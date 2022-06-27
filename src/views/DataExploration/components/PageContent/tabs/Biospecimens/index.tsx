@@ -229,7 +229,6 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
       columns={getDefaultColumns(history)}
       wrapperClassName={styles.biospecimenTabWrapper}
       loading={results.loading}
-      initialColumnState={userInfo?.config.data_exploration?.tables?.biospecimens?.columns}
       enableRowSelection={true}
       showSorterTooltip={false}
       initialSelectedKey={selectedKeys}
@@ -250,27 +249,6 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
         enableTableExport: true,
         onSelectAllResultsChange: setSelectedAllResults,
         onSelectedRowsChange: (keys) => setSelectedKeys(keys),
-        onColumnSortChange: (newState) =>
-          dispatch(
-            updateUserConfig({
-              data_exploration: {
-                tables: {
-                  biospecimens: {
-                    columns: newState,
-                  },
-                },
-              },
-            }),
-          ),
-        onTableExportClick: () =>
-          dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
-              columns: getDefaultColumns(history),
-              index: INDEXES.BIOSPECIMEN,
-              sqon: getCurrentSqon(),
-            }),
-          ),
         extra: [
           <SetsManagementDropdown
             results={results}

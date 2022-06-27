@@ -32,13 +32,17 @@ export type TUserConfig = {
   data_exploration?: {
     tables?: {
       participants?: TUserTableConfig;
-      biospecimens?: TUserTableConfig;
       datafiles?: TUserTableConfig;
     };
     summary?: {
       cards?: {
         order?: string[];
       };
+    };
+  };
+  study_exploration?: {
+    tables?: {
+      studies?: TUserTableConfig;
     };
   };
   dashboard?: {

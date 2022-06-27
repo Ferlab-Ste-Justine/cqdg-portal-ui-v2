@@ -287,6 +287,7 @@ const fr = {
         dashboard: 'Dashboard',
         studies: 'Studies',
         explore: 'Data Exploration',
+        variant: 'Variants',
         participants: 'Participants',
         biospecimen: 'Biospecimen',
         datafiles: 'Data Files',
@@ -394,6 +395,13 @@ const fr = {
         },
         variants: {
           title: 'Variants',
+        },
+      },
+    },
+    studyExploration: {
+      tabs: {
+        studies: {
+          title: 'Studies',
         },
       },
     },
@@ -627,6 +635,23 @@ const fr = {
 
     //Other
     collection_sample_type: 'Collection Sample Type',
+
+    // Studies
+    domain: 'Study Domain',
+    population: 'Population',
+    donors: {
+      diagnoses: {
+        tagged_icd: {
+          main_category: 'Disease Type (ICD-10)',
+        },
+        tagged_mondo: {
+          main_category: 'Diagnosis (Mondo)',
+        },
+      },
+      observed_phenotype_tagged: {
+        main_category: 'Type of Phenotypic Abnormality (HPO)',
+      },
+    },
   },
 };
 

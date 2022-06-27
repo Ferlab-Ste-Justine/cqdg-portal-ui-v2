@@ -1,0 +1,9 @@
+@import "src/style/themes/cqdg/colors";
+
+.studyTabWrapper {
+    display: flex;
+
+    :global(.ant-pagination) {
+        margin-bottom: 0;
+    }
+}

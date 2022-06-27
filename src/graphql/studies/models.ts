@@ -1,19 +1,30 @@
-import { ArrangerResultsTree } from "graphql/models";
+import { ArrangerResultsTree } from 'graphql/models';
 
 export interface IStudyResultTree {
-  study: ArrangerResultsTree<IStudyEntity>;
+  Study: ArrangerResultsTree<IStudyEntity>;
+}
+
+export type ITableStudyEntity = IStudyEntity & {
+  key: string;
+};
+
+export interface ISummaryDataCategory {
+  id: string;
+  donors: number;
+  key: string;
 }
 
 export interface IStudyEntity {
   id: string;
-  study_id: string;
-  study_code: string;
-  study_name: string;
-  program: string;
-  external_id: string;
-  family_count: number;
-  participant_count: number;
-  biospecimen_count: number;
-  data_category: string[]
-  website: string;
+  domain: string;
+  internal_study_id: string;
+  name: string;
+  population: string;
+  description: string;
+  donors: ArrangerResultsTree<{ id: string }>;
+  files: ArrangerResultsTree<{ id: string }>;
+
+  summary: {
+    data_category: ArrangerResultsTree<ISummaryDataCategory>;
+  };
 }

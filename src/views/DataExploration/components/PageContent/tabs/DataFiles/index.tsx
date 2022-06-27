@@ -19,11 +19,9 @@ import { updateUserConfig } from 'store/user/thunks';
 import { useEffect, useState } from 'react';
 import { formatFileSize } from 'utils/formatFileSize';
 import { Button, Modal, Tag, Tooltip } from 'antd';
-import AnalyseModal from 'views/Dashboard/components/DashboardCards/Cavatica/AnalyseModal';
 import { fetchTsvReport } from 'store/report/thunks';
 import { INDEXES } from 'graphql/constants';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import CreateProjectModal from 'views/Dashboard/components/DashboardCards/Cavatica/CreateProjectModal';
 import intl from 'react-intl-universal';
 import { beginAnalyse } from 'store/fenceCavatica/thunks';
 import { useFenceConnection } from 'store/fenceConnection';
@@ -121,12 +119,6 @@ const getDefaultColumns = (
     dataIndex: 'file_name',
     sorter: { multiple: 1 },
     defaultHidden: true,
-  },
-  {
-    key: 'study.study_id',
-    title: 'Study',
-    sorter: { multiple: 1 },
-    render: (record: IFileEntity) => record.study.study_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'data_category',
@@ -297,7 +289,6 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
   }, [isConnected, beginAnalyseAfterConnection]);
 
   return (
-    <>
       <ProTable<ITableFileEntity>
         tableId="datafiles_table"
         columns={getDefaultColumns(
@@ -408,13 +399,6 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
         dataSource={results.data.map((i) => ({ ...i, key: i.file_id }))}
         dictionary={getProTableDictionary()}
       />
-      {isConnected && (
-        <>
-          <AnalyseModal />
-          <CreateProjectModal />
-        </>
-      )}
-    </>
   );
 };
 

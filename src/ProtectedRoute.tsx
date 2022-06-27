@@ -12,10 +12,10 @@ type OwnProps = Omit<RouteProps, 'component' | 'render' | 'children'> & {
 };
 
 const ProtectedRoute = ({ children, layout, ...routeProps }: OwnProps) => {
-  const { userInfo, error } = useUser();
+  const { error } = useUser();
   const { keycloak } = useKeycloak();
   const RouteLayout = layout!;
-  const userNeedsToLogin = !userInfo || !keycloak.authenticated;
+  const userNeedsToLogin = !keycloak.authenticated;
   const currentPath = routeProps.path;
 
   if (error) {

@@ -3,7 +3,7 @@ export enum STATIC_ROUTES {
   LOGIN = '/login',
   AUTH_REDIRECT = '/auth-redirect',
   DASHBOARD = '/dashboard',
-  STUDIES = '/studies',
+  STUDIES_EXPLORATION = '/study-exploration',
   MY_PROFILE = '/profile',
   SETTINGS = '/settings',
   COMMUNITY = '/community',

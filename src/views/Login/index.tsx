@@ -6,7 +6,7 @@ import useQueryParams from 'hooks/useQueryParams';
 import { REDIRECT_URI_KEY } from 'common/constants';
 
 import styles from './index.module.scss';
-import CqdgIconfull from 'components/Icons/CqdgIconFull';
+import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
 
 const { Title, Text } = Typography;
 
@@ -29,7 +29,7 @@ const Login = (): React.ReactElement => {
       <div className={styles.loginContainer}>
         <Space size={24} direction="vertical">
           <div className={styles.logoContainer}>
-            <CqdgIconfull className={styles.logo}/>
+            <CQDGLogoFull className={styles.logo}/>
           </div>
           <Title level={3} className={styles.loginTitle}>
             Portail de données

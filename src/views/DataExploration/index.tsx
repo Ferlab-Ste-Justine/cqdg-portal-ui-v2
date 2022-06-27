@@ -1,7 +1,7 @@
 import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import intl from 'react-intl-universal';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { ExperimentOutlined, UserOutlined, FileSearchOutlined } from '@ant-design/icons';
+import { UserOutlined, FileSearchOutlined } from '@ant-design/icons';
 import PageContent from 'views/DataExploration/components/PageContent';
 import ApolloProvider from 'provider/ApolloProvider';
 import { Spin } from 'antd';
@@ -17,19 +17,13 @@ import { GraphqlBackend } from 'provider/types';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 import { INDEXES } from 'graphql/constants';
 import { useParams } from 'react-router-dom';
-import {
-  mapFilterForBiospecimen,
-  mapFilterForFiles,
-  mapFilterForParticipant,
-} from 'utils/fieldMapper';
+import { mapFilterForFiles, mapFilterForParticipant } from 'utils/fieldMapper';
 import TreeFacet from './components/TreeFacet';
 import ParticipantSearch from './components/ParticipantSearch';
 import FileSearch from './components/FileSearch';
-import { BiospecimenSearch, BiospecimenCollectionSearch } from './components/BiospecimenSearch';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from './utils/helper';
 import ParticipantSetSearch from './components/ParticipantSetSearch';
 import FileSetSearch from './components/FileSetSearch';
-import BiospecimenSetSearch from './components/BiospecimenSetSearch';
 
 import styles from './index.module.scss';
 
@@ -66,25 +60,6 @@ export const filterGroups: {
           'sex',
           'race',
           'ethnicity',
-        ],
-      },
-    ],
-  },
-  [FilterTypes.Biospecimen]: {
-    customSearches: [
-      <BiospecimenSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
-      <BiospecimenCollectionSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
-      <BiospecimenSetSearch key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
-    ],
-    groups: [
-      {
-        facets: [
-          'sample_type',
-          'collection_sample_type',
-          'age_at_biospecimen_collection',
-          'status',
-          'laboratory_procedure',
-          'biospecimen_storage',
         ],
       },
     ],
@@ -149,17 +124,6 @@ const DataExploration = (props: OwnProps) => {
       ),
     },
     {
-      key: TAB_IDS.BIOSPECIMENS,
-      title: intl.get('screen.dataExploration.sidemenu.biospecimen'),
-      icon: <ExperimentOutlined className={styles.sideMenuIcon} />,
-      panelContent: filtersContainer(
-        biospecimenMappingResults,
-        FilterTypes.Biospecimen,
-        INDEXES.BIOSPECIMEN,
-        mapFilterForBiospecimen,
-      ),
-    },
-    {
       key: TAB_IDS.DATA_FILES,
       title: intl.get('screen.dataExploration.sidemenu.datafiles'),
       icon: <FileSearchOutlined className={styles.sideMenuIcon} />,
@@ -181,7 +145,6 @@ const DataExploration = (props: OwnProps) => {
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent
           fileMapping={fileMappingResults}
-          biospecimenMapping={biospecimenMappingResults}
           participantMapping={participantMappingResults}
           tabId={tab}
         />

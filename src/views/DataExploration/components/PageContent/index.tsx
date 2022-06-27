@@ -1,10 +1,5 @@
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
-import {
-  ExperimentOutlined,
-  FileTextOutlined,
-  PieChartOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { FileTextOutlined, PieChartOutlined, UserOutlined } from '@ant-design/icons';
 import {
   DATA_EPLORATION_FILTER_TAG,
   DATA_EXPLORATION_QB_ID,
@@ -19,16 +14,13 @@ import { getQueryBuilderDictionary } from 'utils/translation';
 import { Space, Tabs } from 'antd';
 import {
   combineExtendedMappings,
-  mapFilterForBiospecimen,
   mapFilterForFiles,
   mapFilterForParticipant,
 } from 'utils/fieldMapper';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { useParticipants } from 'graphql/participants/actions';
 import { useDataFiles } from 'graphql/files/actions';
-import { useBiospecimen } from 'graphql/biospecimens/actions';
 import SummaryTab from 'views/DataExploration/components/PageContent/tabs/Summary';
-import BiospecimensTab from 'views/DataExploration/components/PageContent/tabs/Biospecimens';
 import DataFilesTabs from 'views/DataExploration/components/PageContent/tabs/DataFiles';
 import ParticipantsTab from 'views/DataExploration/components/PageContent/tabs/Participants';
 import { ReactElement, useEffect, useState } from 'react';
@@ -61,7 +53,6 @@ import styles from './index.module.scss';
 
 type OwnProps = {
   fileMapping: ExtendedMappingResults;
-  biospecimenMapping: ExtendedMappingResults;
   participantMapping: ExtendedMappingResults;
   tabId?: string;
 };
@@ -74,18 +65,10 @@ const addTagToFilter = (filter: ISavedFilter) => ({
 const resolveSqonForParticipants = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
   mapFilterForParticipant(resolveSyntheticSqon(queryList, activeQuery));
 
-const resolveSqonForBiospecimens = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
-  mapFilterForBiospecimen(resolveSyntheticSqon(queryList, activeQuery));
-
 const resolveSqonForFiles = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
   mapFilterForFiles(resolveSyntheticSqon(queryList, activeQuery));
 
-const PageContent = ({
-  fileMapping,
-  biospecimenMapping,
-  participantMapping,
-  tabId = TAB_IDS.SUMMARY,
-}: OwnProps) => {
+const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { savedSets } = useSavedSet();
@@ -97,11 +80,9 @@ const PageContent = ({
   );
 
   const [participantQueryConfig, setParticipantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
-  const [biospecimenQueryConfig, setBiospecimenQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
   const [datafilesQueryConfig, setDatafilesQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
 
   const participantResolvedSqon = resolveSqonForParticipants(queryList, activeQuery);
-  const biospecimenResolvedSqon = resolveSqonForBiospecimens(queryList, activeQuery);
   const fileResolvedSqon = resolveSqonForFiles(queryList, activeQuery);
 
   const participantResults = useParticipants({
@@ -122,22 +103,9 @@ const PageContent = ({
       : datafilesQueryConfig.sort,
   });
 
-  const biospecimenResults = useBiospecimen({
-    first: biospecimenQueryConfig.size,
-    offset: biospecimenQueryConfig.size * (biospecimenQueryConfig.pageIndex - 1),
-    sqon: biospecimenResolvedSqon,
-    sort: isEmpty(biospecimenQueryConfig.sort)
-      ? [{ field: 'sample_id', order: 'asc' }]
-      : biospecimenQueryConfig.sort,
-  });
-
   useEffect(() => {
     setParticipantQueryConfig({
       ...participantQueryConfig,
-      pageIndex: DEFAULT_PAGE_INDEX,
-    });
-    setBiospecimenQueryConfig({
-      ...biospecimenQueryConfig,
       pageIndex: DEFAULT_PAGE_INDEX,
     });
     setDatafilesQueryConfig({
@@ -151,7 +119,7 @@ const PageContent = ({
     const title = intl.get(`facets.${key}`);
     return title
       ? title
-      : combineExtendedMappings([participantMapping, fileMapping, biospecimenMapping])?.data?.find(
+      : combineExtendedMappings([participantMapping, fileMapping])?.data?.find(
           (mapping: ExtendedMapping) => key === mapping.field,
         )?.displayName || key;
   };
@@ -162,11 +130,6 @@ const PageContent = ({
         return {
           sqon: fileResolvedSqon,
           mapping: fileMapping,
-        };
-      case INDEXES.BIOSPECIMEN:
-        return {
-          sqon: biospecimenResolvedSqon,
-          mapping: biospecimenMapping,
         };
       default:
         return {
@@ -297,24 +260,6 @@ const PageContent = ({
             setQueryConfig={setParticipantQueryConfig}
             queryConfig={participantQueryConfig}
             sqon={participantResolvedSqon}
-          />
-        </Tabs.TabPane>
-        <Tabs.TabPane
-          tab={
-            <span>
-              <ExperimentOutlined />
-              {intl.get('screen.dataExploration.tabs.biospecimens.title', {
-                count: numberWithCommas(biospecimenResults.total),
-              })}
-            </span>
-          }
-          key={TAB_IDS.BIOSPECIMENS}
-        >
-          <BiospecimensTab
-            results={biospecimenResults}
-            setQueryConfig={setBiospecimenQueryConfig}
-            queryConfig={biospecimenQueryConfig}
-            sqon={biospecimenResolvedSqon}
           />
         </Tabs.TabPane>
         <Tabs.TabPane

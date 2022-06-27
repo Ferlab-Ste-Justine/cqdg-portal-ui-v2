@@ -52,7 +52,7 @@ const DataExplorationLinks = () => {
         <Row gutter={[16, 16]}>
           <Col flex="auto" className={styles.customCol}>
             <LinkBox
-              href={STATIC_ROUTES.STUDIES}
+              href={STATIC_ROUTES.STUDIES_EXPLORATION}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.studies!)}
               subLabel={intl.get('components.dataRelease.studies')}

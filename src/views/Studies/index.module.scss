@@ -1,14 +1,11 @@
-@import "src/style/themes/cqdg/layout";
+@import 'src/style/themes/cqdg/layout';
 
-.studiesWrapper {
-  width: 100%;
-  padding: $default-page-content-padding;
+.studiesExplorationLayout {
+  display: flex;
+  height: calc(100vh - #{$main-header-height});
 
-  .tableWrapper {
+  .scrollContent {
     width: 100%;
-  }
-
-  .title {
-    margin: 0;
+    padding: $default-page-content-padding;
   }
 }

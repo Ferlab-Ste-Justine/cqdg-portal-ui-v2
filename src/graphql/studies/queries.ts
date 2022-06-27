@@ -1,26 +1,64 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const FETCH_STUDIES_QUERY = gql`
-  query getStudy {
-    study {
-      hits {
+  query getStudy($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+    Study {
+      hits(offset: $offset, sort: $sort, first: $first, filters: $sqon) {
         total
         edges {
           node {
-            id
-            study_id
-            study_code
-            study_name
-            program
-            external_id
-            participant_count
-            family_count
-            biospecimen_count
-            attribution
-            data_category
-            website
+            domain
+            internal_study_id
+            name
+            population
+            description
+            donors {
+              hits {
+                total
+              }
+            }
+            files {
+              hits {
+                total
+              }
+            }
+            summary {
+              data_category {
+                hits {
+                  edges {
+                    node {
+                      donors
+                      key
+                    }
+                  }
+                }
+              }
+            }
           }
         }
+      }
+    }
+  }
+`;
+
+export const STUDIES_AGGREGATIONS = (fields: string[]) => gql`
+query studiesAgg ($sqon: JSON) {
+    Study {
+      aggregations (filters: $sqon){
+        ${fields.map(
+          (f) =>
+            f +
+            ' {\n          buckets {\n            key\n            doc_count\n          }\n        }',
+        )}
+      }
+    }
+  }`;
+
+export const GET_STUDIES_COUNT = gql`
+  query getStudiesCount($sqon: JSON) {
+    Study {
+      hits(filters: $sqon) {
+        total
       }
     }
   }

@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { PageHeader, Dropdown, Button, Menu } from 'antd';
-import IncludeIconBeta from 'components/Icons/IncludeIconBeta';
 import { ReadOutlined, HomeOutlined, FileSearchOutlined, TeamOutlined } from '@ant-design/icons';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import { DownOutlined } from '@ant-design/icons';
@@ -21,6 +20,8 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
 
 import style from 'components/Layout/Header/index.module.scss';
+import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
 
 const iconSize = { width: 14, height: 14 };
 const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
@@ -46,7 +47,7 @@ const Header = () => {
         closable
       />
       <PageHeader
-        title={<IncludeIconBeta className={style.logo} />}
+        title={<CQDGLogoFullPortal className={style.logo} />}
         subTitle={
           <nav className={style.headerList}>
             <HeaderLink
@@ -59,7 +60,7 @@ const Header = () => {
             <HeaderLink
               key="studies"
               currentPathName={currentPathName}
-              to={STATIC_ROUTES.STUDIES}
+              to={STATIC_ROUTES.STUDIES_EXPLORATION}
               icon={<ReadOutlined />}
               title={intl.get('layout.main.menu.studies')}
             />
@@ -75,6 +76,17 @@ const Header = () => {
               ]}
               icon={<FileSearchOutlined />}
               title={intl.get('layout.main.menu.explore')}
+            />
+            <HeaderLink
+              key="variant-data"
+              currentPathName={currentPathName}
+              to={[
+                STATIC_ROUTES.VARIANT,
+                STATIC_ROUTES.VARIANT_SUMMARY,
+                STATIC_ROUTES.VARIANT_VARIANTS,
+              ]}
+              icon={<LineStyleIcon height={14} width={14} />}
+              title={intl.get('layout.main.menu.variant')}
             />
           </nav>
         }

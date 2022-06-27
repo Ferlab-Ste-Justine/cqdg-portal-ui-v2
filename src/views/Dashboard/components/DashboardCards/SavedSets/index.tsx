@@ -10,13 +10,13 @@ import { useSavedSet } from 'store/savedSet';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { ExperimentOutlined, FileTextOutlined, UserOutlined } from '@ant-design/icons';
+import { FileTextOutlined, UserOutlined } from '@ant-design/icons';
 import cx from 'classnames';
 import { STATIC_ROUTES } from 'utils/routes';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
 
 import styles from './index.module.scss';
-import {SUPPORT_EMAIL} from "store/report/thunks";
+import { SUPPORT_EMAIL } from 'store/report/thunks';
 
 const { Text } = Typography;
 const { TabPane } = Tabs;
@@ -108,23 +108,6 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
               fetchingError,
               isLoading,
               <UserOutlined />,
-            )}
-          </TabPane>
-          <TabPane
-            tab={
-              <div>
-                <ExperimentOutlined />
-                Biospecimen ({savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
-              </div>
-            }
-            key="biospecimen"
-          >
-            {getItemList(
-              SetType.BIOSPECIMEN,
-              savedSets,
-              fetchingError,
-              isLoading,
-              <ExperimentOutlined />,
             )}
           </TabPane>
           <TabPane
