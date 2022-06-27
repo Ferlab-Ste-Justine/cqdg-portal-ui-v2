@@ -1,4 +1,4 @@
-# include-portal-ui
+# cqdg-portal-ui
 
 ## Pre-requisites
 
@@ -9,7 +9,7 @@
 
 ### Environment variables:
 
-- Create a `.env` with the scheme found here: https://github.com/include-dcc/include-portal-ui/blob/main/.env.schema
+- Create a `.env` with the scheme found here: https://github.com/Ferlab-Ste-Justine/cqdg-portal-ui/blob/main/.env.schema
 - Make sure to fill all the variables
 
 ### Running the project locally
@@ -22,9 +22,3 @@
 
 - Install dependencies: `npm install`
 - Start the project: `npm start`
-
-### Running the USERS API locally
-
-- Clone: https://github.com/include-dcc/include-users-api
-- Follow the steps here: https://github.com/include-dcc/include-users-api/blob/main/README.md
-- Make sure to add the include keycloak config for the users-api in your `.env`
