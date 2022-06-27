@@ -1,7 +1,7 @@
-# Release notes for cqdg-portal-ui-v2
+# Release notes for cqdg-portal-ui
 
 <!--
-## 2020-01-?? cqdg-portal-ui-v2 1.??.??
+## 2020-01-?? cqdg-portal-ui 1.??.??
 
 ### Features
 
