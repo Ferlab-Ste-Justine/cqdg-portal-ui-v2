@@ -1,0 +1,18 @@
+@import "src/style/themes/cqdg/colors";
+
+.dataReleaseContainer {  
+  .dataReleaseIcon {
+    margin-top: -1px;
+    color: $blue-7;
+    font-size: 20px;
+  }
+
+  .dataReleaseStatsLabel {
+    color: $gray-1;
+
+    :global(.wrapper__label) {
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+}

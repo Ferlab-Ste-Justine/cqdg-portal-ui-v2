@@ -1,0 +1,130 @@
+{
+  "name": "cqdg-portal-ui-v2",
+  "version": "1.0.0",
+  "private": true,
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run lint&fix"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "scripts": {
+    "theme:watch": "nodemon --watch './src/style/themes' -e scss,less --exec 'npm run theme'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build:netlify": "npm ci && npm run build",
+    "test": "react-scripts test",
+    "lint": "eslint $(git diff-index --name-only --diff-filter=d HEAD | grep \"[\\.js|\\.jsx|\\.tsx|\\.ts]$\" | xargs)",
+    "lint:fix": "eslint --fix --rule 'no-console: 2'",
+    "theme": "mkdir -p src/style/themes/cqdg/dist && npm run theme:antd",
+    "theme:antd": "npm run theme:antd:colors && npm run theme:antd:main",
+    "theme:antd:main": "lessc --js src/style/themes/cqdg/antd-cqdg-theme.less src/style/themes/cqdg/dist/antd.css",
+    "theme:antd:colors": "less2sass ./src/style/themes/cqdg/colors.less && mv -f ./src/style/themes/cqdg/colors.scss ./src/style/themes/cqdg/dist/_colors.scss",
+    "eject": "react-scripts eject",
+    "prepare": "npm run theme"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ferlab-Ste-Justine/cqdg-portal-ui-v2"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@apollo/client": "^3.5.10",
+    "@dnd-kit/core": "^4.0.3",
+    "@dnd-kit/sortable": "^5.1.0",
+    "@ferlab/style": "^1.20.7",
+    "@ferlab/ui": "^3.9.91",
+    "@loadable/component": "^5.15.2",
+    "@nivo/bar": "^0.79.1",
+    "@nivo/pie": "^0.79.1",
+    "@react-keycloak/core": "^3.2.0",
+    "@react-keycloak/web": "^3.4.0",
+    "@reduxjs/toolkit": "^1.6.2",
+    "@testing-library/jest-dom": "^5.15.0",
+    "antd": "^4.20.0",
+    "axios": "^0.24.0",
+    "classnames": "^2.3.1",
+    "d3": "^5.16.0",
+    "date-fns": "1.29.0",
+    "file-saver": "^2.0.2",
+    "graphql": "^16.2.0",
+    "html-react-parser": "^1.4.4",
+    "http-errors": "^1.7.2",
+    "jwt-decode": "^3.1.2",
+    "keycloak-js": "^15.0.2",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "rc-menu": "^9.6.0",
+    "rc-tree-select": "^5.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-intl-universal": "^2.4.8",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "5.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-persist-transform-filter": "^0.0.20",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/d3": "^7.1.0",
+    "@types/file-saver": "^2.0.2",
+    "@types/http-errors": "^1.8.2",
+    "@types/jest": "^27.0.2",
+    "@types/loadable__component": "^5.13.4",
+    "@types/lodash": "^4.14.178",
+    "@types/md5": "^2.3.1",
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/redux-logger": "^3.0.9",
+    "@types/uuid": "^8.3.2",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.2.2",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sort-destructure-keys": "^1.4.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "less2sass": "^1.0.3",
+    "node-sass": "^6.0.1",
+    "prettier": "^2.0.5",
+    "prettier-eslint": "^10.1.1",
+    "typescript": "^4.4.4",
+    "web-vitals": "^2.1.2"
+  }
+}
