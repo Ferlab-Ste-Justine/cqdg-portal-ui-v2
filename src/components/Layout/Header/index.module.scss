@@ -12,6 +12,11 @@
     overflow: unset;
   }
 
+  .langButton {
+    border: none;
+    margin-left: 8px;
+  }
+
   div[class$="-header-heading"],
   span[class$="-header-heading-title"],
   div[class$="-header-heading-left"] {

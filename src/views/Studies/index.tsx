@@ -40,7 +40,7 @@ const Studies = () => {
         aggregations={results.aggregations}
         extendedMapping={studyMappingResults}
         filters={activeQuery as ISqonGroupFilter}
-        isLoading={results.loading}
+        isLoading={studyMappingResults.loading || results.loading}
       />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent studiesMapping={studyMappingResults} />

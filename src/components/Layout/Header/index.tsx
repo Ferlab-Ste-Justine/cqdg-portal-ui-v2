@@ -12,7 +12,7 @@ import NotificationBanner from 'components/featureToggle/NotificationBanner';
 import { AlterTypes } from 'common/types';
 import { useKeycloak } from '@react-keycloak/web';
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
-import { DEFAULT_GRAVATAR_PLACEHOLDER } from 'common/constants';
+import { DEFAULT_GRAVATAR_PLACEHOLDER, LANG } from 'common/constants';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from 'store/user/slice';
@@ -22,13 +22,17 @@ import Gravatar from '@ferlab/ui/core/components/Gravatar';
 import style from 'components/Layout/Header/index.module.scss';
 import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
+import { globalActions, useLang } from 'store/global';
 
 const iconSize = { width: 14, height: 14 };
 const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
 const BANNER_TYPE_KEY = FT_FLAG_KEY + '_TYPE';
 const BANNER_MSG_KEY = FT_FLAG_KEY + '_MSG';
 
+const getTargetLang = (lang: LANG) => (lang === LANG.FR ? LANG.EN : LANG.FR);
+
 const Header = () => {
+  const lang = useLang();
   const { userInfo } = useUser();
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
@@ -136,6 +140,13 @@ const Header = () => {
               <DownOutlined />
             </a>
           </Dropdown>,
+          <Button
+            shape="circle"
+            className={style.langButton}
+            onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
+          >
+            {getTargetLang(lang).toUpperCase()}
+          </Button>,
         ]}
         className={style.mainHeader}
       />
