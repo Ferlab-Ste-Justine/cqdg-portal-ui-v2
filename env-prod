@@ -3,3 +3,4 @@ REACT_APP_ARRANGER_PROJECT_ID=cqdg
 REACT_APP_KC_AUTH_SERVER_URL=https://auth.services.cqdg.ca
 REACT_APP_KC_CLIENT_ID=cqdg-client
 REACT_APP_KC_REALM=CQDG
+SASS_PATH=./src/style/themes/cqdg
