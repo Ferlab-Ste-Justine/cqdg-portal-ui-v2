@@ -9,6 +9,7 @@ RUN npm rebuild node-sass
 
 COPY ./ /app/
 
+RUN npm run theme
 RUN npm run build
 
 FROM nginx:1.20
