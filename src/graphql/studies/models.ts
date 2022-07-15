@@ -1,4 +1,6 @@
 import { ArrangerResultsTree } from 'graphql/models';
+import { IFileDataAccessCodes, IFileEntity } from '../files/models';
+import { IParticipantEntity } from '../participants/models';
 
 export interface IStudyResultTree {
   Study: ArrangerResultsTree<IStudyEntity>;
@@ -8,23 +10,46 @@ export type ITableStudyEntity = IStudyEntity & {
   key: string;
 };
 
-export interface ISummaryDataCategory {
+export interface ISummary {
   id: string;
-  donors: number;
-  key: string;
+  clinical_data_available: ArrangerResultsTree<{
+    id: string;
+    score: number;
+    participants: number;
+    key: string;
+  }>;
+  data_category: ArrangerResultsTree<{
+    id: string;
+    score: number;
+    participants: number;
+    key: string;
+    files: number;
+  }>;
+  experimental_strategy: ArrangerResultsTree<{
+    id: string;
+    score: number;
+    participants: number;
+    key: string;
+    files: number;
+  }>;
 }
 
 export interface IStudyEntity {
   id: string;
+  score: number;
+  access_authority: string;
+  keyword: string;
+  short_name: string;
+  short_name_keyword: string;
+  study_id: string;
+  study_id_keyword: string;
+  data_access_codes: IFileDataAccessCodes;
   domain: string;
   internal_study_id: string;
   name: string;
   population: string;
   description: string;
-  donors: ArrangerResultsTree<{ id: string }>;
-  files: ArrangerResultsTree<{ id: string }>;
-
-  summary: {
-    data_category: ArrangerResultsTree<ISummaryDataCategory>;
-  };
+  participants: ArrangerResultsTree<IParticipantEntity>;
+  files: ArrangerResultsTree<IFileEntity>;
+  summary: ISummary;
 }

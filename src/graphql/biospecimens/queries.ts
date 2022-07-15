@@ -24,8 +24,8 @@ export const SEARCH_BIOSPECIMEN_QUERY = gql`
             study_id
             nb_files
 
-            participant {
-              participant_id
+            participant: Donor {
+              participant_id: id
             }
 
             files {

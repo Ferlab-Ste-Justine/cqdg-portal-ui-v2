@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const FETCH_STUDIES_QUERY = gql`
+export const GET_STUDIES_QUERY = gql`
   query getStudy($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Study {
       hits(offset: $offset, sort: $sort, first: $first, filters: $sqon) {
@@ -12,7 +12,7 @@ export const FETCH_STUDIES_QUERY = gql`
             name
             population
             description
-            donors {
+            participants: donors {
               hits {
                 total
               }
@@ -27,7 +27,7 @@ export const FETCH_STUDIES_QUERY = gql`
                 hits {
                   edges {
                     node {
-                      donors
+                      participants: donors
                       key
                     }
                   }

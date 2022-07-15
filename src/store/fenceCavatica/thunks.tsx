@@ -226,81 +226,81 @@ const startBulkImportJob = createAsyncThunk<
   ICavaticaTreeNode,
   { rejectValue: string; state: RootState }
 >('cavatica/bulk/import', async (node, thunkAPI) => {
-  const { fenceCavatica } = thunkAPI.getState();
-  const selectedFiles = fenceCavatica.bulkImportData.authorizedFiles;
-  const isProject = node.type === CAVATICA_TYPE.PROJECT;
-
-  const indexFileDrsItems: ICavaticaDRSImportItem[] = [];
-  const cavaticaDrsItems: ICavaticaDRSImportItem[] = selectedFiles.map((file) => {
-    const destKey = isProject ? 'project' : 'parent';
-
-    if (file.index) {
-      indexFileDrsItems.push({
-        drs_uri: file.index.urls,
-        name: file.index.file_name,
-        [destKey]: node.id,
-      });
-    }
-
-    return {
-      drs_uri: file.access_urls,
-      name: file.file_name,
-      [destKey]: node.id,
-      metadata: {
-        fhir_document_reference: file.fhir_document_reference,
-      },
-    };
-  });
-
-  const drsItems = cavaticaDrsItems.concat(indexFileDrsItems);
-  const itemsChunks = chunk(drsItems, BATCH_SIZE);
-
-  const responses = await Promise.all(
-    itemsChunks.map((itemsChunk) => CavaticaApi.startBulkDrsImportJob({ items: itemsChunk })),
-  );
-  const responseWithError = responses.find((resp) => !!resp.error);
-
-  return handleThunkApiReponse({
-    error: responseWithError?.error,
-    data: true,
-    reject: thunkAPI.rejectWithValue,
-    onError: () =>
-      thunkAPI.dispatch(
-        globalActions.displayNotification({
-          type: 'error',
-          message: intl.get('api.cavatica.error.title'),
-          description: intl.get('api.cavatica.error.bulk.import'),
-        }),
-      ),
-    onSuccess: () =>
-      thunkAPI.dispatch(
-        globalActions.displayNotification({
-          type: 'success',
-          message: intl.get('api.cavatica.success.title'),
-          description: (
-            <div>
-              {intl.getHTML('api.cavatica.success.bulk.import.copySuccess', {
-                destination: node.title,
-              })}
-              <br />
-              <br />
-              {intl.get('api.cavatica.success.bulk.import.possibleDelays')}
-              <br />
-              <br />
-              <a
-                href={`${USER_BASE_URL}${isProject ? node.id : node.project!}`}
-                style={{ color: 'unset', textDecoration: 'underline' }}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {intl.get('api.cavatica.success.bulk.import.openProject')}
-              </a>
-            </div>
-          ),
-          duration: 5,
-        }),
-      ),
-  });
+  // const { fenceCavatica } = thunkAPI.getState();
+  // const selectedFiles = fenceCavatica.bulkImportData.authorizedFiles;
+  // const isProject = node.type === CAVATICA_TYPE.PROJECT;
+  //
+  // const indexFileDrsItems: ICavaticaDRSImportItem[] = [];
+  // const cavaticaDrsItems: ICavaticaDRSImportItem[] = selectedFiles.map((file) => {
+  //   const destKey = isProject ? 'project' : 'parent';
+  //
+  //   if (file.index) {
+  //     indexFileDrsItems.push({
+  //       drs_uri: file.index.urls,
+  //       name: file.index.file_name,
+  //       [destKey]: node.id,
+  //     });
+  //   }
+  //
+  //   return {
+  //     drs_uri: file.access_urls,
+  //     name: file.file_name,
+  //     [destKey]: node.id,
+  //     metadata: {
+  //       fhir_document_reference: file.fhir_document_reference,
+  //     },
+  //   };
+  // });
+  //
+  // const drsItems = cavaticaDrsItems.concat(indexFileDrsItems);
+  // const itemsChunks = chunk(drsItems, BATCH_SIZE);
+  //
+  // const responses = await Promise.all(
+  //   itemsChunks.map((itemsChunk) => CavaticaApi.startBulkDrsImportJob({ items: itemsChunk })),
+  // );
+  // const responseWithError = responses.find((resp) => !!resp.error);
+  //
+  // return handleThunkApiReponse({
+  //   error: responseWithError?.error,
+  //   data: true,
+  //   reject: thunkAPI.rejectWithValue,
+  //   onError: () =>
+  //     thunkAPI.dispatch(
+  //       globalActions.displayNotification({
+  //         type: 'error',
+  //         message: intl.get('api.cavatica.error.title'),
+  //         description: intl.get('api.cavatica.error.bulk.import'),
+  //       }),
+  //     ),
+  //   onSuccess: () =>
+  //     thunkAPI.dispatch(
+  //       globalActions.displayNotification({
+  //         type: 'success',
+  //         message: intl.get('api.cavatica.success.title'),
+  //         description: (
+  //           <div>
+  //             {intl.getHTML('api.cavatica.success.bulk.import.copySuccess', {
+  //               destination: node.title,
+  //             })}
+  //             <br />
+  //             <br />
+  //             {intl.get('api.cavatica.success.bulk.import.possibleDelays')}
+  //             <br />
+  //             <br />
+  //             <a
+  //               href={`${USER_BASE_URL}${isProject ? node.id : node.project!}`}
+  //               style={{ color: 'unset', textDecoration: 'underline' }}
+  //               rel="noreferrer"
+  //               target="_blank"
+  //             >
+  //               {intl.get('api.cavatica.success.bulk.import.openProject')}
+  //             </a>
+  //           </div>
+  //         ),
+  //         duration: 5,
+  //       }),
+  //     ),
+  // });
 });
 
 const getAuthorizedFiles = (

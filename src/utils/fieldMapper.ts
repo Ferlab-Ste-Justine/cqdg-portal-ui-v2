@@ -51,6 +51,10 @@ const recursiveMap = (
 export const mapFilterForParticipant = (sqonFilters: ISqonGroupFilter) =>
   recursiveMap(sqonFilters, [
     {
+      index: INDEXES.PARTICIPANT,
+      prefix: 'donors.',
+    },
+    {
       index: INDEXES.FILE,
       prefix: 'files.',
     },

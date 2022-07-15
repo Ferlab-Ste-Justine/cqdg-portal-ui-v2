@@ -1,6 +1,6 @@
 const filesFacets = {
   data_category: 'Data Category',
-  controlled_access: 'Access',
+  data_access: 'Data Access',
   data_type: 'Data Type',
   file_format: 'File Format',
   size: 'Size',
@@ -639,7 +639,7 @@ const fr = {
     // Studies
     domain: 'Study Domain',
     population: 'Population',
-    donors: {
+    participants: {
       diagnoses: {
         tagged_icd: {
           main_category: 'Disease Type (ICD-10)',

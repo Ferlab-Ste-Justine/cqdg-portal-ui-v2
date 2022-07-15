@@ -2,11 +2,6 @@
   "name": "cqdg-portal-ui",
   "version": "1.0.0",
   "private": true,
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "npm run lint&fix"
-    ]
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -48,6 +43,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ferlab-Ste-Justine/cqdg-portal-ui"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -120,7 +125,9 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "husky": "^8.0.1",
     "less2sass": "^1.0.3",
+    "lint-staged": "^13.0.3",
     "node-sass": "^6.0.1",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",

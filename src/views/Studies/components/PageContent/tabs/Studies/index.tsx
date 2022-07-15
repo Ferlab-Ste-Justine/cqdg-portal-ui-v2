@@ -48,9 +48,9 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     title: 'Population',
   },
   {
-    key: 'donors',
-    render: (record: IStudyEntity) => record.donors.hits.total,
-    title: 'Donors',
+    key: 'participants',
+    render: (record: IStudyEntity) => record.participants.hits.total,
+    title: 'Participants',
   },
   {
     key: 'seq',
@@ -58,7 +58,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       const sq = record.summary.data_category.hits.edges.find(
         (item: any) => item.node.key === 'Sequencing reads',
       );
-      return sq?.node.donors;
+      return sq?.node.participants;
     },
     title: 'Seq',
   },
@@ -68,7 +68,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       const snv = record.summary.data_category.hits.edges.find(
         (item: any) => item.node.key === 'Simple nucleotide variation',
       );
-      return snv?.node.donors;
+      return snv?.node.participants;
     },
     title: 'SNV',
   },
@@ -78,7 +78,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       const exp = record.summary.data_category.hits.edges.find(
         (item: any) => item.node.key === 'Transcriptome profiling',
       );
-      return exp?.node.donors;
+      return exp?.node.participants;
     },
     title: 'Exp',
   },
