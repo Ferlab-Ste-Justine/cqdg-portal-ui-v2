@@ -42,8 +42,6 @@ const App = () => {
   const { keycloak, initialized } = useKeycloak();
   const keycloakIsReady = keycloak && initialized;
 
-  console.log(lang)
-
   return (
     <ConfigProvider
       locale={lang === LANG.FR ? frFR : enUS}

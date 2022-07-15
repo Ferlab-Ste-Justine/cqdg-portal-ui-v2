@@ -1,7 +1,7 @@
 import {
-  IParticipantDiagnosis,
+  IDiagnosis,
   IParticipantEntity,
-  IParticipantObservedPhenotype,
+  IPhenotype,
   ITableParticipantEntity,
 } from 'graphql/participants/models';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
@@ -46,6 +46,7 @@ import SetsManagementDropdown from 'views/DataExploration/components/SetsManagem
 import { SetType } from 'services/api/savedSet/models';
 
 import styles from './index.module.scss';
+import { IStudyEntity } from 'graphql/studies/models';
 
 interface OwnProps {
   results: IQueryResults<IParticipantEntity[]>;
@@ -64,227 +65,144 @@ const defaultColumns: ProColumnType<any>[] = [
     },
   },
   {
-    key: 'study_id',
-    title: 'Study Code',
-    dataIndex: 'study_id',
+    key: 'studies',
+    title: 'Studies',
+    dataIndex: 'studies',
     sorter: {
       multiple: 1,
     },
     className: styles.studyIdCell,
-  },
-  {
-    key: 'study_external_id',
-    title: 'dbGaP',
-    dataIndex: 'study_external_id',
-    render: (study_external_id: string) =>
-      study_external_id ? (
-        <ExternalLink
-          href={`https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${study_external_id}`}
-        >
-          {study_external_id}
-        </ExternalLink>
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
-  },
-  {
-    key: 'down_syndrome_status',
-    title: (
-      <Tooltip className="tooltip" title={'Down Syndrome Status'}>
-        DS Status
-      </Tooltip>
-    ),
-    sorter: {
-      multiple: 1,
-    },
-    displayTitle: 'DS Status',
-    dataIndex: 'down_syndrome_status',
-    render: (down_syndrome_status: 'D21' | 'T21') => {
+    render: (studies: ArrangerResultsTree<IStudyEntity>) => {
+      const studiesInfo = studies?.hits.edges.map((study) => ({
+        name: study.node.name,
+        id: study.node.internal_study_id,
+      }));
+      if (!studiesInfo) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
       return (
-        <Tooltip title={intl.get(`facets.options.${down_syndrome_status}`)}>
-          {down_syndrome_status}
-        </Tooltip>
+        <ExpandableCell
+          nOfElementsWhenCollapsed={1}
+          dataSource={studiesInfo}
+          renderItem={(item, index) => (
+            <div key={index}>
+              {/*go to good study */}
+              <Link to={STATIC_ROUTES.STUDIES_EXPLORATION}>{item.name}</Link>
+            </div>
+          )}
+        />
       );
     },
   },
   {
-    key: 'sex',
-    title: 'Sex',
-    dataIndex: 'sex',
+    key: 'is_a_proband',
+    title: 'Proband',
+    dataIndex: 'is_a_proband',
     sorter: {
       multiple: 1,
     },
-    render: (sex: string) => (
-      <Tag
-        color={
-          sex.toLowerCase() === SEX.FEMALE
-            ? 'magenta'
-            : sex.toLowerCase() === SEX.MALE
-            ? 'geekblue'
-            : ''
-        }
-      >
-        {capitalize(sex)}
+  },
+  {
+    key: 'gender',
+    title: 'Gender',
+    dataIndex: 'gender',
+    sorter: {
+      multiple: 1,
+    },
+    render: (sex: string) =>
+      sex ? (
+        <Tag
+          color={
+            sex.toLowerCase() === SEX.FEMALE
+              ? 'magenta'
+              : sex.toLowerCase() === SEX.MALE
+              ? 'geekblue'
+              : ''
+          }
+        >
+          {capitalize(sex)}
+        </Tag>
+      ) : (
+        ''
+      ),
+  },
+  {
+    key: 'family_history_available',
+    title: 'Family History',
+    dataIndex: 'family_history_available',
+    sorter: {
+      multiple: 1,
+    },
+    render: (family_history_available) => (
+      <Tag color={family_history_available ? 'geekblue' : 'magenta'}>
+        {family_history_available ? 'Yes' : 'No'}
       </Tag>
     ),
   },
   {
-    key: 'race',
-    title: 'Race',
-    dataIndex: 'race',
-    defaultHidden: true,
+    key: 'age_at_recruitment',
+    title: 'Age at Recruitment',
+    dataIndex: 'age_at_recruitment',
     sorter: {
       multiple: 1,
     },
-    render: (race) => race || TABLE_EMPTY_PLACE_HOLDER,
+    render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'ethnicity',
-    title: 'Ethnicity',
-    dataIndex: 'ethnicity',
-    defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
-    render: (ethnicity) => ethnicity || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'family_type',
-    title: 'Family Unit',
-    dataIndex: 'family_type',
-    defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
-    render: (family_type) => family_type || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'diagnosis.source_text',
-    title: 'Diagnosis (Source Text)',
-    dataIndex: 'diagnosis',
-    defaultHidden: true,
-    render: (mondo: ArrangerResultsTree<IParticipantDiagnosis>) => {
-      const sourceTexts = mondo?.hits?.edges.map((m) => m.node.source_text);
-
-      if (!sourceTexts || sourceTexts.length === 0) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
-
-      return (
-        <ExpandableCell
-          nOfElementsWhenCollapsed={1}
-          dataSource={sourceTexts}
-          renderItem={(sourceText, index): React.ReactNode => <div key={index}>{sourceText}</div>}
-        />
-      );
-    },
-  },
-  {
-    key: 'diagnosis.mondo_id_diagnosis',
+    key: 'diagnoses',
     title: 'Diagnosis (Mondo)',
-    dataIndex: 'diagnosis',
+    dataIndex: 'diagnoses',
     className: styles.diagnosisCell,
-    render: (mondo: ArrangerResultsTree<IParticipantDiagnosis>) => {
-      const mondoNames = mondo?.hits?.edges.map((m) => m.node.mondo_id_diagnosis);
-
-      if (!mondoNames || mondoNames.length === 0) {
+    render: (diagnoses: ArrangerResultsTree<IDiagnosis>) => {
+      const diagnosisMondoCodes = diagnoses?.hits?.edges.map((diag) => ({
+        code: diag.node.diagnosis_mondo_code,
+        text: diag.node.diagnosis_source_text,
+      }));
+      if (!diagnosisMondoCodes || !diagnosisMondoCodes.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={mondoNames}
-          renderItem={(mondo_id, index): React.ReactNode => {
-            const mondoInfo = extractMondoTitleAndCode(mondo_id);
-
-            return mondoInfo ? (
-              <div key={index}>
-                {capitalize(mondoInfo.title)} (MONDO:{' '}
-                <ExternalLink
-                  href={`https://monarchinitiative.org/disease/MONDO:${mondoInfo.code}`}
-                >
-                  {mondoInfo.code}
-                </ExternalLink>
-                )
-              </div>
-            ) : (
-              TABLE_EMPTY_PLACE_HOLDER
-            );
-          }}
+          dataSource={diagnosisMondoCodes}
+          renderItem={(item, index) => (
+            <div key={index}>
+              {capitalize(item.text)}
+              <br />
+              <ExternalLink href={`https://monarchinitiative.org/disease/${item.code}`}>
+                {item.code}
+              </ExternalLink>
+            </div>
+          )}
         />
       );
     },
   },
   {
-    key: 'phenotype.hpo_phenotype_observed',
-    title: 'Phenotype (HPO)',
-    dataIndex: 'observed_phenotype',
+    key: 'phenotypes_tagged',
+    title: 'Phenotypes (HPO)',
+    dataIndex: 'phenotypes_tagged',
     className: styles.phenotypeCell,
-    render: (observed_phenotype: ArrangerResultsTree<IParticipantObservedPhenotype>) => {
-      const phenotypeNames = observed_phenotype?.hits?.edges
+    render: (observed_phenotype: ArrangerResultsTree<IPhenotype>) => {
+      const phenotypes = observed_phenotype?.hits?.edges
         .filter((p) => p.node.is_tagged)
-        .map((p) => p.node.name);
-
-      if (!phenotypeNames || phenotypeNames.length === 0) {
+        .map((p) => ({ name: p.node.name, code: p.node.phenotype_id }));
+      if (!phenotypes || !phenotypes.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={phenotypeNames}
-          renderItem={(hpo_id_phenotype, index): React.ReactNode => {
-            const phenotypeInfo = extractPhenotypeTitleAndCode(hpo_id_phenotype);
-
-            return phenotypeInfo ? (
-              <div key={index}>
-                {capitalize(phenotypeInfo.title)} (HP:{' '}
-                <ExternalLink href={`https://hpo.jax.org/app/browse/term/HP:${phenotypeInfo.code}`}>
-                  {phenotypeInfo.code}
-                </ExternalLink>
-                )
-              </div>
-            ) : (
-              TABLE_EMPTY_PLACE_HOLDER
-            );
-          }}
+          dataSource={phenotypes}
+          renderItem={(item, index) => (
+            <div key={index}>
+              {capitalize(item.name)} <br />
+              <ExternalLink href={`https://hpo.jax.org/app/browse/term/${item.code}`}>
+                {item.code}
+              </ExternalLink>
+            </div>
+          )}
         />
-      );
-    },
-  },
-  {
-    key: 'nb_biospecimens',
-    title: 'Biospecimens',
-    sorter: {
-      multiple: 1,
-    },
-    render: (record: ITableParticipantEntity) => {
-      const nb_biospecimens = record.nb_biospecimens || 0;
-
-      return nb_biospecimens ? (
-        <Link
-          to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
-          onClick={() =>
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'participant_id',
-                    value: [record.participant_id],
-                    index: INDEXES.PARTICIPANT,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            })
-          }
-        >
-          {nb_biospecimens}
-        </Link>
-      ) : (
-        nb_biospecimens
       );
     },
   },
@@ -295,7 +213,7 @@ const defaultColumns: ProColumnType<any>[] = [
       multiple: 1,
     },
     render: (record: ITableParticipantEntity) => {
-      return record.nb_files ? (
+      return record.files.hits.total ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -314,12 +232,52 @@ const defaultColumns: ProColumnType<any>[] = [
             })
           }
         >
-          {record.nb_files}
+          {record.files.hits.total}
         </Link>
       ) : (
-        record.nb_files || 0
+        0
       );
     },
+  },
+  {
+    key: 'ethnicity',
+    title: 'Ethnicity',
+    dataIndex: 'ethnicity',
+    defaultHidden: true,
+    sorter: {
+      multiple: 1,
+    },
+    render: (ethnicity) => ethnicity || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'vital_status',
+    title: 'Vital status',
+    dataIndex: 'vital_status',
+    defaultHidden: true,
+    sorter: {
+      multiple: 1,
+    },
+    render: (vital_status) => vital_status || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'submitter_participant_id',
+    title: 'Submitter Participant ID',
+    dataIndex: 'submitter_participant_id',
+    defaultHidden: true,
+    sorter: {
+      multiple: 1,
+    },
+    render: (submitter_participant_id) => submitter_participant_id || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'age_of_death',
+    title: 'Age at death',
+    dataIndex: 'age_of_death',
+    defaultHidden: true,
+    sorter: {
+      multiple: 1,
+    },
+    render: (age_of_death) => age_of_death || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

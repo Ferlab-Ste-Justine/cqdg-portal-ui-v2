@@ -1,29 +1,31 @@
-import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import intl from 'react-intl-universal';
+import { useParams } from 'react-router-dom';
+import { FileSearchOutlined, UserOutlined } from '@ant-design/icons';
+import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { UserOutlined, FileSearchOutlined } from '@ant-design/icons';
-import PageContent from 'views/DataExploration/components/PageContent';
-import ApolloProvider from 'provider/ApolloProvider';
 import { Spin } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
-import FilterList, { TCustomFilterMapper } from 'components/uiKit/FilterList';
+import ApolloProvider from 'provider/ApolloProvider';
+import { GraphqlBackend } from 'provider/types';
+import PageContent from 'views/DataExploration/components/PageContent';
 import {
   DATA_EXPLORATION_QB_ID,
   SCROLL_WRAPPER_ID,
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
+
+import FilterList, { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
-import { GraphqlBackend } from 'provider/types';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
-import { INDEXES } from 'graphql/constants';
-import { useParams } from 'react-router-dom';
 import { mapFilterForFiles, mapFilterForParticipant } from 'utils/fieldMapper';
-import TreeFacet from './components/TreeFacet';
-import ParticipantSearch from './components/ParticipantSearch';
+
 import FileSearch from './components/FileSearch';
-import { formatHpoTitleAndCode, formatMondoTitleAndCode } from './utils/helper';
-import ParticipantSetSearch from './components/ParticipantSetSearch';
 import FileSetSearch from './components/FileSetSearch';
+import ParticipantSearch from './components/ParticipantSearch';
+import ParticipantSetSearch from './components/ParticipantSetSearch';
+import TreeFacet from './components/TreeFacet';
+import { formatHpoTitleAndCode, formatMondoTitleAndCode } from './utils/helper';
 
 import styles from './index.module.scss';
 
@@ -48,18 +50,20 @@ export const filterGroups: {
     groups: [
       {
         facets: [
-          'study_id',
-          'down_syndrome_status',
+          // eslint-disable-next-line react/jsx-key
+          // eslint-disable-next-line react/jsx-key
           <TreeFacet type={'mondoTree'} field={'mondo'} titleFormatter={formatMondoTitleAndCode} />,
+          // eslint-disable-next-line react/jsx-key
           <TreeFacet
             type={'hpoTree'}
             field={'observed_phenotype'}
             titleFormatter={formatHpoTitleAndCode}
           />,
-          'family_type',
-          'sex',
-          'race',
+          'gender',
           'ethnicity',
+          'is_a_proband',
+          'age_of_death',
+          'study',
         ],
       },
     ],
@@ -72,11 +76,14 @@ export const filterGroups: {
     groups: [
       {
         facets: [
-          'controlled_access',
+          'data_access',
           'data_category',
           'data_type',
-          'sequencing_experiment__experiment_strategy',
           'file_format',
+          'internal_file_id',
+          'platform',
+          'experimental_strategy',
+          'is_harmonized',
         ],
       },
     ],
@@ -105,11 +112,12 @@ const filtersContainer = (
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DataExploration = (props: OwnProps) => {
   const { tab } = useParams<{ tab: string }>();
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const fileMappingResults = useGetExtendedMappings(INDEXES.FILE);
-  const biospecimenMappingResults = useGetExtendedMappings(INDEXES.BIOSPECIMEN);
+  // const biospecimenMappingResults = useGetExtendedMappings(INDEXES.BIOSPECIMEN);
 
   const menuItems: ISidebarMenuItem[] = [
     {
@@ -138,10 +146,7 @@ const DataExploration = (props: OwnProps) => {
 
   return (
     <div className={styles.dataExplorationLayout}>
-      <SidebarMenu
-        className={styles.sideMenu}
-        menuItems={menuItems} /* defaultSelectedKey={tab} */
-      />
+      <SidebarMenu className={styles.sideMenu} menuItems={menuItems} defaultSelectedKey={tab} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent
           fileMapping={fileMappingResults}
