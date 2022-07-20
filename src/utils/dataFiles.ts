@@ -1,5 +1,4 @@
 import { FileAccessType, IFileEntity } from 'graphql/files/models';
-import intersection from 'lodash/intersection';
 
 export const userHasAccessToFile = (
   file: IFileEntity,
@@ -19,10 +18,5 @@ export const userHasAccessToFile = (
     return false;
   }
 
-  return (
-    // !file.acl ||
-    // file.acl.length === 0 ||
-    // intersection(userAcls, file.acl).length > 0 ||
-    file.data_access === FileAccessType.REGISTERED
-  );
+  return file.data_access === FileAccessType.REGISTERED;
 };
