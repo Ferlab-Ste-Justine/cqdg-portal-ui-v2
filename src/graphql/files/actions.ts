@@ -7,14 +7,9 @@ import { IFileResultTree } from './models';
 import { SEARCH_FILES_QUERY } from './queries';
 
 export const useDataFiles = (variables?: QueryVariable) => {
-  const { loading, result, error } = useLazyResultQuery<IFileResultTree>(SEARCH_FILES_QUERY, {
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(SEARCH_FILES_QUERY, {
     variables,
   });
-
-  if (process.env.NODE_ENV === 'development' && error) {
-    // eslint-disable-next-line no-console
-    console.log('useDataFiles error:', error);
-  }
 
   return {
     loading,

@@ -7,17 +7,9 @@ import { IParticipantEntity, IParticipantResultTree } from './models';
 import { SEARCH_PARTICIPANT_QUERY } from './queries';
 
 export const useParticipants = (variables?: QueryVariable): IQueryResults<IParticipantEntity[]> => {
-  const { loading, result, error } = useLazyResultQuery<IParticipantResultTree>(
-    SEARCH_PARTICIPANT_QUERY,
-    {
-      variables,
-    },
-  );
-
-  if (process.env.NODE_ENV === 'development' && error) {
-    // eslint-disable-next-line no-console
-    console.log('useParticipants error:', error);
-  }
+  const { loading, result } = useLazyResultQuery<IParticipantResultTree>(SEARCH_PARTICIPANT_QUERY, {
+    variables,
+  });
 
   return {
     loading,
