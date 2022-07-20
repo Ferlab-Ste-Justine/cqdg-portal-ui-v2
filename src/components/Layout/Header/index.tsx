@@ -1,28 +1,27 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { PageHeader, Dropdown, Button, Menu } from 'antd';
-import { ReadOutlined, HomeOutlined, FileSearchOutlined, TeamOutlined } from '@ant-design/icons';
-import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
-import { DownOutlined } from '@ant-design/icons';
-import HeaderLink from 'components/Layout/Header/HeaderLink';
-import { STATIC_ROUTES } from 'utils/routes';
-import { useUser } from 'store/user';
 import intl from 'react-intl-universal';
-import { getFTEnvVarByKey } from 'helpers/EnvVariables';
-import NotificationBanner from 'components/featureToggle/NotificationBanner';
-import { AlterTypes } from 'common/types';
-import { useKeycloak } from '@react-keycloak/web';
-import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
-import { DEFAULT_GRAVATAR_PLACEHOLDER, LANG } from 'common/constants';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userActions } from 'store/user/slice';
+import { useHistory } from 'react-router-dom';
+import { FileSearchOutlined, HomeOutlined, ReadOutlined, TeamOutlined } from '@ant-design/icons';
+import { DownOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
+import { useKeycloak } from '@react-keycloak/web';
+import { Button, Dropdown, Menu, PageHeader } from 'antd';
+import { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
-import style from 'components/Layout/Header/index.module.scss';
+import { DEFAULT_GRAVATAR_PLACEHOLDER, LANG } from 'common/constants';
+import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
+import { AlterTypes } from 'common/types';
+import NotificationBanner from 'components/featureToggle/NotificationBanner';
 import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
+import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
+import HeaderLink from 'components/Layout/Header/HeaderLink';
+import style from 'components/Layout/Header/index.module.scss';
 import { globalActions, useLang } from 'store/global';
+import { useUser } from 'store/user';
+import { userActions } from 'store/user/slice';
+import { STATIC_ROUTES } from 'utils/routes';
 
 const iconSize = { width: 14, height: 14 };
 const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
@@ -141,6 +140,7 @@ const Header = () => {
             </a>
           </Dropdown>,
           <Button
+            key="change-lang-button"
             shape="circle"
             className={style.langButton}
             onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
