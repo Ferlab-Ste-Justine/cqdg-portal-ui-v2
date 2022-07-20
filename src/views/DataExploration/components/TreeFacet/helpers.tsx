@@ -1,6 +1,7 @@
-import { TreeNode } from 'views/DataExploration/utils/OntologyTree';
-import TreeNodeTitle from './TreeNodeTitle';
 import { Typography } from 'antd';
+import { TreeNode } from 'views/DataExploration/utils/OntologyTree';
+
+import TreeNodeTitle from './TreeNodeTitle';
 
 import styles from './index.module.scss';
 

@@ -1,12 +1,13 @@
-import { ExperimentOutlined } from '@ant-design/icons';
+import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
+import { ExperimentOutlined } from '@ant-design/icons';
 import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { SCROLL_WRAPPER_ID, TAB_IDS } from './utils/constants';
-import intl from 'react-intl-universal';
-import PageContent from './components/PageContent';
-import { GraphqlBackend } from 'provider/types';
 import ApolloProvider from 'provider/ApolloProvider';
+import { GraphqlBackend } from 'provider/types';
+
+import PageContent from './components/PageContent';
+import { SCROLL_WRAPPER_ID, TAB_IDS } from './utils/constants';
 
 import styles from 'views/Variants/index.module.scss';
 

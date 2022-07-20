@@ -1,38 +1,39 @@
-import { IQueryResults } from 'graphql/models';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { DownloadOutlined } from '@ant-design/icons';
+import ProTable from '@ferlab/ui/core/components/ProTable';
+import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import useQueryBuilderState, {
+  addQuery,
+  updateActiveQueryField,
+} from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { Button, Tooltip } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
-import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
+import { INDEXES } from 'graphql/constants';
+import { IQueryResults } from 'graphql/models';
+import { IParticipantEntity } from 'graphql/participants/models';
+import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
-import { IParticipantEntity } from 'graphql/participants/models';
-import ProTable from '@ferlab/ui/core/components/ProTable';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import { getProTableDictionary } from 'utils/translation';
-import { useDispatch } from 'react-redux';
+import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
+
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
+import { ReportType } from 'services/api/reports/models';
+import { SetType } from 'services/api/savedSet/models';
+import { fetchReport, fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
-import { Button, Tooltip } from 'antd';
-import { ReportType } from 'services/api/reports/models';
-import { DownloadOutlined } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
-import { fetchReport, fetchTsvReport } from 'store/report/thunks';
-import { INDEXES } from 'graphql/constants';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
-import { Link, useHistory } from 'react-router-dom';
-import { STATIC_ROUTES } from 'utils/routes';
-import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
-import useQueryBuilderState, {
-  updateActiveQueryField,
-  addQuery,
-} from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
-import { SetType } from 'services/api/savedSet/models';
+import { STATIC_ROUTES } from 'utils/routes';
+import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
@@ -91,24 +92,22 @@ const getDefaultColumns = (history: any): ProColumnType<any>[] => [
     title: 'Collection ID',
     dataIndex: 'collection_sample_id',
     sorter: { multiple: 1 },
-    render: (collection_sample_id: string) => {
-      return (
-        // eslint-disable-next-line
+    render: (collection_sample_id: string) => (
+      // eslint-disable-next-line
         <a
-          type="link"
-          onClick={() =>
-            updateActiveQueryField({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              field: 'collection_sample_id',
-              value: [collection_sample_id],
-              index: INDEXES.BIOSPECIMEN,
-            })
-          }
-        >
-          {collection_sample_id}
-        </a>
-      );
-    },
+        type="link"
+        onClick={() =>
+          updateActiveQueryField({
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            field: 'collection_sample_id',
+            value: [collection_sample_id],
+            index: INDEXES.BIOSPECIMEN,
+          })
+        }
+      >
+        {collection_sample_id}
+      </a>
+    ),
   },
   {
     key: 'collection_sample_type',

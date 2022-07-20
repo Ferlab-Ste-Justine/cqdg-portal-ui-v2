@@ -1,9 +1,9 @@
 import {
-  IValueContent,
-  ISyntheticSqon,
   ISqonGroupFilter,
-  TSqonContent,
+  ISyntheticSqon,
+  IValueContent,
   IValueFilter,
+  TSqonContent,
 } from '@ferlab/ui/core/data/sqon/types';
 import { isBooleanOperator, isEmptySqon } from '@ferlab/ui/core/data/sqon/utils';
 import { INDEXES } from 'graphql/constants';

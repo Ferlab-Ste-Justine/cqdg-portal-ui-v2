@@ -1,8 +1,9 @@
 import intl from 'react-intl-universal';
 import { IDictionary as FiltersDict } from '@ferlab/ui/core/components/filters/types';
-import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { IProTableDictionary } from '@ferlab/ui/core/components/ProTable/types';
+import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
+
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
 export const getProTableDictionary = (): IProTableDictionary => ({

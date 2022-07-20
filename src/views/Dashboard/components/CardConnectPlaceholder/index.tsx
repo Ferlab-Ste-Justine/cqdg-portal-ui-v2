@@ -1,7 +1,7 @@
-import { ApiOutlined } from "@ant-design/icons";
-import { Button, ButtonProps, Space, Typography } from "antd";
+import { ApiOutlined } from '@ant-design/icons';
+import { Button, ButtonProps, Space, Typography } from 'antd';
 
-import styles from "./index.module.scss";
+import styles from './index.module.scss';
 
 interface OwnProps {
   icon: React.ReactElement;
@@ -12,20 +12,15 @@ interface OwnProps {
 
 const { Text } = Typography;
 
-const CardConnectPlaceholder = ({
-  icon,
-  description,
-  btnProps,
-  btnText = "Connect",
-}: OwnProps) => (
+const CardConnectPlaceholder = ({ icon, description, btnProps, btnText = 'Connect' }: OwnProps) => (
   <Space direction="vertical" className={styles.connectPlaceholder} size={16}>
     <div>
       <div className={styles.iconWrapper}>{icon}</div>
     </div>
     <Text className={styles.description}>{description}</Text>
     <Button
-      type={btnProps?.type || "primary"}
-      size={btnProps?.size || "small"}
+      type={btnProps?.type || 'primary'}
+      size={btnProps?.size || 'small'}
       icon={btnProps?.icon || <ApiOutlined />}
       {...btnProps}
     >

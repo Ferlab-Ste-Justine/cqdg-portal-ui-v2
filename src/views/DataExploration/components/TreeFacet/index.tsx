@@ -1,25 +1,27 @@
-import CollapseLikeFacet from 'components/uiKit/FilterList/CollapsePlaceHolderFacet';
-import { Col, Modal, Row, Spin, Tooltip, Transfer, Tree, Button, Dropdown, Menu } from 'antd';
-import intl from 'react-intl-universal';
 import { ReactElement, useEffect, useRef, useState } from 'react';
+import intl from 'react-intl-universal';
+import { BranchesOutlined, UserOutlined } from '@ant-design/icons';
+import Empty from '@ferlab/ui/core/components/Empty';
+import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { TermOperators } from '@ferlab/ui/core/data/sqon/operators';
+import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
+import { findSqonValueByField, removeFieldFromSqon } from '@ferlab/ui/core/data/sqon/utils';
+import { Button, Col, Dropdown, Menu, Modal, Row, Spin, Tooltip, Transfer, Tree } from 'antd';
+import { INDEXES } from 'graphql/constants';
+import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
+import { cloneDeep, isEmpty } from 'lodash';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   getFlattenTree,
-  TreeNode,
   removeSameTerms,
+  TreeNode,
   TTitleFormatter,
 } from 'views/DataExploration/utils/OntologyTree';
 import { PhenotypeStore } from 'views/DataExploration/utils/PhenotypeStore';
-import { findSqonValueByField, removeFieldFromSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { INDEXES } from 'graphql/constants';
-import { BranchesOutlined, UserOutlined } from '@ant-design/icons';
-import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
+
+import CollapseLikeFacet from 'components/uiKit/FilterList/CollapsePlaceHolderFacet';
+
 import { findChildrenKey, generateTree, getExpandedKeys, isChecked, searchInTree } from './helpers';
-import Empty from '@ferlab/ui/core/components/Empty';
-import { cloneDeep, isEmpty } from 'lodash';
-import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { TermOperators } from '@ferlab/ui/core/data/sqon/operators';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 
 import styles from './index.module.scss';
 
@@ -249,9 +251,7 @@ const TreeFacet = ({ type, field, titleFormatter }: Props) => {
             setTargetKeys(
               removeSameTerms(
                 [],
-                targetKeys.filter((el) => {
-                  return !t.includes(el);
-                }),
+                targetKeys.filter((el) => !t.includes(el)),
               ),
             );
           }}

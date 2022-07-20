@@ -1,5 +1,6 @@
-import Keycloak from "keycloak-js";
-import { keycloakConfig } from "./config";
+import Keycloak from 'keycloak-js';
+
+import { keycloakConfig } from './config';
 
 const keycloak = Keycloak(keycloakConfig);
 

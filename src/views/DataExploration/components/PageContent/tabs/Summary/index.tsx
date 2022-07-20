@@ -1,13 +1,15 @@
-import DemographicsGraphCard from './DemographicGraphCard';
+import { useDispatch } from 'react-redux';
+import SortableGrid from '@ferlab/ui/core/layout/SortableGrid';
+import cx from 'classnames';
+
+import { useUser } from 'store/user';
+import { updateUserConfig } from 'store/user/thunks';
+import { orderCardIfNeeded } from 'utils/helper';
+
 import DataCategoryGraphCard from './DataCategoryGraphCard';
 import DataTypeGraphCard from './DataTypeGraphCard';
+import DemographicsGraphCard from './DemographicGraphCard';
 import SunburstGraphCard from './SunburstGraphCard';
-import SortableGrid from '@ferlab/ui/core/layout/SortableGrid';
-import { useDispatch } from 'react-redux';
-import { updateUserConfig } from 'store/user/thunks';
-import { useUser } from 'store/user';
-import cx from 'classnames';
-import { orderCardIfNeeded } from 'utils/helper';
 
 import styles from './index.module.scss';
 

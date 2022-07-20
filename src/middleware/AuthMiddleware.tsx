@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useKeycloak } from '@react-keycloak/web';
+
+import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import Spinner from 'components/uiKit/Spinner';
+import useQueryParams from 'hooks/useQueryParams';
+import { useSavedFilter } from 'store/savedFilter';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
-import { useSavedFilter } from 'store/savedFilter';
-import useQueryParams from 'hooks/useQueryParams';
-import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 
 type Props = {
   children: React.ReactElement;

@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from 'store/types';
+
 import { ALL_FENCE_NAMES, FENCE_CONNECTION_STATUSES, FENCE_NAMES } from 'common/fenceTypes';
-import { handleThunkApiReponse } from 'store/utils';
 import { FenceApi } from 'services/api/fence';
 import { IFenceAuthPayload, IFenceInfo } from 'services/api/fence/models';
+import { RootState } from 'store/types';
+import { handleThunkApiReponse } from 'store/utils';
 
 const TEN_MINUTES_IN_MS = 1000 * 60 * 10;
 

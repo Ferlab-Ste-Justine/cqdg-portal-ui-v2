@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { TUserSavedFilter } from 'services/api/savedFilter/models';
 import { initialState } from 'store/savedFilter/types';
+
 import {
   createSavedFilter,
   deleteSavedFilter,

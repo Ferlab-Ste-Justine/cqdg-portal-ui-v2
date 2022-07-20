@@ -1,7 +1,9 @@
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { IPhenotypeSource } from 'graphql/summary/models';
+
 import { ArrangerApi } from 'services/api/arranger';
+
 import OntologyTree, { lightTreeNodeConstructor, TreeNode, TTitleFormatter } from './OntologyTree';
 
 const ROOT_PHENO = 'All (HP:0000001)';

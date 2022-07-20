@@ -1,4 +1,4 @@
-import EnvVariables from "helpers/EnvVariables";
+import EnvVariables from 'helpers/EnvVariables';
 
 declare global {
   interface Window {
@@ -7,7 +7,7 @@ declare global {
 }
 
 export const initUserSnap = () => {
-  const apiKey = EnvVariables.configFor("USER_SNAP_API_KEY");
+  const apiKey = EnvVariables.configFor('USER_SNAP_API_KEY');
 
   if (!apiKey) {
     return;
@@ -17,7 +17,7 @@ export const initUserSnap = () => {
     api.init();
   };
 
-  const script = document.createElement("script");
+  const script = document.createElement('script');
   script.async = true;
   script.src = `https://widget.usersnap.com/load/${apiKey}?onload=onUsersnapCXLoad`;
   document.head.append(script);

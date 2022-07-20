@@ -1,4 +1,5 @@
 import { IFileEntity, ITableFileEntity } from 'graphql/files/models';
+
 import { ICavaticaBillingGroup, ICavaticaProject } from 'services/api/cavatica/models';
 
 export type initialState = {

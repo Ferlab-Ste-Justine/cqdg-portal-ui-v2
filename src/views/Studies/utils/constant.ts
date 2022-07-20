@@ -21,5 +21,5 @@ export const DEFAULT_QUERY_CONFIG: IQueryConfig = {
 export const SCROLL_WRAPPER_ID = 'studies-explore-scroll-wrapper';
 
 export enum TAB_IDS {
-  STUDIES = 'studies'
+  STUDIES = 'studies',
 }

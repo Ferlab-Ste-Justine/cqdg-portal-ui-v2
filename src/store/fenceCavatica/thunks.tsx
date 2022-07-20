@@ -1,6 +1,18 @@
+import intl from 'react-intl-universal';
+import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { termToSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
+import { IFileEntity, IFileResultTree } from 'graphql/files/models';
+import { SEARCH_FILES_QUERY } from 'graphql/files/queries';
+import { hydrateResults } from 'graphql/models';
+import EnvironmentVariables from 'helpers/EnvVariables';
 import { chunk, isEmpty } from 'lodash';
+import { CAVATICA_FILE_BATCH_SIZE } from 'views/DataExploration/utils/constant';
+
+import { FENCE_CONNECTION_STATUSES } from 'common/fenceTypes';
+import { ArrangerApi } from 'services/api/arranger';
 import { CavaticaApi } from 'services/api/cavatica';
 import {
   CAVATICA_TYPE,
@@ -9,22 +21,12 @@ import {
   ICavaticaDRSImportItem,
   ICavaticaProject,
 } from 'services/api/cavatica/models';
-import { RootState } from 'store/types';
-import { IBulkImportData, ICavaticaTreeNode, TCavaticaProjectWithMembers } from './types';
-import intl from 'react-intl-universal';
-import { IFileEntity, IFileResultTree } from 'graphql/files/models';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { SEARCH_FILES_QUERY } from 'graphql/files/queries';
-import { hydrateResults } from 'graphql/models';
-import { termToSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
-import { CAVATICA_FILE_BATCH_SIZE } from 'views/DataExploration/utils/constant';
-import { handleThunkApiReponse } from 'store/utils';
-import EnvironmentVariables from 'helpers/EnvVariables';
 import { globalActions } from 'store/global';
-import { ArrangerApi } from 'services/api/arranger';
+import { RootState } from 'store/types';
+import { handleThunkApiReponse } from 'store/utils';
 import { userHasAccessToFile } from 'utils/dataFiles';
-import { FENCE_CONNECTION_STATUSES } from 'common/fenceTypes';
+
+import { IBulkImportData, ICavaticaTreeNode, TCavaticaProjectWithMembers } from './types';
 
 const BATCH_SIZE = 100;
 const USER_BASE_URL = EnvironmentVariables.configFor('CAVATICA_USER_BASE_URL');

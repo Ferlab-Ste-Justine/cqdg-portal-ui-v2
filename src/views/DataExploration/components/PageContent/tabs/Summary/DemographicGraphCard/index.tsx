@@ -1,22 +1,23 @@
-import { Col, Row } from 'antd';
-import { RawAggregation } from 'graphql/models';
-import PieChart from 'components/uiKit/charts/Pie';
-import { toChartData } from 'utils/charts';
 import intl from 'react-intl-universal';
-import GridCard from '@ferlab/ui/core/view/v2/GridCard';
-import { INDEXES } from 'graphql/constants';
 import { useHistory } from 'react-router-dom';
-import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
-import CardHeader from 'views/Dashboard/components/CardHeader';
-import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
-import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
-import useApi from 'hooks/useApi';
-import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { BasicTooltip } from '@nivo/tooltip';
-import { capitalize, isEmpty } from 'lodash';
 import Empty from '@ferlab/ui/core/components/Empty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
+import GridCard from '@ferlab/ui/core/view/v2/GridCard';
+import { BasicTooltip } from '@nivo/tooltip';
+import { Col, Row } from 'antd';
+import { INDEXES } from 'graphql/constants';
+import { RawAggregation } from 'graphql/models';
+import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
+import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
+import { capitalize, isEmpty } from 'lodash';
+import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
+import CardHeader from 'views/Dashboard/components/CardHeader';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+
+import PieChart from 'components/uiKit/charts/Pie';
+import useApi from 'hooks/useApi';
+import { toChartData } from 'utils/charts';
 
 import styles from './index.module.scss';
 

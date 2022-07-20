@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { IconProps } from 'components/Icons';
 
 const IncludeIconBeta = ({ width = 90, height = 41, className = '' }: IconProps) => (

@@ -1,22 +1,15 @@
-import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
-import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
-import intl from 'react-intl-universal';
-import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
-import { STATIC_ROUTES } from 'utils/routes';
-import { getQueryBuilderDictionary } from 'utils/translation';
-import { Space, Tabs } from 'antd';
-import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import {
-  createSavedFilter,
-  deleteSavedFilter,
-  setSavedFilterAsDefault,
-  updateSavedFilter,
-} from 'store/savedFilter/thunks';
-import { useSavedFilter } from 'store/savedFilter';
-import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { useHistory } from 'react-router-dom';
+import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
+import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
+import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
+import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
+import { Space, Tabs } from 'antd';
+import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
+import { useVariant } from 'graphql/variants/actions';
 import { isEmpty } from 'lodash';
 import {
   DEFAULT_PAGE_INDEX,
@@ -25,11 +18,20 @@ import {
   VARIANT_FILTER_TAG,
   VARIANT_REPO_QB_ID,
 } from 'views/Variants/utils/constants';
-import { useVariant } from 'graphql/variants/actions';
-import SummaryTab from './tabs/Summary';
+
+import { useSavedFilter } from 'store/savedFilter';
+import {
+  createSavedFilter,
+  deleteSavedFilter,
+  setSavedFilterAsDefault,
+  updateSavedFilter,
+} from 'store/savedFilter/thunks';
 import { combineExtendedMappings } from 'utils/fieldMapper';
+import { STATIC_ROUTES } from 'utils/routes';
+import { getQueryBuilderDictionary } from 'utils/translation';
+
+import SummaryTab from './tabs/Summary';
 import VariantsTab from './tabs/Variants';
-import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 
 import styles from './index.module.scss';
 
@@ -121,7 +123,7 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
       />
       <Tabs
         type="card"
-        className='navNoMarginBtm'
+        className="navNoMarginBtm"
         activeKey={tabId || TAB_IDS.SUMMARY}
         onChange={(key) => {
           if (!history.location.pathname.includes(key)) {

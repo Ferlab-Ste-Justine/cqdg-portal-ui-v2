@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import useQueryParams from 'hooks/useQueryParams';
 import { isBoolTrue } from 'helpers';
+
+import useQueryParams from 'hooks/useQueryParams';
 
 const FEATURE_TOGGLE_PREFIX = 'REACT_APP_FT_';
 

@@ -1,6 +1,8 @@
 import { hydrateResults, IQueryResults } from 'graphql/models';
 import { QueryVariable } from 'graphql/queries';
+
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
+
 import { IBiospecimenEntity, IBiospecimenResultTree } from './models';
 import { SEARCH_BIOSPECIMEN_QUERY } from './queries';
 

@@ -1,18 +1,15 @@
-import cx from "classnames";
-import { IconProps } from "components/Icons";
+import cx from 'classnames';
 
-const CavaticaIcon = ({
-  className = "",
-  width = 40,
-  height = 40,
-}: IconProps) => (
+import { IconProps } from 'components/Icons';
+
+const CavaticaIcon = ({ className = '', width = 40, height = 40 }: IconProps) => (
   <svg
     width={width}
     height={height}
     viewBox="0 0 40 40"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
-    className={cx("anticon", className)}
+    className={cx('anticon', className)}
   >
     <path
       fillRule="evenodd"

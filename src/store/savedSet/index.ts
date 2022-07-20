@@ -1,7 +1,10 @@
 import { useSelector } from 'react-redux';
-import { savedSetSelector } from './selector';
-import EnvironmentVariables from '../../helpers/EnvVariables';
+
 import { SetType } from 'services/api/savedSet/models';
+
+import EnvironmentVariables from '../../helpers/EnvVariables';
+
+import { savedSetSelector } from './selector';
 
 export type { initialState as SavedSetInitialState } from './types';
 export { default, SavedSetState } from './slice';

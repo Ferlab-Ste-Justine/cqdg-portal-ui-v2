@@ -1,17 +1,18 @@
+import intl from 'react-intl-universal';
+import { setQueryBuilderState } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { isEmpty } from 'lodash';
+import { v4 } from 'uuid';
+
+import { FILTER_TAG_QB_ID_MAPPING } from 'common/queryBuilder';
+import { SavedFilterApi } from 'services/api/savedFilter';
 import {
   TUserSavedFilter,
   TUserSavedFilterInsert,
   TUserSavedFilterUpdate,
 } from 'services/api/savedFilter/models';
-import { SavedFilterApi } from 'services/api/savedFilter';
-import { handleThunkApiReponse } from 'store/utils';
-import intl from 'react-intl-universal';
 import { globalActions } from 'store/global';
-import { setQueryBuilderState } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { FILTER_TAG_QB_ID_MAPPING } from 'common/queryBuilder';
-import { isEmpty } from 'lodash';
-import { v4 } from 'uuid';
+import { handleThunkApiReponse } from 'store/utils';
 
 const fetchSavedFilters = createAsyncThunk<
   TUserSavedFilter[],

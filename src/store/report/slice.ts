@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initialState } from 'store/report/types';
+
 import { fetchReport, fetchTsvReport } from 'store/report/thunks';
+import { initialState } from 'store/report/types';
 
 export const ReportState: initialState = {
   isLoading: false,

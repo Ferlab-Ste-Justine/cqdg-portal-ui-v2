@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { CloudUploadOutlined, LockOutlined, SafetyOutlined, UnlockFilled } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import useQueryBuilderState, { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import useQueryBuilderState, {
+  addQuery,
+} from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -66,7 +68,12 @@ const getDefaultColumns = (
     displayTitle: 'File Authorization',
     align: 'center',
     render: (record: IFileEntity) => {
-      const hasAccess = userHasAccessToFile(record, fenceAcls, isConnectedToCavatica, isConnectedToGen3);
+      const hasAccess = userHasAccessToFile(
+        record,
+        fenceAcls,
+        isConnectedToCavatica,
+        isConnectedToGen3,
+      );
 
       return hasAccess ? (
         <Tooltip title="Authorized">
@@ -279,7 +286,9 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
     );
 
   const getCurrentSqon = (): any =>
-    selectedAllResults || !selectedKeys.length ? sqon : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys);
+    selectedAllResults || !selectedKeys.length
+      ? sqon
+      : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys);
 
   const onCavaticaConnectionRequired = () =>
     Modal.confirm({
@@ -296,9 +305,12 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
   const onCavaticaUploadLimitReached = () =>
     Modal.error({
       title: intl.get('screen.dataExploration.tabs.datafiles.cavatica.bulkImportLimit.title'),
-      content: intl.getHTML('screen.dataExploration.tabs.datafiles.cavatica.bulkImportLimit.description', {
-        limit: CAVATICA_FILE_BATCH_SIZE,
-      }),
+      content: intl.getHTML(
+        'screen.dataExploration.tabs.datafiles.cavatica.bulkImportLimit.description',
+        {
+          limit: CAVATICA_FILE_BATCH_SIZE,
+        },
+      ),
       okText: 'Ok',
       cancelText: undefined,
     });
@@ -354,7 +366,10 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
                 connectionStatus.gen3 === FENCE_CONNECTION_STATUSES.connected,
               ),
               index: INDEXES.FILE,
-              sqon: selectedAllResults || !selectedKeys.length ? sqon : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys),
+              sqon:
+                selectedAllResults || !selectedKeys.length
+                  ? sqon
+                  : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys),
             }),
           ),
         onColumnSortChange: (newState) =>

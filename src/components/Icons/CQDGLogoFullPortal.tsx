@@ -26,14 +26,7 @@ const CQDGLogoFullPortal = ({ width = 140, height = 40, className = '' }: IconPr
       fill="#008FC7"
     />
     <g clipPath="url(#clip0_2392_37619)">
-      <mask
-        id="mask0_2392_37619"
-        maskUnits="userSpaceOnUse"
-        x="8"
-        y="8"
-        width="24"
-        height="24"
-      >
+      <mask id="mask0_2392_37619" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
         <circle cx="20.0103" cy="20.0102" r="11.9456" fill="#C4C4C4" />
       </mask>
       <g mask="url(#mask0_2392_37619)">

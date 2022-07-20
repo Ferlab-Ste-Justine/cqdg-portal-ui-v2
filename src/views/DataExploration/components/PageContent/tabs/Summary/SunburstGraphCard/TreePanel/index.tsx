@@ -1,11 +1,11 @@
-import { Button, Space, Tree, Typography } from 'antd';
-import { TreeNode } from 'views/DataExploration/utils/OntologyTree';
 import intl from 'react-intl-universal';
-import { INDEXES } from 'graphql/constants';
-import { RegexExtractPhenotype } from 'views/DataExploration/utils/PhenotypeStore';
-import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
+import { Button, Space, Tree, Typography } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { TreeNode } from 'views/DataExploration/utils/OntologyTree';
+import { RegexExtractPhenotype } from 'views/DataExploration/utils/PhenotypeStore';
 
 import styles from './index.module.scss';
 

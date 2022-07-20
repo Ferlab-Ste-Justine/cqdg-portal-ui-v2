@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { CAVATICA_TYPE, ICavaticaProject } from 'services/api/cavatica/models';
 import { initialState, TCavaticaProjectWithMembers } from 'store/fenceCavatica/types';
+
 import {
   beginAnalyse,
   createProjet,

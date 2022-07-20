@@ -1,8 +1,9 @@
-import { Col, Form, Row, Select } from 'antd';
-import { Store } from 'antd/lib/form/interface';
-import { FormInstance } from 'antd/lib/form';
-import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { UserOutlined } from '@ant-design/icons';
+import { Col, Form, Row, Select } from 'antd';
+import { FormInstance } from 'antd/lib/form';
+import { Store } from 'antd/lib/form/interface';
+
+import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 
 import styles from './index.module.scss';
 

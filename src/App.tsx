@@ -1,32 +1,33 @@
-import { useKeycloak } from '@react-keycloak/web';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Redirect,
+  Route,
   RouteComponentProps,
+  Switch,
 } from 'react-router-dom';
-import ContextProvider from 'provider/ContextProvider';
 import Empty from '@ferlab/ui/core/components/Empty';
-import Login from 'views/Login';
-import SideImageLayout from 'components/Layout/SideImage';
-import { DYNAMIC_ROUTES, STATIC_ROUTES } from 'utils/routes';
-import Spinner from 'components/uiKit/Spinner';
-import MainSideImage from 'components/assets/side-img-svg.svg';
-import ProtectedRoute from 'ProtectedRoute';
-import PageLayout from 'components/Layout';
-import AuthMiddleware from 'middleware/AuthMiddleware';
-import ErrorPage from 'views/Error';
 import loadable from '@loadable/component';
-import { useLang } from 'store/global';
+import { useKeycloak } from '@react-keycloak/web';
 import { ConfigProvider } from 'antd';
-import { LANG } from 'common/constants';
-import frFR from 'antd/lib/locale/fr_FR';
 import enUS from 'antd/lib/locale/en_US';
-import ErrorBoundary from 'components/ErrorBoundary';
+import frFR from 'antd/lib/locale/fr_FR';
+import AuthMiddleware from 'middleware/AuthMiddleware';
+import ProtectedRoute from 'ProtectedRoute';
+import ContextProvider from 'provider/ContextProvider';
+import ErrorPage from 'views/Error';
 import FenceRedirect from 'views/FenceRedirect';
+import Login from 'views/Login';
+
+import { LANG } from 'common/constants';
 import { FENCE_NAMES } from 'common/fenceTypes';
+import MainSideImage from 'components/assets/side-img-svg.svg';
+import ErrorBoundary from 'components/ErrorBoundary';
+import PageLayout from 'components/Layout';
+import SideImageLayout from 'components/Layout/SideImage';
+import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
+import { useLang } from 'store/global';
+import { DYNAMIC_ROUTES, STATIC_ROUTES } from 'utils/routes';
 
 const loadableProps = { fallback: <Spinner size="large" /> };
 const Dashboard = loadable(() => import('views/Dashboard'), loadableProps);
@@ -107,14 +108,12 @@ const App = () => {
   );
 };
 
-const EnhanceApp = () => {
-  return (
-    <ErrorBoundary>
-      <ContextProvider>
-        <App />
-      </ContextProvider>
-    </ErrorBoundary>
-  );
-};
+const EnhanceApp = () => (
+  <ErrorBoundary>
+    <ContextProvider>
+      <App />
+    </ContextProvider>
+  </ErrorBoundary>
+);
 
 export default EnhanceApp;

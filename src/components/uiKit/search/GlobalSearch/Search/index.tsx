@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { DocumentNode } from 'graphql';
+import { INDEXES } from 'graphql/constants';
+
 import SearchAutocomplete, {
   ISearchAutocomplete,
   OptionsType,
 } from 'components/uiKit/search/GlobalSearch/Search/SearchAutocomplete';
-import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { INDEXES } from 'graphql/constants';
-import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { ArrangerApi } from 'services/api/arranger';
-import { DocumentNode } from 'graphql';
 
 interface IGlobalSearch<T> {
   query: DocumentNode;

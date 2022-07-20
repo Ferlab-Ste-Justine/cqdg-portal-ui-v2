@@ -1,18 +1,20 @@
+import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
+import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
+import { INDEXES } from 'graphql/constants';
+import { STUDIES_AGGREGATIONS } from 'graphql/studies/queries';
 import ApolloProvider from 'provider/ApolloProvider';
 import { GraphqlBackend } from 'provider/types';
 
-import styles from './index.module.scss';
-import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { SCROLL_WRAPPER_ID, STUDIES_EXPLORATION_QB_ID } from './utils/constant';
+import useGetAggregations from 'hooks/graphql/useGetAggregations';
+import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
+
 import PageContent from './components/PageContent';
 import StudiesSidebar from './components/Sidebar';
-import useGetAggregations from 'hooks/graphql/useGetAggregations';
-import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { INDEXES } from 'graphql/constants';
-import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { STUDIES_AGGREGATIONS } from 'graphql/studies/queries';
+import { SCROLL_WRAPPER_ID, STUDIES_EXPLORATION_QB_ID } from './utils/constant';
+
+import styles from './index.module.scss';
 
 const Studies = () => {
   const { queryList, activeQuery } = useQueryBuilderState(STUDIES_EXPLORATION_QB_ID);
@@ -49,12 +51,10 @@ const Studies = () => {
   );
 };
 
-const StudiesWrapper = (props: any) => {
-  return (
-    <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-      <Studies {...props} />
-    </ApolloProvider>
-  );
-};
+const StudiesWrapper = (props: any) => (
+  <ApolloProvider backend={GraphqlBackend.ARRANGER}>
+    <Studies {...props} />
+  </ApolloProvider>
+);
 
 export default StudiesWrapper;

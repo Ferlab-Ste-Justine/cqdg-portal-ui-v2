@@ -28,7 +28,7 @@ export const DEMOGRAPHIC_QUERY = gql`
 `;
 
 export const DATATYPE_QUERY = gql`
-  query($sqon: JSON) {
+  query ($sqon: JSON) {
     participant: Donor {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_type {
@@ -43,7 +43,7 @@ export const DATATYPE_QUERY = gql`
 `;
 
 export const PARTICIPANT_BY_STUDIES_QUERY = gql`
-  query($sqon: JSON) {
+  query ($sqon: JSON) {
     participant: Donor {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         study_id {
@@ -58,7 +58,7 @@ export const PARTICIPANT_BY_STUDIES_QUERY = gql`
 `;
 
 export const DATA_CATEGORY_QUERY = gql`
-  query($sqon: JSON) {
+  query ($sqon: JSON) {
     participant: Donor {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_category {

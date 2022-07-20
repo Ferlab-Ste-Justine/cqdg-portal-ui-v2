@@ -1,4 +1,4 @@
-import { RptManager } from "auth/keycloak-api/manager";
+import { RptManager } from 'auth/keycloak-api/manager';
 
 export const userAuthPermissions = async () => {
   try {

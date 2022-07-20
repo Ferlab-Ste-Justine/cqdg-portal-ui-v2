@@ -1,27 +1,28 @@
+import { useEffect, useRef, useState } from 'react';
+import intl from 'react-intl-universal';
+import Empty from '@ferlab/ui/core/components/Empty';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { Col, Row } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
+import CardHeader from 'views/Dashboard/components/CardHeader';
+import TreePanel from 'views/DataExploration/components/PageContent/tabs/Summary/SunburstGraphCard/TreePanel';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import {
+  extractMondoTitleAndCode,
+  extractPhenotypeTitleAndCode,
+} from 'views/DataExploration/utils/helper';
+import { lightTreeNodeConstructor, TreeNode } from 'views/DataExploration/utils/OntologyTree';
 import {
   generateNavTreeFormKey,
   PhenotypeStore,
   RegexExtractPhenotype,
 } from 'views/DataExploration/utils/PhenotypeStore';
-import { lightTreeNodeConstructor, TreeNode } from 'views/DataExploration/utils/OntologyTree';
 
-import intl from 'react-intl-universal';
-import SunburstD3 from './utils/sunburst-d3';
 import { getCommonColors } from 'common/charts';
-import TreePanel from 'views/DataExploration/components/PageContent/tabs/Summary/SunburstGraphCard/TreePanel';
-import {
-  extractMondoTitleAndCode,
-  extractPhenotypeTitleAndCode,
-} from 'views/DataExploration/utils/helper';
-import Empty from '@ferlab/ui/core/components/Empty';
-import CardHeader from 'views/Dashboard/components/CardHeader';
-import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
+
+import SunburstD3 from './utils/sunburst-d3';
 
 import styles from './index.module.scss';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 interface OwnProps {
   id: string;
@@ -44,7 +45,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
   useEffect(() => {
     setIsLoading(true);
     phenotypeStore.current?.fetch({ field, sqon }).then(() => {
-      let rootNode = phenotypeStore.current?.getRootNode();
+      const rootNode = phenotypeStore.current?.getRootNode();
       setCurrentNode(rootNode);
       setTreeData(rootNode ? [lightTreeNodeConstructor(rootNode.key!)] : []);
       setIsLoading(false);
