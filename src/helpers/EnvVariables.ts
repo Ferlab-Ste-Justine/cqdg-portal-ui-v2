@@ -3,6 +3,7 @@ export default class EnvironmentVariables {
     // GENERAL
     ENV: process.env.NODE_ENV,
     INCLUDE_WEB_ROOT: process.env.REACT_APP_INCLUDE_WEB_ROOT,
+    REDUX_LOG: process.env.REACT_APP_REDUX_LOG,
     // APIS
     ARRANGER_API: process.env.REACT_APP_ARRANGER_API_URL,
     ARRANGER_PROJECT_ID: process.env.REACT_APP_ARRANGER_PROJECT_ID,

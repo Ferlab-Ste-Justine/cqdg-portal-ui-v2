@@ -1,22 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
-import storage from 'redux-persist/lib/storage';
-import logger from 'redux-logger';
-import { persistStore, persistReducer } from 'redux-persist';
 import EnvVariables from 'helpers/EnvVariables';
-import { RootState } from 'store/types';
+import { combineReducers } from 'redux';
+import logger from 'redux-logger';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import createFilter from 'redux-persist-transform-filter';
-// Reducers
-import GlobalReducer from 'store/global';
-import UserReducer from 'store/user';
+
+import FenceCavaticaReducer from 'store/fenceCavatica';
 import FenceConnectionReducer from 'store/fenceConnection';
+import FenceStudiesReducer from 'store/fenceStudies';
+import GlobalReducer from 'store/global';
 import ReportReducer from 'store/report';
 import SavedFilterReducer from 'store/savedFilter';
 import SavedSetReducer from 'store/savedSet';
-import FenceCavaticaReducer from 'store/fenceCavatica';
-import FenceStudiesReducer from 'store/fenceStudies';
+import { RootState } from 'store/types';
+import UserReducer from 'store/user';
 
-const devMode = EnvVariables.configFor('ENV') === 'development';
+const isDevMode = EnvVariables.configFor('ENV') === 'development';
+const isReduxLog = EnvVariables.configFor('REDUX_LOG') === 'true';
 
 const persistConfig = {
   key: 'root',
@@ -38,14 +39,12 @@ const rootReducer = combineReducers<RootState>({
 
 const store: any = configureStore({
   reducer: persistReducer(persistConfig, rootReducer),
-  devTools: devMode,
+  devTools: isDevMode,
   middleware: (getDefaultMiddleware) => {
-    let defaultMid = getDefaultMiddleware({
+    const defaultMid = getDefaultMiddleware({
       serializableCheck: false,
     });
-    // Disable redux logger
-    // return devMode ? defaultMid.concat(logger) : defaultMid;
-    return defaultMid;
+    return isDevMode && isReduxLog ? defaultMid.concat(logger) : defaultMid;
   },
 });
 
