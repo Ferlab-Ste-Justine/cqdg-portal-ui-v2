@@ -29,10 +29,6 @@ import { formatHpoTitleAndCode, formatMondoTitleAndCode } from './utils/helper';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  tab?: string;
-}
-
 enum FilterTypes {
   Participant,
   Biospecimen,
@@ -115,8 +111,7 @@ const filtersContainer = (
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const DataExploration = (props: OwnProps) => {
+const DataExploration = () => {
   const { tab } = useParams<{ tab: string }>();
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const fileMappingResults = useGetExtendedMappings(INDEXES.FILE);
@@ -161,9 +156,9 @@ const DataExploration = (props: OwnProps) => {
   );
 };
 
-const DataExplorationWrapper = (props: OwnProps) => (
+const DataExplorationWrapper = () => (
   <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-    <DataExploration {...props} />
+    <DataExploration />
   </ApolloProvider>
 );
 
