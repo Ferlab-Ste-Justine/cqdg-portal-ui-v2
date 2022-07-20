@@ -1,6 +1,6 @@
+import { IFileDataAccessCodes, IFileEntity } from 'graphql/files/models';
 import { ArrangerResultsTree } from 'graphql/models';
-import { IFileDataAccessCodes, IFileEntity } from '../files/models';
-import { IParticipantEntity } from '../participants/models';
+import { IParticipantEntity } from 'graphql/participants/models';
 
 export interface IStudyResultTree {
   Study: ArrangerResultsTree<IStudyEntity>;

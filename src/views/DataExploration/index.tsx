@@ -50,14 +50,17 @@ export const filterGroups: {
     groups: [
       {
         facets: [
-          // eslint-disable-next-line react/jsx-key
-          // eslint-disable-next-line react/jsx-key
-          <TreeFacet type={'mondoTree'} field={'mondo'} titleFormatter={formatMondoTitleAndCode} />,
-          // eslint-disable-next-line react/jsx-key
+          <TreeFacet
+            type={'mondoTree'}
+            field={'mondo'}
+            titleFormatter={formatMondoTitleAndCode}
+            key={'mondo'}
+          />,
           <TreeFacet
             type={'hpoTree'}
             field={'observed_phenotype'}
             titleFormatter={formatHpoTitleAndCode}
+            key={'observed_phenotype'}
           />,
           'gender',
           'ethnicity',
