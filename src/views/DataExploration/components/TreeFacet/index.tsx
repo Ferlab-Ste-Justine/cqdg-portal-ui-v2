@@ -184,6 +184,7 @@ const TreeFacet = ({ type, field, titleFormatter }: Props) => {
             Cancel
           </Button>,
           <Dropdown.Button
+            key="treeFacet-footer-dropdown-button"
             type="primary"
             overlay={
               <Menu
