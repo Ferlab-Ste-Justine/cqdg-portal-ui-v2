@@ -1,6 +1,8 @@
-import { FENCE_CONNECTION_STATUSES, FENCE_NAMES } from 'common/fenceTypes';
 import { useSelector } from 'react-redux';
+
+import { FENCE_CONNECTION_STATUSES, FENCE_NAMES } from 'common/fenceTypes';
 import { useFenceConnection } from 'store/fenceConnection';
+
 import { fenceCavaticaSelector } from './selector';
 
 export type { initialState as FenceCavaticaInitialState } from './types';

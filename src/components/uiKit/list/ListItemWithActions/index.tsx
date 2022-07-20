@@ -1,8 +1,8 @@
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { Button, List, Typography } from 'antd';
 import cx from 'classnames';
-import { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 

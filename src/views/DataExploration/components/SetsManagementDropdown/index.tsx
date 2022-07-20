@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu, Tooltip } from 'antd';
+import { useEffect, useState } from 'react';
 import {
   DownOutlined,
   ExperimentOutlined,
@@ -9,19 +9,21 @@ import {
   UsergroupDeleteOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { MenuClickEventHandler } from 'rc-menu/lib/interface';
-import { IQueryResults } from 'graphql/models';
-import { IParticipantEntity } from 'graphql/participants/models';
-import { useEffect, useState } from 'react';
-import AddRemoveSaveSetModal from './AddRemoveSaveSetModal';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { useSavedSet } from 'store/savedSet';
-import { IFileEntity } from 'graphql/files/models';
+import { Button, Dropdown, Menu, Tooltip } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
+import { IFileEntity } from 'graphql/files/models';
+import { IQueryResults } from 'graphql/models';
+import { IParticipantEntity } from 'graphql/participants/models';
+import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
+
 import { SetType } from 'services/api/savedSet/models';
+import { useSavedSet } from 'store/savedSet';
 import { numberWithCommas } from 'utils/string';
+
+import AddRemoveSaveSetModal from './AddRemoveSaveSetModal';
 
 import styles from './index.module.scss';
 

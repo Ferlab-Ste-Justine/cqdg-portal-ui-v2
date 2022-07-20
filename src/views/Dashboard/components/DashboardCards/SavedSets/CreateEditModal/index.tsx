@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { WarningFilled } from '@ant-design/icons';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Form, Input, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';
-import filtersToName from 'common/sqonToName';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import intl from 'react-intl-universal';
-import { MAX_LENGTH_NAME, PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
+
+import filtersToName from 'common/sqonToName';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
-import { WarningFilled } from '@ant-design/icons';
+import { MAX_LENGTH_NAME, PROJECT_ID, useSavedSet } from 'store/savedSet';
+import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';
 
 import styles from './index.module.scss';
 
@@ -118,7 +119,7 @@ const CreateEditModal = ({
     }
 
     if (hasSelectedKeys) {
-      let newName = `${setType.charAt(0).toUpperCase() + setType.slice(1)} Set`;
+      const newName = `${setType.charAt(0).toUpperCase() + setType.slice(1)} Set`;
       return resolveConflictNames(newName);
     }
 

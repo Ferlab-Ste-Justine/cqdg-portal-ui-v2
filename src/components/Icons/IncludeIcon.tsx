@@ -1,7 +1,8 @@
-import * as React from "react";
-import { IconProps } from "components/Icons";
+import * as React from 'react';
 
-const IncludeIcon = ({ width = 58, height = 60, className = "" }: IconProps) => (
+import { IconProps } from 'components/Icons';
+
+const IncludeIcon = ({ width = 58, height = 60, className = '' }: IconProps) => (
   <svg
     width={width}
     height={height}

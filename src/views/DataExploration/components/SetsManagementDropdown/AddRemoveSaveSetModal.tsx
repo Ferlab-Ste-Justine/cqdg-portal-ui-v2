@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Form, Modal } from 'antd';
-import UserSetsForm from './UserSetForm';
-import { Store } from 'antd/lib/form/interface';
-import { SetActionType } from './index';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
-import { updateSavedSet } from 'store/savedSet/thunks';
-import { useDispatch } from 'react-redux';
-import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import intl from 'react-intl-universal';
+import { useDispatch } from 'react-redux';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { Form, Modal } from 'antd';
+import { Store } from 'antd/lib/form/interface';
+
+import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
+import { PROJECT_ID, useSavedSet } from 'store/savedSet';
+import { updateSavedSet } from 'store/savedSet/thunks';
+
+import { SetActionType } from './index';
+import UserSetsForm from './UserSetForm';
 
 const FORM_NAME = 'add-remove-set';
 

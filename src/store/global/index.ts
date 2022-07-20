@@ -1,5 +1,7 @@
-import { LANG } from 'common/constants';
 import { useSelector } from 'react-redux';
+
+import { LANG } from 'common/constants';
+
 import { globalSelector } from './selector';
 
 export type { initialState as GlobalInitialState } from './types';

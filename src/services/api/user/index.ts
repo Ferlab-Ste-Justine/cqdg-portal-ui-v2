@@ -1,8 +1,10 @@
-import EnvironmentVariables from 'helpers/EnvVariables';
 import keycloak from 'auth/keycloak-api/keycloak';
+import EnvironmentVariables from 'helpers/EnvVariables';
+
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
-import { TUser, TUserInsert, TUserUpdate } from './models';
 import { sendRequest } from 'services/api';
+
+import { TUser, TUserInsert, TUserUpdate } from './models';
 
 const USER_API_URL = `${EnvironmentVariables.configFor('USERS_API')}/user`;
 

@@ -1,19 +1,21 @@
+import intl from 'react-intl-universal';
+import Empty from '@ferlab/ui/core/components/Empty';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { List, Typography } from 'antd';
-import intl from 'react-intl-universal';
-import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
-import CardHeader from 'views/Dashboard/components/CardHeader';
-import Empty from '@ferlab/ui/core/components/Empty';
-import SavedFiltersListItem from './ListItem';
-import { useSavedFilter } from 'store/savedFilter';
-import { TUserSavedFilter } from 'services/api/savedFilter/models';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
-import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { STATIC_ROUTES } from 'utils/routes';
+import CardHeader from 'views/Dashboard/components/CardHeader';
+import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
+
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
+import { TUserSavedFilter } from 'services/api/savedFilter/models';
+import { SUPPORT_EMAIL } from 'store/report/thunks';
+import { useSavedFilter } from 'store/savedFilter';
+import { STATIC_ROUTES } from 'utils/routes';
+
+import SavedFiltersListItem from './ListItem';
 
 import styles from './index.module.scss';
-import {SUPPORT_EMAIL} from "store/report/thunks";
 
 const { Text } = Typography;
 

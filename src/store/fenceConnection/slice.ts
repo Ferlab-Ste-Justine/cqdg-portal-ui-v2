@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { initialState } from 'store/fenceConnection/types';
+
 import { FENCE_CONNECTION_STATUSES, FENCE_NAMES } from 'common/fenceTypes';
+import { initialState } from 'store/fenceConnection/types';
+
 import { checkFenceAuthStatus, connectToFence, disconnectFromFence } from './thunks';
 
 export const FenceConnectionState: initialState = {

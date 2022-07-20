@@ -1,15 +1,17 @@
-import { Space, Typography } from 'antd';
-import { useUser } from 'store/user';
 import intl from 'react-intl-universal';
+import { useDispatch } from 'react-redux';
 import SortableGrid from '@ferlab/ui/core/layout/SortableGrid';
+import { Space, Typography } from 'antd';
 import { getFTEnvVarByKey } from 'helpers/EnvVariables';
+
 import { AlterTypes } from 'common/types';
 import NotificationBanner from 'components/featureToggle/NotificationBanner';
-import { dashboardCards } from './components/DashboardCards';
-import { useDispatch } from 'react-redux';
+import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
-import DataExplorationLinks from './components/DashboardCards/DataExplorationLinks';
 import { orderCardIfNeeded } from 'utils/helper';
+
+import { dashboardCards } from './components/DashboardCards';
+import DataExplorationLinks from './components/DashboardCards/DataExplorationLinks';
 
 import styles from './index.module.scss';
 

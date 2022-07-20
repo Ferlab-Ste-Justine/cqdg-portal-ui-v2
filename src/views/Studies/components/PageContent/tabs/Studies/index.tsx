@@ -1,12 +1,13 @@
-import { IQueryResults } from 'graphql/models';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
-import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import { getProTableDictionary } from 'utils/translation';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { scrollToTop, formatQuerySortList } from 'utils/helper';
+import { IQueryResults } from 'graphql/models';
 import { IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
+
+import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
+import { formatQuerySortList, scrollToTop } from 'utils/helper';
+import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { UserApi } from 'services/api/user';
 import { TUser, TUserConfig, TUserUpdate } from 'services/api/user/models';
 import { RootState } from 'store/types';

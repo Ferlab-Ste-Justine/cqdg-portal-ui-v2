@@ -1,23 +1,25 @@
-import { Col, Modal, Row, Typography } from 'antd';
-import { IUserSetOutput } from 'services/api/savedSet/models';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { ReactElement, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { Col, Modal, Row, Typography } from 'antd';
+import { distanceInWords } from 'date-fns';
+import { INDEXES } from 'graphql/constants';
+import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EPLORATION_FILTER_TAG,
   DATA_EXPLORATION_QB_ID,
 } from 'views/DataExploration/utils/constant';
-import { distanceInWords } from 'date-fns';
-import CreateEditModal from '../CreateEditModal';
-import { deleteSavedSet } from 'store/savedSet/thunks';
-import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { INDEXES } from 'graphql/constants';
-import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
-import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
-import { getSetFieldId } from 'store/savedSet';
+
 import ListItemWithActions from 'components/uiKit/list/ListItemWithActions';
+import { IUserSetOutput } from 'services/api/savedSet/models';
+import { getSetFieldId } from 'store/savedSet';
+import { deleteSavedSet } from 'store/savedSet/thunks';
+
+import CreateEditModal from '../CreateEditModal';
 
 import styles from './index.module.scss';
 

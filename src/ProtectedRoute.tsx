@@ -1,10 +1,11 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
-import ConditionalWrapper from 'components/utils/ConditionalWrapper';
-import { STATIC_ROUTES } from 'utils/routes';
-import { useUser } from 'store/user';
+
 import { REDIRECT_URI_KEY } from 'common/constants';
+import ConditionalWrapper from 'components/utils/ConditionalWrapper';
+import { useUser } from 'store/user';
+import { STATIC_ROUTES } from 'utils/routes';
 
 type OwnProps = Omit<RouteProps, 'component' | 'render' | 'children'> & {
   layout?: (children: any) => React.ReactElement;
@@ -40,9 +41,10 @@ const ProtectedRoute = ({ children, layout, ...routeProps }: OwnProps) => {
   return (
     <ConditionalWrapper
       condition={RouteLayout !== undefined}
-      children={<Route {...routeProps}>{children}</Route>}
       wrapper={(children) => <RouteLayout>{children}</RouteLayout>}
-    />
+    >
+      <Route {...routeProps}>{children}</Route>
+    </ConditionalWrapper>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { FENCE_NAMES } from 'common/fenceTypes';
 import { FenceApi } from 'services/api/fence';
 

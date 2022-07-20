@@ -1,10 +1,12 @@
-import EnvironmentVariables from 'helpers/EnvVariables';
-import keycloak from 'auth/keycloak-api/keycloak';
-import { ReportConfig, ReportType } from './models';
-import isEmpty from 'lodash/isEmpty';
-import { format } from 'date-fns';
-import downloader from 'common/downloader';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
+import keycloak from 'auth/keycloak-api/keycloak';
+import { format } from 'date-fns';
+import EnvironmentVariables from 'helpers/EnvVariables';
+import isEmpty from 'lodash/isEmpty';
+
+import downloader from 'common/downloader';
+
+import { ReportConfig, ReportType } from './models';
 
 const REPORT_API_URL = EnvironmentVariables.configFor('REPORTS_API_URL');
 const arrangerProjectId = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');

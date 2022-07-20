@@ -1,6 +1,7 @@
 import { ArrangerResultsTree } from 'graphql/models';
-import { IParticipantEntity, IMondo, IPhenotype, IDiagnosis } from 'graphql/participants/models';
+import { IDiagnosis, IMondo, IParticipantEntity, IPhenotype } from 'graphql/participants/models';
 import { IStudyEntity } from 'graphql/studies/models';
+
 import { IBiospecimenEntity } from '../biospecimens/models';
 
 export interface IFileResultTree {

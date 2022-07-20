@@ -1,5 +1,6 @@
-import {IUserSetOutput} from 'services/api/savedSet/models';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+
+import { IUserSetOutput } from 'services/api/savedSet/models';
 
 export interface ISavedSet {
   idField: string;

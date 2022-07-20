@@ -1,8 +1,9 @@
-import { Form, Input, Modal } from 'antd';
-import { TUserSavedFilter } from 'services/api/savedFilter/models';
-import { WarningFilled } from '@ant-design/icons';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { WarningFilled } from '@ant-design/icons';
+import { Form, Input, Modal } from 'antd';
+
+import { TUserSavedFilter } from 'services/api/savedFilter/models';
 import { updateSavedFilter } from 'store/savedFilter/thunks';
 
 import styles from './index.module.scss';

@@ -1,6 +1,8 @@
 import EnvironmentVariables from 'helpers/EnvVariables';
-import {TUserSavedSetInsert, TUserSavedSetUpdate, TUserSavedSet, IUserSetOutput} from './models';
+
 import { sendRequest } from 'services/api';
+
+import { IUserSetOutput, TUserSavedSet, TUserSavedSetInsert, TUserSavedSetUpdate } from './models';
 
 const SETS_API_URL = `${EnvironmentVariables.configFor('ARRANGER_API')}/sets`;
 

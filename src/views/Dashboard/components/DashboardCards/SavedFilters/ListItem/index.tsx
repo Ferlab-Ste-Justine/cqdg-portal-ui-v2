@@ -1,16 +1,18 @@
-import { Modal } from 'antd';
-import { TUserSavedFilter } from 'services/api/savedFilter/models';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { deleteSavedFilter } from 'store/savedFilter/thunks';
-import { distanceInWords } from 'date-fns';
-import EditModal from '../EditModal';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { setQueryBuilderState } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { Modal } from 'antd';
+import { distanceInWords } from 'date-fns';
+
 import { FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import { FILTER_TAG_PAGE_MAPPING, FILTER_TAG_QB_ID_MAPPING } from 'common/queryBuilder';
 import ListItemWithActions from 'components/uiKit/list/ListItemWithActions';
+import { TUserSavedFilter } from 'services/api/savedFilter/models';
+import { deleteSavedFilter } from 'store/savedFilter/thunks';
+
+import EditModal from '../EditModal';
 
 interface OwnProps {
   id: any;

@@ -11,9 +11,7 @@ export const scrollToTop = (scrollContentId: string) =>
 
 export const orderCardIfNeeded = (cards: TSortableItems[], userCardConfig: string[] | undefined) =>
   userCardConfig
-    ? cards.sort((a, b) => {
-        return userCardConfig.indexOf(a.id) > userCardConfig.indexOf(b.id) ? 1 : -1;
-      })
+    ? cards.sort((a, b) => (userCardConfig.indexOf(a.id) > userCardConfig.indexOf(b.id) ? 1 : -1))
     : cards;
 
 export const getOrderFromAntdValue = (order: string): TSortDirection =>

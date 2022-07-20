@@ -1,12 +1,13 @@
+import intl from 'react-intl-universal';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Space, Typography } from 'antd';
-import intl from 'react-intl-universal';
-import { STATIC_ROUTES } from 'utils/routes';
-import useQueryParams from 'hooks/useQueryParams';
+
 import { REDIRECT_URI_KEY } from 'common/constants';
+import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
+import useQueryParams from 'hooks/useQueryParams';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
-import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
 
 const { Title, Text } = Typography;
 
@@ -29,7 +30,7 @@ const Login = (): React.ReactElement => {
       <div className={styles.loginContainer}>
         <Space size={24} direction="vertical">
           <div className={styles.logoContainer}>
-            <CQDGLogoFull className={styles.logo}/>
+            <CQDGLogoFull className={styles.logo} />
           </div>
           <Title level={3} className={styles.loginTitle}>
             Portail de données

@@ -1,6 +1,9 @@
-import { FENCE_NAMES } from 'common/fenceTypes';
 import EnvironmentVariables from 'helpers/EnvVariables';
+
+import { FENCE_NAMES } from 'common/fenceTypes';
+
 import { sendRequest } from '..';
+
 import { IFenceAclsPayload, IFenceAuthPayload, IFenceInfo } from './models';
 
 const FENCE_API_URL = EnvironmentVariables.configFor('FENCE_API_URL');

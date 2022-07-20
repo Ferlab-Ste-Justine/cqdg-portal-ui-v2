@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { IUserSetOutput } from 'services/api/savedSet/models';
 import { initialState } from 'store/savedSet/types';
+
 import { createSavedSet, deleteSavedSet, fetchSavedSet, updateSavedSet } from './thunks';
 
 export const SavedSetState: initialState = {

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { FENCE_NAMES } from 'common/fenceTypes';
 import { initialState } from 'store/fenceStudies/types';
+
 import { fetchFenceStudies } from './thunks';
 
 export const FenceStudiesState: initialState = {

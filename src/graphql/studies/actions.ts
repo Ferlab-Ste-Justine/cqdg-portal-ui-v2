@@ -1,6 +1,8 @@
 import { hydrateResults } from 'graphql/models';
 import { QueryVariable } from 'graphql/queries';
+
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
+
 import { IStudyResultTree } from './models';
 import { GET_STUDIES_QUERY } from './queries';
 
