@@ -3,13 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CAVATICA_TYPE, ICavaticaProject } from 'services/api/cavatica/models';
 import { initialState, TCavaticaProjectWithMembers } from 'store/fenceCavatica/types';
 
-import {
-  beginAnalyse,
-  createProjet,
-  fetchAllBillingGroups,
-  fetchAllProjects,
-  startBulkImportJob,
-} from './thunks';
+import { beginAnalyse, createProjet, fetchAllBillingGroups, fetchAllProjects } from './thunks';
 
 export const FenceCavaticaState: initialState = {
   isAnalyseModalOpen: false,
@@ -116,18 +110,6 @@ const fenceCavaticaSlice = createSlice({
     });
     builder.addCase(beginAnalyse.rejected, (state, action) => {
       state.isInitializingAnalyse = false;
-      state.error = action.payload;
-    });
-    // BULK IMPORT
-    builder.addCase(startBulkImportJob.pending, (state, action) => {
-      state.isBulkImportLoading = true;
-    });
-    builder.addCase(startBulkImportJob.fulfilled, (state, action) => {
-      state.isBulkImportLoading = false;
-      state.isAnalyseModalOpen = false;
-    });
-    builder.addCase(startBulkImportJob.rejected, (state, action) => {
-      state.isBulkImportLoading = false;
       state.error = action.payload;
     });
     // CREATE PROJECT
