@@ -45,6 +45,8 @@ const FilterList = ({
 }: OwnProps) => {
   const [filtersOpen, setFiltersOpen] = useState<boolean | undefined>(isAllFacetOpen(filterInfo));
 
+  console.log('filterInfo==', filterInfo);
+
   return (
     <>
       {!isEmpty(filterInfo.customSearches) && (

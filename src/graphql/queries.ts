@@ -20,11 +20,11 @@ export type QueryVariable = {
 };
 
 export const INDEX_EXTENDED_MAPPING = (index: string) => gql`
-query ExtendedMapping {
-  ${index} {
-    extended
+  query ExtendedMapping {
+    ${index} {
+      extended
+    }
   }
-}
 `;
 
 export const AGGREGATION_QUERY = (
@@ -41,31 +41,26 @@ export const AGGREGATION_QUERY = (
   );
 
   return gql`
-      query AggregationInformation($sqon: JSON) {
-        ${index} {
-           aggregations (filters: $sqon, include_missing:false){
-            ${generateAggregations(extendedMappingsFields)}
-          }
+    query AggregationInformation($sqon: JSON) {
+      ${index} {
+         aggregations (filters: $sqon, include_missing: false) {
+           ${generateAggregations(extendedMappingsFields)}
         }
       }
-    `;
+    }
+  `;
 };
 
 const generateAggregations = (extendedMappingFields: ExtendedMapping[]) => {
   const aggs = extendedMappingFields.map((f) => {
     if (['keyword', 'id'].includes(f.type)) {
-      return (
-        dotToUnderscore(f.field) + ' {\n     buckets {\n      key\n        doc_count\n    }\n  }'
-      );
+      return dotToUnderscore(f.field) + '{buckets{key doc_count}}';
     } else if (['long', 'float', 'integer', 'date'].includes(f.type)) {
-      return dotToUnderscore(f.field) + '{\n    stats {\n  max\n   min\n    }\n    }';
+      return dotToUnderscore(f.field) + '{stats{max min}}';
     } else if (['boolean'].includes(f.type)) {
-      return (
-        dotToUnderscore(f.field) +
-        ' {\n      buckets {\n       key\n       doc_count\n     }\n    }'
-      );
+      return dotToUnderscore(f.field) + '{buckets{key doc_count}}';
     } else {
-      return '';
+      return dotToUnderscore(f.field);
     }
   });
   return aggs.join(' ');
