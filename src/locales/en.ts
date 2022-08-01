@@ -287,7 +287,7 @@ const fr = {
         dashboard: 'Dashboard',
         studies: 'Studies',
         explore: 'Data Exploration',
-        variant: 'Variants',
+        variants: 'Variants',
         participants: 'Participants',
         biospecimen: 'Biospecimen',
         datafiles: 'Data Files',
@@ -387,15 +387,25 @@ const fr = {
     },
     variants: {
       sidemenu: {
+        participant: 'Participant',
         variant: 'Variant',
+        gene: 'Gene',
+        frequency: 'Frequency',
+        pathogenicity: 'Pathogenicity',
       },
       tabs: {
-        summary: {
-          title: 'Summary',
-        },
         variants: {
           title: 'Variants',
         },
+      },
+      table: {
+        consequences: 'Consequences',
+        clinvar: 'Clinvar',
+        type: 'Type',
+        variant_class: 'Variant class',
+        variant_id: 'Variant ID',
+        gnomAd: 'GnomAD',
+        genome_build: 'Genome build',
       },
     },
     studyExploration: {
@@ -635,6 +645,15 @@ const fr = {
 
     //Other
     collection_sample_type: 'Collection Sample Type',
+
+    //Variants
+    variant_class: 'variant_class',
+    type: 'type',
+    variant_external_reference: 'variant_external_reference',
+    chromosome: 'chromosome',
+    position: 'position',
+    zygosity: 'zygosity',
+    transmissions: 'transmissions',
 
     // Studies
     domain: 'Study Domain',

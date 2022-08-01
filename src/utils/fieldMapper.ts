@@ -48,6 +48,14 @@ const recursiveMap = (
   });
 };
 
+export const mapFilterForVariant = (sqonFilters: ISqonGroupFilter) =>
+  recursiveMap(sqonFilters, [
+    {
+      index: INDEXES.STUDY,
+      prefix: 'study.',
+    },
+  ]);
+
 export const mapFilterForParticipant = (sqonFilters: ISqonGroupFilter) =>
   recursiveMap(sqonFilters, [
     {
@@ -66,10 +74,10 @@ export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
       index: INDEXES.PARTICIPANT,
       prefix: 'participants.',
     },
-    {
-      index: INDEXES.BIOSPECIMEN,
-      prefix: 'participants.biospecimens.',
-    },
+    // {
+    //   index: INDEXES.BIOSPECIMEN,
+    //   prefix: 'participants.biospecimens.',
+    // },
   ]);
 
 export const mapFilterForBiospecimen = (sqonFilters: ISqonGroupFilter) =>

@@ -35,7 +35,7 @@ enum FilterTypes {
   Datafiles,
 }
 
-export const filterGroups: {
+const filterGroups: {
   [type: string]: FilterInfo;
 } = {
   [FilterTypes.Participant]: {

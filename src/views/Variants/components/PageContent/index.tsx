@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { PieChartOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
@@ -30,7 +30,6 @@ import { combineExtendedMappings } from 'utils/fieldMapper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
-import SummaryTab from './tabs/Summary';
 import VariantsTab from './tabs/Variants';
 
 import styles from './index.module.scss';
@@ -45,7 +44,7 @@ const addTagToFilter = (filter: ISavedFilter) => ({
   tag: VARIANT_FILTER_TAG,
 });
 
-const PageContent = ({ variantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
+const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { queryList, activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
@@ -58,9 +57,9 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
     first: variantQueryConfig.size,
     offset: variantQueryConfig.size * (variantQueryConfig.pageIndex - 1),
     sqon: variantResolvedSqon,
-    sort: isEmpty(variantQueryConfig.sort)
-      ? [{ field: 'variant_id', order: 'asc' }]
-      : variantQueryConfig.sort,
+    // sort: isEmpty(variantQueryConfig.sort)
+    //   ? [{ field: 'id', order: 'asc' }]
+    //   : variantQueryConfig.sort,
   });
 
   useEffect(() => {
@@ -124,24 +123,13 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
       <Tabs
         type="card"
         className="navNoMarginBtm"
-        activeKey={tabId || TAB_IDS.SUMMARY}
+        activeKey={tabId || TAB_IDS.VARIANTS}
         onChange={(key) => {
           if (!history.location.pathname.includes(key)) {
             history.push(`${STATIC_ROUTES.VARIANT}/${key}${window.location.search}`);
           }
         }}
       >
-        <Tabs.TabPane
-          tab={
-            <span>
-              <PieChartOutlined />
-              {intl.get('screen.variants.tabs.summary.title')}
-            </span>
-          }
-          key={TAB_IDS.SUMMARY}
-        >
-          <SummaryTab />
-        </Tabs.TabPane>
         <Tabs.TabPane
           tab={
             <span>
