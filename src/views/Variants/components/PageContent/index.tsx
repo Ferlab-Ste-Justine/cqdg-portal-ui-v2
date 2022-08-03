@@ -57,9 +57,9 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
     first: variantQueryConfig.size,
     offset: variantQueryConfig.size * (variantQueryConfig.pageIndex - 1),
     sqon: variantResolvedSqon,
-    // sort: isEmpty(variantQueryConfig.sort)
-    //   ? [{ field: 'id', order: 'asc' }]
-    //   : variantQueryConfig.sort,
+    sort: isEmpty(variantQueryConfig.sort)
+      ? [{ field: 'variant_class', order: 'asc' }]
+      : variantQueryConfig.sort,
   });
 
   useEffect(() => {

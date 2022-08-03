@@ -1,6 +1,6 @@
 import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
-import { ExperimentOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Spin } from 'antd';
@@ -13,6 +13,7 @@ import TreeFacet from 'views/DataExploration/components/TreeFacet';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import VariantSearch from 'views/Variants/components/VariantSearch';
+import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import DiseaseIcon from 'components/Icons/DiseaseIcon';
 import FrequencyIcon from 'components/Icons/FrequencyIcon';
@@ -21,13 +22,13 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import FilterList, { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
+import { SuggestionType } from 'services/api/arranger/models';
 import { mapFilterForParticipant, mapFilterForVariant } from 'utils/fieldMapper';
 
 import PageContent from './components/PageContent';
 import { SCROLL_WRAPPER_ID } from './utils/constants';
 
 import styles from 'views/Variants/index.module.scss';
-
 interface OwnProps {
   tab?: string;
 }
@@ -66,15 +67,14 @@ const filterGroups: {
     ],
   },
   [FilterTypes.Variant]: {
-    customSearches: [<VariantSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />],
+    customSearches: [<VariantSearch key={0} queryBuilderId={VARIANT_REPO_QB_ID} />],
     groups: [
       {
         facets: [
           'variant_class',
-          'type',
+          'consequences__consequences',
           'variant_external_reference',
           'chromosome',
-          'position',
           'zygosity',
           'transmissions',
         ],
@@ -97,7 +97,7 @@ const FiltersContainer = (
     <FilterList
       key={index}
       index={index}
-      queryBuilderId={DATA_EXPLORATION_QB_ID}
+      queryBuilderId={VARIANT_REPO_QB_ID}
       extendedMappingResults={mappingResults}
       filterInfo={filterGroups[type]}
       filterMapper={filterMapper}

@@ -7,4 +7,5 @@ is_a_proband -> is_proband -> should be Boolean instead of String, or if keep St
 
 Variant:
  - consequences in gql Variant is direct VariantConsequences object, not a array ArrangerResultsTree as Include
-    ->
+
+variant_external_reference is string type but actually string[] on ELS

@@ -3,7 +3,7 @@ import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { INDEXES } from 'graphql/constants';
 import { IVariantEntity } from 'graphql/variants/models';
-import { VARIANT_SEARCH_BY_ID_QUERY } from 'graphql/variants/queries';
+import { SEARCH_VARIANT_BY_ID_QUERY } from 'graphql/variants/queries';
 
 import GlobalSearch, { ICustomSearchProps } from 'components/uiKit/search/GlobalSearch';
 import { highlightSearchMatch } from 'components/uiKit/search/GlobalSearch/utils';
@@ -19,7 +19,7 @@ const VariantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       index={INDEXES.VARIANT}
       placeholder={'e.g. GF_001CSF26'}
       emptyDescription={'No variant found'}
-      query={VARIANT_SEARCH_BY_ID_QUERY}
+      query={SEARCH_VARIANT_BY_ID_QUERY}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
         options.map((option) => ({

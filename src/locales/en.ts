@@ -406,6 +406,8 @@ const fr = {
         variant_id: 'Variant ID',
         gnomAd: 'GnomAD',
         genome_build: 'Genome build',
+        dbsnp: 'dbSNP',
+        variant: 'Variant',
       },
     },
     studyExploration: {
@@ -647,13 +649,14 @@ const fr = {
     collection_sample_type: 'Collection Sample Type',
 
     //Variants
-    variant_class: 'variant_class',
-    type: 'type',
-    variant_external_reference: 'variant_external_reference',
-    chromosome: 'chromosome',
-    position: 'position',
-    zygosity: 'zygosity',
-    transmissions: 'transmissions',
+    variant_class: 'Variant class',
+    type: 'Type',
+    consequences: 'Consequences',
+    variant_external_reference: 'External reference',
+    chromosome: 'Chromosome',
+    position: 'Position',
+    zygosity: 'Zygosity',
+    transmissions: 'Transmissions',
 
     // Studies
     domain: 'Study Domain',

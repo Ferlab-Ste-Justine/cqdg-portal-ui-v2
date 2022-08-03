@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
@@ -35,19 +36,43 @@ interface OwnProps {
 
 const defaultColumns: ProColumnType<any>[] = [
   {
-    key: 'variant_id',
-    title: intl.get('screen.variants.table.variant_id'),
-    dataIndex: 'variant_id',
+    title: intl.get('screen.variants.table.variant'),
+    key: 'hgvsg',
+    dataIndex: 'hgvsg',
+    className: cx(styles.variantTableCell, styles.variantTableCellElipsis),
+    fixed: 'left',
+    render: (hgvsg: string, entity: IVariantEntity) =>
+      hgvsg ? (
+        <Tooltip placement="topLeft" title={hgvsg}>
+          <Link target="_blank" to={`/variant/entity/${entity.locus}`}>
+            {hgvsg}
+          </Link>
+        </Tooltip>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
     key: 'variant_class',
     title: intl.get('screen.variants.table.variant_class'),
     dataIndex: 'variant_class',
+    sorter: {
+      multiple: 1,
+    },
   },
   {
-    key: 'type',
-    title: intl.get('screen.variants.table.type'),
-    dataIndex: 'type',
+    key: 'rsnumber',
+    title: intl.get('screen.variants.table.dbsnp'),
+    dataIndex: 'rsnumber',
+    className: styles.dbSnpTableCell,
+    render: (rsNumber: string) =>
+      rsNumber ? (
+        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
+          {rsNumber}
+        </ExternalLink>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
     key: 'genome_build',

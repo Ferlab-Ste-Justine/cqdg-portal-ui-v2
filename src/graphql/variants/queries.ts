@@ -25,9 +25,6 @@ export const SEARCH_VARIANT_QUERY = gql`
             release_id
             rsnumber
             start
-            suggestion_id
-            symbol_aa_change
-            type
             variant_class
 
             frequencies {
@@ -84,24 +81,56 @@ export const SEARCH_VARIANT_QUERY = gql`
               }
             }
 
-            consequences {
-              hgvsc
-              predictions {
-                fathmm_pred
-                lrt_pred
-                lrt_converted_rankscore
-                revel_rankscore
-                sift_pred
-                polyphen2_hvar_pred
-                polyphen2_hvar_rankscore
-                sift_converted_rankscore
-                cadd_rankscore
-                dann_rankscore
-                fathmm_converted_rankscore
-              }
-              consequences
+            clinvar {
+              clin_sig
+              clinvar_id
+              conditions
+              inheritance
+              interpretations
             }
 
+            consequences {
+              hits {
+                edges {
+                  node {
+                    predictions {
+                      fathmm_pred
+                      lrt_pred
+                      lrt_converted_rankscore
+                      revel_rankscore
+                      sift_pred
+                      polyphen2_hvar_pred
+                      polyphen2_hvar_rankscore
+                      sift_converted_rankscore
+                      cadd_rankscore
+                      dann_rankscore
+                      fathmm_converted_rankscore
+                    }
+                    hgvsc
+                    consequences
+                  }
+                }
+              }
+            }
+
+            studies {
+              hits {
+                total
+                edges {
+                  node {
+                    study_id
+                    study_code
+                  }
+                }
+              }
+            }
+
+            # there before:
+            # suggestion_id
+            # symbol_aa_change
+            # type
+
+            # todo: mapping or types to fix:
             # acls
             # gene_external_reference
             # external_study_ids
@@ -109,11 +138,6 @@ export const SEARCH_VARIANT_QUERY = gql`
             # vep_impacts
             # zygosity
             # tansmissions
-
-            studies {
-              study_id
-              study_code
-            }
           }
         }
       }
@@ -121,7 +145,7 @@ export const SEARCH_VARIANT_QUERY = gql`
   }
 `;
 
-export const VARIANT_SEARCH_BY_ID_QUERY = gql`
+export const SEARCH_VARIANT_BY_ID_QUERY = gql`
   query searchVariantById($sqon: JSON) {
     variant {
       hits(filters: $sqon) {

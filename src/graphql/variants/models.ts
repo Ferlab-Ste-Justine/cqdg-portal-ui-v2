@@ -123,16 +123,13 @@ export interface IVariantEntity {
   release_id: string;
   rsnumber: string;
   start: number;
-  suggestion_id: string;
-  symbol_aa_change: string;
   transmissions: string;
-  type: string;
   variant_class: string;
   variant_external_reference: string;
   vep_impacts: string;
   zygosity: string;
   studies: ArrangerResultsTree<IStudyEntity>;
-  consequences: IConsequenceEntity;
+  consequences: ArrangerResultsTree<IConsequenceEntity>;
   clinvar: IClinVar;
   frequencies: IExternalFrequenciesEntity;
   // genes: VariantGenes

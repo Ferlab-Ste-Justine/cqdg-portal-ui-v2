@@ -10,7 +10,14 @@ import {
 
 import { sendRequest } from 'services/api';
 
-import { ArrangerColumnStateResults, ArrangerPhenotypes, IStatistics } from './models';
+import {
+  ArrangerColumnStateResults,
+  ArrangerPhenotypes,
+  IStatistics,
+  ISuggestionPayload,
+  Suggestion,
+  SuggestionType,
+} from './models';
 
 const ARRANGER_API_URL = EnvironmentVariables.configFor('ARRANGER_API');
 const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
@@ -73,6 +80,12 @@ const fetchMatchParticipant = (ids: string[]) =>
     },
   });
 
+const searchSuggestions = (type: SuggestionType, value: string) =>
+  sendRequest<ISuggestionPayload<Suggestion>>({
+    method: 'GET',
+    url: `${ARRANGER_API_PROJECT_URL}/${type}Feature/suggestions/${value}`,
+  });
+
 export const ArrangerApi = {
   fetchStatistics,
   graphqlRequest,
@@ -80,4 +93,5 @@ export const ArrangerApi = {
   fetchPhenotypes,
   columnStates,
   fetchMatchParticipant,
+  searchSuggestions,
 };
