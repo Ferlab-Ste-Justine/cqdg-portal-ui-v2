@@ -101,6 +101,61 @@ export interface IClinVar {
   interpretations: string[];
 }
 
+interface IGeneCosmic {
+  id: any;
+  score: number;
+  tumour_types_germline: string[];
+}
+
+interface IGeneDdd {
+  id: any;
+  score: number;
+  disease_name: string;
+}
+
+interface IGeneHpo {
+  id: any;
+  score: number;
+  hpo_term_id: string;
+  hpo_term_label: string;
+  hpo_term_name: string;
+}
+
+interface IGeneOmim {
+  id: any;
+  score: number;
+  inheritance: string[];
+  inheritance_code: string;
+  name: string;
+  omim_id: string;
+}
+
+interface IGeneOrphanet {
+  id: any;
+  score: number;
+  inheritance: string;
+  disorder_id: number;
+  panel: string;
+}
+
+export interface IGeneEntity {
+  id: any;
+  score: number;
+  alias: string;
+  ensembl_gene_id: string;
+  entrez_gene_id: number;
+  hgnc: string;
+  location: string;
+  name: string;
+  omim_gene_id: string;
+  symbol: string;
+  cosmic: ArrangerResultsTree<IGeneCosmic>;
+  ddd: ArrangerResultsTree<IGeneDdd>;
+  hpo: ArrangerResultsTree<IGeneHpo>;
+  omim: ArrangerResultsTree<IGeneOmim>;
+  orphanet: ArrangerResultsTree<IGeneOrphanet>;
+}
+
 export interface IVariantEntity {
   id: string;
 
@@ -132,7 +187,7 @@ export interface IVariantEntity {
   consequences: ArrangerResultsTree<IConsequenceEntity>;
   clinvar: IClinVar;
   frequencies: IExternalFrequenciesEntity;
-  // genes: VariantGenes
+  genes: ArrangerResultsTree<IGeneEntity>;
 }
 
 export type ITableVariantEntity = IVariantEntity & {

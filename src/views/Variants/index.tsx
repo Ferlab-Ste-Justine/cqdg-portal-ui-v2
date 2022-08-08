@@ -12,6 +12,8 @@ import ParticipantSearch from 'views/DataExploration/components/ParticipantSearc
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
+import GenesUploadIds from 'views/Variants/components/GeneUploadIds';
+import VariantGeneSearch from 'views/Variants/components/VariantGeneSearch';
 import VariantSearch from 'views/Variants/components/VariantSearch';
 import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
@@ -81,6 +83,66 @@ const filterGroups: {
       },
     ],
   },
+  [FilterTypes.Gene]: {
+    customSearches: [
+      <VariantGeneSearch
+        key="genes"
+        type={SuggestionType.GENES}
+        queryBuilderId={VARIANT_REPO_QB_ID}
+      />,
+      <GenesUploadIds key="genes_upload_ids" queryBuilderId={VARIANT_REPO_QB_ID} />,
+    ],
+    groups: [
+      {
+        facets: ['consequences__biotype', 'gene_external_reference'],
+      },
+      {
+        title: intl.get('facets.genePanels'),
+        facets: [
+          'genes__name',
+          'genes__hpo__hpo_term_label',
+          'genes__orphanet__panel',
+          'genes__omim__name',
+          'genes__ddd__disease_name',
+          'genes__cosmic__tumour_types_germline',
+        ],
+      },
+    ],
+  },
+  [FilterTypes.Frequency]: {
+    groups: [
+      {
+        title: intl.get('screen.patientsnv.filter.grouptitle.publiccohorts'),
+        facets: [
+          'frequencies__gnomad_genomes_2_1__af',
+          'frequencies__gnomad_genomes_3_0__af',
+          'frequencies__gnomad_genomes_3_1_1__af',
+          'frequencies__gnomad_exomes_2_1__af',
+          'frequencies__topmed__af',
+          'frequencies__one_thousand_genomes__af',
+        ],
+      },
+    ],
+  },
+  [FilterTypes.Pathogenicity]: {
+    groups: [
+      {
+        facets: ['clinvar__clin_sig', 'consequences__vep_impact'],
+      },
+      {
+        title: 'Prédictions',
+        facets: [
+          'consequences__predictions__sift_pred',
+          'consequences__predictions__polyphen2_hvar_pred',
+          'consequences__predictions__fathmm_pred',
+          'consequences__predictions__cadd_rankscore',
+          'consequences__predictions__dann_rankscore',
+          'consequences__predictions__lrt_pred',
+          'consequences__predictions__revel_rankscore',
+        ],
+      },
+    ],
+  },
 };
 
 const FiltersContainer = (
@@ -137,19 +199,34 @@ const Variants = (props: OwnProps) => {
       key: '3',
       title: intl.get('screen.variants.sidemenu.gene'),
       icon: <GeneIcon className={styles.sideMenuIcon} />,
-      panelContent: () => {},
+      panelContent: FiltersContainer(
+        variantMappingResults,
+        FilterTypes.Gene,
+        INDEXES.VARIANT,
+        mapFilterForVariant,
+      ),
     },
     {
       key: '4',
       title: intl.get('screen.variants.sidemenu.frequency'),
       icon: <FrequencyIcon className={styles.sideMenuIcon} />,
-      panelContent: () => {},
+      panelContent: FiltersContainer(
+        variantMappingResults,
+        FilterTypes.Frequency,
+        INDEXES.VARIANT,
+        mapFilterForVariant,
+      ),
     },
     {
       key: '5',
       title: intl.get('screen.variants.sidemenu.pathogenicity'),
       icon: <DiseaseIcon className={styles.sideMenuIcon} />,
-      panelContent: () => {},
+      panelContent: FiltersContainer(
+        variantMappingResults,
+        FilterTypes.Pathogenicity,
+        INDEXES.VARIANT,
+        mapFilterForVariant,
+      ),
     },
   ];
 

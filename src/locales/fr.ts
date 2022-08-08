@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+import translations from './fr.json';
+
 const filesFacets = {
   data_category: 'Data Category',
   data_access: 'Data Access',
@@ -11,10 +14,25 @@ const filesFacets = {
 };
 
 const fr = {
-  // Global
+  ...translations,
   global: {
     yes: 'Yes',
     no: 'No',
+    search: {
+      genes: {
+        emptyText: 'Aucun gene trouvé',
+        placeholder: 'e.g. BRAF, ENSG00000157764',
+        title: 'Recherche par gene',
+        tooltip: 'Entrer un Symbole de gène, Alias de gène ou Ensembl ID',
+      },
+      variants: {
+        emptyText: 'Aucun variant trouvé',
+        placeholder: 'e.g. 10-100063679-T-C, rs341',
+        title: 'Recherche par variant',
+        tooltip:
+          'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, Clinvar ID, Ensembl ID, refseq ID',
+      },
+    },
     filters: {
       actions: {
         all: 'All',
@@ -65,7 +83,6 @@ const fr = {
       selectedPlural: 'items selected',
     },
   },
-  // API
   api: {
     savedFilter: {
       error: {
@@ -139,7 +156,6 @@ const fr = {
       },
     },
   },
-  // COMPONENTS
   components: {
     filterList: {
       collapseAll: 'Collapse all',
@@ -280,7 +296,6 @@ const fr = {
       datafiles: 'Data Files',
     },
   },
-  // LAYOUT
   layout: {
     main: {
       menu: {
@@ -304,7 +319,6 @@ const fr = {
       },
     },
   },
-  // SCREENS
   screen: {
     loginPage: {
       title: 'INCLUDE Data Hub',
@@ -657,6 +671,7 @@ const fr = {
     position: 'Position',
     zygosity: 'Zygosity',
     transmissions: 'Transmissions',
+    genePanels: 'Panels de gènes',
 
     // Studies
     domain: 'Study Domain',
