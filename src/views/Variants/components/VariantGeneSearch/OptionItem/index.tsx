@@ -18,11 +18,11 @@ enum OptionLabel {
 }
 
 const OptionItem = ({ type, suggestion, value }: OwnProps) => {
-  const getLabel = () => (type === SuggestionType.GENES ? OptionLabel.GENE : OptionLabel.VARIANT);
+  const label = type === SuggestionType.GENES ? OptionLabel.GENE : OptionLabel.VARIANT;
 
   return (
     <Space size={12}>
-      <SquareLabel label={getLabel()} className={cx(styles.searchLabel, styles[type])} />
+      <SquareLabel label={label} className={cx(styles.searchLabel, styles[type])} />
       <Space direction="vertical" size={0}>
         <Typography.Text className={styles.variantSearchLocus}>{value}</Typography.Text>
         {suggestion.rsnumber || suggestion.ensembl_gene_id || '--'}

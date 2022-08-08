@@ -72,7 +72,7 @@ export const SEARCH_VARIANT_QUERY = gql`
 
 export const SEARCH_VARIANT_BY_ID_QUERY = gql`
   query searchVariantById($sqon: JSON) {
-    Variant {
+    variants: Variant {
       hits(filters: $sqon) {
         edges {
           node {

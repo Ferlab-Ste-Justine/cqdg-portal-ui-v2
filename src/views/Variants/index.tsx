@@ -14,7 +14,6 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import GenesUploadIds from 'views/Variants/components/GeneUploadIds';
 import VariantGeneSearch from 'views/Variants/components/VariantGeneSearch';
-import VariantSearch from 'views/Variants/components/VariantSearch';
 import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import DiseaseIcon from 'components/Icons/DiseaseIcon';
@@ -69,7 +68,13 @@ const filterGroups: {
     ],
   },
   [FilterTypes.Variant]: {
-    customSearches: [<VariantSearch key={0} queryBuilderId={VARIANT_REPO_QB_ID} />],
+    customSearches: [
+      <VariantGeneSearch
+        key="variants"
+        type={SuggestionType.VARIANTS}
+        queryBuilderId={VARIANT_REPO_QB_ID}
+      />,
+    ],
     groups: [
       {
         facets: [

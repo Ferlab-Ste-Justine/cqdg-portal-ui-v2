@@ -21,7 +21,9 @@ const VariantGeneSearch = ({ queryBuilderId, type }: OwnProps) => {
   const { activeQuery } = useQueryBuilderState(queryBuilderId);
 
   const handleSearch = async (searchText: string) => {
+    console.log('handleSearch', type, searchText);
     const { data } = await ArrangerApi.searchSuggestions(type, searchText);
+    console.log('data==', data);
     return data!;
   };
 

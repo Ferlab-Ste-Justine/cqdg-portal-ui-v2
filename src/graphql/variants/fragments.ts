@@ -218,12 +218,3 @@ export const studiesVariantFragment = gql`
     }
   }
 `;
-
-export const variantFragment = gql`
-  fragment variantFragment on Variant {
-    frequencies {
-      ...frequenciesFragment
-    }
-  }
-  ${frequenciesFragment}
-`;

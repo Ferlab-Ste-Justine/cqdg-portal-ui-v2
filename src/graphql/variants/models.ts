@@ -28,25 +28,18 @@ export interface IPredictionEntity {
   cadd_rankscore: number;
   dann_rankscore: number;
   fathmm_converted_rankscore: number;
-
-  // from CLIN:
-  // FATHMM_converted_rankscore: number;
-  // cadd_score: number;
-  // dann_score: number;
-  // sift_converted_rank_score: number;
-  // polyphen2_hvar_score: number;
 }
 
 export interface IBoundType {
-  ac?: number | undefined;
-  af?: number | undefined;
-  an?: number | undefined;
-  hom?: number | undefined;
-  pn?: number | undefined;
-  pc?: number | undefined;
-  pf?: number | undefined;
-  heterozygotes?: number | undefined;
-  homozygotes?: number | undefined;
+  ac?: number;
+  af?: number;
+  an?: number;
+  hom?: number;
+  pn?: number;
+  pc?: number;
+  pf?: number;
+  heterozygotes?: number;
+  homozygotes?: number;
 }
 
 interface IVariantFrequenciesInternal {
@@ -55,13 +48,6 @@ interface IVariantFrequenciesInternal {
 }
 
 export interface IExternalFrequenciesEntity {
-  // from CLIN:
-  // topmed_bravo: IBoundType;
-  // thousand_genomes: IBoundType;
-  // gnomad_exomes_2_1_1: IBoundType;
-  // gnomad_genomes_2_1_1: IBoundType;
-  // gnomad_genomes_3_0: IBoundType;
-
   gnomad_exomes_2_1: IBoundType;
   gnomad_genomes_2_1: IBoundType;
   gnomad_genomes_3_0: IBoundType;
