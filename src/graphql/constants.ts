@@ -4,5 +4,6 @@ export enum INDEXES {
   FILE = 'File',
   BIOSPECIMEN = 'biospecimen',
   SETS = 'sets',
-  VARIANT = 'variant',
+  VARIANT = 'Variant',
+  GENE = 'Gene',
 }

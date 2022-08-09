@@ -3,7 +3,7 @@ import { IQueryConfig } from 'common/searchPageTypes';
 export const DATA_EXPLORATION_QB_ID = 'cqdg-data-exploration-repo-key';
 
 export const DEFAULT_PAGE_INDEX = 1;
-export const DEFAULT_PAGE_SIZE = 10;
+export const DEFAULT_PAGE_SIZE = 20;
 
 export const CAVATICA_FILE_BATCH_SIZE = 10000;
 

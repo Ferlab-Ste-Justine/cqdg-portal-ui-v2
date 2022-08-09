@@ -4,7 +4,7 @@ export const SCROLL_WRAPPER_ID = 'variants-scroll-wrapper';
 
 export const VARIANT_REPO_QB_ID = 'cqdg-variant-repo-key';
 
-export const VARIANT_FILTER_TAG = 'variant';
+export const VARIANT_FILTER_TAG = 'variants-exploration';
 
 export const DEFAULT_PAGE_INDEX = 1;
 export const DEFAULT_PAGE_SIZE = 20;
@@ -16,6 +16,5 @@ export const DEFAULT_QUERY_CONFIG: IQueryConfig = {
 };
 
 export enum TAB_IDS {
-  SUMMARY = 'summary',
   VARIANTS = 'variants',
 }
