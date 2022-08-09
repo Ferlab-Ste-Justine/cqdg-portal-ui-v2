@@ -1,12 +1,26 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { useFilters } from '@ferlab/ui/core/data/filters/utils';
 import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { IQueryResults } from 'graphql/models';
-import { ITableVariantEntity, IVariantEntity } from 'graphql/variants/models';
+import { Tooltip } from 'antd';
+import cx from 'classnames';
+import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
+import {
+  IClinVar,
+  IConsequenceEntity,
+  IConsequenceNode,
+  IExternalFrequenciesEntity,
+  ITableVariantEntity,
+  IVariantEntity,
+} from 'graphql/variants/models';
+import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constants';
 
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
@@ -22,8 +36,85 @@ interface OwnProps {
 
 const defaultColumns: ProColumnType<any>[] = [
   {
-    key: 'variant_id',
-    title: 'Variant ID',
+    title: intl.get('screen.variants.table.variant'),
+    key: 'hgvsg',
+    dataIndex: 'hgvsg',
+    className: cx(styles.variantTableCell, styles.variantTableCellElipsis),
+    fixed: 'left',
+    render: (hgvsg: string, entity: IVariantEntity) =>
+      hgvsg ? (
+        <Tooltip placement="topLeft" title={hgvsg}>
+          <Link target="_blank" to={`/variant/entity/${entity.locus}`}>
+            {hgvsg}
+          </Link>
+        </Tooltip>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+  },
+  {
+    key: 'variant_class',
+    title: intl.get('screen.variants.table.variant_class'),
+    dataIndex: 'variant_class',
+    sorter: {
+      multiple: 1,
+    },
+  },
+  {
+    key: 'rsnumber',
+    title: intl.get('screen.variants.table.dbsnp'),
+    dataIndex: 'rsnumber',
+    className: styles.dbSnpTableCell,
+    render: (rsNumber: string) =>
+      rsNumber ? (
+        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>
+          {rsNumber}
+        </ExternalLink>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+  },
+  {
+    key: 'genome_build',
+    title: intl.get('screen.variants.table.genome_build'),
+    dataIndex: 'genome_build',
+  },
+  {
+    key: 'external_frequencies',
+    title: (
+      <Tooltip title={`${intl.get('screen.variants.table.gnomAd')} exomes`}>
+        {intl.get('screen.variants.table.gnomAd')}
+      </Tooltip>
+    ),
+    displayTitle: intl.get('screen.variants.table.gnomAd'),
+    dataIndex: 'frequencies',
+    render: (frequencies: IExternalFrequenciesEntity) =>
+      frequencies?.gnomad_exomes_2_1
+        ? frequencies.gnomad_exomes_2_1.af?.toExponential(3)
+        : TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'consequences',
+    title: intl.get('screen.variants.table.consequences'),
+    dataIndex: 'consequences',
+    width: 300,
+    render: (consequences: { hits: { edges: IConsequenceNode[] } }) => (
+      <ConsequencesCell consequences={consequences?.hits?.edges || []} />
+    ),
+  },
+  {
+    key: 'clinvar',
+    title: intl.get('screen.variants.table.clinvar'),
+    dataIndex: 'clinvar',
+    className: cx(styles.variantTableCell, styles.variantTableCellElipsis),
+    render: (clinVar: IClinVar) =>
+      clinVar?.clin_sig && clinVar.clinvar_id ? (
+        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinVar.clinvar_id}`}>
+          {clinVar.clin_sig.join(', ')}
+        </ExternalLink>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
 ];
 

@@ -35,7 +35,7 @@ enum FilterTypes {
   Datafiles,
 }
 
-export const filterGroups: {
+const filterGroups: {
   [type: string]: FilterInfo;
 } = {
   [FilterTypes.Participant]: {
@@ -46,6 +46,7 @@ export const filterGroups: {
     groups: [
       {
         facets: [
+          'internal_donor_id',
           <TreeFacet
             type={'mondoTree'}
             field={'mondo'}
@@ -62,7 +63,6 @@ export const filterGroups: {
           'ethnicity',
           'is_a_proband',
           'age_of_death',
-          'study',
         ],
       },
     ],
