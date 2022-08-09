@@ -9,7 +9,8 @@ import { findSqonValueByField, removeFieldFromSqon } from '@ferlab/ui/core/data/
 import { Button, Col, Dropdown, Menu, Modal, Row, Spin, Tooltip, Transfer, Tree } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { cloneDeep, isEmpty } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   getFlattenTree,

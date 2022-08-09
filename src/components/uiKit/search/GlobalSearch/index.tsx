@@ -3,9 +3,8 @@ import { ISqonGroupFilter, MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/
 import { findSqonValueByField } from '@ferlab/ui/core/data/sqon/utils';
 import { DocumentNode } from 'graphql';
 import { INDEXES } from 'graphql/constants';
-import { get } from 'lodash';
 
-import Search from 'components/uiKit/search/GlobalSearch/Search';
+import Search, { TCustomHandleSearch } from 'components/uiKit/search/GlobalSearch/Search';
 import { OptionsType } from 'components/uiKit/search/GlobalSearch/Search/SearchAutocomplete';
 
 export interface ICustomSearchProps {
@@ -23,6 +22,8 @@ interface OwnProps<T> {
   query: DocumentNode;
   sqon: ISqonGroupFilter;
   tooltipText?: string;
+  limit?: number;
+  handleSearch?: TCustomHandleSearch<T>;
   optionsFormatter: (options: T[], matchRegex: RegExp, search: string) => OptionsType[];
 }
 
@@ -38,6 +39,8 @@ const GlobalSearch = <T,>({
   sqon,
   optionsFormatter,
   tooltipText,
+  limit,
+  handleSearch,
 }: OwnProps<T>) => (
   <Search<T>
     onSelect={(values) =>
@@ -57,16 +60,16 @@ const GlobalSearch = <T,>({
     query={query}
     searchKey={searchFields ?? [field]}
     selectedItems={findSqonValueByField(field, sqon) as string[]}
+    customHandleSearch={handleSearch}
     setCurrentOptions={(options, search) =>
       optionsFormatter(
-        (get(options, `${index}.hits.edges`, []) as any[]).map(({ node }) => ({
-          ...node,
-        })),
+        options,
         new RegExp(search.replace(/[-/\\^$*+?.()|[\]{}]/g, ''), 'gi'),
         search,
       )
     }
     title={title}
+    limit={limit}
   />
 );
 

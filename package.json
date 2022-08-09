@@ -21,7 +21,6 @@
     ]
   },
   "scripts": {
-    "theme:watch": "nodemon --watch './src/style/themes' -e scss,less --exec 'npm run theme'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:netlify": "npm ci && npm run build",
@@ -30,6 +29,7 @@
     "lint:diff": "eslint $(git diff-index --name-only --diff-filter=d HEAD | grep \"[\\.js|\\.jsx|\\.tsx|\\.ts]$\" | xargs)",
     "lint:fix": "eslint --fix --rule 'no-console: 2' src",
     "theme": "mkdir -p src/style/themes/cqdg/dist && npm run theme:antd",
+    "theme:watch": "nodemon --watch './src/style/themes' -e scss,less --exec 'npm run theme'",
     "theme:antd": "npm run theme:antd:colors && npm run theme:antd:main",
     "theme:antd:main": "lessc --js src/style/themes/cqdg/antd-cqdg-theme.less src/style/themes/cqdg/dist/antd.css",
     "theme:antd:colors": "less2sass ./src/style/themes/cqdg/colors.less && mv -f ./src/style/themes/cqdg/colors.scss ./src/style/themes/cqdg/dist/_colors.scss",
@@ -60,8 +60,8 @@
     "@apollo/client": "^3.5.10",
     "@dnd-kit/core": "^4.0.3",
     "@dnd-kit/sortable": "^5.1.0",
-    "@ferlab/style": "^1.20.7",
-    "@ferlab/ui": "^3.9.91",
+    "@ferlab/style": "^1.21.2",
+    "@ferlab/ui": "^3.9.110",
     "@loadable/component": "^5.15.2",
     "@nivo/bar": "^0.79.1",
     "@nivo/pie": "^0.79.1",
