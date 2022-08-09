@@ -1,8 +1,10 @@
 export type IconProps = {
   alt?: string;
-  height?: number;
   style?: object;
-  width?: number;
+  height?: string | number;
+  width?: string | number;
   className?: string;
   svgClass?: string;
+  fill?: string;
+  onClick?: () => void;
 };

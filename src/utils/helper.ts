@@ -32,3 +32,9 @@ export const formatQuerySortList = (sorter: SorterResult<any> | SorterResult<any
 
 export const getCurrentUrl = () =>
   window.location.protocol + '//' + window.location.host + window.location.pathname;
+
+const KEBAB_REGEX = /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g;
+export const toKebabCase = (str: string) => {
+  const match: string[] = (str && str.match(KEBAB_REGEX)) || [];
+  return match.map((x: string) => x.toLowerCase()).join('-');
+};

@@ -89,7 +89,7 @@ const Header = () => {
                 STATIC_ROUTES.VARIANT_VARIANTS,
               ]}
               icon={<LineStyleIcon height={14} width={14} />}
-              title={intl.get('layout.main.menu.variant')}
+              title={intl.get('layout.main.menu.variants')}
             />
           </nav>
         }
