@@ -43,8 +43,8 @@ export const AGGREGATION_QUERY = (
   return gql`
     query AggregationInformation($sqon: JSON) {
       ${index} {
-         aggregations (filters: $sqon, include_missing: false) {
-           ${generateAggregations(extendedMappingsFields)}
+        aggregations (filters: $sqon, include_missing: false) {
+          ${generateAggregations(extendedMappingsFields)}
         }
       }
     }
@@ -59,9 +59,8 @@ const generateAggregations = (extendedMappingFields: ExtendedMapping[]) => {
       return dotToUnderscore(f.field) + '{stats{max min}}';
     } else if (['boolean'].includes(f.type)) {
       return dotToUnderscore(f.field) + '{buckets{key doc_count}}';
-    } else {
-      return dotToUnderscore(f.field);
     }
+    return dotToUnderscore(f.field);
   });
   return aggs.join(' ');
 };

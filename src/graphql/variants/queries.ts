@@ -34,6 +34,12 @@ export const SEARCH_VARIANT_QUERY = gql`
             start
             variant_class
             acls
+            gene_external_reference
+            external_study_ids
+            variant_external_reference
+            vep_impacts
+            zygosity
+            transmissions
 
             clinvar {
               ...clinvarFragment
@@ -50,14 +56,6 @@ export const SEARCH_VARIANT_QUERY = gql`
             consequences {
               ...consequencesFragment
             }
-
-            #todo: mapping or types to fix:
-            #gene_external_reference
-            #external_study_ids
-            #variant_external_reference
-            #vep_impacts
-            #zygosity
-            #transmissions
           }
         }
       }

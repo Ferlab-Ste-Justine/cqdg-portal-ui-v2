@@ -14,7 +14,7 @@ export const genesFragment = gql`
           name
           omim_gene_id
           symbol
-          # alias
+          alias
 
           cosmic {
             hits {
@@ -45,7 +45,6 @@ export const genesFragment = gql`
               total
               edges {
                 node {
-                  #id
                   score
                   hpo_term_id
                   hpo_term_label
@@ -59,10 +58,9 @@ export const genesFragment = gql`
               total
               edges {
                 node {
-                  #id
                   score
                   inheritance
-                  #inheritance_code
+                  inheritance_code
                   name
                   omim_id
                 }
@@ -74,9 +72,8 @@ export const genesFragment = gql`
               total
               edges {
                 node {
-                  #id
                   score
-                  #inheritance
+                  inheritance
                   disorder_id
                   panel
                 }
@@ -193,10 +190,9 @@ export const studiesVariantFragment = gql`
           participant_number
           study_code
           study_id
-          #todo: mapping or types to fix:
-          #acls
-          #external_study_ids
-          #transmissions
+          acls
+          external_study_ids
+          transmissions
           frequencies {
             lower_bound_kf {
               ac
