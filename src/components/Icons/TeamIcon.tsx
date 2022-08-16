@@ -1,4 +1,5 @@
-import * as React from 'react';
+/* eslint-disable max-len */
+
 import cx from 'classnames';
 
 import { IconProps } from 'components/Icons';

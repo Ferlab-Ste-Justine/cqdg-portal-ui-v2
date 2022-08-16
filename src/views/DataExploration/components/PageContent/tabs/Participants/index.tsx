@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DownloadOutlined } from '@ant-design/icons';
@@ -12,7 +11,7 @@ import useQueryBuilderState, {
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Button, Dropdown, Menu, Tag, Tooltip } from 'antd';
+import { Button, Dropdown, Menu, Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
 import {
@@ -30,10 +29,6 @@ import {
   SCROLL_WRAPPER_ID,
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
-import {
-  extractMondoTitleAndCode,
-  extractPhenotypeTitleAndCode,
-} from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
 import { SEX, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -375,13 +370,19 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
         onSelectedRowsChange: (keys) => setSelectedKeys(keys),
         extra: [
           <SetsManagementDropdown
+            key={1}
             results={results}
             selectedKeys={selectedKeys}
             selectedAllResults={selectedAllResults}
             sqon={getCurrentSqon()}
             type={SetType.PARTICIPANT}
           />,
-          <Dropdown disabled={selectedKeys.length === 0} overlay={menu} placement="bottomLeft">
+          <Dropdown
+            key={2}
+            disabled={selectedKeys.length === 0}
+            overlay={menu}
+            placement="bottomLeft"
+          >
             <Button icon={<DownloadOutlined />}>Download clinical data</Button>
           </Dropdown>,
         ],

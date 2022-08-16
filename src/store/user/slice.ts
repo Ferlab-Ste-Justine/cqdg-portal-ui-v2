@@ -15,7 +15,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState: UserState,
   reducers: {
-    cleanLogout: (state) => {
+    cleanLogout: () => {
       keycloak.logout({
         redirectUri: `${window.location.origin}/${STATIC_ROUTES.LOGIN}`,
       });

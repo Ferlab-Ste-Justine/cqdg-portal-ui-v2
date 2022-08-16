@@ -1,5 +1,4 @@
 import intl from 'react-intl-universal';
-import { useHistory } from 'react-router-dom';
 import Empty from '@ferlab/ui/core/components/Empty';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
@@ -45,7 +44,7 @@ const graphSetting = {
   },
 };
 
-const addToQuery = (field: string, key: string, history: any) =>
+const addToQuery = (field: string, key: string) =>
   updateActiveQueryField({
     queryBuilderId: DATA_EXPLORATION_QB_ID,
     field,
@@ -54,7 +53,6 @@ const addToQuery = (field: string, key: string, history: any) =>
   });
 
 const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
-  const history = useHistory();
   const { sqon } = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
   const { loading, result } = useApi<any>({
     config: {
@@ -94,7 +92,7 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
               <PieChart
                 title={intl.get('screen.dataExploration.tabs.summary.demographic.sexTitle')}
                 data={sexData}
-                onClick={(datum) => addToQuery('sex', datum.id as string, history)}
+                onClick={(datum) => addToQuery('sex', datum.id as string)}
                 tooltip={(value) => (
                   <BasicTooltip
                     id={capitalize(value.datum.id.toString())}
@@ -113,7 +111,7 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
               <PieChart
                 title={intl.get('screen.dataExploration.tabs.summary.demographic.raceTitle')}
                 data={raceData}
-                onClick={(datum) => addToQuery('race', datum.id as string, history)}
+                onClick={(datum) => addToQuery('race', datum.id as string)}
                 {...graphSetting}
               />
             )}
@@ -125,7 +123,7 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
               <PieChart
                 title={intl.get('screen.dataExploration.tabs.summary.demographic.ethnicityTitle')}
                 data={enthicityData}
-                onClick={(datum) => addToQuery('ethnicity', datum.id as string, history)}
+                onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
                 {...graphSetting}
               />
             )}

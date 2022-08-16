@@ -60,7 +60,7 @@ const fetchReport = createAsyncThunk<
         duration: 0,
       }),
     );
-    await ReportApi.generateReport(args.data).then((_) => {
+    await ReportApi.generateReport(args.data).then(() => {
       thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
       thunkAPI.dispatch(
         globalActions.displayNotification({

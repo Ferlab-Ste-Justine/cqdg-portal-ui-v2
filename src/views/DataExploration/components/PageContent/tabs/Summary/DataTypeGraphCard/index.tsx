@@ -1,5 +1,4 @@
 import intl from 'react-intl-universal';
-import { useHistory } from 'react-router-dom';
 import Empty from '@ferlab/ui/core/components/Empty';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
@@ -36,7 +35,7 @@ const graphSetting: any = {
   layout: 'horizontal',
 };
 
-const addToQuery = (field: string, key: string, history: any) =>
+const addToQuery = (field: string, key: string) =>
   updateActiveQueryField({
     queryBuilderId: DATA_EXPLORATION_QB_ID,
     field,
@@ -45,7 +44,6 @@ const addToQuery = (field: string, key: string, history: any) =>
   });
 
 const DataTypeGraphCard = ({ id, className = '' }: OwnProps) => {
-  const history = useHistory();
   const { sqon } = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
   const { loading, result } = useApi<any>({
     config: {
@@ -91,7 +89,7 @@ const DataTypeGraphCard = ({ id, className = '' }: OwnProps) => {
                 legendPosition: 'middle',
                 legendOffset: 35,
               }}
-              onClick={(datum) => addToQuery('data_type', datum.indexValue as string, history)}
+              onClick={(datum) => addToQuery('data_type', datum.indexValue as string)}
               {...graphSetting}
             />
           )}

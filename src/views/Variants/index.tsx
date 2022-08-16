@@ -30,9 +30,6 @@ import PageContent from './components/PageContent';
 import { SCROLL_WRAPPER_ID } from './utils/constants';
 
 import styles from 'views/Variants/index.module.scss';
-interface OwnProps {
-  tab?: string;
-}
 
 enum FilterTypes {
   Participant,
@@ -172,7 +169,7 @@ const FiltersContainer = (
   );
 };
 
-const Variants = (props: OwnProps) => {
+const Variants = () => {
   const { tab } = useParams<{ tab: string }>();
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const variantMappingResults = useGetExtendedMappings(INDEXES.VARIANT);
@@ -251,9 +248,9 @@ const Variants = (props: OwnProps) => {
   );
 };
 
-const VariantWrapper = (props: OwnProps) => (
+const VariantWrapper = () => (
   <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-    <Variants {...props} />
+    <Variants />
   </ApolloProvider>
 );
 

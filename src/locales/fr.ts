@@ -321,7 +321,9 @@ const fr = {
   },
   screen: {
     loginPage: {
-      title: 'INCLUDE Data Hub',
+      title: 'Portail de données',
+      resume:
+        "Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
       datarelease: {
         title: 'Available Data',
       },
@@ -330,8 +332,8 @@ const fr = {
       biologyConditions: 'into the biology of Down Syndrome and co-occurring conditions.',
       accessLargeScale:
         'Access large-scale data resources and explore custom built cohort datasets based on participant, biospecimen, clinical and omics data.',
-      login: 'Login',
-      signup: 'Sign up',
+      login: 'Connexion',
+      signup: 'Créer un compte',
     },
     dashboard: {
       hello: 'Hello',
