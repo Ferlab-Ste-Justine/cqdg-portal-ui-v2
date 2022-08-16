@@ -99,7 +99,7 @@ const CommunityPage = () => {
                       </Title>
                       <ul className={styles.usagesList}>
                         {item.portal_usages?.map((value) => (
-                          <li>{value}</li>
+                          <li key={value}>{value}</li>
                         ))}
                       </ul>
                       {item.commercial_use_reason && (

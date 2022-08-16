@@ -17,7 +17,6 @@ const Login = (): React.ReactElement => {
 
   const handleSignin = async () => {
     const url = keycloak.createLoginUrl({
-      // eslint-disable-next-line max-len
       redirectUri: `${window.location.origin}/${
         query.get(REDIRECT_URI_KEY) || STATIC_ROUTES.DASHBOARD
       }`,
@@ -33,13 +32,9 @@ const Login = (): React.ReactElement => {
             <CQDGLogoFull className={styles.logo} />
           </div>
           <Title level={3} className={styles.loginTitle}>
-            Portail de données
+            <Text className={styles.loginDescText}>{intl.get('screen.loginPage.title')}</Text>
           </Title>
-          <Text className={styles.loginDescText}>
-            Le Centre québécois de données génomiques est une plateforme d'harmonisation et de
-            diffusion des données génomiques générées par les études cliniques et de recherche du
-            Québec.
-          </Text>
+          <Text className={styles.loginDescText}>{intl.get('screen.loginPage.resume')}</Text>
           <Space className={styles.loginButtons} size={16}>
             <Button type={'primary'} onClick={handleSignin} size={'large'}>
               {intl.get('screen.loginPage.login')}

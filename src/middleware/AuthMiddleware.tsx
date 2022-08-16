@@ -25,8 +25,8 @@ const AuthMiddleware = ({ children }: Props) => {
     if (sharedFilterId) {
       //dispatch(fetchSharedSavedFilter(sharedFilterId));
     }
-    // eslint-disable-next-line
     dispatch(userActions.setIsUserLoading(false));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

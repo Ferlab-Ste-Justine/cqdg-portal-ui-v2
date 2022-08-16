@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import { IconProps } from 'components/Icons';
 
 const CQDGLogoFull = ({ width = 152, height = 52, className = '' }: IconProps) => (

@@ -1,4 +1,4 @@
-import * as React from 'react';
+/* eslint-disable max-len */
 
 import { IconProps } from 'components/Icons';
 

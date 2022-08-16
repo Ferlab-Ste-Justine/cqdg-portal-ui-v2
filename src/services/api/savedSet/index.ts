@@ -10,7 +10,7 @@ const headers = () => ({
   'Content-Type': 'application/json',
 });
 
-const fetchAll = (tag?: string) =>
+const fetchAll = () =>
   sendRequest<IUserSetOutput[]>({
     method: 'GET',
     url: SETS_API_URL,

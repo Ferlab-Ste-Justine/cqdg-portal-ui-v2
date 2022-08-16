@@ -1,4 +1,4 @@
-import { IFileEntity, ITableFileEntity } from 'graphql/files/models';
+import { IFileEntity } from 'graphql/files/models';
 
 import { ICavaticaBillingGroup, ICavaticaProject } from 'services/api/cavatica/models';
 

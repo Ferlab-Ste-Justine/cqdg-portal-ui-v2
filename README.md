@@ -10,7 +10,7 @@
 ### Environment variables:
 
 - Create a `.env` with the scheme found here: https://github.com/Ferlab-Ste-Justine/cqdg-portal-ui/blob/main/.env.schema
-- Make sure to fill all the variables 
+- Make sure to fill all the variables
 
 ### Running the project locally
 

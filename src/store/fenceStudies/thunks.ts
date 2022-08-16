@@ -12,7 +12,7 @@ import { handleThunkApiReponse } from 'store/utils';
 
 import { TFenceStudies, TFenceStudiesIdsAndCount, TFenceStudy } from './types';
 
-const fetchAllFenceStudies = createAsyncThunk<
+export const fetchAllFenceStudies = createAsyncThunk<
   void,
   void,
   { rejectValue: string; state: RootState }
@@ -30,7 +30,7 @@ const fetchAllFenceStudies = createAsyncThunk<
   );
 });
 
-const fetchFenceStudies = createAsyncThunk<
+export const fetchFenceStudies = createAsyncThunk<
   TFenceStudies,
   {
     fenceName: FENCE_NAMES;
@@ -47,7 +47,7 @@ const fetchFenceStudies = createAsyncThunk<
 
     const { authorizedStudies, error: studiesCountError } = isEmpty(studies)
       ? { authorizedStudies: [], error: undefined }
-      : await getStudiesCountByNameAndAcl(studies!, args.userAcls);
+      : await getStudiesCountByNameAndAcl(studies!);
 
     return handleThunkApiReponse({
       error: authStudyError || studiesCountError,
@@ -81,7 +81,6 @@ const fetchFenceStudies = createAsyncThunk<
 
 const getStudiesCountByNameAndAcl = async (
   studies: TFenceStudiesIdsAndCount,
-  userAcls: string[],
 ): Promise<{
   error?: AxiosError;
   authorizedStudies?: TFenceStudy[];
@@ -243,5 +242,3 @@ export const computeAllFencesAuthStudies = (fenceStudies: TFenceStudies) => {
 };
 
 const replaceDashByUnderscore = (value: string) => value.replaceAll('-', '');
-
-export { fetchFenceStudies, fetchAllFenceStudies };

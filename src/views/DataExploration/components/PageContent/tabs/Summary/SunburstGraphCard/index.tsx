@@ -62,7 +62,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
         getSelectedPhenotype,
         {
           centerTitleFormatter: (data: TreeNode) => data.results,
-          centerSubtitleFormatter: (data: TreeNode) => 'Participants with',
+          centerSubtitleFormatter: () => 'Participants with',
           centerDescriptionFormatter: (data: TreeNode) =>
             field === 'observed_phenotype'
               ? `HP:${extractPhenotypeTitleAndCode(data.title!)?.code}`

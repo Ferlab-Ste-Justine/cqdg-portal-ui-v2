@@ -75,7 +75,7 @@ const updateSavedFilter = createAsyncThunk<
     error,
     data: data!,
     reject: thunkAPI.rejectWithValue,
-    onError: (error) =>
+    onError: () =>
       thunkAPI.dispatch(
         globalActions.displayNotification({
           type: 'error',

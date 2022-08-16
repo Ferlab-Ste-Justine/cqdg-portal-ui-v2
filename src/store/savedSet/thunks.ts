@@ -13,7 +13,7 @@ import { handleThunkApiReponse } from 'store/utils';
 const fetchSavedSet = createAsyncThunk<IUserSetOutput[], void | string, { rejectValue: string }>(
   'savedsets/fetch',
   async (tag, thunkAPI) => {
-    const { data, error } = await SavedSetApi.fetchAll(tag as string);
+    const { data, error } = await SavedSetApi.fetchAll();
 
     return handleThunkApiReponse({
       error,
@@ -43,7 +43,7 @@ const createSavedSet = createAsyncThunk<
           description: intl.get('api.savedSet.success.messageCreate'),
         }),
       ),
-    onError: (_) =>
+    onError: () =>
       thunkAPI.dispatch(
         globalActions.displayNotification({
           type: 'error',
@@ -67,7 +67,7 @@ const updateSavedSet = createAsyncThunk<
     error,
     data: data!,
     reject: thunkAPI.rejectWithValue,
-    onError: (error) =>
+    onError: () =>
       thunkAPI.dispatch(
         globalActions.displayNotification({
           type: 'error',

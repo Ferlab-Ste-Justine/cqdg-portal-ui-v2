@@ -72,7 +72,7 @@ const fenceCavaticaSlice = createSlice({
   },
   extraReducers: (builder) => {
     // FETCH PROJECTS
-    builder.addCase(fetchAllProjects.pending, (state, action) => {
+    builder.addCase(fetchAllProjects.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchAllProjects.fulfilled, (state, action) => {
@@ -86,7 +86,7 @@ const fenceCavaticaSlice = createSlice({
       state.error = action.payload;
     });
     // FETCH BILLING GROUPS
-    builder.addCase(fetchAllBillingGroups.pending, (state, action) => {
+    builder.addCase(fetchAllBillingGroups.pending, (state) => {
       state.isFetchingBillingGroup = true;
     });
     builder.addCase(fetchAllBillingGroups.fulfilled, (state, action) => {
@@ -98,7 +98,7 @@ const fenceCavaticaSlice = createSlice({
       state.error = action.payload;
     });
     // BEGIN ANALYSE
-    builder.addCase(beginAnalyse.pending, (state, action) => {
+    builder.addCase(beginAnalyse.pending, (state) => {
       state.isInitializingAnalyse = true;
       state.beginAnalyseAfterConnection = false;
       state.newlyCreatedProject = undefined;
@@ -113,7 +113,7 @@ const fenceCavaticaSlice = createSlice({
       state.error = action.payload;
     });
     // CREATE PROJECT
-    builder.addCase(createProjet.pending, (state, action) => {
+    builder.addCase(createProjet.pending, (state) => {
       state.isCreatingProject = true;
     });
     builder.addCase(createProjet.fulfilled, (state, action) => {

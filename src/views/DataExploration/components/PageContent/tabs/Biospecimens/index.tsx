@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DownloadOutlined } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
@@ -28,9 +28,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { ReportType } from 'services/api/reports/models';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchReport, fetchTsvReport } from 'store/report/thunks';
-import { useUser } from 'store/user';
-import { updateUserConfig } from 'store/user/thunks';
+import { fetchReport } from 'store/report/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
@@ -44,7 +42,7 @@ interface OwnProps {
   sqon?: ISqonGroupFilter;
 }
 
-const getDefaultColumns = (history: any): ProColumnType<any>[] => [
+const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'sample_id',
     title: 'Sample ID',
@@ -94,7 +92,7 @@ const getDefaultColumns = (history: any): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
     render: (collection_sample_id: string) => (
       // eslint-disable-next-line
-        <a
+      <a
         type="link"
         onClick={() =>
           updateActiveQueryField({
@@ -204,8 +202,6 @@ const getDefaultColumns = (history: any): ProColumnType<any>[] => [
 
 const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) => {
   const dispatch = useDispatch();
-  const { userInfo } = useUser();
-  const history = useHistory();
   const { activeQuery } = useQueryBuilderState(DATA_EXPLORATION_QB_ID);
   const [selectedAllResults, setSelectedAllResults] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -225,7 +221,7 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
   return (
     <ProTable
       tableId="biospecimen_table"
-      columns={getDefaultColumns(history)}
+      columns={getDefaultColumns()}
       wrapperClassName={styles.biospecimenTabWrapper}
       loading={results.loading}
       enableRowSelection={true}
@@ -250,6 +246,7 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
         onSelectedRowsChange: (keys) => setSelectedKeys(keys),
         extra: [
           <SetsManagementDropdown
+            key={1}
             results={results}
             sqon={getCurrentSqon()}
             selectedAllResults={selectedAllResults}
@@ -257,6 +254,7 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
             selectedKeys={selectedKeys}
           />,
           <Button
+            key={2}
             icon={<DownloadOutlined />}
             onClick={() =>
               dispatch(

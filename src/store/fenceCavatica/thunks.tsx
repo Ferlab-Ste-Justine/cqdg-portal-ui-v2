@@ -7,18 +7,15 @@ import { Modal } from 'antd';
 import { IFileEntity, IFileResultTree } from 'graphql/files/models';
 import { SEARCH_FILES_QUERY } from 'graphql/files/queries';
 import { hydrateResults } from 'graphql/models';
-import EnvironmentVariables from 'helpers/EnvVariables';
-import { chunk, isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import { CAVATICA_FILE_BATCH_SIZE } from 'views/DataExploration/utils/constant';
 
 import { FENCE_CONNECTION_STATUSES } from 'common/fenceTypes';
 import { ArrangerApi } from 'services/api/arranger';
 import { CavaticaApi } from 'services/api/cavatica';
 import {
-  CAVATICA_TYPE,
   ICavaticaBillingGroup,
   ICavaticaCreateProjectBody,
-  ICavaticaDRSImportItem,
   ICavaticaProject,
 } from 'services/api/cavatica/models';
 import { globalActions } from 'store/global';
@@ -26,10 +23,7 @@ import { RootState } from 'store/types';
 import { handleThunkApiReponse } from 'store/utils';
 import { userHasAccessToFile } from 'utils/dataFiles';
 
-import { IBulkImportData, ICavaticaTreeNode, TCavaticaProjectWithMembers } from './types';
-
-const BATCH_SIZE = 100;
-const USER_BASE_URL = EnvironmentVariables.configFor('CAVATICA_USER_BASE_URL');
+import { IBulkImportData, TCavaticaProjectWithMembers } from './types';
 
 const fetchAllProjects = createAsyncThunk<
   TCavaticaProjectWithMembers[],

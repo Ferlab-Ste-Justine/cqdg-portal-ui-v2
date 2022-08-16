@@ -42,6 +42,7 @@ const ListItemWithActions = ({
       className={cx(styles.listItemWithActions, 'with-action-on-hover', className)}
       actions={[
         <Button
+          key={1}
           type="text"
           size="small"
           icon={<EditFilled />}
@@ -49,6 +50,7 @@ const ListItemWithActions = ({
           className={styles.actionBtn}
         />,
         <Button
+          key={2}
           className={styles.actionBtn}
           type="text"
           size="small"

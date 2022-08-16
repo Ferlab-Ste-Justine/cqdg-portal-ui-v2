@@ -115,7 +115,7 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
         dictionary={getQueryBuilderDictionary(facetTransResolver)}
         getResolvedQueryForCount={() => ({ op: 'and', content: [] })}
         fetchQueryCount={() =>
-          new Promise((resolve, reject) => {
+          new Promise((resolve) => {
             resolve(1);
           })
         }
@@ -145,7 +145,6 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
             results={variantResults}
             setQueryConfig={setVariantQueryConfig}
             queryConfig={variantQueryConfig}
-            sqon={variantResolvedSqon}
           />
         </Tabs.TabPane>
       </Tabs>

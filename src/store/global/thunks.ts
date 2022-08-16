@@ -6,7 +6,7 @@ import { RootState } from 'store/types';
 
 const fetchStats = createAsyncThunk<IStatistics, void, { rejectValue: string; state: RootState }>(
   'arranger/fetch/stats',
-  async (_, thunkAPI) => {
+  async () => {
     const { data } = await ArrangerApi.fetchStatistics();
 
     return data!;
