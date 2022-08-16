@@ -6,19 +6,7 @@ const regexTermNumber = /^[(]HP:\d+\)$/;
 const fillOpacityWithChild = 1;
 const fillOpacityWithoutChild = 0.8;
 
-const SunburstD3 = (
-  ref,
-  data,
-  config,
-  getSelectedPhenotype,
-  formatters = {
-    tooltipFormatter: (node) => {},
-    centerTitleFormatter: (node) => {},
-    centerSubtitleFormatter: (node) => {},
-    centerDescriptionFormatter: (node) => {},
-  },
-  type,
-) => {
+const SunburstD3 = (ref, data, config, getSelectedPhenotype, formatters, type) => {
   const {
     tooltipFormatter,
     centerTitleFormatter,
@@ -115,7 +103,7 @@ const SunburstD3 = (
     .style('max-width', '250px')
     .style('z-index', '1000');
 
-  const mouseoverTooltip = function (d) {
+  const mouseoverTooltip = function () {
     Tooltip.style('display', 'block');
     d3.select(this).style('stroke', 'black').style('opacity', 1);
   };
@@ -199,7 +187,7 @@ const SunburstD3 = (
         y = centerText.attr('y') - 10,
         dy = 0;
 
-      let tspan = centerText
+      const tspan = centerText
         .text(null)
         .append('tspan') // reset text, now hold in text variable
         .attr('x', 0)
