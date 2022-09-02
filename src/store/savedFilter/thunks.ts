@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import { setQueryBuilderState } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import { v4 } from 'uuid';
 
 import { FILTER_TAG_QB_ID_MAPPING } from 'common/queryBuilder';

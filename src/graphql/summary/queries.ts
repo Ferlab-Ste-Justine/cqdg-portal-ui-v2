@@ -2,21 +2,15 @@ import { gql } from '@apollo/client';
 
 export const DEMOGRAPHIC_QUERY = gql`
   query AggregationDemographicInfo($sqon: JSON) {
-    participant: Donor {
+    Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        sex {
+        gender {
           buckets {
             key
             doc_count
           }
         }
         ethnicity {
-          buckets {
-            key
-            doc_count
-          }
-        }
-        race {
           buckets {
             key
             doc_count
@@ -29,7 +23,7 @@ export const DEMOGRAPHIC_QUERY = gql`
 
 export const DATATYPE_QUERY = gql`
   query ($sqon: JSON) {
-    participant: Donor {
+    Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_type {
           buckets {
@@ -44,7 +38,7 @@ export const DATATYPE_QUERY = gql`
 
 export const PARTICIPANT_BY_STUDIES_QUERY = gql`
   query ($sqon: JSON) {
-    participant: Donor {
+    Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         study_id {
           buckets {
@@ -59,7 +53,7 @@ export const PARTICIPANT_BY_STUDIES_QUERY = gql`
 
 export const DATA_CATEGORY_QUERY = gql`
   query ($sqon: JSON) {
-    participant: Donor {
+    Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_category {
           buckets {
@@ -74,7 +68,7 @@ export const DATA_CATEGORY_QUERY = gql`
 
 export const SUNBURST_QUERY = gql`
   query ($sqon: JSON, $term_filters: JSON) {
-    participant: Donor {
+    Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
         observed_phenotype__name {
           buckets {

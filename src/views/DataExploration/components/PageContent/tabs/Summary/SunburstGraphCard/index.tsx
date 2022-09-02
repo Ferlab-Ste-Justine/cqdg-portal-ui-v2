@@ -40,7 +40,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
   const phenotypeStore = useRef<PhenotypeStore | undefined>(new PhenotypeStore());
   const sunburstRef = useRef<SVGSVGElement>(null);
   const updateSunburst = useRef<(key: any) => void>();
-  const { sqon } = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,7 +64,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
           centerTitleFormatter: (data: TreeNode) => data.results,
           centerSubtitleFormatter: () => 'Participants with',
           centerDescriptionFormatter: (data: TreeNode) =>
-            field === 'observed_phenotype'
+            field === 'observed_phenotype_tagged'
               ? `HP:${extractPhenotypeTitleAndCode(data.title!)?.code}`
               : `MONDO:${extractMondoTitleAndCode(data.title!)?.code}`,
           tooltipFormatter: (data: TreeNode) =>

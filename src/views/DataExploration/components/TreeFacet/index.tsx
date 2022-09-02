@@ -43,7 +43,7 @@ const TreeFacet = ({ type, field, titleFormatter }: Props) => {
   const phenotypeStore = useRef(new PhenotypeStore());
   const [rootNode, setRootNode] = useState<TreeNode>();
   const [treeData, setTreeData] = useState<TreeNode>();
-  const { sqon } = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
 
   const getInitialExpandedKeys = (data: TreeNode[], collectedKeys: string[] = [], counter = 0) => {
     if (counter < AUTO_EXPAND_TREE) {

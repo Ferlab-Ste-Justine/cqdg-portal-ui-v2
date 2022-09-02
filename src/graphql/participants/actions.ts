@@ -13,7 +13,7 @@ export const useParticipants = (variables?: QueryVariable): IQueryResults<IParti
 
   return {
     loading,
-    data: hydrateResults(result?.participants?.hits?.edges || []),
-    total: result?.participants?.hits?.total || 0,
+    data: hydrateResults(result?.Participant?.hits?.edges || []),
+    total: result?.Participant?.hits?.total || 0,
   };
 };

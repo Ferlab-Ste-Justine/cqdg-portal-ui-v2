@@ -63,7 +63,7 @@ const Header = () => {
             <HeaderLink
               key="studies"
               currentPathName={currentPathName}
-              to={STATIC_ROUTES.STUDIES_EXPLORATION}
+              to={STATIC_ROUTES.STUDIES}
               icon={<ReadOutlined />}
               title={intl.get('layout.main.menu.studies')}
             />

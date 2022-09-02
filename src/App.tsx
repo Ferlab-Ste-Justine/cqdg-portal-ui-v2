@@ -80,7 +80,7 @@ const App = () => {
                 <ProtectedRoute exact path={STATIC_ROUTES.COMMUNITY} layout={PageLayout}>
                   <Community />
                 </ProtectedRoute>
-                <ProtectedRoute exact path={STATIC_ROUTES.STUDIES_EXPLORATION} layout={PageLayout}>
+                <ProtectedRoute exact path={STATIC_ROUTES.STUDIES} layout={PageLayout}>
                   <Studies />
                 </ProtectedRoute>
                 <ProtectedRoute exact path={DYNAMIC_ROUTES.DATA_EXPLORATION} layout={PageLayout}>

@@ -13,24 +13,17 @@ import styles from 'components/uiKit/DataRelease/index.module.scss';
 import { useGlobals } from 'store/global';
 import { fetchStats } from 'store/global/thunks';
 
-interface OwnProps {
+interface IDataReleaseProps {
   className?: string;
 }
 
-const formatStorage = (storage: string) => {
-  if (!storage) return;
-  const parts = storage.split(/\.| /);
-  return `${parts[0]}${parts[2]}`;
-};
-
-const DataRelease = ({ className = '' }: OwnProps) => {
+const DataRelease = ({ className = '' }: IDataReleaseProps) => {
   const dispatch = useDispatch();
   const { stats } = useGlobals();
 
   useEffect(() => {
     dispatch(fetchStats());
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   return (
     <Spin spinning={false}>
@@ -65,7 +58,7 @@ const DataRelease = ({ className = '' }: OwnProps) => {
         <Col xs={12} md={6}>
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={formatStorage(stats?.fileSize!) || '0TB'}
+            label={stats?.fileSize || '0TB'}
             Icon={<DatabaseOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('components.dataRelease.datafiles')}

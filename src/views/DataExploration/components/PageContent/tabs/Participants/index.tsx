@@ -83,7 +83,7 @@ const defaultColumns: ProColumnType<any>[] = [
           renderItem={(item, index) => (
             <div key={index}>
               {/*go to good study */}
-              <Link to={STATIC_ROUTES.STUDIES_EXPLORATION}>{item.name}</Link>
+              <Link to={STATIC_ROUTES.STUDIES}>{item.name}</Link>
             </div>
           )}
         />

@@ -55,9 +55,9 @@ const filterGroups: {
           />,
           <TreeFacet
             type={'hpoTree'}
-            field={'observed_phenotype'}
+            field={'observed_phenotype_tagged'}
             titleFormatter={formatHpoTitleAndCode}
-            key={'observed_phenotype'}
+            key={'observed_phenotype_tagged'}
           />,
           'gender',
           'ethnicity',

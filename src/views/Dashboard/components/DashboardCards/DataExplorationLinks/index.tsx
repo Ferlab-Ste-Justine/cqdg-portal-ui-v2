@@ -17,20 +17,13 @@ import LinkBox from './LinkBox';
 
 import styles from './index.module.scss';
 
-const formatStorage = (storage: string) => {
-  if (!storage) return;
-  const parts = storage.split(/\.| /);
-  return `${parts[0]}${parts[2]}`;
-};
-
 const DataExplorationLinks = () => {
   const dispatch = useDispatch();
   const { stats } = useGlobals();
 
   useEffect(() => {
     dispatch(fetchStats());
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   return (
     <GridCard
@@ -54,7 +47,7 @@ const DataExplorationLinks = () => {
         <Row gutter={[16, 16]}>
           <Col flex="auto" className={styles.customCol}>
             <LinkBox
-              href={STATIC_ROUTES.STUDIES_EXPLORATION}
+              href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.studies!)}
               subLabel={intl.get('components.dataRelease.studies')}
@@ -83,7 +76,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={formatStorage(stats?.fileSize!) || '0TB'}
+              label={stats?.fileSize || '0TB'}
               subLabel={intl.get('components.dataRelease.datafiles')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />

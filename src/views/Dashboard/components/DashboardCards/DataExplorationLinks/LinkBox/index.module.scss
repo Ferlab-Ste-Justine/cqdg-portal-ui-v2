@@ -5,11 +5,10 @@
   background-color: transparent;
   width: 100%;
   border-radius: 2px;
-  border: 1px solid $gray-7;
+  border: 1px solid $blue-9;
 
   &:hover {
-    background-color: $gray-9;
-    border-color: $gray-9;
+    background-color: $blue-9;
 
     .linkArrow {
       opacity: 1;
@@ -24,7 +23,7 @@
     margin-left: -8px;
     margin-top: 5px;
     font-size: 20px;
-    color: $blue-7;
+    color: $blue-4;
   }
 
   .linkTitle {

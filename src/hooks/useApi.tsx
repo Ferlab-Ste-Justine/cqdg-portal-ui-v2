@@ -1,4 +1,3 @@
-// eslint-disable-next-line react-hooks/exhaustive-deps
 import { useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 
