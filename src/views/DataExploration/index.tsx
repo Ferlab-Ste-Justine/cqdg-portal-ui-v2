@@ -144,7 +144,7 @@ const DataExploration = () => {
 
   return (
     <div className={styles.dataExplorationLayout}>
-      <SidebarMenu className={styles.sideMenu} menuItems={menuItems} defaultSelectedKey={tab} />
+      <SidebarMenu className={styles.sideMenu} menuItems={menuItems} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent
           fileMapping={fileMappingResults}
