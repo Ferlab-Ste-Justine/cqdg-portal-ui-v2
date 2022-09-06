@@ -50,6 +50,7 @@ const Header = () => {
         closable
       />
       <PageHeader
+        className={style.mainHeader}
         title={<CQDGLogoFullPortal className={style.logo} />}
         subTitle={
           <nav className={style.headerList}>
@@ -59,6 +60,7 @@ const Header = () => {
               to={STATIC_ROUTES.DASHBOARD}
               icon={<HomeOutlined />}
               title={intl.get('layout.main.menu.dashboard')}
+              className={style.headerBtn}
             />
             <HeaderLink
               key="studies"
@@ -66,6 +68,7 @@ const Header = () => {
               to={STATIC_ROUTES.STUDIES}
               icon={<ReadOutlined />}
               title={intl.get('layout.main.menu.studies')}
+              className={style.headerBtn}
             />
             <HeaderLink
               key="explore-data"
@@ -79,6 +82,7 @@ const Header = () => {
               ]}
               icon={<FileSearchOutlined />}
               title={intl.get('layout.main.menu.explore')}
+              className={style.headerBtn}
             />
             <HeaderLink
               key="variant-data"
@@ -90,6 +94,7 @@ const Header = () => {
               ]}
               icon={<LineStyleIcon height={14} width={14} />}
               title={intl.get('layout.main.menu.variants')}
+              className={style.headerBtn}
             />
           </nav>
         }
@@ -141,7 +146,6 @@ const Header = () => {
             {getTargetLang(lang).toUpperCase()}
           </Button>,
         ]}
-        className={style.mainHeader}
       />
     </>
   );
