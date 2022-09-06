@@ -55,9 +55,9 @@ const filterGroups: {
           />,
           <TreeFacet
             type={'hpoTree'}
-            field={'observed_phenotype'}
+            field={'observed_phenotype_tagged'}
             titleFormatter={formatHpoTitleAndCode}
-            key={'observed_phenotype'}
+            key={'observed_phenotype_tagged'}
           />,
           'gender',
           'ethnicity',
@@ -144,7 +144,7 @@ const DataExploration = () => {
 
   return (
     <div className={styles.dataExplorationLayout}>
-      <SidebarMenu className={styles.sideMenu} menuItems={menuItems} defaultSelectedKey={tab} />
+      <SidebarMenu className={styles.sideMenu} menuItems={menuItems} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent
           fileMapping={fileMappingResults}

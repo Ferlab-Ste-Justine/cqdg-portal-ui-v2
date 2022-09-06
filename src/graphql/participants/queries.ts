@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SEARCH_PARTICIPANT_QUERY = gql`
   query searchParticipant($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
-    participants: Donor {
+    Participant {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
         edges {
@@ -69,17 +69,7 @@ export const SEARCH_PARTICIPANT_QUERY = gql`
                 }
               }
             }
-            phenotype: observed_phenotypes {
-              age_at_event
-              display_name
-              internal_phenotype_id
-              is_leaf
-              is_tagged
-              name
-              parents
-              phenotype_id
-            }
-            phenotypes_tagged: observed_phenotype_tagged {
+            observed_phenotype_tagged {
               hits {
                 total
                 edges {
@@ -90,7 +80,7 @@ export const SEARCH_PARTICIPANT_QUERY = gql`
                     is_leaf
                     is_tagged
                     name
-                    parents
+                    #parents
                     phenotype_id
                     main_category
                     score
@@ -107,7 +97,7 @@ export const SEARCH_PARTICIPANT_QUERY = gql`
 
 export const MATCH_PARTICIPANT_QUERY = gql`
   query fetchMatchParticipant($sqon: JSON) {
-    participants: Donor {
+    Participant {
       hits(filters: $sqon) {
         edges {
           node {
@@ -132,7 +122,7 @@ export const MATCH_PARTICIPANT_QUERY = gql`
 
 export const GET_PARTICIPANT_COUNT = gql`
   query getParticipantCount($sqon: JSON) {
-    participants: Donor {
+    Participant {
       hits(filters: $sqon) {
         total
       }
@@ -142,7 +132,7 @@ export const GET_PARTICIPANT_COUNT = gql`
 
 export const PARTICIPANT_SEARCH_BY_ID_QUERY = gql`
   query searchParticipantById($sqon: JSON) {
-    participants: Donor {
+    Participant {
       hits(filters: $sqon) {
         edges {
           node {

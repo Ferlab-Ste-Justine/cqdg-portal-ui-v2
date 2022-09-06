@@ -32,6 +32,7 @@ export interface IStatistics {
   participants: number;
   samples: number;
   studies: number;
+  variants: number;
 }
 
 export interface ArrangerSingleColumnState {

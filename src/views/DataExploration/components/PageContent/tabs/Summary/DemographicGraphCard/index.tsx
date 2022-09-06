@@ -53,7 +53,7 @@ const addToQuery = (field: string, key: string) =>
   });
 
 const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
-  const { sqon } = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
   const { loading, result } = useApi<any>({
     config: {
       url: ARRANGER_API_PROJECT_URL,

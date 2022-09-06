@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
+import EnvironmentVariables from 'helpers/EnvVariables';
 
 import { SetType } from 'services/api/savedSet/models';
-
-import EnvironmentVariables from '../../helpers/EnvVariables';
 
 import { savedSetSelector } from './selector';
 

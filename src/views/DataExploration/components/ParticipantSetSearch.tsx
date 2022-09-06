@@ -8,7 +8,7 @@ import { SetType } from 'services/api/savedSet/models';
 import { DATA_EXPLORATION_QB_ID } from '../utils/constant';
 
 const ParticipantSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
-  const { sqon } = useParticipantResolvedSqon(queryBuilderId);
+  const sqon = useParticipantResolvedSqon(queryBuilderId);
 
   return (
     <SetSearch

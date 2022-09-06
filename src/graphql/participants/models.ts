@@ -3,7 +3,7 @@ import { ArrangerResultsTree } from 'graphql/models';
 import { IStudyEntity } from 'graphql/studies/models';
 
 export interface IParticipantResultTree {
-  participants: ArrangerResultsTree<IParticipantEntity>;
+  Participant: ArrangerResultsTree<IParticipantEntity>;
 }
 
 export interface IPhenotype {
@@ -86,8 +86,7 @@ export interface IParticipantEntity {
   studies: ArrangerResultsTree<IStudyEntity>;
   mondo: IMondo;
   diagnoses: ArrangerResultsTree<IDiagnosis>;
-  phenotype: IPhenotype;
-  phenotypes_tagged: ArrangerResultsTree<IPhenotype>;
+  observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
 }
 
 export type ITableParticipantEntity = IParticipantEntity & {

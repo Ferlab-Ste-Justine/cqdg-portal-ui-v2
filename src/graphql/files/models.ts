@@ -50,10 +50,7 @@ export interface IFileEntity {
   diagnoses: ArrangerResultsTree<IDiagnosis>;
   icd: IFileIcd;
   mondo: IMondo;
-  non_observed_phenotypes: ArrangerResultsTree<IPhenotype>;
-  not_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
-  observed_phenotypes: ArrangerResultsTree<IPhenotype>;
 }
 
 export enum FileAccessType {
