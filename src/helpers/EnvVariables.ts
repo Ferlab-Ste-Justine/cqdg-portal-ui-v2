@@ -2,7 +2,9 @@ export default class EnvironmentVariables {
   static vars: Record<string, string | undefined> = {
     // GENERAL
     ENV: process.env.NODE_ENV,
-    INCLUDE_WEB_ROOT: process.env.REACT_APP_INCLUDE_WEB_ROOT,
+    CQDG_WEB_APP: process.env.REACT_APP_CQDG_WEB_APP,
+    CQDG_WEB_SITE: process.env.REACT_APP_CQDG_WEB_SITE,
+    CQDG_DOCUMENTATION: process.env.REACT_APP_CQDG_DOCUMENTATION,
     REDUX_LOG: process.env.REACT_APP_REDUX_LOG,
     // APIS
     ARRANGER_API: process.env.REACT_APP_ARRANGER_API_URL,

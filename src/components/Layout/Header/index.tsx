@@ -1,15 +1,15 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FileSearchOutlined, HomeOutlined, ReadOutlined, TeamOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, HomeOutlined, ReadOutlined } from '@ant-design/icons';
 import { DownOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Dropdown, Menu, PageHeader } from 'antd';
-import { getFTEnvVarByKey } from 'helpers/EnvVariables';
+import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
-import { DEFAULT_GRAVATAR_PLACEHOLDER, LANG } from 'common/constants';
+import { LANG } from 'common/constants';
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { AlterTypes } from 'common/types';
 import NotificationBanner from 'components/featureToggle/NotificationBanner';
@@ -94,22 +94,15 @@ const Header = () => {
           </nav>
         }
         extra={[
-          <HeaderLink
-            key="community"
-            currentPathName={currentPathName}
-            to={STATIC_ROUTES.COMMUNITY}
-            icon={<TeamOutlined />}
-            title={intl.get('layout.main.menu.community')}
-          />,
-          <ExternalLink key="include-website" href="https://includedcc.org">
+          <ExternalLink key="cqdg-website" href={EnvVariables.configFor('CQDG_WEB_SITE')}>
             <Button key="external-website" className={style.headerBtn}>
               {intl.get('layout.main.menu.website')}{' '}
               <ExternalLinkIcon className={style.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
-          <ExternalLink key="include-help" href="https://help.includedcc.org">
+          <ExternalLink key="documentation" href={EnvVariables.configFor('CQDG_WEB_APP')}>
             <Button key="external-help" className={style.headerBtn}>
-              {intl.get('layout.main.menu.help')}{' '}
+              {intl.get('layout.main.menu.documentation')}
               <ExternalLinkIcon className={style.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
@@ -131,7 +124,7 @@ const Header = () => {
             <a className={style.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
               <Gravatar
                 circle
-                placeholder={DEFAULT_GRAVATAR_PLACEHOLDER}
+                placeholder={'mp'}
                 className={style.userGravatar}
                 email={tokenParsed.email || tokenParsed.identity_provider_identity}
               />

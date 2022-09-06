@@ -19,7 +19,3 @@ export const MAIN_SCROLL_WRAPPER_ID = 'main-scroll-wrapper';
 
 export const FILTER_ID_QUERY_PARAM_KEY = 'filterId';
 export const SHARED_FILTER_ID_QUERY_PARAM_KEY = 'sharedFilterId';
-
-export const DEFAULT_GRAVATAR_PLACEHOLDER = `${EnvironmentVariables.configFor(
-  'INCLUDE_WEB_ROOT',
-)}/avatar-placeholder.png`;

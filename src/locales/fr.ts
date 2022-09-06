@@ -307,7 +307,7 @@ const fr = {
         biospecimen: 'Biospecimen',
         datafiles: 'Data Files',
         website: 'Website',
-        help: 'Help',
+        documentation: 'Documentation',
         community: 'Community',
       },
     },

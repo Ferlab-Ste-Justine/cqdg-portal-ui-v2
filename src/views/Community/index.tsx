@@ -5,7 +5,6 @@ import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { List, Space, Typography } from 'antd';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
-import { DEFAULT_GRAVATAR_PLACEHOLDER } from 'common/constants';
 import { UserApi } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
@@ -80,7 +79,7 @@ const CommunityPage = () => {
                       <Gravatar
                         className={styles.userGravatar}
                         circle
-                        placeholder={DEFAULT_GRAVATAR_PLACEHOLDER}
+                        placeholder={'mp'}
                         email={item.email || ''}
                         size={40}
                       />
