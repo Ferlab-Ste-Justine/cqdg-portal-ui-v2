@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Space, Tabs, Typography } from 'antd';
+import { Space, Typography } from 'antd';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useVariant } from 'graphql/variants/actions';
 import { isEmpty } from 'lodash';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
-  TAB_IDS,
   VARIANT_FILTER_TAG,
   VARIANT_REPO_QB_ID,
 } from 'views/Variants/utils/constants';
@@ -27,7 +25,6 @@ import {
   updateSavedFilter,
 } from 'store/savedFilter/thunks';
 import { combineExtendedMappings } from 'utils/fieldMapper';
-import { STATIC_ROUTES } from 'utils/routes';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
 import VariantsTab from './tabs/Variants';
@@ -38,7 +35,6 @@ const { Title } = Typography;
 
 type OwnProps = {
   variantMapping: ExtendedMappingResults;
-  tabId?: string;
 };
 
 const addTagToFilter = (filter: ISavedFilter) => ({
@@ -46,9 +42,8 @@ const addTagToFilter = (filter: ISavedFilter) => ({
   tag: VARIANT_FILTER_TAG,
 });
 
-const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => {
+const PageContent = ({ variantMapping }: OwnProps) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { queryList, activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
   const { savedFilters, defaultFilter } = useSavedFilter(VARIANT_FILTER_TAG);
 

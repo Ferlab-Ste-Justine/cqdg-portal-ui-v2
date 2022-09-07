@@ -1,5 +1,4 @@
 import intl from 'react-intl-universal';
-import { useParams } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import SidebarMenu, { ISidebarMenuItem } from '@ferlab/ui/core/components/SidebarMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
@@ -170,7 +169,6 @@ const FiltersContainer = (
 };
 
 const Variants = () => {
-  const { tab } = useParams<{ tab: string }>();
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const variantMappingResults = useGetExtendedMappings(INDEXES.VARIANT);
 
@@ -241,7 +239,6 @@ const Variants = () => {
             data: [],
             loading: false,
           }}
-          tabId={tab}
         />
       </ScrollContent>
     </div>
