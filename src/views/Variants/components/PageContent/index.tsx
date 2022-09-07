@@ -7,7 +7,7 @@ import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Space, Tabs } from 'antd';
+import { Space, Tabs, Typography } from 'antd';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useVariant } from 'graphql/variants/actions';
 import { isEmpty } from 'lodash';
@@ -33,6 +33,8 @@ import { getQueryBuilderDictionary } from 'utils/translation';
 import VariantsTab from './tabs/Variants';
 
 import styles from './index.module.scss';
+
+const { Title } = Typography;
 
 type OwnProps = {
   variantMapping: ExtendedMappingResults;
@@ -88,6 +90,9 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
 
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
+      <Title level={4} className={styles.variantsTitle}>
+        {intl.get('screen.variants.title')}
+      </Title>
       <QueryBuilder
         id={VARIANT_REPO_QB_ID}
         className="variants-repo__query-builder"
@@ -120,34 +125,11 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
           })
         }
       />
-      <Tabs
-        type="card"
-        className="navNoMarginBtm"
-        activeKey={tabId || TAB_IDS.VARIANTS}
-        onChange={(key) => {
-          if (!history.location.pathname.includes(key)) {
-            history.push(`${STATIC_ROUTES.VARIANT}/${key}${window.location.search}`);
-          }
-        }}
-      >
-        <Tabs.TabPane
-          tab={
-            <span>
-              <UserOutlined />
-              {intl.get('screen.variants.tabs.variants.title', {
-                count: variantResults.total,
-              })}
-            </span>
-          }
-          key={TAB_IDS.VARIANTS}
-        >
-          <VariantsTab
-            results={variantResults}
-            setQueryConfig={setVariantQueryConfig}
-            queryConfig={variantQueryConfig}
-          />
-        </Tabs.TabPane>
-      </Tabs>
+      <VariantsTab
+        results={variantResults}
+        setQueryConfig={setVariantQueryConfig}
+        queryConfig={variantQueryConfig}
+      />
     </Space>
   );
 };

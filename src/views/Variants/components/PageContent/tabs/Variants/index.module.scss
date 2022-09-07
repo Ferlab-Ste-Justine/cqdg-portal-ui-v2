@@ -1,5 +1,7 @@
 .variantTabWrapper {
     display: flex;
+    background-color: white;
+    padding: 20px;
 
     :global(.ant-pagination) {
         margin-bottom: 0;

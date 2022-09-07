@@ -290,10 +290,12 @@ const fr = {
       },
     },
     dataRelease: {
+      dataExploration: 'Data Exploration',
       studies: 'Studies',
       participants: 'Participants',
       biospecimens: 'Biospecimens',
       datafiles: 'Data Files',
+      dataReleaseLink: 'Data release 1.0',
     },
   },
   layout: {
@@ -402,6 +404,7 @@ const fr = {
       },
     },
     variants: {
+      title: 'Variants',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
@@ -427,13 +430,10 @@ const fr = {
       },
     },
     studyExploration: {
-      tabs: {
-        studies: {
-          title: 'Studies',
-        },
-      },
+      title: 'Studies',
     },
     dataExploration: {
+      title: 'Data Exploration',
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospecimen',

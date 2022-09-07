@@ -31,15 +31,17 @@ const DataExplorationLinks = () => {
       title={
         <CardHeader
           id="data-exploration"
-          title="Data Exploration"
-          extra={[
-            <ExternalLink href="" key="data-release">
-              <Button type="link" className={styles.releaseNoteBtn}>
-                Data release 1.0
-                <ExternalLinkIcon />
-              </Button>
-            </ExternalLink>,
-          ]}
+          title={intl.get('components.dataRelease.dataExploration')}
+          extra={
+            [
+              // <ExternalLink href="" key="data-release">
+              //   <Button type="link" className={styles.releaseNoteBtn}>
+              //     {intl.get('components.dataRelease.dataReleaseLink')}
+              //     <ExternalLinkIcon />
+              //   </Button>
+              // </ExternalLink>,
+            ]
+          }
         />
       }
       className={styles.dataExplorationLinksCard}

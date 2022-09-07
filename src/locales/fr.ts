@@ -290,25 +290,27 @@ const fr = {
       },
     },
     dataRelease: {
-      studies: 'Studies',
+      dataExploration: 'Exploration des données',
+      studies: 'Études',
       participants: 'Participants',
-      biospecimens: 'Biospecimens',
-      datafiles: 'Data Files',
+      biospecimens: 'Spécimens biologiques',
+      datafiles: 'Fichiers de donnée',
+      dataReleaseLink: 'Data release 1.0',
     },
   },
   layout: {
     main: {
       menu: {
-        dashboard: 'Dashboard',
-        studies: 'Studies',
-        explore: 'Data Exploration',
+        dashboard: 'Tableau de bord',
+        studies: 'Études',
+        explore: 'Exploration des données',
         variants: 'Variants',
         participants: 'Participants',
-        biospecimen: 'Biospecimen',
-        datafiles: 'Data Files',
+        biospecimen: 'Spécimens biologiques',
+        datafiles: 'Fichiers de données',
         website: 'Website',
         documentation: 'Documentation',
-        community: 'Community',
+        community: 'Communauté',
       },
     },
     user: {
@@ -338,9 +340,9 @@ const fr = {
     dashboard: {
       hello: 'Hello',
       links: {
-        studies: 'Studies',
+        studies: 'Études',
         participants: 'Participants',
-        biospecimens: 'Biospecimens',
+        biospecimens: 'Spécimens biologiques',
         datafiles: 'Data Files',
         variantSearch: 'Variant Search',
       },
@@ -355,16 +357,16 @@ const fr = {
           title: 'Data release {version}',
         },
         authorizedStudies: {
-          title: 'Authorized Studies {count, plural, =0 {} other {(#)}}',
+          title: 'Études autorisées {count, plural, =0 {} other {(#)}}',
           connectedNotice:
             'You have access to the following INCLUDE controlled data through your NIH credentials.',
           disconnectedNotice:
             'Access INCLUDE controlled-access data by connecting your account using your NIH Credentials',
           disconnect: 'Disconnect',
-          noAvailableStudies: 'No available studies',
-          authorization: 'Authorization',
-          of: 'of',
-          files: 'Files',
+          noAvailableStudies: 'Études non disponible',
+          authorization: 'Autorisation',
+          of: 'de',
+          files: 'Fichiers',
           dataGroups: 'Data use groups: {groups}',
           infoPopover: {
             title: 'Accessing Data',
@@ -402,6 +404,7 @@ const fr = {
       },
     },
     variants: {
+      title: 'Variants',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
@@ -426,14 +429,11 @@ const fr = {
         variant: 'Variant',
       },
     },
-    studyExploration: {
-      tabs: {
-        studies: {
-          title: 'Studies',
-        },
-      },
+    studies: {
+      title: 'Études',
     },
     dataExploration: {
+      title: 'Exploration des données',
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospecimen',
@@ -500,7 +500,7 @@ const fr = {
           title: 'Participants ({count})',
         },
         biospecimens: {
-          title: 'Biospecimens ({count})',
+          title: 'Spécimens biologiques ({count})',
         },
         datafiles: {
           title: 'Data Files ({count})',
