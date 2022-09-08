@@ -80,7 +80,7 @@ export const getAccessTokenStatus = (rpt: Rpt) => tokenStatus(rpt.decoded.iat, r
 
 export const rptRequest = async (data: any) => {
   const response = await client.post(
-    `${keycloakConfig.url}/realms/cqdgdcc/protocol/openid-connect/token`,
+    `${keycloakConfig.url}/realms/cqdg/protocol/openid-connect/token`,
     data,
   );
   return decodeRptFromResponse(response);

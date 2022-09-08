@@ -105,7 +105,7 @@ const Header = () => {
               <ExternalLinkIcon className={style.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
-          <ExternalLink key="documentation" href={EnvVariables.configFor('CQDG_WEB_APP')}>
+          <ExternalLink key="documentation" href={EnvVariables.configFor('CQDG_DOCUMENTATION')}>
             <Button key="external-help" className={style.headerBtn}>
               {intl.get('layout.main.menu.documentation')}
               <ExternalLinkIcon className={style.icon} {...iconSize} />
