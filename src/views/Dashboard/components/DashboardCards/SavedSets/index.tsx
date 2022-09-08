@@ -50,7 +50,7 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.get('screen.dashboard.cards.savedSets.noSavedFilters')}
+          description={intl.get('screen.dashboard.cards.savedSets.noSaved')}
         />
       ),
     }}
@@ -74,13 +74,10 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
           title={intl.get('screen.dashboard.cards.savedSets.title')}
           withHandle
           infoPopover={{
-            title: 'Managing saved sets',
+            title: intl.get('screen.dashboard.cards.savedSets.popoverTitle'),
             content: (
               <Text>
-                A saved set is a set of one or more entity IDs that can be saved and revisited for
-                later use without having to manually reselect entity IDs. You can create
-                Participant, Biospecimen, and File saved sets at the top of the table of results in
-                the{' '}
+                {intl.get('screen.dashboard.cards.savedSets.popoverContent')}
                 <PopoverContentLink
                   to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
                   title="Data Exploration page"
@@ -97,7 +94,8 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
             tab={
               <div>
                 <UserOutlined />
-                Participants ({savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
+                {intl.get('screen.dashboard.cards.savedSets.participants')} (
+                {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
               </div>
             }
             key="participants"
@@ -114,7 +112,8 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
             tab={
               <div>
                 <FileTextOutlined />
-                Files ({savedSets.filter((s) => s.setType === SetType.FILE).length})
+                {intl.get('screen.dashboard.cards.savedSets.files')} (
+                {savedSets.filter((s) => s.setType === SetType.FILE).length})
               </div>
             }
             key="files"

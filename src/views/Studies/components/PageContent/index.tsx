@@ -1,24 +1,24 @@
 import { ReactElement, useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
-import { ReadOutlined, UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Space, Tabs } from 'antd';
+import { Space, Typography } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useStudies } from 'graphql/studies/actions';
 import { IStudyResultTree } from 'graphql/studies/models';
 import { GET_STUDIES_COUNT } from 'graphql/studies/queries';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import StudiesTab from 'views/Studies/components/PageContent/tabs/Studies';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
   STUDIES_EXPLORATION_QB_ID,
-  TAB_IDS,
 } from 'views/Studies/utils/constant';
+const { Title } = Typography;
 
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import { ArrangerApi } from 'services/api/arranger';
@@ -68,6 +68,9 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
 
   return (
     <Space direction="vertical" size={24} className={styles.studyExplorePageContent}>
+      <Title level={4} className={styles.studyTitle}>
+        {intl.get('screen.studies.title')}
+      </Title>
       <QueryBuilder
         id={STUDIES_EXPLORATION_QB_ID}
         className="studies-exploration-repo__query-builder"
@@ -109,24 +112,12 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
           return data?.data?.Study.hits.total ?? 0;
         }}
       />
-      <Tabs type="card" className="navNoMarginBtm" activeKey={TAB_IDS.STUDIES}>
-        <Tabs.TabPane
-          tab={
-            <span>
-              <ReadOutlined />
-              {intl.get('screen.studyExploration.tabs.studies.title')}
-            </span>
-          }
-          key={TAB_IDS.STUDIES}
-        >
-          <StudiesTab
-            results={studiesResults}
-            setQueryConfig={setStudiesQueryConfig}
-            queryConfig={studiesQueryConfig}
-            sqon={studiesResolvedSqon}
-          />
-        </Tabs.TabPane>
-      </Tabs>
+      <StudiesTab
+        results={studiesResults}
+        setQueryConfig={setStudiesQueryConfig}
+        queryConfig={studiesQueryConfig}
+        sqon={studiesResolvedSqon}
+      />
     </Space>
   );
 };

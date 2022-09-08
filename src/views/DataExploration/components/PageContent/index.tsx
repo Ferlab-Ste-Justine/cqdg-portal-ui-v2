@@ -8,7 +8,7 @@ import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Space, Tabs } from 'antd';
+import { Space, Tabs, Typography } from 'antd';
 import copy from 'copy-to-clipboard';
 import { INDEXES } from 'graphql/constants';
 import { useDataFiles } from 'graphql/files/actions';
@@ -27,6 +27,8 @@ import {
   DEFAULT_QUERY_CONFIG,
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
+
+const { Title } = Typography;
 
 import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
@@ -158,6 +160,9 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
 
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
+      <Title level={4} className={styles.dataExploreTitle}>
+        {intl.get('screen.dataExploration.title')}
+      </Title>
       <QueryBuilder
         id={DATA_EXPLORATION_QB_ID}
         className="data-exploration-repo__query-builder"

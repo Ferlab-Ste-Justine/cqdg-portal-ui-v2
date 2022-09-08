@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Space, Tabs } from 'antd';
+import { Space, Typography } from 'antd';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useVariant } from 'graphql/variants/actions';
 import { isEmpty } from 'lodash';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
-  TAB_IDS,
   VARIANT_FILTER_TAG,
   VARIANT_REPO_QB_ID,
 } from 'views/Variants/utils/constants';
@@ -27,16 +25,16 @@ import {
   updateSavedFilter,
 } from 'store/savedFilter/thunks';
 import { combineExtendedMappings } from 'utils/fieldMapper';
-import { STATIC_ROUTES } from 'utils/routes';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
 import VariantsTab from './tabs/Variants';
 
 import styles from './index.module.scss';
 
+const { Title } = Typography;
+
 type OwnProps = {
   variantMapping: ExtendedMappingResults;
-  tabId?: string;
 };
 
 const addTagToFilter = (filter: ISavedFilter) => ({
@@ -44,9 +42,8 @@ const addTagToFilter = (filter: ISavedFilter) => ({
   tag: VARIANT_FILTER_TAG,
 });
 
-const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => {
+const PageContent = ({ variantMapping }: OwnProps) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { queryList, activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
   const { savedFilters, defaultFilter } = useSavedFilter(VARIANT_FILTER_TAG);
 
@@ -88,6 +85,9 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
 
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
+      <Title level={4} className={styles.variantsTitle}>
+        {intl.get('screen.variants.title')}
+      </Title>
       <QueryBuilder
         id={VARIANT_REPO_QB_ID}
         className="variants-repo__query-builder"
@@ -120,34 +120,11 @@ const PageContent = ({ variantMapping, tabId = TAB_IDS.VARIANTS }: OwnProps) => 
           })
         }
       />
-      <Tabs
-        type="card"
-        className="navNoMarginBtm"
-        activeKey={tabId || TAB_IDS.VARIANTS}
-        onChange={(key) => {
-          if (!history.location.pathname.includes(key)) {
-            history.push(`${STATIC_ROUTES.VARIANT}/${key}${window.location.search}`);
-          }
-        }}
-      >
-        <Tabs.TabPane
-          tab={
-            <span>
-              <UserOutlined />
-              {intl.get('screen.variants.tabs.variants.title', {
-                count: variantResults.total,
-              })}
-            </span>
-          }
-          key={TAB_IDS.VARIANTS}
-        >
-          <VariantsTab
-            results={variantResults}
-            setQueryConfig={setVariantQueryConfig}
-            queryConfig={variantQueryConfig}
-          />
-        </Tabs.TabPane>
-      </Tabs>
+      <VariantsTab
+        results={variantResults}
+        setQueryConfig={setVariantQueryConfig}
+        queryConfig={variantQueryConfig}
+      />
     </Space>
   );
 };

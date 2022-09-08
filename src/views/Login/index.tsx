@@ -34,7 +34,7 @@ const Login = () => {
           </div>
           <div className={styles.loginStats}>
             <Title level={4} className={styles.statsTitle}>
-              {intl.get('screen.loginPage.datarelease.title')}
+              {intl.get('components.dataRelease.title')}
             </Title>
             <Divider className={styles.statsDivider} />
             <DataRelease className={styles.dataRelease} />

@@ -3,7 +3,7 @@
 
 .mainHeader {
   height: $main-header-height;
-  background-color: $gray-1;
+  background-color: $gray-1 !important;
   padding: 12px 32px;
   box-shadow: 0 0 8px 0 transparentize(#26436f, 0.75);
   z-index: 1000;

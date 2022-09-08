@@ -22,8 +22,8 @@ const SideImageLayout = ({
 }: OwnProps) => (
   <div className={style.sideImagePageContainer}>
     {logoSrc && (
-      <a href={EnvVariables.configFor('INCLUDE_WEB_ROOT')}>
-        <img className={style.logoImage} src={logoSrc} alt="Include Logo Logo" />
+      <a href={EnvVariables.configFor('CQDG_WEB_APP')}>
+        <img className={style.logoImage} src={logoSrc} alt="CQDG Logo Logo" />
       </a>
     )}
     <Row className={style.contentWrapper}>

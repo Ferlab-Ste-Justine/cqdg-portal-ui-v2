@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { FileTextOutlined, ReadOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  ExperimentOutlined,
+  FileTextOutlined,
+  ReadOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { Button, Col, Row } from 'antd';
+import EnvVariables from 'helpers/EnvVariables';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
@@ -31,11 +37,11 @@ const DataExplorationLinks = () => {
       title={
         <CardHeader
           id="data-exploration"
-          title="Data Exploration"
+          title={intl.get('components.dataRelease.dataExploration')}
           extra={[
-            <ExternalLink href="" key="data-release">
+            <ExternalLink href={EnvVariables.configFor('CQDG_DOCUMENTATION')} key="data-release">
               <Button type="link" className={styles.releaseNoteBtn}>
-                Data release 1.0
+                {intl.get('components.dataRelease.dataReleaseLink')}
                 <ExternalLinkIcon />
               </Button>
             </ExternalLink>,
@@ -69,7 +75,7 @@ const DataExplorationLinks = () => {
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.samples!)}
               subLabel={intl.get('components.dataRelease.biospecimens')}
-              icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
+              icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
           <Col flex="auto" className={styles.customCol}>
