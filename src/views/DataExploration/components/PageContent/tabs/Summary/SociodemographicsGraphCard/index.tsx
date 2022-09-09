@@ -6,16 +6,15 @@ import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { BasicTooltip } from '@nivo/tooltip';
 import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { RawAggregation } from 'graphql/models';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
-import { capitalize, isEmpty } from 'lodash';
-import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
+import { SOCIODEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
+import capitalize from 'lodash/capitalize';
+import isEmpty from 'lodash/isEmpty';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import PieChart from 'components/uiKit/charts/Pie';
-import useApi from 'hooks/useApi';
+import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { toChartData } from 'utils/charts';
 
 import styles from './index.module.scss';
@@ -25,12 +24,12 @@ interface OwnProps {
   className?: string;
 }
 
-const transformData = (results: RawAggregation) => {
-  const aggs = results?.data?.participant?.aggregations;
+const transformData = (results: any) => {
+  const aggs = results?.Participant?.aggregations;
   return {
-    race: (aggs?.race.buckets || []).map(toChartData),
-    sex: (aggs?.sex.buckets || []).map(toChartData),
-    ethnicity: (aggs?.ethnicity.buckets || []).map(toChartData),
+    sexData: (aggs?.sex.buckets || []).map(toChartData),
+    enthicityData: (aggs?.ethnicity.buckets || []).map(toChartData),
+    familyData: (aggs?.familyData.buckets || []).map(toChartData),
   };
 };
 
@@ -52,22 +51,12 @@ const addToQuery = (field: string, key: string) =>
     index: INDEXES.PARTICIPANT,
   });
 
-const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
+const SociodemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
   const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
-  const { loading, result } = useApi<any>({
-    config: {
-      url: ARRANGER_API_PROJECT_URL,
-      method: 'POST',
-      data: {
-        query: DEMOGRAPHIC_QUERY,
-        variables: { sqon },
-      },
-    },
+  const { loading, result } = useLazyResultQuery(SOCIODEMOGRAPHIC_QUERY, {
+    variables: { sqon },
   });
-
-  const sexData = result ? transformData(result).sex : [];
-  const raceData = result ? transformData(result).race : [];
-  const enthicityData = result ? transformData(result).ethnicity : [];
+  const { sexData, enthicityData, familyData } = transformData(result);
 
   return (
     <GridCard
@@ -79,7 +68,7 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
       title={
         <CardHeader
           id={id}
-          title={intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle')}
+          title={intl.get('screen.dataExploration.tabs.summary.sociodemographics.cardTitle')}
           withHandle
         />
       }
@@ -90,7 +79,7 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.sexTitle')}
+                title={intl.get('screen.dataExploration.tabs.summary.sociodemographics.sexTitle')}
                 data={sexData}
                 onClick={(datum) => addToQuery('sex', datum.id as string)}
                 tooltip={(value) => (
@@ -105,25 +94,29 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
             )}
           </Col>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(raceData) ? (
+            {isEmpty(enthicityData) ? (
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.raceTitle')}
-                data={raceData}
-                onClick={(datum) => addToQuery('race', datum.id as string)}
+                title={intl.get(
+                  'screen.dataExploration.tabs.summary.sociodemographics.ethnicityTitle',
+                )}
+                data={enthicityData}
+                onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
                 {...graphSetting}
               />
             )}
           </Col>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(enthicityData) ? (
+            {isEmpty(familyData) ? (
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.ethnicityTitle')}
-                data={enthicityData}
-                onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
+                title={intl.get(
+                  'screen.dataExploration.tabs.summary.sociodemographics.compositionFamilyTitle',
+                )}
+                data={familyData}
+                onClick={(datum) => addToQuery('family', datum.id as string)}
                 {...graphSetting}
               />
             )}
@@ -134,4 +127,4 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
   );
 };
 
-export default DemographicsGraphCard;
+export default SociodemographicsGraphCard;

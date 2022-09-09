@@ -143,6 +143,7 @@ const fr = {
         fetchReport: 'Report downloaded successfully',
       },
     },
+    noData: 'No data',
   },
   components: {
     filterList: {
@@ -418,11 +419,11 @@ const fr = {
       tabs: {
         summary: {
           title: 'Summary',
-          demographic: {
-            cardTitle: 'Demographics',
+          sociodemographics: {
+            cardTitle: 'Sociodemographics',
             sexTitle: 'Sex',
-            raceTitle: 'Race',
             ethnicityTitle: 'Ethnicity',
+            compositionFamilyTitle: 'Family Composition',
           },
           availableData: {
             dataCategoryTitle: 'Participants by Data Category',

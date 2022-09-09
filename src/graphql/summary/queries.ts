@@ -1,16 +1,22 @@
 import { gql } from '@apollo/client';
 
-export const DEMOGRAPHIC_QUERY = gql`
-  query AggregationDemographicInfo($sqon: JSON) {
+export const SOCIODEMOGRAPHIC_QUERY = gql`
+  query AggregationSocioDemographicInfo($sqon: JSON) {
     Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        gender {
+        sex: gender {
           buckets {
             key
             doc_count
           }
         }
         ethnicity {
+          buckets {
+            key
+            doc_count
+          }
+        }
+        familyData: familyRelationships__family_type {
           buckets {
             key
             doc_count

@@ -8,7 +8,7 @@ import { orderCardIfNeeded } from 'utils/helper';
 
 import DataCategoryGraphCard from './DataCategoryGraphCard';
 import DataTypeGraphCard from './DataTypeGraphCard';
-import DemographicsGraphCard from './DemographicGraphCard';
+import DemographicsGraphCard from './SociodemographicsGraphCard';
 import SunburstGraphCard from './SunburstGraphCard';
 
 import styles from './index.module.scss';
