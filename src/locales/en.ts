@@ -361,7 +361,7 @@ const fr = {
       },
     },
     variants: {
-      title: 'Variants',
+      title: 'Variants Exploration',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
@@ -381,8 +381,8 @@ const fr = {
         variant: 'Variant',
       },
     },
-    studyExploration: {
-      title: 'Studies',
+    studies: {
+      title: 'Études',
     },
     dataExploration: {
       title: 'Data Exploration',

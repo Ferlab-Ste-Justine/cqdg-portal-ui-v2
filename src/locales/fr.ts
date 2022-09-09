@@ -367,7 +367,7 @@ const fr = {
       },
     },
     variants: {
-      title: 'Variants',
+      title: 'Exploration des variants',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',

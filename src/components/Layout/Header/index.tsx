@@ -87,11 +87,7 @@ const Header = () => {
             <HeaderLink
               key="variant-data"
               currentPathName={currentPathName}
-              to={[
-                STATIC_ROUTES.VARIANT,
-                STATIC_ROUTES.VARIANT_SUMMARY,
-                STATIC_ROUTES.VARIANT_VARIANTS,
-              ]}
+              to={[STATIC_ROUTES.VARIANTS]}
               icon={<LineStyleIcon height={14} width={14} />}
               title={intl.get('layout.main.menu.variants')}
               className={style.headerBtn}
