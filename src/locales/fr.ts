@@ -458,6 +458,12 @@ const fr = {
             },
             empty: 'Aucun diagnostic signalé pour ces participants',
           },
+          studiespie: {
+            cardTitle: 'Études',
+            domainTitle: 'Études par domaine',
+            popTitle: 'Études par type population',
+            partTitle: 'Participants par étude',
+          },
         },
         participants: {
           title: 'Participants ({count})',

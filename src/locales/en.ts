@@ -448,6 +448,12 @@ const fr = {
             },
             empty: 'No diagnoses reported for these participants',
           },
+          studiespie: {
+            cardTitle: 'Studies',
+            domainTitle: 'Studies by domain',
+            popTitle: 'Studies by population type',
+            partTitle: 'Participants by study',
+          },
         },
         participants: {
           title: 'Participants ({count})',
