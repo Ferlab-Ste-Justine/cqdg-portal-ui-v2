@@ -428,7 +428,7 @@ const fr = {
         summary: {
           title: 'Sommaire',
           sociodemographics: {
-            cardTitle: 'Profil sociodémographique',
+            cardTitle: 'Profils sociodémographiques',
             sexTitle: 'Sexe',
             ethnicityTitle: 'Ethnicité',
             compositionFamilyTitle: 'Composition familiale',
