@@ -8,12 +8,11 @@ import { RawAggregation } from 'graphql/models';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATA_CATEGORY_QUERY } from 'graphql/summary/queries';
 import { isEmpty } from 'lodash';
-import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import BarChart from 'components/uiKit/charts/Bar';
-import useApi from 'hooks/useApi';
+import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { toChartData } from 'utils/charts';
 import { truncateString } from 'utils/string';
 
@@ -22,8 +21,8 @@ interface OwnProps {
   className?: string;
 }
 
-const transformDataCategory = (results: RawAggregation) =>
-  (results?.data?.participant?.aggregations?.files__data_category.buckets || []).map(toChartData);
+const transformData = (results: any) =>
+  (results?.Participant?.aggregations?.files__data_category.buckets || []).map(toChartData);
 
 const graphSetting: any = {
   height: 300,
@@ -45,17 +44,10 @@ const addToQuery = (field: string, key: string) =>
 
 const DataCategoryGraphCard = ({ id, className = '' }: OwnProps) => {
   const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
-  const { loading, result } = useApi<any>({
-    config: {
-      url: ARRANGER_API_PROJECT_URL,
-      method: 'POST',
-      data: {
-        query: DATA_CATEGORY_QUERY,
-        variables: { sqon },
-      },
-    },
+  const { loading, result } = useLazyResultQuery(DATA_CATEGORY_QUERY, {
+    variables: { sqon },
   });
-  const dataCategoryResults = transformDataCategory(result);
+  const dataCategoryResults = transformData(result);
 
   return (
     <GridCard

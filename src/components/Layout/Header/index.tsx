@@ -38,6 +38,15 @@ const Header = () => {
   const history = useHistory();
   const currentPathName = history.location.pathname;
   const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
+  const isActive = (to: string | string[]) =>
+    Array.isArray(to) ? to.includes(currentPathName) : currentPathName === to;
+  const DATA_EXPLORATION_ROUTES = [
+    STATIC_ROUTES.DATA_EXPLORATION,
+    STATIC_ROUTES.DATA_EXPLORATION_SUMMARY,
+    STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS,
+    STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS,
+    STATIC_ROUTES.DATA_EXPLORATION_DATAFILES,
+  ];
 
   return (
     <>
@@ -56,45 +65,39 @@ const Header = () => {
           <nav className={style.headerList}>
             <HeaderLink
               key="dashboard"
-              currentPathName={currentPathName}
               to={STATIC_ROUTES.DASHBOARD}
               icon={<HomeOutlined />}
               title={intl.get('layout.main.menu.dashboard')}
-              className={style.headerBtn}
+              className={`${style.headerBtn} ${
+                isActive(STATIC_ROUTES.DASHBOARD) && style.headerBtnActive
+              }`}
             />
             <HeaderLink
               key="studies"
-              currentPathName={currentPathName}
               to={STATIC_ROUTES.STUDIES}
               icon={<ReadOutlined />}
               title={intl.get('layout.main.menu.studies')}
-              className={style.headerBtn}
+              className={`${style.headerBtn} ${
+                isActive(STATIC_ROUTES.STUDIES) && style.headerBtnActive
+              }`}
             />
             <HeaderLink
               key="explore-data"
-              currentPathName={currentPathName}
-              to={[
-                STATIC_ROUTES.DATA_EXPLORATION,
-                STATIC_ROUTES.DATA_EXPLORATION_SUMMARY,
-                STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS,
-                STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS,
-                STATIC_ROUTES.DATA_EXPLORATION_DATAFILES,
-              ]}
+              to={DATA_EXPLORATION_ROUTES}
               icon={<FileSearchOutlined />}
               title={intl.get('layout.main.menu.explore')}
-              className={style.headerBtn}
+              className={`${style.headerBtn} ${
+                isActive(DATA_EXPLORATION_ROUTES) && style.headerBtnActive
+              }`}
             />
             <HeaderLink
               key="variant-data"
-              currentPathName={currentPathName}
-              to={[
-                STATIC_ROUTES.VARIANT,
-                STATIC_ROUTES.VARIANT_SUMMARY,
-                STATIC_ROUTES.VARIANT_VARIANTS,
-              ]}
+              to={[STATIC_ROUTES.VARIANTS]}
               icon={<LineStyleIcon height={14} width={14} />}
               title={intl.get('layout.main.menu.variants')}
-              className={style.headerBtn}
+              className={`${style.headerBtn} ${
+                isActive(STATIC_ROUTES.VARIANTS) && style.headerBtnActive
+              }`}
             />
           </nav>
         }

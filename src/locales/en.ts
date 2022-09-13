@@ -143,6 +143,7 @@ const fr = {
         fetchReport: 'Report downloaded successfully',
       },
     },
+    noData: 'No data',
   },
   components: {
     filterList: {
@@ -361,7 +362,7 @@ const fr = {
       },
     },
     variants: {
-      title: 'Variants',
+      title: 'Variants Exploration',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
@@ -381,8 +382,8 @@ const fr = {
         variant: 'Variant',
       },
     },
-    studyExploration: {
-      title: 'Studies',
+    studies: {
+      title: 'Études',
     },
     dataExploration: {
       title: 'Data Exploration',
@@ -418,11 +419,11 @@ const fr = {
       tabs: {
         summary: {
           title: 'Summary',
-          demographic: {
-            cardTitle: 'Demographics',
+          sociodemographics: {
+            cardTitle: 'Sociodemographics',
             sexTitle: 'Sex',
-            raceTitle: 'Race',
             ethnicityTitle: 'Ethnicity',
+            compositionFamilyTitle: 'Family Composition',
           },
           availableData: {
             dataCategoryTitle: 'Participants by Data Category',
@@ -446,6 +447,12 @@ const fr = {
               currentPath: 'Current Path',
             },
             empty: 'No diagnoses reported for these participants',
+          },
+          studiespie: {
+            cardTitle: 'Studies',
+            domainTitle: 'Studies by domain',
+            popTitle: 'Studies by population type',
+            partTitle: 'Participants by study',
           },
         },
         participants: {

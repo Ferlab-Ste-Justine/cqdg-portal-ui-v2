@@ -47,16 +47,17 @@
 
   .headerBtn {
     border: none;
-    color: $gray-8;
     padding: 4px 8px;
     margin: 0 5px;
 
     &:hover,
     &:focus {
-      background-color: $gray-4;
-      border: none;
-      color: $gray-8;
+      background-color: $gray-3;
     }
+  }
+
+  .headerBtnActive {
+    background-color: $gray-4 !important;
   }
 
   .icon path {

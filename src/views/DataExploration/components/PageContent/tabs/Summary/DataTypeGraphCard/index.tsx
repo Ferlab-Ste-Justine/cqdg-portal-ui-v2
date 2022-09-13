@@ -4,16 +4,14 @@ import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { INDEXES } from 'graphql/constants';
-import { RawAggregation } from 'graphql/models';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATATYPE_QUERY } from 'graphql/summary/queries';
 import { isEmpty } from 'lodash';
-import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import BarChart from 'components/uiKit/charts/Bar';
-import useApi from 'hooks/useApi';
+import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { toChartData } from 'utils/charts';
 import { truncateString } from 'utils/string';
 
@@ -22,8 +20,8 @@ interface OwnProps {
   className?: string;
 }
 
-const transformDataType = (results: RawAggregation) =>
-  (results?.data?.participant?.aggregations?.files__data_type.buckets || []).map(toChartData);
+const transformData = (results: any) =>
+  (results?.Participant?.aggregations?.files__data_type.buckets || []).map(toChartData);
 
 const graphSetting: any = {
   height: 300,
@@ -45,17 +43,10 @@ const addToQuery = (field: string, key: string) =>
 
 const DataTypeGraphCard = ({ id, className = '' }: OwnProps) => {
   const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
-  const { loading, result } = useApi<any>({
-    config: {
-      url: ARRANGER_API_PROJECT_URL,
-      method: 'POST',
-      data: {
-        query: DATATYPE_QUERY,
-        variables: { sqon },
-      },
-    },
+  const { loading, result } = useLazyResultQuery(DATATYPE_QUERY, {
+    variables: { sqon },
   });
-  const dataTypeResults = transformDataType(result);
+  const dataTypeResults = transformData(result);
 
   return (
     <GridCard

@@ -6,16 +6,15 @@ import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { BasicTooltip } from '@nivo/tooltip';
 import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { RawAggregation } from 'graphql/models';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
-import { capitalize, isEmpty } from 'lodash';
-import { ARRANGER_API_PROJECT_URL } from 'provider/ApolloProvider';
+import { STUDIESPIE_QUERY } from 'graphql/summary/queries';
+import capitalize from 'lodash/capitalize';
+import isEmpty from 'lodash/isEmpty';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import PieChart from 'components/uiKit/charts/Pie';
-import useApi from 'hooks/useApi';
+import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { toChartData } from 'utils/charts';
 
 import styles from './index.module.scss';
@@ -25,12 +24,13 @@ interface OwnProps {
   className?: string;
 }
 
-const transformData = (results: RawAggregation) => {
-  const aggs = results?.data?.participant?.aggregations;
+const transformData = (results: any) => {
+  const aggs1 = results?.Study?.aggregations;
+  const aggs2 = results?.Participant?.aggregations;
   return {
-    race: (aggs?.race.buckets || []).map(toChartData),
-    sex: (aggs?.sex.buckets || []).map(toChartData),
-    ethnicity: (aggs?.ethnicity.buckets || []).map(toChartData),
+    domain: (aggs1?.domain.buckets || []).map(toChartData),
+    population: (aggs1?.population.buckets || []).map(toChartData),
+    study__name: (aggs2?.study__name.buckets || []).map(toChartData),
   };
 };
 
@@ -44,30 +44,20 @@ const graphSetting = {
   },
 };
 
-const addToQuery = (field: string, key: string) =>
+const addToQuery = (field: string, key: string, index: string) =>
   updateActiveQueryField({
     queryBuilderId: DATA_EXPLORATION_QB_ID,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
-    index: INDEXES.PARTICIPANT,
+    index,
   });
 
-const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
+const StudiesPieGraphCard = ({ id, className = '' }: OwnProps) => {
   const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
-  const { loading, result } = useApi<any>({
-    config: {
-      url: ARRANGER_API_PROJECT_URL,
-      method: 'POST',
-      data: {
-        query: DEMOGRAPHIC_QUERY,
-        variables: { sqon },
-      },
-    },
+  const { loading, result } = useLazyResultQuery(STUDIESPIE_QUERY, {
+    variables: { sqon },
   });
-
-  const sexData = result ? transformData(result).sex : [];
-  const raceData = result ? transformData(result).race : [];
-  const enthicityData = result ? transformData(result).ethnicity : [];
+  const { domain, population, study__name } = transformData(result);
 
   return (
     <GridCard
@@ -79,20 +69,20 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
       title={
         <CardHeader
           id={id}
-          title={intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle')}
+          title={intl.get('screen.dataExploration.tabs.summary.studiespie.cardTitle')}
           withHandle
         />
       }
       content={
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(sexData) ? (
+            {isEmpty(domain) ? (
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.sexTitle')}
-                data={sexData}
-                onClick={(datum) => addToQuery('sex', datum.id as string)}
+                title={intl.get('screen.dataExploration.tabs.summary.studiespie.domainTitle')}
+                data={domain}
+                onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY)}
                 tooltip={(value) => (
                   <BasicTooltip
                     id={capitalize(value.datum.id.toString())}
@@ -105,25 +95,27 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
             )}
           </Col>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(raceData) ? (
+            {isEmpty(population) ? (
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.raceTitle')}
-                data={raceData}
-                onClick={(datum) => addToQuery('race', datum.id as string)}
+                title={intl.get('screen.dataExploration.tabs.summary.studiespie.popTitle')}
+                data={population}
+                onClick={(datum) => addToQuery('population', datum.id as string, INDEXES.STUDY)}
                 {...graphSetting}
               />
             )}
           </Col>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(enthicityData) ? (
+            {isEmpty(study__name) ? (
               <Empty imageType="grid" />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.ethnicityTitle')}
-                data={enthicityData}
-                onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
+                title={intl.get('screen.dataExploration.tabs.summary.studiespie.partTitle')}
+                data={study__name}
+                onClick={(datum) =>
+                  addToQuery('study__name', datum.id as string, INDEXES.PARTICIPANT)
+                }
                 {...graphSetting}
               />
             )}
@@ -134,4 +126,4 @@ const DemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
   );
 };
 
-export default DemographicsGraphCard;
+export default StudiesPieGraphCard;

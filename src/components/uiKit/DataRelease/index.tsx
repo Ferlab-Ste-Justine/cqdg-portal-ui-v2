@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { DatabaseOutlined, FileTextOutlined, ReadOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  ExperimentOutlined,
+  FileTextOutlined,
+  ReadOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import MultiLabel, {
   MultiLabelIconPositionEnum,
 } from '@ferlab/ui/core/components/labels/MultiLabel';
@@ -50,7 +55,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={numberFormat(stats?.samples!)}
-            Icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
+            Icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('components.dataRelease.biospecimens')}
           />
@@ -59,7 +64,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={stats?.fileSize || '0TB'}
-            Icon={<DatabaseOutlined className={styles.dataReleaseIcon} />}
+            Icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('components.dataRelease.datafiles')}
           />

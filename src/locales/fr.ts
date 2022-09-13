@@ -49,7 +49,7 @@ const fr = {
     },
     forms: {
       errors: {
-        mincaractères: 'caractères minimum',
+        minCharacters: 'caractères minimum',
         requiredField: 'Ce champs est requis',
         enterValidEmail: 'Entrer un email valide',
       },
@@ -144,6 +144,7 @@ const fr = {
         fetchReport: 'Rapport téléchargé avec succès',
       },
     },
+    noData: 'Aucune donnée',
   },
   components: {
     filterList: {
@@ -367,7 +368,7 @@ const fr = {
       },
     },
     variants: {
-      title: 'Variants',
+      title: 'Exploration des variants',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
@@ -426,15 +427,15 @@ const fr = {
       tabs: {
         summary: {
           title: 'Sommaire',
-          demographic: {
-            cardTitle: 'Démographie',
+          sociodemographics: {
+            cardTitle: 'Profils sociodémographiques',
             sexTitle: 'Sexe',
-            raceTitle: 'Race',
-            ethnicityTitle: 'Origine ethnique',
+            ethnicityTitle: 'Ethnicité',
+            compositionFamilyTitle: 'Composition familiale',
           },
           availableData: {
-            dataCategoryTitle: 'Participants par catégorie de données',
-            dataTypeTitle: 'Participants par catégorie de données',
+            dataCategoryTitle: 'Participants par catégories de données',
+            dataTypeTitle: 'Participants par types de données',
             studiesTitle: 'Participants par étude',
           },
           observed_phenotype_tagged: {
@@ -456,6 +457,12 @@ const fr = {
               currentPath: 'Chemin actuel',
             },
             empty: 'Aucun diagnostic signalé pour ces participants',
+          },
+          studiespie: {
+            cardTitle: 'Études',
+            domainTitle: 'Études par domaine',
+            popTitle: 'Études par type population',
+            partTitle: 'Participants par étude',
           },
         },
         participants: {

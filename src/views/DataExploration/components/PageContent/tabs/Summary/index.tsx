@@ -8,7 +8,8 @@ import { orderCardIfNeeded } from 'utils/helper';
 
 import DataCategoryGraphCard from './DataCategoryGraphCard';
 import DataTypeGraphCard from './DataTypeGraphCard';
-import DemographicsGraphCard from './DemographicGraphCard';
+import DemographicsGraphCard from './SociodemographicsGraphCard';
+import StudiesPieGraphCard from './StudiesPieGraphCard';
 import SunburstGraphCard from './SunburstGraphCard';
 
 import styles from './index.module.scss';
@@ -79,6 +80,13 @@ const SummaryTab = () => {
             lg: 24,
             xl: 12,
             component: <DataTypeGraphCard id="5" className={styles.summaryGrapCard} />,
+          },
+          {
+            id: '6',
+            lg: 24,
+            xl: 12,
+            className: styles.summaryGraphCardCol,
+            component: <StudiesPieGraphCard id="6" className={styles.summaryGrapCard} />,
           },
         ],
         userInfo?.config.data_exploration?.summary?.cards?.order,
