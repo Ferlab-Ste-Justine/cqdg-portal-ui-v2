@@ -4,7 +4,6 @@ import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { INDEXES } from 'graphql/constants';
-import { RawAggregation } from 'graphql/models';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATA_CATEGORY_QUERY } from 'graphql/summary/queries';
 import { isEmpty } from 'lodash';
