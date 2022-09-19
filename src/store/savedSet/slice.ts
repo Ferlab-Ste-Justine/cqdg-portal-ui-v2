@@ -13,7 +13,9 @@ export const SavedSetState: initialState = {
 };
 
 const sortByUpdateDate = (sets: IUserSetOutput[]) =>
-  sets.sort((a, b) => (new Date(a.updated_date) < new Date(b.updated_date) ? 0 : -1));
+  sets?.length
+    ? sets.sort((a, b) => (new Date(a.updated_date) < new Date(b.updated_date) ? 0 : -1))
+    : [];
 
 const savedSetSlice = createSlice({
   name: 'user',
