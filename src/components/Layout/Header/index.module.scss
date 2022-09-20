@@ -4,12 +4,23 @@
 .mainHeader {
   height: $main-header-height;
   background-color: $gray-1 !important;
-  padding: 12px 32px;
   box-shadow: 0 0 8px 0 transparentize(#26436f, 0.75);
   z-index: 1000;
 
-  * {
-    overflow: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+
+  .logo {
+    margin-right: 28px;
+  }
+
+  .headerNavList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   .langButton {
@@ -17,18 +28,8 @@
     margin-left: 8px;
   }
 
-  div[class$="-header-heading"],
-  span[class$="-header-heading-title"],
-  div[class$="-header-heading-left"] {
-    height: 100%;
-  }
-
-  span[class$="-header-heading-title"] {
-    margin-right: 28px;
-  }
-
-  div[class$="-header-heading-left"] {
-    margin: 0;
+  div[class$="-header-heading"] {
+    width: 100%;
   }
 
   span[class$="-header-heading-extra"] {
@@ -36,19 +37,10 @@
     align-items: center;
   }
 
-  .logo {
-    height: 100%;
-    width: auto;
-  }
-
-  .headerMenu {
-    margin-left: 24px;
-  }
-
   .headerBtn {
     border: none;
     padding: 4px 8px;
-    margin: 0 5px;
+    margin: 2px 5px;
 
     &:hover,
     &:focus {

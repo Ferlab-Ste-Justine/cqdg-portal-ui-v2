@@ -383,7 +383,7 @@ const fr = {
       },
     },
     studies: {
-      title: 'Études',
+      title: 'Studies',
     },
     dataExploration: {
       title: 'Data Exploration',
