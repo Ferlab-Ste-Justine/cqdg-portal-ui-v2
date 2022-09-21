@@ -1,12 +1,10 @@
 import intl from 'react-intl-universal';
-import Empty from '@ferlab/ui/core/components/Empty';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATA_CATEGORY_QUERY } from 'graphql/summary/queries';
-import { isEmpty } from 'lodash';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
@@ -37,7 +35,7 @@ const addToQuery = (field: string, key: string) =>
   updateActiveQueryField({
     queryBuilderId: DATA_EXPLORATION_QB_ID,
     field,
-    value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
+    value: [key.toLowerCase() === intl.get('api.noData') ? ArrangerValues.missing : key],
     index: INDEXES.FILE,
   });
 
@@ -63,27 +61,23 @@ const DataCategoryGraphCard = ({ id, className = '' }: OwnProps) => {
       }
       content={
         <>
-          {isEmpty(dataCategoryResults) ? (
-            <Empty imageType="grid" size="large" />
-          ) : (
-            <BarChart
-              data={dataCategoryResults}
-              axisLeft={{
-                legend: 'Data Category',
-                legendPosition: 'middle',
-                legendOffset: -120,
-                format: (title: string) => truncateString(title, 15),
-              }}
-              tooltipLabel={(node) => node.data.id}
-              axisBottom={{
-                legend: '# of participants',
-                legendPosition: 'middle',
-                legendOffset: 35,
-              }}
-              onClick={(datum) => addToQuery('data_category', datum.indexValue as string)}
-              {...graphSetting}
-            />
-          )}
+          <BarChart
+            data={dataCategoryResults}
+            axisLeft={{
+              legend: intl.get('screen.dataExploration.tabs.summary.availableData.dataCategories'),
+              legendPosition: 'middle',
+              legendOffset: -120,
+              format: (title: string) => truncateString(title, 15),
+            }}
+            tooltipLabel={(node) => node.data.id}
+            axisBottom={{
+              legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
+              legendPosition: 'middle',
+              legendOffset: 35,
+            }}
+            onClick={(datum) => addToQuery('data_category', datum.indexValue as string)}
+            {...graphSetting}
+          />
         </>
       }
     />

@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FileSearchOutlined, HomeOutlined, ReadOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, HomeOutlined, LogoutOutlined, ReadOutlined } from '@ant-design/icons';
 import { DownOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
@@ -126,6 +126,7 @@ const Header = () => {
                     key: 'logout',
                     label: intl.get('layout.user.menu.logout'),
                     onClick: () => dispatch(userActions.cleanLogout()),
+                    icon: <LogoutOutlined />,
                   },
                 ]}
               />
