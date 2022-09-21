@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FileSearchOutlined, HomeOutlined, ReadOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, HomeOutlined, LogoutOutlined, ReadOutlined } from '@ant-design/icons';
 import { DownOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
@@ -60,46 +60,44 @@ const Header = () => {
       />
       <PageHeader
         className={style.mainHeader}
-        title={<CQDGLogoFullPortal className={style.logo} />}
-        subTitle={
-          <nav className={style.headerList}>
-            <HeaderLink
-              key="dashboard"
-              to={STATIC_ROUTES.DASHBOARD}
-              icon={<HomeOutlined />}
-              title={intl.get('layout.main.menu.dashboard')}
-              className={`${style.headerBtn} ${
-                isActive(STATIC_ROUTES.DASHBOARD) && style.headerBtnActive
-              }`}
-            />
-            <HeaderLink
-              key="studies"
-              to={STATIC_ROUTES.STUDIES}
-              icon={<ReadOutlined />}
-              title={intl.get('layout.main.menu.studies')}
-              className={`${style.headerBtn} ${
-                isActive(STATIC_ROUTES.STUDIES) && style.headerBtnActive
-              }`}
-            />
-            <HeaderLink
-              key="explore-data"
-              to={DATA_EXPLORATION_ROUTES}
-              icon={<FileSearchOutlined />}
-              title={intl.get('layout.main.menu.explore')}
-              className={`${style.headerBtn} ${
-                isActive(DATA_EXPLORATION_ROUTES) && style.headerBtnActive
-              }`}
-            />
-            <HeaderLink
-              key="variant-data"
-              to={[STATIC_ROUTES.VARIANTS]}
-              icon={<LineStyleIcon height={14} width={14} />}
-              title={intl.get('layout.main.menu.variants')}
-              className={`${style.headerBtn} ${
-                isActive(STATIC_ROUTES.VARIANTS) && style.headerBtnActive
-              }`}
-            />
-          </nav>
+        title={
+          <div className={style.headerNavList}>
+            <CQDGLogoFullPortal className={style.logo} />
+            <nav className={style.headerNavList}>
+              <HeaderLink
+                to={STATIC_ROUTES.DASHBOARD}
+                icon={<HomeOutlined />}
+                title={intl.get('layout.main.menu.dashboard')}
+                className={`${style.headerBtn} ${
+                  isActive(STATIC_ROUTES.DASHBOARD) && style.headerBtnActive
+                }`}
+              />
+              <HeaderLink
+                to={STATIC_ROUTES.STUDIES}
+                icon={<ReadOutlined />}
+                title={intl.get('layout.main.menu.studies')}
+                className={`${style.headerBtn} ${
+                  isActive(STATIC_ROUTES.STUDIES) && style.headerBtnActive
+                }`}
+              />
+              <HeaderLink
+                to={DATA_EXPLORATION_ROUTES}
+                icon={<FileSearchOutlined />}
+                title={intl.get('layout.main.menu.explore')}
+                className={`${style.headerBtn} ${
+                  isActive(DATA_EXPLORATION_ROUTES) && style.headerBtnActive
+                }`}
+              />
+              <HeaderLink
+                to={[STATIC_ROUTES.VARIANTS]}
+                icon={<LineStyleIcon height={14} width={14} />}
+                title={intl.get('layout.main.menu.variants')}
+                className={`${style.headerBtn} ${
+                  isActive(STATIC_ROUTES.VARIANTS) && style.headerBtnActive
+                }`}
+              />
+            </nav>
+          </div>
         }
         extra={[
           <ExternalLink key="cqdg-website" href={EnvVariables.configFor('CQDG_WEB_SITE')}>
@@ -124,6 +122,7 @@ const Header = () => {
                     key: 'logout',
                     label: intl.get('layout.user.menu.logout'),
                     onClick: () => dispatch(userActions.cleanLogout()),
+                    icon: <LogoutOutlined />,
                   },
                 ]}
               />

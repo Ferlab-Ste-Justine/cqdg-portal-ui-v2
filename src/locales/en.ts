@@ -383,7 +383,7 @@ const fr = {
       },
     },
     studies: {
-      title: 'Études',
+      title: 'Studies',
     },
     dataExploration: {
       title: 'Data Exploration',
@@ -429,6 +429,9 @@ const fr = {
             dataCategoryTitle: 'Participants by Data Category',
             dataTypeTitle: 'Participants by Data Type',
             studiesTitle: 'Participants by Study',
+            axis: '# of participants',
+            dataCategories: 'Data Categories',
+            dataTypes: 'Data Types',
           },
           observed_phenotype_tagged: {
             cardTitle: 'Observed Phenotypes (HPO)',
@@ -450,9 +453,9 @@ const fr = {
           },
           studiespie: {
             cardTitle: 'Studies',
-            domainTitle: 'Studies by domain',
-            popTitle: 'Studies by population type',
-            partTitle: 'Participants by study',
+            domainTitle: 'Studies by Domain',
+            popTitle: 'Studies by Population Type',
+            partTitle: 'Participants by Study',
           },
         },
         participants: {

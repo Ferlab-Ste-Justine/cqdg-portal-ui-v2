@@ -59,25 +59,21 @@ export const DATA_CATEGORY_QUERY = gql`
 
 export const STUDIESPIE_QUERY = gql`
   query AggregationStudiesPie($sqon: JSON) {
-    Study {
-      aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        domain {
-          buckets {
-            key
-            doc_count
-          }
-        }
-        population {
-          buckets {
-            key
-            doc_count
-          }
-        }
-      }
-    }
     Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
         study__name {
+          buckets {
+            key
+            doc_count
+          }
+        }
+        study__population {
+          buckets {
+            key
+            doc_count
+          }
+        }
+        study__domain {
           buckets {
             key
             doc_count
