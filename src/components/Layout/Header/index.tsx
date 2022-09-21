@@ -65,7 +65,6 @@ const Header = () => {
             <CQDGLogoFullPortal className={style.logo} />
             <nav className={style.headerNavList}>
               <HeaderLink
-                key="dashboard"
                 to={STATIC_ROUTES.DASHBOARD}
                 icon={<HomeOutlined />}
                 title={intl.get('layout.main.menu.dashboard')}
@@ -74,7 +73,6 @@ const Header = () => {
                 }`}
               />
               <HeaderLink
-                key="studies"
                 to={STATIC_ROUTES.STUDIES}
                 icon={<ReadOutlined />}
                 title={intl.get('layout.main.menu.studies')}
@@ -83,7 +81,6 @@ const Header = () => {
                 }`}
               />
               <HeaderLink
-                key="explore-data"
                 to={DATA_EXPLORATION_ROUTES}
                 icon={<FileSearchOutlined />}
                 title={intl.get('layout.main.menu.explore')}
@@ -92,7 +89,6 @@ const Header = () => {
                 }`}
               />
               <HeaderLink
-                key="variant-data"
                 to={[STATIC_ROUTES.VARIANTS]}
                 icon={<LineStyleIcon height={14} width={14} />}
                 title={intl.get('layout.main.menu.variants')}

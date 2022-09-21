@@ -438,7 +438,7 @@ const fr = {
             dataTypeTitle: 'Participants par types de données',
             studiesTitle: 'Participants par étude',
             axis: '# de participants',
-            dataCategories: 'Categories de données',
+            dataCategories: 'Catégories de données',
             dataTypes: 'Types de données',
           },
           observed_phenotype_tagged: {
