@@ -4,8 +4,6 @@ import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { INDEXES } from 'graphql/constants';
 import { STUDIES_AGGREGATIONS } from 'graphql/studies/queries';
-import ApolloProvider from 'provider/ApolloProvider';
-import { GraphqlBackend } from 'provider/types';
 
 import useGetAggregations from 'hooks/graphql/useGetAggregations';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
@@ -51,10 +49,4 @@ const Studies = () => {
   );
 };
 
-const StudiesWrapper = (props: any) => (
-  <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-    <Studies {...props} />
-  </ApolloProvider>
-);
-
-export default StudiesWrapper;
+export default Studies;

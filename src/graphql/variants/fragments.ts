@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const genesFragment = gql`
+export const GENES_FRAGMENT = gql`
   fragment genesFragment on VariantGenes {
     hits {
       total
@@ -86,7 +86,7 @@ export const genesFragment = gql`
   }
 `;
 
-export const frequenciesFragment = gql`
+export const FREQUENCIES_FRAGMENT = gql`
   fragment frequenciesFragment on VariantFrequencies {
     gnomad_exomes_2_1 {
       ac
@@ -110,6 +110,7 @@ export const frequenciesFragment = gql`
       ac
       af
       an
+      homozygotes
     }
     one_thousand_genomes {
       ac
@@ -142,7 +143,7 @@ export const frequenciesFragment = gql`
   }
 `;
 
-export const consequencesFragment = gql`
+export const CONSEQUENCES_FRAGMENT = gql`
   fragment consequencesFragment on VariantConsequences {
     hits {
       total
@@ -163,13 +164,36 @@ export const consequencesFragment = gql`
           }
           hgvsc
           consequences
+
+          aa_change
+          biotype
+          canonical
+          cdna_position
+          cds_position
+          coding_dna_change
+          consequences
+          ensembl_gene_id
+          ensembl_transcript_id
+          entrez_gene_id
+          feature_type
+          hgvsc
+          hgvsp
+          impact_score
+          mane_plus
+          mane_select
+          protein_position
+          refseq_mrna_id
+          refseq_protein_id
+          strand
+          symbol
+          vep_impact
         }
       }
     }
   }
 `;
 
-export const clinvarFragment = gql`
+export const CLINVAR_FRAGMENT = gql`
   fragment clinvarFragment on VariantClinvar {
     clin_sig
     clinvar_id
@@ -179,7 +203,7 @@ export const clinvarFragment = gql`
   }
 `;
 
-export const studiesVariantFragment = gql`
+export const STUDIES_VARIANT_FRAGMENT = gql`
   fragment studiesVariantFragment on VariantStudies {
     hits {
       total

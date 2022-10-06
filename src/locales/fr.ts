@@ -179,6 +179,7 @@ const fr = {
               maximumLength: 'caractères maximum',
             },
           },
+          saveThisFilter: 'Enregistrer ce filtre',
           confirmUnsaved: {
             title: 'Modifications non enregistrées',
             openSavedFilter: {

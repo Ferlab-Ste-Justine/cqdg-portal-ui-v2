@@ -1,15 +1,20 @@
 import { gql } from '@apollo/client';
 import {
-  clinvarFragment,
-  consequencesFragment,
-  frequenciesFragment,
-  genesFragment,
-  studiesVariantFragment,
+  CLINVAR_FRAGMENT,
+  CONSEQUENCES_FRAGMENT,
+  FREQUENCIES_FRAGMENT,
+  GENES_FRAGMENT,
+  STUDIES_VARIANT_FRAGMENT,
 } from 'graphql/variants/fragments';
 
 export const SEARCH_VARIANT_QUERY = gql`
+  ${FREQUENCIES_FRAGMENT}
+  ${GENES_FRAGMENT}
+  ${CONSEQUENCES_FRAGMENT}
+  ${STUDIES_VARIANT_FRAGMENT}
+  ${CLINVAR_FRAGMENT}
   query searchVariant($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
-    variants: Variant {
+    Variant {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
         edges {
@@ -61,16 +66,11 @@ export const SEARCH_VARIANT_QUERY = gql`
       }
     }
   }
-  ${frequenciesFragment}
-  ${genesFragment}
-  ${consequencesFragment}
-  ${studiesVariantFragment}
-  ${clinvarFragment}
 `;
 
 export const SEARCH_VARIANT_BY_ID_QUERY = gql`
   query searchVariantById($sqon: JSON) {
-    variants: Variant {
+    Variant {
       hits(filters: $sqon) {
         edges {
           node {

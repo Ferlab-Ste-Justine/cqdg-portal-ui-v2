@@ -1,5 +1,4 @@
-import { ArrangerEdge } from 'graphql/models';
-import { IVariantConsequence } from 'graphql/variants/models';
+import { IVariantConsequenceNode } from 'graphql/variants/models';
 
 const keyNoSymbol = 'noSymbol_';
 
@@ -17,9 +16,7 @@ const keyNoSymbol = 'noSymbol_';
  *   #=====#
  *   Output: filtered consequences.
  * */
-export const filterThanSortConsequencesByImpact = (
-  consequences: ArrangerEdge<IVariantConsequence>[],
-) => {
+export const filterThanSortConsequencesByImpact = (consequences: IVariantConsequenceNode[]) => {
   if (!consequences || consequences.length === 0) {
     return [];
   }
@@ -31,31 +28,26 @@ export const filterThanSortConsequencesByImpact = (
         b.node.impact_score! - a.node.impact_score! || +b.node.canonical! - +a.node.canonical!,
     );
 };
-type SymbolToConsequences = {
-  [key: string]: ArrangerEdge<IVariantConsequence>[];
-};
+type SymbolToConsequences = { [key: string]: IVariantConsequenceNode[] };
 
 export const generateConsequencesDataLines = (
-  rawConsequences: ArrangerEdge<IVariantConsequence>[] | null,
-): ArrangerEdge<IVariantConsequence>[] => {
+  rawConsequences: IVariantConsequenceNode[] | null,
+): IVariantConsequenceNode[] => {
   if (!rawConsequences || rawConsequences.length === 0) {
     return [];
   }
 
   const symbolToConsequences: SymbolToConsequences = rawConsequences.reduce<SymbolToConsequences>(
-    (dict: SymbolToConsequences, consequence: ArrangerEdge<IVariantConsequence>) => {
+    (dict: SymbolToConsequences, consequence: IVariantConsequenceNode) => {
       const keyForCurrentConsequence = consequence.node?.symbol || keyNoSymbol;
       const oldConsequences = dict[keyForCurrentConsequence] || [];
-      return {
-        ...dict,
-        [keyForCurrentConsequence]: [...oldConsequences, { ...consequence }],
-      };
+      return { ...dict, [keyForCurrentConsequence]: [...oldConsequences, { ...consequence }] };
     },
     {},
   );
 
   return Object.entries(symbolToConsequences).reduce(
-    (acc: ArrangerEdge<IVariantConsequence>[], [key, consequences]) => {
+    (acc: IVariantConsequenceNode[], [key, consequences]) => {
       // no gene then show
       if (key === keyNoSymbol) {
         return [...acc, ...consequences];

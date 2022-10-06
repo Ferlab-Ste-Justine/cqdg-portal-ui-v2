@@ -2,7 +2,7 @@ import { ArrangerResultsTree } from 'graphql/models';
 import { IStudyEntity } from 'graphql/studies/models';
 
 export interface IVariantResultTree {
-  variants: ArrangerResultsTree<IVariantEntity>;
+  Variant: ArrangerResultsTree<IVariantEntity>;
 }
 
 export enum Impact {
@@ -28,40 +28,64 @@ export interface IPredictionEntity {
   cadd_rankscore: number;
   dann_rankscore: number;
   fathmm_converted_rankscore: number;
+
+  //clin:
+  cadd_score: string;
+  dann_score: string;
+  sift_converted_rank_score: string;
+  FATHMM_converted_rankscore: string;
 }
 
-export interface IBoundType {
-  ac?: number;
-  af?: number;
-  an?: number;
-  hom?: number;
-  pn?: number;
-  pc?: number;
-  pf?: number;
-  heterozygotes?: number;
-  homozygotes?: number;
+export type FreqAll = { ac: number; af: number; an: number };
+export type FreqOneThousand = FreqAll & { homozygotes: number };
+export type Freqgnomad = FreqAll & { homozygotes: number };
+export type FreqCombined = FreqAll & { heterozygotes: number; homozygotes: number };
+export type FreqTopmed = FreqAll & { homozygotes: number };
+
+type BoundType = {
+  ac: number;
+  af: number;
+  an: number;
+  heterozygotes: number;
+  homozygotes: number;
+};
+
+export interface IVariantStudyFrequencies {
+  lower_bound_kf: BoundType;
+  upper_bound_kf: BoundType;
 }
 
-interface IVariantFrequenciesInternal {
-  lower_bound_kf: IBoundType;
-  upper_bound_kf: IBoundType;
+export interface IVariantFrequenciesInterval {
+  lower_bound_kf: BoundType;
+  upper_bound_kf: BoundType;
 }
 
-export interface IExternalFrequenciesEntity {
-  gnomad_exomes_2_1: IBoundType;
-  gnomad_genomes_2_1: IBoundType;
-  gnomad_genomes_3_0: IBoundType;
-  gnomad_genomes_3_1_1: IBoundType;
-  one_thousand_genomes: IBoundType;
-  topmed: IBoundType;
-  internal: IVariantFrequenciesInternal;
+export interface IVariantFrequencies {
+  internal: IVariantFrequenciesInterval;
+  topmed: FreqTopmed;
+  one_thousand_genomes: FreqOneThousand;
+  gnomad_exomes_2_1: Freqgnomad;
+  gnomad_genomes_2_1: Freqgnomad;
+  gnomad_genomes_3_0: Freqgnomad;
+  gnomad_genomes_3_1_1: Freqgnomad;
+  [key: string]: any;
 }
 
-export interface IConsequenceNode {
-  node: IConsequenceEntity;
+export interface IVariantConsequenceNode {
+  node: IVariantConsequence;
 }
 
-export interface IConsequenceEntity {
+// export type IFrequencyByAnalysisEntity = {
+//   id: string;
+//   analysis_code: string;
+//   affected: BoundType;
+//   non_affected: BoundType;
+//   total: BoundType;
+// };
+
+export interface IVariantConsequence {
+  fathmm_pred: string;
+
   id: string;
   hgvsc: string;
   symbol: string;
@@ -140,6 +164,25 @@ export interface IGeneEntity {
   hpo: ArrangerResultsTree<IGeneHpo>;
   omim: ArrangerResultsTree<IGeneOmim>;
   orphanet: ArrangerResultsTree<IGeneOrphanet>;
+
+  //clin:
+  biotype: string;
+}
+
+export interface IVariantStudyEntity {
+  id: string;
+  score: number;
+  acls: string[];
+  external_study_ids: string[];
+  participant_ids: string[];
+  participant_number: number;
+  study_code: string;
+  study_id: string;
+  transmissions: string[];
+  frequencies: IVariantStudyFrequencies;
+
+  //todo: add domain
+  domain?: string;
 }
 
 export interface IVariantEntity {
@@ -169,11 +212,13 @@ export interface IVariantEntity {
   variant_external_reference: string;
   vep_impacts: string;
   zygosity: string;
-  studies: ArrangerResultsTree<IStudyEntity>;
-  consequences: ArrangerResultsTree<IConsequenceEntity>;
+  studies: ArrangerResultsTree<IVariantStudyEntity>;
+  consequences: ArrangerResultsTree<IVariantConsequence>;
   clinvar: IClinVar;
-  frequencies: IExternalFrequenciesEntity;
+  frequencies: IVariantFrequencies;
   genes: ArrangerResultsTree<IGeneEntity>;
+
+  position: string;
 }
 
 export type ITableVariantEntity = IVariantEntity & {

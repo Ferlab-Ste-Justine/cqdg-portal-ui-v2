@@ -1,0 +1,21 @@
+@import 'src/style/themes/cqdg/colors';
+
+.container {
+  max-width: 1600px;
+
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .collapse {
+    margin-bottom: 16px;
+    .panel {
+      .card {
+        border: none;
+        *[class$="-card-body"] {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

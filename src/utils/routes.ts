@@ -23,5 +23,6 @@ export enum STATIC_ROUTES {
 
 export enum DYNAMIC_ROUTES {
   DATA_EXPLORATION = '/data-exploration/:tab?',
+  VARIANT_ENTITY = '/variants/:locus?',
   ERROR = '/error/:status?',
 }

@@ -1,0 +1,24 @@
+@import 'src/style/themes/cqdg/layout';
+@import 'src/style/themes/cqdg/colors';
+
+.variantEntityContainer {
+  height: calc(100vh - #{$main-header-height});
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  padding: 24px;
+
+  .scrollContent {
+    overflow: auto;
+    width: 100%;
+    max-width: 1600px;
+  }
+
+  .anchorMenu {
+    margin-top: 0px;
+  }
+}
+
+

@@ -1,7 +1,7 @@
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { ArrangerEdge } from 'graphql/models';
-import { IConsequenceEntity, Impact } from 'graphql/variants/models';
+import { Impact, IVariantConsequence } from 'graphql/variants/models';
 
 import HighBadgeIcon from 'components/Icons/VariantBadgeIcons/HighBadgeIcon';
 import LowBadgeIcon from 'components/Icons/VariantBadgeIcons/LowBadgeIcon';
@@ -25,7 +25,7 @@ const pickImpacBadge = (impact: Impact) => impactToColorClassName[impact];
 const ConsequencesCell = ({
   consequences,
 }: {
-  consequences: ArrangerEdge<IConsequenceEntity>[];
+  consequences: ArrangerEdge<IVariantConsequence>[];
 }) => {
   const lines = generateConsequencesDataLines(consequences);
   return (

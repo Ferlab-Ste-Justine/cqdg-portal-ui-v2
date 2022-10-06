@@ -178,6 +178,7 @@ const fr = {
               maximumLength: 'characters maximum',
             },
           },
+          saveThisFilter: 'Save this filter',
           confirmUnsaved: {
             title: 'Unsaved changes',
             openSavedFilter: {

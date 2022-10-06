@@ -1,14 +1,7 @@
-export enum GraphqlBackend {
-  FHIR,
-  ARRANGER,
-}
-
-type ClinGraphqlProvider = {
-  backend?: GraphqlBackend;
-};
+import React from 'react';
 
 export interface IProvider {
   children: React.ReactNode;
 }
 
-export type GraphqlProvider = IProvider & ClinGraphqlProvider;
+export type GraphqlProvider = IProvider;
