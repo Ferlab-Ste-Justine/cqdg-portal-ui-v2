@@ -23,9 +23,10 @@ interface IUseVariantProps {
   field: string;
   values: string[];
 }
+
 interface IUseVariantReturn {
   loading: boolean;
-  data: IVariantEntity | null;
+  data?: IVariantEntity;
 }
 
 export const useVariant = ({ field, values }: IUseVariantProps): IUseVariantReturn => {
@@ -38,7 +39,7 @@ export const useVariant = ({ field, values }: IUseVariantProps): IUseVariantRetu
     variables: { sqon },
   });
 
-  const data = result?.Variant?.hits?.edges[0].node || null;
+  const data = result?.Variant?.hits?.edges[0].node || undefined;
 
   return {
     loading,

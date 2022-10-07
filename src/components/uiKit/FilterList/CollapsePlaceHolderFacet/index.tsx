@@ -1,4 +1,4 @@
-import { Collapse } from 'antd';
+import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse';
 import cx from 'classnames';
 
 import styles from './index.module.scss';
@@ -11,8 +11,8 @@ interface OwnProps {
 
 const CollapsePlaceHolderFacet = ({ onClick = () => {}, title, className = '' }: OwnProps) => (
   <div onClick={onClick} className={cx(styles.collapseLikeFacet, className)}>
-    <Collapse className={styles.collapse}>
-      <Collapse.Panel collapsible="disabled" header={title} key="1"></Collapse.Panel>
+    <Collapse className={styles.collapse} arrowIcon="caretFilled">
+      <CollapsePanel collapsible="disabled" header={title} key="1"></CollapsePanel>
     </Collapse>
   </div>
 );

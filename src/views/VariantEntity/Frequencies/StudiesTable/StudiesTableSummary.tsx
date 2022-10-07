@@ -6,7 +6,7 @@ import { IVariantStudyEntity } from 'graphql/variants/models';
 import { addToSqons } from 'common/sqonUtils';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
 
-import style from './TableSummaryKfStudies.module.scss';
+import styles from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary.module.scss';
 
 type EnhancedVariantStudy = IVariantStudyEntity & { participantTotalNumber: number };
 
@@ -23,7 +23,7 @@ type OwnProps = {
 
 const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
 
-const TableSummaryKfStudies = (props: OwnProps) => {
+const StudiesTableSummary = (props: OwnProps) => {
   const {
     variantStudies,
     onClickStudyLink,
@@ -42,12 +42,12 @@ const TableSummaryKfStudies = (props: OwnProps) => {
   ].flat();
 
   return (
-    <Table.Summary.Row>
-      <Table.Summary.Cell className={style.cell} index={0}>
+    <Table.Summary.Row className={styles.row}>
+      <Table.Summary.Cell className={styles.cell} index={0}>
         Total
       </Table.Summary.Cell>
       <Table.Summary.Cell index={1}>{''}</Table.Summary.Cell>
-      <Table.Summary.Cell className={style.cell} index={2}>
+      <Table.Summary.Cell className={styles.cell} index={2}>
         {hasParticipantLink ? (
           <>
             <Link
@@ -65,7 +65,7 @@ const TableSummaryKfStudies = (props: OwnProps) => {
               }}
             >
               <Button type="link">
-                <div className={style.participantNumLink}>{participantNumber}</div>
+                <div className={styles.participantNumLink}>{participantNumber}</div>
               </Button>
             </Link>
             {participantTotalNumber ? ` / ${participantTotalNumber}` : ''}
@@ -74,17 +74,17 @@ const TableSummaryKfStudies = (props: OwnProps) => {
           formatQuotientOrElse(participantNumber, participantTotalNumber)
         )}
       </Table.Summary.Cell>
-      <Table.Summary.Cell className={style.cell} index={3}>
+      <Table.Summary.Cell className={styles.cell} index={3}>
         {formatQuotientToExponentialOrElse(participantNumber, participantTotalNumber)}
       </Table.Summary.Cell>
-      <Table.Summary.Cell className={style.cell} index={4}>
+      <Table.Summary.Cell className={styles.cell} index={4}>
         {altAlleles}
       </Table.Summary.Cell>
-      <Table.Summary.Cell className={style.cell} index={5}>
+      <Table.Summary.Cell className={styles.cell} index={5}>
         {homozygotes}
       </Table.Summary.Cell>
     </Table.Summary.Row>
   );
 };
 
-export default TableSummaryKfStudies;
+export default StudiesTableSummary;

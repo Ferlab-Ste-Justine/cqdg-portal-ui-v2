@@ -1,12 +1,13 @@
 import intl from 'react-intl-universal';
+import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import ExpandableTable from '@ferlab/ui/core/components/tables/ExpandableTable';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Card, Collapse, Space, Tag, Tooltip, Typography } from 'antd';
+import { Card, Space, Tag, Tooltip, Typography } from 'antd';
 import { ArrangerEdge } from 'graphql/models';
-import { IGeneEntity, Impact, IVariantConsequence, IVariantEntity } from 'graphql/variants/models';
+import { Impact, IVariantConsequence, IVariantEntity, IVariantGene } from 'graphql/variants/models';
 import capitalize from 'lodash/capitalize';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -76,7 +77,7 @@ const getLongPredictionLabelIfKnown = (predictionField: string, predictionShortL
 
 const groupConsequencesBySymbol = (
   consequences: ArrangerEdge<IVariantConsequence>[],
-  genes: ArrangerEdge<IGeneEntity>[],
+  genes: ArrangerEdge<IVariantGene>[],
 ) => {
   if (consequences.length === 0) {
     return {};
@@ -133,7 +134,7 @@ const orderConsequencesForTable = (tableGroups: TableGroup[]) => {
 
 const makeTables = (
   rawConsequences: ArrangerEdge<IVariantConsequence>[],
-  rawGenes: ArrangerEdge<IGeneEntity>[],
+  rawGenes: ArrangerEdge<IVariantGene>[],
 ) => {
   if (!rawConsequences?.length) {
     return [];
@@ -318,7 +319,7 @@ const sortConsequences = (data: ArrangerEdge<IVariantConsequence>[]) =>
     .sort((a, b) => (a.node.canonical === b.node.canonical ? 0 : a.node.canonical ? -1 : 1));
 
 interface IConsequencesProps {
-  variant: IVariantEntity | null;
+  variant?: IVariantEntity;
   loading: boolean;
   id: string;
 }
@@ -334,8 +335,8 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
       <Title level={5} className={styles.title}>
         {intl.get('Gene Consequences')} Gene Consequences
       </Title>
-      <Collapse defaultActiveKey={['1']} className={styles.collapse}>
-        <Collapse.Panel header="Gene Consequences" key="1" className={styles.panel}>
+      <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
+        <CollapsePanel header="Gene Consequences" key="1" className={styles.panel}>
           <Card loading={loading} className={styles.card}>
             <Space className={styles.consequenceCards} direction="vertical" size={48}>
               {tables.length > 0 ? (
@@ -405,7 +406,7 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
               )}
             </Space>
           </Card>
-        </Collapse.Panel>
+        </CollapsePanel>
       </Collapse>
     </div>
   );

@@ -1,5 +1,6 @@
 import intl from 'react-intl-universal';
-import { Card, Col, Collapse, Descriptions, Row } from 'antd';
+import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse';
+import { Card, Col, Descriptions, Row } from 'antd';
 import { IVariantEntity } from 'graphql/variants/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -7,18 +8,16 @@ import { toExponentialNotation } from 'utils/helper';
 
 import styles from './index.module.scss';
 
-const { Panel } = Collapse;
-
 interface ISummaryProps {
-  variant: IVariantEntity | null;
+  variant?: IVariantEntity;
   loading: boolean;
   id: string;
 }
 
 const Summary = ({ variant, loading, id }: ISummaryProps) => (
   <div id={id} className={styles.container}>
-    <Collapse defaultActiveKey={['1']} className={styles.collapse}>
-      <Panel header="Summary" key="1" className={styles.panel}>
+    <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
+      <CollapsePanel header="Summary" key="1" className={styles.panel}>
         <Card loading={loading} className={styles.card}>
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={24} lg={8}>
@@ -67,7 +66,7 @@ const Summary = ({ variant, loading, id }: ISummaryProps) => (
             </Col>
           </Row>
         </Card>
-      </Panel>
+      </CollapsePanel>
     </Collapse>
   </div>
 );

@@ -1,5 +1,4 @@
 import { ArrangerResultsTree } from 'graphql/models';
-import { IStudyEntity } from 'graphql/studies/models';
 
 export interface IVariantResultTree {
   Variant: ArrangerResultsTree<IVariantEntity>;
@@ -75,14 +74,6 @@ export interface IVariantConsequenceNode {
   node: IVariantConsequence;
 }
 
-// export type IFrequencyByAnalysisEntity = {
-//   id: string;
-//   analysis_code: string;
-//   affected: BoundType;
-//   non_affected: BoundType;
-//   total: BoundType;
-// };
-
 export interface IVariantConsequence {
   fathmm_pred: string;
 
@@ -111,44 +102,83 @@ export interface IClinVar {
   interpretations: string[];
 }
 
-interface IGeneCosmic {
-  id: any;
-  score: number;
-  tumour_types_germline: string[];
-}
+export type OmimCondition = {
+  omimName: string;
+  omimId: string;
+};
+export type OmimConditions = OmimCondition[];
 
-interface IGeneDdd {
-  id: any;
-  score: number;
-  disease_name: string;
-}
+export type HpoCondition = {
+  hpoTermLabel: string;
+  hpoTermTermId: string;
+};
+export type HpoConditions = HpoCondition[];
 
-interface IGeneHpo {
-  id: any;
-  score: number;
-  hpo_term_id: string;
-  hpo_term_label: string;
-  hpo_term_name: string;
-}
-
-interface IGeneOmim {
-  id: any;
-  score: number;
-  inheritance: string[];
-  inheritance_code: string;
-  name: string;
-  omim_id: string;
-}
-
-interface IGeneOrphanet {
-  id: any;
-  score: number;
-  inheritance: string;
-  disorder_id: number;
+export type OrphanetCondition = {
   panel: string;
+  disorderId: number;
+};
+export type OrphanetConditions = OrphanetCondition[];
+
+export type DddCondition = string;
+export type DddConditions = DddCondition[];
+
+export type CosmicCondition = string;
+export type CosmicConditions = CosmicCondition[];
+
+export type Conditions =
+  | OmimConditions
+  | HpoConditions
+  | OrphanetConditions
+  | DddConditions
+  | CosmicConditions;
+
+export type OrphanetInheritance = string[][];
+export type OmimInheritance = string[][];
+export type SingleValuedInheritance = string;
+export type Inheritance = SingleValuedInheritance | OrphanetInheritance | OmimInheritance;
+
+export type OmimGene = string[][];
+
+export type OmimEntity = {
+  id: string;
+  omim_id: string;
+  name: string;
+  inheritance: OmimInheritance | undefined | null;
+};
+
+export type HpoEntity = {
+  id: string;
+  hpo_term_label: string;
+  hpo_term_id: string;
+};
+
+export type DddEntity = {
+  id: string;
+  disease_name: string;
+};
+
+export type CosmicEntity = {
+  id: string;
+  tumour_types_germline: string[];
+};
+
+export type OrphanetEntity = {
+  id: string;
+  panel: string;
+  inheritance: OrphanetInheritance | null | undefined;
+  disorder_id: number;
+};
+
+export enum ClinicalGenesTableSource {
+  orphanet = 'Orphanet',
+  omim = 'OMIM',
+  hpo = 'HPO',
+  ddd = 'DDD',
+  cosmic = 'Cosmic',
 }
 
-export interface IGeneEntity {
+export interface IVariantGene {
   id: any;
   score: number;
   alias: string;
@@ -159,11 +189,11 @@ export interface IGeneEntity {
   name: string;
   omim_gene_id: string;
   symbol: string;
-  cosmic: ArrangerResultsTree<IGeneCosmic>;
-  ddd: ArrangerResultsTree<IGeneDdd>;
-  hpo: ArrangerResultsTree<IGeneHpo>;
-  omim: ArrangerResultsTree<IGeneOmim>;
-  orphanet: ArrangerResultsTree<IGeneOrphanet>;
+  cosmic: ArrangerResultsTree<CosmicEntity>;
+  ddd: ArrangerResultsTree<DddEntity>;
+  hpo: ArrangerResultsTree<HpoEntity>;
+  omim: ArrangerResultsTree<OmimEntity>;
+  orphanet: ArrangerResultsTree<OrphanetEntity>;
 
   //clin:
   biotype: string;
@@ -216,7 +246,7 @@ export interface IVariantEntity {
   consequences: ArrangerResultsTree<IVariantConsequence>;
   clinvar: IClinVar;
   frequencies: IVariantFrequencies;
-  genes: ArrangerResultsTree<IGeneEntity>;
+  genes: ArrangerResultsTree<IVariantGene>;
 
   position: string;
 }

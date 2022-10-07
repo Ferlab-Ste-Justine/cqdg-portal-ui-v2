@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
+import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { useVariant } from 'graphql/variants/actions';
 import Consequences from 'views/VariantEntity/Consequences';
 import Frequencies from 'views/VariantEntity/Frequencies';
+import Pathogenicity from 'views/VariantEntity/Pathogenicity';
 import Summary from 'views/VariantEntity/Summary';
 
 import styles from './index.module.scss';
@@ -18,21 +20,26 @@ const VariantEntity = () => {
   console.log('locus==', locus);
   console.log('variant data==', data);
 
-  const scrollContainerId = 'variant-entity-scroll-wrapper';
-
   const links: IAnchorLink[] = [
     { href: '#summary', title: 'Summary' },
     { href: '#consequences', title: 'Consequences' },
     { href: '#frequencies', title: 'Frequencies' },
+    { href: '#pathogenicity', title: 'Pathogenicity' },
   ];
+
+  /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */
+  const simplebarContent = document.getElementsByClassName('simplebar-content-wrapper');
+  const scrollContainerId = 'variant-entity-scroll-wrapper';
+  simplebarContent[1] && simplebarContent[1].setAttribute('id', scrollContainerId);
 
   return (
     <div className={styles.variantEntityContainer}>
-      <div id={scrollContainerId} className={styles.scrollContent}>
+      <ScrollContent className={styles.scrollContent} key={scrollContainerId}>
         <Summary id={'summary'} variant={data} loading={loading} />
         <Consequences id={'consequences'} variant={data} loading={loading} />
         <Frequencies id={'frequencies'} variant={data} loading={loading} />
-      </div>
+        <Pathogenicity id={'pathogenicity'} variant={data} loading={loading} />
+      </ScrollContent>
       <AnchorMenu
         scrollContainerId={scrollContainerId}
         links={links}
