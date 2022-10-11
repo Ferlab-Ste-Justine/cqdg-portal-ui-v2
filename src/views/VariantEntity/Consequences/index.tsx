@@ -20,19 +20,16 @@ export const getVepImpactTag = (score: number | string) => {
   switch (score) {
     case 1:
     case 'modifier':
-      return <Tag>MODIFIER</Tag>;
+      return <Tag>{intl.get('screen.variants.consequences.impactTag.modifier')}</Tag>;
     case 2:
     case 'low':
-      return <Tag color="green">LOW</Tag>;
+      return <Tag color="green">{intl.get('screen.variants.consequences.impactTag.low')}</Tag>;
     case 3:
     case 'moderate':
-      return <Tag color="gold">MODERATE</Tag>;
+      return <Tag color="gold">{intl.get('screen.variants.consequences.impactTag.moderate')}</Tag>;
     case 4:
     case 'high':
-      return <Tag color="red">HIGH</Tag>;
-
-    default:
-      return true;
+      return <Tag color="red">{intl.get('screen.variants.consequences.impactTag.high')}</Tag>;
   }
 };
 
@@ -53,7 +50,7 @@ const INDEX_IMPACT_PREDICTION_FIELD = 0;
 const INDEX_IMPACT_PREDICTION_SHORT_LABEL = 1;
 const INDEX_IMPACT_SCORE = 2;
 
-export const shortToLongPrediction: Record<string, string> = {
+const shortToLongPrediction: Record<string, string> = {
   'sift.d': 'damaging',
   'sift.t': 'tolerated',
   'polyphen2.p': 'possibly damaging',
@@ -79,7 +76,7 @@ const groupConsequencesBySymbol = (
   consequences: ArrangerEdge<IVariantConsequence>[],
   genes: ArrangerEdge<IVariantGene>[],
 ) => {
-  if (consequences.length === 0) {
+  if (!consequences.length) {
     return {};
   }
   return consequences.reduce(
@@ -192,7 +189,7 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
 
 const columns = [
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.AAColumn'),
+    title: () => intl.get('screen.variants.consequences.AAColumn'),
     dataIndex: 'aa',
     render: (aa: string) => (
       <div className={styles.longValue}>{aa || TABLE_EMPTY_PLACE_HOLDER}</div>
@@ -201,11 +198,11 @@ const columns = [
     width: '10%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConsequenceColumn'),
+    title: () => intl.get('screen.variants.consequences.consequence'),
     dataIndex: 'consequences',
     render: (consequences: string[]) => {
       if (consequences.length === 0) {
-        return <></>;
+        return '';
       }
       return (
         <ExpandableCell
@@ -221,7 +218,7 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.CDNAChangeColumn'),
+    title: () => intl.get('screen.variants.consequences.CDNAChangeColumn'),
     dataIndex: 'codingDna',
     render: (codingDna: string) => (
       <div className={styles.longValue}>{codingDna || TABLE_EMPTY_PLACE_HOLDER}</div>
@@ -229,16 +226,16 @@ const columns = [
     width: '12%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.strand'),
+    title: () => intl.get('screen.variants.consequences.strand'),
     dataIndex: 'strand',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.vep_impact'),
+    title: () => intl.get('screen.variants.consequences.vep'),
     dataIndex: 'vep_impact',
     render: (vep: Impact) => getVepImpactTag(vep?.toLowerCase()),
   },
   {
-    title: () => intl.get('prediction'),
+    title: () => intl.get('screen.variants.consequences.prediction'),
     dataIndex: 'predictions',
     render: (impacts: string[][]) => {
       if (impacts?.length === 0) {
@@ -275,19 +272,19 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('screen.variantDetails.summaryTab.consequencesTable.ConservationColumn'),
+    title: () => intl.get('screen.variants.consequences.conservationColumn'),
     dataIndex: 'conservation',
     render: (conservation: number) =>
       conservation == null ? TABLE_EMPTY_PLACE_HOLDER : conservation,
   },
   {
-    title: () => intl.get('ensemblID'),
+    title: () => intl.get('screen.variants.consequences.transcript'),
     dataIndex: 'transcript',
     render: (transcript: { transcriptId: string; isCanonical?: boolean }) => (
       <Space>
         {transcript.transcriptId}
         {transcript.isCanonical && (
-          <Tooltip title={intl.get('screen.variantDetails.summaryTab.canonical')}>
+          <Tooltip title={intl.get('screen.variants.consequences.canonical')}>
             <CanonicalIcon className={styles.canonicalIcon} height="14" width="14" />
           </Tooltip>
         )}
@@ -296,7 +293,7 @@ const columns = [
     width: '15%',
   },
   {
-    title: () => intl.get('refSeq'),
+    title: () => intl.get('screen.variants.consequences.refSeq'),
     dataIndex: 'transcript',
     width: '15%',
     render: (transcript: { ids: string[] }) =>
@@ -333,10 +330,14 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
   return (
     <div id={id} className={styles.container}>
       <Title level={5} className={styles.title}>
-        {intl.get('Gene Consequences')} Gene Consequences
+        {intl.get('screen.variants.consequences.geneConsequences')}
       </Title>
       <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
-        <CollapsePanel header="Gene Consequences" key="1" className={styles.panel}>
+        <CollapsePanel
+          header={intl.get('screen.variants.consequences.geneConsequences')}
+          key="1"
+          className={styles.panel}
+        >
           <Card loading={loading} className={styles.card}>
             <Space className={styles.consequenceCards} direction="vertical" size={48}>
               {tables.length > 0 ? (
@@ -366,7 +367,7 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                         <Space size={4}>
                           {omim && (
                             <>
-                              <span>Omim</span>
+                              <span>{intl.get('screen.variants.consequences.omim')}</span>
                               <span>
                                 <ExternalLink href={`https://omim.org/entry/${omim}`}>
                                   {omim}
@@ -382,8 +383,8 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                         nOfElementsWhenCollapsed={1}
                         buttonText={(showAll, hiddenNum) =>
                           showAll
-                            ? intl.get('screen.variant.entity.table.hidetranscript')
-                            : intl.get('screen.variant.entity.table.showtranscript', {
+                            ? intl.get('screen.variants.consequences.hidetranscript')
+                            : intl.get('screen.variants.consequences.showtranscript', {
                                 count: hiddenNum,
                               })
                         }

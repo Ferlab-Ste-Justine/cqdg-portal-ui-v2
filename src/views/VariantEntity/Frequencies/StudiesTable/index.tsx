@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Table, Tooltip } from 'antd';
@@ -35,13 +36,13 @@ const hasAtLeastOneParticipantsLink = (rows: InternalRow[]) =>
 const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: boolean) => [
   {
     key: 'study_id',
-    title: 'Studies',
+    title: intl.get('screen.variants.frequencies.studies'),
     dataIndex: 'study_id',
     render: (study_id: string) => study_id,
   },
   {
     key: 'study_id_domain',
-    title: 'Domain',
+    title: intl.get('screen.variants.frequencies.domain'),
     dataIndex: 'study_id',
     render: (variantStudyId: string) => {
       const study = globalStudies.find((s) => s.id === variantStudyId);
@@ -52,17 +53,13 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
     key: 'participants',
     title: hasParticipantsLinks ? (
       <>
-        Participants{' '}
-        <Tooltip
-          title={
-            'Due to participant confidentiality, links may return a smaller number than displayed.'
-          }
-        >
+        {intl.get('screen.variants.frequencies.participants')}{' '}
+        <Tooltip title={intl.get('screen.variants.frequencies.participantsTooltip')}>
           <InfoCircleOutlined />
         </Tooltip>
       </>
     ) : (
-      'Participants'
+      intl.get('screen.variants.frequencies.participants')
     ),
     dataIndex: '',
     render: (row: InternalRow) => {
@@ -99,7 +96,7 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
   },
   {
     key: 'frequency',
-    title: 'Frequency',
+    title: intl.get('screen.variants.frequencies.frequency'),
     render: (row: InternalRow) => {
       const participantsNumber = row.participant_number;
       const participantsTotal = row.participantTotalNumber;
@@ -108,14 +105,14 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
   },
   {
     key: 'upper_bound_kf_ac',
-    title: 'ALT Alleles',
+    title: intl.get('screen.variants.frequencies.altAlleles'),
     dataIndex: 'frequencies',
     render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.ac,
     width: '14%',
   },
   {
     key: 'upper_bound_kf_homozygotes',
-    title: 'Homozygotes',
+    title: intl.get('screen.variants.frequencies.homozygotes'),
     dataIndex: 'frequencies',
     render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.homozygotes,
     width: '14%',

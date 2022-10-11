@@ -22,7 +22,7 @@ const Pathogenicity = ({ variant, loading, id }: IPathogenicityProps) => {
   return (
     <div id={id} className={styles.container}>
       <Title level={5} className={styles.title}>
-        {intl.get('pathogenicity')} Pathogenicity
+        {intl.get('screen.variants.pathogenicity.pathogenicity')}
       </Title>
       <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
         <CollapsePanel
@@ -37,7 +37,7 @@ const Pathogenicity = ({ variant, loading, id }: IPathogenicityProps) => {
                 ClinVar {clinvarId}
               </ExternalLink>
             ) : (
-              'ClinVar'
+              intl.get('screen.variants.pathogenicity.clinVar')
             )
           }
           key="1"
@@ -47,7 +47,11 @@ const Pathogenicity = ({ variant, loading, id }: IPathogenicityProps) => {
         </CollapsePanel>
       </Collapse>
       <Collapse defaultActiveKey={['2']} className={styles.collapse} arrowIcon="caretFilled">
-        <CollapsePanel header="Gene - Phenotype" key="2" className={styles.panel}>
+        <CollapsePanel
+          header={intl.get('screen.variants.pathogenicity.genePhenotype')}
+          key="2"
+          className={styles.panel}
+        >
           <GeneTable loading={loading} variant={variant} />
         </CollapsePanel>
       </Collapse>

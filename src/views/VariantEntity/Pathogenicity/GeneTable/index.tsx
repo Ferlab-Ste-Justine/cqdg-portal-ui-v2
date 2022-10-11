@@ -45,11 +45,11 @@ type Record = {
 
 export const columnsPhenotypes = [
   {
-    title: () => intl.get('screen.variantDetails.clinicalAssociationsTab.source'),
+    title: intl.get('screen.variants.pathogenicity.source'),
     dataIndex: 'source',
   },
   {
-    title: () => intl.get('screen.variantDetails.clinicalAssociationsTab.gene'),
+    title: intl.get('screen.variants.pathogenicity.gene'),
     dataIndex: 'gene',
     render: (text: Conditions, record: Record) => {
       const source = record.source;
@@ -66,7 +66,7 @@ export const columnsPhenotypes = [
     },
   },
   {
-    title: () => intl.get('screen.variantDetails.clinicalAssociationsTab.condition'),
+    title: intl.get('screen.variants.pathogenicity.condition'),
     dataIndex: 'conditions',
     render: (text: Conditions, record: Record) => {
       switch (record.source) {
@@ -85,7 +85,7 @@ export const columnsPhenotypes = [
     width: '33%',
   },
   {
-    title: () => intl.get('screen.variantDetails.clinicalAssociationsTab.inheritance'),
+    title: intl.get('screen.variants.pathogenicity.inheritance'),
     dataIndex: 'inheritance',
     render: (text: Inheritance, record: Record) => {
       const source = record.source;

@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
 import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
@@ -21,10 +22,10 @@ const VariantEntity = () => {
   console.log('variant data==', data);
 
   const links: IAnchorLink[] = [
-    { href: '#summary', title: 'Summary' },
-    { href: '#consequences', title: 'Consequences' },
-    { href: '#frequencies', title: 'Frequencies' },
-    { href: '#pathogenicity', title: 'Pathogenicity' },
+    { href: '#summary', title: intl.get('screen.variants.summary.summary') },
+    { href: '#consequences', title: intl.get('screen.variants.consequences.consequences') },
+    { href: '#frequencies', title: intl.get('screen.variants.frequencies.frequencies') },
+    { href: '#pathogenicity', title: intl.get('screen.variants.pathogenicity.pathogenicity') },
   ];
 
   /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */

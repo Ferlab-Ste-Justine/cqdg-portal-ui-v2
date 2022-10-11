@@ -25,15 +25,23 @@ interface IFrequenciesProps {
 const Frequencies = ({ variant, loading, id }: IFrequenciesProps) => (
   <div id={id} className={styles.container}>
     <Title level={5} className={styles.title}>
-      {intl.get('frequencies')} Frequencies
+      {intl.get('screen.variants.frequencies.frequencies')}
     </Title>
     <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
-      <CollapsePanel header="CQDG Studies" key="1" className={styles.panel}>
+      <CollapsePanel
+        header={intl.get('screen.variants.frequencies.CQDGStudies')}
+        key="1"
+        className={styles.panel}
+      >
         <StudiesTable loading={loading} variant={variant} />
       </CollapsePanel>
     </Collapse>
     <Collapse defaultActiveKey={['2']} className={styles.collapse} arrowIcon="caretFilled">
-      <CollapsePanel header="Public Cohorts" key="2" className={styles.panel}>
+      <CollapsePanel
+        header={intl.get('screen.variants.frequencies.publicCohorts')}
+        key="2"
+        className={styles.panel}
+      >
         <CohortsTable loading={loading} variant={variant} />
       </CollapsePanel>
     </Collapse>

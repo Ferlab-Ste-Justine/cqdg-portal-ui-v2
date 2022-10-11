@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { Table } from 'antd';
 import { IVariantEntity, IVariantFrequencies } from 'graphql/variants/models';
 
@@ -26,7 +27,7 @@ const displayDefaultIfNeeded = (datum: ExternalCohortDatum) =>
 const externalColumns = [
   {
     key: 'cohort',
-    title: 'Cohort',
+    title: intl.get('screen.variants.frequencies.cohort'),
     dataIndex: 'cohort',
     render: (cohort: { cohortName: string; link?: string }) => {
       const cohortName = cohort.cohortName;
@@ -42,31 +43,27 @@ const externalColumns = [
   },
   {
     key: 'alt',
-    title: 'ALT Allele',
+    title: intl.get('screen.variants.frequencies.altAlleles'),
     dataIndex: 'alt',
     render: displayDefaultIfNeeded,
-    width: '14%',
   },
   {
     key: 'altRef',
-    title: 'Alleles (ALT + REF)',
+    title: intl.get('screen.variants.frequencies.altRef'),
     dataIndex: 'altRef',
     render: displayDefaultIfNeeded,
-    width: '14%',
   },
   {
     key: 'homozygotes',
-    title: 'Homozygote',
+    title: intl.get('screen.variants.frequencies.Homozygotes'),
     dataIndex: 'homozygotes',
     render: displayDefaultIfNeeded,
-    width: '14%',
   },
   {
     key: 'frequency',
-    title: 'Frequency',
+    title: intl.get('screen.variants.frequencies.frequency'),
     dataIndex: 'frequency',
     render: displayDefaultIfNeeded,
-    width: '14%',
   },
 ];
 

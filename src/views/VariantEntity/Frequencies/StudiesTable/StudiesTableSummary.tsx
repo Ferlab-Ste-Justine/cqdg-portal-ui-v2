@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Table } from 'antd';
@@ -44,7 +45,7 @@ const StudiesTableSummary = (props: OwnProps) => {
   return (
     <Table.Summary.Row className={styles.row}>
       <Table.Summary.Cell className={styles.cell} index={0}>
-        Total
+        {intl.get('screen.variants.frequencies.total')}
       </Table.Summary.Cell>
       <Table.Summary.Cell index={1}>{''}</Table.Summary.Cell>
       <Table.Summary.Cell className={styles.cell} index={2}>

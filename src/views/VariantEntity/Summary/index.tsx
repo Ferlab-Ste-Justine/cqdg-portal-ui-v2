@@ -17,51 +17,75 @@ interface ISummaryProps {
 const Summary = ({ variant, loading, id }: ISummaryProps) => (
   <div id={id} className={styles.container}>
     <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
-      <CollapsePanel header="Summary" key="1" className={styles.panel}>
+      <CollapsePanel
+        header={intl.get('screen.variants.summary.summary')}
+        key="1"
+        className={styles.panel}
+      >
         <Card loading={loading} className={styles.card}>
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={24} md={24} lg={8}>
               <Descriptions bordered column={1} size="small">
-                <Descriptions.Item label="Type">{variant?.variant_class}</Descriptions.Item>
-                <Descriptions.Item label="Chromosome">{variant?.chromosome}</Descriptions.Item>
-                <Descriptions.Item label="Position">{variant?.start}</Descriptions.Item>
-                <Descriptions.Item label="Cytobande">
+                <Descriptions.Item label={intl.get('screen.variants.summary.type')}>
+                  {variant?.variant_class}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.chromosome')}>
+                  {variant?.chromosome}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.position')}>
+                  {variant?.start}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.cytobande')}>
                   {variant?.genes?.hits?.edges[0]
                     ? variant.genes.hits.edges[0].node.location
                     : TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
-                <Descriptions.Item label="ALT Allele">{variant?.alternate}</Descriptions.Item>
-                <Descriptions.Item label="REF Allele">{variant?.reference}</Descriptions.Item>
-                <Descriptions.Item label="Reference Genome">
+                <Descriptions.Item label={intl.get('screen.variants.summary.altAllele')}>
+                  {variant?.alternate}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.refAllele')}>
+                  {variant?.reference}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.referenceGenome')}>
                   {variant?.genome_build}
                 </Descriptions.Item>
-                <Descriptions.Item label="Studies">{'TODO'}</Descriptions.Item>
-                <Descriptions.Item label="Participants">
+                <Descriptions.Item label={intl.get('screen.variants.summary.studies')}>
+                  {'TODO'}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.participants')}>
                   {variant?.participant_number}
                 </Descriptions.Item>
               </Descriptions>
             </Col>
             <Col xs={24} sm={24} md={24} lg={8}>
               <Descriptions bordered column={1} size="small">
-                <Descriptions.Item label="Genes">{'TODO'}</Descriptions.Item>
-                <Descriptions.Item label="OMIM">
+                <Descriptions.Item label={intl.get('screen.variants.summary.genes')}>
+                  {'TODO'}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.omim')}>
                   {variant?.genes?.hits?.edges[0] && variant.genes.hits.edges[0].node.omim_gene_id}
                 </Descriptions.Item>
                 <div style={{ height: '24px' }} />
-                <Descriptions.Item label="ClinVar">{variant?.clinvar?.clin_sig}</Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.clinVar')}>
+                  {variant?.clinvar?.clin_sig}
+                </Descriptions.Item>
                 <div style={{ height: '24px' }} />
-                <Descriptions.Item label="gnomAD Genome (v3.1.1)">
+                <Descriptions.Item label={intl.get('screen.variants.summary.gnomadGenome311')}>
                   {toExponentialNotation(variant?.frequencies?.gnomad_genomes_3_1_1?.af)}
                 </Descriptions.Item>
               </Descriptions>
             </Col>
             <Col xs={24} sm={24} md={24} lg={8}>
               <Descriptions bordered column={1} size="small">
-                <Descriptions.Item label="ClinVar">
+                <Descriptions.Item label={intl.get('screen.variants.summary.clinVar')}>
                   {variant?.clinvar?.clinvar_id}
                 </Descriptions.Item>
-                <Descriptions.Item label="dbSNP">{variant?.rsnumber}</Descriptions.Item>
-                <Descriptions.Item label="gnomAD">{'TODO'}</Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.dbSNP')}>
+                  {variant?.rsnumber}
+                </Descriptions.Item>
+                <Descriptions.Item label={intl.get('screen.variants.summary.gnomAD')}>
+                  {'TODO'}
+                </Descriptions.Item>
               </Descriptions>
             </Col>
           </Row>
