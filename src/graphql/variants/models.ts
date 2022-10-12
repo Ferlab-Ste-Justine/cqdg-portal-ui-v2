@@ -27,12 +27,6 @@ export interface IPredictionEntity {
   cadd_rankscore: number;
   dann_rankscore: number;
   fathmm_converted_rankscore: number;
-
-  //clin:
-  cadd_score: string;
-  dann_score: string;
-  sift_converted_rank_score: string;
-  FATHMM_converted_rankscore: string;
 }
 
 export type FreqAll = { ac: number; af: number; an: number };
@@ -194,9 +188,6 @@ export interface IVariantGene {
   hpo: ArrangerResultsTree<HpoEntity>;
   omim: ArrangerResultsTree<OmimEntity>;
   orphanet: ArrangerResultsTree<OrphanetEntity>;
-
-  //clin:
-  biotype: string;
 }
 
 export interface IVariantStudyEntity {
@@ -211,7 +202,7 @@ export interface IVariantStudyEntity {
   transmissions: string[];
   frequencies: IVariantStudyFrequencies;
 
-  //todo: add domain
+  //todo: add domain with variant etl
   domain?: string;
 }
 
@@ -247,8 +238,6 @@ export interface IVariantEntity {
   clinvar: IClinVar;
   frequencies: IVariantFrequencies;
   genes: ArrangerResultsTree<IVariantGene>;
-
-  position: string;
 }
 
 export type ITableVariantEntity = IVariantEntity & {

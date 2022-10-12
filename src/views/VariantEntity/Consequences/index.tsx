@@ -37,7 +37,6 @@ type TableGroup = {
   consequences: ArrangerEdge<IVariantConsequence>[];
   omim: string;
   symbol: string;
-  biotype: string;
   ensembleGeneId: string;
 };
 
@@ -88,7 +87,6 @@ const groupConsequencesBySymbol = (
       }
       const gene = genes.find((g) => g.node.symbol === symbol);
       const omim = gene ? gene.node.omim_gene_id : '';
-      const biotype = gene ? gene.node.biotype : '';
       const ensembleGeneId = consequence.node.ensembl_gene_id || '';
       const oldConsequences = acc[symbol]?.consequences || [];
 
@@ -99,7 +97,6 @@ const groupConsequencesBySymbol = (
           omim,
           symbol,
           ensembleGeneId,
-          biotype,
         },
       };
     },
@@ -154,20 +151,20 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
       [
         'Sift',
         consequence.node.predictions?.sift_pred,
-        consequence.node.predictions?.sift_converted_rank_score,
+        consequence.node.predictions?.sift_converted_rankscore,
       ],
       [
         'Polyphen2',
         consequence.node.predictions?.polyphen2_hvar_pred,
-        consequence.node.predictions?.sift_converted_rank_score,
+        consequence.node.predictions?.sift_converted_rankscore,
       ],
       [
         'Fathmm',
         consequence.node.predictions?.fathmm_pred,
-        consequence.node.predictions?.FATHMM_converted_rankscore,
+        consequence.node.predictions?.fathmm_converted_rankscore,
       ],
-      ['Cadd', null, consequence.node.predictions?.cadd_score],
-      ['Dann', null, consequence.node.predictions?.dann_score],
+      ['Cadd', null, consequence.node.predictions?.cadd_rankscore],
+      ['Dann', null, consequence.node.predictions?.dann_rankscore],
       [
         'Lrt',
         consequence.node.predictions?.lrt_pred,
@@ -207,7 +204,7 @@ const columns = [
       return (
         <ExpandableCell
           dataSource={consequences}
-          renderItem={(item: any, id): React.ReactNode => (
+          renderItem={(item: any, id) => (
             <StackLayout key={id} horizontal className={styles.cellList}>
               <Text>{item}</Text>
             </StackLayout>
@@ -345,7 +342,6 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                 tables.map((tableData: TableGroup, index: number) => {
                   const symbol = tableData.symbol;
                   const omim = tableData.omim;
-                  const biotype = tableData.biotype;
                   const orderedConsequences = sortConsequences(tableData.consequences);
 
                   return (
@@ -377,7 +373,6 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                             </>
                           )}
                         </Space>
-                        <span className="bold value">{biotype}</span>
                       </Space>
                       <ExpandableTable
                         bordered={true}

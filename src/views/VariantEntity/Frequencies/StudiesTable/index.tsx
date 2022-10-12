@@ -12,10 +12,10 @@ import {
   IVariantStudyFrequencies,
 } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
 import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import EmptyMessage from 'components/Variants/Empty';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
 
 import styles from './index.module.scss';

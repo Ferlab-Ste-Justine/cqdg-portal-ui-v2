@@ -1,9 +1,9 @@
 import intl from 'react-intl-universal';
 import { Table } from 'antd';
 import { IVariantEntity, IVariantFrequencies } from 'graphql/variants/models';
+import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import EmptyMessage from 'components/Variants/Empty';
 import { toExponentialNotation } from 'utils/helper';
 
 import styles from './index.module.scss';
