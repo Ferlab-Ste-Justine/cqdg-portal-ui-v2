@@ -1,7 +1,9 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { Table, Tooltip } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { IStudyEntity } from 'graphql/studies/models';
 import {
   FreqCombined,
@@ -9,9 +11,11 @@ import {
   IVariantFrequencies,
   IVariantStudyFrequencies,
 } from 'graphql/variants/models';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary';
 
-import EmptyMessage, { DISPLAY_WHEN_EMPTY_DATUM } from 'components/Variants/Empty';
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import EmptyMessage from 'components/Variants/Empty';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
 
 import styles from './index.module.scss';
@@ -46,7 +50,7 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
     dataIndex: 'study_id',
     render: (variantStudyId: string) => {
       const study = globalStudies.find((s) => s.id === variantStudyId);
-      return study?.domain || DISPLAY_WHEN_EMPTY_DATUM;
+      return study?.domain || TABLE_EMPTY_PLACE_HOLDER;
     },
   },
   {
@@ -68,21 +72,14 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
       return canMakeParticipantsLink(participantsNumber) ? (
         <>
           <Link
-            to={'/explore'}
-            href={'#top'}
+            to={'/data-exploration'}
             onClick={() => {
-              const study = globalStudies.find((s) => s.id === row.study_id);
-              if (study) {
-                console.log('onLinkClick todo');
-                // onLinkClick(
-                //   addToSqons({
-                //     fieldsWValues: [{ field: 'kf_id', value: row.participant_ids || [] }],
-                //     sqons: sqons,
-                //   }),
-                // );
-              }
-              const toTop = document.getElementById('main-page-container');
-              toTop?.scrollTo(0, 0);
+              updateActiveQueryField({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                field: 'participant_id',
+                value: row.participant_ids || [],
+                index: INDEXES.PARTICIPANT,
+              });
             }}
           >
             {participantsNumber}
@@ -136,8 +133,6 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
     return <EmptyMessage />;
   }
 
-  //const  participant_ids= variant?.participant_ids || [];
-  // const globalStudies = variant?.map((n: IStudyEntity) => n.node);
   const globalStudies: IStudyEntity[] = [];
   const participantTotalNumber = variant?.participant_total_number || 0;
   const participantNumber = variant?.participant_number || 0;
@@ -156,8 +151,6 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
       summary={() => (
         <StudiesTableSummary
           variantStudies={variantStudies}
-          // onClickStudyLink={props.onClickStudyLink}
-          // currentVirtualStudy={props.currentVirtualStudy}
           participantNumber={participantNumber}
           altAlleles={variantFrequencies?.ac}
           homozygotes={variantFrequencies?.homozygotes}

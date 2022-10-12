@@ -50,7 +50,9 @@ const Summary = ({ variant, loading, id }: ISummaryProps) => (
                   {variant?.genome_build}
                 </Descriptions.Item>
                 <Descriptions.Item label={intl.get('screen.variants.summary.studies')}>
-                  {'TODO'}
+                  {variant?.studies?.hits?.edges?.length
+                    ? variant.studies.hits.edges.map((study) => study.node.study_id)
+                    : TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
                 <Descriptions.Item label={intl.get('screen.variants.summary.participants')}>
                   {variant?.participant_number}
@@ -60,14 +62,18 @@ const Summary = ({ variant, loading, id }: ISummaryProps) => (
             <Col xs={24} sm={24} md={24} lg={8}>
               <Descriptions bordered column={1} size="small">
                 <Descriptions.Item label={intl.get('screen.variants.summary.genes')}>
-                  {'TODO'}
+                  {variant?.genes?.hits?.edges?.length
+                    ? variant.genes.hits.edges.map((gene) => gene.node.symbol)
+                    : TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
                 <Descriptions.Item label={intl.get('screen.variants.summary.omim')}>
-                  {variant?.genes?.hits?.edges[0] && variant.genes.hits.edges[0].node.omim_gene_id}
+                  {(variant?.genes?.hits?.edges[0] &&
+                    variant.genes.hits.edges[0].node.omim_gene_id) ||
+                    TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
                 <div style={{ height: '24px' }} />
                 <Descriptions.Item label={intl.get('screen.variants.summary.clinVar')}>
-                  {variant?.clinvar?.clin_sig}
+                  {variant?.clinvar?.clin_sig || TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
                 <div style={{ height: '24px' }} />
                 <Descriptions.Item label={intl.get('screen.variants.summary.gnomadGenome311')}>
@@ -78,13 +84,10 @@ const Summary = ({ variant, loading, id }: ISummaryProps) => (
             <Col xs={24} sm={24} md={24} lg={8}>
               <Descriptions bordered column={1} size="small">
                 <Descriptions.Item label={intl.get('screen.variants.summary.clinVar')}>
-                  {variant?.clinvar?.clinvar_id}
+                  {variant?.clinvar?.clinvar_id || TABLE_EMPTY_PLACE_HOLDER}
                 </Descriptions.Item>
                 <Descriptions.Item label={intl.get('screen.variants.summary.dbSNP')}>
                   {variant?.rsnumber}
-                </Descriptions.Item>
-                <Descriptions.Item label={intl.get('screen.variants.summary.gnomAD')}>
-                  {'TODO'}
                 </Descriptions.Item>
               </Descriptions>
             </Col>

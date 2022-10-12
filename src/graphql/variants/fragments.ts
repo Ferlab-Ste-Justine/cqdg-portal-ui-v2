@@ -21,7 +21,6 @@ export const GENES_FRAGMENT = gql`
               total
               edges {
                 node {
-                  id
                   score
                   tumour_types_germline
                 }
@@ -33,7 +32,6 @@ export const GENES_FRAGMENT = gql`
               total
               edges {
                 node {
-                  id
                   score
                   disease_name
                 }

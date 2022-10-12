@@ -18,9 +18,6 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  console.log('locus==', locus);
-  console.log('variant data==', data);
-
   const links: IAnchorLink[] = [
     { href: '#summary', title: intl.get('screen.variants.summary.summary') },
     { href: '#consequences', title: intl.get('screen.variants.consequences.consequences') },

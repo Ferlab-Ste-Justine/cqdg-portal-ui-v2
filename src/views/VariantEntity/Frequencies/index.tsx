@@ -9,13 +9,6 @@ import styles from './index.module.scss';
 
 const { Title } = Typography;
 
-// const mapDispatch = (dispatch: DispatchVirtualStudies) => ({
-//   onClickStudyLink: (sqons: Sqon[]) => dispatch(createQueryInCohortBuilder(sqons)),
-// });
-// const mapState = (state: RootState): FrequencyTabTableContainerState => ({
-//   currentVirtualStudy: state.currentVirtualStudy.sqons,
-// });
-
 interface IFrequenciesProps {
   variant?: IVariantEntity;
   loading: boolean;

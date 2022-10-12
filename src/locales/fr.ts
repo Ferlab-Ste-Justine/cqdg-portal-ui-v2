@@ -370,6 +370,7 @@ const fr = {
     },
     variants: {
       title: 'Exploration des variants',
+      noDataVariant: 'Aucune donnée disponible pour ce variant',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',

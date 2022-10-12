@@ -195,11 +195,11 @@ const keepOnlyOmimWithId = (arr: ArrangerEdge<OmimEntity>[]) =>
   arr.filter((omimNode: ArrangerEdge<OmimEntity>) => omimNode.node.omim_id);
 
 export const makeUnGroupedDataRows = (genes: ArrangerEdge<IVariantGene>[]) => {
-  if (!genes) {
+  if (!genes.length) {
     return [];
   }
 
-  return genes.map((gene: ArrangerEdge<IVariantGene>) => {
+  return genes.map((gene) => {
     const rowOrphanet = orphanetFromEdges(gene, gene.node.orphanet?.hits?.edges || []);
     const rowOmim = omimFromEdges(gene, keepOnlyOmimWithId(gene.node.omim?.hits?.edges || []));
     const rowCosmic = cosmicFromEdges(gene, gene.node.cosmic?.hits?.edges || []);
@@ -231,9 +231,9 @@ export const groupRowsBySource = (ungroupedDataTable: any[]) => {
 };
 
 const makeGenesOrderedRow = (genesHits?: ArrangerResultsTree<IVariantGene>) => {
-  const genes = genesHits?.hits?.edges;
+  const genes = genesHits?.hits?.edges || [];
 
-  if (!genes?.length) {
+  if (!genes.length) {
     return [];
   }
 

@@ -364,6 +364,7 @@ const fr = {
     },
     variants: {
       title: 'Variants Exploration',
+      noDataVariant: 'No data available for this variant',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',

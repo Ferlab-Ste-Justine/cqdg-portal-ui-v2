@@ -2,7 +2,8 @@ import intl from 'react-intl-universal';
 import { Table } from 'antd';
 import { IVariantEntity, IVariantFrequencies } from 'graphql/variants/models';
 
-import EmptyMessage, { DISPLAY_WHEN_EMPTY_DATUM } from 'components/Variants/Empty';
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import EmptyMessage from 'components/Variants/Empty';
 import { toExponentialNotation } from 'utils/helper';
 
 import styles from './index.module.scss';
@@ -22,7 +23,7 @@ type Row = {
 };
 
 const displayDefaultIfNeeded = (datum: ExternalCohortDatum) =>
-  datum == null ? DISPLAY_WHEN_EMPTY_DATUM : datum;
+  !datum ? TABLE_EMPTY_PLACE_HOLDER : datum;
 
 const externalColumns = [
   {

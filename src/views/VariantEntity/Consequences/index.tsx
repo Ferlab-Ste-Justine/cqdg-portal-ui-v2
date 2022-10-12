@@ -46,6 +46,7 @@ type SymbolToConsequences = {
 };
 
 const { Text } = Typography;
+
 const INDEX_IMPACT_PREDICTION_FIELD = 0;
 const INDEX_IMPACT_PREDICTION_SHORT_LABEL = 1;
 const INDEX_IMPACT_SCORE = 2;
@@ -176,7 +177,6 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
     ].filter(([, , score]) => score),
     conservation: consequence.node.conservations?.phylo_p17way_primate_rankscore,
     transcript: {
-      // ids: consequence.node.refseq_mrna_id?.filter((i) => i?.length > 0),
       ids: consequence.node.refseq_mrna_id
         ? Array.isArray(consequence.node.refseq_mrna_id)
           ? consequence.node.refseq_mrna_id
@@ -228,25 +228,26 @@ const columns = [
   {
     title: () => intl.get('screen.variants.consequences.strand'),
     dataIndex: 'strand',
+    render: (strand: string) => strand || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: () => intl.get('screen.variants.consequences.vep'),
     dataIndex: 'vep_impact',
-    render: (vep: Impact) => getVepImpactTag(vep?.toLowerCase()),
+    render: (vep: Impact) => getVepImpactTag(vep?.toLowerCase()) || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: () => intl.get('screen.variants.consequences.prediction'),
-    dataIndex: 'predictions',
-    render: (impacts: string[][]) => {
-      if (impacts?.length === 0) {
+    dataIndex: 'impact',
+    render: (impact: string[][]) => {
+      if (!impact?.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
 
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={2}
-          dataSource={impacts}
-          renderItem={(item: any, id): React.ReactNode => {
+          dataSource={impact}
+          renderItem={(item: any, id) => {
             const predictionField = item[INDEX_IMPACT_PREDICTION_FIELD];
             const score = item[INDEX_IMPACT_SCORE];
             const predictionShortLabel = item[INDEX_IMPACT_PREDICTION_SHORT_LABEL];
