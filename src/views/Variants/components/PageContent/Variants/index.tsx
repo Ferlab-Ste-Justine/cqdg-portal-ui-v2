@@ -52,7 +52,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'variant_class',
-    title: intl.get('screen.variants.table.variant_class'),
+    title: intl.get('screen.variants.table.type'),
     dataIndex: 'variant_class',
     sorter: {
       multiple: 1,
@@ -71,20 +71,6 @@ const defaultColumns: ProColumnType<any>[] = [
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
-  },
-  {
-    key: 'genome_build',
-    title: intl.get('screen.variants.table.genome_build'),
-    dataIndex: 'genome_build',
-  },
-  {
-    key: 'external_frequencies',
-    title: intl.get('screen.variants.table.gnomAd'),
-    dataIndex: 'frequencies',
-    render: (frequencies: IVariantFrequencies) =>
-      frequencies?.gnomad_exomes_2_1
-        ? frequencies.gnomad_exomes_2_1.af?.toExponential(3)
-        : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'consequences',
@@ -108,6 +94,13 @@ const defaultColumns: ProColumnType<any>[] = [
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
+  },
+  {
+    key: 'external_frequencies',
+    title: intl.get('screen.variants.table.gnomAd'),
+    dataIndex: 'frequencies',
+    render: (frequencies: IVariantFrequencies) =>
+      frequencies?.gnomad_genomes_3_1_1?.af?.toExponential(3) || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

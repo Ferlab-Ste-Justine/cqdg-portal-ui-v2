@@ -9,7 +9,7 @@ body {
   height: 100%;
 }
 
-#appContainer {
+.appContainer {
   height: 100vh;
 }
 

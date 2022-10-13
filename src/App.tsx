@@ -50,7 +50,7 @@ const App = () => {
       renderEmpty={() => <Empty imageType="grid" />}
     >
       <ApolloProvider>
-        <div className="App" id="appContainer">
+        <div className="appContainer">
           {keycloakIsReady ? (
             <AuthMiddleware>
               <Router>
