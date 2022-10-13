@@ -5,8 +5,6 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Spin } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
-import ApolloProvider from 'provider/ApolloProvider';
-import { GraphqlBackend } from 'provider/types';
 import ParticipantSearch from 'views/DataExploration/components/ParticipantSearch';
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
@@ -245,10 +243,4 @@ const Variants = () => {
   );
 };
 
-const VariantWrapper = () => (
-  <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-    <Variants />
-  </ApolloProvider>
-);
-
-export default VariantWrapper;
+export default Variants;

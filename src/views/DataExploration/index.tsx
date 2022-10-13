@@ -6,8 +6,6 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Spin } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
-import ApolloProvider from 'provider/ApolloProvider';
-import { GraphqlBackend } from 'provider/types';
 import PageContent from 'views/DataExploration/components/PageContent';
 import {
   DATA_EXPLORATION_QB_ID,
@@ -156,10 +154,4 @@ const DataExploration = () => {
   );
 };
 
-const DataExplorationWrapper = () => (
-  <ApolloProvider backend={GraphqlBackend.ARRANGER}>
-    <DataExploration />
-  </ApolloProvider>
-);
-
-export default DataExplorationWrapper;
+export default DataExploration;

@@ -8,7 +8,7 @@ import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { Space, Typography } from 'antd';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
-import { useVariant } from 'graphql/variants/actions';
+import { useVariants } from 'graphql/variants/actions';
 import { isEmpty } from 'lodash';
 import {
   DEFAULT_PAGE_INDEX,
@@ -27,7 +27,7 @@ import {
 import { combineExtendedMappings } from 'utils/fieldMapper';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
-import VariantsTab from './tabs/Variants';
+import Variants from './Variants';
 
 import styles from './index.module.scss';
 
@@ -50,7 +50,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   const [variantQueryConfig, setVariantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
   const variantResolvedSqon = resolveSyntheticSqon(queryList, activeQuery);
 
-  const variantResults = useVariant({
+  const variantResults = useVariants({
     first: variantQueryConfig.size,
     offset: variantQueryConfig.size * (variantQueryConfig.pageIndex - 1),
     sqon: variantResolvedSqon,
@@ -120,7 +120,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
           })
         }
       />
-      <VariantsTab
+      <Variants
         results={variantResults}
         setQueryConfig={setVariantQueryConfig}
         queryConfig={variantQueryConfig}

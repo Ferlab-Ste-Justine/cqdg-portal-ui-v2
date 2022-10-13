@@ -1,0 +1,164 @@
+import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { Table, Tooltip } from 'antd';
+import { INDEXES } from 'graphql/constants';
+import { IStudyEntity } from 'graphql/studies/models';
+import {
+  FreqCombined,
+  IVariantEntity,
+  IVariantFrequencies,
+  IVariantStudyFrequencies,
+} from 'graphql/variants/models';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
+import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary';
+
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
+
+import styles from './index.module.scss';
+
+type InternalRow = {
+  frequencies: IVariantFrequencies;
+  key: string;
+  participantTotalNumber: number;
+  participant_ids: null | string[];
+  participant_number: number;
+  study_id: string;
+};
+
+const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
+
+const canMakeParticipantsLink = (nOfParticipants: number) =>
+  nOfParticipants && nOfParticipants >= MIN_N_OF_PARTICIPANTS_FOR_LINK;
+
+const hasAtLeastOneParticipantsLink = (rows: InternalRow[]) =>
+  (rows || []).some((row: InternalRow) => canMakeParticipantsLink(row.participant_number));
+
+const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: boolean) => [
+  {
+    key: 'study_id',
+    title: intl.get('screen.variants.frequencies.studies'),
+    dataIndex: 'study_id',
+    render: (study_id: string) => study_id,
+  },
+  {
+    key: 'study_id_domain',
+    title: intl.get('screen.variants.frequencies.domain'),
+    dataIndex: 'study_id',
+    render: (variantStudyId: string) => {
+      const study = globalStudies.find((s) => s.id === variantStudyId);
+      return study?.domain || TABLE_EMPTY_PLACE_HOLDER;
+    },
+  },
+  {
+    key: 'participants',
+    title: hasParticipantsLinks ? (
+      <>
+        {intl.get('screen.variants.frequencies.participants')}{' '}
+        <Tooltip title={intl.get('screen.variants.frequencies.participantsTooltip')}>
+          <InfoCircleOutlined />
+        </Tooltip>
+      </>
+    ) : (
+      intl.get('screen.variants.frequencies.participants')
+    ),
+    dataIndex: '',
+    render: (row: InternalRow) => {
+      const participantsNumber = row.participant_number;
+      const participantsTotal = row.participantTotalNumber;
+      return canMakeParticipantsLink(participantsNumber) ? (
+        <>
+          <Link
+            to={'/data-exploration'}
+            onClick={() => {
+              updateActiveQueryField({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                field: 'participant_id',
+                value: row.participant_ids || [],
+                index: INDEXES.PARTICIPANT,
+              });
+            }}
+          >
+            {participantsNumber}
+          </Link>
+          {participantsTotal ? ` / ${participantsTotal}` : ''}
+        </>
+      ) : (
+        formatQuotientOrElse(participantsNumber, participantsTotal)
+      );
+    },
+  },
+  {
+    key: 'frequency',
+    title: intl.get('screen.variants.frequencies.frequency'),
+    render: (row: InternalRow) => {
+      const participantsNumber = row.participant_number;
+      const participantsTotal = row.participantTotalNumber;
+      return formatQuotientToExponentialOrElse(participantsNumber, participantsTotal);
+    },
+  },
+  {
+    key: 'upper_bound_kf_ac',
+    title: intl.get('screen.variants.frequencies.altAlleles'),
+    dataIndex: 'frequencies',
+    render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.ac,
+    width: '14%',
+  },
+  {
+    key: 'upper_bound_kf_homozygotes',
+    title: intl.get('screen.variants.frequencies.homozygotes'),
+    dataIndex: 'frequencies',
+    render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.homozygotes,
+    width: '14%',
+  },
+];
+
+interface IStudiesTableProps {
+  loading: boolean;
+  variant?: IVariantEntity;
+}
+
+const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
+  const variantStudies =
+    variant?.studies?.hits?.edges.map((e: any, index: number) => ({
+      key: index,
+      ...e.node,
+      participantTotalNumber: variant?.participant_total_number || 0,
+    })) || [];
+
+  if (!loading && !variantStudies.length) {
+    return <EmptyMessage />;
+  }
+
+  const globalStudies: IStudyEntity[] = [];
+  const participantTotalNumber = variant?.participant_total_number || 0;
+  const participantNumber = variant?.participant_number || 0;
+
+  const variantFrequencies: FreqCombined | undefined =
+    variant?.frequencies?.internal?.upper_bound_kf;
+
+  return (
+    <Table
+      loading={loading}
+      dataSource={variantStudies}
+      columns={internalColumns(globalStudies, hasAtLeastOneParticipantsLink(variantStudies))}
+      size="small"
+      pagination={false}
+      rowClassName={styles.notStriped}
+      summary={() => (
+        <StudiesTableSummary
+          variantStudies={variantStudies}
+          participantNumber={participantNumber}
+          altAlleles={variantFrequencies?.ac}
+          homozygotes={variantFrequencies?.homozygotes}
+          participantTotalNumber={participantTotalNumber}
+        />
+      )}
+    />
+  );
+};
+
+export default StudiesTable;

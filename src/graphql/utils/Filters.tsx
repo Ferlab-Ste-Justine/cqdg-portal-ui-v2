@@ -81,6 +81,7 @@ export const generateFilters = ({
           filters={filters}
           collapseProps={{
             headerBorderOnly: true,
+            arrowIcon: 'caretFilled',
           }}
           onChange={(fg, f) => {
             updateActiveQueryFilters({

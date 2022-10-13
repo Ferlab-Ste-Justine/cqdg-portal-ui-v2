@@ -8,7 +8,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { INDEXES } from 'graphql/constants';
 import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
 import { hydrateResults } from 'graphql/models';
-import { IGeneEntity } from 'graphql/variants/models';
+import { IVariantGene } from 'graphql/variants/models';
 
 import { ArrangerApi } from 'services/api/arranger';
 
@@ -68,7 +68,7 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
         },
       });
 
-      const genes: IGeneEntity[] = hydrateResults(response.data?.data?.Genes?.hits?.edges || []);
+      const genes: IVariantGene[] = hydrateResults(response.data?.data?.Genes?.hits?.edges || []);
 
       const matchResults = ids.map((id, index) => {
         const gene = genes.find((gene) => [gene.symbol, gene.ensembl_gene_id].includes(id));

@@ -11,10 +11,10 @@ import cx from 'classnames';
 import { IQueryResults } from 'graphql/models';
 import {
   IClinVar,
-  IConsequenceNode,
-  IExternalFrequenciesEntity,
   ITableVariantEntity,
+  IVariantConsequenceNode,
   IVariantEntity,
+  IVariantFrequencies,
 } from 'graphql/variants/models';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constants';
@@ -22,9 +22,10 @@ import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/const
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
+import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from 'views/Variants/components/PageContent/Variants/index.module.scss';
 
 interface OwnProps {
   results: IQueryResults<IVariantEntity[]>;
@@ -43,9 +44,7 @@ const defaultColumns: ProColumnType<any>[] = [
     render: (hgvsg: string, entity: IVariantEntity) =>
       hgvsg ? (
         <Tooltip placement="topLeft" title={hgvsg}>
-          <Link target="_blank" to={`/variant/entity/${entity.locus}`}>
-            {hgvsg}
-          </Link>
+          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>{hgvsg}</Link>
         </Tooltip>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
@@ -53,7 +52,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'variant_class',
-    title: intl.get('screen.variants.table.variant_class'),
+    title: intl.get('screen.variants.table.type'),
     dataIndex: 'variant_class',
     sorter: {
       multiple: 1,
@@ -74,30 +73,11 @@ const defaultColumns: ProColumnType<any>[] = [
       ),
   },
   {
-    key: 'genome_build',
-    title: intl.get('screen.variants.table.genome_build'),
-    dataIndex: 'genome_build',
-  },
-  {
-    key: 'external_frequencies',
-    title: (
-      <Tooltip title={`${intl.get('screen.variants.table.gnomAd')} exomes`}>
-        {intl.get('screen.variants.table.gnomAd')}
-      </Tooltip>
-    ),
-    displayTitle: intl.get('screen.variants.table.gnomAd'),
-    dataIndex: 'frequencies',
-    render: (frequencies: IExternalFrequenciesEntity) =>
-      frequencies?.gnomad_exomes_2_1
-        ? frequencies.gnomad_exomes_2_1.af?.toExponential(3)
-        : TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
     key: 'consequences',
     title: intl.get('screen.variants.table.consequences'),
     dataIndex: 'consequences',
     width: 300,
-    render: (consequences: { hits: { edges: IConsequenceNode[] } }) => (
+    render: (consequences: { hits: { edges: IVariantConsequenceNode[] } }) => (
       <ConsequencesCell consequences={consequences?.hits?.edges || []} />
     ),
   },
@@ -114,6 +94,13 @@ const defaultColumns: ProColumnType<any>[] = [
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
+  },
+  {
+    key: 'external_frequencies',
+    title: intl.get('screen.variants.table.gnomAd'),
+    dataIndex: 'frequencies',
+    render: (frequencies: IVariantFrequencies) =>
+      frequencies?.gnomad_genomes_3_1_1?.af?.toExponential(3) || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

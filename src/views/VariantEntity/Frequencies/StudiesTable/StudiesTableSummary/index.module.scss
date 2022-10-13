@@ -1,0 +1,14 @@
+@import 'src/style/themes/cqdg/colors';
+
+.participantNumLink {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.row {
+  background-color: $gray-2;
+}
+
+.cell {
+  font-weight: bold;
+}

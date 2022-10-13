@@ -1,5 +1,5 @@
 import { ArrangerEdge } from 'graphql/models';
-import { IConsequenceEntity } from 'graphql/variants/models';
+import { IVariantConsequence } from 'graphql/variants/models';
 
 const keyNoSymbol = 'noSymbol_';
 
@@ -18,7 +18,7 @@ const keyNoSymbol = 'noSymbol_';
  *   Output: filtered consequences.
  * */
 export const filterThanSortConsequencesByImpact = (
-  consequences: ArrangerEdge<IConsequenceEntity>[],
+  consequences: ArrangerEdge<IVariantConsequence>[],
 ) => {
   if (!consequences || consequences.length === 0) {
     return [];
@@ -32,18 +32,18 @@ export const filterThanSortConsequencesByImpact = (
     );
 };
 type SymbolToConsequences = {
-  [key: string]: ArrangerEdge<IConsequenceEntity>[];
+  [key: string]: ArrangerEdge<IVariantConsequence>[];
 };
 
 export const generateConsequencesDataLines = (
-  rawConsequences: ArrangerEdge<IConsequenceEntity>[] | null,
-): ArrangerEdge<IConsequenceEntity>[] => {
+  rawConsequences: ArrangerEdge<IVariantConsequence>[] | null,
+): ArrangerEdge<IVariantConsequence>[] => {
   if (!rawConsequences || rawConsequences.length === 0) {
     return [];
   }
 
   const symbolToConsequences: SymbolToConsequences = rawConsequences.reduce<SymbolToConsequences>(
-    (dict: SymbolToConsequences, consequence: ArrangerEdge<IConsequenceEntity>) => {
+    (dict: SymbolToConsequences, consequence: ArrangerEdge<IVariantConsequence>) => {
       const keyForCurrentConsequence = consequence.node?.symbol || keyNoSymbol;
       const oldConsequences = dict[keyForCurrentConsequence] || [];
       return {
@@ -55,7 +55,7 @@ export const generateConsequencesDataLines = (
   );
 
   return Object.entries(symbolToConsequences).reduce(
-    (acc: ArrangerEdge<IConsequenceEntity>[], [key, consequences]) => {
+    (acc: ArrangerEdge<IVariantConsequence>[], [key, consequences]) => {
       // no gene then show
       if (key === keyNoSymbol) {
         return [...acc, ...consequences];

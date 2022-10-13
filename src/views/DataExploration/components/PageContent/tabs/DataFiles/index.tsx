@@ -60,12 +60,9 @@ const getDefaultColumns = (
 ): ProColumnType<any>[] => [
   {
     key: 'lock',
-    title: (
-      <Tooltip title="File Authorization">
-        <LockOutlined />
-      </Tooltip>
-    ),
-    displayTitle: 'File Authorization',
+    title: '',
+    icon: <LockOutlined />,
+    tooltip: 'File Authorization',
     align: 'center',
     render: (record: IFileEntity) => {
       const hasAccess = userHasAccessToFile(
@@ -88,13 +85,10 @@ const getDefaultColumns = (
   },
   {
     key: 'data_access',
-    title: (
-      <Tooltip title="Data access">
-        <SafetyOutlined />
-      </Tooltip>
-    ),
+    title: '',
+    icon: <SafetyOutlined />,
+    tooltip: 'Data access',
     dataIndex: 'data_access',
-    displayTitle: 'Data access',
     align: 'center',
     width: 75,
     render: (data_access: string) =>

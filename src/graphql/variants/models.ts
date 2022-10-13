@@ -1,8 +1,7 @@
 import { ArrangerResultsTree } from 'graphql/models';
-import { IStudyEntity } from 'graphql/studies/models';
 
 export interface IVariantResultTree {
-  variants: ArrangerResultsTree<IVariantEntity>;
+  Variant: ArrangerResultsTree<IVariantEntity>;
 }
 
 export enum Impact {
@@ -30,38 +29,48 @@ export interface IPredictionEntity {
   fathmm_converted_rankscore: number;
 }
 
-export interface IBoundType {
-  ac?: number;
-  af?: number;
-  an?: number;
-  hom?: number;
-  pn?: number;
-  pc?: number;
-  pf?: number;
-  heterozygotes?: number;
-  homozygotes?: number;
+export type FreqAll = { ac: number; af: number; an: number };
+export type FreqOneThousand = FreqAll & { homozygotes: number };
+export type Freqgnomad = FreqAll & { homozygotes: number };
+export type FreqCombined = FreqAll & { heterozygotes: number; homozygotes: number };
+export type FreqTopmed = FreqAll & { homozygotes: number };
+
+type BoundType = {
+  ac: number;
+  af: number;
+  an: number;
+  heterozygotes: number;
+  homozygotes: number;
+};
+
+export interface IVariantStudyFrequencies {
+  lower_bound_kf: BoundType;
+  upper_bound_kf: BoundType;
 }
 
-interface IVariantFrequenciesInternal {
-  lower_bound_kf: IBoundType;
-  upper_bound_kf: IBoundType;
+export interface IVariantFrequenciesInterval {
+  lower_bound_kf: BoundType;
+  upper_bound_kf: BoundType;
 }
 
-export interface IExternalFrequenciesEntity {
-  gnomad_exomes_2_1: IBoundType;
-  gnomad_genomes_2_1: IBoundType;
-  gnomad_genomes_3_0: IBoundType;
-  gnomad_genomes_3_1_1: IBoundType;
-  one_thousand_genomes: IBoundType;
-  topmed: IBoundType;
-  internal: IVariantFrequenciesInternal;
+export interface IVariantFrequencies {
+  internal: IVariantFrequenciesInterval;
+  topmed: FreqTopmed;
+  one_thousand_genomes: FreqOneThousand;
+  gnomad_exomes_2_1: Freqgnomad;
+  gnomad_genomes_2_1: Freqgnomad;
+  gnomad_genomes_3_0: Freqgnomad;
+  gnomad_genomes_3_1_1: Freqgnomad;
+  [key: string]: any;
 }
 
-export interface IConsequenceNode {
-  node: IConsequenceEntity;
+export interface IVariantConsequenceNode {
+  node: IVariantConsequence;
 }
 
-export interface IConsequenceEntity {
+export interface IVariantConsequence {
+  fathmm_pred: string;
+
   id: string;
   hgvsc: string;
   symbol: string;
@@ -87,44 +96,83 @@ export interface IClinVar {
   interpretations: string[];
 }
 
-interface IGeneCosmic {
-  id: any;
-  score: number;
-  tumour_types_germline: string[];
-}
+export type OmimCondition = {
+  omimName: string;
+  omimId: string;
+};
+export type OmimConditions = OmimCondition[];
 
-interface IGeneDdd {
-  id: any;
-  score: number;
-  disease_name: string;
-}
+export type HpoCondition = {
+  hpoTermLabel: string;
+  hpoTermTermId: string;
+};
+export type HpoConditions = HpoCondition[];
 
-interface IGeneHpo {
-  id: any;
-  score: number;
-  hpo_term_id: string;
-  hpo_term_label: string;
-  hpo_term_name: string;
-}
-
-interface IGeneOmim {
-  id: any;
-  score: number;
-  inheritance: string[];
-  inheritance_code: string;
-  name: string;
-  omim_id: string;
-}
-
-interface IGeneOrphanet {
-  id: any;
-  score: number;
-  inheritance: string;
-  disorder_id: number;
+export type OrphanetCondition = {
   panel: string;
+  disorderId: number;
+};
+export type OrphanetConditions = OrphanetCondition[];
+
+export type DddCondition = string;
+export type DddConditions = DddCondition[];
+
+export type CosmicCondition = string;
+export type CosmicConditions = CosmicCondition[];
+
+export type Conditions =
+  | OmimConditions
+  | HpoConditions
+  | OrphanetConditions
+  | DddConditions
+  | CosmicConditions;
+
+export type OrphanetInheritance = string[][];
+export type OmimInheritance = string[][];
+export type SingleValuedInheritance = string;
+export type Inheritance = SingleValuedInheritance | OrphanetInheritance | OmimInheritance;
+
+export type OmimGene = string[][];
+
+export type OmimEntity = {
+  id: string;
+  omim_id: string;
+  name: string;
+  inheritance: OmimInheritance | undefined | null;
+};
+
+export type HpoEntity = {
+  id: string;
+  hpo_term_label: string;
+  hpo_term_id: string;
+};
+
+export type DddEntity = {
+  id: string;
+  disease_name: string;
+};
+
+export type CosmicEntity = {
+  id: string;
+  tumour_types_germline: string[];
+};
+
+export type OrphanetEntity = {
+  id: string;
+  panel: string;
+  inheritance: OrphanetInheritance | null | undefined;
+  disorder_id: number;
+};
+
+export enum ClinicalGenesTableSource {
+  orphanet = 'Orphanet',
+  omim = 'OMIM',
+  hpo = 'HPO',
+  ddd = 'DDD',
+  cosmic = 'Cosmic',
 }
 
-export interface IGeneEntity {
+export interface IVariantGene {
   id: any;
   score: number;
   alias: string;
@@ -135,11 +183,27 @@ export interface IGeneEntity {
   name: string;
   omim_gene_id: string;
   symbol: string;
-  cosmic: ArrangerResultsTree<IGeneCosmic>;
-  ddd: ArrangerResultsTree<IGeneDdd>;
-  hpo: ArrangerResultsTree<IGeneHpo>;
-  omim: ArrangerResultsTree<IGeneOmim>;
-  orphanet: ArrangerResultsTree<IGeneOrphanet>;
+  cosmic: ArrangerResultsTree<CosmicEntity>;
+  ddd: ArrangerResultsTree<DddEntity>;
+  hpo: ArrangerResultsTree<HpoEntity>;
+  omim: ArrangerResultsTree<OmimEntity>;
+  orphanet: ArrangerResultsTree<OrphanetEntity>;
+}
+
+export interface IVariantStudyEntity {
+  id: string;
+  score: number;
+  acls: string[];
+  external_study_ids: string[];
+  participant_ids: string[];
+  participant_number: number;
+  study_code: string;
+  study_id: string;
+  transmissions: string[];
+  frequencies: IVariantStudyFrequencies;
+
+  //todo: add domain with variant etl
+  domain?: string;
 }
 
 export interface IVariantEntity {
@@ -169,11 +233,11 @@ export interface IVariantEntity {
   variant_external_reference: string;
   vep_impacts: string;
   zygosity: string;
-  studies: ArrangerResultsTree<IStudyEntity>;
-  consequences: ArrangerResultsTree<IConsequenceEntity>;
+  studies: ArrangerResultsTree<IVariantStudyEntity>;
+  consequences: ArrangerResultsTree<IVariantConsequence>;
   clinvar: IClinVar;
-  frequencies: IExternalFrequenciesEntity;
-  genes: ArrangerResultsTree<IGeneEntity>;
+  frequencies: IVariantFrequencies;
+  genes: ArrangerResultsTree<IVariantGene>;
 }
 
 export type ITableVariantEntity = IVariantEntity & {

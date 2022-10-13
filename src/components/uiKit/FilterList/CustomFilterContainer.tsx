@@ -80,6 +80,7 @@ const CustomFilterContainer = ({
         onSearchVisibleChange={setIsSearchVisible}
         collapseProps={{
           headerBorderOnly: true,
+          arrowIcon: 'caretFilled',
         }}
         customContent={
           <CustomFilterSelector

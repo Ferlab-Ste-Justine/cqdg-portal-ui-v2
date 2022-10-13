@@ -64,6 +64,7 @@ export const getQueryBuilderDictionary = (
           maximumLength: intl.get('components.querybuilder.header.modal.edit.input.maximumLength'),
         },
       },
+      saveThisFilter: intl.get('components.querybuilder.header.modal.saveThisFilter'),
       confirmUnsaved: {
         title: intl.get('components.querybuilder.header.modal.confirmUnsaved.title'),
         openSavedFilter: {
