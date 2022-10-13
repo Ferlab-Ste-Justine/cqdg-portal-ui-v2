@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { Space, Typography } from 'antd';
+import { Typography } from 'antd';
 import { IVariantEntity } from 'graphql/variants/models';
 import ClinvarTable from 'views/VariantEntity/Pathogenicity/ClinvarTable';
 import GeneTable from 'views/VariantEntity/Pathogenicity/GeneTable';
