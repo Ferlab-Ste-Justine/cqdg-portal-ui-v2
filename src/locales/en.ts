@@ -308,7 +308,8 @@ const fr = {
       menu: {
         myprofile: 'My Profile',
         settings: 'Settings',
-        logout: 'Logout',
+        logout: 'Sign out',
+        signedWith: 'Signed in with',
       },
     },
   },

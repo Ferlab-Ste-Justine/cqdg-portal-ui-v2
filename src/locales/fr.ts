@@ -314,6 +314,7 @@ const fr = {
         myprofile: 'Mon profil',
         settings: 'Paramètres',
         logout: 'Se déconnecter',
+        signedWith: 'Connecté en tant que',
       },
     },
   },

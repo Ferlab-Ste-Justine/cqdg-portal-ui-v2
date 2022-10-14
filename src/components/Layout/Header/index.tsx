@@ -17,11 +17,12 @@ import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
-import style from 'components/Layout/Header/index.module.scss';
 import { globalActions, useLang } from 'store/global';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
 import { STATIC_ROUTES } from 'utils/routes';
+
+import styles from './index.module.scss';
 
 const iconSize = { width: 14, height: 14 };
 const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
@@ -51,7 +52,7 @@ const Header = () => {
   return (
     <>
       <NotificationBanner
-        className={style.siteWideBanner}
+        className={styles.siteWideBanner}
         featureToggleKey={FT_FLAG_KEY}
         type={getFTEnvVarByKey<AlterTypes>(BANNER_TYPE_KEY, 'warning')}
         message={getFTEnvVarByKey(BANNER_MSG_KEY)}
@@ -59,41 +60,41 @@ const Header = () => {
         closable
       />
       <PageHeader
-        className={style.mainHeader}
+        className={styles.mainHeader}
         title={
-          <div className={style.headerNavList}>
-            <CQDGLogoFullPortal className={style.logo} />
-            <nav className={style.headerNavList}>
+          <div className={styles.headerNavList}>
+            <CQDGLogoFullPortal className={styles.logo} />
+            <nav className={styles.headerNavList}>
               <HeaderLink
                 to={STATIC_ROUTES.DASHBOARD}
                 icon={<HomeOutlined />}
                 title={intl.get('layout.main.menu.dashboard')}
-                className={`${style.headerBtn} ${
-                  isActive(STATIC_ROUTES.DASHBOARD) && style.headerBtnActive
+                className={`${styles.headerBtn} ${
+                  isActive(STATIC_ROUTES.DASHBOARD) && styles.headerBtnActive
                 }`}
               />
               <HeaderLink
                 to={STATIC_ROUTES.STUDIES}
                 icon={<ReadOutlined />}
                 title={intl.get('layout.main.menu.studies')}
-                className={`${style.headerBtn} ${
-                  isActive(STATIC_ROUTES.STUDIES) && style.headerBtnActive
+                className={`${styles.headerBtn} ${
+                  isActive(STATIC_ROUTES.STUDIES) && styles.headerBtnActive
                 }`}
               />
               <HeaderLink
                 to={DATA_EXPLORATION_ROUTES}
                 icon={<FileSearchOutlined />}
                 title={intl.get('layout.main.menu.explore')}
-                className={`${style.headerBtn} ${
-                  isActive(DATA_EXPLORATION_ROUTES) && style.headerBtnActive
+                className={`${styles.headerBtn} ${
+                  isActive(DATA_EXPLORATION_ROUTES) && styles.headerBtnActive
                 }`}
               />
               <HeaderLink
                 to={[STATIC_ROUTES.VARIANTS]}
                 icon={<LineStyleIcon height={14} width={14} />}
                 title={intl.get('layout.main.menu.variants')}
-                className={`${style.headerBtn} ${
-                  isActive(STATIC_ROUTES.VARIANTS) && style.headerBtnActive
+                className={`${styles.headerBtn} ${
+                  isActive(STATIC_ROUTES.VARIANTS) && styles.headerBtnActive
                 }`}
               />
             </nav>
@@ -101,15 +102,15 @@ const Header = () => {
         }
         extra={[
           <ExternalLink key="cqdg-website" href={EnvVariables.configFor('CQDG_WEB_SITE')}>
-            <Button key="external-website" className={style.headerBtn}>
+            <Button key="external-website" className={styles.headerBtn}>
               {intl.get('layout.main.menu.website')}{' '}
-              <ExternalLinkIcon className={style.icon} {...iconSize} />
+              <ExternalLinkIcon className={styles.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
           <ExternalLink key="documentation" href={EnvVariables.configFor('CQDG_DOCUMENTATION')}>
-            <Button key="external-help" className={style.headerBtn}>
+            <Button key="external-help" className={styles.headerBtn}>
               {intl.get('layout.main.menu.documentation')}
-              <ExternalLinkIcon className={style.icon} {...iconSize} />
+              <ExternalLinkIcon className={styles.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
           <Dropdown
@@ -118,6 +119,19 @@ const Header = () => {
             overlay={
               <Menu
                 items={[
+                  {
+                    label: (
+                      <span className={styles.titleUserDropdown}>
+                        {intl.get('layout.user.menu.signedWith') + ' '}
+                        <b>{userInfo?.email}</b>
+                      </span>
+                    ),
+                    key: 'title',
+                    type: 'group',
+                  },
+                  {
+                    type: 'divider',
+                  },
                   {
                     key: 'logout',
                     label: intl.get('layout.user.menu.logout'),
@@ -128,21 +142,21 @@ const Header = () => {
               />
             }
           >
-            <a className={style.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
+            <a className={styles.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
               <Gravatar
                 circle
                 placeholder={'mp'}
-                className={style.userGravatar}
+                className={styles.userGravatar}
                 email={tokenParsed.email || tokenParsed.identity_provider_identity}
               />
-              <span className={style.userName}>{userInfo?.first_name}</span>
+              <span className={styles.userName}>{userInfo?.first_name}</span>
               <DownOutlined />
             </a>
           </Dropdown>,
           <Button
             key="change-lang-button"
             shape="circle"
-            className={style.langButton}
+            className={styles.langButton}
             onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
           >
             {getTargetLang(lang).toUpperCase()}
