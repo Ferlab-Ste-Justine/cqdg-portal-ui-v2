@@ -505,8 +505,8 @@ const fr = {
             dataTypeTitle: 'Participants par types de données',
             studiesTitle: 'Participants par étude',
             axis: '# de participants',
-            dataCategories: 'Catégories de données',
-            dataTypes: 'Types de données',
+            dataCategory: 'Catégorie de données',
+            dataType: 'Type de données',
           },
           observed_phenotype_tagged: {
             cardTitle: 'Phénotypes observés (HPO)',

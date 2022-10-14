@@ -64,7 +64,7 @@ const DataTypeGraphCard = ({ id, className = '' }: OwnProps) => {
           <BarChart
             data={dataTypeResults}
             axisLeft={{
-              legend: intl.get('screen.dataExploration.tabs.summary.availableData.dataTypes'),
+              legend: intl.get('screen.dataExploration.tabs.summary.availableData.dataType'),
               legendPosition: 'middle',
               legendOffset: -120,
               format: (title: string) => truncateString(title, 15),
