@@ -16,11 +16,9 @@ import ProtectedRoute from 'ProtectedRoute';
 import ApolloProvider from 'provider/ApolloProvider';
 import ContextProvider from 'provider/ContextProvider';
 import ErrorPage from 'views/Error';
-import FenceRedirect from 'views/FenceRedirect';
 import Login from 'views/Login';
 
 import { LANG } from 'common/constants';
-import { FENCE_NAMES } from 'common/fenceTypes';
 import MainSideImage from 'components/assets/side-img-svg.svg';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLayout from 'components/Layout';
@@ -55,16 +53,6 @@ const App = () => {
             <AuthMiddleware>
               <Router>
                 <Switch>
-                  <Route
-                    path={STATIC_ROUTES.GEN3_FENCE_REDIRECT}
-                    exact
-                    render={() => <FenceRedirect fence={FENCE_NAMES.gen3} />}
-                  />
-                  <Route
-                    path={STATIC_ROUTES.CAVATICA_FENCE_REDIRECT}
-                    exact
-                    render={() => <FenceRedirect fence={FENCE_NAMES.cavatica} />}
-                  />
                   <Route exact path={STATIC_ROUTES.LOGIN}>
                     <SideImageLayout sideImgSrc={MainSideImage} theme="light">
                       <Login />

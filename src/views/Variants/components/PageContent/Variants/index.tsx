@@ -25,7 +25,7 @@ import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from 'views/Variants/components/PageContent/Variants/index.module.scss';
+import styles from './index.module.scss';
 
 interface OwnProps {
   results: IQueryResults<IVariantEntity[]>;
@@ -44,7 +44,9 @@ const defaultColumns: ProColumnType<any>[] = [
     render: (hgvsg: string, entity: IVariantEntity) =>
       hgvsg ? (
         <Tooltip placement="topLeft" title={hgvsg}>
-          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>{hgvsg}</Link>
+          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>
+            {hgvsg}TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+          </Link>
         </Tooltip>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
@@ -62,7 +64,6 @@ const defaultColumns: ProColumnType<any>[] = [
     key: 'rsnumber',
     title: intl.get('screen.variants.table.dbsnp'),
     dataIndex: 'rsnumber',
-    className: styles.dbSnpTableCell,
     render: (rsNumber: string) =>
       rsNumber ? (
         <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${rsNumber}`}>

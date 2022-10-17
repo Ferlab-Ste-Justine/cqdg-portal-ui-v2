@@ -93,41 +93,6 @@ const fr = {
         messageUpdate: 'Your set has been updated.',
       },
     },
-    cavatica: {
-      error: {
-        title: 'Error',
-        projects: {
-          fetch: 'Unable to fetch your cavatica projects.',
-          create: 'Unable to create your cavatica project.',
-        },
-        billingGroups: {
-          fetch: 'Unable to fetch your cavatica billing groups.',
-        },
-        bulk: {
-          import: 'Unable to copy files to your project',
-          fetchFiles: 'Unable to fetch selected files',
-        },
-        fileAuth: {
-          title: 'Unauthorized files',
-          description:
-            'You are not authorized to analyze the files you have selected. Learn more about data access.',
-        },
-      },
-      success: {
-        title: 'Success',
-        projects: {
-          create: 'Project created successfully',
-        },
-        bulk: {
-          import: {
-            copySuccess: 'Your files have been copied to: <strong>{destination}</strong>',
-            possibleDelays:
-              'If you have uploaded more than 10000 files in the last 5 minutes, the import may take a little longer.',
-            openProject: 'Open project in Cavatica',
-          },
-        },
-      },
-    },
     report: {
       error: {
         title: 'Error',
@@ -330,22 +295,6 @@ const fr = {
             'We are currently unable to connect to this service. Please refresh the page and try again. If the problem persists, please',
           contactSupport: 'contact support',
         },
-        cavatica: {
-          title: 'Cavatica Projects',
-          connectedNotice: 'You are connected to the Cavatica cloud environment.',
-          disconnectedNotice: 'To analyze INCLUDE data on the cloud, connect to Cavatica.',
-          disconnect: 'Disconnect',
-          noProjects: 'You do not have any Cavatica projects.',
-          createNewProject: 'Create your first project',
-          membersCount: '{count, plural, =0 {member} =1 {# member} other {# members}}',
-          infoPopover: {
-            title: 'CAVATICA compute cloud platform',
-            content:
-              'CAVATICA is a cloud-based data analysis platform where data, results, and workflows are shared among the world’s research community.',
-            readMore: 'Read more',
-          },
-          newProject: 'New project',
-        },
         savedFilters: {
           title: 'Saved Filters',
           noSavedFilters: 'You have no saved filters',
@@ -528,34 +477,50 @@ const fr = {
         },
         participants: {
           title: 'Participants ({count})',
+          participantID: 'Participant ID',
+          studies: 'Studies',
+          proband: 'Proband',
+          gender: 'Gender',
+          familyHistory: 'Family History',
+          ageAtRecruitment: 'Age at Recruitment',
+          diagnoses: 'Diagnosis (Mondo)',
+          phenotypes: 'Phenotypes (HPO)',
+          files: 'Files',
+          ethnicity: 'Ethnicity',
+          vitalStatus: 'Vital Status',
+          submitterParticipantId: 'Submitter Participant Id',
+          ageAtDeath: 'Age at death',
+          selectedParticipants: 'Selected participants',
+          selectedParticipantsFamilies: 'Selected participants & families',
         },
         biospecimens: {
           title: 'Biospecimens ({count})',
         },
         datafiles: {
           title: 'Data Files ({count})',
-          cavatica: {
-            analyseInCavatica: 'Analyze in Cavatica',
-            bulkImportLimit: {
-              title: 'Maximum file count exceeded',
-              description:
-                'You can copy a maximum of <strong>{limit} files</strong> at a time. Please select fewer files and try again.',
-            },
-            authWarning: {
-              title: 'You are not connected to Cavatica',
-              description:
-                'In order to analyze your files you must first connect your Cavatica account. Once you are connected, you will be redirected back to this page.',
-            },
-            analyseModal: {
-              newProject: 'New project',
-              copyFiles: 'Copy files',
-              copyFilesTo: 'Copy files to...',
-              createProjectToPushFileTo: 'Create a project to push your files to.',
-              youAreAuthorizedToCopy: 'You are authorized to copy',
-            },
-          },
+          fileAuthorization: 'File Authorization',
+          dataAccess: 'Data Access',
+          fileID: 'File ID',
+          studies: 'Studies',
+          dataCategory: 'Data Category',
+          dataType: 'Data Type',
+          experimentalStrategy: 'Experimental Strategy',
+          accessUrl: 'Access Url',
+          format: 'Format',
+          size: 'Size',
+          platform: 'Platform',
+          participants: 'Participants',
+          biospecimens: 'Biospecimens',
+          controlled: 'Controlled',
+          registered: 'Registered',
         },
       },
+      selected: '(s) selected',
+      participantCount: 'items at a time. The first 10,000 will be processed.',
+      saveAsNewSet: 'Save as new set',
+      addToExistingSet: 'Add to existing set',
+      removeFromExistingSet: 'Remove from existing set',
+      saveTypeSet: 'Save {type} set',
     },
     join: {
       cancel: 'Cancel',

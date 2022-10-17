@@ -16,9 +16,6 @@ export enum STATIC_ROUTES {
   DATA_EXPLORATION_DATAFILES = '/data-exploration/datafiles',
 
   VARIANTS = '/variants',
-
-  GEN3_FENCE_REDIRECT = '/gen3_redirect',
-  CAVATICA_FENCE_REDIRECT = '/cavatica_redirect',
 }
 
 export enum DYNAMIC_ROUTES {
