@@ -242,7 +242,7 @@ const fr = {
       },
       popupConfirm: {
         delete: {
-          title: 'Supprimer définitivement cet ensemble?',
+          title: 'Supprimer définitivement cet ensemble ensemble ensemble ensemble?',
           okText: 'Supprimer cet ensemble ensemble ensemble',
           cancelText: 'Annuler',
           content: 'Vous êtes sur le point de supprimer définitivement cet ensemble.',
