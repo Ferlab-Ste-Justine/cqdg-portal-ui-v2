@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import {
   DownOutlined,
   ExperimentOutlined,
@@ -109,14 +110,15 @@ const menu = (
         label: (
           <>
             <span>
-              {participantCount} {type} selected
+              {participantCount} {type}
+              {intl.get('screen.dataExploration.selected')}
             </span>
             <Tooltip
               arrowPointAtCenter
               placement="topRight"
-              title={`Max. ${numberWithCommas(
-                ROW_SELECTION_LIMIT,
-              )} items at a time. The first 10,000 will be processed.`}
+              title={`Max. ${numberWithCommas(ROW_SELECTION_LIMIT)} ${intl.get(
+                'screen.dataExploration.participantCount',
+              )}`}
             >
               <InfoCircleOutlined className={styles.infoCircle} />
             </Tooltip>
@@ -129,18 +131,18 @@ const menu = (
       {
         key: 'create',
         icon: <PlusOutlined />,
-        label: 'Save as new set',
+        label: intl.get('screen.dataExploration.saveAsNewSet'),
       },
       {
         key: 'add_ids',
         icon: <UsergroupAddOutlined />,
-        label: 'Add to existing set',
+        label: intl.get('screen.dataExploration.addToExistingSet'),
         disabled: isEditDisabled,
       },
       {
         key: 'remove_ids',
         icon: <UsergroupDeleteOutlined />,
-        label: 'Remove from existing set',
+        label: intl.get('screen.dataExploration.removeFromExistingSet'),
         disabled: isEditDisabled,
       },
     ]}
@@ -217,7 +219,7 @@ const SetsManagementDropdown = ({
         }
       >
         <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
-          {`Save ${type} set`}
+          {intl.get('screen.dataExploration.saveTypeSet', { type })}
           <DownOutlined />
         </Button>
       </Dropdown>

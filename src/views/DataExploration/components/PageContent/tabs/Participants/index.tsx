@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DownloadOutlined } from '@ant-design/icons';
@@ -7,6 +8,7 @@ import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import useQueryBuilderState, {
   addQuery,
+  updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
@@ -30,6 +32,7 @@ import {
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
+import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { SEX, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
@@ -54,7 +57,7 @@ interface OwnProps {
 const defaultColumns: ProColumnType<any>[] = [
   {
     key: 'participant_id',
-    title: 'Participant ID',
+    title: intl.get('screen.dataExploration.tabs.participants.participantID'),
     dataIndex: 'participant_id',
     sorter: {
       multiple: 1,
@@ -62,29 +65,39 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'studies',
-    title: 'Studies',
+    title: intl.get('screen.dataExploration.tabs.participants.studies'),
     dataIndex: 'studies',
     sorter: {
       multiple: 1,
     },
     className: styles.studyIdCell,
     render: (studies: ArrangerResultsTree<IStudyEntity>) => {
+      if (!studies?.hits?.edges?.length) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
       const studiesInfo = studies?.hits.edges.map((study) => ({
         name: study.node.name,
         id: study.node.internal_study_id,
       }));
-      if (!studiesInfo) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
           dataSource={studiesInfo}
           renderItem={(item, index) => (
-            <div key={index}>
-              {/*go to good study */}
-              <Link to={STATIC_ROUTES.STUDIES}>{item.name}</Link>
-            </div>
+            <Link
+              key={index}
+              to={STATIC_ROUTES.STUDIES}
+              onClick={() =>
+                updateActiveQueryField({
+                  queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+                  field: 'internal_study_id',
+                  value: item.id ? [item.id] : [],
+                  index: INDEXES.STUDY,
+                })
+              }
+            >
+              {item.name}
+            </Link>
           )}
         />
       );
@@ -92,7 +105,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'is_a_proband',
-    title: 'Proband',
+    title: intl.get('screen.dataExploration.tabs.participants.proband'),
     dataIndex: 'is_a_proband',
     sorter: {
       multiple: 1,
@@ -100,23 +113,23 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'gender',
-    title: 'Gender',
+    title: intl.get('screen.dataExploration.tabs.participants.gender'),
     dataIndex: 'gender',
     sorter: {
       multiple: 1,
     },
-    render: (sex: string) =>
-      sex ? (
+    render: (gender: string) =>
+      gender ? (
         <Tag
           color={
-            sex.toLowerCase() === SEX.FEMALE
+            gender.toLowerCase() === SEX.FEMALE
               ? 'magenta'
-              : sex.toLowerCase() === SEX.MALE
+              : gender.toLowerCase() === SEX.MALE
               ? 'geekblue'
               : ''
           }
         >
-          {capitalize(sex)}
+          {capitalize(gender)}
         </Tag>
       ) : (
         ''
@@ -124,7 +137,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'family_history_available',
-    title: 'Family History',
+    title: intl.get('screen.dataExploration.tabs.participants.familyHistory'),
     dataIndex: 'family_history_available',
     sorter: {
       multiple: 1,
@@ -137,7 +150,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'age_at_recruitment',
-    title: 'Age at Recruitment',
+    title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
     dataIndex: 'age_at_recruitment',
     sorter: {
       multiple: 1,
@@ -146,7 +159,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'diagnoses',
-    title: 'Diagnosis (Mondo)',
+    title: intl.get('screen.dataExploration.tabs.participants.diagnoses'),
     dataIndex: 'diagnoses',
     className: styles.diagnosisCell,
     render: (diagnoses: ArrangerResultsTree<IDiagnosis>) => {
@@ -176,7 +189,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'phenotypes_tagged',
-    title: 'Phenotypes (HPO)',
+    title: intl.get('screen.dataExploration.tabs.participants.phenotypes'),
     dataIndex: 'phenotypes_tagged',
     className: styles.phenotypeCell,
     render: (observed_phenotype: ArrangerResultsTree<IPhenotype>) => {
@@ -204,7 +217,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'nb_files',
-    title: 'Files',
+    title: intl.get('screen.dataExploration.tabs.participants.files'),
     sorter: {
       multiple: 1,
     },
@@ -236,7 +249,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'ethnicity',
-    title: 'Ethnicity',
+    title: intl.get('screen.dataExploration.tabs.participants.ethnicity'),
     dataIndex: 'ethnicity',
     defaultHidden: true,
     sorter: {
@@ -246,7 +259,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'vital_status',
-    title: 'Vital status',
+    title: intl.get('screen.dataExploration.tabs.participants.vitalStatus'),
     dataIndex: 'vital_status',
     defaultHidden: true,
     sorter: {
@@ -256,7 +269,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'submitter_participant_id',
-    title: 'Submitter Participant ID',
+    title: intl.get('screen.dataExploration.tabs.participants.submitterParticipantId'),
     dataIndex: 'submitter_participant_id',
     defaultHidden: true,
     sorter: {
@@ -266,7 +279,7 @@ const defaultColumns: ProColumnType<any>[] = [
   },
   {
     key: 'age_of_death',
-    title: 'Age at death',
+    title: intl.get('screen.dataExploration.tabs.participants.ageAtDeath'),
     dataIndex: 'age_of_death',
     defaultHidden: true,
     sorter: {
@@ -310,11 +323,11 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
       items={[
         {
           key: ReportType.CLINICAL_DATA,
-          label: 'Selected participants',
+          label: intl.get('screen.dataExploration.tabs.participants.selectedParticipants'),
         },
         {
           key: ReportType.CLINICAL_DATA_FAM,
-          label: 'Selected participants & familys',
+          label: intl.get('screen.dataExploration.tabs.participants.selectedParticipantsFamilies'),
         },
       ]}
     />

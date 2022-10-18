@@ -93,41 +93,6 @@ const fr = {
         messageUpdate: 'Votre ensemble a été modifié.',
       },
     },
-    cavatica: {
-      error: {
-        title: 'Erreur',
-        projects: {
-          fetch: 'Impossible de trouver vos projets Cavatica.',
-          create: 'Impossible de créer votre projet Cavatica.',
-        },
-        billingGroups: {
-          fetch: 'Impossible de trouver vos factures de groupe Cavatica.',
-        },
-        bulk: {
-          import: 'Impossible de copier des fichiers à votre projet',
-          fetchFiles: 'Impossible de trouver les fichiers séléctionnés',
-        },
-        fileAuth: {
-          title: 'Fichiers non autorisés',
-          description:
-            "Vous n'êtes pas autorisé à analyser les fichiers que vous avez sélectionnés. En savoir plus sur l'accès aux données.",
-        },
-      },
-      success: {
-        title: 'Succès',
-        projects: {
-          create: 'Projet créé avec succès',
-        },
-        bulk: {
-          import: {
-            copySuccess: 'Vos fichiers ont été copiés dans: <strong>{destination}</strong>',
-            possibleDelays:
-              "Si vous avez téléchargé plus de 10 000 fichiers au cours des 5 dernières minutes, l'importation peut prendre un peu plus de temps\n.",
-            openProject: 'Ouvrir le project dans Cavatica',
-          },
-        },
-      },
-    },
     report: {
       error: {
         title: 'Erreur',
@@ -314,6 +279,7 @@ const fr = {
         myprofile: 'Mon profil',
         settings: 'Paramètres',
         logout: 'Se déconnecter',
+        signedWith: 'Connecté en tant que',
       },
     },
   },
@@ -333,23 +299,6 @@ const fr = {
           subtitle:
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
           contactSupport: 'contactez le support',
-        },
-        cavatica: {
-          title: 'Projets Cavatica',
-          connectedNotice: "Vous êtes connecté à l'environnement cloud Cavatica.",
-          disconnectedNotice:
-            'Pour analyser les données INCLUDE sur le cloud, connectez-vous à Cavatica.',
-          disconnect: 'Déconnecter',
-          noProjects: "Vous n'avez pas de projets Cavatica.",
-          createNewProject: 'Créez votre premier projet',
-          membersCount: '{count, plural, =0 {member} =1 {# member} autre {# members}}',
-          infoPopover: {
-            title: 'Plateforme cloud de calcul CAVATICA',
-            content:
-              "CAVATICA est une plate-forme d'analyse de données basée sur le cloud où les données, les résultats et les flux de travail sont partagés entre la communauté de recherche mondiale.",
-            readMore: 'Lire la suite',
-          },
-          newProject: 'Nouveau projet',
         },
         savedFilters: {
           title: 'Filtres enregistrés',
@@ -505,8 +454,8 @@ const fr = {
             dataTypeTitle: 'Participants par types de données',
             studiesTitle: 'Participants par étude',
             axis: '# de participants',
-            dataCategories: 'Catégories de données',
-            dataTypes: 'Types de données',
+            dataCategory: 'Catégorie de données',
+            dataType: 'Type de données',
           },
           observed_phenotype_tagged: {
             cardTitle: 'Phénotypes observés (HPO)',
@@ -537,34 +486,50 @@ const fr = {
         },
         participants: {
           title: 'Participants ({count})',
+          participantID: 'Participant ID',
+          studies: 'Études',
+          proband: 'Proband',
+          gender: 'Genre',
+          familyHistory: 'Historique familiale',
+          ageAtRecruitment: 'Âge au recrutement',
+          diagnoses: 'Diagnosis (Mondo)',
+          phenotypes: 'Phenotypes (HPO)',
+          files: 'Fichiers',
+          ethnicity: 'Ethnicité',
+          vitalStatus: 'Status vitale',
+          submitterParticipantId: 'Submitter Participant Id',
+          ageAtDeath: 'Âge au décés',
+          selectedParticipants: 'Participants séléctionnés',
+          selectedParticipantsFamilies: 'Participants séléctionnés et familles',
         },
         biospecimens: {
           title: 'Spécimens biologiques ({count})',
         },
         datafiles: {
           title: 'Fichiers de données ({count})',
-          cavatica: {
-            analyseInCavatica: 'Analyser dans Cavatica',
-            bulkImportLimit: {
-              title: 'Nombre maximal de fichiers dépassé',
-              description:
-                'Vous pouvez copier un maximum de <strong>{limit} fichiers</strong> en meme temps. Veuillez sélectionner moins de fichiers et réessayer.',
-            },
-            authWarning: {
-              title: "Vous n'êtes pas connecté à Cavatica",
-              description:
-                "Afin d'analyser vos fichiers, vous devez d'abord vous connecter à votre compte Cavatica. Une fois connecté, vous serez redirigé vers cette page.",
-            },
-            analyseModal: {
-              newProject: 'Nouveau projet',
-              copyFiles: 'Copier des fichiers',
-              copyFilesTo: 'Copier des fichiers vers...',
-              createProjectToPushFileTo: 'Créez un projet pour pousser vos fichiers vers.',
-              youAreAuthorizedToCopy: 'Vous êtes autorisé à copier',
-            },
-          },
+          fileAuthorization: 'Authorisation des fichiers',
+          dataAccess: 'Accès des données',
+          fileID: 'Fichier ID',
+          studies: 'Études',
+          dataCategory: 'Catégorie de données',
+          dataType: 'type de données',
+          experimentalStrategy: 'Stratégie expérimentale',
+          accessUrl: 'Accès Url',
+          format: 'Format',
+          size: 'Taille',
+          platform: 'Platforme',
+          participants: 'Participants',
+          biospecimens: 'Specimens biologiques',
+          controlled: 'Controllé',
+          registered: 'Enregistré',
         },
       },
+      selected: '(s) séléctionné(s)',
+      participantCount: 'éléments à la fois. Les 10 000 premiers seront traités.',
+      saveAsNewSet: 'Enregistrer un nouveau ensemble',
+      addToExistingSet: 'Ajouter à un ensemble existant',
+      removeFromExistingSet: "Supprimer d'un ensemble existant",
+      saveTypeSet: "Enregistrer l'ensemble {type}",
     },
     join: {
       cancel: 'Annuler',

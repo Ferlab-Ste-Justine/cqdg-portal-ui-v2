@@ -17,6 +17,7 @@ import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/St
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
 
@@ -72,7 +73,7 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
       return canMakeParticipantsLink(participantsNumber) ? (
         <>
           <Link
-            to={'/data-exploration'}
+            to={STATIC_ROUTES.DATA_EXPLORATION}
             onClick={() => {
               updateActiveQueryField({
                 queryBuilderId: DATA_EXPLORATION_QB_ID,
