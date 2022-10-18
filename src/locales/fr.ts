@@ -65,7 +65,7 @@ const fr = {
     },
     proTable: {
       results: 'Résultats',
-      noResults: 'Aucun résultats',
+      noResults: 'Aucun résultat',
       of: 'de',
       selected: 'élément selectionné',
       selectedPlural: 'éléments selectionnés',
