@@ -44,9 +44,7 @@ const defaultColumns: ProColumnType<any>[] = [
     render: (hgvsg: string, entity: IVariantEntity) =>
       hgvsg ? (
         <Tooltip placement="topLeft" title={hgvsg}>
-          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>
-            {hgvsg}TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
-          </Link>
+          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>{hgvsg}</Link>
         </Tooltip>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
