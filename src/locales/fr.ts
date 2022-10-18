@@ -8,10 +8,10 @@ const fr = {
     no: 'Non',
     search: {
       genes: {
-        emptyText: 'Aucun gene trouvé',
+        emptyText: 'Aucun gène trouvé',
         placeholder: 'e.g. BRAF, ENSG00000157764',
         title: 'Recherche par gene',
-        tooltip: 'Entrer un Symbole de gène, Alias de gène ou Ensembl ID',
+        tooltip: 'Entrer un Symbole de gène, Alias de gène ou un Ensembl ID',
       },
       variants: {
         emptyText: 'Aucun variant trouvé',
@@ -41,7 +41,7 @@ const fr = {
         is: 'Est',
       },
       messages: {
-        empty: 'Aucune value trouvée',
+        empty: 'Aucune valeur trouvée',
       },
       checkbox: {
         placeholder: 'Chercher...',
@@ -65,10 +65,10 @@ const fr = {
     },
     proTable: {
       results: 'Résultats',
-      noResults: 'Aucun résultats',
+      noResults: 'Aucun résultat',
       of: 'de',
-      selected: 'element selectionné',
-      selectedPlural: 'elements selectionnés',
+      selected: 'élément selectionné',
+      selectedPlural: 'éléments selectionnés',
     },
   },
   api: {
