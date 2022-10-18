@@ -17,7 +17,18 @@
   }
 
   .anchorMenu {
-    margin-top: 0px;
+    margin-top: 0;
+  }
+
+
+  .titleHeader {
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+
+    .title {
+      padding-left: 12px;
+    }
   }
 }
 

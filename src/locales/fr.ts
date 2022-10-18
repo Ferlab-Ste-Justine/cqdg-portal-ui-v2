@@ -118,9 +118,9 @@ const fr = {
     },
     table: {
       itemCount: {
-        singlePage: '{count, plural, =0 {No result} autre {<strong>#</strong> résultats}}',
+        singlePage: '{count, plural, =0 {No result} other {<strong>#</strong> results}}',
         multiplePages:
-          'Résultats <strong>{from}</strong> - <strong>{to}</strong> de <strong>{total}</strong>',
+          'Results <strong>{from}</strong> - <strong>{to}</strong> of <strong>{total}</strong>',
       },
     },
     suggester: {
