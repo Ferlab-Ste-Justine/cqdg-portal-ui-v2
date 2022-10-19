@@ -86,6 +86,7 @@ export interface IVariantConsequence {
   ensembl_gene_id: string;
   predictions: IPredictionEntity;
   conservations: IConservationsEntity;
+  biotype: string;
 }
 
 export interface IClinVar {

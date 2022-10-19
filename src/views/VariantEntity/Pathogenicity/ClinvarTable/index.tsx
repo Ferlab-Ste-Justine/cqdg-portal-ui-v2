@@ -49,6 +49,7 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => (
     size="small"
     pagination={false}
     rowClassName={styles.notStriped}
+    bordered
   />
 );
 export default StudiesTable;

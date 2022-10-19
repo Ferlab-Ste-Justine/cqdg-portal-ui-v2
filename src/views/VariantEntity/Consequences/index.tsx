@@ -142,11 +142,11 @@ const makeTables = (
 const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
   consequences.map((consequence: ArrangerEdge<IVariantConsequence>, index: number) => ({
     key: `${index + 1}`,
-    aa: consequence.node.aa_change,
-    consequences: consequence.node.consequences?.filter((c) => c || c.length > 0),
-    codingDna: consequence.node.coding_dna_change,
+    aa_change: consequence.node.aa_change,
+    consequences: consequence.node.consequences?.filter((c) => c?.length),
+    coding_dna_change: consequence.node.coding_dna_change,
     strand: consequence.node.strand,
-    vep: consequence.node.vep_impact,
+    vep_impact: consequence.node.vep_impact,
     impact: [
       [
         'Sift',
@@ -173,32 +173,30 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
       ['Revel', null, consequence.node.predictions?.revel_rankscore],
     ].filter(([, , score]) => score),
     conservation: consequence.node.conservations?.phylo_p17way_primate_rankscore,
+    refseq_mrna_id: consequence.node.refseq_mrna_id || '',
     transcript: {
-      ids: consequence.node.refseq_mrna_id
-        ? Array.isArray(consequence.node.refseq_mrna_id)
-          ? consequence.node.refseq_mrna_id
-          : [consequence.node.refseq_mrna_id]
-        : [],
-      transcriptId: consequence.node.ensembl_transcript_id || '',
+      ensembl_transcript_id: consequence.node.ensembl_transcript_id || '',
       isCanonical: consequence.node.canonical || false,
     },
   }));
 
 const columns = [
   {
-    title: () => intl.get('screen.variants.consequences.AAColumn'),
-    dataIndex: 'aa',
-    render: (aa: string) => (
-      <div className={styles.longValue}>{aa || TABLE_EMPTY_PLACE_HOLDER}</div>
+    title: (
+      <Tooltip title={intl.get('screen.variants.summary.AAColumnTooltip')}>
+        {intl.get('screen.variants.consequences.AAColumn')}
+      </Tooltip>
     ),
-    className: `${styles.longValue}`,
-    width: '10%',
+    dataIndex: 'aa_change',
+    render: (aa_change: string) => (
+      <div className={styles.longValue}>{aa_change || TABLE_EMPTY_PLACE_HOLDER}</div>
+    ),
   },
   {
-    title: () => intl.get('screen.variants.consequences.consequence'),
+    title: intl.get('screen.variants.consequences.consequence'),
     dataIndex: 'consequences',
     render: (consequences: string[]) => {
-      if (consequences.length === 0) {
+      if (!consequences.length) {
         return '';
       }
       return (
@@ -212,28 +210,26 @@ const columns = [
         />
       );
     },
-    width: '15%',
   },
   {
-    title: () => intl.get('screen.variants.consequences.CDNAChangeColumn'),
-    dataIndex: 'codingDna',
-    render: (codingDna: string) => (
-      <div className={styles.longValue}>{codingDna || TABLE_EMPTY_PLACE_HOLDER}</div>
+    title: intl.get('screen.variants.consequences.CDNAChangeColumn'),
+    dataIndex: 'coding_dna_change',
+    render: (coding_dna_change: string) => (
+      <div className={styles.longValue}>{coding_dna_change || TABLE_EMPTY_PLACE_HOLDER}</div>
     ),
-    width: '12%',
   },
   {
-    title: () => intl.get('screen.variants.consequences.strand'),
+    title: intl.get('screen.variants.consequences.strand'),
     dataIndex: 'strand',
     render: (strand: string) => strand || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    title: () => intl.get('screen.variants.consequences.vep'),
+    title: intl.get('screen.variants.consequences.vep'),
     dataIndex: 'vep_impact',
     render: (vep: Impact) => getVepImpactTag(vep?.toLowerCase()) || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    title: () => intl.get('screen.variants.consequences.prediction'),
+    title: intl.get('screen.variants.consequences.prediction'),
     dataIndex: 'impact',
     render: (impact: string[][]) => {
       if (!impact?.length) {
@@ -267,44 +263,40 @@ const columns = [
         />
       );
     },
-    width: '15%',
   },
   {
-    title: () => intl.get('screen.variants.consequences.conservationColumn'),
+    title: intl.get('screen.variants.consequences.conservationColumn'),
     dataIndex: 'conservation',
     render: (conservation: number) =>
       conservation == null ? TABLE_EMPTY_PLACE_HOLDER : conservation,
   },
   {
-    title: () => intl.get('screen.variants.consequences.transcript'),
+    title: intl.get('screen.variants.consequences.transcript'),
     dataIndex: 'transcript',
-    render: (transcript: { transcriptId: string; isCanonical?: boolean }) => (
+    render: (transcript: { ensembl_transcript_id: string; isCanonical?: boolean }) => (
       <Space>
-        {transcript.transcriptId}
+        <ExternalLink href={`https://www.ensembl.org/id/${transcript.ensembl_transcript_id}`}>
+          {transcript.ensembl_transcript_id}
+        </ExternalLink>
         {transcript.isCanonical && (
           <Tooltip title={intl.get('screen.variants.consequences.canonical')}>
-            <CanonicalIcon className={styles.canonicalIcon} height="14" width="14" />
+            <CanonicalIcon className={styles.canonicalIcon} height="14" width="14" />{' '}
           </Tooltip>
         )}
       </Space>
     ),
-    width: '15%',
   },
   {
-    title: () => intl.get('screen.variants.consequences.refSeq'),
-    dataIndex: 'transcript',
-    width: '15%',
-    render: (transcript: { ids: string[] }) =>
-      transcript?.ids?.map((id) => (
-        <div key={id} className={styles.transcriptId}>
-          <ExternalLink
-            href={`https://www.ncbi.nlm.nih.gov/nuccore/${id}?report=graph`}
-            className={styles.transcriptLink}
-          >
-            {id}
-          </ExternalLink>
-        </div>
-      )) || TABLE_EMPTY_PLACE_HOLDER,
+    title: intl.get('screen.variants.consequences.refSeq'),
+    dataIndex: 'refseq_mrna_id',
+    render: (refseq_mrna_id: string) =>
+      refseq_mrna_id ? (
+        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/nuccore/${refseq_mrna_id}?report=graph`}>
+          {refseq_mrna_id}
+        </ExternalLink>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
 ];
 
@@ -327,8 +319,8 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
 
   return (
     <div id={id} className={styles.container}>
-      <Title level={5} className={styles.title}>
-        {intl.get('screen.variants.consequences.geneConsequences')}
+      <Title level={4} className={styles.title}>
+        {intl.get('screen.variants.consequences.consequences')}
       </Title>
       <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
         <CollapsePanel
@@ -354,11 +346,14 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                       <Space size={12}>
                         <Space size={4}>
                           <span>
-                            <ExternalLink
-                              href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${symbol}`}
-                            >
-                              {symbol}
-                            </ExternalLink>
+                            <span>{intl.get('screen.variants.consequences.gene')} </span>
+                            <span>
+                              <ExternalLink
+                                href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${symbol}`}
+                              >
+                                {symbol}
+                              </ExternalLink>
+                            </span>
                           </span>
                         </Space>
                         <Space size={4}>
@@ -375,7 +370,7 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                         </Space>
                       </Space>
                       <ExpandableTable
-                        bordered={true}
+                        bordered
                         nOfElementsWhenCollapsed={1}
                         buttonText={(showAll, hiddenNum) =>
                           showAll
@@ -384,7 +379,6 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                                 count: hiddenNum,
                               })
                         }
-                        key={index}
                         dataSource={makeRows(orderedConsequences)}
                         columns={columns}
                         pagination={false}

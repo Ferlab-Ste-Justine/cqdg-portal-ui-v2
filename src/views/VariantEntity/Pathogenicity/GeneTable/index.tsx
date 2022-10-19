@@ -57,7 +57,7 @@ export const columnsPhenotypes = [
         const [geneName, omimId] = record.gene as OmimGene;
         return (
           <>
-            <Typography.Text>{geneName}</Typography.Text>&nbsp;(MIM:
+            {`${geneName} (OMIM:`}
             <ExternalLink href={`https://www.omim.org/entry/${omimId}`}>{omimId}</ExternalLink>)
           </>
         );
@@ -262,6 +262,7 @@ const CohortsTable = ({ loading, variant }: ICohortsTableProps) => (
     pagination={false}
     size="small"
     rowClassName={styles.notStriped}
+    bordered
   />
 );
 

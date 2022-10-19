@@ -1,5 +1,5 @@
 import intl from 'react-intl-universal';
-import { Table } from 'antd';
+import { Table, Tooltip } from 'antd';
 import { IVariantEntity, IVariantFrequencies } from 'graphql/variants/models';
 import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
 
@@ -22,49 +22,55 @@ type Row = {
   key: string;
 };
 
-const displayDefaultIfNeeded = (datum: ExternalCohortDatum) =>
-  !datum ? TABLE_EMPTY_PLACE_HOLDER : datum;
-
 const externalColumns = [
   {
     key: 'cohort',
     title: intl.get('screen.variants.frequencies.cohort'),
     dataIndex: 'cohort',
-    render: (cohort: { cohortName: string; link?: string }) => {
-      const cohortName = cohort.cohortName;
-      if (['TopMed', 'Gnomad Genomes (v3)'].includes(cohortName)) {
-        return (
-          <a href={cohort.link} target="_blank" rel="noopener noreferrer">
-            {cohortName}
-          </a>
-        );
-      }
-      return cohortName;
-    },
+    render: (cohort: { cohortName: string; link?: string }) =>
+      cohort.link ? (
+        <a href={cohort.link} target="_blank" rel="noopener noreferrer">
+          {cohort.cohortName}
+        </a>
+      ) : (
+        cohort.cohortName
+      ),
   },
   {
     key: 'alt',
-    title: intl.get('screen.variants.frequencies.altAlleles'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.altAllelesTooltip')}>
+        {`# ${intl.get('screen.variants.frequencies.altAlleles')}`}
+      </Tooltip>
+    ),
     dataIndex: 'alt',
-    render: displayDefaultIfNeeded,
+    render: (alt: string) => alt || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'altRef',
-    title: intl.get('screen.variants.frequencies.altRef'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.altRefTooltip')}>
+        {`# ${intl.get('screen.variants.frequencies.altRef')}`}
+      </Tooltip>
+    ),
     dataIndex: 'altRef',
-    render: displayDefaultIfNeeded,
+    render: (altRef: string) => altRef || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'homozygotes',
-    title: intl.get('screen.variants.frequencies.Homozygotes'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.homozygotesTooltip')}>
+        {`# ${intl.get('screen.variants.frequencies.homozygotes')}`}
+      </Tooltip>
+    ),
     dataIndex: 'homozygotes',
-    render: displayDefaultIfNeeded,
+    render: (homozygotes: string) => homozygotes || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'frequency',
     title: intl.get('screen.variants.frequencies.frequency'),
     dataIndex: 'frequency',
-    render: displayDefaultIfNeeded,
+    render: (frequency: string) => frequency || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
@@ -75,6 +81,7 @@ const makeRowFromFrequencies = (
   if (!frequencies) return [];
 
   const topmed = frequencies.topmed || {};
+  const gnomadGenomes3_1_1 = frequencies.gnomad_genomes_3_1_1 || {};
   const gnomadGenomes3 = frequencies.gnomad_genomes_3_0 || {};
   const gnomadGenomes2_1 = frequencies.gnomad_genomes_2_1 || {};
   const gnomadExomes2_1 = frequencies.gnomad_exomes_2_1 || {};
@@ -93,9 +100,20 @@ const makeRowFromFrequencies = (
       frequency: toExponentialNotation(topmed.af),
     },
     {
+      key: 'gnomadGenomes3_1_1',
+      cohort: {
+        cohortName: 'gnomAD Genomes (v3.1.1)',
+        link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
+      },
+      alt: gnomadGenomes3_1_1.ac,
+      altRef: gnomadGenomes3_1_1.an,
+      homozygotes: gnomadGenomes3_1_1.homozygotes,
+      frequency: toExponentialNotation(gnomadGenomes3_1_1.af),
+    },
+    {
       key: 'gnomadGenomes3',
       cohort: {
-        cohortName: 'Gnomad Genomes (v3)',
+        cohortName: 'gnomAD Genomes (v3)',
         link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
       },
       alt: gnomadGenomes3.ac,
@@ -106,7 +124,7 @@ const makeRowFromFrequencies = (
     {
       key: 'gnomadGenomes2_1',
       cohort: {
-        cohortName: 'Gnomad Genomes (v2.1)',
+        cohortName: 'gnomAD Genomes (v2.1)',
       },
       alt: gnomadGenomes2_1.ac,
       altRef: gnomadGenomes2_1.an,
@@ -116,7 +134,7 @@ const makeRowFromFrequencies = (
     {
       key: 'gnomadExomes2_1',
       cohort: {
-        cohortName: 'Gnomad Exomes (v2.1)',
+        cohortName: 'gnomAD Exomes (v2.1)',
       },
       alt: gnomadExomes2_1.ac,
       altRef: gnomadExomes2_1.an,
@@ -166,6 +184,7 @@ const CohortsTable = ({ loading, variant }: ICohortsTableProps) => {
       pagination={false}
       size="small"
       rowClassName={styles.notStriped}
+      bordered
     />
   );
 };

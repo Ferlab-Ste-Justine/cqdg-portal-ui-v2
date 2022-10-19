@@ -22,12 +22,19 @@
 
 
   .titleHeader {
-    padding-bottom: 16px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
 
     .title {
-      padding-left: 12px;
+      margin-left: 12px;
+      margin-bottom: 0;
+    }
+
+    .variantTag {
+      margin-left: 12px;
+      color: $green-8;
+      background-color: $green-2;
     }
   }
 }

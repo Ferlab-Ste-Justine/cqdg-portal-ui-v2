@@ -2,12 +2,13 @@ import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Table } from 'antd';
+import { Table } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IVariantStudyEntity } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
 
@@ -47,8 +48,7 @@ const StudiesTableSummary = (props: OwnProps) => {
         {hasParticipantLink ? (
           <>
             <Link
-              to={'/data-exploration'}
-              href={'#top'}
+              to={STATIC_ROUTES.DATA_EXPLORATION}
               onClick={() => {
                 updateActiveQueryField({
                   queryBuilderId: DATA_EXPLORATION_QB_ID,
@@ -57,10 +57,9 @@ const StudiesTableSummary = (props: OwnProps) => {
                   index: INDEXES.PARTICIPANT,
                 });
               }}
+              className={styles.participantNumLink}
             >
-              <Button type="link">
-                <div className={styles.participantNumLink}>{participantNumber}</div>
-              </Button>
+              {participantNumber}
             </Link>
             {participantTotalNumber ? ` / ${participantTotalNumber}` : ''}
           </>
