@@ -21,7 +21,7 @@ interface OwnProps {
 const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'internal_study_id',
-    render: (record: IStudyEntity) => record.name,
+    dataIndex: 'internal_study_id',
     title: 'Study ID',
   },
   {

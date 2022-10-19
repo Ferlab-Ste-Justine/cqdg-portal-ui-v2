@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
 import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { Typography } from 'antd';
+import { Tag, Typography } from 'antd';
 import { useVariant } from 'graphql/variants/actions';
 import Consequences from 'views/VariantEntity/Consequences';
 import Frequencies from 'views/VariantEntity/Frequencies';
@@ -39,10 +39,14 @@ const VariantEntity = () => {
     <div className={styles.variantEntityContainer}>
       <ScrollContent className={styles.scrollContent} key={scrollContainerId}>
         {data && (
-          <Title className={styles.titleHeader} level={4}>
+          <div className={styles.titleHeader}>
             <LineStyleIcon />
-            <div className={styles.title}>{`${data?.hgvsg} ${data?.variant_class}`}</div>
-          </Title>
+            <Title
+              level={4}
+              className={styles.title}
+            >{`${data?.hgvsg} ${data?.variant_class} `}</Title>
+            <Tag className={styles.variantTag}>Germline</Tag>
+          </div>
         )}
         <Summary id={'summary'} variant={data} loading={loading} />
         <Consequences id={'consequences'} variant={data} loading={loading} />

@@ -1,8 +1,8 @@
 @import 'src/style/themes/cqdg/colors';
 
 .container {
-  margin-bottom: 16px;
   max-width: 1600px;
+  margin-bottom: 40px;
 
   .collapse {
     .panel {
@@ -11,6 +11,10 @@
         *[class$="-card-body"] {
           padding: 0;
         }
+          *[class$="-descriptions-item-label"] {
+            width: 220px;
+            background-color: $gray-2;
+          }
       }
     }
   }

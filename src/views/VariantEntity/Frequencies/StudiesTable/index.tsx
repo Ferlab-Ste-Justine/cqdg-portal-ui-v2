@@ -1,6 +1,5 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { Table, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
@@ -35,10 +34,7 @@ const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
 const canMakeParticipantsLink = (nOfParticipants: number) =>
   nOfParticipants && nOfParticipants >= MIN_N_OF_PARTICIPANTS_FOR_LINK;
 
-const hasAtLeastOneParticipantsLink = (rows: InternalRow[]) =>
-  (rows || []).some((row: InternalRow) => canMakeParticipantsLink(row.participant_number));
-
-const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: boolean) => [
+const internalColumns = (globalStudies: IStudyEntity[]) => [
   {
     key: 'study_id',
     title: intl.get('screen.variants.frequencies.studies'),
@@ -56,17 +52,11 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
   },
   {
     key: 'participants',
-    title: hasParticipantsLinks ? (
-      <>
-        {intl.get('screen.variants.frequencies.participants')}{' '}
-        <Tooltip title={intl.get('screen.variants.frequencies.participantsTooltip')}>
-          <InfoCircleOutlined />
-        </Tooltip>
-      </>
-    ) : (
-      intl.get('screen.variants.frequencies.participants')
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.participantsTooltip')}>
+        {intl.get('screen.variants.frequencies.participants')}
+      </Tooltip>
     ),
-    dataIndex: '',
     render: (row: InternalRow) => {
       const participantsNumber = row.participant_number;
       const participantsTotal = row.participantTotalNumber;
@@ -94,7 +84,11 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
   },
   {
     key: 'frequency',
-    title: intl.get('screen.variants.frequencies.frequency'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.frequencyTooltip')}>
+        {intl.get('screen.variants.frequencies.frequency')}
+      </Tooltip>
+    ),
     render: (row: InternalRow) => {
       const participantsNumber = row.participant_number;
       const participantsTotal = row.participantTotalNumber;
@@ -103,14 +97,22 @@ const internalColumns = (globalStudies: IStudyEntity[], hasParticipantsLinks: bo
   },
   {
     key: 'upper_bound_kf_ac',
-    title: intl.get('screen.variants.frequencies.altAlleles'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.altAllelesTooltip')}>
+        {`# ${intl.get('screen.variants.frequencies.altAlleles')}`}
+      </Tooltip>
+    ),
     dataIndex: 'frequencies',
     render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.ac,
     width: '14%',
   },
   {
     key: 'upper_bound_kf_homozygotes',
-    title: intl.get('screen.variants.frequencies.homozygotes'),
+    title: (
+      <Tooltip title={intl.get('screen.variants.frequencies.homozygotesTooltip')}>
+        {`# ${intl.get('screen.variants.frequencies.homozygotes')}`}
+      </Tooltip>
+    ),
     dataIndex: 'frequencies',
     render: (frequencies: IVariantStudyFrequencies) => frequencies?.upper_bound_kf?.homozygotes,
     width: '14%',
@@ -145,10 +147,11 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
     <Table
       loading={loading}
       dataSource={variantStudies}
-      columns={internalColumns(globalStudies, hasAtLeastOneParticipantsLink(variantStudies))}
+      columns={internalColumns(globalStudies)}
       size="small"
       pagination={false}
       rowClassName={styles.notStriped}
+      bordered
       summary={() => (
         <StudiesTableSummary
           variantStudies={variantStudies}

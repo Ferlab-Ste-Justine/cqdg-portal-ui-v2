@@ -21,24 +21,25 @@ const Pathogenicity = ({ variant, loading, id }: IPathogenicityProps) => {
 
   return (
     <div id={id} className={styles.container}>
-      <Title level={5} className={styles.title}>
+      <Title level={4} className={styles.title}>
         {intl.get('screen.variants.pathogenicity.pathogenicity')}
       </Title>
       <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
         <CollapsePanel
           header={
-            clinvarId ? (
-              <ExternalLink
-                onClick={(e) => e.stopPropagation()}
-                className={styles.externalLink}
-                href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinvarId}`}
-                hasIcon={true}
-              >
-                ClinVar {clinvarId}
-              </ExternalLink>
-            ) : (
-              intl.get('screen.variants.pathogenicity.clinVar')
-            )
+            <>
+              {intl.get('screen.variants.pathogenicity.clinVar')}{' '}
+              {clinvarId && (
+                <ExternalLink
+                  onClick={(e) => e.stopPropagation()}
+                  className={styles.externalLink}
+                  href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinvarId}`}
+                  hasIcon={true}
+                >
+                  {clinvarId}
+                </ExternalLink>
+              )}
+            </>
           }
           key="1"
           className={styles.panel}
