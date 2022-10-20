@@ -240,6 +240,10 @@ const columns = [
         <ExpandableCell
           nOfElementsWhenCollapsed={2}
           dataSource={impact}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
           renderItem={(item: any, id) => {
             const predictionField = item[INDEX_IMPACT_PREDICTION_FIELD];
             const score = item[INDEX_IMPACT_SCORE];
