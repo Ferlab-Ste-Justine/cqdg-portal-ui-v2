@@ -70,6 +70,8 @@ const fr = {
       selected: 'item selected',
       selectedPlural: 'items selected',
     },
+    seeLess: 'See less',
+    seeMore: 'See more',
   },
   api: {
     savedFilter: {

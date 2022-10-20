@@ -70,6 +70,8 @@ const fr = {
       selected: 'élément selectionné',
       selectedPlural: 'éléments selectionnés',
     },
+    seeLess: 'Voir moins',
+    seeMore: 'Voir plus',
   },
   api: {
     savedFilter: {

@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: center;
 
-  padding: 24px;
+  padding: $default-page-content-padding;
 
   .scrollContent {
     overflow: auto;
