@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const GET_STUDIES_QUERY = gql`
+export const GET_STUDIES = gql`
   query getStudy($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Study {
       hits(offset: $offset, sort: $sort, first: $first, filters: $sqon) {

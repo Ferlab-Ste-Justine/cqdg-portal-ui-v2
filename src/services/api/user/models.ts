@@ -40,9 +40,14 @@ export type TUserConfig = {
       };
     };
   };
-  study_exploration?: {
+  studies?: {
     tables?: {
       studies?: TUserTableConfig;
+    };
+  };
+  variants?: {
+    tables?: {
+      variants?: TUserTableConfig;
     };
   };
   dashboard?: {

@@ -1,6 +1,6 @@
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { IParticipantResultTree } from 'graphql/participants/models';
-import { MATCH_PARTICIPANT_QUERY } from 'graphql/participants/queries';
+import { MATCH_PARTICIPANTS } from 'graphql/participants/queries';
 import EnvironmentVariables from 'helpers/EnvVariables';
 import {
   ARRANGER_API_COLUMN_STATE_URL,
@@ -66,7 +66,7 @@ const fetchMatchParticipant = (ids: string[]) =>
     method: 'POST',
     url: ARRANGER_API_PROJECT_URL,
     data: {
-      query: MATCH_PARTICIPANT_QUERY.loc?.source.body,
+      query: MATCH_PARTICIPANTS.loc?.source.body,
       variables: {
         sqon: generateQuery({
           newFilters: [

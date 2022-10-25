@@ -15,7 +15,7 @@ import { useDataFiles } from 'graphql/files/actions';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useParticipants } from 'graphql/participants/actions';
 import { IParticipantResultTree } from 'graphql/participants/models';
-import { GET_PARTICIPANT_COUNT } from 'graphql/participants/queries';
+import { GET_PARTICIPANTS_COUNT } from 'graphql/participants/queries';
 import { isEmpty } from 'lodash';
 import DataFilesTabs from 'views/DataExploration/components/PageContent/tabs/DataFiles';
 import ParticipantsTab from 'views/DataExploration/components/PageContent/tabs/Participants';
@@ -220,12 +220,11 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
         getResolvedQueryForCount={(sqon) => resolveSqonForParticipants(queryList, sqon)}
         fetchQueryCount={async (sqon) => {
           const { data } = await ArrangerApi.graphqlRequest<{ data: IParticipantResultTree }>({
-            query: GET_PARTICIPANT_COUNT.loc?.source.body,
+            query: GET_PARTICIPANTS_COUNT.loc?.source.body,
             variables: {
               sqon: resolveSqonForParticipants(queryList, sqon),
             },
           });
-
           return data?.data?.Participant.hits.total ?? 0;
         }}
       />

@@ -4,10 +4,10 @@ import { QueryVariable } from 'graphql/queries';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IParticipantEntity, IParticipantResultTree } from './models';
-import { SEARCH_PARTICIPANT_QUERY } from './queries';
+import { GET_PARTICIPANTS } from './queries';
 
 export const useParticipants = (variables?: QueryVariable): IQueryResults<IParticipantEntity[]> => {
-  const { loading, result } = useLazyResultQuery<IParticipantResultTree>(SEARCH_PARTICIPANT_QUERY, {
+  const { loading, result } = useLazyResultQuery<IParticipantResultTree>(GET_PARTICIPANTS, {
     variables,
   });
 

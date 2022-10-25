@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
@@ -17,10 +18,12 @@ import {
   IVariantFrequencies,
 } from 'graphql/variants/models';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
-import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constants';
+import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
+import { useUser } from 'store/user';
+import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
@@ -106,6 +109,8 @@ const defaultColumns: ProColumnType<any>[] = [
 const VariantsTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
   const { filters }: { filters: ISyntheticSqon } = useFilters();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const { userInfo } = useUser();
 
   useEffect(() => {
     if (selectedKeys.length) {
@@ -118,6 +123,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
     <ProTable<ITableVariantEntity>
       tableId="variants_table"
       columns={defaultColumns}
+      initialColumnState={userInfo?.config.variants?.tables?.variants?.columns}
       wrapperClassName={styles.variantTabWrapper}
       loading={results.loading}
       enableRowSelection={true}
@@ -136,6 +142,19 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
           pageSize: queryConfig.size,
           total: results.total,
         },
+        enableColumnSort: true,
+        onColumnSortChange: (newState) =>
+          dispatch(
+            updateUserConfig({
+              variants: {
+                tables: {
+                  variants: {
+                    columns: newState,
+                  },
+                },
+              },
+            }),
+          ),
       }}
       bordered
       size="small"

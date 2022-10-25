@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { INDEXES } from 'graphql/constants';
-import { SEARCH_VARIANT_BY_ID_QUERY } from 'graphql/variants/queries';
+import { GET_VARIANTS_BY_ID } from 'graphql/variants/queries';
 
 import GlobalSearch, { ICustomSearchProps } from 'components/uiKit/search/GlobalSearch';
 import { ArrangerApi } from 'services/api/arranger';
@@ -34,7 +34,7 @@ const VariantGeneSearch = ({ queryBuilderId, type }: OwnProps) => {
       emptyDescription={intl.get(`global.search.${type}.emptyText`)}
       searchFields={[]}
       tooltipText={intl.get(`global.search.${type}.tooltip`)}
-      query={SEARCH_VARIANT_BY_ID_QUERY}
+      query={GET_VARIANTS_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       handleSearch={handleSearch}
       optionsFormatter={(options) =>

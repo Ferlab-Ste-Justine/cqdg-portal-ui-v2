@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const SEARCH_PARTICIPANT_QUERY = gql`
+export const GET_PARTICIPANTS = gql`
   query searchParticipant($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Participant {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
@@ -95,7 +95,7 @@ export const SEARCH_PARTICIPANT_QUERY = gql`
   }
 `;
 
-export const MATCH_PARTICIPANT_QUERY = gql`
+export const MATCH_PARTICIPANTS = gql`
   query fetchMatchParticipant($sqon: JSON) {
     Participant {
       hits(filters: $sqon) {
@@ -120,7 +120,7 @@ export const MATCH_PARTICIPANT_QUERY = gql`
   }
 `;
 
-export const GET_PARTICIPANT_COUNT = gql`
+export const GET_PARTICIPANTS_COUNT = gql`
   query getParticipantCount($sqon: JSON) {
     Participant {
       hits(filters: $sqon) {
@@ -130,8 +130,8 @@ export const GET_PARTICIPANT_COUNT = gql`
   }
 `;
 
-export const PARTICIPANT_SEARCH_BY_ID_QUERY = gql`
-  query searchParticipantById($sqon: JSON) {
+export const GET_PARTICIPANTS_BY_ID = gql`
+  query getParticipantById($sqon: JSON) {
     Participant {
       hits(filters: $sqon) {
         edges {

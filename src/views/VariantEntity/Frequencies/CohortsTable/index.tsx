@@ -22,7 +22,7 @@ type Row = {
   key: string;
 };
 
-const externalColumns = [
+const getExternalColumns = () => [
   {
     key: 'cohort',
     title: intl.get('screen.variants.frequencies.cohort'),
@@ -180,7 +180,7 @@ const CohortsTable = ({ loading, variant }: ICohortsTableProps) => {
     <Table
       loading={loading}
       dataSource={externalCohortsRows}
-      columns={externalColumns}
+      columns={getExternalColumns()}
       pagination={false}
       size="small"
       rowClassName={styles.notStriped}

@@ -34,7 +34,7 @@ const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
 const canMakeParticipantsLink = (nOfParticipants: number) =>
   nOfParticipants && nOfParticipants >= MIN_N_OF_PARTICIPANTS_FOR_LINK;
 
-const internalColumns = (globalStudies: IStudyEntity[]) => [
+const getInternalColumns = (globalStudies: IStudyEntity[]) => [
   {
     key: 'study_id',
     title: intl.get('screen.variants.frequencies.studies'),
@@ -147,7 +147,7 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
     <Table
       loading={loading}
       dataSource={variantStudies}
-      columns={internalColumns(globalStudies)}
+      columns={getInternalColumns(globalStudies)}
       size="small"
       pagination={false}
       rowClassName={styles.notStriped}

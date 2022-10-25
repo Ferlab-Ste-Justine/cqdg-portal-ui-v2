@@ -180,7 +180,7 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
     },
   }));
 
-const columns = [
+const getColumns = () => [
   {
     title: (
       <Tooltip title={intl.get('screen.variants.summary.AAColumnTooltip')}>
@@ -196,9 +196,7 @@ const columns = [
     title: intl.get('screen.variants.consequences.consequence'),
     dataIndex: 'consequences',
     render: (consequences: string[]) => {
-      if (!consequences.length) {
-        return '';
-      }
+      if (!consequences.length) return '';
       return (
         <ExpandableCell
           dataSource={consequences}
@@ -232,10 +230,7 @@ const columns = [
     title: intl.get('screen.variants.consequences.prediction'),
     dataIndex: 'impact',
     render: (impact: string[][]) => {
-      if (!impact?.length) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
-
+      if (!impact?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={2}
@@ -248,14 +243,11 @@ const columns = [
             const predictionField = item[INDEX_IMPACT_PREDICTION_FIELD];
             const score = item[INDEX_IMPACT_SCORE];
             const predictionShortLabel = item[INDEX_IMPACT_PREDICTION_SHORT_LABEL];
-
             const predictionLongLabel = getLongPredictionLabelIfKnown(
               predictionField,
               predictionShortLabel,
             );
-
             const label = predictionLongLabel || predictionShortLabel;
-
             const description = label ? `${capitalize(label)} - ${score}` : score;
             return (
               <StackLayout key={id} horizontal className={styles.cellList}>
@@ -384,7 +376,7 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
                               })
                         }
                         dataSource={makeRows(orderedConsequences)}
-                        columns={columns}
+                        columns={getColumns()}
                         pagination={false}
                         size="small"
                       />

@@ -4,10 +4,10 @@ import { QueryVariable } from 'graphql/queries';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IStudyResultTree } from './models';
-import { GET_STUDIES_QUERY } from './queries';
+import { GET_STUDIES } from './queries';
 
 export const useStudies = (variables?: QueryVariable) => {
-  const { loading, result } = useLazyResultQuery<IStudyResultTree>(GET_STUDIES_QUERY, {
+  const { loading, result } = useLazyResultQuery<IStudyResultTree>(GET_STUDIES, {
     variables,
   });
 
