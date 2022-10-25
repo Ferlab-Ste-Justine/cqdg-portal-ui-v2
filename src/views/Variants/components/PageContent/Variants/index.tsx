@@ -18,7 +18,7 @@ import {
   IVariantFrequencies,
 } from 'graphql/variants/models';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
-import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constants';
+import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Variants/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';

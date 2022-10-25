@@ -275,7 +275,7 @@ const fr = {
       menu: {
         myprofile: 'My Profile',
         settings: 'Settings',
-        logout: 'Sign out',
+        logout: 'Logout',
         signedWith: 'Signed in with',
       },
     },

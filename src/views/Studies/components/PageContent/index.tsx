@@ -108,7 +108,6 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
               sqon: resolveSyntheticSqon(queryList, sqon),
             },
           });
-
           return data?.data?.Study.hits.total ?? 0;
         }}
       />

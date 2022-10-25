@@ -5,10 +5,10 @@ import { QueryVariable } from 'graphql/queries';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IVariantEntity, IVariantResultTree } from './models';
-import { SEARCH_VARIANT_QUERY } from './queries';
+import { GET_VARIANTS } from './queries';
 
 export const useVariants = (variables?: QueryVariable): IQueryResults<IVariantEntity[]> => {
-  const { loading, result } = useLazyResultQuery<IVariantResultTree>(SEARCH_VARIANT_QUERY, {
+  const { loading, result } = useLazyResultQuery<IVariantResultTree>(GET_VARIANTS, {
     variables,
   });
 
@@ -35,7 +35,7 @@ export const useVariant = ({ field, values }: IUseVariantProps): IUseVariantRetu
     op: 'and',
   };
 
-  const { loading, result } = useLazyResultQuery<IVariantResultTree>(SEARCH_VARIANT_QUERY, {
+  const { loading, result } = useLazyResultQuery<IVariantResultTree>(GET_VARIANTS, {
     variables: { sqon },
   });
 

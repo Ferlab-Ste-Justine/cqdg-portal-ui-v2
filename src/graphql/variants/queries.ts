@@ -7,20 +7,19 @@ import {
   STUDIES_VARIANT_FRAGMENT,
 } from 'graphql/variants/fragments';
 
-export const SEARCH_VARIANT_QUERY = gql`
+export const GET_VARIANTS = gql`
   ${FREQUENCIES_FRAGMENT}
   ${GENES_FRAGMENT}
   ${CONSEQUENCES_FRAGMENT}
   ${STUDIES_VARIANT_FRAGMENT}
   ${CLINVAR_FRAGMENT}
-  query searchVariant($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+  query getVariants($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Variant {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
         edges {
           node {
             id
-            variant_id: id
             score
             alternate
             chromosome
@@ -68,7 +67,7 @@ export const SEARCH_VARIANT_QUERY = gql`
   }
 `;
 
-export const SEARCH_VARIANT_BY_ID_QUERY = gql`
+export const GET_VARIANTS_BY_ID = gql`
   query searchVariantById($sqon: JSON) {
     Variant {
       hits(filters: $sqon) {
@@ -77,6 +76,16 @@ export const SEARCH_VARIANT_BY_ID_QUERY = gql`
             id
           }
         }
+      }
+    }
+  }
+`;
+
+export const GET_VARIANTS_COUNT = gql`
+  query getVariantsCount($sqon: JSON) {
+    Variant {
+      hits(filters: $sqon) {
+        total
       }
     }
   }

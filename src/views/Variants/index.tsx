@@ -11,7 +11,8 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import GenesUploadIds from 'views/Variants/components/GeneUploadIds';
 import VariantGeneSearch from 'views/Variants/components/VariantGeneSearch';
-import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
+import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constant';
+import { SCROLL_WRAPPER_ID } from 'views/Variants/utils/constant';
 
 import DiseaseIcon from 'components/Icons/DiseaseIcon';
 import FrequencyIcon from 'components/Icons/FrequencyIcon';
@@ -24,7 +25,6 @@ import { SuggestionType } from 'services/api/arranger/models';
 import { mapFilterForParticipant, mapFilterForVariant } from 'utils/fieldMapper';
 
 import PageContent from './components/PageContent';
-import { SCROLL_WRAPPER_ID } from './utils/constants';
 
 import styles from 'views/Variants/index.module.scss';
 
@@ -232,12 +232,7 @@ const Variants = () => {
     <div className={styles.variantsLayout}>
       <SidebarMenu className={styles.sideMenu} menuItems={menuItems} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
-        <PageContent
-          variantMapping={{
-            data: [],
-            loading: false,
-          }}
-        />
+        <PageContent variantMapping={variantMappingResults} />
       </ScrollContent>
     </div>
   );

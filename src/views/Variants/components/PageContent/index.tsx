@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { UserOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { Space, Typography } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
+import { IVariantResultTree } from 'graphql/variants/models';
+import { GET_VARIANTS_COUNT } from 'graphql/variants/queries';
 import { isEmpty } from 'lodash';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
   VARIANT_FILTER_TAG,
   VARIANT_REPO_QB_ID,
-} from 'views/Variants/utils/constants';
+} from 'views/Variants/utils/constant';
 
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
+import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
+import { ArrangerApi } from 'services/api/arranger';
 import { useSavedFilter } from 'store/savedFilter';
 import {
   createSavedFilter,
@@ -46,6 +52,10 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   const dispatch = useDispatch();
   const { queryList, activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
   const { savedFilters, defaultFilter } = useSavedFilter(VARIANT_FILTER_TAG);
+
+  const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement | undefined>(
+    undefined,
+  );
 
   const [variantQueryConfig, setVariantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
   const variantResolvedSqon = resolveSyntheticSqon(queryList, activeQuery);
@@ -109,16 +119,35 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         }}
         enableCombine
         enableShowHideLabels
-        IconTotal={<UserOutlined size={18} />}
+        IconTotal={<LineStyleIcon width={18} />}
         currentQuery={isEmptySqon(activeQuery) ? {} : activeQuery}
         total={variantResults.total}
         dictionary={getQueryBuilderDictionary(facetTransResolver)}
-        getResolvedQueryForCount={() => ({ op: 'and', content: [] })}
-        fetchQueryCount={() =>
-          new Promise((resolve) => {
-            resolve(1);
-          })
-        }
+        getResolvedQueryForCount={(sqon) => resolveSyntheticSqon(queryList, sqon)}
+        fetchQueryCount={async (sqon) => {
+          const { data } = await ArrangerApi.graphqlRequest<{ data: IVariantResultTree }>({
+            query: GET_VARIANTS_COUNT.loc?.source.body,
+            variables: {
+              sqon: resolveSyntheticSqon(queryList, sqon),
+            },
+          });
+          return data?.data?.Variant.hits.total ?? 0;
+        }}
+        facetFilterConfig={{
+          enable: true,
+          onFacetClick: (filter) => {
+            setSelectedFilterContent(
+              <GenericFilters
+                queryBuilderId={VARIANT_REPO_QB_ID}
+                index={INDEXES.VARIANT}
+                field={dotToUnderscore(filter.content.field)}
+                sqon={variantResolvedSqon}
+                extendedMappingResults={variantMapping}
+              />,
+            );
+          },
+          selectedFilterContent,
+        }}
       />
       <Variants
         results={variantResults}
