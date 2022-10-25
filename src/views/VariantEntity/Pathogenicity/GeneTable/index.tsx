@@ -43,7 +43,7 @@ type Record = {
   inheritance: Inheritance;
 };
 
-export const columnsPhenotypes = [
+export const getColumnsPhenotypes = () => [
   {
     title: intl.get('screen.variants.pathogenicity.source'),
     dataIndex: 'source',
@@ -254,11 +254,11 @@ interface ICohortsTableProps {
   variant?: IVariantEntity;
 }
 
-const CohortsTable = ({ loading, variant }: ICohortsTableProps) => (
+const GeneTable = ({ loading, variant }: ICohortsTableProps) => (
   <Table
     loading={loading}
     dataSource={makeGenesOrderedRow(variant?.genes)}
-    columns={columnsPhenotypes}
+    columns={getColumnsPhenotypes()}
     pagination={false}
     size="small"
     rowClassName={styles.notStriped}
@@ -266,4 +266,4 @@ const CohortsTable = ({ loading, variant }: ICohortsTableProps) => (
   />
 );
 
-export default CohortsTable;
+export default GeneTable;

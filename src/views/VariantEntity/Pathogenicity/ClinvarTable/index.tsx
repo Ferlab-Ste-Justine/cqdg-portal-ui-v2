@@ -4,7 +4,7 @@ import { IClinVar, IVariantEntity } from 'graphql/variants/models';
 
 import styles from './index.module.scss';
 
-export const columnsClinVar = [
+export const getColumnsClinVar = [
   {
     title: () => intl.get('interpretation'),
     dataIndex: 'interpretation',
@@ -41,15 +41,15 @@ interface IStudiesTableProps {
   variant?: IVariantEntity;
 }
 
-const StudiesTable = ({ loading, variant }: IStudiesTableProps) => (
+const ClinvarTable = ({ loading, variant }: IStudiesTableProps) => (
   <Table
     loading={loading}
     dataSource={makeClinVarRows(variant?.clinvar)}
-    columns={columnsClinVar}
+    columns={getColumnsClinVar}
     size="small"
     pagination={false}
     rowClassName={styles.notStriped}
     bordered
   />
 );
-export default StudiesTable;
+export default ClinvarTable;
