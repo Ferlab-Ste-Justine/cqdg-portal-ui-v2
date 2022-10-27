@@ -25,22 +25,22 @@ type OwnProps = {
 const finishButtonText = (type: string) => {
   switch (type) {
     case SetActionType.ADD_IDS:
-      return 'Add to set';
+      return intl.get('screen.dataExploration.addToSet');
     case SetActionType.REMOVE_IDS:
-      return 'Remove from set';
+      return intl.get('screen.dataExploration.removeFromSet');
     default:
       break;
   }
 };
 
-const formTitle = (setActionType: string, type: SetType) => {
+const formTitle = (setActionType: string, type: SetType): string => {
   switch (setActionType) {
     case SetActionType.ADD_IDS:
-      return intl.get('components.savedSets.modal.add.title', { type });
+      return intl.get('screen.dataExploration.addTypeSet', { type: type.toLowerCase() });
     case SetActionType.REMOVE_IDS:
-      return intl.get('components.savedSets.modal.remove.title', { type });
+      return intl.get('screen.dataExploration.removeTypeSet', { type: type.toLowerCase() });
     default:
-      break;
+      return '';
   }
 };
 

@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { UserOutlined } from '@ant-design/icons';
 import { Col, Form, Row, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
@@ -26,11 +27,14 @@ const UserSetsForm = ({
 }: OwnProps) => (
   <Form form={form} name={formName} onFinish={onFinish} layout="vertical">
     <Form.Item
-      label={`${type.charAt(0).toUpperCase() + type.slice(1)} Set`}
+      label={`${type} ${intl.get('screen.dataExploration.set')}`}
       name="setId"
       className={styles.setEditFormItem}
     >
-      <Select placeholder="Choose a set" onSelect={(value: string) => onSelectionChange(value)}>
+      <Select
+        placeholder={intl.get('screen.dataExploration.chooseSet')}
+        onSelect={(value: string) => onSelectionChange(value)}
+      >
         {userSets.map((s: IUserSetOutput) => (
           <Select.Option key={s.id} value={s.id}>
             <Row>

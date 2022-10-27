@@ -68,7 +68,7 @@ const CreateEditModal = ({
       form.setFields([
         {
           name: SET_NAME_KEY,
-          errors: ['A set with this name already exists'],
+          errors: [intl.get('components.savedSets.modal.edit.setAlreadyExists')],
         },
       ]);
     } else {
@@ -139,7 +139,7 @@ const CreateEditModal = ({
       onCancel={handleCancel}
       onOk={() => form.submit()}
       okButtonProps={{ disabled: isLoading, loading: isLoading || isUpdating }}
-      okText="Save"
+      okText={intl.get('components.savedSets.modal.edit.okText')}
       destroyOnClose
     >
       <Form
@@ -182,7 +182,7 @@ const CreateEditModal = ({
           ]}
           required={false}
         >
-          <Input autoFocus placeholder="Enter the name of your new set" />
+          <Input autoFocus placeholder={intl.get('components.savedSets.modal.add.enterName')} />
         </Form.Item>
       </Form>
     </Modal>

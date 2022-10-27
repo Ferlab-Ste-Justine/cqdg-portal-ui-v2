@@ -28,14 +28,6 @@ import AddRemoveSaveSetModal from './AddRemoveSaveSetModal';
 
 import styles from './index.module.scss';
 
-type Props = {
-  results: IQueryResults<IParticipantEntity[] | IFileEntity[] | IBiospecimenEntity[]>;
-  sqon?: ISqonGroupFilter;
-  selectedAllResults: boolean;
-  selectedKeys?: string[];
-  type: SetType;
-};
-
 export enum SetActionType {
   RENAME_TAG = 'RENAME_TAG',
   ADD_IDS = 'ADD_IDS',
@@ -110,7 +102,7 @@ const menu = (
         label: (
           <>
             <span>
-              {participantCount} {type}
+              {participantCount} {type.toLowerCase()}
               {intl.get('screen.dataExploration.selected')}
             </span>
             <Tooltip
@@ -157,13 +149,21 @@ const getSetCount = (selected: string[], total: number, allSelected: boolean) =>
   }
 };
 
+interface ISetsManagementDropdownProps {
+  results: IQueryResults<IParticipantEntity[] | IFileEntity[] | IBiospecimenEntity[]>;
+  sqon?: ISqonGroupFilter;
+  selectedAllResults: boolean;
+  selectedKeys?: string[];
+  type: SetType;
+}
+
 const SetsManagementDropdown = ({
   results,
   sqon,
   type,
   selectedKeys = [],
   selectedAllResults,
-}: Props) => {
+}: ISetsManagementDropdownProps) => {
   const [isEditDisabled, setIsEditDisabled] = useState(true);
   const [modal, setModal] = useState<ModalState>(modals.hideAll);
   const { savedSets, isLoading, fetchingError } = useSavedSet();
@@ -185,7 +185,7 @@ const SetsManagementDropdown = ({
     <div id={`${type}-set-dropdown-container`}>
       {modal.showModalSave && sqon && (
         <CreateEditModal
-          title={`Save ${type.charAt(0).toUpperCase() + type.slice(1)} Set`}
+          title={intl.get('screen.dataExploration.saveTypeSet', { type: type.toLowerCase() })}
           sqon={sqon}
           setType={type}
           hideModalCb={() => setModal(modals.hideAll)}
@@ -219,7 +219,7 @@ const SetsManagementDropdown = ({
         }
       >
         <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
-          {intl.get('screen.dataExploration.saveTypeSet', { type })}
+          {intl.get('screen.dataExploration.saveTypeSet', { type: type.toLowerCase() })}
           <DownOutlined />
         </Button>
       </Dropdown>
