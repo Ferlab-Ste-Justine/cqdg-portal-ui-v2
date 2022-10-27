@@ -58,6 +58,8 @@ export const generateFilters = ({
   index?: string;
 }) =>
   Object.keys(aggregations || []).map((key) => {
+    if (key === '__typename') return null;
+
     const found = (extendedMapping?.data || []).find(
       (f: ExtendedMapping) => f.field === underscoreToDot(key),
     );
