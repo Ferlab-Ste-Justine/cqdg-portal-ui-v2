@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { UserOutlined } from '@ant-design/icons';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
@@ -18,7 +19,7 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       field="participant_id"
       index={INDEXES.PARTICIPANT}
       placeholder={'e.g. PT_WFB3TQP4'}
-      emptyDescription={'No participants found'}
+      emptyDescription={intl.get('screen.dataExploration.noParticipantFound')}
       query={GET_PARTICIPANTS_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
@@ -32,7 +33,7 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
           value: option.participant_id,
         }))
       }
-      title={'Search by Participant ID'}
+      title={intl.get('screen.dataExploration.searchByParticipantId')}
     />
   );
 };

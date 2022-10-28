@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 
@@ -13,11 +14,11 @@ const ParticipantSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   return (
     <SetSearch
       index={INDEXES.PARTICIPANT}
-      title="Saved Participant Sets"
+      title={intl.get('screen.dataExploration.savedParticipantSets')}
       queryBuilderId={DATA_EXPLORATION_QB_ID}
       type={SetType.PARTICIPANT}
       sqon={sqon}
-      emptyDescription={'No participant sets found'}
+      emptyDescription={intl.get('screen.dataExploration.noParticipantSetsFound')}
     />
   );
 };

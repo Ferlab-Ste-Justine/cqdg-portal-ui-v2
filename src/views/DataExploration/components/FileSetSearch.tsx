@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { INDEXES } from 'graphql/constants';
 import useFileResolvedSqon from 'graphql/files/useFileResolvedSqon';
 
@@ -13,11 +14,11 @@ const FileSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   return (
     <SetSearch
       index={INDEXES.FILE}
-      title="Saved File Sets"
+      title={intl.get('screen.dataExploration.savedFileSets')}
       queryBuilderId={DATA_EXPLORATION_QB_ID}
       type={SetType.FILE}
       sqon={sqon}
-      emptyDescription={'No file sets found'}
+      emptyDescription={intl.get('screen.dataExploration.noFileSetsFound')}
     />
   );
 };

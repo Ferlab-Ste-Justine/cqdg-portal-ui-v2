@@ -8,11 +8,6 @@ import {
 } from 'graphql/variants/fragments';
 
 export const GET_VARIANTS = gql`
-  ${FREQUENCIES_FRAGMENT}
-  ${GENES_FRAGMENT}
-  ${CONSEQUENCES_FRAGMENT}
-  ${STUDIES_VARIANT_FRAGMENT}
-  ${CLINVAR_FRAGMENT}
   query getVariants($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Variant {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
@@ -65,10 +60,15 @@ export const GET_VARIANTS = gql`
       }
     }
   }
+  ${FREQUENCIES_FRAGMENT}
+  ${GENES_FRAGMENT}
+  ${CONSEQUENCES_FRAGMENT}
+  ${STUDIES_VARIANT_FRAGMENT}
+  ${CLINVAR_FRAGMENT}
 `;
 
 export const GET_VARIANTS_BY_ID = gql`
-  query searchVariantById($sqon: JSON) {
+  query getVariantsById($sqon: JSON) {
     Variant {
       hits(filters: $sqon) {
         edges {

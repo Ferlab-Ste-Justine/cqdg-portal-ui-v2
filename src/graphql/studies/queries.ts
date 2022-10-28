@@ -1,12 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const GET_STUDIES = gql`
-  query getStudy($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+  query getStudies($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Study {
       hits(offset: $offset, sort: $sort, first: $first, filters: $sqon) {
         total
         edges {
           node {
+            id
             domain
             internal_study_id
             name
@@ -42,17 +43,14 @@ export const GET_STUDIES = gql`
 `;
 
 export const STUDIES_AGGREGATIONS = (fields: string[]) => gql`
-query studiesAgg ($sqon: JSON) {
+  query studiesAgg($sqon: JSON) {
     Study {
-      aggregations (filters: $sqon){
-        ${fields.map(
-          (f) =>
-            f +
-            ' {\n          buckets {\n            key\n            doc_count\n          }\n        }',
-        )}
+      aggregations(filters: $sqon) {
+        ${fields.map((f) => f + '{\nbuckets{\nkey\ndoc_count\n}\n}')}
       }
     }
-  }`;
+  }
+`;
 
 export const GET_STUDIES_COUNT = gql`
   query getStudiesCount($sqon: JSON) {
