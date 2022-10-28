@@ -1,3 +1,4 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { IDictionary as FiltersDict } from '@ferlab/ui/core/components/filters/types';
 import { IProTableDictionary } from '@ferlab/ui/core/components/ProTable/types';
@@ -13,8 +14,17 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     of: intl.get('global.proTable.of'),
     selected: intl.get('global.proTable.selected'),
     selectedPlural: intl.get('global.proTable.selectedPlural'),
-    selectAllResults: 'Select all results',
-    clear: 'Clear',
+    selectAllResults: intl.get('global.proTable.selectAllResults'),
+    clear: intl.get('global.proTable.clear'),
+  },
+  tooltips: {
+    tableExport: intl.get('global.proTable.tableExport'),
+  },
+  columnSelector: {
+    reset: intl.get('global.proTable.reset'),
+    tooltips: {
+      columns: intl.get('global.proTable.columns'),
+    },
   },
 });
 

@@ -80,6 +80,30 @@ const itemIcon = (type: string) => {
   }
 };
 
+const getLabel = (type: string, participantCount: number): string => {
+  if (type === INDEXES.FILE) {
+    return participantCount > 1
+      ? `${participantCount} ${intl.get('screen.dataExploration.filesSelected')}`
+      : `${participantCount} ${intl.get('screen.dataExploration.fileSelected')}`;
+  }
+  if (type === INDEXES.PARTICIPANT) {
+    return participantCount > 1
+      ? `${participantCount} ${intl.get('screen.dataExploration.participantsSelected')}`
+      : `${participantCount} ${intl.get('screen.dataExploration.participantSelected')}`;
+  }
+  return '';
+};
+
+const getTitle = (type: string): string => {
+  if (type === INDEXES.FILE) {
+    return intl.get('screen.dataExploration.saveFilesSet');
+  }
+  if (type === INDEXES.PARTICIPANT) {
+    return intl.get('screen.dataExploration.saveParticipantsSet');
+  }
+  return '';
+};
+
 const menu = (
   participantCount: number,
   onClick: MenuClickEventHandler,
@@ -101,19 +125,7 @@ const menu = (
         icon: itemIcon(type),
         label: (
           <>
-            <span>
-              {participantCount > 1 ? (
-                <>
-                  {participantCount} {type.toLowerCase()}s{' '}
-                  {intl.get('screen.dataExploration.selecteds')}
-                </>
-              ) : (
-                <>
-                  {participantCount} {type.toLowerCase()}{' '}
-                  {intl.get('screen.dataExploration.selected')}
-                </>
-              )}
-            </span>
+            <span>{getLabel(type, participantCount)}</span>
             <Tooltip
               arrowPointAtCenter
               placement="topRight"
@@ -194,7 +206,7 @@ const SetsManagementDropdown = ({
     <div id={`${type}-set-dropdown-container`}>
       {modal.showModalSave && sqon && (
         <CreateEditModal
-          title={intl.get('screen.dataExploration.saveTypeSet', { type: type.toLowerCase() })}
+          title={getTitle(type)}
           sqon={sqon}
           setType={type}
           hideModalCb={() => setModal(modals.hideAll)}
@@ -228,7 +240,7 @@ const SetsManagementDropdown = ({
         }
       >
         <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
-          {intl.get('screen.dataExploration.saveTypeSet', { type: type.toLowerCase() })}
+          {getTitle(type)}
           <DownOutlined />
         </Button>
       </Dropdown>
