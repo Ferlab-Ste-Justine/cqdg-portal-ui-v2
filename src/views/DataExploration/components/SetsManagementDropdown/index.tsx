@@ -102,8 +102,17 @@ const menu = (
         label: (
           <>
             <span>
-              {participantCount} {type.toLowerCase()}
-              {intl.get('screen.dataExploration.selected')}
+              {participantCount > 1 ? (
+                <>
+                  {participantCount} {type.toLowerCase()}s{' '}
+                  {intl.get('screen.dataExploration.selecteds')}
+                </>
+              ) : (
+                <>
+                  {participantCount} {type.toLowerCase()}{' '}
+                  {intl.get('screen.dataExploration.selected')}
+                </>
+              )}
             </span>
             <Tooltip
               arrowPointAtCenter
