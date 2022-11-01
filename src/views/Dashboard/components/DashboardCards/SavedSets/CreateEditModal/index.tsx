@@ -158,7 +158,7 @@ const CreateEditModal = ({
         }}
       >
         <Form.Item
-          label="Name"
+          label={intl.get('components.savedSets.modal.add.name')}
           className={styles.setCreateFormItem}
           name={SET_NAME_KEY}
           rules={[

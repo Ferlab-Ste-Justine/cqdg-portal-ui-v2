@@ -183,11 +183,12 @@ const makeRows = (consequences: ArrangerEdge<IVariantConsequence>[]) =>
 const getColumns = () => [
   {
     title: (
-      <Tooltip title={intl.get('screen.variants.summary.AAColumnTooltip')}>
+      <Tooltip title={intl.get('screen.variants.consequences.AAColumnTooltip')}>
         {intl.get('screen.variants.consequences.AAColumn')}
       </Tooltip>
     ),
     dataIndex: 'aa_change',
+    width: '10%',
     render: (aa_change: string) => (
       <div className={styles.longValue}>{aa_change || TABLE_EMPTY_PLACE_HOLDER}</div>
     ),
@@ -195,6 +196,7 @@ const getColumns = () => [
   {
     title: intl.get('screen.variants.consequences.consequence'),
     dataIndex: 'consequences',
+    width: '15%',
     render: (consequences: string[]) => {
       if (!consequences.length) return '';
       return (
@@ -212,6 +214,7 @@ const getColumns = () => [
   {
     title: intl.get('screen.variants.consequences.CDNAChangeColumn'),
     dataIndex: 'coding_dna_change',
+    width: '15%',
     render: (coding_dna_change: string) => (
       <div className={styles.longValue}>{coding_dna_change || TABLE_EMPTY_PLACE_HOLDER}</div>
     ),
@@ -219,16 +222,19 @@ const getColumns = () => [
   {
     title: intl.get('screen.variants.consequences.strand'),
     dataIndex: 'strand',
+    width: '5%',
     render: (strand: string) => strand || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: intl.get('screen.variants.consequences.vep'),
     dataIndex: 'vep_impact',
+    width: '5%',
     render: (vep: Impact) => getVepImpactTag(vep?.toLowerCase()) || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: intl.get('screen.variants.consequences.prediction'),
     dataIndex: 'impact',
+    width: '15%',
     render: (impact: string[][]) => {
       if (!impact?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
@@ -263,12 +269,14 @@ const getColumns = () => [
   {
     title: intl.get('screen.variants.consequences.conservationColumn'),
     dataIndex: 'conservation',
+    width: '10%',
     render: (conservation: number) =>
       conservation == null ? TABLE_EMPTY_PLACE_HOLDER : conservation,
   },
   {
     title: intl.get('screen.variants.consequences.transcript'),
     dataIndex: 'transcript',
+    width: '15%',
     render: (transcript: { ensembl_transcript_id: string; isCanonical?: boolean }) => (
       <Space>
         <ExternalLink href={`https://www.ensembl.org/id/${transcript.ensembl_transcript_id}`}>
@@ -285,6 +293,7 @@ const getColumns = () => [
   {
     title: intl.get('screen.variants.consequences.refSeq'),
     dataIndex: 'refseq_mrna_id',
+    width: '10%',
     render: (refseq_mrna_id: string) =>
       refseq_mrna_id ? (
         <ExternalLink href={`https://www.ncbi.nlm.nih.gov/nuccore/${refseq_mrna_id}?report=graph`}>

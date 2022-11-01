@@ -396,7 +396,9 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
             overlay={menu}
             placement="bottomLeft"
           >
-            <Button icon={<DownloadOutlined />}>Download clinical data</Button>
+            <Button icon={<DownloadOutlined />}>
+              {intl.get('screen.dataExploration.tabs.participants.downloadClinicalData')}
+            </Button>
           </Dropdown>,
         ],
       }}
