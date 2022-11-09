@@ -1,11 +1,11 @@
 import { ArrangerResultsTree } from 'graphql/models';
-import { IDiagnosis, IMondo, IParticipantEntity, IPhenotype } from 'graphql/participants/models';
+import { IMondo, IParticipantEntity, IPhenotype } from 'graphql/participants/models';
 import { IStudyEntity } from 'graphql/studies/models';
 
 import { IBiospecimenEntity } from '../biospecimens/models';
 
 export interface IFileResultTree {
-  file: ArrangerResultsTree<IFileEntity>;
+  File: ArrangerResultsTree<IFileEntity>;
 }
 
 export interface IFileDataAccessCodes {
@@ -31,14 +31,13 @@ export interface IFileEntity {
   id: string;
   file_id: string;
   participants: ArrangerResultsTree<IParticipantEntity>;
-  biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
+  biospecimens?: ArrangerResultsTree<IBiospecimenEntity>;
   studies: ArrangerResultsTree<IStudyEntity>;
   data_category: string;
   data_type: string;
   file_format: string;
   score: number;
   data_access: string;
-  dictionary_version: number;
   experimental_strategy: string;
   file_size: number;
   file_variant_class: string;
@@ -47,7 +46,6 @@ export interface IFileEntity {
   study_version: number;
   study_version_creation_date: string;
   data_access_codes: IFileDataAccessCodes;
-  diagnoses: ArrangerResultsTree<IDiagnosis>;
   icd: IFileIcd;
   mondo: IMondo;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;

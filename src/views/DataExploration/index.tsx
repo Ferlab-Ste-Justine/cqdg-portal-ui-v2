@@ -44,7 +44,7 @@ const filterGroups: {
     groups: [
       {
         facets: [
-          'internal_donor_id',
+          'fhir_id',
           <TreeFacet
             type={'mondoTree'}
             field={'mondo'}
@@ -77,7 +77,7 @@ const filterGroups: {
           'data_category',
           'data_type',
           'file_format',
-          'internal_file_id',
+          'fhir_id',
           'platform',
           'experimental_strategy',
           'is_harmonized',

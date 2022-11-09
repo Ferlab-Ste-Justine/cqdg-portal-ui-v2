@@ -10,31 +10,11 @@ export const GET_STUDIES = gql`
             id
             domain
             internal_study_id
-            name
+            name: title
             population
             description
-            participants: donors {
-              hits {
-                total
-              }
-            }
-            files {
-              hits {
-                total
-              }
-            }
-            summary {
-              data_category {
-                hits {
-                  edges {
-                    node {
-                      participants: donors
-                      key
-                    }
-                  }
-                }
-              }
-            }
+            participant_count
+            file_count
           }
         }
       }

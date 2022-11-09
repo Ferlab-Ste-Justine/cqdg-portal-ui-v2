@@ -1,6 +1,5 @@
-import { IFileDataAccessCodes, IFileEntity } from 'graphql/files/models';
+import { IFileDataAccessCodes } from 'graphql/files/models';
 import { ArrangerResultsTree } from 'graphql/models';
-import { IParticipantEntity } from 'graphql/participants/models';
 
 export interface IStudyResultTree {
   Study: ArrangerResultsTree<IStudyEntity>;
@@ -49,7 +48,6 @@ export interface IStudyEntity {
   name: string;
   population: string;
   description: string;
-  participants: ArrangerResultsTree<IParticipantEntity>;
-  files: ArrangerResultsTree<IFileEntity>;
-  summary: ISummary;
+  participant_count: number;
+  file_count: number;
 }

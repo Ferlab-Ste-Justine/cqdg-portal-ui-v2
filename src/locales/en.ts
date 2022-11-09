@@ -718,7 +718,7 @@ const fr = {
     // Studies
     domain: 'Study Domain',
     population: 'Population',
-    donors: {
+    participants: {
       diagnoses: {
         tagged_icd: {
           main_category: 'Disease Type (ICD-10)',

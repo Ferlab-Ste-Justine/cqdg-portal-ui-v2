@@ -17,7 +17,7 @@ import { Button, Dropdown, Menu, Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
 import {
-  IDiagnosis,
+  IMondoTagged,
   IParticipantEntity,
   IPhenotype,
   ITableParticipantEntity,
@@ -31,6 +31,7 @@ import {
   SCROLL_WRAPPER_ID,
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
+import { extractMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
@@ -136,19 +137,6 @@ const defaultColumns: ProColumnType<any>[] = [
       ),
   },
   {
-    key: 'family_history_available',
-    title: intl.get('screen.dataExploration.tabs.participants.familyHistory'),
-    dataIndex: 'family_history_available',
-    sorter: {
-      multiple: 1,
-    },
-    render: (family_history_available) => (
-      <Tag color={family_history_available ? 'geekblue' : 'magenta'}>
-        {family_history_available ? 'Yes' : 'No'}
-      </Tag>
-    ),
-  },
-  {
     key: 'age_at_recruitment',
     title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
     dataIndex: 'age_at_recruitment',
@@ -158,28 +146,27 @@ const defaultColumns: ProColumnType<any>[] = [
     render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'diagnoses',
+    key: 'tagged_mondo',
     title: intl.get('screen.dataExploration.tabs.participants.diagnoses'),
-    dataIndex: 'diagnoses',
+    dataIndex: 'tagged_mondo',
     className: styles.diagnosisCell,
-    render: (diagnoses: ArrangerResultsTree<IDiagnosis>) => {
-      const diagnosisMondoCodes = diagnoses?.hits?.edges.map((diag) => ({
-        code: diag.node.diagnosis_mondo_code,
-        text: diag.node.diagnosis_source_text,
-      }));
-      if (!diagnosisMondoCodes || !diagnosisMondoCodes.length) {
+    render: (tagged_mondo: ArrangerResultsTree<IMondoTagged>) => {
+      if (!tagged_mondo?.hits?.edges.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
+      const diagnosesTagged = tagged_mondo?.hits?.edges.map((diag) =>
+        extractMondoTitleAndCode(diag.node.name),
+      );
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={diagnosisMondoCodes}
+          dataSource={diagnosesTagged}
           renderItem={(item, index) => (
             <div key={index}>
-              {capitalize(item.text)}
+              {capitalize(item!.title)}
               <br />
-              <ExternalLink href={`https://monarchinitiative.org/disease/${item.code}`}>
-                {item.code}
+              <ExternalLink href={`https://monarchinitiative.org/disease/${item!.code}`}>
+                {item!.code}
               </ExternalLink>
             </div>
           )}
@@ -188,21 +175,21 @@ const defaultColumns: ProColumnType<any>[] = [
     },
   },
   {
-    key: 'phenotypes_tagged',
+    key: 'observed_phenotype_tagged',
     title: intl.get('screen.dataExploration.tabs.participants.phenotypes'),
-    dataIndex: 'phenotypes_tagged',
+    dataIndex: 'observed_phenotype_tagged',
     className: styles.phenotypeCell,
-    render: (observed_phenotype: ArrangerResultsTree<IPhenotype>) => {
-      const phenotypes = observed_phenotype?.hits?.edges
-        .filter((p) => p.node.is_tagged)
-        .map((p) => ({ name: p.node.name, code: p.node.phenotype_id }));
-      if (!phenotypes || !phenotypes.length) {
+    render: (observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>) => {
+      if (!observed_phenotype_tagged?.hits?.edges?.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
+      const phenotypesTagged = observed_phenotype_tagged?.hits?.edges
+        .filter((p) => p.node.is_tagged)
+        .map((p) => ({ name: p.node.name, code: p.node.internal_phenotype_id }));
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={phenotypes}
+          dataSource={phenotypesTagged}
           renderItem={(item, index) => (
             <div key={index}>
               {capitalize(item.name)} <br />
@@ -222,7 +209,7 @@ const defaultColumns: ProColumnType<any>[] = [
       multiple: 1,
     },
     render: (record: ITableParticipantEntity) =>
-      record.files.hits.total ? (
+      record?.files?.hits?.total ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -411,7 +398,8 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
         total: results.total,
         onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.participant_id }))}
+      // dataSource={results.data.map((i) => ({ ...i, key: i.participant_id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
       dictionary={getProTableDictionary()}
     />
   );
