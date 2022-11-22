@@ -312,7 +312,7 @@ const fr = {
         savedFilters: {
           title: 'Filtres enregistrés',
           noSavedFilters: "Vous n'avez aucun filtre enregistré",
-          lastSaved: 'Last saved: {date} ago',
+          lastSaved: 'Dernier enregistrement: il y a {date}',
         },
         savedSets: {
           title: 'Ensembles enregistrés',
@@ -423,6 +423,20 @@ const fr = {
     },
     studies: {
       title: 'Études',
+      code: 'Code',
+      name: 'Nom',
+      domain: 'Domaine',
+      population: 'Population',
+      participants: 'Participants',
+      families: 'Familles',
+      genomics: 'Génomique',
+      transcriptomics: 'Transcriptomique',
+      imaging: 'Imagerie',
+      files: 'Fichiers',
+      accessLimitation: 'Restriction d’accès',
+      accessRequirement: 'Exigence d’accès',
+      sampleAvailability: 'Disponibilité des échantillons',
+      description: 'Description',
     },
     dataExploration: {
       title: 'Exploration des données',

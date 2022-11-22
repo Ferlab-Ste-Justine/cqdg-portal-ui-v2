@@ -1,15 +1,19 @@
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { IQueryResults } from 'graphql/models';
-import { IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
+import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
@@ -25,71 +29,109 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'internal_study_id',
     dataIndex: 'internal_study_id',
-    title: 'Study ID',
+    title: intl.get('screen.studies.code'),
+    sorter: { multiple: 1 },
   },
   {
     dataIndex: 'name',
     key: 'study_name',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Study Name',
+    title: intl.get('screen.studies.name'),
+    sorter: { multiple: 1 },
   },
   {
     dataIndex: 'domain',
     key: 'domain',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Domain',
+    title: intl.get('screen.studies.domain'),
+    sorter: { multiple: 1 },
   },
   {
     dataIndex: 'population',
     key: 'population',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Population',
+    title: intl.get('screen.studies.population'),
+    sorter: { multiple: 1 },
   },
   {
-    key: 'participants',
-    render: (record: IStudyEntity) => record.participants.hits.total,
-    title: 'Participants',
+    key: 'participant_count',
+    title: intl.get('screen.studies.participants'),
+    dataIndex: 'participant_count',
+    render: (participant_count: number) => (
+      <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}`}>{participant_count}</Link>
+    ),
+    defaultHidden: true,
   },
   {
-    key: 'seq',
-    render: (record: IStudyEntity) => {
-      const sq = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Sequencing reads',
+    key: 'family_count',
+    title: intl.get('screen.studies.families'),
+    dataIndex: 'family_count',
+  },
+  {
+    key: 'genomics',
+    render: (study: IStudyEntity) => {
+      const elem = study.data_categories.hits.edges.find(
+        (item: any) => item.node.data_type === 'Genomics',
       );
-      return sq?.node.participants;
+      return elem?.node.participant_count;
     },
-    title: 'Seq',
+    title: intl.get('screen.studies.genomics'),
   },
   {
-    key: 'snv',
-    render: (record: IStudyEntity) => {
-      const snv = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Simple nucleotide variation',
+    key: 'transcriptomics',
+    render: (study: IStudyEntity) => {
+      const elem = study.data_categories.hits.edges.find(
+        (item: any) => item.node.data_type === 'Transcriptomics',
       );
-      return snv?.node.participants;
+      return elem?.node.participant_count;
     },
-    title: 'SNV',
+    title: intl.get('screen.studies.transcriptomics'),
   },
   {
-    key: 'exp',
-    render: (record: IStudyEntity) => {
-      const exp = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Transcriptome profiling',
-      );
-      return exp?.node.participants;
-    },
-    title: 'Exp',
+    key: 'imaging',
+    title: intl.get('screen.studies.imaging'),
+    dataIndex: 'imaging',
   },
   {
-    key: 'files',
-    render: (record: IStudyEntity) => record.files.hits.total,
-    title: 'Files',
+    key: 'file_count',
+    title: intl.get('screen.studies.files'),
+    dataIndex: 'file_count',
+    render: (file_count: number) => (
+      <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}`}>{file_count}</Link>
+    ),
+  },
+  {
+    key: 'access_limitations',
+    title: intl.get('screen.studies.accessLimitation'),
+    dataIndex: 'data_access_codes',
+    defaultHidden: true,
+    render: (data_access_codes: IStudyDataAccessCodes) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_access_codes?.access_limitations || []}
+      />
+    ),
+  },
+  {
+    key: 'access_requirements',
+    title: intl.get('screen.studies.accessRequirement'),
+    dataIndex: 'access_requirements',
+    defaultHidden: true,
+    render: (data_access_codes: IStudyDataAccessCodes) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_access_codes?.access_requirements || []}
+      />
+    ),
+  },
+  {
+    key: 'sample_availability',
+    title: intl.get('screen.studies.sampleAvailability'),
+    dataIndex: 'sample_availability',
+    defaultHidden: true,
+  },
+  {
+    key: 'description',
+    title: intl.get('screen.studies.description'),
+    dataIndex: 'description',
+    defaultHidden: true,
   },
 ];
 
