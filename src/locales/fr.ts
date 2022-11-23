@@ -368,6 +368,7 @@ const fr = {
         gnomAD: 'gnomAD',
       },
       consequences: {
+        consequence: 'Conséquence',
         consequences: 'Conséquences',
         geneConsequences: 'Conséquences géniques',
         impactTag: {
@@ -378,7 +379,6 @@ const fr = {
         },
         AAColumn: 'AA',
         AAColumnTooltip: 'Substitution acide aminé',
-        consequence: 'Conséquence',
         CDNAChangeColumn: 'ADN codant',
         conservationColumn: 'Conservation',
         strand: 'Brin',
@@ -393,6 +393,7 @@ const fr = {
         canonical: 'Transcrit canonique',
       },
       frequencies: {
+        frequency: 'Fréquence',
         frequencies: 'Fréquences',
         frequencyTooltip: 'Fréquence du variant dans les études du CQDG',
         CQDGStudies: 'Études du CQDG',
@@ -401,7 +402,6 @@ const fr = {
         domain: 'Domaine',
         participants: 'Participants',
         participantsTooltip: '# de participants affectés dans les études du CQDG',
-        frequency: 'Fréquence',
         altAlleles: 'Allèles ALT',
         altAllelesTooltip: 'Nombre d’allèles alternatifs',
         altRef: 'Allèles (ALT + REF)',
@@ -412,7 +412,8 @@ const fr = {
         cohort: 'Cohorte',
       },
       pathogenicity: {
-        pathogenicity: 'Pathogénicités',
+        pathogenicity: 'Pathogénicité',
+        pathogenicities: 'Pathogénicités',
         clinVar: 'ClinVar',
         genePhenotype: 'Gène - Phénotype',
         condition: 'Condition',

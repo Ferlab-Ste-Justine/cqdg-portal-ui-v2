@@ -325,7 +325,7 @@ const Consequences = ({ variant, loading, id }: IConsequencesProps) => {
   return (
     <div id={id} className={styles.container}>
       <Title level={4} className={styles.title}>
-        {intl.get('screen.variants.consequences.consequences')}
+        {intl.get('screen.variants.consequences.consequence')}
       </Title>
       <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
         <CollapsePanel
