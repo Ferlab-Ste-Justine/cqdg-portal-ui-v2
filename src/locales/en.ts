@@ -324,6 +324,7 @@ const fr = {
           lastSaved: 'Last saved: {date} ago',
           files: 'Files',
           participants: 'Participants',
+          biospecimens: 'Biospecimens',
         },
       },
     },

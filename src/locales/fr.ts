@@ -328,6 +328,7 @@ const fr = {
           lastSaved: 'Dernier enregistrement: il y a {date}',
           files: 'Fichiers',
           participants: 'Participants',
+          biospecimens: 'Specimens biologiques',
         },
       },
     },

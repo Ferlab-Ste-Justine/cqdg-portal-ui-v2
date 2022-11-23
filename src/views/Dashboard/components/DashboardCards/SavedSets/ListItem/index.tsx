@@ -1,14 +1,14 @@
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import ListItemWithActions from '@ferlab/ui/core/components/List/ListItemWithActions';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Col, ConfigProvider, Modal, Row, Typography } from 'antd';
+import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
-import enUS from 'date-fns/locale/en-US';
-import frCA from 'date-fns/locale/fr-CA';
 import { INDEXES } from 'graphql/constants';
 import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 import {
@@ -16,7 +16,6 @@ import {
   DATA_EXPLORATION_QB_ID,
 } from 'views/DataExploration/utils/constant';
 
-import ListItemWithActions from 'components/uiKit/list/ListItemWithActions';
 import { IUserSetOutput } from 'services/api/savedSet/models';
 import { getSetFieldId } from 'store/savedSet';
 import { deleteSavedSet } from 'store/savedSet/thunks';
@@ -48,7 +47,7 @@ const redirectToPage = (setType: string) => {
 const ListItem = ({ data, icon }: OwnProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const { locale } = useContext(ConfigProvider.ConfigContext);
+  const history = useHistory();
 
   const onCancel = () => {
     setModalVisible(false);
@@ -59,8 +58,8 @@ const ListItem = ({ data, icon }: OwnProps) => {
       <ListItemWithActions
         key={data.id}
         className={styles.savedSetListItem}
-        onEditCb={() => setModalVisible(true)}
-        onDeleteCb={() =>
+        onEdit={() => setModalVisible(true)}
+        onDelete={() =>
           Modal.confirm({
             title: intl.get('components.savedSets.popupConfirm.delete.title'),
             icon: <ExclamationCircleOutlined />,
@@ -81,30 +80,27 @@ const ListItem = ({ data, icon }: OwnProps) => {
             </Col>
           </Row>
         }
-        linkProps={{
-          to: redirectToPage(data.setType),
-          content: data.tag,
-          onClick: () => {
-            const setValue = `${SET_ID_PREFIX}${data.id}`;
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: getSetFieldId(data.setType),
-                    value: [setValue],
-                    index: data.setType,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            });
-          },
+        onClick={() => {
+          history.push(redirectToPage(data.setType));
+
+          const setValue = `${SET_ID_PREFIX}${data.id}`;
+          addQuery({
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            query: generateQuery({
+              newFilters: [
+                generateValueFilter({
+                  field: getSetFieldId(data.setType),
+                  value: [setValue],
+                  index: data.setType,
+                }),
+              ],
+            }),
+            setAsActive: true,
+          });
         }}
+        title={data.tag}
         description={intl.get('screen.dashboard.cards.savedFilters.lastSaved', {
-          date: formatDistance(new Date(), new Date(data.updated_date), {
-            locale: locale?.locale === 'fr' ? frCA : enUS,
-          }),
+          date: formatDistance(new Date(), new Date(data.updated_date)),
         })}
       />
       <CreateEditModal
