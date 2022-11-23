@@ -15,16 +15,9 @@ export const SEARCH_FILES_QUERY = gql`
                 total
               }
             }
-            #            studies: study {
-            #              hits {
-            #                total
-            #                edges {
-            #                  node {
-            #                    internal_study_id
-            #                    name: title
-            #                  }
-            #                }
-            #              }
+            #            study {
+            #              internal_study_id
+            #              name
             #            }
             data_category
             data_type

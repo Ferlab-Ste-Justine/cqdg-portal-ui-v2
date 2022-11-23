@@ -1,12 +1,14 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Col, Modal, Row, Typography } from 'antd';
-import { distanceInWords } from 'date-fns';
+import { Col, ConfigProvider, Modal, Row, Typography } from 'antd';
+import { formatDistance } from 'date-fns';
+import enUS from 'date-fns/locale/en-US';
+import frCA from 'date-fns/locale/fr-CA';
 import { INDEXES } from 'graphql/constants';
 import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 import {
@@ -46,6 +48,7 @@ const redirectToPage = (setType: string) => {
 const ListItem = ({ data, icon }: OwnProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
+  const { locale } = useContext(ConfigProvider.ConfigContext);
 
   const onCancel = () => {
     setModalVisible(false);
@@ -99,7 +102,9 @@ const ListItem = ({ data, icon }: OwnProps) => {
           },
         }}
         description={intl.get('screen.dashboard.cards.savedFilters.lastSaved', {
-          date: distanceInWords(new Date(), new Date(data.updated_date)),
+          date: formatDistance(new Date(), new Date(data.updated_date), {
+            locale: locale?.locale === 'fr' ? frCA : enUS,
+          }),
         })}
       />
       <CreateEditModal
