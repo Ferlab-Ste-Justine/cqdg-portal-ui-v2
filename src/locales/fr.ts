@@ -311,6 +311,10 @@ const fr = {
         },
         savedFilters: {
           title: 'Filtres enregistrés',
+          popoverTitle: 'Gestion des filtres enregistrés',
+          popoverContent:
+            "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans la ",
+          popoverContentLink: 'page Exploration des données',
           noSavedFilters: "Vous n'avez aucun filtre enregistré",
           lastSaved: 'Dernier enregistrement: il y a {date}',
         },
@@ -319,6 +323,7 @@ const fr = {
           popoverTitle: 'Gestion des ensembles enregistrés',
           popoverContent:
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans la ",
+          popoverContentLink: 'page Exploration des données',
           noSaved: "Vous n'avez pas d'ensemble enregistré",
           lastSaved: 'Dernier enregistrement: il y a {date}',
           files: 'Fichiers',

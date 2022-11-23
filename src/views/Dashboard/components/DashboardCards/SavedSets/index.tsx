@@ -80,7 +80,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
                 {intl.get('screen.dashboard.cards.savedSets.popoverContent')}
                 <PopoverContentLink
                   to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-                  title="Data Exploration page"
+                  title={intl.get('screen.dashboard.cards.savedSets.popoverContentLink')}
                 />
                 .
               </Text>
