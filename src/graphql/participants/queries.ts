@@ -8,9 +8,7 @@ export const GET_PARTICIPANTS = gql`
         edges {
           node {
             id
-            fhir_id
-            participant_id: fhir_id
-            submitter_participant_id
+            participant_id
             score
             age_at_recruitment
             age_of_death
@@ -20,22 +18,15 @@ export const GET_PARTICIPANTS = gql`
             is_a_proband
             is_affected
             vital_status
-            files {
-              hits {
-                total
-              }
-            }
-            #            study {
+            #            files {
             #              hits {
             #                total
-            #                edges {
-            #                  node {
-            #                    study_id
-            #                    name: title
-            #                  }
-            #                }
             #              }
             #            }
+            study {
+              study_id
+              name
+            }
             mondo {
               hits {
                 edges {
@@ -50,7 +41,7 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
-            tagged_mondo {
+            mondo_tagged {
               hits {
                 edges {
                   node {
@@ -59,7 +50,7 @@ export const GET_PARTICIPANTS = gql`
                     is_leaf
                     is_tagged
                     name
-                    parents
+                    #                    parents
                     internal_phenotype_id
                   }
                 }
@@ -130,8 +121,7 @@ export const MATCH_PARTICIPANTS = gql`
         edges {
           node {
             id
-            participant_id: fhir_id
-            fhir_id
+            participant_id
             study {
               hits {
                 total

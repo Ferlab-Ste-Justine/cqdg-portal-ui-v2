@@ -8,24 +8,45 @@ export const SEARCH_FILES_QUERY = gql`
         edges {
           node {
             id
-            fhir_id
-            file_id: fhir_id
+            file_id
             participants {
               hits {
                 total
+                edges {
+                  node {
+                    participant_id
+                  }
+                }
               }
             }
-            #            study {
-            #              internal_study_id
-            #              name
-            #            }
+            study {
+              study_id
+              name
+            }
+            study_id
             data_category
             data_type
             file_format
-            score
-            experimental_strategy
             file_size
-            platform
+            score
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const MATCH_FILES = gql`
+  query matchFiles($sqon: JSON, $first: Int, $offset: Int) {
+    file {
+      hits(filters: $sqon, first: $first, offset: $offset) {
+        edges {
+          node {
+            fhir_id
+            file_id
+            study {
+              study_id
+            }
           }
         }
       }
@@ -40,8 +61,7 @@ export const FILE_SEARCH_BY_ID_QUERY = gql`
         edges {
           node {
             id
-            fhir_id
-            file_id: fhir_id
+            file_id
           }
         }
       }

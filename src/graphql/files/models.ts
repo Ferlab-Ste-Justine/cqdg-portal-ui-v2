@@ -1,54 +1,53 @@
 import { ArrangerResultsTree } from 'graphql/models';
-import { IMondo, IParticipantEntity, IPhenotype } from 'graphql/participants/models';
+import { IParticipantEntity } from 'graphql/participants/models';
 import { IStudyEntity } from 'graphql/studies/models';
-
-import { IBiospecimenEntity } from '../biospecimens/models';
 
 export interface IFileResultTree {
   File: ArrangerResultsTree<IFileEntity>;
 }
 
-export interface IFileDataAccessCodes {
-  access_limitations: string;
-  access_requirements: string[];
-}
-
-export interface IFileIcd {
-  id: string;
-  score: number;
-  age_at_event: number;
-  display_name: string;
-  internal_phenotype_id: string;
-  is_leaf: boolean;
-  is_tagged: boolean;
-  main_category: string;
-  name: string;
-  parents: string[];
-  phenotype_id: string;
+export interface IFileSequencingExperiment {
+  alir: string;
+  bio_informatic_analysis: string;
+  capture_kit: string;
+  experimental_strategy: string;
+  gcnv: string;
+  genome_build: string;
+  gsv: string;
+  is_paired_end: boolean;
+  labAliquotID: string;
+  owner: string;
+  platform: string;
+  read_length: string;
+  run_alias: string;
+  run_date: string;
+  run_name: string;
+  sequencer_id: string;
+  snv: string;
+  ssup: string;
+  workflow_name: string;
+  workflow_version: string;
 }
 
 export interface IFileEntity {
   id: string;
   file_id: string;
   participants: ArrangerResultsTree<IParticipantEntity>;
-  biospecimens?: ArrangerResultsTree<IBiospecimenEntity>;
-  studies: ArrangerResultsTree<IStudyEntity>;
   data_category: string;
   data_type: string;
   file_format: string;
   score: number;
   data_access: string;
-  experimental_strategy: string;
   file_size: number;
-  file_variant_class: string;
-  is_harmonized: boolean;
-  platform: string;
-  study_version: number;
-  study_version_creation_date: string;
-  data_access_codes: IFileDataAccessCodes;
-  icd: IFileIcd;
-  mondo: IMondo;
-  observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
+  study_id: string;
+  study: IStudyEntity;
+  biospecimen_reference: string;
+  ferload_url: string;
+  file_hash: string;
+  file_name: string;
+  release_id: string;
+  sequencing_experiment: IFileSequencingExperiment;
+  nb_biospecimens: number;
 }
 
 export enum FileAccessType {

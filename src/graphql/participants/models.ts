@@ -38,6 +38,17 @@ export interface IMondoTagged {
   internal_phenotype_id: string;
 }
 
+export interface IIcd {
+  id: string;
+  score: number;
+  age_at_event: number;
+  internal_phenotype_id: string;
+  is_leaf: boolean;
+  is_tagged: boolean;
+  name: string;
+  parents: string[];
+}
+
 export interface IParticipantEntity {
   id: string;
   participant_id: string;
@@ -53,12 +64,14 @@ export interface IParticipantEntity {
   is_affected: string;
   vital_status: string;
   files: ArrangerResultsTree<IFileEntity>;
-  studies: ArrangerResultsTree<IStudyEntity>;
+  study: IStudyEntity;
+  study_id: string;
   mondo: ArrangerResultsTree<IMondo>;
-  tagged_mondo: ArrangerResultsTree<IMondoTagged>;
+  mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   non_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
+  icd_tagged: ArrangerResultsTree<IIcd>;
 }
 
 export type ITableParticipantEntity = IParticipantEntity & {

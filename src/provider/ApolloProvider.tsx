@@ -33,7 +33,15 @@ const Provider = ({ children }: GraphqlProvider) => {
   const header = getAuthLink();
 
   const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Study: { merge: true },
+        Participant: { merge: true },
+        Biospecimen: { merge: true },
+        File: { merge: true },
+        Variant: { merge: true },
+      },
+    }),
     link: header.concat(arrangerLink),
   });
   return <ApolloProvider client={client}>{children}</ApolloProvider>;

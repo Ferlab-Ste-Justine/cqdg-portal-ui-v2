@@ -9,12 +9,24 @@ export const GET_STUDIES = gql`
           node {
             id
             domain
-            internal_study_id
-            name: title
+            study_id
+            name
             population
             description
             participant_count
             file_count
+            data_category
+            data_categories {
+              hits {
+                total
+                edges {
+                  node {
+                    participant_count
+                    data_category
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -7,6 +7,8 @@ import { Spin } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
 import PageContent from 'views/DataExploration/components/PageContent';
+import FileUploadIds from 'views/DataExploration/components/UploadIds/FileUploadIds';
+import ParticipantUploadIds from 'views/DataExploration/components/UploadIds/ParticipantUploadIds';
 import {
   DATA_EXPLORATION_QB_ID,
   SCROLL_WRAPPER_ID,
@@ -40,11 +42,12 @@ const filterGroups: {
     customSearches: [
       <ParticipantSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
       <ParticipantSetSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
+      <ParticipantUploadIds key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
     ],
     groups: [
       {
         facets: [
-          'fhir_id',
+          'participant_id',
           <TreeFacet
             type={'mondoTree'}
             field={'mondo'}
@@ -69,18 +72,15 @@ const filterGroups: {
     customSearches: [
       <FileSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
       <FileSetSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
+      <FileUploadIds key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
     ],
     groups: [
       {
         facets: [
-          'data_access',
           'data_category',
           'data_type',
+          'sequencing_experiment__experiment_strategy',
           'file_format',
-          'fhir_id',
-          'platform',
-          'experimental_strategy',
-          'is_harmonized',
         ],
       },
     ],

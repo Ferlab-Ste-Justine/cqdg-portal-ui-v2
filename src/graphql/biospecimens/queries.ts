@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SEARCH_BIOSPECIMEN_QUERY = gql`
   query searchBiospecimen($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
-    biospecimen {
+    Biospecimen {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
         edges {
@@ -42,7 +42,7 @@ export const SEARCH_BIOSPECIMEN_QUERY = gql`
 
 export const BIOSPECIMEN_SEARCH_BY_ID_QUERY = gql`
   query searchBiospecimenById($sqon: JSON) {
-    biospecimen {
+    Biospecimen {
       hits(filters: $sqon) {
         edges {
           node {
