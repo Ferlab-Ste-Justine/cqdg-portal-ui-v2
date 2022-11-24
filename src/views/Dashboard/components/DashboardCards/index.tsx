@@ -14,7 +14,7 @@ export interface DashboardCardProps {
 
 // Important do not change the ID
 // Its is used for user config
-export const dashboardCards: TSortableItems[] = [
+export const getDashboardCards = (): TSortableItems[] => [
   {
     id: '3',
     xs: 24,

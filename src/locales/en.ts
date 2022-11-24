@@ -307,18 +307,24 @@ const fr = {
         },
         savedFilters: {
           title: 'Saved Filters',
+          popoverTitle: 'Managing Saved Filters',
+          popoverContent:
+            'A saved filter is a virtual query created by applying one or more filters to a search query. They can be saved and revisited for later use without having to manually reselect filters in the sidebar. You can create saved filters using the Query Management tool above the table of results in the ',
+          popoverContentLink: 'Data Exploration page',
           noSavedFilters: 'You have no saved filters',
           lastSaved: 'Last saved: {date} ago',
         },
         savedSets: {
           title: 'Saved Sets',
-          popoverTitle: 'Managing saved sets',
+          popoverTitle: 'Managing Saved Sets',
           popoverContent:
             'A saved set is a set of one or more entity IDs that can be saved and revisited for later use without having to manually reselect entity IDs. You can create Participant, Biospecimen, and File saved sets at the top of the table of results in the ',
+          popoverContentLink: 'Data Exploration page',
           noSaved: 'You have no saved sets',
           lastSaved: 'Last saved: {date} ago',
           files: 'Files',
           participants: 'Participants',
+          biospecimens: 'Biospecimens',
         },
       },
     },
@@ -364,6 +370,7 @@ const fr = {
         gnomAD: 'gnomAD',
       },
       consequences: {
+        consequence: 'Consequence',
         consequences: 'Consequences',
         geneConsequences: 'Gene Consequences',
         impactTag: {
@@ -374,7 +381,6 @@ const fr = {
         },
         AAColumn: 'AA',
         AAColumnTooltip: 'Amino acid substitution',
-        consequence: 'Consequence',
         CDNAChangeColumn: 'Coding DNA',
         conservationColumn: 'Conservation',
         strand: 'Strand',
@@ -389,6 +395,7 @@ const fr = {
         canonical: 'Canonical transcript',
       },
       frequencies: {
+        frequency: 'Frequency',
         frequencies: 'Frequencies',
         frequencyTooltip: 'Frequency of the variant across CQDG studies',
         CQDGStudies: 'CQDG Studies',
@@ -397,7 +404,6 @@ const fr = {
         domain: 'Domain',
         participants: 'Participants',
         participantsTooltip: '# of affected participants across CQDG studies',
-        frequency: 'Frequency',
         altAlleles: 'ALT Alleles',
         altAllelesTooltip: 'Number of alternative alleles',
         altRef: 'Alleles (ALT + REF)',
@@ -408,7 +414,8 @@ const fr = {
         cohort: 'Cohort',
       },
       pathogenicity: {
-        pathogenicity: 'Pathogenicities',
+        pathogenicity: 'Pathogenicity',
+        pathogenicities: 'Pathogenicities',
         clinVar: 'ClinVar',
         genePhenotype: 'Gene - Phenotype',
         condition: 'Condition',
@@ -419,6 +426,20 @@ const fr = {
     },
     studies: {
       title: 'Studies',
+      code: 'Code',
+      name: 'Name',
+      domain: 'Domain',
+      population: 'Population',
+      participants: 'Participants',
+      families: 'Families',
+      genomics: 'Genomics',
+      transcriptomics: 'Transcriptomics',
+      imaging: 'Imaging',
+      files: 'Files',
+      accessLimitation: 'Access Limitation',
+      accessRequirement: 'Access Requirement',
+      sampleAvailability: 'Sample Availability',
+      description: 'Description',
     },
     dataExploration: {
       title: 'Data Exploration',
@@ -718,7 +739,7 @@ const fr = {
     // Studies
     domain: 'Study Domain',
     population: 'Population',
-    donors: {
+    participants: {
       diagnoses: {
         tagged_icd: {
           main_category: 'Disease Type (ICD-10)',

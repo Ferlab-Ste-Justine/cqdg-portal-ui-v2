@@ -93,7 +93,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
     offset: participantQueryConfig.size * (participantQueryConfig.pageIndex - 1),
     sqon: participantResolvedSqon,
     sort: isEmpty(participantQueryConfig.sort)
-      ? [{ field: 'internal_donor_id', order: 'asc' }] //todo: to change to participant_id after els index changed
+      ? [{ field: 'participant_id', order: 'asc' }]
       : participantQueryConfig.sort,
   });
 
@@ -102,7 +102,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
     offset: datafilesQueryConfig.size * (datafilesQueryConfig.pageIndex - 1),
     sqon: fileResolvedSqon,
     sort: isEmpty(datafilesQueryConfig.sort)
-      ? [{ field: 'internal_file_id', order: 'asc' }] //todo: to change to file_id after els index changed
+      ? [{ field: 'file_id', order: 'asc' }]
       : datafilesQueryConfig.sort,
   });
 
@@ -202,14 +202,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
             );
           },
           selectedFilterContent: selectedFilterContent,
-          blacklistedFacets: [
-            'participant_id',
-            'sample_id',
-            'file_id',
-            'participant_fhir_id',
-            'biospecimen_fhir_id',
-            'file_fhir_id',
-          ],
+          blacklistedFacets: ['participant_id', 'sample_id', 'file_id', 'biospecimen_id'],
         }}
         enableCombine
         enableShowHideLabels

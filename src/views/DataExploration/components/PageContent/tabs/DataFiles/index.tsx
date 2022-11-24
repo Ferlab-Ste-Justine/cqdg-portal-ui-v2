@@ -149,12 +149,6 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (data_type) => data_type || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'experimental_strategy',
-    title: intl.get('screen.dataExploration.tabs.datafiles.experimentalStrategy'),
-    sorter: { multiple: 1 },
-    render: (record: IFileEntity) => record.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
     key: 'access_urls',
     title: intl.get('screen.dataExploration.tabs.datafiles.accessUrl'),
     dataIndex: 'access_urls',
@@ -220,7 +214,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
     defaultHidden: true,
     render: (record: IFileEntity) => {
-      const nb_biospecimens = record?.biospecimens?.hits.total || 0;
+      const nb_biospecimens = record?.nb_biospecimens || 0;
       return nb_biospecimens ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}

@@ -1,15 +1,22 @@
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { Popover } from 'antd';
 import { IQueryResults } from 'graphql/models';
-import { IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
+import { STATIC_ROUTES } from 'utils/routes';
+import { truncateString } from 'utils/string';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
@@ -23,73 +30,133 @@ interface OwnProps {
 
 const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
-    key: 'internal_study_id',
-    dataIndex: 'internal_study_id',
-    title: 'Study ID',
+    key: 'study_id',
+    dataIndex: 'study_id',
+    title: intl.get('screen.studies.code'),
+    sorter: { multiple: 1 },
   },
   {
     dataIndex: 'name',
     key: 'study_name',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Study Name',
+    title: intl.get('screen.studies.name'),
+    sorter: { multiple: 1 },
   },
   {
     dataIndex: 'domain',
     key: 'domain',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Domain',
+    title: intl.get('screen.studies.domain'),
+    sorter: { multiple: 1 },
+    render: (domain: string) => domain || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     dataIndex: 'population',
     key: 'population',
-    sorter: {
-      multiple: 1,
-    },
-    title: 'Population',
+    title: intl.get('screen.studies.population'),
+    sorter: { multiple: 1 },
+    render: (population: string) => population || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participants',
-    render: (record: IStudyEntity) => record.participants.hits.total,
-    title: 'Participants',
+    key: 'participant_count',
+    title: intl.get('screen.studies.participants'),
+    dataIndex: 'participant_count',
+    defaultHidden: true,
+    render: (participant_count: number) =>
+      participant_count ? (
+        <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}`}>{participant_count}</Link>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
-    key: 'seq',
-    render: (record: IStudyEntity) => {
-      const sq = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Sequencing reads',
+    key: 'family_count',
+    title: intl.get('screen.studies.families'),
+    dataIndex: 'family_count',
+    render: (family_count: string) => family_count || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'genomics',
+    title: intl.get('screen.studies.genomics'),
+    render: (study: IStudyEntity) => {
+      const elem = study.data_categories?.hits.edges.find(
+        (item: any) => item.node.data_type === 'Genomics',
       );
-      return sq?.node.participants;
+      return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
     },
-    title: 'Seq',
   },
   {
-    key: 'snv',
-    render: (record: IStudyEntity) => {
-      const snv = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Simple nucleotide variation',
+    key: 'transcriptomics',
+    title: intl.get('screen.studies.transcriptomics'),
+    render: (study: IStudyEntity) => {
+      const elem = study.data_categories?.hits.edges.find(
+        (item: any) => item.node.data_type === 'Transcriptomics',
       );
-      return snv?.node.participants;
+      return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
     },
-    title: 'SNV',
   },
   {
-    key: 'exp',
-    render: (record: IStudyEntity) => {
-      const exp = record.summary.data_category.hits.edges.find(
-        (item: any) => item.node.key === 'Transcriptome profiling',
-      );
-      return exp?.node.participants;
-    },
-    title: 'Exp',
+    key: 'imaging',
+    title: intl.get('screen.studies.imaging'),
+    dataIndex: 'imaging',
+    render: (imaging: string) => imaging || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'files',
-    render: (record: IStudyEntity) => record.files.hits.total,
-    title: 'Files',
+    key: 'file_count',
+    title: intl.get('screen.studies.files'),
+    dataIndex: 'file_count',
+    render: (file_count: number) =>
+      file_count ? (
+        <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}`}>{file_count}</Link>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+  },
+  {
+    key: 'access_limitations',
+    title: intl.get('screen.studies.accessLimitation'),
+    dataIndex: 'data_access_codes',
+    defaultHidden: true,
+    render: (data_access_codes: IStudyDataAccessCodes) =>
+      data_access_codes?.access_limitations?.length ? (
+        <ExpandableCell
+          nOfElementsWhenCollapsed={1}
+          dataSource={data_access_codes?.access_limitations || []}
+        />
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+  },
+  {
+    key: 'access_requirements',
+    title: intl.get('screen.studies.accessRequirement'),
+    dataIndex: 'access_requirements',
+    defaultHidden: true,
+    render: (data_access_codes: IStudyDataAccessCodes) =>
+      data_access_codes?.access_requirements?.length ? (
+        <ExpandableCell
+          nOfElementsWhenCollapsed={1}
+          dataSource={data_access_codes?.access_requirements || []}
+        />
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+  },
+  {
+    key: 'sample_availability',
+    title: intl.get('screen.studies.sampleAvailability'),
+    dataIndex: 'sample_availability',
+    defaultHidden: true,
+    render: (sample_availability: string) => sample_availability || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'description',
+    title: intl.get('screen.studies.description'),
+    dataIndex: 'description',
+    defaultHidden: true,
+    render: (description: string) => (
+      <Popover content={description} trigger="hover">
+        {truncateString(description, 20) || TABLE_EMPTY_PLACE_HOLDER}
+      </Popover>
+    ),
   },
 ];
 
@@ -142,7 +209,7 @@ const StudiesTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
         onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
         hideOnSinglePage: true,
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.internal_study_id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.study_id }))}
       dictionary={getProTableDictionary()}
     />
   );

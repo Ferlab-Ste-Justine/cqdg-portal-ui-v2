@@ -7,9 +7,10 @@ import { Form, Input, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 
+import { MAX_TITLE_LENGTH } from 'common/constants';
 import filtersToName from 'common/sqonToName';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
-import { MAX_LENGTH_NAME, PROJECT_ID, useSavedSet } from 'store/savedSet';
+import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';
 
 import styles from './index.module.scss';
@@ -68,7 +69,7 @@ const CreateEditModal = ({
       form.setFields([
         {
           name: SET_NAME_KEY,
-          errors: [intl.get('components.savedSets.modal.edit.setAlreadyExists')],
+          errors: ['A set with this name already exists'],
         },
       ]);
     } else {
@@ -104,7 +105,7 @@ const CreateEditModal = ({
       do {
         newName = `${newName}(copy)`;
         existsName = isSetNameExists(newName);
-      } while (existsName && newName.length < MAX_LENGTH_NAME);
+      } while (existsName && newName.length < MAX_TITLE_LENGTH);
     }
     return newName;
   };
@@ -139,7 +140,7 @@ const CreateEditModal = ({
       onCancel={handleCancel}
       onOk={() => form.submit()}
       okButtonProps={{ disabled: isLoading, loading: isLoading || isUpdating }}
-      okText={intl.get('components.savedSets.modal.edit.okText')}
+      okText="Save"
       destroyOnClose
     >
       <Form
@@ -158,16 +159,16 @@ const CreateEditModal = ({
         }}
       >
         <Form.Item
-          label={intl.get('components.savedSets.modal.add.name')}
+          label="Name"
           className={styles.setCreateFormItem}
           name={SET_NAME_KEY}
           rules={[
             {
               type: 'string',
-              max: MAX_LENGTH_NAME,
+              max: MAX_TITLE_LENGTH,
               message: (
                 <span>
-                  <WarningFilled /> {MAX_LENGTH_NAME}{' '}
+                  <WarningFilled /> {MAX_TITLE_LENGTH}{' '}
                   {intl.get('components.querybuilder.header.modal.edit.input.maximumLength')}
                 </span>
               ),
@@ -182,7 +183,7 @@ const CreateEditModal = ({
           ]}
           required={false}
         >
-          <Input autoFocus placeholder={intl.get('components.savedSets.modal.add.enterName')} />
+          <Input autoFocus placeholder="Enter the name of your new set" />
         </Form.Item>
       </Form>
     </Modal>

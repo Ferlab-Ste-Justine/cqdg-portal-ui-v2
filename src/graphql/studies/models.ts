@@ -1,6 +1,4 @@
-import { IFileDataAccessCodes, IFileEntity } from 'graphql/files/models';
 import { ArrangerResultsTree } from 'graphql/models';
-import { IParticipantEntity } from 'graphql/participants/models';
 
 export interface IStudyResultTree {
   Study: ArrangerResultsTree<IStudyEntity>;
@@ -10,46 +8,41 @@ export type ITableStudyEntity = IStudyEntity & {
   key: string;
 };
 
-export interface ISummary {
+export interface IStudyDataAccessCodes {
+  access_limitations: string[];
+  access_requirements: string[];
+}
+
+interface IDataType {
   id: string;
-  clinical_data_available: ArrangerResultsTree<{
-    id: string;
-    score: number;
-    participants: number;
-    key: string;
-  }>;
-  data_category: ArrangerResultsTree<{
-    id: string;
-    score: number;
-    participants: number;
-    key: string;
-    files: number;
-  }>;
-  experimental_strategy: ArrangerResultsTree<{
-    id: string;
-    score: number;
-    participants: number;
-    key: string;
-    files: number;
-  }>;
+  data_type: string;
+  participant_count: string;
 }
 
 export interface IStudyEntity {
   id: string;
   score: number;
-  access_authority: string;
   keyword: string;
-  short_name: string;
-  short_name_keyword: string;
   study_id: string;
-  study_id_keyword: string;
-  data_access_codes: IFileDataAccessCodes;
   domain: string;
   internal_study_id: string;
   name: string;
   population: string;
   description: string;
-  participants: ArrangerResultsTree<IParticipantEntity>;
-  files: ArrangerResultsTree<IFileEntity>;
-  summary: ISummary;
+  participant_count: number;
+  data_category: string;
+  file_count: number;
+  data_types: ArrangerResultsTree<IDataType>;
+  data_categories: ArrangerResultsTree<IDataType>;
+  data_access_codes: IStudyDataAccessCodes;
+  experimental_strategy: string[];
+  family_count: number;
+  family_data: boolean;
+  hpo_terms: string[];
+  icd_terms: string[];
+  mondo_terms: string[];
+  release_id: string;
+  status: string;
+  study_version: string;
+  contact: { type: string; value: string };
 }

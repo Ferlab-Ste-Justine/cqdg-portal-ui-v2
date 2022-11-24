@@ -22,14 +22,7 @@ const Studies = () => {
     {
       sqon: resolveSyntheticSqon(queryList, activeQuery),
     },
-    STUDIES_AGGREGATIONS([
-      'domain',
-      'population',
-      'donors__diagnoses__tagged_icd__main_category',
-      'donors__observed_phenotype_tagged__main_category',
-      'donors__diagnoses__tagged_mondo__main_category',
-      'files__data_category',
-    ]),
+    STUDIES_AGGREGATIONS(['domain', 'population', 'icd_terms', 'mondo_terms']),
     INDEXES.STUDY,
   );
 

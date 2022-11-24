@@ -18,7 +18,7 @@ interface IFrequenciesProps {
 const Frequencies = ({ variant, loading, id }: IFrequenciesProps) => (
   <div id={id} className={styles.container}>
     <Title level={4} className={styles.title}>
-      {intl.get('screen.variants.frequencies.frequencies')}
+      {intl.get('screen.variants.frequencies.frequency')}
     </Title>
     <Collapse defaultActiveKey={['1']} className={styles.collapse} arrowIcon="caretFilled">
       <CollapsePanel

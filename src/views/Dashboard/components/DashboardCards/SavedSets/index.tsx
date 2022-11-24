@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import intl from 'react-intl-universal';
-import { FileTextOutlined, UserOutlined } from '@ant-design/icons';
+import { ExperimentOutlined, FileTextOutlined, UserOutlined } from '@ant-design/icons';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
@@ -50,7 +50,7 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.get('screen.dashboard.cards.savedSets.noSaved')}
+          description={intl.get('screen.dashboard.cards.savedSets.noSavedFilters')}
         />
       ),
     }}
@@ -80,7 +80,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
                 {intl.get('screen.dashboard.cards.savedSets.popoverContent')}
                 <PopoverContentLink
                   to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-                  title="Data Exploration page"
+                  title={intl.get('screen.dashboard.cards.savedSets.popoverContentLink')}
                 />
                 .
               </Text>
@@ -106,6 +106,24 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
               fetchingError,
               isLoading,
               <UserOutlined />,
+            )}
+          </TabPane>
+          <TabPane
+            tab={
+              <div>
+                <ExperimentOutlined />
+                {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
+                {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
+              </div>
+            }
+            key="biospecimens"
+          >
+            {getItemList(
+              SetType.BIOSPECIMEN,
+              savedSets,
+              fetchingError,
+              isLoading,
+              <ExperimentOutlined />,
             )}
           </TabPane>
           <TabPane

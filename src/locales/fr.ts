@@ -311,18 +311,24 @@ const fr = {
         },
         savedFilters: {
           title: 'Filtres enregistrés',
+          popoverTitle: 'Gestion des filtres enregistrés',
+          popoverContent:
+            "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans la ",
+          popoverContentLink: 'page Exploration des données',
           noSavedFilters: "Vous n'avez aucun filtre enregistré",
-          lastSaved: 'Last saved: {date} ago',
+          lastSaved: 'Dernier enregistrement: il y a {date}',
         },
         savedSets: {
           title: 'Ensembles enregistrés',
           popoverTitle: 'Gestion des ensembles enregistrés',
           popoverContent:
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans la ",
+          popoverContentLink: 'page Exploration des données',
           noSaved: "Vous n'avez pas d'ensemble enregistré",
           lastSaved: 'Dernier enregistrement: il y a {date}',
           files: 'Fichiers',
           participants: 'Participants',
+          biospecimens: 'Specimens biologiques',
         },
       },
     },
@@ -368,6 +374,7 @@ const fr = {
         gnomAD: 'gnomAD',
       },
       consequences: {
+        consequence: 'Conséquence',
         consequences: 'Conséquences',
         geneConsequences: 'Conséquences géniques',
         impactTag: {
@@ -378,7 +385,6 @@ const fr = {
         },
         AAColumn: 'AA',
         AAColumnTooltip: 'Substitution acide aminé',
-        consequence: 'Conséquence',
         CDNAChangeColumn: 'ADN codant',
         conservationColumn: 'Conservation',
         strand: 'Brin',
@@ -393,6 +399,7 @@ const fr = {
         canonical: 'Transcrit canonique',
       },
       frequencies: {
+        frequency: 'Fréquence',
         frequencies: 'Fréquences',
         frequencyTooltip: 'Fréquence du variant dans les études du CQDG',
         CQDGStudies: 'Études du CQDG',
@@ -401,7 +408,6 @@ const fr = {
         domain: 'Domaine',
         participants: 'Participants',
         participantsTooltip: '# de participants affectés dans les études du CQDG',
-        frequency: 'Fréquence',
         altAlleles: 'Allèles ALT',
         altAllelesTooltip: 'Nombre d’allèles alternatifs',
         altRef: 'Allèles (ALT + REF)',
@@ -412,7 +418,8 @@ const fr = {
         cohort: 'Cohorte',
       },
       pathogenicity: {
-        pathogenicity: 'Pathogénicités',
+        pathogenicity: 'Pathogénicité',
+        pathogenicities: 'Pathogénicités',
         clinVar: 'ClinVar',
         genePhenotype: 'Gène - Phénotype',
         condition: 'Condition',
@@ -423,6 +430,20 @@ const fr = {
     },
     studies: {
       title: 'Études',
+      code: 'Code',
+      name: 'Nom',
+      domain: 'Domaine',
+      population: 'Population',
+      participants: 'Participants',
+      families: 'Familles',
+      genomics: 'Génomique',
+      transcriptomics: 'Transcriptomique',
+      imaging: 'Imagerie',
+      files: 'Fichiers',
+      accessLimitation: 'Restriction d’accès',
+      accessRequirement: 'Exigence d’accès',
+      sampleAvailability: 'Disponibilité des échantillons',
+      description: 'Description',
     },
     dataExploration: {
       title: 'Exploration des données',

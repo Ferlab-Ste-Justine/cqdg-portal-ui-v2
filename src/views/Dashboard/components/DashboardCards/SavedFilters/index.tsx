@@ -33,17 +33,15 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           title={intl.get('screen.dashboard.cards.savedFilters.title')}
           withHandle
           infoPopover={{
-            title: 'Managing saved filters',
+            title: intl.get('screen.dashboard.cards.savedFilters.popoverTitle'),
             content: (
               <Text>
-                A saved filter is a virtual query created by applying one or more filters to a
-                search query. They can be saved and revisited for later use without having to
-                manually reselect filters in the sidebar. You can create saved filters using the
-                Query Management tool above the table of results in the{' '}
+                {intl.get('screen.dashboard.cards.savedFilters.popoverContent')}
                 <PopoverContentLink
                   to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-                  title="Data Exploration page"
+                  title={intl.get('screen.dashboard.cards.savedFilters.popoverContentLink')}
                 />
+                .
               </Text>
             ),
           }}
