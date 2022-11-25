@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import translations from './en.json';
 
-const fr = {
+const en = {
   ...translations,
   global: {
     yes: 'Yes',
@@ -701,6 +701,19 @@ const fr = {
       D21: 'Disomy 21, euploid',
       T21: 'Trisomy 21',
     },
+    participants: {
+      diagnoses: {
+        tagged_icd: {
+          main_category: 'Disease Type (ICD-10)',
+        },
+        tagged_mondo: {
+          main_category: 'Diagnosis (Mondo)',
+        },
+      },
+      observed_phenotype_tagged: {
+        main_category: 'Type of Phenotypic Abnormality (HPO)',
+      },
+    },
 
     // Biospecimen
     biospecimen_type: 'Biospecimen Type',
@@ -739,20 +752,11 @@ const fr = {
     // Studies
     domain: 'Study Domain',
     population: 'Population',
-    participants: {
-      diagnoses: {
-        tagged_icd: {
-          main_category: 'Disease Type (ICD-10)',
-        },
-        tagged_mondo: {
-          main_category: 'Diagnosis (Mondo)',
-        },
-      },
-      observed_phenotype_tagged: {
-        main_category: 'Type of Phenotypic Abnormality (HPO)',
-      },
+    data_access_codes: {
+      access_limitations: 'Access Limitation',
+      access_requirements: 'Access Requirement',
     },
   },
 };
 
-export default fr;
+export default en;
