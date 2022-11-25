@@ -156,6 +156,7 @@ export const GET_PARTICIPANT_BY_ID = gql`
         edges {
           node {
             id
+            participant_id
           }
         }
       }
