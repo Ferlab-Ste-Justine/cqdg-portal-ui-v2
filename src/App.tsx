@@ -9,8 +9,10 @@ import Empty from '@ferlab/ui/core/components/Empty';
 import loadable from '@loadable/component';
 import { useKeycloak } from '@react-keycloak/web';
 import { ConfigProvider } from 'antd';
-import enUS from 'antd/lib/locale/en_US';
-import frFR from 'antd/lib/locale/fr_FR';
+import enUSAntd from 'antd/lib/locale/en_US';
+import frFRAntd from 'antd/lib/locale/fr_FR';
+import { setDefaultOptions } from 'date-fns';
+import { enUS, fr } from 'date-fns/locale';
 import AuthMiddleware from 'middleware/AuthMiddleware';
 import ProtectedRoute from 'ProtectedRoute';
 import ApolloProvider from 'provider/ApolloProvider';
@@ -41,10 +43,11 @@ const App = () => {
   const lang = useLang();
   const { keycloak, initialized } = useKeycloak();
   const keycloakIsReady = keycloak && initialized;
+  setDefaultOptions({ locale: lang === LANG.FR ? fr : enUS });
 
   return (
     <ConfigProvider
-      locale={lang === LANG.FR ? frFR : enUS}
+      locale={lang === LANG.FR ? frFRAntd : enUSAntd}
       renderEmpty={() => <Empty imageType="grid" />}
     >
       <ApolloProvider>

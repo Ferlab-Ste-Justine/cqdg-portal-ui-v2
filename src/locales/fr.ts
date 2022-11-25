@@ -687,7 +687,7 @@ const fr = {
     file_id: 'Fichier ID',
     // Participant
     participant_id: 'Participant ID',
-    study_id: 'Étude ID',
+    study_id: 'Code',
     down_syndrome_status: 'Statut du syndrome de Down',
     down_syndrome_diagnosis: 'Diagnostic du syndrome de Down',
     mondo: {
@@ -710,6 +710,19 @@ const fr = {
     options: {
       D21: 'Disomie 21, euploïde',
       T21: 'Trisomie 21',
+    },
+    participants: {
+      diagnoses: {
+        tagged_icd: {
+          main_category: 'Type de maladie (CIM-10)',
+        },
+        tagged_mondo: {
+          main_category: 'Diagnostic (Mondo)',
+        },
+      },
+      observed_phenotype_tagged: {
+        main_category: "Type d'anomalie phénotypique (HPO)",
+      },
     },
 
     // Biospecimen
@@ -747,20 +760,11 @@ const fr = {
     genePanels: 'Panels de gènes',
 
     // Studies
-    domain: "Domaine d'étude",
+    domain: 'Domaine',
     population: 'Population',
-    participants: {
-      diagnoses: {
-        tagged_icd: {
-          main_category: 'Type de maladie (CIM-10)',
-        },
-        tagged_mondo: {
-          main_category: 'Diagnostic (Mondo)',
-        },
-      },
-      observed_phenotype_tagged: {
-        main_category: "Type d'anomalie phénotypique (HPO)",
-      },
+    data_access_codes: {
+      access_limitations: 'Restriction d’accès',
+      access_requirements: 'Exigences d’accès',
     },
   },
 };

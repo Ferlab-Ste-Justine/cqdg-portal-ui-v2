@@ -79,7 +79,7 @@ const filterGroups: {
         facets: [
           'data_category',
           'data_type',
-          'sequencing_experiment__experiment_strategy',
+          'sequencing_experiment__experimental_strategy',
           'file_format',
         ],
       },
