@@ -15,12 +15,11 @@ import { deleteSavedFilter } from 'store/savedFilter/thunks';
 
 import EditModal from '../EditModal';
 
-interface OwnProps {
-  id: any;
+interface IListItemProps {
   data: TUserSavedFilter;
 }
 
-const SavedFiltersListItem = ({ data }: OwnProps) => {
+const ListItem = ({ data }: IListItemProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -45,7 +44,6 @@ const SavedFiltersListItem = ({ data }: OwnProps) => {
           history.push(
             `${FILTER_TAG_PAGE_MAPPING[data.tag]}?${FILTER_ID_QUERY_PARAM_KEY}=${data.id}`,
           );
-
           setQueryBuilderState(FILTER_TAG_QB_ID_MAPPING[data.tag], {
             active: data.queries[0].id,
             state: data.queries,
@@ -61,4 +59,4 @@ const SavedFiltersListItem = ({ data }: OwnProps) => {
   );
 };
 
-export default SavedFiltersListItem;
+export default ListItem;

@@ -23,12 +23,6 @@ import { deleteSavedSet } from 'store/savedSet/thunks';
 import CreateEditModal from '../CreateEditModal';
 
 import styles from './index.module.scss';
-
-interface OwnProps {
-  data: IUserSetOutput;
-  icon: ReactElement;
-}
-
 const { Text } = Typography;
 
 const redirectToPage = (setType: string) => {
@@ -44,7 +38,12 @@ const redirectToPage = (setType: string) => {
   }
 };
 
-const ListItem = ({ data, icon }: OwnProps) => {
+interface IListItemProps {
+  data: IUserSetOutput;
+  icon: ReactElement;
+}
+
+const ListItem = ({ data, icon }: IListItemProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();

@@ -304,6 +304,7 @@ const en = {
           subtitle:
             'We are currently unable to connect to this service. Please refresh the page and try again. If the problem persists, please',
           contactSupport: 'contact support',
+          pleaseRefresh: 'Please refresh and try again or ',
         },
         savedFilters: {
           title: 'Saved Filters',
@@ -313,6 +314,9 @@ const en = {
           popoverContentLink: 'Data Exploration page',
           noSavedFilters: 'You have no saved filters',
           lastSaved: 'Last saved: {date} ago',
+          dataExploration: 'Data Exploration',
+          variants: 'Variants',
+          failedFetch: 'Failed to fetch filters saved',
         },
         savedSets: {
           title: 'Saved Sets',
@@ -325,6 +329,7 @@ const en = {
           files: 'Files',
           participants: 'Participants',
           biospecimens: 'Biospecimens',
+          failedFetch: 'Failed to fetch sets saved',
         },
       },
     },
