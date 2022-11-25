@@ -108,7 +108,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           <TabPane
             tab={
               <div>
-                <LineStyleIcon height={14} width={14} />
+                <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
                 {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
               </div>
             }
