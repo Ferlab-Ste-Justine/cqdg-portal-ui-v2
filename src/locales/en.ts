@@ -98,6 +98,8 @@ const en = {
         messageCreate: 'You can add your sets to a query from the sidebar or the dashboard.',
         titleUpdate: 'Success',
         messageUpdate: 'Your set has been updated.',
+        titleDelete: 'Success',
+        messageDelete: 'Your set has been deleted.',
       },
     },
     report: {
@@ -334,7 +336,7 @@ const en = {
       },
     },
     variants: {
-      title: 'Variants Exploration',
+      title: 'Variants',
       noDataVariant: 'No data available for this variant',
       sidemenu: {
         participant: 'Participant',
@@ -477,6 +479,18 @@ const en = {
           all: 'Participants including descendant terms',
         },
       },
+      icdTree: {
+        modal: {
+          title: 'Diagnosis (ICD-10) Browser',
+          okText: 'Apply',
+        },
+        searchPlaceholder: 'Search for ontology term - min 3 characters',
+        emptySelection: 'Select items from the left-hand pane in order to add to your query.',
+        tags: {
+          exact: 'Participants with this exact term',
+          all: 'Participants including descendant terms',
+        },
+      },
       tabs: {
         summary: {
           title: 'Summary',
@@ -540,6 +554,14 @@ const en = {
         },
         biospecimens: {
           title: 'Biospecimens ({count})',
+          biospecimen_id: 'Biospecimen',
+          sample_id: 'Sample',
+          participant_id: 'Participant',
+          study_id: 'Study',
+          sample_type: 'Sample Type',
+          biospecimen_tissue_source: 'Tissue',
+          age_biospecimen_collection: 'Age',
+          files: 'Files',
         },
         datafiles: {
           title: 'Data Files ({count})',
@@ -562,26 +584,35 @@ const en = {
       },
       participantsSelected: 'participants selected',
       participantSelected: 'participant selected',
-      filesSelected: 'files selected',
-      fileSelected: 'file selected',
-      participantCount: 'items at a time. The first 10,000 will be processed.',
-      saveAsNewSet: 'Save as new set',
-      addToExistingSet: 'Add to existing set',
-      removeFromExistingSet: 'Remove from existing set',
-      saveFilesSet: 'Save files set',
       saveParticipantsSet: 'Save participants set',
-      addToSet: 'Add to set',
-      addTypeSet: 'Add to a {type} set',
-      removeFromSet: 'Remove from set',
-      removeTypeSet: 'Remove from a {type} set',
       searchByParticipantId: 'Search by participant ID',
       savedParticipantSets: 'Saved participant sets',
       noParticipantFound: 'No participant found',
       noParticipantSetsFound: 'No participant sets found',
+      participantCount: 'items at a time. The first 10,000 will be processed.',
+      filesSelected: 'files selected',
+      fileSelected: 'file selected',
+      saveFilesSet: 'Save files set',
       searchByFileId: 'Search by file ID',
       noFileFound: 'No file found',
       savedFileSets: 'Saved file sets',
       noFileSetsFound: 'No file sets found',
+      biospecimensSelected: 'Biospecimens selected',
+      biospecimenSelected: 'Biospecimen selected',
+      saveBiospecimensSet: 'Save biospecimens set',
+      searchByBiospecimenId: 'Search by biospecimen ID',
+      searchByBiospecimenSampleId: 'Search by Sample ID',
+      noBiospecimenFound: 'No biospecimen found',
+      savedBiospecimenSets: 'Saved biospecimen sets',
+      noBiospecimenSetsFound: 'No biospecimen sets found',
+      noBiospecimenSampleFound: 'No sample ID found',
+      saveAsNewSet: 'Save as new set',
+      addToExistingSet: 'Add to existing set',
+      removeFromExistingSet: 'Remove from existing set',
+      addToSet: 'Add to set',
+      addTypeSet: 'Add to a {type} set',
+      removeFromSet: 'Remove from set',
+      removeTypeSet: 'Remove from a {type} set',
       set: 'Set',
       chooseSet: 'Choose a set',
     },
@@ -683,25 +714,31 @@ const en = {
     // Participant
     participant_id: 'Participant ID',
     study_id: 'Study Code',
+    study: {
+      study_id: 'Study Code',
+    },
     down_syndrome_status: 'Down Syndrome Status',
     down_syndrome_diagnosis: 'Down Syndrome Diagnosis',
     mondo: {
       name: 'Diagnosis (MONDO)',
     },
-    diagnosis: {
-      mondo_id_diagnosis: 'Diagnosis (MONDO)',
+    mondo_tagged: {
+      name: 'Diagnosis (MONDO)',
     },
-    phenotype: {
-      hpo_phenotype_observed: 'Phenotype (HPO)',
+    observed_phenotypes: {
+      name: 'Phenotype (HPO)',
+    },
+    observed_phenotype_tagged: {
+      name: 'Phenotype (HPO)',
+    },
+    icd_tagged: {
+      name: 'Diagnosis (ICD-10)',
     },
     age_at_data_collection: 'Age at data collection',
     family_type: 'Family Unit',
     gender: 'Gender',
     ethnicity: 'Ethnicity',
     race: 'Race',
-    observed_phenotype_tagged: {
-      name: 'Phenotype (HPO)',
-    },
     options: {
       D21: 'Disomy 21, euploid',
       T21: 'Trisomy 21',
@@ -722,12 +759,11 @@ const en = {
 
     // Biospecimen
     biospecimen_type: 'Biospecimen Type',
-    sample_type: 'Sample Type',
-    derived_sample_type: 'Derived Sample Type',
-    ncit_id_tissue_type: 'Tissue Type (NCIT)',
-    status: 'Availability',
-    age_at_biospecimen_collection: 'Age at Biospec. Collection (days)',
-    bio_repository: 'Biorepository',
+    biospecimen_tissue_source: 'Tissue',
+    age_biospecimen_collection: 'Age at Biospecimen Collection (days)',
+    sample: {
+      sample_type: 'Sample Type',
+    },
 
     // File
     data_category: 'Data Category',

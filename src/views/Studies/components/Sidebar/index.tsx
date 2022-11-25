@@ -26,9 +26,8 @@ const StudiesSidebar = ({
   queryBuilderId,
   aggregations,
   extendedMapping,
-  filters,
   isLoading = false,
-}: StudiesSidebarProps): React.ReactElement => {
+}: StudiesSidebarProps) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
   return (
@@ -44,7 +43,6 @@ const StudiesSidebar = ({
             queryBuilderId={queryBuilderId}
             aggregations={aggregations}
             extendedMapping={extendedMapping}
-            filters={filters}
           />
         </ScrollContent>
       </div>

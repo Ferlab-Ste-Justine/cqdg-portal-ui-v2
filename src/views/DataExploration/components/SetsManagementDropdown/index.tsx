@@ -91,6 +91,11 @@ const getLabel = (type: string, participantCount: number): string => {
       ? `${participantCount} ${intl.get('screen.dataExploration.participantsSelected')}`
       : `${participantCount} ${intl.get('screen.dataExploration.participantSelected')}`;
   }
+  if (type === INDEXES.BIOSPECIMEN) {
+    return participantCount > 1
+      ? `${participantCount} ${intl.get('screen.dataExploration.biospecimensSelected')}`
+      : `${participantCount} ${intl.get('screen.dataExploration.biospecimenSelected')}`;
+  }
   return '';
 };
 
@@ -101,15 +106,20 @@ const getTitle = (type: string): string => {
   if (type === INDEXES.PARTICIPANT) {
     return intl.get('screen.dataExploration.saveParticipantsSet');
   }
+  if (type === INDEXES.BIOSPECIMEN) {
+    return intl.get('screen.dataExploration.saveBiospecimensSet');
+  }
   return '';
 };
 
-const menu = (
-  participantCount: number,
-  onClick: MenuClickEventHandler,
-  isEditDisabled: boolean,
-  type: string,
-) => (
+interface IMenuOverlayProps {
+  participantCount: number;
+  onClick: MenuClickEventHandler;
+  isEditDisabled: boolean;
+  type: string;
+}
+
+const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuOverlayProps) => (
   <Menu
     className={styles.saveSetOptionMenu}
     onClick={onClick}
@@ -227,12 +237,14 @@ const SetsManagementDropdown = ({
         />
       )}
       <Dropdown
-        overlay={menu(
-          getSetCount(selectedKeys || [], results.total, selectedAllResults),
-          onClick,
-          isEditDisabled,
-          type,
-        )}
+        overlay={
+          <MenuOverlay
+            participantCount={getSetCount(selectedKeys || [], results.total, selectedAllResults)}
+            onClick={onClick}
+            isEditDisabled={isEditDisabled}
+            type={type}
+          />
+        }
         placement="bottomLeft"
         trigger={['click']}
         getPopupContainer={() =>

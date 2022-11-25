@@ -17,8 +17,8 @@ import {
 } from 'views/DataExploration/utils/constant';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
-import { getSetFieldId } from 'store/savedSet';
 import { deleteSavedSet } from 'store/savedSet/thunks';
+import { getIdFieldByType } from 'utils/fieldMapper';
 
 import CreateEditModal from '../CreateEditModal';
 
@@ -48,10 +48,6 @@ const ListItem = ({ data, icon }: IListItemProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onCancel = () => {
-    setModalVisible(false);
-  };
-
   return (
     <>
       <ListItemWithActions
@@ -80,15 +76,15 @@ const ListItem = ({ data, icon }: IListItemProps) => {
           </Row>
         }
         onClick={() => {
-          history.push(redirectToPage(data.setType));
-
           const setValue = `${SET_ID_PREFIX}${data.id}`;
+
           addQuery({
             queryBuilderId: DATA_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
-                  field: getSetFieldId(data.setType),
+                  // field: `participant_facet_ids.participant_fhir_id_1`,
+                  field: getIdFieldByType(data.setType),
                   value: [setValue],
                   index: data.setType,
                 }),
@@ -96,6 +92,8 @@ const ListItem = ({ data, icon }: IListItemProps) => {
             }),
             setAsActive: true,
           });
+
+          history.push(redirectToPage(data.setType));
         }}
         title={data.tag}
         description={intl.get('screen.dashboard.cards.savedFilters.lastSaved', {
@@ -105,7 +103,7 @@ const ListItem = ({ data, icon }: IListItemProps) => {
       <CreateEditModal
         title={intl.get('components.savedSets.modal.edit.title')}
         setType={data.setType}
-        hideModalCb={onCancel}
+        hideModalCb={() => setModalVisible(false)}
         visible={modalVisible}
         currentSaveSet={data}
         saveSetActionType={SetActionType.UPDATE_SET}

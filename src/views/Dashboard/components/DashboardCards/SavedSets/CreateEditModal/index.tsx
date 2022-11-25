@@ -12,13 +12,14 @@ import filtersToName from 'common/sqonToName';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';
+import { getIdFieldByType } from 'utils/fieldMapper';
 
 import styles from './index.module.scss';
 
 const FORM_NAME = 'save-set';
 const SET_NAME_KEY = 'nameSet';
 
-type OwnProps = {
+interface ICreateEditModal {
   title: string;
   visible?: boolean;
   saveSetActionType: SetActionType;
@@ -27,7 +28,7 @@ type OwnProps = {
   setType: SetType;
   currentSaveSet?: IUserSetOutput;
   hasSelectedKeys?: boolean;
-};
+}
 
 const CreateEditModal = ({
   sqon,
@@ -38,7 +39,7 @@ const CreateEditModal = ({
   visible = true,
   currentSaveSet,
   hasSelectedKeys = false,
-}: OwnProps) => {
+}: ICreateEditModal) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(visible);
@@ -85,7 +86,7 @@ const CreateEditModal = ({
       } else {
         dispatch(
           createSavedSet({
-            idField: 'fhir_id',
+            idField: getIdFieldByType(setType),
             projectId: PROJECT_ID,
             sort: [],
             sqon: sqon!,

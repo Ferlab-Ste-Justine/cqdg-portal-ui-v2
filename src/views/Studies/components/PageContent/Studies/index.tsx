@@ -53,13 +53,13 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     key: 'population',
     title: intl.get('screen.studies.population'),
     sorter: { multiple: 1 },
+    defaultHidden: true,
     render: (population: string) => population || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'participant_count',
     title: intl.get('screen.studies.participants'),
     dataIndex: 'participant_count',
-    defaultHidden: true,
     render: (participant_count: number) =>
       participant_count ? (
         <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}`}>{participant_count}</Link>

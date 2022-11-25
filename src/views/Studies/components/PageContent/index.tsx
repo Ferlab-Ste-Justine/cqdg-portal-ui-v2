@@ -12,13 +12,12 @@ import { useStudies } from 'graphql/studies/actions';
 import { IStudyResultTree } from 'graphql/studies/models';
 import { GET_STUDIES_COUNT } from 'graphql/studies/queries';
 import isEmpty from 'lodash/isEmpty';
-import StudiesTab from 'views/Studies/components/PageContent/tabs/Studies';
+import StudiesTab from 'views/Studies/components/PageContent/Studies';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
   STUDIES_EXPLORATION_QB_ID,
 } from 'views/Studies/utils/constant';
-const { Title } = Typography;
 
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import { ArrangerApi } from 'services/api/arranger';
@@ -26,6 +25,8 @@ import { combineExtendedMappings } from 'utils/fieldMapper';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
+
+const { Title } = Typography;
 
 type OwnProps = {
   studiesMapping: ExtendedMappingResults;
@@ -45,7 +46,7 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
     offset: studiesQueryConfig.size * (studiesQueryConfig.pageIndex - 1),
     sqon: studiesResolvedSqon,
     sort: isEmpty(studiesQueryConfig.sort)
-      ? [{ field: 'name', order: 'asc' }]
+      ? [{ field: 'study_id', order: 'asc' }]
       : studiesQueryConfig.sort,
   });
 

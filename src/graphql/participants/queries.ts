@@ -11,6 +11,7 @@ export const GET_PARTICIPANTS = gql`
             participant_id
             score
             age_at_recruitment
+            age_at_diagnosis
             age_of_death
             cause_of_death
             ethnicity
@@ -18,23 +19,37 @@ export const GET_PARTICIPANTS = gql`
             is_a_proband
             is_affected
             vital_status
-            #            files {
-            #              hits {
-            #                total
-            #                edges {
-            #                  node {
-            #                    biospecimens {
-            #                      hits {
-            #                        total
-            #                      }
-            #                    }
-            #                  }
-            #                }
-            #              }
-            #            }
+            files {
+              hits {
+                total
+                edges {
+                  node {
+                    biospecimens {
+                      hits {
+                        total
+                      }
+                    }
+                  }
+                }
+              }
+            }
             study {
               study_id
               name
+            }
+            icd_tagged {
+              hits {
+                edges {
+                  node {
+                    age_at_event
+                    is_leaf
+                    is_tagged
+                    name
+                    parents
+                    internal_phenotype_id
+                  }
+                }
+              }
             }
             mondo {
               hits {
@@ -59,7 +74,7 @@ export const GET_PARTICIPANTS = gql`
                     is_leaf
                     is_tagged
                     name
-                    #                    parents
+                    parents
                     internal_phenotype_id
                   }
                 }
@@ -82,23 +97,6 @@ export const GET_PARTICIPANTS = gql`
               }
             }
             observed_phenotype_tagged {
-              hits {
-                total
-                edges {
-                  node {
-                    id
-                    score
-                    age_at_event
-                    internal_phenotype_id
-                    is_leaf
-                    is_tagged
-                    name
-                    parents
-                  }
-                }
-              }
-            }
-            non_observed_phenotype_tagged {
               hits {
                 total
                 edges {

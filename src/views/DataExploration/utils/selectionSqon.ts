@@ -1,28 +1,14 @@
 import { Key } from 'react';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { TAB_IDS } from 'views/DataExploration/utils/constant';
 
-export const generateSelectionSqon = (type: Omit<TAB_IDS, TAB_IDS.SUMMARY>, ids: Key[]) => {
-  let field;
+import { getIdFieldByType } from 'utils/fieldMapper';
 
-  switch (type) {
-    case TAB_IDS.BIOSPECIMENS:
-      field = '_id';
-      break;
-    case TAB_IDS.DATA_FILES:
-      field = 'file_id';
-      break;
-    default:
-      field = 'participant_id';
-      break;
-  }
-
-  return generateQuery({
+export const generateSelectionSqon = (type: string, ids: Key[]) =>
+  generateQuery({
     newFilters: [
       generateValueFilter({
-        field,
+        field: getIdFieldByType(type),
         value: ids as string[],
       }),
     ],
   });
-};

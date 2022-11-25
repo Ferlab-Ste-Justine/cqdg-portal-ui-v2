@@ -69,7 +69,6 @@ const AddRemoveSaveSetModal = ({ hideModalCb, userSets, setActionType, sqon, typ
           updateSavedSet({
             id: setId,
             subAction: setActionType,
-            idField: 'fhir_id',
             projectId: PROJECT_ID,
             sqon: sqon!,
             onCompleteCb: onSuccessCreateCb,

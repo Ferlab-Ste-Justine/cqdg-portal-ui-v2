@@ -52,7 +52,7 @@ export const mapFilterForVariant = (sqonFilters: ISqonGroupFilter) =>
   recursiveMap(sqonFilters, [
     {
       index: INDEXES.STUDY,
-      prefix: 'study.',
+      prefix: 'studies.',
     },
   ]);
 
@@ -74,10 +74,6 @@ export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
       index: INDEXES.PARTICIPANT,
       prefix: 'participants.',
     },
-    // {
-    //   index: INDEXES.BIOSPECIMEN,
-    //   prefix: 'participants.biospecimens.',
-    // },
   ]);
 
 export const mapFilterForBiospecimen = (sqonFilters: ISqonGroupFilter) =>
@@ -87,7 +83,6 @@ export const mapFilterForBiospecimen = (sqonFilters: ISqonGroupFilter) =>
       prefix: 'files.',
     },
     {
-      // Biospecimen only 1 participant so no 's'
       index: INDEXES.PARTICIPANT,
       prefix: 'participant.',
     },
@@ -103,4 +98,21 @@ export const combineExtendedMappings = (mappings: ExtendedMappingResults[]) => {
     loading: false,
     data: concatMappings,
   };
+};
+
+export const getIdFieldByType = (type: string): string => {
+  switch (type) {
+    case INDEXES.BIOSPECIMEN:
+      return 'sample_id';
+    case INDEXES.PARTICIPANT:
+      return 'participant_id';
+    case INDEXES.FILE:
+      return 'file_id';
+    case INDEXES.VARIANT:
+      return 'id';
+    case INDEXES.STUDY:
+      return 'study_id';
+    default:
+      return '';
+  }
 };
