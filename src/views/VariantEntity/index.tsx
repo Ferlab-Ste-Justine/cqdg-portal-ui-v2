@@ -23,11 +23,16 @@ const VariantEntity = () => {
     values: [locus],
   });
 
+  const SUMMARY = 'SUMMARY';
+  const CONSEQUENCE = 'CONSEQUENCE';
+  const FREQUENCY = 'FREQUENCY';
+  const PATHOGENICITY = 'PATHOGENICITY';
+
   const links: IAnchorLink[] = [
-    { href: '#summary', title: intl.get('screen.variants.summary.summary') },
-    { href: '#consequences', title: intl.get('screen.variants.consequences.consequences') },
-    { href: '#frequencies', title: intl.get('screen.variants.frequencies.frequencies') },
-    { href: '#pathogenicity', title: intl.get('screen.variants.pathogenicity.pathogenicity') },
+    { href: `#${SUMMARY}`, title: intl.get('screen.variants.summary.summary') },
+    { href: `#${CONSEQUENCE}`, title: intl.get('screen.variants.consequences.consequence') },
+    { href: `#${FREQUENCY}`, title: intl.get('screen.variants.frequencies.frequency') },
+    { href: `#${PATHOGENICITY}`, title: intl.get('screen.variants.pathogenicity.pathogenicity') },
   ];
 
   /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */
@@ -48,10 +53,10 @@ const VariantEntity = () => {
             <Tag className={styles.variantTag}>Germline</Tag>
           </div>
         )}
-        <Summary id={'summary'} variant={data} loading={loading} />
-        <Consequences id={'consequences'} variant={data} loading={loading} />
-        <Frequencies id={'frequencies'} variant={data} loading={loading} />
-        <Pathogenicity id={'pathogenicity'} variant={data} loading={loading} />
+        <Summary id={SUMMARY} variant={data} loading={loading} />
+        <Consequences id={CONSEQUENCE} variant={data} loading={loading} />
+        <Frequencies id={FREQUENCY} variant={data} loading={loading} />
+        <Pathogenicity id={PATHOGENICITY} variant={data} loading={loading} />
       </ScrollContent>
       <AnchorMenu
         scrollContainerId={scrollContainerId}
