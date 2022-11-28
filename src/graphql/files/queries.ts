@@ -42,7 +42,6 @@ export const MATCH_FILES = gql`
       hits(filters: $sqon, first: $first, offset: $offset) {
         edges {
           node {
-            fhir_id
             file_id
             study {
               study_id

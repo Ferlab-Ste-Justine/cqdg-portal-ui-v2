@@ -21,6 +21,15 @@ export const GET_PARTICIPANTS = gql`
             #            files {
             #              hits {
             #                total
+            #                edges {
+            #                  node {
+            #                    biospecimens {
+            #                      hits {
+            #                        total
+            #                      }
+            #                    }
+            #                  }
+            #                }
             #              }
             #            }
             study {

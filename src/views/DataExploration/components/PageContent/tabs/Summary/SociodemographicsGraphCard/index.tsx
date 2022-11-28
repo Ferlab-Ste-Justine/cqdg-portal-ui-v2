@@ -25,7 +25,7 @@ interface OwnProps {
 const transformData = (results: any) => {
   const aggs = results?.Participant?.aggregations;
   return {
-    sexData: (aggs?.sex.buckets || []).map(toChartData),
+    genderData: (aggs?.gender.buckets || []).map(toChartData),
     enthicityData: (aggs?.ethnicity.buckets || []).map(toChartData),
     familyData: (aggs?.familyData.buckets || []).map(toChartData),
   };
@@ -54,7 +54,7 @@ const SociodemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
   const { loading, result } = useLazyResultQuery(SOCIODEMOGRAPHIC_QUERY, {
     variables: { sqon },
   });
-  const { sexData, enthicityData, familyData } = transformData(result);
+  const { genderData, enthicityData, familyData } = transformData(result);
 
   return (
     <GridCard
@@ -74,9 +74,9 @@ const SociodemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
             <PieChart
-              title={intl.get('screen.dataExploration.tabs.summary.sociodemographics.sexTitle')}
-              data={sexData}
-              onClick={(datum) => addToQuery('sex', datum.id as string)}
+              title={intl.get('screen.dataExploration.tabs.summary.sociodemographics.genderTitle')}
+              data={genderData}
+              onClick={(datum) => addToQuery('gender', datum.id as string)}
               tooltip={(value) => (
                 <BasicTooltip
                   id={capitalize(value.datum.id.toString())}

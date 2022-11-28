@@ -482,7 +482,7 @@ const en = {
           title: 'Summary',
           sociodemographics: {
             cardTitle: 'Sociodemographics',
-            sexTitle: 'Sex',
+            genderTitle: 'Gender',
             ethnicityTitle: 'Ethnicity',
             compositionFamilyTitle: 'Family Composition',
           },
@@ -696,7 +696,7 @@ const en = {
     },
     age_at_data_collection: 'Age at data collection',
     family_type: 'Family Unit',
-    sex: 'Sex',
+    gender: 'Gender',
     ethnicity: 'Ethnicity',
     race: 'Race',
     observed_phenotype_tagged: {

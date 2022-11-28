@@ -3,7 +3,7 @@ export enum LANG {
   FR = 'fr',
 }
 
-export enum SEX {
+export enum GENDER {
   FEMALE = 'female',
   MALE = 'male',
   UNKNOWN = 'unknown',

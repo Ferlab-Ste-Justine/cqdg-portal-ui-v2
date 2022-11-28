@@ -4,7 +4,7 @@ export const SOCIODEMOGRAPHIC_QUERY = gql`
   query AggregationSocioDemographicInfo($sqon: JSON) {
     Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        sex: gender {
+        gender {
           buckets {
             key
             doc_count
