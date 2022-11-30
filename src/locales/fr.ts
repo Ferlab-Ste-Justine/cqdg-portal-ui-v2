@@ -308,6 +308,7 @@ const fr = {
           subtitle:
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
           contactSupport: 'contactez le support',
+          pleaseRefresh: 'Veuillez actualiser et réessayer ou ',
         },
         savedFilters: {
           title: 'Filtres enregistrés',
@@ -317,6 +318,9 @@ const fr = {
           popoverContentLink: 'page Exploration des données',
           noSavedFilters: "Vous n'avez aucun filtre enregistré",
           lastSaved: 'Dernier enregistrement: il y a {date}',
+          dataExploration: 'Exploration des données',
+          variants: 'Variants',
+          failedFetch: 'Échec de la récupération des filtres enregistrés',
         },
         savedSets: {
           title: 'Ensembles enregistrés',
@@ -329,6 +333,7 @@ const fr = {
           files: 'Fichiers',
           participants: 'Participants',
           biospecimens: 'Specimens biologiques',
+          failedFetch: 'Échec de la récupération des ensembles enregistrés',
         },
       },
     },
@@ -483,7 +488,7 @@ const fr = {
           title: 'Sommaire',
           sociodemographics: {
             cardTitle: 'Profils sociodémographiques',
-            sexTitle: 'Sexe',
+            genderTitle: 'Genre',
             ethnicityTitle: 'Ethnicité',
             compositionFamilyTitle: 'Composition familiale',
           },
@@ -701,7 +706,7 @@ const fr = {
     },
     age_at_data_collection: 'Âge à la collecte des données',
     family_type: 'Unité familiale',
-    sex: 'Sexe',
+    gender: 'Genre',
     ethnicity: 'Origine ethnique',
     race: 'Race',
     observed_phenotype_tagged: {

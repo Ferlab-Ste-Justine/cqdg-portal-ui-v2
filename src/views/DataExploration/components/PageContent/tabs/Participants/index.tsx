@@ -35,7 +35,7 @@ import { extractMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
-import { SEX, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { GENDER, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { ReportType } from 'services/api/reports/models';
 import { SetType } from 'services/api/savedSet/models';
@@ -123,9 +123,9 @@ const defaultColumns: ProColumnType<any>[] = [
       gender ? (
         <Tag
           color={
-            gender.toLowerCase() === SEX.FEMALE
+            gender.toLowerCase() === GENDER.FEMALE
               ? 'magenta'
-              : gender.toLowerCase() === SEX.MALE
+              : gender.toLowerCase() === GENDER.MALE
               ? 'geekblue'
               : ''
           }

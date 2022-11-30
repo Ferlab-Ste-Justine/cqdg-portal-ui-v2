@@ -91,7 +91,7 @@ const Header = () => {
               />
               <HeaderLink
                 to={[STATIC_ROUTES.VARIANTS]}
-                icon={<LineStyleIcon height={14} width={14} />}
+                icon={<LineStyleIcon height={16} width={16} className={styles.iconSvg} />}
                 title={intl.get('layout.main.menu.variants')}
                 className={`${styles.headerBtn} ${
                   isActive(STATIC_ROUTES.VARIANTS) && styles.headerBtnActive
