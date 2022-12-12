@@ -78,7 +78,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     title: intl.get('screen.studies.genomics'),
     render: (study: IStudyEntity) => {
       const elem = study.data_categories?.hits.edges.find(
-        (item: any) => item.node.data_type === 'Genomics',
+        (item: any) => item.node.data_category === 'Genomics',
       );
       return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
     },
@@ -88,7 +88,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     title: intl.get('screen.studies.transcriptomics'),
     render: (study: IStudyEntity) => {
       const elem = study.data_categories?.hits.edges.find(
-        (item: any) => item.node.data_type === 'Transcriptomics',
+        (item: any) => item.node.data_category === 'Transcriptomics',
       );
       return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
     },
