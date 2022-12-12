@@ -84,11 +84,7 @@ const getFilterGroups = (type: FilterTypes) => {
         ],
         groups: [
           {
-            facets: [
-              'sample.sample_type',
-              'biospecimen_tissue_source',
-              'age_biospecimen_collection',
-            ],
+            facets: ['sample_type', 'biospecimen_tissue_source', 'age_biospecimen_collection'],
           },
         ],
       };

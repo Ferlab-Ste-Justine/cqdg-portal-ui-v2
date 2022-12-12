@@ -47,9 +47,8 @@ export const MATCH_BIOSPECIMENS = gql`
         edges {
           node {
             study_id
-            sample {
-              sample_id: fhir_id
-            }
+            biospecimen_id
+            sample_id
           }
         }
       }
@@ -64,9 +63,7 @@ export const BIOSPECIMEN_SEARCH_BY_ID_QUERY = gql`
         edges {
           node {
             biospecimen_id
-            sample {
-              sample_id: fhir_id
-            }
+            sample_id
           }
         }
       }

@@ -761,9 +761,7 @@ const en = {
     biospecimen_type: 'Biospecimen Type',
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Age at Biospecimen Collection (days)',
-    sample: {
-      sample_type: 'Sample Type',
-    },
+    sample_type: 'Sample Type',
 
     // File
     data_category: 'Data Category',
