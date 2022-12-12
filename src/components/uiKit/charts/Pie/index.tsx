@@ -42,7 +42,7 @@ const PieChart = ({
         />
       </div>
     ) : (
-      <Empty imageType="grid" />
+      <Empty imageType="grid" className={styles.emptyGrid} />
     )}
   </div>
 );

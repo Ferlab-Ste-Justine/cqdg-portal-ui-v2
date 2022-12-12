@@ -30,7 +30,6 @@ export interface IStudyEntity {
   population: string;
   description: string;
   participant_count: number;
-  data_category: string;
   file_count: number;
   data_types: ArrangerResultsTree<IDataType>;
   data_categories: ArrangerResultsTree<IDataType>;

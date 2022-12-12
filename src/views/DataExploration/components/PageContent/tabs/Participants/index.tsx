@@ -29,7 +29,6 @@ import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
-  TAB_IDS,
 } from 'views/DataExploration/utils/constant';
 import { extractMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
@@ -293,7 +292,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
       ? sqon
-      : generateSelectionSqon(TAB_IDS.PARTICIPANTS, selectedKeys);
+      : generateSelectionSqon(INDEXES.PARTICIPANT, selectedKeys);
 
   const menu = (
     <Menu
@@ -372,10 +371,10 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
           <SetsManagementDropdown
             key={1}
             results={results}
-            selectedKeys={selectedKeys}
-            selectedAllResults={selectedAllResults}
             sqon={getCurrentSqon()}
+            selectedAllResults={selectedAllResults}
             type={SetType.PARTICIPANT}
+            selectedKeys={selectedKeys}
           />,
           <Dropdown
             key={2}
@@ -398,8 +397,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
         total: results.total,
         onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
       }}
-      // dataSource={results.data.map((i) => ({ ...i, key: i.participant_id }))}
-      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.participant_id }))}
       dictionary={getProTableDictionary()}
     />
   );

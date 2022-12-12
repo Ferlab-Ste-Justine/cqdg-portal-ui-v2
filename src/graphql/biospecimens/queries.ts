@@ -1,36 +1,36 @@
 import { gql } from '@apollo/client';
 
-export const SEARCH_BIOSPECIMEN_QUERY = gql`
-  query searchBiospecimen($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+export const GET_BIOSPECIMENS = gql`
+  query getBiospecimens($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     Biospecimen {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
         edges {
           node {
             id
-            container_id
-            status
-            sample_id
-            sample_type
-            parent_sample_id
-            parent_sample_type
-            collection_sample_id
-            collection_sample_type
-            age_at_biospecimen_collection
-            laboratory_procedure
-            volume_ul
-            volume_unit
-            biospecimen_storage
+            biospecimen_id
+            age_biospecimen_collection
+            biospecimen_tissue_source
+            release_id
             study_id
-            nb_files
-
             participant {
-              participant_id: id
+              participant_id
             }
+
+            sample_type
+            sample_id
+            submitter_biospecimen_id
+            submitter_sample_id
 
             files {
               hits {
                 total
+                edges {
+                  node {
+                    file_size
+                    file_name
+                  }
+                }
               }
             }
           }
@@ -40,14 +40,30 @@ export const SEARCH_BIOSPECIMEN_QUERY = gql`
   }
 `;
 
+export const MATCH_BIOSPECIMENS = gql`
+  query matchBiospecimens($sqon: JSON, $first: Int, $offset: Int) {
+    Biospecimen {
+      hits(filters: $sqon, first: $first, offset: $offset) {
+        edges {
+          node {
+            study_id
+            biospecimen_id
+            sample_id
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const BIOSPECIMEN_SEARCH_BY_ID_QUERY = gql`
-  query searchBiospecimenById($sqon: JSON) {
+  query getBiospecimenById($sqon: JSON) {
     Biospecimen {
       hits(filters: $sqon) {
         edges {
           node {
+            biospecimen_id
             sample_id
-            collection_sample_id
           }
         }
       }

@@ -5,7 +5,7 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Spin } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
-import ParticipantSearch from 'views/DataExploration/components/ParticipantSearch';
+import ParticipantSearch from 'views/DataExploration/components/Searchs/ParticipantSearch';
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
@@ -56,7 +56,6 @@ const filterGroups: {
             titleFormatter={formatHpoTitleAndCode}
             key={'observed_phenotype_tagged'}
           />,
-          'study',
         ],
       },
     ],

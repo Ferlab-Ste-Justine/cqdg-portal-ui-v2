@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DownloadOutlined } from '@ant-design/icons';
@@ -6,7 +7,6 @@ import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import useQueryBuilderState, {
   addQuery,
-  updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -20,7 +20,6 @@ import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
-  TAB_IDS,
 } from 'views/DataExploration/utils/constant';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
@@ -35,139 +34,58 @@ import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  results: IQueryResults<IBiospecimenEntity[]>;
-  setQueryConfig: TQueryConfigCb;
-  queryConfig: IQueryConfig;
-  sqon?: ISqonGroupFilter;
-}
-
 const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'sample_id',
-    title: 'Sample ID',
     dataIndex: 'sample_id',
-    sorter: { multiple: 1 },
+    title: intl.get('screen.dataExploration.tabs.biospecimens.sample_id'),
     render: (sample_id: string) => sample_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
+    key: 'biospecimen_id',
+    dataIndex: 'biospecimen_id',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_id'),
+    render: (biospecimen_id: string) => biospecimen_id || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'participant.participant_id',
+    dataIndex: 'participant',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
+    render: (participant: IParticipantEntity) => participant.participant_id,
+  },
+  {
     key: 'study_id',
-    title: 'Study',
     dataIndex: 'study_id',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.study_id'),
     sorter: { multiple: 1 },
     render: (study_id) => study_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'sample_type',
-    title: 'Sample Type',
     dataIndex: 'sample_type',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.sample_type'),
     sorter: { multiple: 1 },
     render: (sample_type: string) => sample_type || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'parent_sample_id',
-    title: 'Parent Sample ID',
-    dataIndex: 'parent_sample_id',
+    key: 'biospecimen_tissue_source',
+    dataIndex: 'biospecimen_tissue_source',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
     sorter: { multiple: 1 },
-    render: (parent_sample_id) => parent_sample_id || TABLE_EMPTY_PLACE_HOLDER,
+    render: (biospecimen_tissue_source: string) =>
+      biospecimen_tissue_source || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'parent_sample_type',
-    title: 'Parent Sample Type',
-    dataIndex: 'parent_sample_type',
-    sorter: { multiple: 1 },
-    render: (parent_sample_type) => parent_sample_type || TABLE_EMPTY_PLACE_HOLDER,
+    key: 'age_biospecimen_collection',
+    dataIndex: 'age_biospecimen_collection',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection'),
+    render: (age_biospecimen_collection) => age_biospecimen_collection || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participant.participant_id',
-    title: 'Participant ID',
-    dataIndex: 'participant',
-    sorter: { multiple: 1 },
-    render: (participant: IParticipantEntity) => participant.participant_id,
-  },
-  {
-    key: 'collection_sample_id',
-    title: 'Collection ID',
-    dataIndex: 'collection_sample_id',
-    sorter: { multiple: 1 },
-    render: (collection_sample_id: string) => (
-      // eslint-disable-next-line
-      <a
-        type="link"
-        onClick={() =>
-          updateActiveQueryField({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            field: 'collection_sample_id',
-            value: [collection_sample_id],
-            index: INDEXES.BIOSPECIMEN,
-          })
-        }
-      >
-        {collection_sample_id}
-      </a>
-    ),
-  },
-  {
-    key: 'collection_sample_type',
-    title: 'Collection Sample Type',
-    dataIndex: 'collection_sample_type',
-    sorter: { multiple: 1 },
-    render: (collection_sample_type) => collection_sample_type || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'age_at_biospecimen_collection',
-    title: 'Age (days)',
-    tooltip: 'Age at Biospecimen Collection',
-    dataIndex: 'age_at_biospecimen_collection',
-    render: (age_at_biospecimen_collection) =>
-      age_at_biospecimen_collection || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'container_id',
-    title: 'Container ID',
-    dataIndex: 'container_id',
-    defaultHidden: true,
-    render: (container_id: string) => container_id || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'volume_ul',
-    title: 'Volume',
-    dataIndex: 'volume_ul',
-    defaultHidden: true,
-    render: (volume_ul) => volume_ul || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'volume_unit',
-    title: 'Volume Unit',
-    defaultHidden: true,
-    render: (record: IBiospecimenEntity) =>
-      record.volume_ul ? record.volume_unit : TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'status',
-    title: 'Sample Availability',
-    dataIndex: 'status',
-    sorter: { multiple: 1 },
-    render: (status: string) => (status.toLowerCase() === 'available' ? 'Yes' : 'No'),
-  },
-  {
-    key: 'laboratory_procedure',
-    title: 'Laboratory Procedure',
-    dataIndex: 'laboratory_procedure',
-    defaultHidden: true,
-  },
-  {
-    key: 'biospecimen_storage',
-    title: 'Biospecimen Storage',
-    dataIndex: 'biospecimen_storage',
-    defaultHidden: true,
-  },
-  {
-    key: 'nb_files',
+    key: 'files',
     title: 'Files',
-    sorter: { multiple: 1 },
     render: (record: IBiospecimenEntity) => {
-      const nbFiles = record?.nb_files || 0;
+      const nbFiles = record?.files?.hits?.total || 0;
       return nbFiles ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
@@ -196,7 +114,14 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
 ];
 
-const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) => {
+interface IBiospecimenTabProps {
+  results: IQueryResults<IBiospecimenEntity[]>;
+  setQueryConfig: TQueryConfigCb;
+  queryConfig: IQueryConfig;
+  sqon?: ISqonGroupFilter;
+}
+
+const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospecimenTabProps) => {
   const dispatch = useDispatch();
   const { activeQuery } = useQueryBuilderState(DATA_EXPLORATION_QB_ID);
   const [selectedAllResults, setSelectedAllResults] = useState(false);
@@ -212,7 +137,7 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
       ? sqon
-      : generateSelectionSqon(TAB_IDS.BIOSPECIMENS, selectedKeys);
+      : generateSelectionSqon(INDEXES.BIOSPECIMEN, selectedKeys);
 
   return (
     <ProTable
@@ -277,10 +202,10 @@ const BioSpecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps
         total: results.total,
         onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.sample_id }))}
       dictionary={getProTableDictionary()}
     />
   );
 };
 
-export default BioSpecimenTab;
+export default BiospecimenTab;

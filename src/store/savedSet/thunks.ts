@@ -103,6 +103,16 @@ const deleteSavedSet = createAsyncThunk<string, string, { rejectValue: string }>
             description: intl.get('api.savedFilter.error.messageDelete'),
           }),
         ),
+      onSuccess: async () => {
+        await thunkAPI.dispatch(
+          globalActions.displayNotification({
+            type: 'success',
+            message: intl.get('api.savedSet.success.titleDelete'),
+            description: intl.get('api.savedSet.success.messageDelete'),
+          }),
+        );
+        await thunkAPI.dispatch(fetchSavedSet());
+      },
     });
   },
 );

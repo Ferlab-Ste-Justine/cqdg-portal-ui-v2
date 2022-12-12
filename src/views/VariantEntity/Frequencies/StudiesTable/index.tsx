@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { Table, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { IStudyEntity } from 'graphql/studies/models';
 import {
   FreqCombined,
   IVariantEntity,
@@ -14,7 +13,6 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
 import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary';
 
-import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -34,21 +32,12 @@ const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
 const canMakeParticipantsLink = (nOfParticipants: number) =>
   nOfParticipants && nOfParticipants >= MIN_N_OF_PARTICIPANTS_FOR_LINK;
 
-const getInternalColumns = (globalStudies: IStudyEntity[]) => [
+const getInternalColumns = () => [
   {
     key: 'study_id',
     title: intl.get('screen.variants.frequencies.studies'),
     dataIndex: 'study_id',
     render: (study_id: string) => study_id,
-  },
-  {
-    key: 'study_id_domain',
-    title: intl.get('screen.variants.frequencies.domain'),
-    dataIndex: 'study_id',
-    render: (variantStudyId: string) => {
-      const study = globalStudies.find((s) => s.id === variantStudyId);
-      return study?.domain || TABLE_EMPTY_PLACE_HOLDER;
-    },
   },
   {
     key: 'participants',
@@ -136,7 +125,6 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
     return <EmptyMessage />;
   }
 
-  const globalStudies: IStudyEntity[] = [];
   const participantTotalNumber = variant?.participant_total_number || 0;
   const participantNumber = variant?.participant_number || 0;
 
@@ -147,7 +135,7 @@ const StudiesTable = ({ loading, variant }: IStudiesTableProps) => {
     <Table
       loading={loading}
       dataSource={variantStudies}
-      columns={getInternalColumns(globalStudies)}
+      columns={getInternalColumns()}
       size="small"
       pagination={false}
       rowClassName={styles.notStriped}

@@ -22,7 +22,6 @@ import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
-  TAB_IDS,
 } from 'views/DataExploration/utils/constant';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
@@ -162,11 +161,11 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
   },
   {
-    key: 'size',
+    key: 'file_size',
     title: intl.get('screen.dataExploration.tabs.datafiles.size'),
-    dataIndex: 'size',
+    dataIndex: 'file_size',
     sorter: { multiple: 1 },
-    render: (size) => formatFileSize(size, { output: 'string' }),
+    render: (file_size) => formatFileSize(file_size, { output: 'string' }),
   },
   {
     key: 'platform',
@@ -260,7 +259,7 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
       ? sqon
-      : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys);
+      : generateSelectionSqon(INDEXES.FILE, selectedKeys);
 
   return (
     <ProTable<ITableFileEntity>
@@ -300,7 +299,7 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
               sqon:
                 selectedAllResults || !selectedKeys.length
                   ? sqon
-                  : generateSelectionSqon(TAB_IDS.DATA_FILES, selectedKeys),
+                  : generateSelectionSqon(INDEXES.FILE, selectedKeys),
             }),
           ),
         onColumnSortChange: (newState) =>
