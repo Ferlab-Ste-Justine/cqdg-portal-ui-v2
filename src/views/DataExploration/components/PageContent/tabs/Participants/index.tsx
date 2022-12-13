@@ -22,7 +22,6 @@ import {
   IPhenotype,
   ITableParticipantEntity,
 } from 'graphql/participants/models';
-import { IStudyEntity } from 'graphql/studies/models';
 import { capitalize } from 'lodash';
 import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
@@ -59,65 +58,41 @@ const defaultColumns: ProColumnType<any>[] = [
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participantID'),
     dataIndex: 'participant_id',
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
   },
   {
-    key: 'studies',
-    title: intl.get('screen.dataExploration.tabs.participants.studies'),
-    dataIndex: 'studies',
-    sorter: {
-      multiple: 1,
-    },
+    key: 'study_id',
+    title: intl.get('screen.dataExploration.tabs.participants.study_id'),
+    dataIndex: 'study_id',
+    sorter: { multiple: 1 },
     className: styles.studyIdCell,
-    render: (studies: ArrangerResultsTree<IStudyEntity>) => {
-      if (!studies?.hits?.edges?.length) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
-      const studiesInfo = studies?.hits.edges.map((study) => ({
-        name: study.node.name,
-        id: study.node.internal_study_id,
-      }));
-      return (
-        <ExpandableCell
-          nOfElementsWhenCollapsed={1}
-          dataSource={studiesInfo}
-          renderItem={(item, index) => (
-            <Link
-              key={index}
-              to={STATIC_ROUTES.STUDIES}
-              onClick={() =>
-                updateActiveQueryField({
-                  queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-                  field: 'internal_study_id',
-                  value: item.id ? [item.id] : [],
-                  index: INDEXES.STUDY,
-                })
-              }
-            >
-              {item.name}
-            </Link>
-          )}
-        />
-      );
-    },
+    render: (study_id: string) => (
+      <Link
+        to={STATIC_ROUTES.STUDIES}
+        onClick={() =>
+          updateActiveQueryField({
+            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+            field: 'study_id',
+            value: [study_id],
+            index: INDEXES.STUDY,
+          })
+        }
+      >
+        {study_id}
+      </Link>
+    ),
   },
   {
     key: 'is_a_proband',
     title: intl.get('screen.dataExploration.tabs.participants.proband'),
     dataIndex: 'is_a_proband',
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
   },
   {
     key: 'gender',
     title: intl.get('screen.dataExploration.tabs.participants.gender'),
     dataIndex: 'gender',
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (gender: string) =>
       gender ? (
         <Tag
@@ -139,21 +114,19 @@ const defaultColumns: ProColumnType<any>[] = [
     key: 'age_at_recruitment',
     title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
     dataIndex: 'age_at_recruitment',
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'tagged_mondo',
+    key: 'mondo_tagged',
     title: intl.get('screen.dataExploration.tabs.participants.diagnoses'),
-    dataIndex: 'tagged_mondo',
+    dataIndex: 'mondo_tagged',
     className: styles.diagnosisCell,
-    render: (tagged_mondo: ArrangerResultsTree<IMondoTagged>) => {
-      if (!tagged_mondo?.hits?.edges.length) {
+    render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
+      if (!mondo_tagged?.hits?.edges.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      const diagnosesTagged = tagged_mondo?.hits?.edges.map((diag) =>
+      const diagnosesTagged = mondo_tagged?.hits?.edges.map((diag) =>
         extractMondoTitleAndCode(diag.node.name),
       );
       return (
@@ -204,9 +177,7 @@ const defaultColumns: ProColumnType<any>[] = [
   {
     key: 'nb_files',
     title: intl.get('screen.dataExploration.tabs.participants.files'),
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (record: ITableParticipantEntity) =>
       record?.files?.hits?.total ? (
         <Link
@@ -238,9 +209,7 @@ const defaultColumns: ProColumnType<any>[] = [
     title: intl.get('screen.dataExploration.tabs.participants.ethnicity'),
     dataIndex: 'ethnicity',
     defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (ethnicity) => ethnicity || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
@@ -248,9 +217,7 @@ const defaultColumns: ProColumnType<any>[] = [
     title: intl.get('screen.dataExploration.tabs.participants.vitalStatus'),
     dataIndex: 'vital_status',
     defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (vital_status) => vital_status || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
@@ -258,9 +225,7 @@ const defaultColumns: ProColumnType<any>[] = [
     title: intl.get('screen.dataExploration.tabs.participants.submitterParticipantId'),
     dataIndex: 'submitter_participant_id',
     defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (submitter_participant_id) => submitter_participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
@@ -268,9 +233,7 @@ const defaultColumns: ProColumnType<any>[] = [
     title: intl.get('screen.dataExploration.tabs.participants.ageAtDeath'),
     dataIndex: 'age_of_death',
     defaultHidden: true,
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
     render: (age_of_death) => age_of_death || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];

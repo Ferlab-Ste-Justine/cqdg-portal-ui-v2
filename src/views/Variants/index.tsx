@@ -7,7 +7,6 @@ import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
 import ParticipantSearch from 'views/DataExploration/components/Searchs/ParticipantSearch';
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { formatHpoTitleAndCode, formatMondoTitleAndCode } from 'views/DataExploration/utils/helper';
 import GenesUploadIds from 'views/Variants/components/GeneUploadIds';
 import VariantGeneSearch from 'views/Variants/components/VariantGeneSearch';
@@ -40,21 +39,23 @@ const filterGroups: {
   [type: string]: FilterInfo;
 } = {
   [FilterTypes.Participant]: {
-    customSearches: [<ParticipantSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />],
+    customSearches: [<ParticipantSearch key={0} queryBuilderId={VARIANT_REPO_QB_ID} />],
     groups: [
       {
         facets: [
           <TreeFacet
-            type={'mondoTree'}
-            field={'mondo'}
-            titleFormatter={formatMondoTitleAndCode}
-            key={'mondo'}
+            type={'hpoTree'}
+            field={'observed_phenotypes'}
+            key={'observed_phenotypes'}
+            titleFormatter={formatHpoTitleAndCode}
+            queryBuilderId={VARIANT_REPO_QB_ID}
           />,
           <TreeFacet
-            type={'hpoTree'}
-            field={'observed_phenotype_tagged'}
-            titleFormatter={formatHpoTitleAndCode}
-            key={'observed_phenotype_tagged'}
+            type={'mondoTree'}
+            field={'mondo'}
+            key={'mondo'}
+            titleFormatter={formatMondoTitleAndCode}
+            queryBuilderId={VARIANT_REPO_QB_ID}
           />,
         ],
       },

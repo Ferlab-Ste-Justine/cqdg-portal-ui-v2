@@ -536,7 +536,7 @@ const en = {
         participants: {
           title: 'Participants ({count})',
           participantID: 'Participant ID',
-          studies: 'Studies',
+          study_id: 'Study Code',
           proband: 'Proband',
           gender: 'Gender',
           familyHistory: 'Family History',
@@ -568,7 +568,7 @@ const en = {
           fileAuthorization: 'File Authorization',
           dataAccess: 'Data Access',
           fileID: 'File ID',
-          studies: 'Studies',
+          study_id: 'Study Code',
           dataCategory: 'Data Category',
           dataType: 'Data Type',
           experimentalStrategy: 'Experimental Strategy',

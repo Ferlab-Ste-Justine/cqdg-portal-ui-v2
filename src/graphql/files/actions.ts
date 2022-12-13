@@ -4,10 +4,10 @@ import { QueryVariable } from 'graphql/queries';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IFileResultTree } from './models';
-import { SEARCH_FILES_QUERY } from './queries';
+import { GET_FILES } from './queries';
 
 export const useDataFiles = (variables?: QueryVariable) => {
-  const { loading, result } = useLazyResultQuery<IFileResultTree>(SEARCH_FILES_QUERY, {
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
     variables,
   });
 
