@@ -735,12 +735,14 @@ const fr = {
     },
     mondo_tagged: {
       name: 'Diagnostic (MONDO)',
+      source_text: 'Phénotype (texte source)',
     },
     observed_phenotypes: {
       name: 'Phénotype (HPO)',
     },
     observed_phenotype_tagged: {
       name: 'Phénotype (HPO)',
+      source_text: 'Diagnostic (texte source)',
     },
     icd_tagged: {
       name: 'Diagnostic (ICD-10)',
@@ -782,7 +784,7 @@ const fr = {
     size: 'Taille',
     access: 'Accéder',
     sequencing_experiment: {
-      experiment_strategy: 'Stratégie expérimentale',
+      experimental_strategy: 'Stratégie expérimentale',
     },
 
     //Other

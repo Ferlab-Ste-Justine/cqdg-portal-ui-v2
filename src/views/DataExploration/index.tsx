@@ -73,6 +73,8 @@ const getFilterGroups = (type: FilterTypes) => {
               'age_at_recruitment',
               'age_at_diagnosis',
               'ethnicity',
+              'observed_phenotype_tagged__source_text',
+              'mondo_tagged__source_text',
             ],
           },
         ],
