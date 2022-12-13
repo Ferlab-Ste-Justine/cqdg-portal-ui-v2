@@ -73,6 +73,8 @@ export const generateFilters = ({
     });
     const FilterComponent = useFilterSelector ? FilterSelector : FilterContainer;
 
+    const searchInputVisible = showSearchInput || key === 'study_id';
+
     return (
       <div className={className} key={`${key}_${filtersOpen}`}>
         <FilterComponent
@@ -93,7 +95,7 @@ export const generateFilters = ({
               index,
             });
           }}
-          searchInputVisible={showSearchInput}
+          searchInputVisible={searchInputVisible}
           selectedFilters={selectedFilters}
         />
       </div>

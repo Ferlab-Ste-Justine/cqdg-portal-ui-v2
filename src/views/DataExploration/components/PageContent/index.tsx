@@ -49,6 +49,7 @@ import {
 import { useSavedSet } from 'store/savedSet';
 import {
   combineExtendedMappings,
+  mapFilterForBiospecimen,
   mapFilterForFiles,
   mapFilterForParticipant,
 } from 'utils/fieldMapper';
@@ -78,6 +79,9 @@ const resolveSqonForParticipants = (queryList: ISyntheticSqon[], activeQuery: IS
 const resolveSqonForFiles = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
   mapFilterForFiles(resolveSyntheticSqon(queryList, activeQuery));
 
+const resolveSqonForBiospecimens = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
+  mapFilterForBiospecimen(resolveSyntheticSqon(queryList, activeQuery));
+
 const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -94,7 +98,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
   const [datafilesQueryConfig, setDatafilesQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
 
   const participantResolvedSqon = resolveSqonForParticipants(queryList, activeQuery);
-  const biospecimenResolvedSqon = resolveSqonForParticipants(queryList, activeQuery);
+  const biospecimenResolvedSqon = resolveSqonForBiospecimens(queryList, activeQuery);
   const fileResolvedSqon = resolveSqonForFiles(queryList, activeQuery);
 
   const participantResults = useParticipants({

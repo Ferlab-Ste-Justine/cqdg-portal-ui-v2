@@ -24,7 +24,7 @@ const SidebarFilters = ({
       className: style.facetCollapse,
       filtersOpen: true,
       filterFooter: true,
-      showSearchInput: true,
+      showSearchInput: false,
       useFilterSelector: false,
     })}
   </>

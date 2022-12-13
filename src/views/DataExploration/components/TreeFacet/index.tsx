@@ -11,7 +11,6 @@ import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   getFlattenTree,
   removeSameTerms,
@@ -29,13 +28,14 @@ import styles from './index.module.scss';
 const AUTO_EXPAND_TREE = 1;
 const MIN_SEARCH_TEXT_LENGTH = 3;
 
-type Props = {
+interface ITreeFacetProps {
   type: string;
   field: string;
   titleFormatter?: TTitleFormatter;
-};
+  queryBuilderId: string;
+}
 
-const TreeFacet = ({ type, field, titleFormatter }: Props) => {
+const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetProps) => {
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
@@ -43,7 +43,7 @@ const TreeFacet = ({ type, field, titleFormatter }: Props) => {
   const phenotypeStore = useRef(new PhenotypeStore());
   const [rootNode, setRootNode] = useState<TreeNode>();
   const [treeData, setTreeData] = useState<TreeNode>();
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(queryBuilderId);
 
   const getInitialExpandedKeys = (data: TreeNode[], collectedKeys: string[] = [], counter = 0) => {
     if (counter < AUTO_EXPAND_TREE) {
@@ -108,13 +108,13 @@ const TreeFacet = ({ type, field, titleFormatter }: Props) => {
     if (!results || results.length === 0) {
       setExpandedKeys(getInitialExpandedKeys([treeData!]));
       updateActiveQueryField({
-        queryBuilderId: DATA_EXPLORATION_QB_ID,
+        queryBuilderId: queryBuilderId,
         field: `${field}.name`,
         value: [],
       });
     } else {
       updateActiveQueryField({
-        queryBuilderId: DATA_EXPLORATION_QB_ID,
+        queryBuilderId: queryBuilderId,
         field: `${field}.name`,
         value: results,
         operator,

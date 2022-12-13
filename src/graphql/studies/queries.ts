@@ -15,7 +15,6 @@ export const GET_STUDIES = gql`
             description
             participant_count
             file_count
-            data_category
             data_categories {
               hits {
                 total

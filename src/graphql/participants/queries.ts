@@ -33,6 +33,7 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
+            study_id
             study {
               study_id
               name

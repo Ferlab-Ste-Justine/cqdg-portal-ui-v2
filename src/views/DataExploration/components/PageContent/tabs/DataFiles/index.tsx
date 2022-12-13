@@ -9,14 +9,12 @@ import useQueryBuilderState, {
   addQuery,
   updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Tag, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { FileAccessType, IFileEntity, ITableFileEntity } from 'graphql/files/models';
-import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
-import { IStudyEntity } from 'graphql/studies/models';
+import { IQueryResults } from 'graphql/models';
 import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
@@ -95,44 +93,26 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
   },
   {
-    key: 'studies',
-    title: intl.get('screen.dataExploration.tabs.datafiles.studies'),
-    dataIndex: 'studies',
-    sorter: {
-      multiple: 1,
-    },
+    key: 'study_id',
+    title: intl.get('screen.dataExploration.tabs.datafiles.study_id'),
+    dataIndex: 'study_id',
+    sorter: { multiple: 1 },
     className: styles.studyIdCell,
-    render: (studies: ArrangerResultsTree<IStudyEntity>) => {
-      if (!studies?.hits?.edges?.length) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
-      const studiesInfo = studies?.hits.edges.map((study) => ({
-        name: study.node.name,
-        id: study.node.internal_study_id,
-      }));
-      return (
-        <ExpandableCell
-          nOfElementsWhenCollapsed={1}
-          dataSource={studiesInfo}
-          renderItem={(item, index) => (
-            <Link
-              key={index}
-              to={STATIC_ROUTES.STUDIES}
-              onClick={() =>
-                updateActiveQueryField({
-                  queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-                  field: 'internal_study_id',
-                  value: item.id ? [item.id] : [],
-                  index: INDEXES.STUDY,
-                })
-              }
-            >
-              {item.name}
-            </Link>
-          )}
-        />
-      );
-    },
+    render: (study_id: string) => (
+      <Link
+        to={STATIC_ROUTES.STUDIES}
+        onClick={() =>
+          updateActiveQueryField({
+            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+            field: 'study_id',
+            value: [study_id],
+            index: INDEXES.STUDY,
+          })
+        }
+      >
+        {study_id}
+      </Link>
+    ),
   },
   {
     key: 'data_category',

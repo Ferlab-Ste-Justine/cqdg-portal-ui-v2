@@ -53,24 +53,28 @@ const getFilterGroups = (type: FilterTypes) => {
         groups: [
           {
             facets: [
-              'study__study_id',
+              'study_id',
               <TreeFacet
                 type={'hpoTree'}
                 field={'observed_phenotypes'}
-                titleFormatter={formatHpoTitleAndCode}
                 key={'observed_phenotypes'}
+                titleFormatter={formatHpoTitleAndCode}
+                queryBuilderId={DATA_EXPLORATION_QB_ID}
               />,
               <TreeFacet
                 type={'mondoTree'}
                 field={'mondo'}
-                titleFormatter={formatMondoTitleAndCode}
                 key={'mondo'}
+                titleFormatter={formatMondoTitleAndCode}
+                queryBuilderId={DATA_EXPLORATION_QB_ID}
               />,
               'icd_tagged__name',
               'gender',
               'age_at_recruitment',
               'age_at_diagnosis',
               'ethnicity',
+              'observed_phenotype_tagged__source_text',
+              'mondo_tagged__source_text',
             ],
           },
         ],

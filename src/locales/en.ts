@@ -536,7 +536,7 @@ const en = {
         participants: {
           title: 'Participants ({count})',
           participantID: 'Participant ID',
-          studies: 'Studies',
+          study_id: 'Study Code',
           proband: 'Proband',
           gender: 'Gender',
           familyHistory: 'Family History',
@@ -568,7 +568,7 @@ const en = {
           fileAuthorization: 'File Authorization',
           dataAccess: 'Data Access',
           fileID: 'File ID',
-          studies: 'Studies',
+          study_id: 'Study Code',
           dataCategory: 'Data Category',
           dataType: 'Data Type',
           experimentalStrategy: 'Experimental Strategy',
@@ -724,12 +724,14 @@ const en = {
     },
     mondo_tagged: {
       name: 'Diagnosis (MONDO)',
+      source_text: 'Phenotype (Source Text)',
     },
     observed_phenotypes: {
       name: 'Phenotype (HPO)',
     },
     observed_phenotype_tagged: {
       name: 'Phenotype (HPO)',
+      source_text: 'Diagnosis (Source Text)',
     },
     icd_tagged: {
       name: 'Diagnosis (ICD-10)',
@@ -771,7 +773,7 @@ const en = {
     size: 'Size',
     access: 'Access',
     sequencing_experiment: {
-      experiment_strategy: 'Experimental Strategy',
+      experimental_strategy: 'Experimental Strategy',
     },
 
     //Other

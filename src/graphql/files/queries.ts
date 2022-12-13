@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const SEARCH_FILES_QUERY = gql`
-  query searchFiles($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+export const GET_FILES = gql`
+  query getFiles($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     File {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
         total
@@ -53,8 +53,8 @@ export const MATCH_FILES = gql`
   }
 `;
 
-export const FILE_SEARCH_BY_ID_QUERY = gql`
-  query searchFileById($sqon: JSON) {
+export const GET_FILE_BY_ID = gql`
+  query getFileById($sqon: JSON) {
     File {
       hits(filters: $sqon) {
         edges {
