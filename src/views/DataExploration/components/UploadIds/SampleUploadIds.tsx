@@ -17,12 +17,13 @@ interface OwnProps {
   queryBuilderId: string;
 }
 
-const BiospecimenUploadIds = ({ queryBuilderId }: OwnProps) => (
+const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="biospecimen"
-    entityIdTrans="Sample"
-    entityIdentifiers="Sample ID"
-    placeHolder="e.g. HTP0001B2_Whole blood, BS_011DYZ2J_DNA, 238981007"
+    entityIdTrans={intl.get('components.uploadIds.sample')}
+    entityIdentifiers={intl.get('components.uploadIds.sampleID')}
+    placeHolder={intl.get('components.uploadIds.samplePlaceholder')}
+    title={intl.get('components.uploadIds.sampleTitle')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_BIOSPECIMENS.loc?.source.body,
@@ -50,7 +51,7 @@ const BiospecimenUploadIds = ({ queryBuilderId }: OwnProps) => (
         key: biospecimen.biospecimen_id,
         submittedId: ids.find((id) => [biospecimen.sample_id].includes(id))!,
         mappedTo: biospecimen.sample_id,
-        matchTo: biospecimen.study_id,
+        matchTo: biospecimen.study_code,
       }));
     }}
     onUpload={(match) =>
@@ -60,11 +61,11 @@ const BiospecimenUploadIds = ({ queryBuilderId }: OwnProps) => (
         field: 'biospecimen_id',
         value: match.map((value) => value.key),
         index: INDEXES.BIOSPECIMEN,
-        overrideValuesName: intl.get('components.uploadIds.modal.pillTitle'),
+        overrideValuesName: intl.get('components.uploadIds.pillTitle'),
         merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
       })
     }
   />
 );
 
-export default BiospecimenUploadIds;
+export default SampleUploadIds;

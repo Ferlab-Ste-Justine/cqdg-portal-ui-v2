@@ -13,11 +13,12 @@ const FileSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   return (
     <SetSearch
       index={INDEXES.FILE}
-      title={intl.get('screen.dataExploration.savedFileSets')}
+      title={intl.get('components.search.savedFileSets')}
+      emptyDescription={intl.get('components.search.noFileSetFound')}
+      placeholder={intl.get('components.search.selectSavedSet')}
       queryBuilderId={DATA_EXPLORATION_QB_ID}
       type={SetType.FILE}
       sqon={sqon}
-      emptyDescription={intl.get('screen.dataExploration.noFileSetsFound')}
     />
   );
 };

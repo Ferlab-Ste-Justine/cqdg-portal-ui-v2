@@ -5,13 +5,14 @@ import { Descriptions } from 'antd';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
+interface IEntityUploadIdsProps {
   entityId: string;
   entityIdTrans: string;
   placeHolder: string;
   entityIdentifiers: string;
   fetchMatch: TFetchMatchFunc;
   onUpload: TOnUpload;
+  title?: string;
 }
 
 const EntityUploadIds = ({
@@ -21,65 +22,59 @@ const EntityUploadIds = ({
   entityIdentifiers,
   fetchMatch,
   onUpload,
-}: OwnProps) => (
+  title,
+}: IEntityUploadIdsProps) => (
   <UploadIds
     dictionary={{
-      modalTitle: intl.get('components.uploadIds.modal.title', { entity: entityIdTrans }),
-      submittedColTitle: intl.get('components.uploadIds.modal.submittedColTitle', {
+      modalTitle: title || intl.get('components.uploadIds.title', { entity: entityIdTrans }),
+      submittedColTitle: intl.get('components.uploadIds.submittedColTitle', {
         entity: entityIdTrans,
       }),
-      uploadBtnText: intl.get('components.uploadIds.modal.uploadBtnText', {
-        entity: entityIdTrans,
-      }),
-      modalUploadBtnText: intl.get('components.uploadIds.modal.upload.fileBtn'),
-      mappedTo: intl.get('components.uploadIds.modal.mappedTo'),
-      clear: intl.get('components.uploadIds.modal.clearBtn'),
-      emptyTableDescription: intl.get('components.uploadIds.modal.emptyTable'),
-      modalOkText: intl.get('components.uploadIds.modal.upload.btn'),
-      modalCancelText: intl.get('components.uploadIds.modal.cancelBtn'),
+      uploadBtnText:
+        title ||
+        intl.get('components.uploadIds.uploadBtnText', {
+          entity: entityIdTrans,
+        }),
+      modalUploadBtnText: intl.get('components.uploadIds.upload.fileBtn'),
+      mappedTo: intl.get('components.uploadIds.mappedTo'),
+      clear: intl.get('components.uploadIds.clearBtn'),
+      emptyTableDescription: intl.get('components.uploadIds.emptyTable'),
+      modalOkText: intl.get('components.uploadIds.upload.btn'),
+      modalCancelText: intl.get('components.uploadIds.cancelBtn'),
       collapseTitle: (matchCount, unMatchCount) =>
-        intl.get('components.uploadIds.modal.collapseTitle', {
+        intl.get('components.uploadIds.collapseTitle', {
           matchCount,
           unMatchCount,
         }),
-      matchTabTitle: (matchCount) =>
-        intl.get('components.uploadIds.modal.match', { count: matchCount }),
+      matchTabTitle: (matchCount) => intl.get('components.uploadIds.match', { count: matchCount }),
       unmatchTabTitle: (unmatchcount) =>
-        intl.get('components.uploadIds.modal.unmatch', { count: unmatchcount }),
+        intl.get('components.uploadIds.unmatch', { count: unmatchcount }),
       tablesMessage: (submittedCount, mappedCount) =>
-        intl.get('components.uploadIds.modal.tableMessage', {
+        intl.get('components.uploadIds.tableMessage', {
           submittedCount,
           mappedCount,
         }),
-      inputLabel: intl.get('components.uploadIds.modal.inputLabel'),
+      inputLabel: intl.get('components.uploadIds.inputLabel'),
       matchTable: {
-        idColTitle: intl.get('components.uploadIds.modal.matchTable.idcol', {
+        idColTitle: intl.get('components.uploadIds.matchTable.idcol', {
           entity: entityIdTrans,
         }),
-        matchToFieldColTitle: intl.get(
-          `components.uploadIds.modal.matchTable.${entityId}.matchcol`,
-        ),
-        mappedToFieldColTitle: intl.get(
-          `components.uploadIds.modal.matchTable.${entityId}.mappedcol`,
-        ),
+        matchToFieldColTitle: intl.get(`components.uploadIds.matchTable.${entityId}.matchcol`),
+        mappedToFieldColTitle: intl.get(`components.uploadIds.matchTable.${entityId}.mappedcol`),
       },
     }}
     popoverProps={{
-      title: intl.get('components.uploadIds.modal.popover.title'),
+      title: intl.get('components.uploadIds.popover.title'),
       overlayClassName: styles.entityUploadIdsPopover,
       content: (
         <Descriptions column={1}>
-          <Descriptions.Item label={intl.get('components.uploadIds.modal.popover.identifiers')}>
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.identifiers')}>
             {entityIdentifiers}
           </Descriptions.Item>
-          <Descriptions.Item
-            label={intl.get('components.uploadIds.modal.popover.separatedBy.title')}
-          >
-            {intl.get('components.uploadIds.modal.popover.separatedBy.values')}
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.separatedBy.title')}>
+            {intl.get('components.uploadIds.popover.separatedBy.values')}
           </Descriptions.Item>
-          <Descriptions.Item
-            label={intl.get('components.uploadIds.modal.popover.uploadFileFormats')}
-          >
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.uploadFileFormats')}>
             .txt, .csv, .tsv
           </Descriptions.Item>
         </Descriptions>

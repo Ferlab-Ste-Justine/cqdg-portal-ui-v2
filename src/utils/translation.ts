@@ -143,12 +143,6 @@ export const getQueryBuilderDictionary = (
       const set = savedSets?.find((set) => set.id === setId.replace(SET_ID_PREFIX, ''));
       return set ? set.tag : setId;
     },
-    facetValueMapping: {
-      down_syndrome_status: {
-        D21: intl.get('facets.options.D21'),
-        T21: intl.get('facets.options.T21'),
-      },
-    },
   },
   actions: {
     new: intl.get('components.querybuilder.actions.new'),

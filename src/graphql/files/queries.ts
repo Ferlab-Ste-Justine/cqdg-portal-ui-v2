@@ -9,26 +9,37 @@ export const GET_FILES = gql`
           node {
             id
             file_id
+            file_format
+            file_size
+            file_name
             participants {
               hits {
                 total
                 edges {
                   node {
                     participant_id
+                    biospecimens {
+                      hits {
+                        total
+                        edges {
+                          node {
+                            sample_id
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
             }
-            study {
-              study_id
-              name
-            }
+            study_code
             study_id
             data_category
             data_type
-            file_format
-            file_size
-            score
+            biospecimen_reference
+            sequencing_experiment {
+              experimental_strategy
+            }
           }
         }
       }
@@ -43,9 +54,7 @@ export const MATCH_FILES = gql`
         edges {
           node {
             file_id
-            study {
-              study_id
-            }
+            study_code
           }
         }
       }

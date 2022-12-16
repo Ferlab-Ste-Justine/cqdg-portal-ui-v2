@@ -18,8 +18,8 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       queryBuilderId={queryBuilderId}
       field="participant_id"
       index={INDEXES.PARTICIPANT}
-      placeholder={'e.g. PT_WFB3TQP4'}
-      emptyDescription={intl.get('screen.dataExploration.noParticipantFound')}
+      placeholder={intl.get('components.search.participantPlaceholder')}
+      emptyDescription={intl.get('components.search.noParticipantFound')}
       query={GET_PARTICIPANT_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
@@ -33,7 +33,7 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
           value: option.participant_id,
         }))
       }
-      title={intl.get('screen.dataExploration.searchByParticipantId')}
+      title={intl.get('components.search.searchByParticipantId')}
     />
   );
 };

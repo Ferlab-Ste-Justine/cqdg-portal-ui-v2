@@ -7,19 +7,20 @@ import { ICustomSearchProps } from 'components/uiKit/search/GlobalSearch';
 import SetSearch from 'components/uiKit/search/SetSearch';
 import { SetType } from 'services/api/savedSet/models';
 
-const BiospecimenSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
+const SampleSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   const { sqon } = useBiospecimenResolvedSqon(queryBuilderId);
 
   return (
     <SetSearch
       index={INDEXES.BIOSPECIMEN}
-      title={intl.get('screen.dataExploration.savedBiospecimenSets')}
+      title={intl.get('components.search.savedSampleSets')}
+      emptyDescription={intl.get('components.search.noSampleSetFound')}
+      placeholder={intl.get('components.search.selectSavedSet')}
       queryBuilderId={DATA_EXPLORATION_QB_ID}
       type={SetType.BIOSPECIMEN}
       sqon={sqon}
-      emptyDescription={intl.get('screen.dataExploration.noBiospecimenSetsFound')}
     />
   );
 };
 
-export default BiospecimenSetSearch;
+export default SampleSetSearch;

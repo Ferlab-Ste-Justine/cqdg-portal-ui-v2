@@ -34,7 +34,6 @@ export const GET_VARIANTS = gql`
             variant_class
             acls
             gene_external_reference
-            external_study_ids
             variant_external_reference
             vep_impacts
             zygosity

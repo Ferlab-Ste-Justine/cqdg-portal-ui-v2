@@ -19,9 +19,9 @@ interface OwnProps {
 const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="file"
-    entityIdTrans="File"
-    entityIdentifiers="File ID"
-    placeHolder="e.g. GF_001CSF26, HTP.007855d5-e22e-405f-91f4-d54b4b8a9136.g.vcf.gz"
+    entityIdTrans={intl.get('components.uploadIds.file')}
+    entityIdentifiers={intl.get('components.uploadIds.fileID')}
+    placeHolder={intl.get('components.uploadIds.filePlaceholder')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_FILES.loc?.source.body,
@@ -41,24 +41,23 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
         },
       });
 
-      const files: IFileEntity[] = hydrateResults(response.data?.data?.file?.hits?.edges || []);
+      const files: IFileEntity[] = hydrateResults(response.data?.data?.File?.hits?.edges || []);
 
       return files.map((file) => ({
         key: file.file_id,
         submittedId: ids.find((id) => [file.file_id].includes(id))!,
-        mappedTo: file.study_id,
+        mappedTo: file.study_code,
         matchTo: file.file_id,
       }));
     }}
     onUpload={(match) =>
       updateActiveQueryField({
         queryBuilderId,
-        //todo: check
         // field: 'file_facet_ids.file_fhir_id_2',
         field: 'file_id',
         value: match.map((value) => value.key),
         index: INDEXES.FILE,
-        overrideValuesName: intl.get('components.uploadIds.modal.pillTitle'),
+        overrideValuesName: intl.get('components.uploadIds.pillTitle'),
         merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
       })
     }

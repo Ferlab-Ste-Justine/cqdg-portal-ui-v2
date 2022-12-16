@@ -13,11 +13,12 @@ const ParticipantSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   return (
     <SetSearch
       index={INDEXES.PARTICIPANT}
-      title={intl.get('screen.dataExploration.savedParticipantSets')}
+      title={intl.get('components.search.savedParticipantSets')}
+      placeholder={intl.get('components.search.selectSavedSet')}
+      emptyDescription={intl.get('components.search.noParticipantSetFound')}
       queryBuilderId={DATA_EXPLORATION_QB_ID}
       type={SetType.PARTICIPANT}
       sqon={sqon}
-      emptyDescription={intl.get('screen.dataExploration.noParticipantSetsFound')}
     />
   );
 };

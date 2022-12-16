@@ -30,8 +30,8 @@ interface OwnProps {
 
 const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
-    key: 'study_id',
-    dataIndex: 'study_id',
+    key: 'study_code',
+    dataIndex: 'study_code',
     title: intl.get('screen.studies.code'),
     sorter: { multiple: 1 },
   },
@@ -209,7 +209,7 @@ const StudiesTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
         onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
         hideOnSinglePage: true,
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.study_id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.study_code }))}
       dictionary={getProTableDictionary()}
     />
   );

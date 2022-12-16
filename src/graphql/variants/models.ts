@@ -195,7 +195,6 @@ export interface IVariantStudyEntity {
   id: string;
   score: number;
   acls: string[];
-  external_study_ids: string[];
   participant_ids: string[];
   participant_number: number;
   study_code: string;
@@ -214,7 +213,6 @@ export interface IVariantEntity {
   acls: string;
   alternate: string;
   chromosome: string;
-  external_study_ids: string;
   gene_external_reference: string;
   genome_build: string;
   hash: string;

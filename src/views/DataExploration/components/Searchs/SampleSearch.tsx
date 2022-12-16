@@ -10,7 +10,7 @@ import { highlightSearchMatch } from 'components/uiKit/search/GlobalSearch/utils
 import SelectItem from 'components/uiKit/select/SelectItem';
 import { uniqBy } from 'utils/array';
 
-const BiospecimenSampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
+const SampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
   const { sqon } = useBiospecimenResolvedSqon(queryBuilderId);
 
   return (
@@ -18,8 +18,9 @@ const BiospecimenSampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       queryBuilderId={queryBuilderId}
       field="sample_id"
       index={INDEXES.BIOSPECIMEN}
-      placeholder={'SR0250715'}
-      emptyDescription={intl.get('screen.dataExploration.noBiospecimenSampleFound')}
+      title={intl.get('components.search.searchBySampleId')}
+      placeholder={intl.get('components.search.samplePlaceholder')}
+      emptyDescription={intl.get('components.search.noSampleFound')}
       query={BIOSPECIMEN_SEARCH_BY_ID_QUERY}
       sqon={sqon}
       optionsFormatter={(options, matchRegex, search) =>
@@ -33,9 +34,8 @@ const BiospecimenSampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
           value: option.sample_id,
         }))
       }
-      title={intl.get('screen.dataExploration.searchByBiospecimenSampleId')}
     />
   );
 };
 
-export { BiospecimenSampleSearch };
+export default SampleSearch;

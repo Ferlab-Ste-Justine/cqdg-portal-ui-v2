@@ -23,7 +23,7 @@ const Studies = () => {
       sqon: resolveSyntheticSqon(queryList, activeQuery),
     },
     STUDIES_AGGREGATIONS([
-      'study_id',
+      'study_code',
       'domain',
       'population',
       'data_access_codes__access_limitations',

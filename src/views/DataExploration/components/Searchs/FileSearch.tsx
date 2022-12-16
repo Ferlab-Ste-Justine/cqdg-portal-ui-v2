@@ -18,8 +18,9 @@ const FileSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       queryBuilderId={queryBuilderId}
       field="file_id"
       index={INDEXES.FILE}
-      placeholder={'e.g. GF_001CSF26'}
-      emptyDescription={intl.get('screen.dataExploration.noFileFound')}
+      title={intl.get('components.search.searchByFileId')}
+      placeholder={intl.get('components.search.filePlaceholder')}
+      emptyDescription={intl.get('components.search.noFileFound')}
       query={GET_FILE_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
@@ -33,7 +34,6 @@ const FileSearch = ({ queryBuilderId }: ICustomSearchProps) => {
           value: option.file_id,
         }))
       }
-      title={intl.get('screen.dataExploration.searchByFileId')}
     />
   );
 };

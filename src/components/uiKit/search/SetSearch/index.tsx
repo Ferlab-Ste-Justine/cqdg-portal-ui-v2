@@ -19,18 +19,6 @@ import SearchLabel from '../SearchLabel';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  title: string;
-  index: INDEXES;
-  queryBuilderId: string;
-  type: SetType;
-  className?: string;
-  tooltipText?: string;
-  field?: string;
-  sqon: ISqonGroupFilter;
-  emptyDescription?: string;
-}
-
 interface OptionsType {
   value: string;
   label: string;
@@ -43,6 +31,19 @@ const getDefaultValues = (field: string, sqon: ISqonGroupFilter) => {
   return selectedValue;
 };
 
+interface ISetSearchProps {
+  title: string;
+  index: INDEXES;
+  queryBuilderId: string;
+  type: SetType;
+  className?: string;
+  tooltipText?: string;
+  field?: string;
+  sqon: ISqonGroupFilter;
+  emptyDescription?: string;
+  placeholder?: string;
+}
+
 const SetSearch = ({
   title,
   index,
@@ -52,7 +53,8 @@ const SetSearch = ({
   tooltipText,
   sqon,
   emptyDescription = 'You have no sets',
-}: OwnProps) => {
+  placeholder = 'Select a saved set',
+}: ISetSearchProps) => {
   const { savedSets } = useSavedSet();
   const [values, setValues] = useState<string[]>(getDefaultValues(getIdFieldByType(type), sqon));
   const [options, setOptions] = useState<OptionsType[]>([]);
@@ -91,7 +93,7 @@ const SetSearch = ({
         filterOption={(input, option) =>
           option ? option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0 : false
         }
-        placeholder="Select a saved set"
+        placeholder={placeholder}
         mode="multiple"
         maxTagCount={1}
         value={values}
