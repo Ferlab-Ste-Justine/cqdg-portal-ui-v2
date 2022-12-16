@@ -7,16 +7,16 @@ import { Spin } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ExtendedMappingResults } from 'graphql/models';
 import PageContent from 'views/DataExploration/components/PageContent';
-import { BiospecimenSampleSearch } from 'views/DataExploration/components/Searchs/BiospecimenSearch';
-import BiospecimenSetSearch from 'views/DataExploration/components/Searchs/BiospecimenSetSearch';
 import FileSearch from 'views/DataExploration/components/Searchs/FileSearch';
 import FileSetSearch from 'views/DataExploration/components/Searchs/FileSetSearch';
 import ParticipantSearch from 'views/DataExploration/components/Searchs/ParticipantSearch';
 import ParticipantSetSearch from 'views/DataExploration/components/Searchs/ParticipantSetSearch';
+import SampleSearch from 'views/DataExploration/components/Searchs/SampleSearch';
+import SampleSetSearch from 'views/DataExploration/components/Searchs/SampleSetSearch';
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
-import BiospecimenUploadIds from 'views/DataExploration/components/UploadIds/BiospecimenUploadIds';
 import FileUploadIds from 'views/DataExploration/components/UploadIds/FileUploadIds';
 import ParticipantUploadIds from 'views/DataExploration/components/UploadIds/ParticipantUploadIds';
+import SampleUploadIds from 'views/DataExploration/components/UploadIds/SampleUploadIds';
 import {
   DATA_EXPLORATION_QB_ID,
   SCROLL_WRAPPER_ID,
@@ -53,7 +53,7 @@ const getFilterGroups = (type: FilterTypes) => {
         groups: [
           {
             facets: [
-              'study_id',
+              'study_code',
               <TreeFacet
                 type={'hpoTree'}
                 field={'observed_phenotypes'}
@@ -71,7 +71,7 @@ const getFilterGroups = (type: FilterTypes) => {
               'icd_tagged__name',
               'gender',
               'age_at_recruitment',
-              'age_at_diagnosis',
+              'mondo_tagged__age_at_event',
               'ethnicity',
               'observed_phenotype_tagged__source_text',
               'mondo_tagged__source_text',
@@ -82,9 +82,9 @@ const getFilterGroups = (type: FilterTypes) => {
     case FilterTypes.Biospecimen:
       return {
         customSearches: [
-          <BiospecimenSampleSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
-          <BiospecimenSetSearch key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
-          <BiospecimenUploadIds key={3} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
+          <SampleSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
+          <SampleSetSearch key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
+          <SampleUploadIds key={3} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
         ],
         groups: [
           {

@@ -71,6 +71,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     iconTitle: <SafetyOutlined />,
     tooltip: intl.get('screen.dataExploration.tabs.datafiles.dataAccess'),
     dataIndex: 'data_access',
+    sorter: { multiple: 1 },
     align: 'center',
     width: 75,
     render: (data_access: string) =>
@@ -88,29 +89,29 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
   {
     key: 'file_id',
-    title: intl.get('screen.dataExploration.tabs.datafiles.fileID'),
+    title: intl.get('screen.dataExploration.tabs.datafiles.file'),
     dataIndex: 'file_id',
     sorter: { multiple: 1 },
   },
   {
-    key: 'study_id',
-    title: intl.get('screen.dataExploration.tabs.datafiles.study_id'),
-    dataIndex: 'study_id',
+    key: 'study_code',
+    title: intl.get('screen.dataExploration.tabs.datafiles.study_code'),
+    dataIndex: 'study_code',
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
-    render: (study_id: string) => (
+    render: (study_code: string) => (
       <Link
         to={STATIC_ROUTES.STUDIES}
         onClick={() =>
           updateActiveQueryField({
             queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            field: 'study_id',
-            value: [study_id],
+            field: 'study_code',
+            value: [study_code],
             index: INDEXES.STUDY,
           })
         }
       >
-        {study_id}
+        {study_code}
       </Link>
     ),
   },
@@ -128,11 +129,12 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (data_type) => data_type || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'access_urls',
-    title: intl.get('screen.dataExploration.tabs.datafiles.accessUrl'),
-    dataIndex: 'access_urls',
+    key: 'experimental_strategy',
+    title: intl.get('screen.dataExploration.tabs.datafiles.experimentalStrategy'),
+    dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
-    defaultHidden: true,
+    render: (sequencing_experiment) =>
+      sequencing_experiment?.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'file_format',
@@ -159,9 +161,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'nb_participants',
     title: intl.get('screen.dataExploration.tabs.datafiles.participants'),
     sorter: { multiple: 1 },
-    render: (record: IFileEntity) => {
-      const nb_participants = record?.participants.hits.total || 0;
-      return nb_participants ? (
+    render: (file: IFileEntity) => {
+      const participantIds = file?.participants?.hits.edges.map((p) => p.node.participant_id) || [];
+      return participantIds?.length ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
           onClick={() =>
@@ -171,7 +173,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
                 newFilters: [
                   generateValueFilter({
                     field: 'file_id',
-                    value: [record.file_id],
+                    value: [file.file_id],
                     index: INDEXES.FILE,
                   }),
                 ],
@@ -180,10 +182,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {nb_participants}
+          {participantIds.length}
         </Link>
       ) : (
-        nb_participants
+        0
       );
     },
   },
@@ -192,9 +194,14 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
     sorter: { multiple: 1 },
     defaultHidden: true,
-    render: (record: IFileEntity) => {
-      const nb_biospecimens = record?.nb_biospecimens || 0;
-      return nb_biospecimens ? (
+    render: (file: IFileEntity) => {
+      const sampleIds: string[] = [];
+      file?.participants?.hits.edges.forEach((edge) => {
+        edge.node.biospecimens?.hits.edges.forEach((edge) => {
+          sampleIds.push(edge.node.sample_id);
+        });
+      });
+      return sampleIds.length ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={() =>
@@ -204,7 +211,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
                 newFilters: [
                   generateValueFilter({
                     field: 'file_id',
-                    value: [record.file_id],
+                    value: [file.file_id],
                     index: INDEXES.FILE,
                   }),
                 ],
@@ -213,12 +220,26 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {nb_biospecimens}
+          {sampleIds.length}
         </Link>
       ) : (
-        nb_biospecimens
+        0
       );
     },
+  },
+  {
+    key: 'file_name',
+    title: intl.get('screen.dataExploration.tabs.datafiles.name'),
+    dataIndex: 'file_name',
+    defaultHidden: true,
+    render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'biospecimen_reference',
+    title: intl.get('screen.dataExploration.tabs.datafiles.sample'),
+    dataIndex: 'biospecimen_reference',
+    defaultHidden: true,
+    render: (biospecimen_reference) => biospecimen_reference || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

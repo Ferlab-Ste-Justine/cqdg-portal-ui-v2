@@ -213,7 +213,6 @@ export const STUDIES_VARIANT_FRAGMENT = gql`
           study_code
           study_id
           acls
-          external_study_ids
           transmissions
           frequencies {
             lower_bound_kf {

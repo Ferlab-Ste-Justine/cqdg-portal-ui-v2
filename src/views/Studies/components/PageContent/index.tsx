@@ -46,7 +46,7 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
     offset: studiesQueryConfig.size * (studiesQueryConfig.pageIndex - 1),
     sqon: studiesResolvedSqon,
     sort: isEmpty(studiesQueryConfig.sort)
-      ? [{ field: 'study_id', order: 'asc' }]
+      ? [{ field: 'study_code', order: 'asc' }]
       : studiesQueryConfig.sort,
   });
 

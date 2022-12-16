@@ -13,6 +13,7 @@ export const GET_BIOSPECIMENS = gql`
             biospecimen_tissue_source
             release_id
             study_id
+            study_code
             participant {
               participant_id
             }
@@ -27,6 +28,7 @@ export const GET_BIOSPECIMENS = gql`
                 total
                 edges {
                   node {
+                    file_id
                     file_size
                     file_name
                   }
@@ -46,6 +48,7 @@ export const MATCH_BIOSPECIMENS = gql`
       hits(filters: $sqon, first: $first, offset: $offset) {
         edges {
           node {
+            study_code
             study_id
             biospecimen_id
             sample_id

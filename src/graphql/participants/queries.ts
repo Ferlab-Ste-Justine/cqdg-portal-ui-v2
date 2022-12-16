@@ -11,7 +11,6 @@ export const GET_PARTICIPANTS = gql`
             participant_id
             score
             age_at_recruitment
-            age_at_diagnosis
             age_of_death
             cause_of_death
             ethnicity
@@ -27,6 +26,11 @@ export const GET_PARTICIPANTS = gql`
                     biospecimens {
                       hits {
                         total
+                        edges {
+                          node {
+                            sample_id
+                          }
+                        }
                       }
                     }
                   }
@@ -34,10 +38,7 @@ export const GET_PARTICIPANTS = gql`
               }
             }
             study_id
-            study {
-              study_id
-              name
-            }
+            study_code
             icd_tagged {
               hits {
                 edges {
@@ -77,6 +78,7 @@ export const GET_PARTICIPANTS = gql`
                     name
                     parents
                     internal_phenotype_id
+                    source_text
                   }
                 }
               }
@@ -110,6 +112,7 @@ export const GET_PARTICIPANTS = gql`
                     is_tagged
                     name
                     parents
+                    source_text
                   }
                 }
               }

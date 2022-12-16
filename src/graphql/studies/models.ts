@@ -24,8 +24,8 @@ export interface IStudyEntity {
   score: number;
   keyword: string;
   study_id: string;
+  study_code: string;
   domain: string;
-  internal_study_id: string;
   name: string;
   population: string;
   description: string;

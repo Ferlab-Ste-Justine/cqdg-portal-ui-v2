@@ -1,3 +1,4 @@
+import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { ArrangerResultsTree } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { IStudyEntity } from 'graphql/studies/models';
@@ -40,6 +41,7 @@ export interface IFileEntity {
   data_access: string;
   file_size: number;
   study_id: string;
+  study_code: string;
   study: IStudyEntity;
   biospecimen_reference: string;
   ferload_url: string;
@@ -47,7 +49,7 @@ export interface IFileEntity {
   file_name: string;
   release_id: string;
   sequencing_experiment: IFileSequencingExperiment;
-  nb_biospecimens: number;
+  biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
 }
 
 export enum FileAccessType {

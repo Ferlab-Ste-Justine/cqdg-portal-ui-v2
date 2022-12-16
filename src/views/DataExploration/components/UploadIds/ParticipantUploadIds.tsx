@@ -19,9 +19,9 @@ interface OwnProps {
 const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="participant"
-    entityIdTrans="Participant"
-    entityIdentifiers="Participant ID"
-    placeHolder="e.g. PT_03Y3K025, HTP0001, 10214"
+    entityIdTrans={intl.get('components.uploadIds.participant')}
+    entityIdentifiers={intl.get('components.uploadIds.participantID')}
+    placeHolder={intl.get('components.uploadIds.participantPlaceholder')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_PARTICIPANTS.loc?.source.body,
@@ -48,7 +48,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
       return participants.map((participant) => ({
         key: participant.participant_id,
         submittedId: ids.find((id) => [participant.participant_id].includes(id))!,
-        mappedTo: participant.study.study_id,
+        mappedTo: participant.study.study_code,
         matchTo: participant.participant_id,
       }));
     }}
@@ -59,7 +59,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
         field: 'participant_id',
         value: match.map((value) => value.key),
         index: INDEXES.PARTICIPANT,
-        overrideValuesName: intl.get('components.uploadIds.modal.pillTitle'),
+        overrideValuesName: intl.get('components.uploadIds.pillTitle'),
         merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
       })
     }

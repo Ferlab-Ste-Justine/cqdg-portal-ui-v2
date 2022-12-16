@@ -17,6 +17,7 @@ import { Button, Dropdown, Menu, Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
 import {
+  IIcd,
   IMondoTagged,
   IParticipantEntity,
   IPhenotype,
@@ -29,7 +30,10 @@ import {
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
-import { extractMondoTitleAndCode } from 'views/DataExploration/utils/helper';
+import {
+  extractMondoTitleAndCode,
+  extractPhenotypeTitleAndCode,
+} from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
@@ -53,40 +57,34 @@ interface OwnProps {
   sqon?: ISqonGroupFilter;
 }
 
-const defaultColumns: ProColumnType<any>[] = [
+const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'participant_id',
-    title: intl.get('screen.dataExploration.tabs.participants.participantID'),
+    title: intl.get('screen.dataExploration.tabs.participants.participant'),
     dataIndex: 'participant_id',
     sorter: { multiple: 1 },
   },
   {
-    key: 'study_id',
-    title: intl.get('screen.dataExploration.tabs.participants.study_id'),
-    dataIndex: 'study_id',
+    key: 'study_code',
+    title: intl.get('screen.dataExploration.tabs.participants.study_code'),
+    dataIndex: 'study_code',
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
-    render: (study_id: string) => (
+    render: (study_code: string) => (
       <Link
         to={STATIC_ROUTES.STUDIES}
         onClick={() =>
           updateActiveQueryField({
             queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            field: 'study_id',
-            value: [study_id],
+            field: 'study_code',
+            value: [study_code],
             index: INDEXES.STUDY,
           })
         }
       >
-        {study_id}
+        {study_code}
       </Link>
     ),
-  },
-  {
-    key: 'is_a_proband',
-    title: intl.get('screen.dataExploration.tabs.participants.proband'),
-    dataIndex: 'is_a_proband',
-    sorter: { multiple: 1 },
   },
   {
     key: 'gender',
@@ -111,75 +109,80 @@ const defaultColumns: ProColumnType<any>[] = [
       ),
   },
   {
-    key: 'age_at_recruitment',
-    title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
-    dataIndex: 'age_at_recruitment',
-    sorter: { multiple: 1 },
-    render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
     key: 'mondo_tagged',
-    title: intl.get('screen.dataExploration.tabs.participants.diagnoses'),
+    title: intl.get('screen.dataExploration.tabs.participants.diagnosis'),
     dataIndex: 'mondo_tagged',
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
-      if (!mondo_tagged?.hits?.edges.length) {
+      const mondoNames = mondo_tagged?.hits?.edges.map((m) => m.node.name);
+      if (!mondoNames || mondoNames.length === 0) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      const diagnosesTagged = mondo_tagged?.hits?.edges.map((diag) =>
-        extractMondoTitleAndCode(diag.node.name),
-      );
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={diagnosesTagged}
-          renderItem={(item, index) => (
-            <div key={index}>
-              {capitalize(item!.title)}
-              <br />
-              <ExternalLink href={`https://monarchinitiative.org/disease/${item!.code}`}>
-                {item!.code}
-              </ExternalLink>
-            </div>
-          )}
+          dataSource={mondoNames}
+          renderItem={(mondo_id, id) => {
+            const mondoInfo = extractMondoTitleAndCode(mondo_id);
+            return (
+              <div key={id}>
+                {capitalize(mondoInfo!.title)} (MONDO:{' '}
+                <ExternalLink href={`http://purl.obolibrary.org/obo/MONDO_${mondoInfo!.code}`}>
+                  {mondoInfo!.code}
+                </ExternalLink>
+                )
+              </div>
+            );
+          }}
         />
       );
     },
   },
   {
     key: 'observed_phenotype_tagged',
-    title: intl.get('screen.dataExploration.tabs.participants.phenotypes'),
+    title: intl.get('screen.dataExploration.tabs.participants.phenotype'),
     dataIndex: 'observed_phenotype_tagged',
     className: styles.phenotypeCell,
     render: (observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>) => {
-      if (!observed_phenotype_tagged?.hits?.edges?.length) {
+      const phenotypeNames = observed_phenotype_tagged?.hits?.edges.map((p) => p.node.name);
+      if (!phenotypeNames || phenotypeNames.length === 0) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      const phenotypesTagged = observed_phenotype_tagged?.hits?.edges
-        .filter((p) => p.node.is_tagged)
-        .map((p) => ({ name: p.node.name, code: p.node.internal_phenotype_id }));
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
-          dataSource={phenotypesTagged}
-          renderItem={(item, index) => (
-            <div key={index}>
-              {capitalize(item.name)} <br />
-              <ExternalLink href={`https://hpo.jax.org/app/browse/term/${item.code}`}>
-                {item.code}
-              </ExternalLink>
-            </div>
-          )}
+          dataSource={phenotypeNames}
+          renderItem={(hpo_id_phenotype, index): React.ReactNode => {
+            const phenotypeInfo = extractPhenotypeTitleAndCode(hpo_id_phenotype);
+            return phenotypeInfo ? (
+              <div key={index}>
+                {capitalize(phenotypeInfo.title)} (HP:{' '}
+                <ExternalLink href={`http://purl.obolibrary.org/obo/HP_${phenotypeInfo.code}`}>
+                  {phenotypeInfo.code}
+                </ExternalLink>
+                )
+              </div>
+            ) : (
+              TABLE_EMPTY_PLACE_HOLDER
+            );
+          }}
         />
       );
     },
   },
   {
+    key: 'age_at_recruitment',
+    title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
+    dataIndex: 'age_at_recruitment',
+    sorter: { multiple: 1 },
+    tooltip: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip'),
+    render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
     key: 'nb_files',
     title: intl.get('screen.dataExploration.tabs.participants.files'),
-    sorter: { multiple: 1 },
-    render: (record: ITableParticipantEntity) =>
-      record?.files?.hits?.total ? (
+    render: (participant: ITableParticipantEntity) =>
+      participant?.files?.hits?.total ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -189,7 +192,7 @@ const defaultColumns: ProColumnType<any>[] = [
                 newFilters: [
                   generateValueFilter({
                     field: 'participant_id',
-                    value: [record.participant_id],
+                    value: [participant.participant_id],
                     index: INDEXES.PARTICIPANT,
                   }),
                 ],
@@ -198,11 +201,48 @@ const defaultColumns: ProColumnType<any>[] = [
             })
           }
         >
-          {record.files.hits.total}
+          {participant.files.hits.total}
         </Link>
       ) : (
         0
       ),
+  },
+  {
+    key: 'nb_biospecimen',
+    title: intl.get('screen.dataExploration.tabs.participants.biospecimen'),
+    render: (participant: ITableParticipantEntity) => {
+      const sampleIds: string[] = [];
+      participant?.files?.hits.edges.forEach((edge) => {
+        edge.node.biospecimens?.hits.edges.forEach((edge) => {
+          sampleIds.push(edge.node.sample_id);
+        });
+      });
+      const sampleIdsUniq: string[] = [...new Set(sampleIds)];
+      return sampleIdsUniq.length ? (
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'sample_id',
+                    value: sampleIdsUniq,
+                    index: INDEXES.BIOSPECIMEN,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          {sampleIdsUniq.length}
+        </Link>
+      ) : (
+        0
+      );
+    },
   },
   {
     key: 'ethnicity',
@@ -213,28 +253,59 @@ const defaultColumns: ProColumnType<any>[] = [
     render: (ethnicity) => ethnicity || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'vital_status',
-    title: intl.get('screen.dataExploration.tabs.participants.vitalStatus'),
-    dataIndex: 'vital_status',
+    key: 'icd_tagged',
+    title: intl.get('screen.dataExploration.tabs.participants.icdTagged'),
+    dataIndex: 'icd_tagged',
     defaultHidden: true,
-    sorter: { multiple: 1 },
-    render: (vital_status) => vital_status || TABLE_EMPTY_PLACE_HOLDER,
+    className: styles.diagnosisCell,
+    render: (icd_tagged: ArrangerResultsTree<IIcd>) => {
+      const icdNames = icd_tagged?.hits?.edges.map((m) => m.node.name);
+      if (!icdNames?.length) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return (
+        <ExpandableCell
+          nOfElementsWhenCollapsed={1}
+          dataSource={icdNames}
+          renderItem={(name, id) => <div key={id}>{capitalize(name)}</div>}
+        />
+      );
+    },
+  },
+  {
+    key: 'mondo_tagged__source_text',
+    title: intl.get('screen.dataExploration.tabs.participants.diagnosisSourceText'),
+    dataIndex: 'mondo_tagged',
+    defaultHidden: true,
+    className: styles.diagnosisCell,
+    render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
+      const sourceTexts = mondo_tagged?.hits?.edges.map((m) => m.node.source_text);
+      if (!sourceTexts?.length) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return (
+        <ExpandableCell
+          nOfElementsWhenCollapsed={1}
+          dataSource={sourceTexts}
+          renderItem={(sourceText, id) => <div key={id}>{capitalize(sourceText)}</div>}
+        />
+      );
+    },
   },
   {
     key: 'submitter_participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.submitterParticipantId'),
     dataIndex: 'submitter_participant_id',
     defaultHidden: true,
-    sorter: { multiple: 1 },
     render: (submitter_participant_id) => submitter_participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'age_of_death',
-    title: intl.get('screen.dataExploration.tabs.participants.ageAtDeath'),
-    dataIndex: 'age_of_death',
+    key: 'vital_status',
+    title: intl.get('screen.dataExploration.tabs.participants.vitalStatus'),
+    dataIndex: 'vital_status',
     defaultHidden: true,
     sorter: { multiple: 1 },
-    render: (age_of_death) => age_of_death || TABLE_EMPTY_PLACE_HOLDER,
+    render: (vital_status) => vital_status || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
@@ -285,7 +356,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
   return (
     <ProTable<ITableParticipantEntity>
       tableId="participants_table"
-      columns={defaultColumns}
+      columns={getDefaultColumns()}
       wrapperClassName={styles.participantTabWrapper}
       loading={results.loading}
       initialColumnState={userInfo?.config.data_exploration?.tables?.participants?.columns}
@@ -323,7 +394,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
           dispatch(
             fetchTsvReport({
               columnStates: userInfo?.config.data_exploration?.tables?.participants?.columns,
-              columns: defaultColumns,
+              columns: getDefaultColumns(),
               index: INDEXES.PARTICIPANT,
               sqon: getCurrentSqon(),
             }),

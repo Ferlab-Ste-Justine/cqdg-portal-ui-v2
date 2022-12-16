@@ -1,3 +1,4 @@
+import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { IFileEntity } from 'graphql/files/models';
 import { ArrangerResultsTree } from 'graphql/models';
 import { IStudyEntity } from 'graphql/studies/models';
@@ -36,6 +37,7 @@ export interface IMondoTagged {
   name: string;
   parents: string[];
   internal_phenotype_id: string;
+  source_text: string;
 }
 
 export interface IIcd {
@@ -66,12 +68,14 @@ export interface IParticipantEntity {
   files: ArrangerResultsTree<IFileEntity>;
   study: IStudyEntity;
   study_id: string;
+  study_code: string;
   mondo: ArrangerResultsTree<IMondo>;
   mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   non_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   icd_tagged: ArrangerResultsTree<IIcd>;
+  biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
 }
 
 export type ITableParticipantEntity = IParticipantEntity & {

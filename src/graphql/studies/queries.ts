@@ -9,6 +9,7 @@ export const GET_STUDIES = gql`
           node {
             id
             domain
+            study_code
             study_id
             name
             population

@@ -24,7 +24,7 @@ type InternalRow = {
   participantTotalNumber: number;
   participant_ids: null | string[];
   participant_number: number;
-  study_id: string;
+  study_code: string;
 };
 
 const MIN_N_OF_PARTICIPANTS_FOR_LINK = 10;
@@ -34,10 +34,10 @@ const canMakeParticipantsLink = (nOfParticipants: number) =>
 
 const getInternalColumns = () => [
   {
-    key: 'study_id',
+    key: 'study_code',
     title: intl.get('screen.variants.frequencies.studies'),
-    dataIndex: 'study_id',
-    render: (study_id: string) => study_id,
+    dataIndex: 'study_code',
+    render: (study_code: string) => study_code,
   },
   {
     key: 'participants',

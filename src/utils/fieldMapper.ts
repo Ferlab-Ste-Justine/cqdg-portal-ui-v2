@@ -111,7 +111,7 @@ export const getIdFieldByType = (type: string): string => {
     case INDEXES.VARIANT:
       return 'id';
     case INDEXES.STUDY:
-      return 'study_id';
+      return 'study_code';
     default:
       return '';
   }

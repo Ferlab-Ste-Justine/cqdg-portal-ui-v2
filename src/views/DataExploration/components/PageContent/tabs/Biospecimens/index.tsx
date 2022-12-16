@@ -48,17 +48,17 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (biospecimen_id: string) => biospecimen_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participant.participant_id',
+    key: 'participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
     render: (participant: IParticipantEntity) => participant.participant_id,
   },
   {
-    key: 'study_id',
-    dataIndex: 'study_id',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.study_id'),
+    key: 'study_code',
+    dataIndex: 'study_code',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.study_code'),
     sorter: { multiple: 1 },
-    render: (study_id) => study_id || TABLE_EMPTY_PLACE_HOLDER,
+    render: (study_code) => study_code || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'sample_type',
@@ -79,14 +79,15 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
     title: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection'),
+    tooltip: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip'),
     render: (age_biospecimen_collection) => age_biospecimen_collection || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'files',
     title: 'Files',
-    render: (record: IBiospecimenEntity) => {
-      const nbFiles = record?.files?.hits?.total || 0;
-      return nbFiles ? (
+    render: (biospecimen: IBiospecimenEntity) => {
+      const fileIds = biospecimen?.files?.hits?.edges.map((file) => file.node.file_id) || [];
+      return fileIds?.length ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -95,9 +96,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'sample_id',
-                    value: [record.sample_id],
-                    index: INDEXES.BIOSPECIMEN,
+                    field: 'file_id',
+                    value: fileIds,
+                    index: INDEXES.FILE,
                   }),
                 ],
               }),
@@ -105,10 +106,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {nbFiles}
+          {fileIds.length}
         </Link>
       ) : (
-        nbFiles
+        0
       );
     },
   },
