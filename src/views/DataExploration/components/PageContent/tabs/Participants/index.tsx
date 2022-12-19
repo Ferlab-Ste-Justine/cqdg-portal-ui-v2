@@ -23,7 +23,7 @@ import {
   IPhenotype,
   ITableParticipantEntity,
 } from 'graphql/participants/models';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,

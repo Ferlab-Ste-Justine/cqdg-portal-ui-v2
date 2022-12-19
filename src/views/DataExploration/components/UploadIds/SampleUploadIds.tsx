@@ -7,7 +7,7 @@ import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { MATCH_BIOSPECIMENS } from 'graphql/biospecimens/queries';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 
 import { ArrangerApi } from 'services/api/arranger';
 

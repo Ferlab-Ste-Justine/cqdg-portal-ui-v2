@@ -6,7 +6,7 @@ import { underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { ExtendedMapping, ExtendedMappingResults, GqlResults } from 'graphql/models';
 import { getFilterGroup, getFilters } from 'graphql/utils/Filters';
-import { isUndefined } from 'lodash';
+import isUndefined from 'lodash/isUndefined';
 
 import { getFiltersDictionary } from 'utils/translation';
 

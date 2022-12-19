@@ -4,7 +4,7 @@ import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/type
 import { Button, Layout, Space, Typography } from 'antd';
 import cx from 'classnames';
 import { ExtendedMappingResults } from 'graphql/models';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 import styles from 'components/uiKit/FilterList/Filters.module.scss';
 

@@ -5,7 +5,7 @@ import keycloak from 'auth/keycloak-api/keycloak';
 import { saveAs } from 'file-saver';
 import { INDEXES } from 'graphql/constants';
 import { getColumnStateQuery } from 'graphql/reports/queries';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 import { v4 } from 'uuid';
 
 import { getDefaultContentType } from 'common/downloader';
