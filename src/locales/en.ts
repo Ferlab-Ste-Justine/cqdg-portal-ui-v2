@@ -804,7 +804,9 @@ const en = {
   facets: {
     // Participant
     participant_id: 'Participant ID',
-    study_code: 'Study Code',
+    study: {
+      study_code: 'Study Code',
+    },
     mondo: {
       name: 'Diagnosis (MONDO)',
     },
@@ -877,7 +879,8 @@ const en = {
     },
 
     // Studies
-    domain: 'Study Domain',
+    study_code: 'Search by study',
+    domain: 'Domain',
     population: 'Population',
     data_access_codes: {
       access_limitations: 'Access Limitation',

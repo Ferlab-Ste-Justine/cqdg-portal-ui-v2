@@ -68,7 +68,7 @@ export const mapFilterForParticipant = (sqonFilters: ISqonGroupFilter) =>
     },
     {
       index: INDEXES.BIOSPECIMEN,
-      prefix: 'biospecimens.',
+      prefix: 'files.biospecimens.',
     },
   ]);
 
@@ -80,7 +80,7 @@ export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
     },
     {
       index: INDEXES.BIOSPECIMEN,
-      prefix: 'biospecimens.',
+      prefix: 'participants.biospecimens.',
     },
   ]);
 

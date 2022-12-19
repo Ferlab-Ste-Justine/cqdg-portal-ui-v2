@@ -53,7 +53,7 @@ const getFilterGroups = (type: FilterTypes) => {
         groups: [
           {
             facets: [
-              'study_code',
+              'study__study_code',
               <TreeFacet
                 type={'hpoTree'}
                 field={'observed_phenotypes'}

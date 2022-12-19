@@ -37,8 +37,10 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
-            study_id
             study_code
+            study {
+              study_code
+            }
             icd_tagged {
               hits {
                 edges {
