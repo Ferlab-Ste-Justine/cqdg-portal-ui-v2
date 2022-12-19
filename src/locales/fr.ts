@@ -164,16 +164,16 @@ const fr = {
       matchTable: {
         idcol: 'ID {entity}',
         participant: {
-          matchcol: 'Participant ID',
-          mappedcol: 'Study ID',
+          matchcol: 'ID du participant',
+          mappedcol: "Code de l'étude",
         },
         file: {
-          matchcol: 'File ID',
-          mappedcol: 'Study ID',
+          matchcol: 'ID du fichier',
+          mappedcol: "Code de l'étude",
         },
         biospecimen: {
-          matchcol: 'Sample ID',
-          mappedcol: 'Study ID',
+          matchcol: "ID de l'échantillon",
+          mappedcol: "Code de l'étude",
         },
       },
       pillTitle: 'Liste téléchargée',
@@ -688,7 +688,6 @@ const fr = {
       noBiospecimenSetsFound: 'Aucun ensemble de biospecimen trouvé',
       noBiospecimenCollectionFound: 'Aucune ID collection trouvé',
       savedBiospecimenSets: 'Ensemble d’échantillons',
-      uploadSampleList: 'Téléverser une liste d’échantillons',
       saveAsNewSet: 'Enregistrer un nouvel ensemble',
       addToExistingSet: 'Ajouter à un ensemble existant',
       removeFromExistingSet: "Supprimer d'un ensemble existant",
@@ -825,7 +824,7 @@ const fr = {
     // Biospecimen
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Âge au  prélèvement du biospécimen (jours)',
-    sample_type: 'Échantillon type',
+    sample_type: "Type d'échantillon",
 
     // File
     data_category: 'Catégorie de données',

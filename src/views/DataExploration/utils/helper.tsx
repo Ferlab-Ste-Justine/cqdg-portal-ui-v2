@@ -2,9 +2,15 @@ import { Typography } from 'antd';
 
 const { Text } = Typography;
 
-const titleAndCodeExtractor = (value: string, codeSubstring: string) => {
+const titleAndCodeExtractor = (
+  value: string,
+  codeSubstring: string,
+): { title: string; code: string } => {
   if (!value) {
-    return null;
+    return {
+      title: '',
+      code: '',
+    };
   }
   const indexCode = value.indexOf(codeSubstring);
 

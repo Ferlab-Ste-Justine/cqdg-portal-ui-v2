@@ -2,9 +2,9 @@ import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import keycloak from 'auth/keycloak-api/keycloak';
-import { format } from 'date-fns';
 import { saveAs } from 'file-saver';
 import { INDEXES } from 'graphql/constants';
+import { getColumnStateQuery } from 'graphql/reports/queries';
 import { startCase } from 'lodash';
 import { v4 } from 'uuid';
 
@@ -14,8 +14,6 @@ import { ArrangerColumnStateResults } from 'services/api/arranger/models';
 import { ReportApi } from 'services/api/reports';
 import { ReportConfig } from 'services/api/reports/models';
 import { globalActions } from 'store/global';
-
-import { getColumnStateQuery } from '../../graphql/reports/queries';
 
 import { TFetchTSVArgs } from './types';
 
@@ -91,8 +89,10 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
     );
 
     try {
-      const filename = `[include-${args.index}-table]-YYYY-MM-DD`;
-      const formattedFileName = format(new Date(), `${filename}[.tsv]`);
+      const d = new Date();
+      const dateFormated = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      const filename = `cqdg-${args.index.toLowerCase()}-table`;
+      const formattedFileName = `${filename}-${dateFormated}.tsv`;
 
       const { data, error } = await ArrangerApi.columnStates({
         query: getColumnStateQuery(args.index),

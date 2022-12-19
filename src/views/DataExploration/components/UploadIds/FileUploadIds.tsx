@@ -34,7 +34,7 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
               generateValueFilter({
                 field,
                 value: ids,
-                index: INDEXES.PARTICIPANT,
+                index: INDEXES.FILE,
               }),
             ),
           }),

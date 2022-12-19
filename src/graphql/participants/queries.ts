@@ -135,16 +135,7 @@ export const MATCH_PARTICIPANTS = gql`
           node {
             id
             participant_id
-            study {
-              hits {
-                total
-                edges {
-                  node {
-                    id
-                  }
-                }
-              }
-            }
+            study_code
           }
         }
       }

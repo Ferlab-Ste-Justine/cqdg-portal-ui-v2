@@ -165,15 +165,15 @@ const en = {
         idcol: '{entity} ID',
         participant: {
           matchcol: 'Participant ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
         file: {
           matchcol: 'File ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
         biospecimen: {
           matchcol: 'Sample ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
       },
       pillTitle: 'Uploaded List',
@@ -696,8 +696,6 @@ const en = {
       biospecimenSelected: 'Biospecimen selected',
       saveBiospecimensSet: 'Save biospecimens set',
       searchByBiospecimenId: 'Search by biospecimen ID',
-
-      uploadSampleList: 'Upload a sample list',
       saveAsNewSet: 'Save as new set',
       addToExistingSet: 'Add to existing set',
       removeFromExistingSet: 'Remove from existing set',

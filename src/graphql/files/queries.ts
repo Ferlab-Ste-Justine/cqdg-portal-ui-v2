@@ -49,7 +49,7 @@ export const GET_FILES = gql`
 
 export const MATCH_FILES = gql`
   query matchFiles($sqon: JSON, $first: Int, $offset: Int) {
-    file {
+    File {
       hits(filters: $sqon, first: $first, offset: $offset) {
         edges {
           node {
