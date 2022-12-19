@@ -146,7 +146,7 @@ const fr = {
       sampleTitle: "Téléverser une liste d'échantillons",
       sample: 'échantillon',
       sampleID: "ID d'échantillon",
-      samplePlaceholder: 'ex: SR0230956',
+      samplePlaceholder: 'ex : SR0230956',
       file: 'fichier',
       fileID: 'ID de fichier',
       filePlaceholder: 'ex : FI0080837',
@@ -164,16 +164,16 @@ const fr = {
       matchTable: {
         idcol: 'ID {entity}',
         participant: {
-          matchcol: 'Participant ID',
-          mappedcol: 'Study ID',
+          matchcol: 'ID du participant',
+          mappedcol: "Code de l'étude",
         },
         file: {
-          matchcol: 'File ID',
-          mappedcol: 'Study ID',
+          matchcol: 'ID du fichier',
+          mappedcol: "Code de l'étude",
         },
         biospecimen: {
-          matchcol: 'Sample ID',
-          mappedcol: 'Study ID',
+          matchcol: "ID de l'échantillon",
+          mappedcol: "Code de l'étude",
         },
       },
       pillTitle: 'Liste téléchargée',
@@ -302,7 +302,7 @@ const fr = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Enregistrer cet ensemble',
+          title: 'Modifier cet ensemble',
           okText: 'Save',
           cancelText: 'Annuler',
           input: {
@@ -391,8 +391,8 @@ const fr = {
           popoverContent:
             "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans la ",
           popoverContentLink: 'page Exploration des données',
-          noSavedFilters: "Vous n'avez aucun filtre enregistré",
-          lastSaved: 'Dernier enregistrement: il y a {date}',
+          noSaved: "Vous n'avez aucun filtre enregistré",
+          lastSaved: 'Dernier enregistrement : il y a {date}',
           dataExploration: 'Exploration des données',
           variants: 'Variants',
           failedFetch: 'Échec de la récupération des filtres enregistrés',
@@ -404,7 +404,7 @@ const fr = {
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans la ",
           popoverContentLink: 'page Exploration des données',
           noSaved: "Vous n'avez pas d'ensemble enregistré",
-          lastSaved: 'Dernier enregistrement: il y a {date}',
+          lastSaved: 'Dernier enregistrement : il y a {date}',
           files: 'Fichiers',
           participants: 'Participants',
           biospecimens: 'Biospécimens',
@@ -688,7 +688,6 @@ const fr = {
       noBiospecimenSetsFound: 'Aucun ensemble de biospecimen trouvé',
       noBiospecimenCollectionFound: 'Aucune ID collection trouvé',
       savedBiospecimenSets: 'Ensemble d’échantillons',
-      uploadSampleList: 'Téléverser une liste d’échantillons',
       saveAsNewSet: 'Enregistrer un nouvel ensemble',
       addToExistingSet: 'Ajouter à un ensemble existant',
       removeFromExistingSet: "Supprimer d'un ensemble existant",
@@ -797,7 +796,9 @@ const fr = {
   facets: {
     // Participant
     participant_id: 'Participant ID',
-    study_code: "Code de l'étude",
+    study: {
+      study_code: "Code de l'étude",
+    },
     mondo: {
       name: 'Diagnostic (MONDO)',
     },
@@ -823,7 +824,7 @@ const fr = {
     // Biospecimen
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Âge au  prélèvement du biospécimen (jours)',
-    sample_type: 'Échantillon type',
+    sample_type: "Type d'échantillon",
 
     // File
     data_category: 'Catégorie de données',
@@ -869,6 +870,7 @@ const fr = {
     },
 
     // Studies
+    study_code: 'Rechercher par étude',
     domain: 'Domaine',
     population: 'Population',
     data_access_codes: {

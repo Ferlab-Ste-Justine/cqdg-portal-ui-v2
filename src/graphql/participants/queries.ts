@@ -37,8 +37,10 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
-            study_id
             study_code
+            study {
+              study_code
+            }
             icd_tagged {
               hits {
                 edges {
@@ -133,16 +135,7 @@ export const MATCH_PARTICIPANTS = gql`
           node {
             id
             participant_id
-            study {
-              hits {
-                total
-                edges {
-                  node {
-                    id
-                  }
-                }
-              }
-            }
+            study_code
           }
         }
       }

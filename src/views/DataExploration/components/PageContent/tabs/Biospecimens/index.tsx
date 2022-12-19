@@ -3,6 +3,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DownloadOutlined } from '@ant-design/icons';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import useQueryBuilderState, {
@@ -15,19 +16,22 @@ import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
+import capitalize from 'lodash/capitalize';
 import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
+import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { ReportType } from 'services/api/reports/models';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchReport } from 'store/report/thunks';
+import { fetchReport, fetchTsvReport } from 'store/report/thunks';
+import { useUser } from 'store/user';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
@@ -65,15 +69,32 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'sample_type',
     title: intl.get('screen.dataExploration.tabs.biospecimens.sample_type'),
     sorter: { multiple: 1 },
-    render: (sample_type: string) => sample_type || TABLE_EMPTY_PLACE_HOLDER,
+    render: (sample_type: string) => {
+      if (!sample_type) return TABLE_EMPTY_PLACE_HOLDER;
+      const { code, title } = extractNcitTissueTitleAndCode(sample_type);
+      return (
+        <>
+          {capitalize(title)} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
   },
   {
     key: 'biospecimen_tissue_source',
     dataIndex: 'biospecimen_tissue_source',
     title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
     sorter: { multiple: 1 },
-    render: (biospecimen_tissue_source: string) =>
-      biospecimen_tissue_source || TABLE_EMPTY_PLACE_HOLDER,
+    render: (biospecimen_tissue_source: string) => {
+      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
+      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
+      return (
+        <>
+          {capitalize(title)} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
   },
   {
     key: 'age_biospecimen_collection',
@@ -84,10 +105,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
   {
     key: 'files',
-    title: 'Files',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.files'),
     render: (biospecimen: IBiospecimenEntity) => {
-      const fileIds = biospecimen?.files?.hits?.edges.map((file) => file.node.file_id) || [];
-      return fileIds?.length ? (
+      const fileCount = biospecimen?.files?.hits?.total || 0;
+      return fileCount ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -96,9 +117,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'file_id',
-                    value: fileIds,
-                    index: INDEXES.FILE,
+                    field: 'sample_id',
+                    value: [biospecimen.sample_id],
+                    index: INDEXES.BIOSPECIMEN,
                   }),
                 ],
               }),
@@ -106,7 +127,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {fileIds.length}
+          {fileCount}
         </Link>
       ) : (
         0
@@ -127,6 +148,7 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
   const { activeQuery } = useQueryBuilderState(DATA_EXPLORATION_QB_ID);
   const [selectedAllResults, setSelectedAllResults] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const { userInfo } = useUser();
 
   useEffect(() => {
     if (selectedKeys.length) {
@@ -146,6 +168,7 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
       columns={getDefaultColumns()}
       wrapperClassName={styles.biospecimenTabWrapper}
       loading={results.loading}
+      initialColumnState={userInfo?.config.data_exploration?.tables?.biospecimens?.columns}
       enableRowSelection={true}
       showSorterTooltip={false}
       initialSelectedKey={selectedKeys}
@@ -164,6 +187,15 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
         },
         enableColumnSort: true,
         enableTableExport: true,
+        onTableExportClick: () =>
+          dispatch(
+            fetchTsvReport({
+              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
+              columns: getDefaultColumns(),
+              index: INDEXES.BIOSPECIMEN,
+              sqon: getCurrentSqon(),
+            }),
+          ),
         onSelectAllResultsChange: setSelectedAllResults,
         onSelectedRowsChange: (keys) => setSelectedKeys(keys),
         extra: [

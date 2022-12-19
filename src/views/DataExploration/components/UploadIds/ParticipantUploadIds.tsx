@@ -42,13 +42,13 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
       });
 
       const participants: IParticipantEntity[] = hydrateResults(
-        response.data?.data?.participant?.hits?.edges || [],
+        response.data?.data?.Participant?.hits?.edges || [],
       );
 
       return participants.map((participant) => ({
         key: participant.participant_id,
         submittedId: ids.find((id) => [participant.participant_id].includes(id))!,
-        mappedTo: participant.study.study_code,
+        mappedTo: participant.study_code,
         matchTo: participant.participant_id,
       }));
     }}

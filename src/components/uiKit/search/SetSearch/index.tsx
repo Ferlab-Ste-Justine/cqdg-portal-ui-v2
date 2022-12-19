@@ -9,7 +9,7 @@ import {
 import { findSqonValueByField } from '@ferlab/ui/core/data/sqon/utils';
 import { Select, Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { intersection } from 'lodash';
+import intersection from 'lodash/intersection';
 
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';

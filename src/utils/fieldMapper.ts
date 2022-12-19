@@ -66,6 +66,10 @@ export const mapFilterForParticipant = (sqonFilters: ISqonGroupFilter) =>
       index: INDEXES.STUDY,
       prefix: 'study.',
     },
+    {
+      index: INDEXES.BIOSPECIMEN,
+      prefix: 'biospecimens.',
+    },
   ]);
 
 export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
@@ -73,6 +77,10 @@ export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
     {
       index: INDEXES.PARTICIPANT,
       prefix: 'participants.',
+    },
+    {
+      index: INDEXES.BIOSPECIMEN,
+      prefix: 'biospecimens.',
     },
   ]);
 

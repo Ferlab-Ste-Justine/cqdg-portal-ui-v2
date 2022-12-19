@@ -165,15 +165,15 @@ const en = {
         idcol: '{entity} ID',
         participant: {
           matchcol: 'Participant ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
         file: {
           matchcol: 'File ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
         biospecimen: {
           matchcol: 'Sample ID',
-          mappedcol: 'Study ID',
+          mappedcol: 'Study Code',
         },
       },
       pillTitle: 'Uploaded List',
@@ -319,7 +319,7 @@ const en = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Save this Set',
+          title: 'Edit this Set',
           okText: 'Save',
           cancelText: 'Cancel',
           input: {
@@ -409,7 +409,7 @@ const en = {
           popoverContent:
             'A saved filter is a virtual query created by applying one or more filters to a search query. They can be saved and revisited for later use without having to manually reselect filters in the sidebar. You can create saved filters using the Query Management tool above the table of results in the ',
           popoverContentLink: 'Data Exploration page',
-          noSavedFilters: 'You have no saved filters',
+          noSaved: 'You have no saved filters',
           lastSaved: 'Last saved: {date} ago',
           dataExploration: 'Data Exploration',
           variants: 'Variants',
@@ -696,8 +696,6 @@ const en = {
       biospecimenSelected: 'Biospecimen selected',
       saveBiospecimensSet: 'Save biospecimens set',
       searchByBiospecimenId: 'Search by biospecimen ID',
-
-      uploadSampleList: 'Upload a sample list',
       saveAsNewSet: 'Save as new set',
       addToExistingSet: 'Add to existing set',
       removeFromExistingSet: 'Remove from existing set',
@@ -804,7 +802,9 @@ const en = {
   facets: {
     // Participant
     participant_id: 'Participant ID',
-    study_code: 'Study Code',
+    study: {
+      study_code: 'Study Code',
+    },
     mondo: {
       name: 'Diagnosis (MONDO)',
     },
@@ -877,7 +877,8 @@ const en = {
     },
 
     // Studies
-    domain: 'Study Domain',
+    study_code: 'Search by study',
+    domain: 'Domain',
     population: 'Population',
     data_access_codes: {
       access_limitations: 'Access Limitation',

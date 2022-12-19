@@ -7,7 +7,7 @@ import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { MATCH_BIOSPECIMENS } from 'graphql/biospecimens/queries';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 
 import { ArrangerApi } from 'services/api/arranger';
 
@@ -48,10 +48,10 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
       );
 
       return uniqBy(biospecimens, 'sample_id').map((biospecimen) => ({
-        key: biospecimen.biospecimen_id,
+        key: biospecimen.sample_id,
         submittedId: ids.find((id) => [biospecimen.sample_id].includes(id))!,
-        mappedTo: biospecimen.sample_id,
-        matchTo: biospecimen.study_code,
+        mappedTo: biospecimen.study_code,
+        matchTo: biospecimen.sample_id,
       }));
     }}
     onUpload={(match) =>

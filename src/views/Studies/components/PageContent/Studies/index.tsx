@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { CheckOutlined } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
@@ -76,28 +77,35 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'genomics',
     title: intl.get('screen.studies.genomics'),
+    align: 'center',
     render: (study: IStudyEntity) => {
       const elem = study.data_categories?.hits.edges.find(
         (item: any) => item.node.data_category === 'Genomics',
       );
-      return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
+      return elem?.node?.participant_count ? <CheckOutlined /> : TABLE_EMPTY_PLACE_HOLDER;
     },
   },
   {
     key: 'transcriptomics',
     title: intl.get('screen.studies.transcriptomics'),
+    align: 'center',
     render: (study: IStudyEntity) => {
       const elem = study.data_categories?.hits.edges.find(
         (item: any) => item.node.data_category === 'Transcriptomics',
       );
-      return elem?.node.participant_count || TABLE_EMPTY_PLACE_HOLDER;
+      return elem?.node?.participant_count ? <CheckOutlined /> : TABLE_EMPTY_PLACE_HOLDER;
     },
   },
   {
     key: 'imaging',
     title: intl.get('screen.studies.imaging'),
-    dataIndex: 'imaging',
-    render: (imaging: string) => imaging || TABLE_EMPTY_PLACE_HOLDER,
+    align: 'center',
+    render: (study: IStudyEntity) => {
+      const elem = study.data_categories?.hits.edges.find(
+        (item: any) => item.node.data_category === 'Imaging',
+      );
+      return elem?.node?.participant_count ? <CheckOutlined /> : TABLE_EMPTY_PLACE_HOLDER;
+    },
   },
   {
     key: 'file_count',

@@ -12,7 +12,7 @@ import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useVariants } from 'graphql/variants/actions';
 import { IVariantResultTree } from 'graphql/variants/models';
 import { GET_VARIANTS_COUNT } from 'graphql/variants/queries';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import {
   DEFAULT_PAGE_INDEX,
   DEFAULT_QUERY_CONFIG,
