@@ -50,7 +50,7 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.get('screen.dashboard.cards.savedSets.noSavedFilters')}
+          description={intl.get('screen.dashboard.cards.savedSets.noSaved')}
         />
       ),
     }}

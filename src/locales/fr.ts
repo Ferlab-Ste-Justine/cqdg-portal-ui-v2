@@ -302,7 +302,7 @@ const fr = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Enregistrer cet ensemble',
+          title: 'Modifier cet ensemble',
           okText: 'Save',
           cancelText: 'Annuler',
           input: {
@@ -391,7 +391,7 @@ const fr = {
           popoverContent:
             "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans la ",
           popoverContentLink: 'page Exploration des données',
-          noSavedFilters: "Vous n'avez aucun filtre enregistré",
+          noSaved: "Vous n'avez aucun filtre enregistré",
           lastSaved: 'Dernier enregistrement: il y a {date}',
           dataExploration: 'Exploration des données',
           variants: 'Variants',

@@ -319,7 +319,7 @@ const en = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Save this Set',
+          title: 'Edit this Set',
           okText: 'Save',
           cancelText: 'Cancel',
           input: {
@@ -409,7 +409,7 @@ const en = {
           popoverContent:
             'A saved filter is a virtual query created by applying one or more filters to a search query. They can be saved and revisited for later use without having to manually reselect filters in the sidebar. You can create saved filters using the Query Management tool above the table of results in the ',
           popoverContentLink: 'Data Exploration page',
-          noSavedFilters: 'You have no saved filters',
+          noSaved: 'You have no saved filters',
           lastSaved: 'Last saved: {date} ago',
           dataExploration: 'Data Exploration',
           variants: 'Variants',
