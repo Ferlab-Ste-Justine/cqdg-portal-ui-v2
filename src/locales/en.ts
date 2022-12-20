@@ -548,7 +548,7 @@ const en = {
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospecimen',
-        datafiles: 'Data Files',
+        datafiles: 'Data File',
       },
       hpoTree: {
         modal: {
@@ -643,13 +643,13 @@ const en = {
           files: 'Files',
           ethnicity: 'Ethnicity',
           biospecimen: 'Biospecimen',
-          vitalStatus: 'Vital status',
-          submitterParticipantId: 'Submitter Participant Id',
+          vitalStatus: 'Vital Status',
+          submitterParticipantId: 'External Participant',
           ageAtDeath: 'Age at death',
           selectedParticipants: 'Selected participants',
           selectedParticipantsFamilies: 'Selected participants & families',
           downloadClinicalData: 'Download clinical data',
-          icdTagged: 'Diagnosis (ICD-10)',
+          icdTagged: 'Diagnosis (ICD)',
           diagnosisSourceText: 'Diagnosis (Source Text)',
         },
         biospecimens: {
@@ -681,7 +681,7 @@ const en = {
           participants: 'Participants',
           biospecimens: 'Biospecimens',
           controlled: 'Controlled',
-          registered: 'Registered',
+          authorized: 'Authorized',
           sample: 'Sample',
         },
       },
@@ -837,6 +837,7 @@ const en = {
     data_category: 'Data Category',
     data_type: 'Data Type',
     file_format: 'Format',
+    file_id: 'File ID',
     sequencing_experiment: {
       experimental_strategy: 'Experimental Strategy',
     },

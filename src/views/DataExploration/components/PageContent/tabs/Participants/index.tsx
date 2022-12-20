@@ -62,7 +62,6 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participant'),
     dataIndex: 'participant_id',
-    sorter: { multiple: 1 },
   },
   {
     key: 'study_code',

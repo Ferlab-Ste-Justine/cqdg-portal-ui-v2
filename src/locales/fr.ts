@@ -134,7 +134,7 @@ const fr = {
       noSampleSetFound: 'Aucun ensemble d’échantillons trouvé',
       samplePlaceholder: 'ex : SR0230956',
       searchByFileId: 'Recherche par ID de fichier',
-      savedFileSets: "Enregistrer l'ensemble de fichier",
+      savedFileSets: 'Ensemble de fichiers',
       noFileFound: 'Aucun fichier trouvé',
       noFileSetFound: 'Aucun ensemble de fichier trouvé',
       filePlaceholder: 'ex : FI0080837',
@@ -150,9 +150,9 @@ const fr = {
       file: 'fichier',
       fileID: 'ID de fichier',
       filePlaceholder: 'ex : FI0080837',
-      title: 'Téléverser une liste de {entity}',
+      title: 'Téléverser une liste de {entity}s',
       submittedColTitle: 'Identifiants {entity} soumis',
-      uploadBtnText: 'Téléverser une liste de {entity}',
+      uploadBtnText: 'Téléverser une liste de {entity}s',
       mappedTo: 'Orienté vers',
       collapseTitle:
         'Tableau récapitulatif ({matchCount} correspondant, {unMatchCount} non correspondant)',
@@ -530,7 +530,7 @@ const fr = {
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospécimen',
-        datafiles: 'Fichiers de données',
+        datafiles: 'Fichier de données',
       },
       hpoTree: {
         modal: {
@@ -631,12 +631,12 @@ const fr = {
           ethnicity: 'Ethnicité',
           biospecimen: 'Biospecimen',
           vitalStatus: 'Statut vital',
-          submitterParticipantId: 'Submitter Participant Id',
+          submitterParticipantId: 'Participant externe',
           ageAtDeath: 'Âge au décés',
           selectedParticipants: 'Participants séléctionnés',
           selectedParticipantsFamilies: 'Participants séléctionnés et familles',
           downloadClinicalData: 'Télécharger les données cliniques',
-          icdTagged: 'Diagnostic (ICD-10)',
+          icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',
         },
         biospecimens: {
@@ -653,8 +653,8 @@ const fr = {
         },
         datafiles: {
           title: 'Fichiers de données ({count})',
-          fileAuthorization: 'Authorisation des fichiers',
-          dataAccess: 'Accès des données',
+          fileAuthorization: 'Autorisation du fichier',
+          dataAccess: 'Accès aux données',
           file: 'Fichier',
           study_code: 'Étude',
           dataCategory: 'Catégorie de données',
@@ -668,7 +668,7 @@ const fr = {
           participants: 'Participants',
           biospecimens: 'Biospécimens',
           controlled: 'Controllé',
-          registered: 'Enregistré',
+          authorized: 'Autorisé',
           sample: 'Échantillon',
         },
       },
@@ -795,7 +795,7 @@ const fr = {
   },
   facets: {
     // Participant
-    participant_id: 'Participant ID',
+    participant_id: 'ID de participant',
     study: {
       study_code: "Code de l'étude",
     },
@@ -831,6 +831,7 @@ const fr = {
     data_category: 'Catégorie de données',
     data_type: 'Type de données',
     file_format: 'Format',
+    file_id: 'ID de fichier',
     sequencing_experiment: {
       experimental_strategy: 'Stratégie expérimentale',
     },
