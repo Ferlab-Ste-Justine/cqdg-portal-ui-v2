@@ -52,7 +52,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (biospecimen_id: string) => biospecimen_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participant_id',
+    key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
     render: (participant: IParticipantEntity) => participant.participant_id,
@@ -75,7 +75,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       return (
         <>
           {capitalize(title)} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
     },
@@ -91,7 +91,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       return (
         <>
           {capitalize(title)} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
     },

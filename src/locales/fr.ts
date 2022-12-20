@@ -825,6 +825,7 @@ const fr = {
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Âge au  prélèvement du biospécimen (jours)',
     sample_type: "Type d'échantillon",
+    sample_id: "ID d'échantillon",
 
     // File
     data_category: 'Catégorie de données',
