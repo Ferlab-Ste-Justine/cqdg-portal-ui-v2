@@ -18,16 +18,18 @@ export const GET_FILES = gql`
                 edges {
                   node {
                     participant_id
-                    biospecimens {
-                      hits {
-                        total
-                        edges {
-                          node {
-                            sample_id
-                          }
-                        }
-                      }
-                    }
+                  }
+                }
+              }
+            }
+            biospecimens {
+              hits {
+                total
+                edges {
+                  node {
+                    biospecimen_tissue_source
+                    sample_id
+                    sample_type
                   }
                 }
               }

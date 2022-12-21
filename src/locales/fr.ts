@@ -134,7 +134,7 @@ const fr = {
       noSampleSetFound: 'Aucun ensemble d’échantillons trouvé',
       samplePlaceholder: 'ex : SR0230956',
       searchByFileId: 'Recherche par ID de fichier',
-      savedFileSets: "Enregistrer l'ensemble de fichier",
+      savedFileSets: 'Ensemble de fichiers',
       noFileFound: 'Aucun fichier trouvé',
       noFileSetFound: 'Aucun ensemble de fichier trouvé',
       filePlaceholder: 'ex : FI0080837',
@@ -150,9 +150,9 @@ const fr = {
       file: 'fichier',
       fileID: 'ID de fichier',
       filePlaceholder: 'ex : FI0080837',
-      title: 'Téléverser une liste de {entity}',
+      title: 'Téléverser une liste de {entity}s',
       submittedColTitle: 'Identifiants {entity} soumis',
-      uploadBtnText: 'Téléverser une liste de {entity}',
+      uploadBtnText: 'Téléverser une liste de {entity}s',
       mappedTo: 'Orienté vers',
       collapseTitle:
         'Tableau récapitulatif ({matchCount} correspondant, {unMatchCount} non correspondant)',
@@ -302,12 +302,12 @@ const fr = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Modifier cet ensemble',
-          okText: 'Save',
+          title: "Modifier l'ensemble",
+          okText: 'Enregistrer',
           cancelText: 'Annuler',
           input: {
-            label: 'Ensemble name',
-            placeholder: 'Ensemble sans titre',
+            label: "Nom de l'ensemble",
+            placeholder: 'Entrer le nom de votre ensemble',
             maximumLength: 'Caractères maximum',
           },
         },
@@ -316,7 +316,7 @@ const fr = {
           okText: 'Ajouter a un ensemble',
           cancelText: 'Annuler',
           enterName: 'Entrer le nom de votre nouvel ensemble',
-          name: 'Nom',
+          name: "Nom de l'ensemble",
         },
         remove: {
           title: "Retirer d'un ensemble {type}",
@@ -326,7 +326,7 @@ const fr = {
       },
       popupConfirm: {
         delete: {
-          title: 'Supprimer définitivement cet ensemble?',
+          title: 'Supprimer définitivement cet ensemble ?',
           okText: 'Supprimer cet ensemble',
           cancelText: 'Annuler',
           content: 'Vous êtes sur le point de supprimer définitivement cet ensemble.',
@@ -403,7 +403,7 @@ const fr = {
           popoverContent:
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans la ",
           popoverContentLink: 'page Exploration des données',
-          noSaved: "Vous n'avez pas d'ensemble enregistré",
+          noSaved: 'Vous n’avez aucun ensemble enregistré',
           lastSaved: 'Dernier enregistrement : il y a {date}',
           files: 'Fichiers',
           participants: 'Participants',
@@ -530,7 +530,7 @@ const fr = {
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospécimen',
-        datafiles: 'Fichiers de données',
+        datafiles: 'Fichier de données',
       },
       hpoTree: {
         modal: {
@@ -631,12 +631,12 @@ const fr = {
           ethnicity: 'Ethnicité',
           biospecimen: 'Biospecimen',
           vitalStatus: 'Statut vital',
-          submitterParticipantId: 'Submitter Participant Id',
+          submitterParticipantId: 'Participant externe',
           ageAtDeath: 'Âge au décés',
           selectedParticipants: 'Participants séléctionnés',
           selectedParticipantsFamilies: 'Participants séléctionnés et familles',
           downloadClinicalData: 'Télécharger les données cliniques',
-          icdTagged: 'Diagnostic (ICD-10)',
+          icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',
         },
         biospecimens: {
@@ -650,11 +650,12 @@ const fr = {
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
+          downloadSampleData: "Télécharger les données d'échantillon",
         },
         datafiles: {
           title: 'Fichiers de données ({count})',
-          fileAuthorization: 'Authorisation des fichiers',
-          dataAccess: 'Accès des données',
+          fileAuthorization: 'Autorisation du fichier',
+          dataAccess: 'Accès aux données',
           file: 'Fichier',
           study_code: 'Étude',
           dataCategory: 'Catégorie de données',
@@ -668,7 +669,7 @@ const fr = {
           participants: 'Participants',
           biospecimens: 'Biospécimens',
           controlled: 'Controllé',
-          registered: 'Enregistré',
+          authorized: 'Autorisé',
           sample: 'Échantillon',
         },
       },
@@ -795,7 +796,7 @@ const fr = {
   },
   facets: {
     // Participant
-    participant_id: 'Participant ID',
+    participant_id: 'ID de participant',
     study: {
       study_code: "Code de l'étude",
     },
@@ -825,11 +826,13 @@ const fr = {
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Âge au  prélèvement du biospécimen (jours)',
     sample_type: "Type d'échantillon",
+    sample_id: "ID d'échantillon",
 
     // File
     data_category: 'Catégorie de données',
     data_type: 'Type de données',
     file_format: 'Format',
+    file_id: 'ID de fichier',
     sequencing_experiment: {
       experimental_strategy: 'Stratégie expérimentale',
     },

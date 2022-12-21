@@ -12,27 +12,28 @@ export const GET_PARTICIPANTS = gql`
             score
             age_at_recruitment
             age_of_death
-            cause_of_death
             ethnicity
             gender
             is_a_proband
             is_affected
             vital_status
+            submitter_participant_id
             files {
               hits {
                 total
                 edges {
                   node {
-                    biospecimens {
-                      hits {
-                        total
-                        edges {
-                          node {
-                            sample_id
-                          }
-                        }
-                      }
-                    }
+                    file_id
+                  }
+                }
+              }
+            }
+            biospecimens {
+              hits {
+                total
+                edges {
+                  node {
+                    sample_id
                   }
                 }
               }

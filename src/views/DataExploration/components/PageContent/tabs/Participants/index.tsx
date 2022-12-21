@@ -62,7 +62,6 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participant'),
     dataIndex: 'participant_id',
-    sorter: { multiple: 1 },
   },
   {
     key: 'study_code',
@@ -181,8 +180,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_files',
     title: intl.get('screen.dataExploration.tabs.participants.files'),
-    render: (participant: ITableParticipantEntity) =>
-      participant?.files?.hits?.total ? (
+    render: (participant: ITableParticipantEntity) => {
+      const fileCount = participant?.files?.hits.total || 0;
+      return fileCount ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -201,24 +201,19 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {participant.files.hits.total}
+          {fileCount}
         </Link>
       ) : (
         0
-      ),
+      );
+    },
   },
   {
     key: 'nb_biospecimen',
     title: intl.get('screen.dataExploration.tabs.participants.biospecimen'),
     render: (participant: ITableParticipantEntity) => {
-      const sampleIds: string[] = [];
-      participant?.files?.hits.edges.forEach((edge) => {
-        edge.node.biospecimens?.hits.edges.forEach((edge) => {
-          sampleIds.push(edge.node.sample_id);
-        });
-      });
-      const sampleIdsUniq: string[] = [...new Set(sampleIds)];
-      return sampleIdsUniq.length ? (
+      const bioCount = participant?.biospecimens?.hits.total || 0;
+      return bioCount ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={() =>
@@ -227,9 +222,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'sample_id',
-                    value: sampleIdsUniq,
-                    index: INDEXES.BIOSPECIMEN,
+                    field: 'participant_id',
+                    value: [participant.participant_id],
+                    index: INDEXES.PARTICIPANT,
                   }),
                 ],
               }),
@@ -237,7 +232,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {sampleIdsUniq.length}
+          {bioCount}
         </Link>
       ) : (
         0

@@ -319,12 +319,12 @@ const en = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Edit this Set',
+          title: 'Edit set',
           okText: 'Save',
           cancelText: 'Cancel',
           input: {
             label: 'Set name',
-            placeholder: 'Untitled Set',
+            placeholder: 'Enter the name of your new set',
             maximumLength: 'characters maximum',
           },
           setAlreadyExists: 'A set with this name already exists',
@@ -334,7 +334,7 @@ const en = {
           okText: 'Add to set',
           cancelText: 'Cancel',
           enterName: 'Enter the name of your new set',
-          name: 'Name',
+          name: 'Set name',
         },
         remove: {
           title: 'Remove from a {type} set',
@@ -548,7 +548,7 @@ const en = {
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospecimen',
-        datafiles: 'Data Files',
+        datafiles: 'Data File',
       },
       hpoTree: {
         modal: {
@@ -643,13 +643,13 @@ const en = {
           files: 'Files',
           ethnicity: 'Ethnicity',
           biospecimen: 'Biospecimen',
-          vitalStatus: 'Vital status',
-          submitterParticipantId: 'Submitter Participant Id',
+          vitalStatus: 'Vital Status',
+          submitterParticipantId: 'External Participant',
           ageAtDeath: 'Age at death',
           selectedParticipants: 'Selected participants',
           selectedParticipantsFamilies: 'Selected participants & families',
           downloadClinicalData: 'Download clinical data',
-          icdTagged: 'Diagnosis (ICD-10)',
+          icdTagged: 'Diagnosis (ICD)',
           diagnosisSourceText: 'Diagnosis (Source Text)',
         },
         biospecimens: {
@@ -663,6 +663,7 @@ const en = {
           age_biospecimen_collection: 'Age',
           age_biospecimen_collectionTooltip: 'Age at Biospecimen Collection',
           files: 'Files',
+          downloadSampleData: 'Download sample data',
         },
         datafiles: {
           title: 'Data Files ({count})',
@@ -681,7 +682,7 @@ const en = {
           participants: 'Participants',
           biospecimens: 'Biospecimens',
           controlled: 'Controlled',
-          registered: 'Registered',
+          authorized: 'Authorized',
           sample: 'Sample',
         },
       },
@@ -831,11 +832,13 @@ const en = {
     biospecimen_tissue_source: 'Tissue',
     age_biospecimen_collection: 'Age at Biospecimen Collection (days)',
     sample_type: 'Sample Type',
+    sample_id: 'Sample ID',
 
     // File
     data_category: 'Data Category',
     data_type: 'Data Type',
     file_format: 'Format',
+    file_id: 'File ID',
     sequencing_experiment: {
       experimental_strategy: 'Experimental Strategy',
     },

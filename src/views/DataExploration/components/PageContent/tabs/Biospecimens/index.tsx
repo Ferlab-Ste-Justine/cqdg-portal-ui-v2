@@ -32,6 +32,7 @@ import { ReportType } from 'services/api/reports/models';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchReport, fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
+import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
@@ -52,7 +53,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (biospecimen_id: string) => biospecimen_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participant_id',
+    key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
     render: (participant: IParticipantEntity) => participant.participant_id,
@@ -75,7 +76,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       return (
         <>
           {capitalize(title)} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
     },
@@ -91,7 +92,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       return (
         <>
           {capitalize(title)} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT:${code}`}>{code}</ExternalLink>)
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
     },
@@ -196,6 +197,18 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
               sqon: getCurrentSqon(),
             }),
           ),
+        onColumnSortChange: (newState) =>
+          dispatch(
+            updateUserConfig({
+              data_exploration: {
+                tables: {
+                  biospecimens: {
+                    columns: newState,
+                  },
+                },
+              },
+            }),
+          ),
         onSelectAllResultsChange: setSelectedAllResults,
         onSelectedRowsChange: (keys) => setSelectedKeys(keys),
         extra: [
@@ -222,7 +235,7 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
             }
             disabled={selectedKeys.length === 0}
           >
-            Download sample data
+            {intl.get('screen.dataExploration.tabs.biospecimens.downloadSampleData')}
           </Button>,
         ],
       }}

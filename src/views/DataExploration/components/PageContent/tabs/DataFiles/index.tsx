@@ -55,11 +55,11 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (record: IFileEntity) => {
       const hasAccess = userHasAccessToFile(record);
       return hasAccess ? (
-        <Tooltip title="Authorized">
+        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.authorized')}>
           <UnlockFilled className={styles.authorizedLock} />
         </Tooltip>
       ) : (
-        <Tooltip title="Unauthorized">
+        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.controlled')}>
           <LockOutlined className={styles.unauthorizedLock} />
         </Tooltip>
       );
@@ -82,7 +82,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
           <Tag color="geekblue">C</Tag>
         </Tooltip>
       ) : (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.registered')}>
+        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.authorized')}>
           <Tag color="green">R</Tag>
         </Tooltip>
       ),
@@ -150,17 +150,8 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     render: (file_size) => formatFileSize(file_size, { output: 'string' }),
   },
   {
-    key: 'platform',
-    title: intl.get('screen.dataExploration.tabs.datafiles.platform'),
-    dataIndex: 'platform',
-    sorter: { multiple: 1 },
-    defaultHidden: true,
-    render: (platform) => platform || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
     key: 'nb_participants',
     title: intl.get('screen.dataExploration.tabs.datafiles.participants'),
-    sorter: { multiple: 1 },
     render: (file: IFileEntity) => {
       const participantIds = file?.participants?.hits.edges.map((p) => p.node.participant_id) || [];
       return participantIds?.length ? (
@@ -192,16 +183,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_biospecimens',
     title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
-    sorter: { multiple: 1 },
-    defaultHidden: true,
     render: (file: IFileEntity) => {
-      const sampleIds: string[] = [];
-      file?.participants?.hits.edges.forEach((edge) => {
-        edge.node.biospecimens?.hits.edges.forEach((edge) => {
-          sampleIds.push(edge.node.sample_id);
-        });
-      });
-      return sampleIds.length ? (
+      const bioCount = file?.biospecimens?.hits.total || 0;
+      return bioCount ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={() =>
@@ -220,7 +204,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {sampleIds.length}
+          {bioCount}
         </Link>
       ) : (
         0
@@ -228,18 +212,19 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     },
   },
   {
+    key: 'sequencing_experiment.platform',
+    title: intl.get('screen.dataExploration.tabs.datafiles.platform'),
+    dataIndex: 'sequencing_experiment',
+    sorter: { multiple: 1 },
+    defaultHidden: true,
+    render: (sequencing_experiment) => sequencing_experiment?.platform || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
     key: 'file_name',
     title: intl.get('screen.dataExploration.tabs.datafiles.name'),
     dataIndex: 'file_name',
     defaultHidden: true,
     render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'biospecimen_reference',
-    title: intl.get('screen.dataExploration.tabs.datafiles.sample'),
-    dataIndex: 'biospecimen_reference',
-    defaultHidden: true,
-    render: (biospecimen_reference) => biospecimen_reference || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
