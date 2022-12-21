@@ -212,12 +212,12 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     },
   },
   {
-    key: 'platform',
+    key: 'sequencing_experiment.platform',
     title: intl.get('screen.dataExploration.tabs.datafiles.platform'),
-    dataIndex: 'platform',
+    dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
     defaultHidden: true,
-    render: (platform) => platform || TABLE_EMPTY_PLACE_HOLDER,
+    render: (sequencing_experiment) => sequencing_experiment?.platform || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'file_name',
@@ -225,13 +225,6 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'file_name',
     defaultHidden: true,
     render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'biospecimen_reference',
-    title: intl.get('screen.dataExploration.tabs.datafiles.sample'),
-    dataIndex: 'biospecimen_reference',
-    defaultHidden: true,
-    render: (biospecimen_reference) => biospecimen_reference || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
