@@ -141,7 +141,7 @@ const CreateEditModal = ({
       onCancel={handleCancel}
       onOk={() => form.submit()}
       okButtonProps={{ disabled: isLoading, loading: isLoading || isUpdating }}
-      okText="Save"
+      okText={intl.get('components.savedSets.modal.edit.okText')}
       destroyOnClose
     >
       <Form
@@ -160,7 +160,7 @@ const CreateEditModal = ({
         }}
       >
         <Form.Item
-          label="Name"
+          label={intl.get('components.savedSets.modal.edit.input.label')}
           className={styles.setCreateFormItem}
           name={SET_NAME_KEY}
           rules={[
@@ -184,7 +184,10 @@ const CreateEditModal = ({
           ]}
           required={false}
         >
-          <Input autoFocus placeholder="Enter the name of your new set" />
+          <Input
+            autoFocus
+            placeholder={intl.get('components.savedSets.modal.edit.input.placeholder')}
+          />
         </Form.Item>
       </Form>
     </Modal>

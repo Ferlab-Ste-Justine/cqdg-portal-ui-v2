@@ -324,7 +324,7 @@ const en = {
           cancelText: 'Cancel',
           input: {
             label: 'Set name',
-            placeholder: 'Untitled Set',
+            placeholder: 'Enter the name of your new set',
             maximumLength: 'characters maximum',
           },
           setAlreadyExists: 'A set with this name already exists',
@@ -334,7 +334,7 @@ const en = {
           okText: 'Add to set',
           cancelText: 'Cancel',
           enterName: 'Enter the name of your new set',
-          name: 'Name',
+          name: 'Set name',
         },
         remove: {
           title: 'Remove from a {type} set',

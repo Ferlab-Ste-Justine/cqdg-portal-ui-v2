@@ -302,12 +302,12 @@ const fr = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Modifier cet ensemble',
-          okText: 'Save',
+          title: "Modifier l'ensemble",
+          okText: 'Enregistrer',
           cancelText: 'Annuler',
           input: {
-            label: 'Ensemble name',
-            placeholder: 'Ensemble sans titre',
+            label: "Nom de l'ensemble",
+            placeholder: 'Entrer le nom de votre ensemble',
             maximumLength: 'Caractères maximum',
           },
         },
@@ -316,7 +316,7 @@ const fr = {
           okText: 'Ajouter a un ensemble',
           cancelText: 'Annuler',
           enterName: 'Entrer le nom de votre nouvel ensemble',
-          name: 'Nom',
+          name: "Nom de l'ensemble",
         },
         remove: {
           title: "Retirer d'un ensemble {type}",
@@ -326,7 +326,7 @@ const fr = {
       },
       popupConfirm: {
         delete: {
-          title: 'Supprimer définitivement cet ensemble?',
+          title: 'Supprimer définitivement cet ensemble ?',
           okText: 'Supprimer cet ensemble',
           cancelText: 'Annuler',
           content: 'Vous êtes sur le point de supprimer définitivement cet ensemble.',
@@ -403,7 +403,7 @@ const fr = {
           popoverContent:
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans la ",
           popoverContentLink: 'page Exploration des données',
-          noSaved: "Vous n'avez pas d'ensemble enregistré",
+          noSaved: 'Vous n’avez aucun ensemble enregistré',
           lastSaved: 'Dernier enregistrement : il y a {date}',
           files: 'Fichiers',
           participants: 'Participants',
