@@ -212,19 +212,19 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     },
   },
   {
+    key: 'file_name',
+    title: intl.get('screen.dataExploration.tabs.datafiles.name'),
+    dataIndex: 'file_name',
+    defaultHidden: true,
+    render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
     key: 'sequencing_experiment.platform',
     title: intl.get('screen.dataExploration.tabs.datafiles.platform'),
     dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
     defaultHidden: true,
     render: (sequencing_experiment) => sequencing_experiment?.platform || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    key: 'file_name',
-    title: intl.get('screen.dataExploration.tabs.datafiles.name'),
-    dataIndex: 'file_name',
-    defaultHidden: true,
-    render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
