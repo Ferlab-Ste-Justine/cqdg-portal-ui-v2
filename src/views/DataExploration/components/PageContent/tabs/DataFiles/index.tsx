@@ -184,13 +184,8 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'nb_biospecimens',
     title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
     render: (file: IFileEntity) => {
-      const sampleIds: string[] = [];
-      file?.participants?.hits.edges.forEach((edge) => {
-        edge.node.biospecimens?.hits.edges.forEach((edge) => {
-          sampleIds.push(edge.node.sample_id);
-        });
-      });
-      return sampleIds.length ? (
+      const bioCount = file?.biospecimens?.hits.total || 0;
+      return bioCount ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={() =>
@@ -209,7 +204,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {sampleIds.length}
+          {bioCount}
         </Link>
       ) : (
         0

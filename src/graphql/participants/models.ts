@@ -59,7 +59,6 @@ export interface IParticipantEntity {
   score: number;
   age_at_recruitment: number;
   age_of_death: number;
-  cause_of_death: string;
   ethnicity: string;
   gender: string;
   is_a_proband: string;

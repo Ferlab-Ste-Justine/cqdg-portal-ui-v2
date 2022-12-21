@@ -650,6 +650,7 @@ const fr = {
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
+          downloadSampleData: "Télécharger les données d'échantillon",
         },
         datafiles: {
           title: 'Fichiers de données ({count})',

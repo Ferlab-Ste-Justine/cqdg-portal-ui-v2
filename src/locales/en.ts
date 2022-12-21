@@ -319,7 +319,7 @@ const en = {
     savedSets: {
       modal: {
         edit: {
-          title: 'Edit this Set',
+          title: 'Edit set',
           okText: 'Save',
           cancelText: 'Cancel',
           input: {
@@ -663,6 +663,7 @@ const en = {
           age_biospecimen_collection: 'Age',
           age_biospecimen_collectionTooltip: 'Age at Biospecimen Collection',
           files: 'Files',
+          downloadSampleData: 'Download sample data',
         },
         datafiles: {
           title: 'Data Files ({count})',
