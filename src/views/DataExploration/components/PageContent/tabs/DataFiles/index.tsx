@@ -91,7 +91,6 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'file_id',
     title: intl.get('screen.dataExploration.tabs.datafiles.file'),
     dataIndex: 'file_id',
-    sorter: { multiple: 1 },
   },
   {
     key: 'study_code',

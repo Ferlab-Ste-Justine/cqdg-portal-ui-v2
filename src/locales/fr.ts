@@ -664,7 +664,7 @@ const fr = {
           accessUrl: 'Accès Url',
           format: 'Format',
           size: 'Taille',
-          platform: 'Platforme',
+          platform: 'Plateforme',
           name: 'Nom du fichier',
           participants: 'Participants',
           biospecimens: 'Biospécimens',
