@@ -28,6 +28,7 @@ export interface IFileSequencingExperiment {
   ssup: string;
   workflow_name: string;
   workflow_version: string;
+  type_of_sequencing: string;
 }
 
 export interface IFileEntity {

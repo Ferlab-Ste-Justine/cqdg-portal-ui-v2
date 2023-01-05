@@ -12,6 +12,8 @@ export const GET_FILES = gql`
             file_format
             file_size
             file_name
+            file_hash
+            ferload_url
             participants {
               hits {
                 total
@@ -42,6 +44,20 @@ export const GET_FILES = gql`
             sequencing_experiment {
               experimental_strategy
               platform
+              type_of_sequencing
+              experimental_strategy
+              type_of_sequencing
+              read_length
+              platform
+              capture_kit
+              sequencer_id
+              run_date
+              run_name
+              labAliquotID
+              bio_informatic_analysis
+              workflow_name
+              workflow_version
+              genome_build
             }
           }
         }

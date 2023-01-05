@@ -91,6 +91,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'file_id',
     title: intl.get('screen.dataExploration.tabs.datafiles.file'),
     dataIndex: 'file_id',
+    render: (file_id: string) => <Link to={`${STATIC_ROUTES.FILES}/${file_id}`}>{file_id}</Link>,
   },
   {
     key: 'study_code',

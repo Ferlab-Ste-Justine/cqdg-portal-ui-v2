@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
 import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
+import Empty from '@ferlab/ui/core/components/Empty';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Tag, Typography } from 'antd';
 import { useVariant } from 'graphql/variants/actions';
@@ -39,6 +40,10 @@ const VariantEntity = () => {
   const simplebarContent = document.getElementsByClassName('simplebar-content-wrapper');
   const scrollContainerId = 'variant-entity-scroll-wrapper';
   simplebarContent[1] && simplebarContent[1].setAttribute('id', scrollContainerId);
+
+  if (!data && !loading) {
+    return <Empty imageType="row" size="large" description={intl.get('no.data.available')} />;
+  }
 
   return (
     <div className={styles.variantEntityContainer}>

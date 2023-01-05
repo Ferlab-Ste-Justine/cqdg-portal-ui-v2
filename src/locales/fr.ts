@@ -3,6 +3,42 @@ import translations from './fr.json';
 
 const fr = {
   ...translations,
+  entities: {
+    file: {
+      file_id: 'Identifiant',
+      file_name: 'Nom',
+      file_format: 'Format',
+      file_size: 'Taille',
+      ferload_url: 'URL',
+      file_hash: 'Hash',
+      summary: 'Résumé',
+      study: 'Étude',
+      participants: 'Participants',
+      samples: 'Échantillons',
+      analysis: 'Analyses',
+      dataType: 'Type de données',
+      data_type: 'Type',
+      data_category: 'Catégorie',
+
+      experimentalProcedure: 'Procédure expérimentale',
+      analysisProperties: 'Propriétés de l’analyse',
+      sequencing_experiment: {
+        experimental_strategy: 'Stratégie expérimentale',
+        type_of_sequencing: 'Type de séquençage',
+        read_length: 'Longueur des fragments',
+        platform: 'Plateforme',
+        capture_kit: 'Kit de capture',
+        sequencer_id: 'Séquenceur',
+        run_date: 'Date',
+        run_name: 'Run',
+        labAliquotID: 'Aliquot',
+        bio_informatic_analysis: 'Identifiant',
+        workflow_name: 'Pipeline',
+        workflow_version: 'Version',
+        genome_build: 'Génome build',
+      },
+    },
+  },
   global: {
     yes: 'Oui',
     no: 'Non',
