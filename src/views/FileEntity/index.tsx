@@ -7,6 +7,8 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { Typography } from 'antd';
 import { useFile } from 'graphql/files/actions';
 import Analysis from 'views/FileEntity/Analysis';
+import AnalysisFiles from 'views/FileEntity/AnalysisFiles';
+import Biospecimens from 'views/FileEntity/Biospecimens';
 import DataType from 'views/FileEntity/DataType';
 import ExperimentalProcedure from 'views/FileEntity/ExperimentalProcedure';
 import Summary from 'views/FileEntity/Summary';
@@ -25,14 +27,18 @@ const FileEntity = () => {
 
   const SUMMARY = 'SUMMARY';
   const DATATYPE = 'DATATYPE';
+  const BIOSPECIMENS = 'BIOSPECIMENS';
   const EXPERIMENTALPROCEDURE = 'EXPERIMENTALPROCEDURE';
   const ANALYSIS = 'ANALYSIS';
+  const ANALYSISFILES = 'ANALYSISFILES';
 
   const links: IAnchorLink[] = [
     { href: `#${SUMMARY}`, title: intl.get('entities.file.summary') },
     { href: `#${DATATYPE}`, title: intl.get('entities.file.dataType') },
+    { href: `#${BIOSPECIMENS}`, title: intl.get('entities.file.participantsSamples') },
     { href: `#${EXPERIMENTALPROCEDURE}`, title: intl.get('entities.file.experimentalProcedure') },
     { href: `#${ANALYSIS}`, title: intl.get('entities.file.analysis') },
+    { href: `#${ANALYSISFILES}`, title: intl.get('entities.file.analysisFiles') },
   ];
 
   /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */
@@ -57,8 +63,10 @@ const FileEntity = () => {
         )}
         <Summary id={SUMMARY} file={data} loading={loading} />
         <DataType id={DATATYPE} file={data} loading={loading} />
+        <Biospecimens id={BIOSPECIMENS} file={data} loading={loading} />
         <ExperimentalProcedure id={EXPERIMENTALPROCEDURE} file={data} loading={loading} />
         <Analysis id={ANALYSIS} file={data} loading={loading} />
+        <AnalysisFiles id={ANALYSISFILES} file={data} loading={loading} />
       </ScrollContent>
       <AnchorMenu
         scrollContainerId={scrollContainerId}

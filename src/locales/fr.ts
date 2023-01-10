@@ -4,6 +4,9 @@ import translations from './fr.json';
 const fr = {
   ...translations,
   entities: {
+    biospecimen: {
+      sample_id: 'Échantillon',
+    },
     file: {
       file_id: 'Identifiant',
       file_name: 'Nom',
@@ -19,7 +22,7 @@ const fr = {
       dataType: 'Type de données',
       data_type: 'Type',
       data_category: 'Catégorie',
-
+      participantsSamples: 'Biospecimens / Échantillons',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
       sequencing_experiment: {
@@ -37,6 +40,7 @@ const fr = {
         workflow_version: 'Version',
         genome_build: 'Génome build',
       },
+      analysisFiles: "Fichiers générés par l'analyse",
     },
   },
   global: {
@@ -577,8 +581,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Participants avec ce terme exact',
-          all: 'Participants y compris les termes descendants',
+          exact: 'Biospecimens avec ce terme exact',
+          all: 'Biospecimens y compris les termes descendants',
         },
       },
       mondoTree: {
@@ -590,8 +594,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Participants avec ce terme exact',
-          all: 'Participants y compris les termes descendants',
+          exact: 'Biospecimens avec ce terme exact',
+          all: 'Biospecimens y compris les termes descendants',
         },
       },
       icdTree: {
@@ -603,8 +607,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Participants avec ce terme exact',
-          all: 'Participants y compris les termes descendants',
+          exact: 'Biospecimens avec ce terme exact',
+          all: 'Biospecimens y compris les termes descendants',
         },
       },
       tabs: {
@@ -617,9 +621,9 @@ const fr = {
             compositionFamilyTitle: 'Composition familiale',
           },
           availableData: {
-            dataCategoryTitle: 'Participants par catégories de données',
-            dataTypeTitle: 'Participants par types de données',
-            studiesTitle: 'Participants par étude',
+            dataCategoryTitle: 'Biospecimens par catégories de données',
+            dataTypeTitle: 'Biospecimens par types de données',
+            studiesTitle: 'Biospecimens par étude',
             axis: '# de participants',
             dataCategory: 'Catégorie de données',
             dataType: 'Type de données',
@@ -648,11 +652,11 @@ const fr = {
             cardTitle: 'Études',
             domainTitle: 'Études par domaine',
             popTitle: 'Études par type population',
-            partTitle: 'Participants par étude',
+            partTitle: 'Biospecimens par étude',
           },
         },
         participants: {
-          title: 'Participants ({count})',
+          title: 'Biospecimens ({count})',
           participant: 'Participant',
           study_code: 'Études',
           proband: 'Proband',
@@ -669,8 +673,8 @@ const fr = {
           vitalStatus: 'Statut vital',
           submitterParticipantId: 'Participant externe',
           ageAtDeath: 'Âge au décés',
-          selectedParticipants: 'Participants séléctionnés',
-          selectedParticipantsFamilies: 'Participants séléctionnés et familles',
+          selectedParticipants: 'Biospecimens séléctionnés',
+          selectedParticipantsFamilies: 'Biospecimens séléctionnés et familles',
           downloadClinicalData: 'Télécharger les données cliniques',
           icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',

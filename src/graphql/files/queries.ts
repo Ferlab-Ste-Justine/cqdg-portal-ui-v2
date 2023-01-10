@@ -32,6 +32,7 @@ export const GET_FILES = gql`
                     biospecimen_tissue_source
                     sample_id
                     sample_type
+                    biospecimen_id: fhir_id
                   }
                 }
               }

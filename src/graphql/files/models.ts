@@ -32,6 +32,7 @@ export interface IFileSequencingExperiment {
 }
 
 export interface IFileEntity {
+  key?: string;
   id: string;
   file_id: string;
   participants: ArrangerResultsTree<IParticipantEntity>;
