@@ -51,6 +51,7 @@ export const getFiltersDictionary = (): FiltersDict => ({
     noData: intl.get('api.noData'),
   },
   checkBox: {
+    noData: intl.get('api.noData'),
     searchPlaceholder: intl.get('global.filters.checkbox.placeholder'),
   },
   messages: {

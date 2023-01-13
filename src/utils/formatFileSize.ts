@@ -11,7 +11,8 @@ type TFilesizeInput = (
   input?: number,
   options?: Record<string, any>,
   inputType?: EFileInputType,
-) => string | Record<string, any>;
+) => string;
+
 type TConvertFileSize = (input: number, inputType: EFileInputType) => number;
 
 const baseConversion = 1000;

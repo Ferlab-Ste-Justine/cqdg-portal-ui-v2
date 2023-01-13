@@ -1,23 +1,35 @@
 import intl from 'react-intl-universal';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FileTextOutlined } from '@ant-design/icons';
-import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
+import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
 import Empty from '@ferlab/ui/core/components/Empty';
-import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { Typography } from 'antd';
+import EntityPage, {
+  EntityDescriptions,
+  EntityTable,
+  EntityTitle,
+} from '@ferlab/ui/core/pages/EntityPage';
+import { IBiospecimenEntity } from 'graphql/biospecimens/models';
+import { INDEXES } from 'graphql/constants';
 import { useFile } from 'graphql/files/actions';
-import Analysis from 'views/FileEntity/Analysis';
-import AnalysisFiles from 'views/FileEntity/AnalysisFiles';
-import Biospecimens from 'views/FileEntity/Biospecimens';
-import DataType from 'views/FileEntity/DataType';
-import ExperimentalProcedure from 'views/FileEntity/ExperimentalProcedure';
-import Summary from 'views/FileEntity/Summary';
+import { IFileEntity } from 'graphql/files/models';
+import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
+import SummaryHeader from 'views/FileEntity/SummaryHeader';
+import getAnalysisDescriptions from 'views/FileEntity/utils/getAnalysisDescriptions';
+import getAnalysisFilesColumns from 'views/FileEntity/utils/getAnalysisFilesColumns';
+import getBiospecimensColumns from 'views/FileEntity/utils/getBiospecimensColumns';
+import getDataTypeDescriptions from 'views/FileEntity/utils/getDataTypeDescriptions';
+import getExperimentalProcedureDescriptions from 'views/FileEntity/utils/getExperimentalProcedureDescriptions';
+import getSummaryDescriptions from 'views/FileEntity/utils/getSummaryDescriptions';
 
-import styles from './index.module.scss';
-
-const { Title } = Typography;
+import { fetchTsvReport } from 'store/report/thunks';
+import { useUser } from 'store/user';
+import { updateUserConfig } from 'store/user/thunks';
+import { getProTableDictionary } from 'utils/translation';
 
 const FileEntity = () => {
+  const dispatch = useDispatch();
+  const { userInfo } = useUser();
   const { file_id } = useParams<{ file_id: string }>();
 
   const { data, loading } = useFile({
@@ -25,55 +37,123 @@ const FileEntity = () => {
     values: [file_id],
   });
 
-  const SUMMARY = 'SUMMARY';
-  const DATATYPE = 'DATATYPE';
-  const BIOSPECIMENS = 'BIOSPECIMENS';
-  const EXPERIMENTALPROCEDURE = 'EXPERIMENTALPROCEDURE';
-  const ANALYSIS = 'ANALYSIS';
-  const ANALYSISFILES = 'ANALYSISFILES';
+  enum SectionId {
+    SUMMARY = 'SUMMARY',
+    DATA_TYPE = 'DATA_TYPE',
+    BIOSPECIMENS = 'BIOSPECIMENS',
+    EXPERIMENTAL_PROCEDURE = 'EXPERIMENTAL)PROCEDURE',
+    ANALYSIS = 'ANALYSIS',
+    ANALYSIS_FILES = 'ANALYSIS_FILES',
+  }
 
   const links: IAnchorLink[] = [
-    { href: `#${SUMMARY}`, title: intl.get('entities.file.summary') },
-    { href: `#${DATATYPE}`, title: intl.get('entities.file.dataType') },
-    { href: `#${BIOSPECIMENS}`, title: intl.get('entities.file.participantsSamples') },
-    { href: `#${EXPERIMENTALPROCEDURE}`, title: intl.get('entities.file.experimentalProcedure') },
-    { href: `#${ANALYSIS}`, title: intl.get('entities.file.analysis') },
-    { href: `#${ANALYSISFILES}`, title: intl.get('entities.file.analysisFiles') },
+    { href: `#${SectionId.SUMMARY}`, title: intl.get('entities.file.summary') },
+    { href: `#${SectionId.DATA_TYPE}`, title: intl.get('entities.file.dataType') },
+    { href: `#${SectionId.BIOSPECIMENS}`, title: intl.get('entities.file.participantsSamples') },
+    {
+      href: `#${SectionId.EXPERIMENTAL_PROCEDURE}`,
+      title: intl.get('entities.file.experimentalProcedure'),
+    },
+    { href: `#${SectionId.ANALYSIS}`, title: intl.get('entities.file.analysis') },
+    { href: `#${SectionId.ANALYSIS_FILES}`, title: intl.get('entities.file.analysisFiles') },
   ];
-
-  /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */
-  const simplebarContent = document.getElementsByClassName('simplebar-content-wrapper');
-  const scrollContainerId = 'variant-entity-scroll-wrapper';
-  simplebarContent[1] && simplebarContent[1].setAttribute('id', scrollContainerId);
 
   if (!data && !loading) {
     return <Empty imageType="row" size="large" description={intl.get('no.data.available')} />;
   }
 
+  const dataBiospecimensTable: IBiospecimenEntity[] =
+    data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
+  const dataAnalysisFilesTable: IFileEntity[] = data ? [{ key: data.file_id, ...data }] : [];
+
   return (
-    <div className={styles.variantEntityContainer}>
-      <ScrollContent className={styles.scrollContent} key={scrollContainerId}>
-        {data && (
-          <div className={styles.titleHeader}>
-            <FileTextOutlined />
-            <Title level={4} className={styles.title}>
-              {data?.file_id}
-            </Title>
-          </div>
-        )}
-        <Summary id={SUMMARY} file={data} loading={loading} />
-        <DataType id={DATATYPE} file={data} loading={loading} />
-        <Biospecimens id={BIOSPECIMENS} file={data} loading={loading} />
-        <ExperimentalProcedure id={EXPERIMENTALPROCEDURE} file={data} loading={loading} />
-        <Analysis id={ANALYSIS} file={data} loading={loading} />
-        <AnalysisFiles id={ANALYSISFILES} file={data} loading={loading} />
-      </ScrollContent>
-      <AnchorMenu
-        scrollContainerId={scrollContainerId}
-        links={links}
-        className={styles.anchorMenu}
+    <EntityPage links={links} pageId={'file-entity-page'}>
+      <EntityTitle text={data?.file_id} icon={<FileTextOutlined size={24} />} loading={loading} />
+      <EntityDescriptions
+        id={SectionId.SUMMARY}
+        loading={loading}
+        descriptions={getSummaryDescriptions(data)}
+        header={intl.get('entities.file.summary')}
+        subheader={<SummaryHeader file={data} />}
       />
-    </div>
+      <EntityDescriptions
+        id={SectionId.DATA_TYPE}
+        loading={loading}
+        descriptions={getDataTypeDescriptions(data)}
+        header={intl.get('entities.file.dataType')}
+        title={intl.get('entities.file.dataType')}
+      />
+      <EntityTable
+        id={SectionId.BIOSPECIMENS}
+        loading={loading}
+        header={intl.get('entities.file.participantsSamples')}
+        columns={getBiospecimensColumns()}
+        data={dataBiospecimensTable}
+        initialColumnState={userInfo?.config.files?.tables?.biospecimens?.columns}
+        dictionary={getProTableDictionary()}
+        headerConfig={{
+          enableTableExport: true,
+          onTableExportClick: () =>
+            dispatch(
+              fetchTsvReport({
+                columnStates: userInfo?.config.files?.tables?.biospecimens?.columns,
+                columns: getBiospecimensColumns(),
+                index: INDEXES.BIOSPECIMEN,
+                sqon: generateSelectionSqon(
+                  INDEXES.BIOSPECIMEN,
+                  dataBiospecimensTable.map((biospecimen) => biospecimen.sample_id),
+                ),
+              }),
+            ),
+          enableColumnSort: true,
+          onColumnSortChange: (newState) =>
+            dispatch(
+              updateUserConfig({ files: { tables: { biospecimens: { columns: newState } } } }),
+            ),
+        }}
+      />
+      <EntityDescriptions
+        id={SectionId.EXPERIMENTAL_PROCEDURE}
+        loading={loading}
+        descriptions={getExperimentalProcedureDescriptions(data)}
+        header={intl.get('entities.file.experimentalProcedure')}
+        title={intl.get('entities.file.experimentalProcedure')}
+      />
+      <EntityDescriptions
+        id={SectionId.ANALYSIS}
+        loading={loading}
+        descriptions={getAnalysisDescriptions(data)}
+        header={intl.get('entities.file.analysisProperties')}
+        title={intl.get('entities.file.analysis')}
+      />
+      <EntityTable
+        id={SectionId.ANALYSIS_FILES}
+        loading={loading}
+        header={intl.get('entities.file.analysisFiles')}
+        columns={getAnalysisFilesColumns()}
+        data={dataAnalysisFilesTable}
+        initialColumnState={userInfo?.config.files?.tables?.files?.columns}
+        dictionary={getProTableDictionary()}
+        headerConfig={{
+          enableTableExport: true,
+          onTableExportClick: () =>
+            dispatch(
+              fetchTsvReport({
+                columnStates: userInfo?.config.files?.tables?.biospecimens?.columns,
+                columns: getAnalysisFilesColumns(),
+                index: INDEXES.BIOSPECIMEN,
+                sqon: generateSelectionSqon(
+                  INDEXES.FILE,
+                  dataAnalysisFilesTable.map((file) => file.file_id),
+                ),
+              }),
+            ),
+          enableColumnSort: true,
+          onColumnSortChange: (newState) =>
+            dispatch(updateUserConfig({ files: { tables: { files: { columns: newState } } } })),
+        }}
+      />
+    </EntityPage>
   );
 };
 
