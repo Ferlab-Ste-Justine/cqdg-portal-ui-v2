@@ -581,8 +581,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Biospecimens avec ce terme exact',
-          all: 'Biospecimens y compris les termes descendants',
+          exact: 'Participants avec ce terme exact',
+          all: 'Participants y compris les termes descendants',
         },
       },
       mondoTree: {
@@ -594,8 +594,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Biospecimens avec ce terme exact',
-          all: 'Biospecimens y compris les termes descendants',
+          exact: 'Participants avec ce terme exact',
+          all: 'Participants y compris les termes descendants',
         },
       },
       icdTree: {
@@ -607,8 +607,8 @@ const fr = {
         emptySelection:
           'Sélectionnez des éléments dans le volet de gauche afin de les ajouter à votre requête.',
         tags: {
-          exact: 'Biospecimens avec ce terme exact',
-          all: 'Biospecimens y compris les termes descendants',
+          exact: 'Participants avec ce terme exact',
+          all: 'Participants y compris les termes descendants',
         },
       },
       tabs: {
@@ -621,9 +621,9 @@ const fr = {
             compositionFamilyTitle: 'Composition familiale',
           },
           availableData: {
-            dataCategoryTitle: 'Biospecimens par catégories de données',
-            dataTypeTitle: 'Biospecimens par types de données',
-            studiesTitle: 'Biospecimens par étude',
+            dataCategoryTitle: 'Participants par catégories de données',
+            dataTypeTitle: 'Participants par types de données',
+            studiesTitle: 'Participants par étude',
             axis: '# de participants',
             dataCategory: 'Catégorie de données',
             dataType: 'Type de données',
@@ -652,11 +652,11 @@ const fr = {
             cardTitle: 'Études',
             domainTitle: 'Études par domaine',
             popTitle: 'Études par type population',
-            partTitle: 'Biospecimens par étude',
+            partTitle: 'Participants par étude',
           },
         },
         participants: {
-          title: 'Biospecimens ({count})',
+          title: 'Participants ({count})',
           participant: 'Participant',
           study_code: 'Études',
           proband: 'Proband',
@@ -673,8 +673,8 @@ const fr = {
           vitalStatus: 'Statut vital',
           submitterParticipantId: 'Participant externe',
           ageAtDeath: 'Âge au décés',
-          selectedParticipants: 'Biospecimens séléctionnés',
-          selectedParticipantsFamilies: 'Biospecimens séléctionnés et familles',
+          selectedParticipants: 'Participants séléctionnés',
+          selectedParticipantsFamilies: 'Participants séléctionnés et familles',
           downloadClinicalData: 'Télécharger les données cliniques',
           icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',

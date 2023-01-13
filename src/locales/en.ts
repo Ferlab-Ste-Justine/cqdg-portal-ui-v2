@@ -598,8 +598,8 @@ const en = {
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
         tags: {
-          exact: 'Biospecimens with this exact term',
-          all: 'Biospecimens including descendant terms',
+          exact: 'Participants with this exact term',
+          all: 'Participants including descendant terms',
         },
       },
       mondoTree: {
@@ -610,8 +610,8 @@ const en = {
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
         tags: {
-          exact: 'Biospecimens with this exact term',
-          all: 'Biospecimens including descendant terms',
+          exact: 'Participants with this exact term',
+          all: 'Participants including descendant terms',
         },
       },
       icdTree: {
@@ -622,8 +622,8 @@ const en = {
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
         tags: {
-          exact: 'Biospecimens with this exact term',
-          all: 'Biospecimens including descendant terms',
+          exact: 'Participants with this exact term',
+          all: 'Participants including descendant terms',
         },
       },
       tabs: {
@@ -636,9 +636,9 @@ const en = {
             compositionFamilyTitle: 'Family Composition',
           },
           availableData: {
-            dataCategoryTitle: 'Biospecimens by Data Category',
-            dataTypeTitle: 'Biospecimens by Data Type',
-            studiesTitle: 'Biospecimens by Study',
+            dataCategoryTitle: 'Participants by Data Category',
+            dataTypeTitle: 'Participants by Data Type',
+            studiesTitle: 'Participants by Study',
             axis: '# of participants',
             dataCategory: 'Data Category',
             dataType: 'Data Type',
@@ -665,11 +665,11 @@ const en = {
             cardTitle: 'Studies',
             domainTitle: 'Studies by Domain',
             popTitle: 'Studies by Population Type',
-            partTitle: 'Biospecimens by Study',
+            partTitle: 'Participants by Study',
           },
         },
         participants: {
-          title: 'Biospecimens ({count})',
+          title: 'Participants ({count})',
           participant: 'Participant',
           study_code: 'Study',
           proband: 'Proband',
