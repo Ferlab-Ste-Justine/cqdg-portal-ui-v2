@@ -66,7 +66,9 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         }
       >
         <div className={styles.count}>{file?.participants?.hits?.total}</div>
-        <div className={styles.name}>{intl.get('entities.file.participants')}</div>
+        <div className={styles.name}>
+          {intl.get('entities.file.participants', { count: file?.participants?.hits?.total })}
+        </div>
       </Link>
     </Button>
     <Button className={styles.button} icon={<ExperimentOutlined />} size="large" block>
@@ -91,7 +93,9 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         }
       >
         <div className={styles.count}>{file?.biospecimens?.hits?.total}</div>
-        <div className={styles.name}>{intl.get('entities.file.samples')}</div>
+        <div className={styles.name}>
+          {intl.get('entities.file.samples', { count: file?.biospecimens?.hits?.total })}
+        </div>
       </Link>
     </Button>
   </div>

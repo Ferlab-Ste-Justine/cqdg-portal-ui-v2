@@ -41,7 +41,7 @@ const FileEntity = () => {
     SUMMARY = 'SUMMARY',
     DATA_TYPE = 'DATA_TYPE',
     BIOSPECIMENS = 'BIOSPECIMENS',
-    EXPERIMENTAL_PROCEDURE = 'EXPERIMENTAL)PROCEDURE',
+    EXPERIMENTAL_PROCEDURE = 'EXPERIMENTAL_PROCEDURE',
     ANALYSIS = 'ANALYSIS',
     ANALYSIS_FILES = 'ANALYSIS_FILES',
   }
@@ -58,13 +58,13 @@ const FileEntity = () => {
     { href: `#${SectionId.ANALYSIS_FILES}`, title: intl.get('entities.file.analysisFiles') },
   ];
 
-  if (!data && !loading) {
-    return <Empty imageType="row" size="large" description={intl.get('no.data.available')} />;
-  }
-
   const dataBiospecimensTable: IBiospecimenEntity[] =
     data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
   const dataAnalysisFilesTable: IFileEntity[] = data ? [{ key: data.file_id, ...data }] : [];
+
+  if (!data && !loading) {
+    return <Empty imageType="row" size="large" description={intl.get('no.data.available')} />;
+  }
 
   return (
     <EntityPage links={links} pageId={'file-entity-page'}>
