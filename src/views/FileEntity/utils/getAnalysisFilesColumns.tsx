@@ -15,7 +15,7 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
   {
     key: 'file_id',
     dataIndex: 'file_id',
-    title: intl.get('entities.file.file_id'),
+    title: intl.get('entities.file.file'),
     render: (file_id: string) => <Link to={`${STATIC_ROUTES.FILES}/${file_id}`}>{file_id}</Link>,
   },
   {

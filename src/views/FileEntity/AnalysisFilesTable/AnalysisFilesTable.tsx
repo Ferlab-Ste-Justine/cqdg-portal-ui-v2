@@ -21,7 +21,8 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
     value: file.sequencing_experiment.analysis_id,
   });
 
-  const dataAnalysisFilesTable: IFileEntity[] = data || [];
+  const dataAnalysisFilesTable: IFileEntity[] =
+    data?.filter((f) => f.file_id !== file.file_id) || [];
 
   return (
     <EntityTable

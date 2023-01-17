@@ -83,6 +83,7 @@ const FileEntity = () => {
         id={SectionId.BIOSPECIMENS}
         loading={loading}
         header={intl.get('entities.participant.participantsSamples')}
+        title={intl.get('entities.participant.participantSample')}
         columns={getBiospecimensColumns()}
         data={dataBiospecimensTable}
         initialColumnState={userInfo?.config.files?.tables?.biospecimens?.columns}

@@ -1,13 +1,20 @@
 import intl from 'react-intl-universal';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
+import { Tag } from 'antd';
 import { IFileEntity } from 'graphql/files/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
+import styles from 'views/FileEntity/index.module.scss';
+
 const getExperimentalProcedureDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
     label: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
-    value: file?.sequencing_experiment?.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER,
+    value: (
+      <Tag className={styles.tag}>
+        {file?.sequencing_experiment?.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER}
+      </Tag>
+    ),
   },
   {
     label: intl.get('entities.file.sequencing_experiment.type_of_sequencing'),

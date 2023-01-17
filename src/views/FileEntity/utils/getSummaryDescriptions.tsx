@@ -6,6 +6,7 @@ import { IFileEntity } from 'graphql/files/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { formatFileSize } from 'utils/formatFileSize';
+import { truncateString } from 'utils/string';
 
 import styles from 'views/FileEntity/index.module.scss';
 
@@ -30,7 +31,7 @@ const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] =
     label: intl.get('entities.file.ferload_url'),
     value: (
       <ExternalLink href={file?.ferload_url}>
-        {file?.ferload_url || TABLE_EMPTY_PLACE_HOLDER}
+        {file?.ferload_url ? truncateString(file.ferload_url, 50) : TABLE_EMPTY_PLACE_HOLDER}
       </ExternalLink>
     ),
   },
