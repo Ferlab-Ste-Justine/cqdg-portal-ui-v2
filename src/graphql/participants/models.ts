@@ -59,6 +59,7 @@ export interface IParticipantEntity {
   score: number;
   age_at_recruitment: number;
   age_of_death: number;
+  cause_of_death: string;
   ethnicity: string;
   gender: string;
   is_a_proband: string;
@@ -68,6 +69,8 @@ export interface IParticipantEntity {
   study: IStudyEntity;
   study_id: string;
   study_code: string;
+  family_type?: string;
+  family_position?: string;
   mondo: ArrangerResultsTree<IMondo>;
   mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;

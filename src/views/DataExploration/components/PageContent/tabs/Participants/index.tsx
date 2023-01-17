@@ -62,6 +62,9 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participant'),
     dataIndex: 'participant_id',
+    render: (participant_id: string) => (
+      <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}>{participant_id}</Link>
+    ),
   },
   {
     key: 'study_code',

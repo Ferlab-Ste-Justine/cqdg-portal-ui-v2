@@ -32,7 +32,11 @@ export const GET_FILES = gql`
                     biospecimen_tissue_source
                     sample_id
                     sample_type
-                    biospecimen_id: fhir_id
+                    biospecimen_id
+                    participant {
+                      participant_id
+                      study_code
+                    }
                   }
                 }
               }
@@ -59,6 +63,7 @@ export const GET_FILES = gql`
               workflow_name
               workflow_version
               genome_build
+              analysis_id
             }
           }
         }

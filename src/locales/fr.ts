@@ -22,7 +22,7 @@ const fr = {
       dataType: 'Type de données',
       data_type: 'Type',
       data_category: 'Catégorie',
-      participantsSamples: 'Biospecimens / Échantillons',
+      participantsSamples: 'Participants / Échantillons',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
       sequencing_experiment: {

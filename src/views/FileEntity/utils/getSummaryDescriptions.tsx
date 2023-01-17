@@ -1,4 +1,5 @@
 import intl from 'react-intl-universal';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
 import { Tag } from 'antd';
 import { IFileEntity } from 'graphql/files/models';
@@ -27,7 +28,11 @@ const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] =
   },
   {
     label: intl.get('entities.file.ferload_url'),
-    value: file?.ferload_url || TABLE_EMPTY_PLACE_HOLDER,
+    value: (
+      <ExternalLink href={file?.ferload_url}>
+        {file?.ferload_url || TABLE_EMPTY_PLACE_HOLDER}
+      </ExternalLink>
+    ),
   },
   {
     label: intl.get('entities.file.file_hash'),

@@ -57,6 +57,14 @@ export type TUserConfig = {
       files?: TUserTableConfig;
     };
   };
+  participants?: {
+    tables?: {
+      family?: TUserTableConfig;
+      diagnostics?: TUserTableConfig;
+      phenotypes?: TUserTableConfig;
+      biospecimens?: TUserTableConfig;
+    };
+  };
   dashboard?: {
     cards?: {
       order?: string[];

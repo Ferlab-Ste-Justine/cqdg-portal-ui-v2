@@ -29,6 +29,7 @@ export interface IFileSequencingExperiment {
   workflow_name: string;
   workflow_version: string;
   type_of_sequencing: string;
+  analysis_id: string;
 }
 
 export interface IFileEntity {

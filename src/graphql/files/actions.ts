@@ -4,7 +4,7 @@ import { QueryVariable } from 'graphql/queries';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
-import { IFileEntity, IFileResultTree } from './models';
+import { IFileResultTree } from './models';
 import { GET_FILES } from './queries';
 
 export const useDataFiles = (variables?: QueryVariable) => {
@@ -19,19 +19,27 @@ export const useDataFiles = (variables?: QueryVariable) => {
   };
 };
 
-interface IUseFileProps {
-  field: string;
-  values: string[];
-}
-
-interface IUseFileReturn {
-  loading: boolean;
-  data?: IFileEntity;
-}
-
-export const useFile = ({ field, values }: IUseFileProps): IUseFileReturn => {
+export const useFiles = ({ field, value }: { field: string; value: string }) => {
   const sqon = {
-    content: [{ content: { field, value: values, index: INDEXES.FILE }, op: 'in' }],
+    content: [{ content: { field, value, index: INDEXES.FILE }, op: 'in' }],
+    op: 'and',
+  };
+
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
+    variables: { sqon },
+  });
+
+  const data = hydrateResults(result?.File?.hits?.edges || []) || undefined;
+
+  return {
+    loading,
+    data,
+  };
+};
+
+export const useFile = ({ field, value }: { field: string; value: string }) => {
+  const sqon = {
+    content: [{ content: { field, value, index: INDEXES.FILE }, op: 'in' }],
     op: 'and',
   };
 

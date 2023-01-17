@@ -1,23 +1,30 @@
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { IParticipantEntity } from 'graphql/participants/models';
 import capitalize from 'lodash/capitalize';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { STATIC_ROUTES } from 'utils/routes';
 
 const getBiospecimensColumns = (): ProColumnType<any>[] => [
   {
-    key: 'participant_id',
-    dataIndex: 'participant_id',
+    key: 'participant.participant_id',
+    dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
-    render: (participant_id: string) => participant_id,
+    render: (participant: IParticipantEntity) => (
+      <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant?.participant_id}`}>
+        {participant?.participant_id}
+      </Link>
+    ),
   },
   {
-    key: 'study_code',
-    dataIndex: 'study_code',
+    key: 'participant.study_code',
+    dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.study_code'),
-    render: (study_code: string) => study_code,
+    render: (participant: IParticipantEntity) => participant?.study_code,
   },
   {
     key: 'sample_id',
