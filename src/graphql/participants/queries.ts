@@ -35,6 +35,10 @@ export const GET_PARTICIPANTS = gql`
                 edges {
                   node {
                     sample_id
+                    biospecimen_id
+                    sample_type
+                    biospecimen_tissue_source
+                    age_biospecimen_collection
                   }
                 }
               }
@@ -43,6 +47,14 @@ export const GET_PARTICIPANTS = gql`
             study {
               study_code
               name
+              data_access_codes {
+                access_limitations
+                access_requirements
+              }
+              contact {
+                type
+                value
+              }
             }
             icd_tagged {
               hits {
@@ -118,6 +130,20 @@ export const GET_PARTICIPANTS = gql`
                     name
                     parents
                     source_text
+                  }
+                }
+              }
+            }
+            diagnoses {
+              hits {
+                total
+                edges {
+                  node {
+                    fhir_id
+                    diagnosis_ICD_code
+                    diagnosis_mondo_code
+                    diagnosis_source_text
+                    age_at_diagnosis
                   }
                 }
               }
