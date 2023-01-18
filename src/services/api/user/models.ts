@@ -60,7 +60,7 @@ export type TUserConfig = {
   participants?: {
     tables?: {
       family?: TUserTableConfig;
-      diagnostics?: TUserTableConfig;
+      diagnoses?: TUserTableConfig;
       phenotypes?: TUserTableConfig;
       biospecimens?: TUserTableConfig;
     };
