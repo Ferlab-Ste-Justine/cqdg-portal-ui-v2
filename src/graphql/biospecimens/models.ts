@@ -8,6 +8,7 @@ export interface IBiospecimenResultTree {
 }
 
 export interface IBiospecimenEntity {
+  key?: string;
   id: string;
   score: number;
   study_id: string;

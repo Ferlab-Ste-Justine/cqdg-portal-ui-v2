@@ -1,3 +1,4 @@
+import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
 import { QueryVariable } from 'graphql/queries';
 
@@ -15,5 +16,41 @@ export const useDataFiles = (variables?: QueryVariable) => {
     loading,
     data: hydrateResults(result?.File?.hits?.edges || []),
     total: result?.File?.hits?.total || 0,
+  };
+};
+
+export const useFiles = ({ field, value }: { field: string; value: string }) => {
+  const sqon = {
+    content: [{ content: { field, value, index: INDEXES.FILE }, op: 'in' }],
+    op: 'and',
+  };
+
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
+    variables: { sqon },
+  });
+
+  const data = hydrateResults(result?.File?.hits?.edges || []) || undefined;
+
+  return {
+    loading,
+    data,
+  };
+};
+
+export const useFile = ({ field, value }: { field: string; value: string }) => {
+  const sqon = {
+    content: [{ content: { field, value, index: INDEXES.FILE }, op: 'in' }],
+    op: 'and',
+  };
+
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
+    variables: { sqon },
+  });
+
+  const data = result?.File?.hits?.edges[0]?.node || undefined;
+
+  return {
+    loading,
+    data,
   };
 };

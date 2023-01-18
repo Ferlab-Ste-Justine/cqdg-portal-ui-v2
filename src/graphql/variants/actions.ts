@@ -39,7 +39,7 @@ export const useVariant = ({ field, values }: IUseVariantProps): IUseVariantRetu
     variables: { sqon },
   });
 
-  const data = result?.Variant?.hits?.edges[0].node || undefined;
+  const data = result?.Variant?.hits?.edges[0]?.node || undefined;
 
   return {
     loading,

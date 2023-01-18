@@ -13,6 +13,7 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import EmptyMessage from 'views/VariantEntity/Frequencies/EmptyMessage';
 import StudiesTableSummary from 'views/VariantEntity/Frequencies/StudiesTable/StudiesTableSummary';
 
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { formatQuotientOrElse, formatQuotientToExponentialOrElse } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -38,6 +39,12 @@ const getInternalColumns = () => [
     title: intl.get('screen.variants.frequencies.studies'),
     dataIndex: 'study_code',
     render: (study_code: string) => study_code,
+  },
+  {
+    key: 'study_domain',
+    title: intl.get('screen.variants.frequencies.domain'),
+    dataIndex: 'study_domain',
+    render: (study_domain: string) => study_domain || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'participants',

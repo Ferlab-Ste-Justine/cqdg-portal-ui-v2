@@ -16,10 +16,14 @@ export enum STATIC_ROUTES {
   DATA_EXPLORATION_DATAFILES = '/data-exploration/datafiles',
 
   VARIANTS = '/variants',
+  FILES = '/files',
+  PARTICIPANTS = '/participants',
 }
 
 export enum DYNAMIC_ROUTES {
   DATA_EXPLORATION = '/data-exploration/:tab?',
   VARIANT_ENTITY = '/variants/:locus?',
+  FILE_ENTITY = '/files/:file_id?',
+  PARTICIPANT_ENTITY = '/participants/:participant_id?',
   ERROR = '/error/:status?',
 }

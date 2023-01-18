@@ -12,6 +12,7 @@ export const GET_PARTICIPANTS = gql`
             score
             age_at_recruitment
             age_of_death
+            cause_of_death
             ethnicity
             gender
             is_a_proband
@@ -41,6 +42,7 @@ export const GET_PARTICIPANTS = gql`
             study_code
             study {
               study_code
+              name
             }
             icd_tagged {
               hits {

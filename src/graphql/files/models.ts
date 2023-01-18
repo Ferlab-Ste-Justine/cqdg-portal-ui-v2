@@ -28,9 +28,12 @@ export interface IFileSequencingExperiment {
   ssup: string;
   workflow_name: string;
   workflow_version: string;
+  type_of_sequencing: string;
+  analysis_id: string;
 }
 
 export interface IFileEntity {
+  key?: string;
   id: string;
   file_id: string;
   participants: ArrangerResultsTree<IParticipantEntity>;

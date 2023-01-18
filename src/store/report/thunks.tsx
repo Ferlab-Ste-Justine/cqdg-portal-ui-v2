@@ -90,9 +90,9 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
 
     try {
       const d = new Date();
-      const dateFormated = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      const dateFormatted = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
       const filename = `cqdg-${args.index.toLowerCase()}-table`;
-      const formattedFileName = `${filename}-${dateFormated}.tsv`;
+      const formattedFileName = `${filename}-${dateFormatted}.tsv`;
 
       const { data, error } = await ArrangerApi.columnStates({
         query: getColumnStateQuery(args.index),
