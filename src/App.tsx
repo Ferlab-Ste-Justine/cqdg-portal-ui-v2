@@ -39,6 +39,7 @@ const DataExploration = loadable(() => import('views/DataExploration'), loadable
 const Variants = loadable(() => import('views/Variants'), loadableProps);
 const VariantEntity = loadable(() => import('views/VariantEntity'), loadableProps);
 const FileEntity = loadable(() => import('views/FileEntity'), loadableProps);
+const ParticipantEntity = loadable(() => import('views/ParticipantEntity'), loadableProps);
 
 const App = () => {
   const lang = useLang();
@@ -85,6 +86,13 @@ const App = () => {
                   </ProtectedRoute>
                   <ProtectedRoute exact path={DYNAMIC_ROUTES.FILE_ENTITY} layout={PageLayout}>
                     <FileEntity />
+                  </ProtectedRoute>
+                  <ProtectedRoute
+                    exact
+                    path={DYNAMIC_ROUTES.PARTICIPANT_ENTITY}
+                    layout={PageLayout}
+                  >
+                    <ParticipantEntity />
                   </ProtectedRoute>
                   <ProtectedRoute exact path={STATIC_ROUTES.MY_PROFILE} layout={PageLayout}>
                     <MyProfile />
