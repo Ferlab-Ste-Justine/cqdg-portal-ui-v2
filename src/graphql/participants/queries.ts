@@ -25,6 +25,10 @@ export const GET_PARTICIPANTS = gql`
                 edges {
                   node {
                     file_id
+                    sequencing_experiment {
+                      experimental_strategy
+                      type_of_sequencing
+                    }
                   }
                 }
               }

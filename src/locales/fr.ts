@@ -77,7 +77,9 @@ const fr = {
       analysis: 'Analyses',
       dataType: 'Type de données',
       data_type: 'Type',
+      data_types: 'Type de données',
       data_category: 'Catégorie',
+      data_access: 'Data Access',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
       sequencing_experiment: {
@@ -97,6 +99,9 @@ const fr = {
         analysis_id: "ID d'analyse",
       },
       analysisFiles: "Fichiers générés par l'analyse",
+      numberByExperimentalStrategy: 'Nombre par stratégie expérimentale',
+      numberByDataTypes: 'Nombre par type de données',
+      'n=2': '(n=2)',
     },
   },
   global: {

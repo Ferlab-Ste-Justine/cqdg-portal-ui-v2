@@ -13,6 +13,7 @@ import { useParticipant } from 'graphql/participants/actions';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import BiospecimensTable from 'views/ParticipantEntity/BiospecimensTable';
 import DiagnosesTable from 'views/ParticipantEntity/DiagnosesTable';
+import FilesTable from 'views/ParticipantEntity/FilesTable';
 import PhenotypesTable from 'views/ParticipantEntity/PhenotypesTable';
 import getDataAccessDescriptions from 'views/ParticipantEntity/utils/getDataAccessDescriptions';
 import getFamilyColumns from 'views/ParticipantEntity/utils/getFamilyColumns';
@@ -128,6 +129,7 @@ const ParticipantEntity = () => {
       <>{data && <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} />}</>
       <>{data && <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} />}</>
       <BiospecimensTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
+      <FilesTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
     </EntityPage>
   );
 };
