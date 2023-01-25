@@ -8,6 +8,8 @@ import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
+import styles from 'views/FileEntity/index.module.scss';
+
 const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
   {
     label: intl.get('entities.study.access_limitations'),
@@ -20,7 +22,10 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           return limitation ? (
             <div key={index}>
               {capitalize(limitation.title)} (DUO:{' '}
-              <ExternalLink href={`http://purl.obolibrary.org/obo/DUO_${limitation.code}`}>
+              <ExternalLink
+                href={`http://purl.obolibrary.org/obo/DUO_${limitation.code}`}
+                className={styles.link}
+              >
                 {limitation.code}
               </ExternalLink>
               )
@@ -45,7 +50,10 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           return requirement ? (
             <div key={index}>
               {capitalize(requirement.title)} (DUO:{' '}
-              <ExternalLink href={`http://purl.obolibrary.org/obo/DUO_${requirement.code}`}>
+              <ExternalLink
+                href={`http://purl.obolibrary.org/obo/DUO_${requirement.code}`}
+                className={styles.link}
+              >
                 {requirement.code}
               </ExternalLink>
               )
@@ -62,7 +70,7 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
   {
     label: intl.get('entities.study.access_authority'),
     value: participant?.study?.contact?.value ? (
-      <ExternalLink href={participant.study.contact.value}>
+      <ExternalLink href={participant.study.contact.value} className={styles.link}>
         {participant.study.contact.value}
       </ExternalLink>
     ) : (

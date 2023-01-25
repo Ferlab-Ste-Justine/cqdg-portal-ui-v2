@@ -21,14 +21,14 @@ const DiagnosesTable = ({ participant, id }: IDiagnosesTableProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
+  const diagnosesData = participant?.diagnoses
+    ? participant.diagnoses?.hits?.edges?.map(({ node }) => ({ ...node, key: node.fhir_id }))
+    : [];
+
   const { data, loading } = useParticipantsFromField({
     field: '', //TODO: add mondo term field ?
     value: '', //TODO: add mondo term value ?
   });
-
-  const diagnosesData = participant?.diagnoses
-    ? participant.diagnoses?.hits?.edges?.map(({ node }) => ({ ...node, key: node.fhir_id }))
-    : [];
 
   return (
     <EntityTable

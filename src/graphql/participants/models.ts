@@ -60,13 +60,15 @@ export interface IDiagnoses {
   age_at_diagnosis: string;
 }
 
-export interface IPhenotypes {
+export interface IFamilyRelationships {
   id: string;
-  fhir_id: string;
-  phenotype_code: string;
-  phenotype_source_text: string;
-  interpretation: string;
-  age_at_phenotype: string;
+  family_id: string;
+  family_type: string;
+  focus_participant_id: string;
+  relationship_to_proband: string;
+  submitter_family_id: string;
+  submitter_participant_id: string;
+  is_affected: string;
 }
 
 export interface IParticipantEntity {
@@ -97,7 +99,7 @@ export interface IParticipantEntity {
   icd_tagged: ArrangerResultsTree<IIcd>;
   biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
   diagnoses: ArrangerResultsTree<IDiagnoses>;
-  phenotypes: ArrangerResultsTree<IPhenotypes>;
+  family_relationships: ArrangerResultsTree<IFamilyRelationships>;
 }
 
 export type ITableParticipantEntity = IParticipantEntity & {

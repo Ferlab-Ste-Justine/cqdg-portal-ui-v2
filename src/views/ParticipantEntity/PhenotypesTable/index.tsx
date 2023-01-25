@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
 import { useParticipantsFromField } from 'graphql/participants/actions';
-import { IParticipantEntity } from 'graphql/participants/models';
+import { IParticipantEntity, IPhenotype } from 'graphql/participants/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getPhenotypesColumns from 'views/ParticipantEntity/utils/getPhenotypesColumns';
 
@@ -21,14 +21,22 @@ const PhenotypesTable = ({ participant, id }: IPhenotypesTableProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
+  const observedPhenotypeTagged =
+    participant?.observed_phenotype_tagged?.hits?.edges?.map(({ node }) => ({
+      key: node.internal_phenotype_id,
+      ...node,
+    })) || [];
+  const nonObservedPhenotypeTagged =
+    participant?.non_observed_phenotype_tagged?.hits?.edges?.map(({ node }) => ({
+      key: node.internal_phenotype_id,
+      ...node,
+    })) || [];
+  const phenotypesData: IPhenotype[] = [...observedPhenotypeTagged, ...nonObservedPhenotypeTagged];
+
   const { data, loading } = useParticipantsFromField({
     field: '', //TODO: add mondo term field ?
     value: '', //TODO: add mondo term value ?
   });
-
-  const diagnosesData = participant?.phenotypes
-    ? participant.phenotypes?.hits?.edges?.map(({ node }) => ({ ...node, key: node.fhir_id }))
-    : [];
 
   return (
     <EntityTable
@@ -37,7 +45,7 @@ const PhenotypesTable = ({ participant, id }: IPhenotypesTableProps) => {
       title={intl.get('entities.participant.phenotype')}
       header={intl.get('entities.participant.phenotypes')}
       columns={getPhenotypesColumns()}
-      data={diagnosesData}
+      data={phenotypesData}
       initialColumnState={userInfo?.config.participants?.tables?.phenotypes?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{
@@ -50,7 +58,7 @@ const PhenotypesTable = ({ participant, id }: IPhenotypesTableProps) => {
               index: INDEXES.PARTICIPANT,
               sqon: generateSelectionSqon(
                 INDEXES.PARTICIPANT,
-                diagnosesData.map(() => participant?.participant_id || ''),
+                phenotypesData.map(() => participant?.participant_id || ''),
               ),
             }),
           ),

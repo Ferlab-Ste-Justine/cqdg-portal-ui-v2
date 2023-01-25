@@ -40,7 +40,7 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
           })
         }
       >
-        <ReadOutlined width={24} />
+        <ReadOutlined className={styles.icon} />
         <div className={styles.count}>{1}</div>
         <div className={styles.name}>{intl.get('entities.study.study')}</div>
       </Link>
@@ -66,7 +66,7 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
           })
         }
       >
-        <ExperimentOutlined width={24} />
+        <ExperimentOutlined className={styles.icon} />
         <div className={styles.count}>{participant?.biospecimens?.hits?.total}</div>
         <div className={styles.name}>
           {intl.get('entities.biospecimen.biospecimensAuto', {
@@ -96,7 +96,7 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
           })
         }
       >
-        <FileTextOutlined width={24} />
+        <FileTextOutlined className={styles.icon} />
         <div className={styles.count}>{participant?.files?.hits?.total}</div>
         <div className={styles.name}>
           {intl.get('entities.file.filesAuto', { count: participant?.files?.hits?.total })}

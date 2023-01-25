@@ -9,7 +9,6 @@ export const GET_PARTICIPANTS = gql`
           node {
             id
             participant_id
-            score
             age_at_recruitment
             age_of_death
             cause_of_death
@@ -78,7 +77,6 @@ export const GET_PARTICIPANTS = gql`
               hits {
                 edges {
                   node {
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -92,7 +90,6 @@ export const GET_PARTICIPANTS = gql`
               hits {
                 edges {
                   node {
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -109,8 +106,6 @@ export const GET_PARTICIPANTS = gql`
                 total
                 edges {
                   node {
-                    id
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -125,8 +120,22 @@ export const GET_PARTICIPANTS = gql`
                 total
                 edges {
                   node {
-                    id
-                    score
+                    age_at_event
+                    internal_phenotype_id
+                    is_leaf
+                    is_tagged
+                    name
+                    parents
+                    source_text
+                  }
+                }
+              }
+            }
+            non_observed_phenotype_tagged {
+              hits {
+                total
+                edges {
+                  node {
                     age_at_event
                     internal_phenotype_id
                     is_leaf

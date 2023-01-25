@@ -1,5 +1,11 @@
 import intl from 'react-intl-universal';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import capitalize from 'lodash/capitalize';
+import {
+  extractIcdTitleAndCode,
+  extractMondoTitleAndCode,
+} from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
@@ -8,13 +14,34 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     key: 'diagnosis_mondo_code',
     dataIndex: 'diagnosis_mondo_code',
     title: intl.get('entities.participant.diagnosis_mondo'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (diagnosis_mondo_code: string) => {
+      if (!diagnosis_mondo_code) return TABLE_EMPTY_PLACE_HOLDER;
+      const { code, title } = extractMondoTitleAndCode(diagnosis_mondo_code);
+      return (
+        <>
+          {capitalize(title)} (MONDO:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/MONDO_${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
   },
   {
     key: 'diagnosis_ICD_code',
     dataIndex: 'diagnosis_ICD_code',
     title: intl.get('entities.participant.diagnosis_ICD'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (diagnosis_ICD_code: string) => {
+      if (!diagnosis_ICD_code) return TABLE_EMPTY_PLACE_HOLDER;
+      const { code, title } = extractIcdTitleAndCode(diagnosis_ICD_code);
+      return (
+        <>
+          {capitalize(title)} (ICD:{' '}
+          <ExternalLink href={`http://purl.bioontology.org/ontology/ICD9CM/${code}`}>
+            {code}
+          </ExternalLink>
+          )
+        </>
+      );
+    },
   },
   {
     key: 'diagnosis_source_text',

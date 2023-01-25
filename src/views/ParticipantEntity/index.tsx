@@ -1,35 +1,23 @@
 import intl from 'react-intl-universal';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
-import EntityPage, {
-  EntityDescriptions,
-  EntityTable,
-  EntityTitle,
-} from '@ferlab/ui/core/pages/EntityPage';
-import { INDEXES } from 'graphql/constants';
+import EntityPage, { EntityDescriptions, EntityTitle } from '@ferlab/ui/core/pages/EntityPage';
 import { useParticipant } from 'graphql/participants/actions';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import BiospecimensTable from 'views/ParticipantEntity/BiospecimensTable';
 import DiagnosesTable from 'views/ParticipantEntity/DiagnosesTable';
+import FamilyTable from 'views/ParticipantEntity/FamilyTable';
 import FilesTable from 'views/ParticipantEntity/FilesTable';
 import PhenotypesTable from 'views/ParticipantEntity/PhenotypesTable';
 import getDataAccessDescriptions from 'views/ParticipantEntity/utils/getDataAccessDescriptions';
-import getFamilyColumns from 'views/ParticipantEntity/utils/getFamilyColumns';
 import getProfileDescriptions from 'views/ParticipantEntity/utils/getProfileDescriptions';
-
-import { fetchTsvReport } from 'store/report/thunks';
-import { useUser } from 'store/user';
-import { updateUserConfig } from 'store/user/thunks';
-import { getProTableDictionary } from 'utils/translation';
 
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
 import SummaryHeader from './SummaryHeader';
 
+import styles from './index.module.scss';
+
 const ParticipantEntity = () => {
-  const dispatch = useDispatch();
-  const { userInfo } = useUser();
   const { participant_id } = useParams<{ participant_id: string }>();
 
   const { data, loading } = useParticipant({
@@ -62,14 +50,11 @@ const ParticipantEntity = () => {
     { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.file.file') },
   ];
 
-  //todo: fetch participants by family_id
-  const familyData: any[] = [];
-
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={'participant-entity-page'}>
       <EntityTitle
         text={data?.participant_id}
-        icon={<UserOutlined size={24} />}
+        icon={<UserOutlined className={styles.titleIcon} />}
         loading={loading}
       />
       <EntityDescriptions
@@ -86,38 +71,7 @@ const ParticipantEntity = () => {
         header={intl.get('entities.participant.profile')}
         title={intl.get('entities.participant.profile')}
       />
-
-      <EntityTable
-        id={SectionId.FAMILY}
-        loading={loading}
-        title={intl.get('entities.participant.family')}
-        header={intl.get('entities.participant.family')}
-        columns={getFamilyColumns()}
-        data={familyData}
-        initialColumnState={userInfo?.config.participants?.tables?.family?.columns}
-        dictionary={getProTableDictionary()}
-        headerConfig={{
-          enableTableExport: true,
-          onTableExportClick: () =>
-            dispatch(
-              fetchTsvReport({
-                columnStates: userInfo?.config.participants?.tables?.family?.columns,
-                columns: getFamilyColumns(),
-                index: INDEXES.PARTICIPANT,
-                sqon: generateSelectionSqon(
-                  INDEXES.PARTICIPANT,
-                  familyData.map((participant) => participant.participant_id),
-                ),
-              }),
-            ),
-          enableColumnSort: true,
-          onColumnSortChange: (newState) =>
-            dispatch(
-              updateUserConfig({ participants: { tables: { family: { columns: newState } } } }),
-            ),
-        }}
-      />
-
+      <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
         loading={loading}
@@ -125,9 +79,8 @@ const ParticipantEntity = () => {
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-
-      <>{data && <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} />}</>
-      <>{data && <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} />}</>
+      {data && <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} />}
+      {data && <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} />}
       <BiospecimensTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
       <FilesTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
     </EntityPage>

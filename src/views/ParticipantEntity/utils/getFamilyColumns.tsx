@@ -6,21 +6,21 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 const getFamilyColumns = (): ProColumnType<any>[] => [
   {
-    key: 'participant_id',
-    dataIndex: 'participant_id',
+    key: 'submitter_participant_id',
+    dataIndex: 'submitter_participant_id',
     title: intl.get('entities.participant.participant_id'),
     render: (participant_id: string) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}>{participant_id}</Link>
     ),
   },
   {
-    key: 'family_position',
-    dataIndex: 'family_position',
+    key: 'relationship_to_proband',
+    dataIndex: 'relationship_to_proband',
     title: intl.get('entities.participant.family_position'),
   },
   {
-    key: 'disease_status',
-    dataIndex: 'disease_status',
+    key: 'is_affected',
+    dataIndex: 'is_affected',
     title: intl.get('entities.participant.disease_status'),
   },
 ];
