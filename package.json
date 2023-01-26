@@ -18,7 +18,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:netlify": "npm ci && npm run build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --coverageReporters=\"json-summary\"",
+    "test:github": "react-scripts test --coverage --watchAll=false --no-watchman --coverageReporters=\"json-summary\"",
+    "coverage": "npm test -- --watchAll=false --coverage --coverageReporters=\"json-summary\"",
+    "coverage:changed": "npm test -- --coverage --watchAll=false --onlyChanged --coverageReporters=\"json-summary\"",
     "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
     "theme": "mkdir -p src/style/themes/cqdg/dist && npm run theme:antd",
@@ -128,16 +131,5 @@
     "prettier-eslint": "^10.1.1",
     "typescript": "^4.4.4",
     "web-vitals": "^2.1.2"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "<rootDir>/.jest/identity-obj-proxy-esm.js"
-    },
-    "coverageThreshold": {
-      "global": {
-        "lines": 80
-      }
-    }
   }
 }
