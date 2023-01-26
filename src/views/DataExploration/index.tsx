@@ -144,7 +144,7 @@ const DataExploration = () => {
   const menuItems: ISidebarMenuItem[] = [
     {
       key: TAB_IDS.PARTICIPANTS,
-      title: intl.get('screen.dataExploration.sidemenu.participant'),
+      title: intl.get('entities.participant.participant'),
       icon: <UserOutlined className={styles.sideMenuIcon} />,
       panelContent: filtersContainer(
         participantMappingResults,
@@ -155,7 +155,7 @@ const DataExploration = () => {
     },
     {
       key: TAB_IDS.BIOSPECIMENS,
-      title: intl.get('screen.dataExploration.sidemenu.biospecimen'),
+      title: intl.get('entities.biospecimen.biospecimen'),
       icon: <ExperimentOutlined className={styles.sideMenuIcon} />,
       panelContent: filtersContainer(
         biospecimenMappingResults,
@@ -166,7 +166,7 @@ const DataExploration = () => {
     },
     {
       key: TAB_IDS.DATA_FILES,
-      title: intl.get('screen.dataExploration.sidemenu.datafiles'),
+      title: intl.get('entities.file.file'),
       icon: <FileSearchOutlined className={styles.sideMenuIcon} />,
       panelContent: filtersContainer(
         fileMappingResults,
