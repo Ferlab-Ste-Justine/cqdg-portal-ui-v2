@@ -305,8 +305,8 @@ const fr = {
       },
     },
     filterList: {
-      collapseAll: 'Réduire tout',
-      expandAll: 'Développer tout',
+      collapseAll: 'Tout fermer',
+      expandAll: 'Tout ouvrir',
     },
     table: {
       itemCount: {
@@ -676,6 +676,13 @@ const fr = {
       tabs: {
         summary: {
           title: 'Sommaire',
+          global: {
+            nbParticipant:
+              '{count} participants (y compris les termes descendants sur cette arborescence)',
+            addTermToQuery: 'Ajouter un terme à la requête active',
+            currentPath: 'Arborescence actuelle',
+            centerSubtitleFormatter: 'Participants avec',
+          },
           sociodemographics: {
             cardTitle: 'Profils sociodémographiques',
             genderTitle: 'Genre',
@@ -692,22 +699,10 @@ const fr = {
           },
           observed_phenotype_tagged: {
             cardTitle: 'Phénotypes observés (HPO)',
-            phenotypeTree: {
-              nbParticipant:
-                '{count} participants (y compris les termes descendants sur ce chemin)',
-              addTermToQuery: 'Ajouter un terme à la requête active',
-              currentPath: 'Chemin actuel',
-            },
             empty: 'Aucun phénotype observé signalé pour ces participants',
           },
           mondo: {
             cardTitle: 'Diagnostic (MONDO)',
-            phenotypeTree: {
-              nbParticipant:
-                '{count} participants (y compris les termes descendants sur ce chemin)',
-              addTermToQuery: 'Ajouter un terme à la requête active',
-              currentPath: 'Chemin actuel',
-            },
             empty: 'Aucun diagnostic signalé pour ces participants',
           },
           studiespie: {
@@ -737,7 +732,7 @@ const fr = {
           ageAtDeath: 'Âge au décés',
           selectedParticipants: 'Participants séléctionnés',
           selectedParticipantsFamilies: 'Participants séléctionnés et familles',
-          downloadClinicalData: 'Télécharger les données cliniques',
+          downloadClinicalData: 'Données cliniques',
           icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',
         },
@@ -752,7 +747,7 @@ const fr = {
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
-          downloadSampleData: "Télécharger les données d'échantillon",
+          downloadSampleData: "Données d'échantillon",
         },
         datafiles: {
           title: 'Fichiers de données ({count})',

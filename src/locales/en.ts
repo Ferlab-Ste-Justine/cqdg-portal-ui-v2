@@ -720,6 +720,7 @@ const en = {
               currentPath: 'Current Path',
             },
             empty: 'No diagnoses reported for these participants',
+            centerSubtitleFormatter: 'Participants with',
           },
           studiespie: {
             cardTitle: 'Studies',
