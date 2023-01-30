@@ -454,7 +454,7 @@ const fr = {
       menu: {
         dashboard: 'Tableau de bord',
         studies: 'Études',
-        explore: 'Exploration des données',
+        explore: 'Exploration',
         website: 'Site web',
         documentation: 'Documentation',
         community: 'Communauté',
