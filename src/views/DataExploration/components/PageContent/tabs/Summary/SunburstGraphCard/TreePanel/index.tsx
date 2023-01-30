@@ -45,7 +45,7 @@ const TreePanel = ({
   <Space direction="vertical" className={styles.phenotypeSunburstTree}>
     <Title level={5}>{currentNode?.name}</Title>
     <Text>
-      {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.nbParticipant`, {
+      {intl.get(`screen.dataExploration.tabs.summary.global.nbParticipant`, {
         count: currentNode?.results,
       })}
     </Text>
@@ -63,11 +63,11 @@ const TreePanel = ({
         });
       }}
     >
-      {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.addTermToQuery`)}
+      {intl.get(`screen.dataExploration.tabs.summary.global.addTermToQuery`)}
     </Button>
     <Space className={styles.treeWrapper} direction="vertical" size={5}>
       <Text type="secondary">
-        {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.currentPath`)}
+        {intl.get(`screen.dataExploration.tabs.summary.global.currentPath`)}
       </Text>
       <Tree
         height={213}

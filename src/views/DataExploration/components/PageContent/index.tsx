@@ -268,9 +268,9 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
           tab={
             <span>
               <UserOutlined />
-              {intl.get('screen.dataExploration.tabs.participants.title', {
-                count: numberWithCommas(participantResults.total),
-              })}
+              {`${intl.get('entities.participant.participants')} (${numberWithCommas(
+                biospecimenResults.total,
+              )})`}
             </span>
           }
           key={TAB_IDS.PARTICIPANTS}
@@ -286,9 +286,9 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
           tab={
             <span>
               <ExperimentOutlined />
-              {intl.get('screen.dataExploration.tabs.biospecimens.title', {
-                count: numberWithCommas(biospecimenResults.total),
-              })}
+              {`${intl.get('entities.biospecimen.biospecimens')} (${numberWithCommas(
+                biospecimenResults.total,
+              )})`}
             </span>
           }
           key={TAB_IDS.BIOSPECIMENS}
@@ -304,9 +304,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
           tab={
             <span>
               <FileTextOutlined />
-              {intl.get('screen.dataExploration.tabs.datafiles.title', {
-                count: numberWithCommas(fileResults.total),
-              })}
+              {`${intl.get('entities.file.files')} (${numberWithCommas(fileResults.total)})`}
             </span>
           }
           key={TAB_IDS.DATA_FILES}

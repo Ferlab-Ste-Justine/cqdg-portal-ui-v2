@@ -56,7 +56,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.studies!)}
-              subLabel={intl.get('components.dataRelease.studies')}
+              subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
               icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
@@ -65,7 +65,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.participants!)}
-              subLabel={intl.get('components.dataRelease.participants')}
+              subLabel={intl.get('entities.participant.participants')}
               icon={<UserOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
@@ -74,7 +74,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(stats?.samples!)}
-              subLabel={intl.get('components.dataRelease.biospecimens')}
+              subLabel={intl.get('entities.biospecimen.biospecimens')}
               icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
@@ -83,7 +83,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={stats?.fileSize || '0TB'}
-              subLabel={intl.get('components.dataRelease.datafiles')}
+              subLabel={intl.get('entities.file.files')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
