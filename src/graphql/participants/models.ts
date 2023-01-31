@@ -58,6 +58,8 @@ export interface IDiagnoses {
   diagnosis_mondo_code: string;
   diagnosis_source_text: string;
   age_at_diagnosis: string;
+  diagnosis_icd_display: string;
+  diagnosis_mondo_display: string;
 }
 
 export interface IFamilyRelationships {
@@ -89,8 +91,9 @@ export interface IParticipantEntity {
   study: IStudyEntity;
   study_id: string;
   study_code: string;
-  family_type?: string;
-  family_position?: string;
+  family_id: string;
+  family_type: string;
+  relationship_to_proband: string;
   mondo: ArrangerResultsTree<IMondo>;
   mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;

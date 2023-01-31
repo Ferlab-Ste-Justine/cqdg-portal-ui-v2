@@ -16,7 +16,7 @@ export const SOCIODEMOGRAPHIC_QUERY = gql`
             doc_count
           }
         }
-        familyData: familyRelationships__family_type {
+        familyData: family_relationships__family_type {
           buckets {
             key
             doc_count

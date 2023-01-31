@@ -52,5 +52,5 @@ export const extractNcitTissueTitleAndCode = (ncit: string) =>
 // Format is like: General (DUO:0000042)
 export const extractDuoTitleAndCode = (duo: string) => titleAndCodeExtractor(duo, '(DUO:');
 
-// Format is like: Down's syndrome (ICD:758.0)
-export const extractIcdTitleAndCode = (duo: string) => titleAndCodeExtractor(duo, '(ICD:');
+// Format is like: Unspecified cataract (H26.9) or Type 1 diabetes mellitus (E10)
+export const extractIcdTitleAndCode = (duo: string) => titleAndCodeExtractor(duo, '(');

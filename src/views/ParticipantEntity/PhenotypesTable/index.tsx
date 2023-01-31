@@ -2,7 +2,6 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
-import { useParticipantsFromField } from 'graphql/participants/actions';
 import { IParticipantEntity, IPhenotype } from 'graphql/participants/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getPhenotypesColumns from 'views/ParticipantEntity/utils/getPhenotypesColumns';
@@ -13,30 +12,20 @@ import { updateUserConfig } from 'store/user/thunks';
 import { getProTableDictionary } from 'utils/translation';
 
 interface IPhenotypesTableProps {
-  participant: IParticipantEntity;
+  participant?: IParticipantEntity;
   id: string;
+  loading: boolean;
 }
 
-const PhenotypesTable = ({ participant, id }: IPhenotypesTableProps) => {
+const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
-  const observedPhenotypeTagged =
-    participant?.observed_phenotype_tagged?.hits?.edges?.map(({ node }) => ({
-      key: node.internal_phenotype_id,
+  const phenotypesData: IPhenotype[] =
+    participant?.observed_phenotypes?.hits?.edges?.map(({ node }) => ({
+      key: node.name,
       ...node,
     })) || [];
-  const nonObservedPhenotypeTagged =
-    participant?.non_observed_phenotype_tagged?.hits?.edges?.map(({ node }) => ({
-      key: node.internal_phenotype_id,
-      ...node,
-    })) || [];
-  const phenotypesData: IPhenotype[] = [...observedPhenotypeTagged, ...nonObservedPhenotypeTagged];
-
-  const { data, loading } = useParticipantsFromField({
-    field: '', //TODO: add mondo term field ?
-    value: '', //TODO: add mondo term value ?
-  });
 
   return (
     <EntityTable

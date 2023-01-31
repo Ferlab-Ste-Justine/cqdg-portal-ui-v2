@@ -1,7 +1,46 @@
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { INDEXES } from 'graphql/constants';
+import { useParticipantsFromField } from 'graphql/participants/actions';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { STATIC_ROUTES } from 'utils/routes';
+
+const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string }) => {
+  const { loading, total } = useParticipantsFromField({
+    field: 'observed_phenotypes.name',
+    value: phenotypeName,
+  });
+  if (loading) return <>{TABLE_EMPTY_PLACE_HOLDER}</>;
+  return total ? (
+    <Link
+      to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+      onClick={() =>
+        addQuery({
+          queryBuilderId: DATA_EXPLORATION_QB_ID,
+          query: generateQuery({
+            newFilters: [
+              generateValueFilter({
+                field: 'observed_phenotypes.name',
+                value: [phenotypeName],
+                index: INDEXES.PARTICIPANT,
+              }),
+            ],
+          }),
+          setAsActive: true,
+        })
+      }
+    >
+      {total}
+    </Link>
+  ) : (
+    <>0</>
+  );
+};
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
@@ -30,10 +69,11 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'nbOfParticipantsWithMondo',
-    dataIndex: 'nbOfParticipantsWithMondo',
-    title: intl.get('entities.participant.hpo_term'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    key: 'participantsCount',
+    dataIndex: 'name',
+    title: intl.get('entities.participant.mondo_term'),
+    render: (name: string) =>
+      name ? <ParticipantsPhenotypesCount phenotypeName={name} /> : TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

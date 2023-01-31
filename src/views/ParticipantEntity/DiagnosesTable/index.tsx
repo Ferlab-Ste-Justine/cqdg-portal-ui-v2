@@ -2,7 +2,6 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
-import { useParticipantsFromField } from 'graphql/participants/actions';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getDiagnosesColumns from 'views/ParticipantEntity/utils/getDiagnosesColumns';
@@ -13,22 +12,18 @@ import { updateUserConfig } from 'store/user/thunks';
 import { getProTableDictionary } from 'utils/translation';
 
 interface IDiagnosesTableProps {
-  participant: IParticipantEntity;
+  participant?: IParticipantEntity;
   id: string;
+  loading: boolean;
 }
 
-const DiagnosesTable = ({ participant, id }: IDiagnosesTableProps) => {
+const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
   const diagnosesData = participant?.diagnoses
     ? participant.diagnoses?.hits?.edges?.map(({ node }) => ({ ...node, key: node.fhir_id }))
     : [];
-
-  const { data, loading } = useParticipantsFromField({
-    field: '', //TODO: add mondo term field ?
-    value: '', //TODO: add mondo term value ?
-  });
 
   return (
     <EntityTable

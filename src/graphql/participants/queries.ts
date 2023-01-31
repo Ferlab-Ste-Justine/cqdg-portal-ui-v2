@@ -18,6 +18,9 @@ export const GET_PARTICIPANTS = gql`
             is_affected
             vital_status
             submitter_participant_id
+            family_id
+            family_type
+            relationship_to_proband
             files {
               hits {
                 total
@@ -25,9 +28,26 @@ export const GET_PARTICIPANTS = gql`
                   node {
                     file_id
                     sequencing_experiment {
-                      experimental_strategy
+                      #                      experimental_strategy
                       type_of_sequencing
                     }
+                  }
+                }
+              }
+            }
+            family_relationships {
+              hits {
+                total
+                edges {
+                  node {
+                    focus_participant_id
+                    family_id
+                    family_type
+                    focus_participant_id
+                    relationship_to_proband
+                    submitter_family_id
+                    submitter_participant_id
+                    is_affected
                   }
                 }
               }
@@ -157,6 +177,8 @@ export const GET_PARTICIPANTS = gql`
                     diagnosis_mondo_code
                     diagnosis_source_text
                     age_at_diagnosis
+                    diagnosis_icd_display
+                    diagnosis_mondo_display
                   }
                 }
               }

@@ -65,7 +65,7 @@ const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescri
     label: intl.get('entities.participant.family_position'),
     value: (
       <Tag color="purple" className={styles.tag}>
-        {participant?.family_position || TABLE_EMPTY_PLACE_HOLDER}
+        {participant?.relationship_to_proband || TABLE_EMPTY_PLACE_HOLDER}
       </Tag>
     ),
   },

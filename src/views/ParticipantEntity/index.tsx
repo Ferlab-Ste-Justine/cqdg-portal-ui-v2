@@ -79,8 +79,8 @@ const ParticipantEntity = () => {
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-      {data && <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} />}
-      {data && <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} />}
+      <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} loading={loading} />
+      <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} loading={loading} />
       <BiospecimensTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
       <FilesTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
     </EntityPage>

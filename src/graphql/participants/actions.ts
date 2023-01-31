@@ -21,7 +21,7 @@ export const useParticipants = (variables?: QueryVariable): IQueryResults<IParti
 
 export const useParticipantsFromField = ({ field, value }: { field: string; value: string }) => {
   const sqon = {
-    content: [{ content: { field, values: value, index: INDEXES.PARTICIPANT }, op: 'in' }],
+    content: [{ content: { field, value, index: INDEXES.PARTICIPANT }, op: 'in' }],
     op: 'and',
   };
 
@@ -30,10 +30,12 @@ export const useParticipantsFromField = ({ field, value }: { field: string; valu
   });
 
   const data = result?.Participant?.hits?.edges || [];
+  const total = result?.Participant?.hits?.total || 0;
 
   return {
     loading,
     data,
+    total,
   };
 };
 

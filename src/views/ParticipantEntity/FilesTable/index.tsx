@@ -29,26 +29,24 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
   );
 
   return (
-    <div>
-      <EntityTableMultiple
-        id={id}
-        loading={loading}
-        title={intl.get('entities.file.file')}
-        header={intl.get('entities.file.files')}
-        tables={[
-          {
-            columns: getTypeSequencingColumns(),
-            data: typeOfSequencingData,
-            subTitle: intl.get('entities.file.numberByDataTypes'),
-          },
-          {
-            columns: getExperimentalStrategyColumns(),
-            data: experimentalStrategyData,
-            subTitle: intl.get('entities.file.numberByExperimentalStrategy'),
-          },
-        ]}
-      />
-    </div>
+    <EntityTableMultiple
+      id={id}
+      loading={loading}
+      title={intl.get('entities.file.file')}
+      header={intl.get('entities.file.files')}
+      tables={[
+        {
+          columns: getTypeSequencingColumns(),
+          data: typeOfSequencingData,
+          subTitle: intl.get('entities.file.numberByDataTypes'),
+        },
+        {
+          columns: getExperimentalStrategyColumns(),
+          data: experimentalStrategyData,
+          subTitle: intl.get('entities.file.numberByExperimentalStrategy'),
+        },
+      ]}
+    />
   );
 };
 export default FilesTable;
