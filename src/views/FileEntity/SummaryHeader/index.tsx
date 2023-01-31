@@ -19,7 +19,7 @@ interface ISummaryBarProps {
 
 const SummaryHeader = ({ file }: ISummaryBarProps) => (
   <div className={styles.buttonGroup}>
-    <Button className={styles.button} icon={<ReadOutlined />} size="large" block>
+    <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.STUDIES}
@@ -40,11 +40,12 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
           })
         }
       >
+        <ReadOutlined className={styles.icon} />
         <div className={styles.count}>{1}</div>
         <div className={styles.name}>{intl.get('entities.study.study')}</div>
       </Link>
     </Button>
-    <Button className={styles.button} icon={<UserOutlined />} size="large" block>
+    <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -65,6 +66,7 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
           })
         }
       >
+        <UserOutlined className={styles.icon} />
         <div className={styles.count}>{file?.participants?.hits?.total}</div>
         <div className={styles.name}>
           {intl.get('entities.participant.participants', {
@@ -73,7 +75,7 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} icon={<ExperimentOutlined />} size="large" block>
+    <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
@@ -94,6 +96,7 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
           })
         }
       >
+        <ExperimentOutlined className={styles.icon} />
         <div className={styles.count}>{file?.biospecimens?.hits?.total}</div>
         <div className={styles.name}>
           {intl.get('entities.biospecimen.samplesAuto', { count: file?.biospecimens?.hits?.total })}

@@ -26,14 +26,14 @@ const ParticipantEntity = () => {
   });
 
   enum SectionId {
-    SUMMARY = 'SUMMARY',
-    PROFILE = 'PROFILE',
-    FAMILY = 'FAMILY',
-    DATA_ACCESS = 'DATA_ACCESS',
-    DIAGNOSIS = 'DIAGNOSIS',
-    PHENOTYPE = 'PHENOTYPE',
-    BIOSPECIMEN = 'BIOSPECIMEN',
-    DATA_FILE = 'DATA_FILE',
+    SUMMARY = 'summary',
+    PROFILE = 'profile',
+    FAMILY = 'family',
+    DATA_ACCESS = 'data_access',
+    DIAGNOSIS = 'diagnosis',
+    PHENOTYPE = 'phenotype',
+    BIOSPECIMEN = 'biospecimen',
+    DATA_FILE = 'data_file',
   }
 
   const links: IAnchorLink[] = [

@@ -5,6 +5,7 @@ import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { Tag } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { ArrangerResultsTree } from 'graphql/models';
+import { pageId } from 'views/FileEntity/index';
 
 import { formatFileSize } from 'utils/formatFileSize';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -16,7 +17,16 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
     key: 'file_id',
     dataIndex: 'file_id',
     title: intl.get('entities.file.file'),
-    render: (file_id: string) => <Link to={`${STATIC_ROUTES.FILES}/${file_id}`}>{file_id}</Link>,
+    render: (file_id: string) => (
+      <Link
+        to={`${STATIC_ROUTES.FILES}/${file_id}`}
+        onClick={() => {
+          document.getElementById(pageId)?.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      >
+        {file_id}
+      </Link>
+    ),
   },
   {
     key: 'file_name',
