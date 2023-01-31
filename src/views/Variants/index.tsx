@@ -173,7 +173,7 @@ const Variants = () => {
   const menuItems: ISidebarMenuItem[] = [
     {
       key: '1',
-      title: intl.get('screen.variants.sidemenu.participant'),
+      title: intl.get('entities.participant.participant'),
       icon: <UserOutlined className={styles.sideMenuIcon} />,
       panelContent: FiltersContainer(
         participantMappingResults,
@@ -184,7 +184,7 @@ const Variants = () => {
     },
     {
       key: '2',
-      title: intl.get('screen.variants.sidemenu.variant'),
+      title: intl.get('entities.variant.variant'),
       icon: <LineStyleIcon className={styles.sideMenuIcon} />,
       panelContent: FiltersContainer(
         variantMappingResults,
