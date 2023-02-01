@@ -48,3 +48,9 @@ export const formatHpoTitleAndCode = (phenotype: string) => {
 // Format is like: Feces (NCIT:C13234)
 export const extractNcitTissueTitleAndCode = (ncit: string) =>
   titleAndCodeExtractor(ncit, '(NCIT:');
+
+// Format is like: General (DUO:0000042)
+export const extractDuoTitleAndCode = (duo: string) => titleAndCodeExtractor(duo, '(DUO:');
+
+// Format is like: Unspecified cataract (H26.9) or Type 1 diabetes mellitus (E10)
+export const extractIcdTitleAndCode = (duo: string) => titleAndCodeExtractor(duo, '(');

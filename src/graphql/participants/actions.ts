@@ -19,17 +19,27 @@ export const useParticipants = (variables?: QueryVariable): IQueryResults<IParti
   };
 };
 
-interface IUseParticipantProps {
-  field: string;
-  value: string;
-}
+export const useParticipantsFromField = ({ field, value }: { field: string; value: string }) => {
+  const sqon = {
+    content: [{ content: { field, value, index: INDEXES.PARTICIPANT }, op: 'in' }],
+    op: 'and',
+  };
 
-interface IUseParticipantReturn {
-  loading: boolean;
-  data?: IParticipantEntity;
-}
+  const { loading, result } = useLazyResultQuery<IParticipantResultTree>(GET_PARTICIPANTS, {
+    variables: { sqon },
+  });
 
-export const useParticipant = ({ field, value }: IUseParticipantProps): IUseParticipantReturn => {
+  const data = result?.Participant?.hits?.edges || [];
+  const total = result?.Participant?.hits?.total || 0;
+
+  return {
+    loading,
+    data,
+    total,
+  };
+};
+
+export const useParticipant = ({ field, value }: { field: string; value: string }) => {
   const sqon = {
     content: [{ content: { field, value, index: INDEXES.PARTICIPANT }, op: 'in' }],
     op: 'and',

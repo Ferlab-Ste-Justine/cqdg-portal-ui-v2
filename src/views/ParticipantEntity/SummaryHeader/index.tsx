@@ -1,11 +1,11 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { ExperimentOutlined, ReadOutlined, UserOutlined } from '@ant-design/icons';
+import { ExperimentOutlined, FileTextOutlined, ReadOutlined } from '@ant-design/icons';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Button } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { IFileEntity } from 'graphql/files/models';
+import { IParticipantEntity } from 'graphql/participants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
@@ -14,24 +14,24 @@ import { STATIC_ROUTES } from 'utils/routes';
 import styles from './index.module.scss';
 
 interface ISummaryBarProps {
-  file?: IFileEntity;
+  participant?: IParticipantEntity;
 }
 
-const SummaryHeader = ({ file }: ISummaryBarProps) => (
+const SummaryHeader = ({ participant }: ISummaryBarProps) => (
   <div className={styles.buttonGroup}>
     <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.STUDIES}
         onClick={() =>
-          file &&
+          participant &&
           addQuery({
             queryBuilderId: STUDIES_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
                   field: 'study_code',
-                  value: [file.study_code],
+                  value: [participant.study_code],
                   index: INDEXES.STUDY,
                 }),
               ],
@@ -48,47 +48,17 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
     <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-        onClick={() =>
-          file &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'file_id',
-                  value: [file.file_id],
-                  index: INDEXES.FILE,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
-      >
-        <UserOutlined className={styles.icon} />
-        <div className={styles.count}>{file?.participants?.hits?.total}</div>
-        <div className={styles.name}>
-          {intl.get('entities.participant.participants', {
-            count: file?.participants?.hits?.total,
-          })}
-        </div>
-      </Link>
-    </Button>
-    <Button className={styles.button} size="large" block>
-      <Link
-        className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
         onClick={() =>
-          file &&
+          participant &&
           addQuery({
             queryBuilderId: DATA_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
-                  field: 'file_id',
-                  value: [file.file_id],
-                  index: INDEXES.FILE,
+                  field: 'participant_id',
+                  value: [participant.participant_id],
+                  index: INDEXES.PARTICIPANT,
                 }),
               ],
             }),
@@ -97,9 +67,39 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         }
       >
         <ExperimentOutlined className={styles.icon} />
-        <div className={styles.count}>{file?.biospecimens?.hits?.total}</div>
+        <div className={styles.count}>{participant?.biospecimens?.hits?.total}</div>
         <div className={styles.name}>
-          {intl.get('entities.biospecimen.samplesAuto', { count: file?.biospecimens?.hits?.total })}
+          {intl.get('entities.biospecimen.biospecimensAuto', {
+            count: participant?.biospecimens?.hits?.total,
+          })}
+        </div>
+      </Link>
+    </Button>
+    <Button className={styles.button} size="large" block>
+      <Link
+        className={styles.link}
+        to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
+        onClick={() =>
+          participant &&
+          addQuery({
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            query: generateQuery({
+              newFilters: [
+                generateValueFilter({
+                  field: 'participant_id',
+                  value: [participant.participant_id],
+                  index: INDEXES.PARTICIPANT,
+                }),
+              ],
+            }),
+            setAsActive: true,
+          })
+        }
+      >
+        <FileTextOutlined className={styles.icon} />
+        <div className={styles.count}>{participant?.files?.hits?.total}</div>
+        <div className={styles.name}>
+          {intl.get('entities.file.filesAuto', { count: participant?.files?.hits?.total })}
         </div>
       </Link>
     </Button>

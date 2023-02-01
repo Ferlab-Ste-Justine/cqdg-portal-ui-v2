@@ -67,8 +67,8 @@ const en = {
       hpo_term: 'HPO Term',
     },
     file: {
-      file: 'Data File',
-      files: 'Data Files',
+      file: 'File',
+      files: 'Files',
       filesAuto: '{count, plural, =0 {Data File} =1 {Data File} other {Data Files}}',
       file_id: 'ID',
       file_name: 'Name',

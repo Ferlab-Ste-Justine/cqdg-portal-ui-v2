@@ -25,6 +25,10 @@ import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { getProTableDictionary } from 'utils/translation';
 
+import styles from 'views/ParticipantEntity/index.module.scss';
+
+export const pageId = 'file-entity-page';
+
 const FileEntity = () => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
@@ -36,12 +40,12 @@ const FileEntity = () => {
   });
 
   enum SectionId {
-    SUMMARY = 'SUMMARY',
-    DATA_TYPE = 'DATA_TYPE',
-    BIOSPECIMENS = 'BIOSPECIMENS',
-    EXPERIMENTAL_PROCEDURE = 'EXPERIMENTAL_PROCEDURE',
-    ANALYSIS = 'ANALYSIS',
-    ANALYSIS_FILES = 'ANALYSIS_FILES',
+    SUMMARY = 'summary',
+    DATA_TYPE = 'data_type',
+    BIOSPECIMENS = 'biospecimens',
+    EXPERIMENTAL_PROCEDURE = 'experimental_procedure',
+    ANALYSIS = 'analysis',
+    ANALYSIS_FILES = 'analysis_files',
   }
 
   const links: IAnchorLink[] = [
@@ -49,22 +53,25 @@ const FileEntity = () => {
     { href: `#${SectionId.DATA_TYPE}`, title: intl.get('entities.file.dataType') },
     {
       href: `#${SectionId.BIOSPECIMENS}`,
-      title: intl.get('entities.participant.participantsSamples'),
+      title: intl.get('entities.participant.participantSample'),
     },
     {
       href: `#${SectionId.EXPERIMENTAL_PROCEDURE}`,
       title: intl.get('entities.file.experimentalProcedure'),
     },
     { href: `#${SectionId.ANALYSIS}`, title: intl.get('entities.file.analysis') },
-    { href: `#${SectionId.ANALYSIS_FILES}`, title: intl.get('entities.file.analysisFiles') },
   ];
 
   const dataBiospecimensTable: IBiospecimenEntity[] =
     data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
 
   return (
-    <EntityPage loading={loading} data={data} links={links} pageId={'file-entity-page'}>
-      <EntityTitle text={data?.file_id} icon={<FileTextOutlined size={24} />} loading={loading} />
+    <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
+      <EntityTitle
+        text={data?.file_id}
+        icon={<FileTextOutlined className={styles.titleIcon} />}
+        loading={loading}
+      />
       <EntityDescriptions
         id={SectionId.SUMMARY}
         loading={loading}

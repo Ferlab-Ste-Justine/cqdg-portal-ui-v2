@@ -54,4 +54,5 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
     />
   );
 };
+
 export default AnalysisFilesTable;

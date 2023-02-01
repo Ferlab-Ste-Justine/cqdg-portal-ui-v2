@@ -9,7 +9,6 @@ export const GET_PARTICIPANTS = gql`
           node {
             id
             participant_id
-            score
             age_at_recruitment
             age_of_death
             cause_of_death
@@ -19,12 +18,36 @@ export const GET_PARTICIPANTS = gql`
             is_affected
             vital_status
             submitter_participant_id
+            family_id
+            family_type
+            relationship_to_proband
             files {
               hits {
                 total
                 edges {
                   node {
                     file_id
+                    sequencing_experiment {
+                      experimental_strategy
+                      type_of_sequencing
+                    }
+                  }
+                }
+              }
+            }
+            family_relationships {
+              hits {
+                total
+                edges {
+                  node {
+                    focus_participant_id
+                    family_id
+                    family_type
+                    focus_participant_id
+                    relationship_to_proband
+                    submitter_family_id
+                    submitter_participant_id
+                    is_affected
                   }
                 }
               }
@@ -35,6 +58,10 @@ export const GET_PARTICIPANTS = gql`
                 edges {
                   node {
                     sample_id
+                    biospecimen_id
+                    sample_type
+                    biospecimen_tissue_source
+                    age_biospecimen_collection
                   }
                 }
               }
@@ -43,6 +70,14 @@ export const GET_PARTICIPANTS = gql`
             study {
               study_code
               name
+              data_access_codes {
+                access_limitations
+                access_requirements
+              }
+              contact {
+                type
+                value
+              }
             }
             icd_tagged {
               hits {
@@ -62,7 +97,6 @@ export const GET_PARTICIPANTS = gql`
               hits {
                 edges {
                   node {
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -76,7 +110,6 @@ export const GET_PARTICIPANTS = gql`
               hits {
                 edges {
                   node {
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -93,8 +126,6 @@ export const GET_PARTICIPANTS = gql`
                 total
                 edges {
                   node {
-                    id
-                    score
                     age_at_event
                     is_leaf
                     is_tagged
@@ -109,8 +140,6 @@ export const GET_PARTICIPANTS = gql`
                 total
                 edges {
                   node {
-                    id
-                    score
                     age_at_event
                     internal_phenotype_id
                     is_leaf
@@ -118,6 +147,38 @@ export const GET_PARTICIPANTS = gql`
                     name
                     parents
                     source_text
+                  }
+                }
+              }
+            }
+            non_observed_phenotype_tagged {
+              hits {
+                total
+                edges {
+                  node {
+                    age_at_event
+                    internal_phenotype_id
+                    is_leaf
+                    is_tagged
+                    name
+                    parents
+                    source_text
+                  }
+                }
+              }
+            }
+            diagnoses {
+              hits {
+                total
+                edges {
+                  node {
+                    fhir_id
+                    diagnosis_ICD_code
+                    diagnosis_mondo_code
+                    diagnosis_source_text
+                    age_at_diagnosis
+                    diagnosis_icd_display
+                    diagnosis_mondo_display
                   }
                 }
               }

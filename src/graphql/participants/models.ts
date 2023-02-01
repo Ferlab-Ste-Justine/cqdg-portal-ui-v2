@@ -51,6 +51,28 @@ export interface IIcd {
   parents: string[];
 }
 
+export interface IDiagnoses {
+  id: string;
+  fhir_id: string;
+  diagnosis_ICD_code: string;
+  diagnosis_mondo_code: string;
+  diagnosis_source_text: string;
+  age_at_diagnosis: string;
+  diagnosis_icd_display: string;
+  diagnosis_mondo_display: string;
+}
+
+export interface IFamilyRelationships {
+  id: string;
+  family_id: string;
+  family_type: string;
+  focus_participant_id: string;
+  relationship_to_proband: string;
+  submitter_family_id: string;
+  submitter_participant_id: string;
+  is_affected: string;
+}
+
 export interface IParticipantEntity {
   id: string;
   participant_id: string;
@@ -69,8 +91,9 @@ export interface IParticipantEntity {
   study: IStudyEntity;
   study_id: string;
   study_code: string;
-  family_type?: string;
-  family_position?: string;
+  family_id: string;
+  family_type: string;
+  relationship_to_proband: string;
   mondo: ArrangerResultsTree<IMondo>;
   mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;
@@ -78,6 +101,8 @@ export interface IParticipantEntity {
   non_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   icd_tagged: ArrangerResultsTree<IIcd>;
   biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
+  diagnoses: ArrangerResultsTree<IDiagnoses>;
+  family_relationships: ArrangerResultsTree<IFamilyRelationships>;
 }
 
 export type ITableParticipantEntity = IParticipantEntity & {
