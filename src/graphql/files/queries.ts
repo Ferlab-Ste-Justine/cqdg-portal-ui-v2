@@ -47,7 +47,7 @@ export const GET_FILES = gql`
             data_type
             biospecimen_reference
             sequencing_experiment {
-              #              experimental_strategy
+              experimental_strategy
               type_of_sequencing
               read_length
               platform

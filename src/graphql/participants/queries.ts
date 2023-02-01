@@ -28,7 +28,7 @@ export const GET_PARTICIPANTS = gql`
                   node {
                     file_id
                     sequencing_experiment {
-                      #                      experimental_strategy
+                      experimental_strategy
                       type_of_sequencing
                     }
                   }
