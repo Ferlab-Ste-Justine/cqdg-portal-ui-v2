@@ -34,7 +34,7 @@ export interface IStudyEntity {
   data_types: ArrangerResultsTree<IDataType>;
   data_categories: ArrangerResultsTree<IDataType>;
   data_access_codes: IStudyDataAccessCodes;
-  experimental_strategy: string[];
+  experimental_strategies: string[];
   family_count: number;
   family_data: boolean;
   hpo_terms: string[];
