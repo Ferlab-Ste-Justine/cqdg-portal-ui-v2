@@ -72,11 +72,11 @@ const exceedLimit = (participantCount: number) => participantCount > ROW_SELECTI
 const itemIcon = (type: string) => {
   switch (type) {
     case INDEXES.BIOSPECIMEN:
-      return <ExperimentOutlined width="14px" height="14px" />;
+      return <ExperimentOutlined className={styles.icon} />;
     case INDEXES.FILE:
-      return <FileTextOutlined width="14px" height="14px" />;
+      return <FileTextOutlined className={styles.icon} />;
     default:
-      return <UserOutlined width="14px" height="14px" />;
+      return <UserOutlined className={styles.icon} />;
   }
 };
 
@@ -153,7 +153,7 @@ const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuO
       },
       {
         key: 'create',
-        icon: <PlusOutlined />,
+        icon: <PlusOutlined className={styles.icon} />,
         label: intl.get('screen.dataExploration.saveAsNewSet'),
       },
       {
