@@ -176,7 +176,7 @@ const getSetCount = (selected: string[], total: number, allSelected: boolean) =>
   if (allSelected) {
     return total;
   } else {
-    return selected.length === 0 ? total : selected.length;
+    return selected.length;
   }
 };
 
