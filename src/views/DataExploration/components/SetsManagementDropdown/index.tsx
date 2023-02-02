@@ -6,8 +6,6 @@ import {
   FileTextOutlined,
   InfoCircleOutlined,
   PlusOutlined,
-  UsergroupAddOutlined,
-  UsergroupDeleteOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
@@ -20,6 +18,8 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
 
+import PlaylistAdd from 'components/Icons/PlaylistAdd';
+import PlaylistRemove from 'components/Icons/PlaylistRemove';
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
 import { numberWithCommas } from 'utils/string';
@@ -72,11 +72,11 @@ const exceedLimit = (participantCount: number) => participantCount > ROW_SELECTI
 const itemIcon = (type: string) => {
   switch (type) {
     case INDEXES.BIOSPECIMEN:
-      return <ExperimentOutlined width="14px" height="14px" />;
+      return <ExperimentOutlined className={styles.icon} />;
     case INDEXES.FILE:
-      return <FileTextOutlined width="14px" height="14px" />;
+      return <FileTextOutlined className={styles.icon} />;
     default:
-      return <UserOutlined width="14px" height="14px" />;
+      return <UserOutlined className={styles.icon} />;
   }
 };
 
@@ -153,18 +153,18 @@ const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuO
       },
       {
         key: 'create',
-        icon: <PlusOutlined />,
+        icon: <PlusOutlined className={styles.icon} />,
         label: intl.get('screen.dataExploration.saveAsNewSet'),
       },
       {
         key: 'add_ids',
-        icon: <UsergroupAddOutlined />,
+        icon: <PlaylistAdd />,
         label: intl.get('screen.dataExploration.addToExistingSet'),
         disabled: isEditDisabled,
       },
       {
         key: 'remove_ids',
-        icon: <UsergroupDeleteOutlined />,
+        icon: <PlaylistRemove />,
         label: intl.get('screen.dataExploration.removeFromExistingSet'),
         disabled: isEditDisabled,
       },
@@ -176,7 +176,7 @@ const getSetCount = (selected: string[], total: number, allSelected: boolean) =>
   if (allSelected) {
     return total;
   } else {
-    return selected.length === 0 ? total : selected.length;
+    return selected.length;
   }
 };
 
@@ -237,6 +237,7 @@ const SetsManagementDropdown = ({
         />
       )}
       <Dropdown
+        disabled={!selectedKeys?.length}
         overlay={
           <MenuOverlay
             participantCount={getSetCount(selectedKeys || [], results.total, selectedAllResults)}

@@ -5,7 +5,7 @@ const fr = {
   ...translations,
   entities: {
     global: {
-      summary: 'Sommaire',
+      summary: 'Résumé',
     },
     study: {
       study_code: "Code de l'étude",
@@ -83,7 +83,7 @@ const fr = {
       data_type: 'Type',
       data_types: 'Type de données',
       data_category: 'Catégorie',
-      data_access: 'Data Access',
+      data_access: 'Accès aux données',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
       sequencing_experiment: {
