@@ -6,8 +6,6 @@ import {
   FileTextOutlined,
   InfoCircleOutlined,
   PlusOutlined,
-  UsergroupAddOutlined,
-  UsergroupDeleteOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
@@ -20,6 +18,8 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
 
+import PlaylistAdd from 'components/Icons/PlaylistAdd';
+import PlaylistRemove from 'components/Icons/PlaylistRemove';
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
 import { numberWithCommas } from 'utils/string';
@@ -158,13 +158,13 @@ const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuO
       },
       {
         key: 'add_ids',
-        icon: <UsergroupAddOutlined />,
+        icon: <PlaylistAdd />,
         label: intl.get('screen.dataExploration.addToExistingSet'),
         disabled: isEditDisabled,
       },
       {
         key: 'remove_ids',
-        icon: <UsergroupDeleteOutlined />,
+        icon: <PlaylistRemove />,
         label: intl.get('screen.dataExploration.removeFromExistingSet'),
         disabled: isEditDisabled,
       },
