@@ -237,6 +237,7 @@ const SetsManagementDropdown = ({
         />
       )}
       <Dropdown
+        disabled={!selectedKeys?.length}
         overlay={
           <MenuOverlay
             participantCount={getSetCount(selectedKeys || [], results.total, selectedAllResults)}
