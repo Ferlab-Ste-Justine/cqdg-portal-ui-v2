@@ -8,11 +8,11 @@ const titleAndCodeExtractor = (
 ): { title: string; code: string } => {
   if (!value) return { title: '', code: '' };
 
-  const regexTitle = /.*(?=\()/g;
+  const regexTitle = /.*(?= \()/g;
   const title = value.match(regexTitle)?.[0] || '';
 
-  const regexCode = new RegExp(`(?<=${codeSubstring})[a-zA-Z0-9-_]+`, 'g');
-  const code = value.match(regexCode)?.[0] || '';
+  const regexCode = new RegExp(`.*${codeSubstring}([a-zA-Z0-9-_]+)`);
+  const code = value.match(regexCode)?.[1] || '';
 
   return { title, code };
 };
