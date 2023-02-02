@@ -69,6 +69,8 @@ const fr = {
     file: {
       file: 'Fichier',
       files: 'Fichiers',
+      datafile: 'Fichier',
+      datafiles: 'Fichiers',
       filesAuto: '{count, plural, =0 {Fichier} =1 {Fichier} other {Fichiers}}',
       file_id: 'Identifiant',
       file_name: 'Nom',
@@ -747,7 +749,7 @@ const fr = {
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
-          downloadSampleData: "Données d'échantillon",
+          downloadSampleData: "Données d'échantillons",
         },
         datafiles: {
           title: 'Fichiers de données ({count})',
@@ -777,8 +779,8 @@ const fr = {
       filesSelected: 'fichiers séléctionnés',
       fileSelected: 'fichier séléctionné',
       saveFilesSet: "Enregistrer l'ensemble de fichiers",
-      biospecimensSelected: 'Biospecimens séléctionnés',
-      biospecimenSelected: 'Biospecimen séléctionné',
+      biospecimensSelected: 'biospecimens séléctionnés',
+      biospecimenSelected: 'biospecimen séléctionné',
       saveBiospecimensSet: "Enregistrer l'ensemble de biospecimens",
       searchByBiospecimenId: 'Rechercher par ID biospecimen',
       searchByBiospecimenSampleId: 'Recherche par ID d’échantillon',

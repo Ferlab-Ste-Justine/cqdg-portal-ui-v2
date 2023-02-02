@@ -304,7 +304,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
           tab={
             <span>
               <FileTextOutlined />
-              {`${intl.get('entities.file.files')} (${numberWithCommas(fileResults.total)})`}
+              {`${intl.get('entities.file.datafiles')} (${numberWithCommas(fileResults.total)})`}
             </span>
           }
           key={TAB_IDS.DATA_FILES}

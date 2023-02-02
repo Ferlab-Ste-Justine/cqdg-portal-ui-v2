@@ -69,6 +69,8 @@ const en = {
     file: {
       file: 'File',
       files: 'Files',
+      datafile: 'Data File',
+      datafiles: 'Data Files',
       filesAuto: '{count, plural, =0 {Data File} =1 {Data File} other {Data Files}}',
       file_id: 'ID',
       file_name: 'Name',
@@ -689,6 +691,12 @@ const en = {
       tabs: {
         summary: {
           title: 'Summary',
+          global: {
+            nbParticipant: '{count} participants (including descendant terms on this path)',
+            addTermToQuery: 'Add term to active query',
+            currentPath: 'Current Path',
+            centerSubtitleFormatter: 'Participants avec',
+          },
           sociodemographics: {
             cardTitle: 'Sociodemographics',
             genderTitle: 'Gender',
@@ -705,22 +713,11 @@ const en = {
           },
           observed_phenotype_tagged: {
             cardTitle: 'Observed Phenotypes (HPO)',
-            phenotypeTree: {
-              nbParticipant: '{count} participants (including descendant terms on this path)',
-              addTermToQuery: 'Add term to active query',
-              currentPath: 'Current Path',
-            },
             empty: 'No observed phenotypes reported for these participants',
           },
           mondo: {
             cardTitle: ' Diagnosis (MONDO)',
-            phenotypeTree: {
-              nbParticipant: '{count} participants (including descendant terms on this path)',
-              addTermToQuery: 'Add term to active query',
-              currentPath: 'Current Path',
-            },
             empty: 'No diagnoses reported for these participants',
-            centerSubtitleFormatter: 'Participants with',
           },
           studiespie: {
             cardTitle: 'Studies',
@@ -794,8 +791,8 @@ const en = {
       filesSelected: 'files selected',
       fileSelected: 'file selected',
       saveFilesSet: 'Save file set',
-      biospecimensSelected: 'Biospecimens selected',
-      biospecimenSelected: 'Biospecimen selected',
+      biospecimensSelected: 'biospecimens selected',
+      biospecimenSelected: 'biospecimen selected',
       saveBiospecimensSet: 'Save biospecimen set',
       searchByBiospecimenId: 'Search by biospecimen ID',
       saveAsNewSet: 'Save as new set',

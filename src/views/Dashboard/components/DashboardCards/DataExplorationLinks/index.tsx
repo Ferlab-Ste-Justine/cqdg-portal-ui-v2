@@ -83,7 +83,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={stats?.fileSize || '0TB'}
-              subLabel={intl.get('entities.file.files')}
+              subLabel={intl.get('entities.file.datafiles')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
