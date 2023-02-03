@@ -695,7 +695,7 @@ const en = {
             nbParticipant: '{count} participants (including descendant terms on this path)',
             addTermToQuery: 'Add term to active query',
             currentPath: 'Current Path',
-            centerSubtitleFormatter: 'Participants avec',
+            centerSubtitleFormatter: 'Participants with',
           },
           sociodemographics: {
             cardTitle: 'Sociodemographics',
