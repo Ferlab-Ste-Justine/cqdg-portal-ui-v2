@@ -166,7 +166,7 @@ const DataExploration = () => {
     },
     {
       key: TAB_IDS.DATA_FILES,
-      title: intl.get('entities.file.file'),
+      title: intl.get('entities.file.datafile'),
       icon: <FileSearchOutlined className={styles.sideMenuIcon} />,
       panelContent: filtersContainer(
         fileMappingResults,
