@@ -19,6 +19,7 @@ import {
 } from 'views/DataExploration/utils/PhenotypeStore';
 
 import { getCommonColors } from 'common/charts';
+import getStoreConfig from 'store';
 
 import SunburstD3 from './utils/sunburst-d3';
 
@@ -41,6 +42,8 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
   const sunburstRef = useRef<SVGSVGElement>(null);
   const updateSunburst = useRef<(key: any) => void>();
   const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const { store } = getStoreConfig();
+  const locale = store.getState().global.lang;
 
   useEffect(() => {
     setIsLoading(true);
@@ -82,7 +85,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
       updateSunburst.current = undefined;
     };
     // eslint-disable-next-line
-  }, [JSON.stringify(sqon)]);
+  }, [JSON.stringify(sqon), locale]);
 
   const getSelectedPhenotype = (node: TreeNode) => {
     const phenoReversed = (node.key.match(RegexExtractPhenotype) || []).reverse();
