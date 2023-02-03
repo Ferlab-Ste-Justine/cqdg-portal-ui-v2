@@ -226,6 +226,13 @@ const en = {
         title: 'Success',
         fetchReport: 'Report downloaded successfully',
       },
+      clinicalData: {
+        download: 'Download clinical data',
+        family:
+          '{count, plural, =0 {Selected participant & family} =1 {Selected participant & family} other {Selected participants & families}}',
+        participant:
+          '{count, plural, =0 {Selected participant} =1 {Selected participant} other {Selected participants}}',
+      },
     },
     noData: 'No data',
   },
@@ -744,8 +751,6 @@ const en = {
           vitalStatus: 'Vital Status',
           submitterParticipantId: 'External Participant',
           ageAtDeath: 'Age at death',
-          selectedParticipants: 'Selected participants',
-          selectedParticipantsFamilies: 'Selected participants & families',
           downloadClinicalData: 'Download clinical data',
           icdTagged: 'Diagnosis (ICD)',
           diagnosisSourceText: 'Diagnosis (Source Text)',
