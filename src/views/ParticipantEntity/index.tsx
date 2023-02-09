@@ -49,7 +49,7 @@ const ParticipantEntity = () => {
     { href: `#${SectionId.DIAGNOSIS}`, title: intl.get('entities.participant.diagnosis') },
     { href: `#${SectionId.PHENOTYPE}`, title: intl.get('entities.participant.phenotype') },
     { href: `#${SectionId.BIOSPECIMEN}`, title: intl.get('entities.biospecimen.biospecimen') },
-    { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.file.file') },
+    { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.file.datafile') },
   ];
 
   return (
@@ -78,7 +78,9 @@ const ParticipantEntity = () => {
         header={intl.get('entities.participant.profile')}
         title={intl.get('entities.participant.profile')}
       />
-      <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
+      {data?.family_id && data?.family_relationships?.hits?.edges?.length > 1 && (
+        <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
+      )}
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
         loading={loading}
@@ -89,7 +91,7 @@ const ParticipantEntity = () => {
       <DiagnosesTable participant={data} id={SectionId.DIAGNOSIS} loading={loading} />
       <PhenotypesTable participant={data} id={SectionId.PHENOTYPE} loading={loading} />
       <BiospecimensTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
-      <FilesTable participant={data} id={SectionId.BIOSPECIMEN} loading={loading} />
+      <FilesTable participant={data} id={SectionId.DATA_FILE} loading={loading} />
     </EntityPage>
   );
 };

@@ -15,7 +15,7 @@ import styles from '../index.module.scss';
 
 const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.participant.participant_id'),
+    label: intl.get('entities.participant.id'),
     value: participant?.participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
