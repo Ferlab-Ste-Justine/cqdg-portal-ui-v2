@@ -229,6 +229,13 @@ const fr = {
         title: 'Succès',
         fetchReport: 'Rapport téléchargé avec succès',
       },
+      clinicalData: {
+        download: 'Données cliniques',
+        family:
+          '{count, plural, =0 {Participant séléctionné et famille} =1 {Participant séléctionné et famille} other {Participants séléctionnés et familles}}',
+        participant:
+          '{count, plural, =0 {Participant séléctionné} =1 {Participant séléctionné} other {Participants séléctionnés}}',
+      },
     },
     noData: 'Aucune donnée',
   },
@@ -732,8 +739,6 @@ const fr = {
           vitalStatus: 'Statut vital',
           submitterParticipantId: 'Participant externe',
           ageAtDeath: 'Âge au décés',
-          selectedParticipants: 'Participants séléctionnés',
-          selectedParticipantsFamilies: 'Participants séléctionnés et familles',
           downloadClinicalData: 'Données cliniques',
           icdTagged: 'Diagnostic (ICD)',
           diagnosisSourceText: 'Diagnostic (texte source)',

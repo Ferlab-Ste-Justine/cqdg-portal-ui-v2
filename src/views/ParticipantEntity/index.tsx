@@ -12,6 +12,8 @@ import PhenotypesTable from 'views/ParticipantEntity/PhenotypesTable';
 import getDataAccessDescriptions from 'views/ParticipantEntity/utils/getDataAccessDescriptions';
 import getProfileDescriptions from 'views/ParticipantEntity/utils/getProfileDescriptions';
 
+import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
+
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
 import SummaryHeader from './SummaryHeader';
 
@@ -56,6 +58,11 @@ const ParticipantEntity = () => {
         text={data?.participant_id}
         icon={<UserOutlined className={styles.titleIcon} />}
         loading={loading}
+        extra={
+          data && (
+            <DownloadClinicalDataDropdown participantIds={[data.participant_id]} type="primary" />
+          )
+        }
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}

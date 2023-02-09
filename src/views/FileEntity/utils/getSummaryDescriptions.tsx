@@ -8,7 +8,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { formatFileSize } from 'utils/formatFileSize';
 import { truncateString } from 'utils/string';
 
-import styles from 'views/FileEntity/index.module.scss';
+import styles from '../index.module.scss';
 
 const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
@@ -30,7 +30,7 @@ const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] =
   {
     label: intl.get('entities.file.ferload_url'),
     value: (
-      <ExternalLink href={file?.ferload_url}>
+      <ExternalLink href={file?.ferload_url} className={styles.link}>
         {file?.ferload_url ? truncateString(file.ferload_url, 50) : TABLE_EMPTY_PLACE_HOLDER}
       </ExternalLink>
     ),

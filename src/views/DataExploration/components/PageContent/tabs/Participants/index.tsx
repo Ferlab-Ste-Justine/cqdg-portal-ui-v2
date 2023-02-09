@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
@@ -13,7 +12,7 @@ import useQueryBuilderState, {
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Button, Dropdown, Menu, Tag } from 'antd';
+import { Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
 import {
@@ -39,9 +38,9 @@ import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { GENDER, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
-import { ReportType } from 'services/api/reports/models';
+import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchReport, fetchTsvReport } from 'store/report/thunks';
+import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
@@ -326,31 +325,6 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
       ? sqon
       : generateSelectionSqon(INDEXES.PARTICIPANT, selectedKeys);
 
-  const menu = (
-    <Menu
-      onClick={(e) =>
-        dispatch(
-          fetchReport({
-            data: {
-              sqon: getCurrentSqon(),
-              name: e.key,
-            },
-          }),
-        )
-      }
-      items={[
-        {
-          key: ReportType.CLINICAL_DATA,
-          label: intl.get('screen.dataExploration.tabs.participants.selectedParticipants'),
-        },
-        {
-          key: ReportType.CLINICAL_DATA_FAM,
-          label: intl.get('screen.dataExploration.tabs.participants.selectedParticipantsFamilies'),
-        },
-      ]}
-    />
-  );
-
   return (
     <ProTable<ITableParticipantEntity>
       tableId="participants_table"
@@ -408,16 +382,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
             type={SetType.PARTICIPANT}
             selectedKeys={selectedKeys}
           />,
-          <Dropdown
-            key={2}
-            disabled={selectedKeys.length === 0}
-            overlay={menu}
-            placement="bottomLeft"
-          >
-            <Button icon={<DownloadOutlined />}>
-              {intl.get('screen.dataExploration.tabs.participants.downloadClinicalData')}
-            </Button>
-          </Dropdown>,
+          <DownloadClinicalDataDropdown participantIds={selectedKeys} key={2} />,
         ],
       }}
       bordered
