@@ -43,8 +43,8 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
         <div>
           <ReadOutlined className={styles.icon} />
         </div>
-        <div className={styles.count}>{1}</div>
-        <div className={styles.name}>{intl.get('entities.study.study')}</div>
+        <span className={styles.count}>{1}</span>
+        <span className={styles.name}>{intl.get('entities.study.study')}</span>
       </Link>
     </Button>
     <Button className={styles.button} size="large" block>
@@ -69,12 +69,12 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
         }
       >
         <ExperimentOutlined className={styles.icon} />
-        <div className={styles.count}>{participant?.biospecimens?.hits?.total}</div>
-        <div className={styles.name}>
+        <span className={styles.count}>{participant?.biospecimens?.hits?.total}</span>
+        <span className={styles.name}>
           {intl.get('entities.biospecimen.biospecimensAuto', {
             count: participant?.biospecimens?.hits?.total,
           })}
-        </div>
+        </span>
       </Link>
     </Button>
     <Button className={styles.button} size="large" block>
@@ -99,10 +99,10 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
         }
       >
         <FileTextOutlined className={styles.icon} />
-        <div className={styles.count}>{participant?.files?.hits?.total}</div>
-        <div className={styles.name}>
+        <span className={styles.count}>{participant?.files?.hits?.total}</span>
+        <span className={styles.name}>
           {intl.get('entities.file.filesAuto', { count: participant?.files?.hits?.total })}
-        </div>
+        </span>
       </Link>
     </Button>
   </div>
