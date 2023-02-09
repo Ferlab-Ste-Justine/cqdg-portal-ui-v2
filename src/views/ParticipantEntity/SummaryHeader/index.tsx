@@ -40,11 +40,11 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
           })
         }
       >
-        <div>
-          <ReadOutlined className={styles.icon} />
+        <ReadOutlined className={styles.icon} />
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{1}</span>
+          <span className={styles.name}>{intl.get('entities.study.study')}</span>
         </div>
-        <span className={styles.count}>{1}</span>
-        <span className={styles.name}>{intl.get('entities.study.study')}</span>
       </Link>
     </Button>
     <Button className={styles.button} size="large" block>
@@ -69,12 +69,14 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
         }
       >
         <ExperimentOutlined className={styles.icon} />
-        <span className={styles.count}>{participant?.biospecimens?.hits?.total}</span>
-        <span className={styles.name}>
-          {intl.get('entities.biospecimen.biospecimensAuto', {
-            count: participant?.biospecimens?.hits?.total,
-          })}
-        </span>
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{participant?.biospecimens?.hits?.total}</span>
+          <span className={styles.name}>
+            {intl.get('entities.biospecimen.biospecimensAuto', {
+              count: participant?.biospecimens?.hits?.total,
+            })}
+          </span>
+        </div>
       </Link>
     </Button>
     <Button className={styles.button} size="large" block>
@@ -99,10 +101,12 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
         }
       >
         <FileTextOutlined className={styles.icon} />
-        <span className={styles.count}>{participant?.files?.hits?.total}</span>
-        <span className={styles.name}>
-          {intl.get('entities.file.filesAuto', { count: participant?.files?.hits?.total })}
-        </span>
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{participant?.files?.hits?.total}</span>
+          <span className={styles.name}>
+            {intl.get('entities.file.filesAuto', { count: participant?.files?.hits?.total })}
+          </span>
+        </div>
       </Link>
     </Button>
   </div>
