@@ -40,11 +40,11 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
           })
         }
       >
-        <div>
-          <ReadOutlined className={styles.icon} />
+        <ReadOutlined className={styles.icon} />
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{1}</span>
+          <span className={styles.name}>{intl.get('entities.study.study')}</span>
         </div>
-        <div className={styles.count}>{1}</div>
-        <div className={styles.name}>{intl.get('entities.study.study')}</div>
       </Link>
     </Button>
     <Button className={styles.button} size="large" block>
@@ -69,11 +69,13 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         }
       >
         <UserOutlined className={styles.icon} />
-        <div className={styles.count}>{file?.participants?.hits?.total}</div>
-        <div className={styles.name}>
-          {intl.get('entities.participant.participants', {
-            count: file?.participants?.hits?.total,
-          })}
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{file?.participants?.hits?.total}</span>
+          <span className={styles.name}>
+            {intl.get('entities.participant.participants', {
+              count: file?.participants?.hits?.total,
+            })}
+          </span>
         </div>
       </Link>
     </Button>
@@ -99,9 +101,13 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         }
       >
         <ExperimentOutlined className={styles.icon} />
-        <div className={styles.count}>{file?.biospecimens?.hits?.total}</div>
-        <div className={styles.name}>
-          {intl.get('entities.biospecimen.samplesAuto', { count: file?.biospecimens?.hits?.total })}
+        <div className={styles.alignBaseline}>
+          <span className={styles.count}>{file?.biospecimens?.hits?.total}</span>
+          <span className={styles.name}>
+            {intl.get('entities.biospecimen.samplesAuto', {
+              count: file?.biospecimens?.hits?.total,
+            })}
+          </span>
         </div>
       </Link>
     </Button>

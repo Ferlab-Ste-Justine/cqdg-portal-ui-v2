@@ -32,7 +32,7 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
     <EntityTableMultiple
       id={id}
       loading={loading}
-      title={intl.get('entities.file.file')}
+      title={intl.get('entities.file.datafile')}
       header={intl.get('entities.file.files')}
       tables={[
         {

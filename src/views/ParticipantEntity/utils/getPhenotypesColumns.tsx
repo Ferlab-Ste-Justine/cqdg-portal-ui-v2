@@ -71,7 +71,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'participantsCount',
     dataIndex: 'name',
-    title: intl.get('entities.participant.mondo_term'),
+    title: intl.get('entities.participant.hpo_term'),
     render: (name: string) =>
       name ? <ParticipantsPhenotypesCount phenotypeName={name} /> : TABLE_EMPTY_PLACE_HOLDER,
   },

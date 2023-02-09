@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { pageId } from 'views/FileEntity';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -10,7 +11,12 @@ const getFamilyColumns = (): ProColumnType<any>[] => [
     dataIndex: 'submitter_participant_id',
     title: intl.get('entities.participant.participant_id'),
     render: (participant_id: string) => (
-      <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}>{participant_id}</Link>
+      <Link
+        to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}
+        onClick={() => document.getElementById(pageId)?.scrollTo(0, 0)}
+      >
+        {participant_id}
+      </Link>
     ),
   },
   {
