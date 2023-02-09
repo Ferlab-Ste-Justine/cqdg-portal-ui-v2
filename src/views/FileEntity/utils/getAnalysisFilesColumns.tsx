@@ -20,9 +20,7 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
     render: (file_id: string) => (
       <Link
         to={`${STATIC_ROUTES.FILES}/${file_id}`}
-        onClick={() => {
-          document.getElementById(pageId)?.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        onClick={() => document.getElementById(pageId)?.scrollTo(0, 0)}
       >
         {file_id}
       </Link>

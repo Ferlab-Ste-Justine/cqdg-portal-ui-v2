@@ -19,6 +19,8 @@ import SummaryHeader from './SummaryHeader';
 
 import styles from './index.module.scss';
 
+export const pageId = 'participant-entity-page';
+
 const ParticipantEntity = () => {
   const { participant_id } = useParams<{ participant_id: string }>();
 
@@ -53,7 +55,7 @@ const ParticipantEntity = () => {
   ];
 
   return (
-    <EntityPage loading={loading} data={data} links={links} pageId={'participant-entity-page'}>
+    <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
       <EntityTitle
         text={data?.participant_id}
         icon={<UserOutlined className={styles.titleIcon} />}
