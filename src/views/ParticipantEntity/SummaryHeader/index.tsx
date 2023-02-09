@@ -40,7 +40,9 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
           })
         }
       >
-        <ReadOutlined className={styles.icon} />
+        <div>
+          <ReadOutlined className={styles.icon} />
+        </div>
         <div className={styles.count}>{1}</div>
         <div className={styles.name}>{intl.get('entities.study.study')}</div>
       </Link>
