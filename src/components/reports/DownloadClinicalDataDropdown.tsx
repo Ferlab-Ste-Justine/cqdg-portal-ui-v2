@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Dropdown, Menu } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
 import { ReportType } from 'services/api/reports/models';
@@ -17,7 +18,8 @@ interface OwnProps {
 const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }: OwnProps) => {
   const dispatch = useDispatch();
 
-  const getCurrentSqon = (): any => sqon || generateSelectionSqon('participant_id', participantIds);
+  const getCurrentSqon = (): any =>
+    sqon || generateSelectionSqon(INDEXES.PARTICIPANT, participantIds);
 
   const menu = (
     <Menu
