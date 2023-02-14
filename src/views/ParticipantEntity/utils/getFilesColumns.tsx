@@ -20,6 +20,28 @@ interface IFileInfoByType {
   participant_id: string;
 }
 
+export const getDataTypeInfo = (files: IFileEntity[], key: string, participant_id?: string) => {
+  const filesInfosData: IFileInfoByType[] = [];
+  for (const file of files) {
+    // @ts-ignore
+    const valueOfKey: string = file[key];
+    const filesFound = files.filter(
+      // @ts-ignore
+      (file) => file[key] === valueOfKey,
+    );
+    if (!filesInfosData.find((file) => file.value === valueOfKey)) {
+      filesInfosData.push({
+        key,
+        value: valueOfKey,
+        nb_files: filesFound.length,
+        proportion_of_files: (filesFound.length / files.length) * 100,
+        participant_id: participant_id || '',
+      });
+    }
+  }
+  return filesInfosData;
+};
+
 // get files info by sequencing_experiment key (ex: experimental_strategy or type_of_sequencing)
 export const getFilesInfoByKey = (files: IFileEntity[], key: string, participant_id?: string) => {
   const filesInfosData: IFileInfoByType[] = [];
@@ -35,7 +57,7 @@ export const getFilesInfoByKey = (files: IFileEntity[], key: string, participant
         key,
         value: valueOfKey,
         nb_files: filesFound.length,
-        proportion_of_files: (filesFound.length / filesFound.length) * 100,
+        proportion_of_files: (filesFound.length / files.length) * 100,
         participant_id: participant_id || '',
       });
     }
@@ -43,7 +65,7 @@ export const getFilesInfoByKey = (files: IFileEntity[], key: string, participant
   return filesInfosData;
 };
 
-export const getExperimentalStrategyColumns = (): ProColumnType<any>[] => [
+export const getExperimentalStrategyColumns = (files_nb: number): ProColumnType<any>[] => [
   {
     key: 'value',
     dataIndex: 'value',
@@ -85,7 +107,7 @@ export const getExperimentalStrategyColumns = (): ProColumnType<any>[] => [
   {
     key: 'proportion_of_files',
     dataIndex: 'proportion_of_files',
-    title: intl.get('entities.file.n=2'),
+    title: intl.get('entities.file.n=2', { count: files_nb }),
     tooltip: intl.get('entities.file.nTooltip'),
     render: (percent: number) => (
       <Progress percent={percent} showInfo={false} strokeColor={blue[5]} />
@@ -93,7 +115,7 @@ export const getExperimentalStrategyColumns = (): ProColumnType<any>[] => [
   },
 ];
 
-export const getTypeSequencingColumns = (): ProColumnType<any>[] => [
+export const getTypeSequencingColumns = (files_nb: number): ProColumnType<any>[] => [
   {
     key: 'value',
     dataIndex: 'value',
@@ -135,7 +157,7 @@ export const getTypeSequencingColumns = (): ProColumnType<any>[] => [
   {
     key: 'proportion_of_files',
     dataIndex: 'proportion_of_files',
-    title: intl.get('entities.file.n=2'),
+    title: intl.get('entities.file.n=2', { count: files_nb }),
     tooltip: intl.get('entities.file.nTooltip'),
     render: (percent: number) => (
       <Progress percent={percent} showInfo={false} strokeColor={blue[5]} />

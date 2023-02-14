@@ -48,7 +48,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
               index: INDEXES.BIOSPECIMEN,
               sqon: generateSelectionSqon(
                 INDEXES.BIOSPECIMEN,
-                biospecimensData.map((b) => b.biospecimen_id),
+                biospecimensData.map((b) => b.sample_id),
               ),
             }),
           ),
