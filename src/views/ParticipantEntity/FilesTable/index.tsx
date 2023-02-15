@@ -3,8 +3,8 @@ import { EntityTableMultiple } from '@ferlab/ui/core/pages/EntityPage';
 import { IFileEntity } from 'graphql/files/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import {
-  getDataTypeInfo,
   getExperimentalStrategyColumns,
+  getFilesDataTypeInfo,
   getFilesInfoByKey,
   getTypeSequencingColumns,
 } from 'views/ParticipantEntity/utils/getFilesColumns';
@@ -18,7 +18,7 @@ interface IFilesTableProps {
 const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
   const files: IFileEntity[] = participant?.files?.hits.edges.map(({ node }) => node) || [];
 
-  const typeOfSequencingData = getDataTypeInfo(files, 'data_type', participant?.participant_id);
+  const typeOfSequencingData = getFilesDataTypeInfo(files, participant?.participant_id);
   const experimentalStrategyData = getFilesInfoByKey(
     files,
     'experimental_strategy',

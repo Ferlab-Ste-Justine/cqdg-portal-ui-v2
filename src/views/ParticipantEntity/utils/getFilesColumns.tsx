@@ -20,19 +20,15 @@ interface IFileInfoByType {
   participant_id: string;
 }
 
-export const getDataTypeInfo = (files: IFileEntity[], key: string, participant_id?: string) => {
+/** Join files by data_type */
+export const getFilesDataTypeInfo = (files: IFileEntity[], participant_id?: string) => {
   const filesInfosData: IFileInfoByType[] = [];
   for (const file of files) {
-    // @ts-ignore
-    const valueOfKey: string = file[key];
-    const filesFound = files.filter(
-      // @ts-ignore
-      (file) => file[key] === valueOfKey,
-    );
-    if (!filesInfosData.find((file) => file.value === valueOfKey)) {
+    const filesFound = files.filter(({ data_type }) => data_type === file.data_type);
+    if (!filesInfosData.find((f) => f.value === file.data_type)) {
       filesInfosData.push({
-        key: valueOfKey,
-        value: valueOfKey,
+        key: file.data_type,
+        value: file.data_type,
         nb_files: filesFound.length,
         proportion_of_files: (filesFound.length / files.length) * 100,
         participant_id: participant_id || '',
@@ -42,7 +38,7 @@ export const getDataTypeInfo = (files: IFileEntity[], key: string, participant_i
   return filesInfosData;
 };
 
-// get files info by sequencing_experiment key (ex: experimental_strategy or type_of_sequencing)
+/** Join files by sequencing_experiment key (ex: experimental_strategy) */
 export const getFilesInfoByKey = (files: IFileEntity[], key: string, participant_id?: string) => {
   const filesInfosData: IFileInfoByType[] = [];
   for (const file of files) {
