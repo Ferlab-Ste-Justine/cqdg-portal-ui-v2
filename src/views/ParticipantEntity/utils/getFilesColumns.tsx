@@ -31,7 +31,7 @@ export const getDataTypeInfo = (files: IFileEntity[], key: string, participant_i
     );
     if (!filesInfosData.find((file) => file.value === valueOfKey)) {
       filesInfosData.push({
-        key,
+        key: valueOfKey,
         value: valueOfKey,
         nb_files: filesFound.length,
         proportion_of_files: (filesFound.length / files.length) * 100,
@@ -54,7 +54,7 @@ export const getFilesInfoByKey = (files: IFileEntity[], key: string, participant
     );
     if (!filesInfosData.find((file) => file.value === valueOfKey)) {
       filesInfosData.push({
-        key,
+        key: valueOfKey,
         value: valueOfKey,
         nb_files: filesFound.length,
         proportion_of_files: (filesFound.length / files.length) * 100,
