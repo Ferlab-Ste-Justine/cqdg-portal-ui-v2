@@ -6,6 +6,7 @@ import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQuery
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { INDEXES } from 'graphql/constants';
 import { useParticipantsFromField } from 'graphql/participants/actions';
+import { IDiagnoses } from 'graphql/participants/models';
 import capitalize from 'lodash/capitalize';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
@@ -16,7 +17,13 @@ import {
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
 
-const ParticipantsMondoCount = ({ diagnosis_mondo_code }: { diagnosis_mondo_code: string }) => {
+const ParticipantsMondoCount = ({
+  diagnosis_mondo_code,
+  diagnosis_mondo_display,
+}: {
+  diagnosis_mondo_code: string;
+  diagnosis_mondo_display: string;
+}) => {
   const { loading, total } = useParticipantsFromField({
     field: 'diagnoses.diagnosis_mondo_code',
     value: diagnosis_mondo_code,
@@ -31,8 +38,8 @@ const ParticipantsMondoCount = ({ diagnosis_mondo_code }: { diagnosis_mondo_code
           query: generateQuery({
             newFilters: [
               generateValueFilter({
-                field: 'diagnoses.diagnosis_mondo_code',
-                value: [diagnosis_mondo_code],
+                field: 'mondo.name',
+                value: [diagnosis_mondo_display],
                 index: INDEXES.PARTICIPANT,
               }),
             ],
@@ -74,7 +81,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       return (
         <>
           {capitalize(title)} (
-          <ExternalLink href={`http://purl.bioontology.org/ontology/ICD9CM/${code}`}>
+          <ExternalLink href={`http://purl.bioontology.org/ontology/ICD10CM/${code}`}>
             {code}
           </ExternalLink>
           )
@@ -86,7 +93,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     key: 'diagnoses.diagnosis_source_text',
     dataIndex: 'diagnosis_source_text',
     title: intl.get('entities.participant.diagnosis_source_text'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (label: string) => (label ? capitalize(label) : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'diagnoses.age_at_diagnosis',
@@ -103,14 +110,19 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   },
   {
     key: 'diagnoses.participantsCount',
-    dataIndex: 'diagnosis_mondo_code',
     title: intl.get('entities.participant.mondo_term'),
-    render: (diagnosis_mondo_code: string) =>
-      diagnosis_mondo_code ? (
-        <ParticipantsMondoCount diagnosis_mondo_code={diagnosis_mondo_code} />
+    tooltip: intl.get('entities.participant.mondo_term_tooltip'),
+    render: (diagnosis: IDiagnoses) => {
+      const { diagnosis_mondo_display, diagnosis_mondo_code } = diagnosis;
+      return diagnosis_mondo_code && diagnosis_mondo_display ? (
+        <ParticipantsMondoCount
+          diagnosis_mondo_code={diagnosis_mondo_code}
+          diagnosis_mondo_display={diagnosis_mondo_display}
+        />
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
-      ),
+      );
+    },
   },
 ];
 

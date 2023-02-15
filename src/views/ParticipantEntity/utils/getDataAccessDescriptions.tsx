@@ -17,6 +17,10 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
         dataSource={participant.study.data_access_codes.access_limitations}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
         renderItem={(access_limitation, index) => {
           const limitation = extractDuoTitleAndCode(access_limitation);
           return limitation ? (
@@ -45,6 +49,10 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
         dataSource={participant.study.data_access_codes.access_requirements}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
         renderItem={(access_requirement, index) => {
           const requirement = extractDuoTitleAndCode(access_requirement);
           return requirement ? (

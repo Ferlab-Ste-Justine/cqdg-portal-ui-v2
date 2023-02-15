@@ -4,6 +4,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import {
   getExperimentalStrategyColumns,
+  getFilesDataTypeInfo,
   getFilesInfoByKey,
   getTypeSequencingColumns,
 } from 'views/ParticipantEntity/utils/getFilesColumns';
@@ -17,11 +18,7 @@ interface IFilesTableProps {
 const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
   const files: IFileEntity[] = participant?.files?.hits.edges.map(({ node }) => node) || [];
 
-  const typeOfSequencingData = getFilesInfoByKey(
-    files,
-    'type_of_sequencing',
-    participant?.participant_id,
-  );
+  const typeOfSequencingData = getFilesDataTypeInfo(files, participant?.participant_id);
   const experimentalStrategyData = getFilesInfoByKey(
     files,
     'experimental_strategy',
@@ -36,12 +33,12 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
       header={intl.get('entities.file.files')}
       tables={[
         {
-          columns: getTypeSequencingColumns(),
+          columns: getTypeSequencingColumns(experimentalStrategyData.length),
           data: typeOfSequencingData,
           subTitle: intl.get('entities.file.numberByDataTypes'),
         },
         {
-          columns: getExperimentalStrategyColumns(),
+          columns: getExperimentalStrategyColumns(experimentalStrategyData.length),
           data: experimentalStrategyData,
           subTitle: intl.get('entities.file.numberByExperimentalStrategy'),
         },

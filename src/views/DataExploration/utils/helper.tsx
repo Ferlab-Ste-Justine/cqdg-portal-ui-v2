@@ -11,7 +11,7 @@ const titleAndCodeExtractor = (
   const regexTitle = /.*(?= \()/g;
   const title = value.match(regexTitle)?.[0] || '';
 
-  const regexCode = new RegExp(`.*${codeSubstring}([a-zA-Z0-9-_]+)`);
+  const regexCode = new RegExp(`.*${codeSubstring}([a-zA-Z0-9-_.]+)`);
   const code = value.match(regexCode)?.[1] || '';
 
   return { title, code };

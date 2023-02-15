@@ -7,7 +7,6 @@ import { Button } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -22,17 +21,17 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
     <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
-        to={STATIC_ROUTES.STUDIES}
+        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
         onClick={() =>
           participant &&
           addQuery({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
                   field: 'study_code',
                   value: [participant.study_code],
-                  index: INDEXES.STUDY,
+                  index: INDEXES.PARTICIPANT,
                 }),
               ],
             }),
