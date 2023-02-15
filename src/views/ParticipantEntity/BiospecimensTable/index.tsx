@@ -6,11 +6,11 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getBiospecimensColumns from 'views/ParticipantEntity/utils/getBiospecimensColumns';
 
+import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { getProTableDictionary } from 'utils/translation';
-
 interface IBiospecimensTableProps {
   participant?: IParticipantEntity;
   id: string;
@@ -57,6 +57,9 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
           dispatch(
             updateUserConfig({ participants: { tables: { biospecimens: { columns: newState } } } }),
           ),
+        extra: [
+          <DownloadSampleDataButton key={1} sampleIds={biospecimensData.map((b) => b.sample_id)} />,
+        ],
       }}
     />
   );

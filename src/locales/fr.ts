@@ -48,7 +48,7 @@ const fr = {
       age_at_diagnosis: 'Âge',
       age_at_diagnosis_tooltip: 'Âge au diagnostic (jours)',
       age_at_phenotype: 'Âge',
-      age_at_phenotype_tooltip: 'Âge au phenotype du biospécimen (jours)',
+      age_at_phenotype_tooltip: 'Âge au phénotype du biospécimen (jours)',
       phenotype: 'Phénotype',
       phenotypes: 'Phénotypes',
       family_type: 'Type de famille',
@@ -239,6 +239,9 @@ const fr = {
           '{count, plural, =0 {Participant séléctionné et famille} =1 {Participant séléctionné et famille} other {Participants séléctionnés et familles}}',
         participant:
           '{count, plural, =0 {Participant séléctionné} =1 {Participant séléctionné} other {Participants séléctionnés}}',
+      },
+      sampleData: {
+        download: "Données d'échantillons",
       },
     },
     noData: 'Aucune donnée',
@@ -758,7 +761,6 @@ const fr = {
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
-          downloadSampleData: "Données d'échantillons",
         },
         datafiles: {
           title: 'Fichiers de données ({count})',

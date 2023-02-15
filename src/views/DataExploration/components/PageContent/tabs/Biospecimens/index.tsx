@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
@@ -11,7 +10,6 @@ import useQueryBuilderState, {
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Button } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
@@ -28,9 +26,9 @@ import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
-import { ReportType } from 'services/api/reports/models';
+import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchReport, fetchTsvReport } from 'store/report/thunks';
+import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
@@ -220,23 +218,7 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
             type={SetType.BIOSPECIMEN}
             selectedKeys={selectedKeys}
           />,
-          <Button
-            key={2}
-            icon={<DownloadOutlined />}
-            onClick={() =>
-              dispatch(
-                fetchReport({
-                  data: {
-                    sqon: getCurrentSqon(),
-                    name: ReportType.BIOSEPCIMEN_DATA,
-                  },
-                }),
-              )
-            }
-            disabled={selectedKeys.length === 0}
-          >
-            {intl.get('screen.dataExploration.tabs.biospecimens.downloadSampleData')}
-          </Button>,
+          <DownloadSampleDataButton key={2} sampleIds={selectedKeys} sqon={getCurrentSqon()} />,
         ],
       }}
       bordered

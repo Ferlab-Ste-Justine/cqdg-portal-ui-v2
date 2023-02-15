@@ -237,6 +237,9 @@ const en = {
         participant:
           '{count, plural, =0 {Selected participant} =1 {Selected participant} other {Selected participants}}',
       },
+      sampleData: {
+        download: 'Download sample data',
+      },
     },
     noData: 'No data',
   },
@@ -770,7 +773,6 @@ const en = {
           age_biospecimen_collection: 'Age',
           age_biospecimen_collectionTooltip: 'Age at Biospecimen Collection',
           files: 'Files',
-          downloadSampleData: 'Download sample data',
         },
         datafiles: {
           title: 'Data Files ({count})',
