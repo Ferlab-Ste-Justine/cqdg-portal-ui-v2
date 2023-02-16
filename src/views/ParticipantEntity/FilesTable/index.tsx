@@ -3,10 +3,10 @@ import { EntityTableMultiple } from '@ferlab/ui/core/pages/EntityPage';
 import { IFileEntity } from 'graphql/files/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import {
+  getDataTypeColumns,
   getExperimentalStrategyColumns,
   getFilesDataTypeInfo,
   getFilesInfoByKey,
-  getTypeSequencingColumns,
 } from 'views/ParticipantEntity/utils/getFilesColumns';
 
 interface IFilesTableProps {
@@ -18,7 +18,7 @@ interface IFilesTableProps {
 const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
   const files: IFileEntity[] = participant?.files?.hits.edges.map(({ node }) => node) || [];
 
-  const typeOfSequencingData = getFilesDataTypeInfo(files, participant?.participant_id);
+  const dataTypeInfoData = getFilesDataTypeInfo(files, participant?.participant_id);
   const experimentalStrategyData = getFilesInfoByKey(
     files,
     'experimental_strategy',
@@ -33,12 +33,12 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
       header={intl.get('entities.file.files')}
       tables={[
         {
-          columns: getTypeSequencingColumns(experimentalStrategyData.length),
-          data: typeOfSequencingData,
+          columns: getDataTypeColumns(files.length),
+          data: dataTypeInfoData,
           subTitle: intl.get('entities.file.numberByDataTypes'),
         },
         {
-          columns: getExperimentalStrategyColumns(experimentalStrategyData.length),
+          columns: getExperimentalStrategyColumns(files.length),
           data: experimentalStrategyData,
           subTitle: intl.get('entities.file.numberByExperimentalStrategy'),
         },

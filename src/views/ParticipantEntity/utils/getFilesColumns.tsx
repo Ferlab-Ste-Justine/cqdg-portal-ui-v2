@@ -111,7 +111,7 @@ export const getExperimentalStrategyColumns = (files_nb: number): ProColumnType<
   },
 ];
 
-export const getTypeSequencingColumns = (files_nb: number): ProColumnType<any>[] => [
+export const getDataTypeColumns = (files_nb: number): ProColumnType<any>[] => [
   {
     key: 'value',
     dataIndex: 'value',
@@ -136,7 +136,7 @@ export const getTypeSequencingColumns = (files_nb: number): ProColumnType<any>[]
                     index: INDEXES.PARTICIPANT,
                   }),
                   generateValueFilter({
-                    field: 'sequencing_experiment.type_of_sequencing',
+                    field: 'data_type',
                     value: [filesInfo.value],
                     index: INDEXES.FILE,
                   }),

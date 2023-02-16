@@ -90,7 +90,8 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
 
     try {
       const d = new Date();
-      const dateFormatted = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+      const dateFormatted = `${d.getFullYear()}-${months[d.getMonth()]}-${d.getDate()}`;
       const filename = `cqdg-${args.index.toLowerCase()}-table`;
       const formattedFileName = `${filename}-${dateFormatted}.tsv`;
 

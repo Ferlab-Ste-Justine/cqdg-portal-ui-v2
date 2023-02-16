@@ -18,15 +18,13 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
 
 const ParticipantsMondoCount = ({
-  diagnosis_mondo_code,
   diagnosis_mondo_display,
 }: {
-  diagnosis_mondo_code: string;
   diagnosis_mondo_display: string;
 }) => {
   const { loading, total } = useParticipantsFromField({
-    field: 'diagnoses.diagnosis_mondo_code',
-    value: diagnosis_mondo_code,
+    field: 'mondo.name',
+    value: diagnosis_mondo_display,
   });
   if (loading) return <>{TABLE_EMPTY_PLACE_HOLDER}</>;
   return total ? (
@@ -115,10 +113,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     render: (diagnosis: IDiagnoses) => {
       const { diagnosis_mondo_display, diagnosis_mondo_code } = diagnosis;
       return diagnosis_mondo_code && diagnosis_mondo_display ? (
-        <ParticipantsMondoCount
-          diagnosis_mondo_code={diagnosis_mondo_code}
-          diagnosis_mondo_display={diagnosis_mondo_display}
-        />
+        <ParticipantsMondoCount diagnosis_mondo_display={diagnosis_mondo_display} />
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       );
