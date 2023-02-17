@@ -81,7 +81,7 @@ interface IDownloadFileManifestProps {
   type?: 'default' | 'primary';
 }
 
-const DownloadFileManifest = ({ files, sqon, type = 'primary' }: IDownloadFileManifestProps) => {
+const DownloadFileManifest = ({ files, sqon, type = 'default' }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -98,7 +98,12 @@ const DownloadFileManifest = ({ files, sqon, type = 'primary' }: IDownloadFileMa
 
   return (
     <>
-      <Button icon={<DownloadOutlined />} onClick={() => setIsModalVisible(true)} type={type}>
+      <Button
+        icon={<DownloadOutlined />}
+        onClick={() => setIsModalVisible(true)}
+        type={type}
+        disabled={!files.length}
+      >
         {intl.get('api.report.fileManifest.button')}
       </Button>
       <Modal

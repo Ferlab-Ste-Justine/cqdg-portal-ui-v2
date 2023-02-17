@@ -72,7 +72,7 @@ const FileEntity = () => {
         text={data?.file_id}
         icon={<FileTextOutlined className={styles.titleIcon} />}
         loading={loading}
-        extra={data && <DownloadFileManifest files={[data]} />}
+        extra={data && <DownloadFileManifest files={[data]} type="primary" />}
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}

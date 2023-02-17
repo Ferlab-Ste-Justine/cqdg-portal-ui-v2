@@ -244,7 +244,7 @@ const fr = {
       },
       fileManifest: {
         button: 'Manifeste',
-        title: 'Manifeste de fichier',
+        title: 'Fichier manifeste',
         okText: 'Télécharger',
         cancel: 'Annuler',
         text: `Télécharger un manifeste des fichiers sélectionnés. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG*. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,

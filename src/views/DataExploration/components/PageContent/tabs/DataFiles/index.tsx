@@ -26,6 +26,7 @@ import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
+import DownloadFileManifest from 'components/reports/DownloadFileManifest';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
@@ -308,6 +309,11 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
             selectedAllResults={selectedAllResults}
             type={SetType.FILE}
             selectedKeys={selectedKeys}
+          />,
+          <DownloadFileManifest
+            key={2}
+            files={results.data.filter((r) => selectedKeys.includes(r.file_id))}
+            sqon={getCurrentSqon()}
           />,
         ],
       }}
