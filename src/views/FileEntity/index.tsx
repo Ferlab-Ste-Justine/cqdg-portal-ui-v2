@@ -20,6 +20,7 @@ import getDataTypeDescriptions from 'views/FileEntity/utils/getDataTypeDescripti
 import getExperimentalProcedureDescriptions from 'views/FileEntity/utils/getExperimentalProcedureDescriptions';
 import getSummaryDescriptions from 'views/FileEntity/utils/getSummaryDescriptions';
 
+import DownloadFileManifest from 'components/reports/DownloadFileManifest';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
@@ -50,7 +51,7 @@ const FileEntity = () => {
 
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('entities.global.summary') },
-    { href: `#${SectionId.DATA_TYPE}`, title: intl.get('entities.file.dataType') },
+    { href: `#${SectionId.DATA_TYPE}`, title: intl.get('entities.file.data_type') },
     {
       href: `#${SectionId.BIOSPECIMENS}`,
       title: intl.get('entities.participant.participantSample'),
@@ -71,6 +72,7 @@ const FileEntity = () => {
         text={data?.file_id}
         icon={<FileTextOutlined className={styles.titleIcon} />}
         loading={loading}
+        extra={data && <DownloadFileManifest files={[data]} />}
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}
@@ -83,8 +85,8 @@ const FileEntity = () => {
         id={SectionId.DATA_TYPE}
         loading={loading}
         descriptions={getDataTypeDescriptions(data)}
-        header={intl.get('entities.file.dataType')}
-        title={intl.get('entities.file.dataType')}
+        header={intl.get('entities.file.data_type')}
+        title={intl.get('entities.file.data_type')}
       />
       <EntityTable
         id={SectionId.BIOSPECIMENS}

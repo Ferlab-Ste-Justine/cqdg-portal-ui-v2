@@ -39,7 +39,7 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
           label: intl.get('api.report.clinicalData.participant', { count: participantIds.length }),
         },
         {
-          key: ReportType.CLINICAL_DATA_FAM,
+          key: ReportType.CLINICAL_DATA_FAMILY,
           label: intl.get('api.report.clinicalData.family', { count: participantIds.length }),
         },
       ]}

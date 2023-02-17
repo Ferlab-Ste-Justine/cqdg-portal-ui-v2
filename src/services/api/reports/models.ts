@@ -7,6 +7,8 @@ export type ReportConfig = {
 
 export enum ReportType {
   CLINICAL_DATA = 'clinicalData',
-  CLINICAL_DATA_FAM = 'familyClinicalData',
-  BIOSEPCIMEN_DATA = 'biospecimenData',
+  CLINICAL_DATA_FAMILY = 'familyClinicalData',
+  BIOSPECIMEN_DATA = 'biospecimenData',
+  FILE_MANIFEST = 'manifest',
+  FILE_MANIFEST_FAMILY = 'familyManifest',
 }

@@ -8,14 +8,11 @@ export const getDefaultContentType = (responseType: string) => {
   switch (responseType) {
     case 'json':
       return 'application/json';
-
     case 'text':
       return 'text/plain;charset=utf-8';
-
     case 'arraybuffer':
     case 'blob':
       return fallbackContentType;
-
     case 'document':
     case 'stream': // unsupported by axios on the browser. The Fetch API Supports it, though.
     default:
@@ -29,14 +26,12 @@ const getBlobFromResponse = (res: AxiosResponse<any, any>, responseType = 'json'
   switch (responseType) {
     case 'blob':
       return res.data;
-
     case 'json':
     case 'text':
     case 'arraybuffer':
       return new Blob([res.data], {
         type: contentType,
       });
-
     case 'document':
     case 'stream': // unsupported by axios on the browser. The Fetch API Supports it, though.
     default:
@@ -56,11 +51,12 @@ const getBlobFromResponse = (res: AxiosResponse<any, any>, responseType = 'json'
  * @returns {Promise<void>} a promise that resolve to `void` once the request is done.
  */
 const downloader = async (opts: AxiosRequestConfig = {}) => {
-  if (opts.responseType && ['stream', 'document'].includes(opts.responseType)) {
-    throw new Error(`Unsupported responseType "${opts.responseType}" provided.`);
-  }
+  try {
+    if (opts.responseType && ['stream', 'document'].includes(opts.responseType)) {
+      throw new Error(`Unsupported responseType "${opts.responseType}" provided.`);
+    }
 
-  return axios(opts).then((response) => {
+    const response = await axios(opts);
     const blob = getBlobFromResponse(response, opts.responseType);
 
     let filename;
@@ -82,6 +78,10 @@ const downloader = async (opts: AxiosRequestConfig = {}) => {
     }
 
     saveAs(blob, filename);
-  });
+  } catch (err) {
+    console.error('downloader error', err);
+    throw err;
+  }
 };
+
 export default downloader;

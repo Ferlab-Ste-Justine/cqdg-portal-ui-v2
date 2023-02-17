@@ -9,27 +9,26 @@ import downloader from 'common/downloader';
 import { ReportConfig, ReportType } from './models';
 
 const REPORT_API_URL = EnvironmentVariables.configFor('REPORTS_API_URL');
-const arrangerProjectId = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
+const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
 
 const REPORTS_ROUTES = {
   [ReportType.CLINICAL_DATA]: `${REPORT_API_URL}/reports/clinical-data`,
-  [ReportType.CLINICAL_DATA_FAM]: `${REPORT_API_URL}/reports/family-clinical-data`,
-  [ReportType.BIOSEPCIMEN_DATA]: `${REPORT_API_URL}/reports/biospecimen-data`,
+  [ReportType.CLINICAL_DATA_FAMILY]: `${REPORT_API_URL}/reports/clinical-data-family`,
+  [ReportType.BIOSPECIMEN_DATA]: `${REPORT_API_URL}/reports/biospecimen-data`,
+  [ReportType.FILE_MANIFEST]: `${REPORT_API_URL}/reports/file-manifest`,
+  [ReportType.FILE_MANIFEST_FAMILY]: `${REPORT_API_URL}/reports/file-manifest-family`,
 };
 
 const headers = () => ({
   'Content-Type': 'application/json',
   Accept: '*/*',
   Authorization: `Bearer ${keycloak.token}`,
-  'Accept-Encoding': 'gzip, deflate, br',
 });
 
 const generateReport = (config: ReportConfig) => {
   const name = config.name;
 
-  //TODO do we need google analytics tracking?
   let reportSqon;
-
   if (!config.sqon || isEmpty(config.sqon)) {
     reportSqon = {
       op: BooleanOperators.and,
@@ -46,7 +45,7 @@ const generateReport = (config: ReportConfig) => {
     responseType: 'blob',
     data: {
       sqon: reportSqon,
-      projectId: arrangerProjectId,
+      projectId: ARRANGER_PROJECT_ID,
       filename: format(new Date(), `'cqdg_${name}'_yyyyMMdd'.xlsx'`),
     },
     headers: headers(),

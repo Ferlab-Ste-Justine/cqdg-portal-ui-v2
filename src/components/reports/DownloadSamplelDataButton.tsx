@@ -29,7 +29,7 @@ const DownloadSampleDataButton = ({ sampleIds, sqon, type = 'default' }: OwnProp
           fetchReport({
             data: {
               sqon: getCurrentSqon(),
-              name: ReportType.BIOSEPCIMEN_DATA,
+              name: ReportType.BIOSPECIMEN_DATA,
             },
           }),
         )

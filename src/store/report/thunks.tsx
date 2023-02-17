@@ -54,20 +54,20 @@ const fetchReport = createAsyncThunk<
       globalActions.displayMessage({
         type: 'loading',
         key: messageKey,
-        content: 'Please wait while we generate your report',
+        content: intl.get('api.report.inProgress.fetchReport'),
         duration: 0,
       }),
     );
-    await ReportApi.generateReport(args.data).then(() => {
-      thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
-      thunkAPI.dispatch(
-        globalActions.displayNotification({
-          type: 'success',
-          message: intl.get('api.report.onSuccess.title'),
-          description: intl.get('api.report.onSuccess.fetchReport'),
-        }),
-      );
-    });
+    await ReportApi.generateReport(args.data);
+    thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
+    thunkAPI.dispatch(
+      globalActions.displayNotification({
+        type: 'success',
+        message: intl.get('api.report.onSuccess.title'),
+        description: intl.get('api.report.onSuccess.fetchReport'),
+      }),
+    );
+    if (args.callback) args.callback();
   } catch (e) {
     thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
     showErrorReportNotif(thunkAPI);
@@ -83,7 +83,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
       globalActions.displayMessage({
         type: 'loading',
         key: messageKey,
-        content: 'Please wait while we generate your report',
+        content: intl.get('api.report.inProgress.fetchReport'),
         duration: 0,
       }),
     );

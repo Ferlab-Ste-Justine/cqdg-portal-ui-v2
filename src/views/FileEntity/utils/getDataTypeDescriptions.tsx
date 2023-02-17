@@ -10,7 +10,7 @@ const getDataTypeDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] 
     value: file?.data_category || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    label: intl.get('entities.file.data_type'),
+    label: intl.get('entities.file.type'),
     value: file?.data_type || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];

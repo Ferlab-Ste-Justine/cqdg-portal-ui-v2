@@ -35,7 +35,7 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
   {
     key: 'data_type',
     dataIndex: 'data_type',
-    title: intl.get('entities.file.data_type'),
+    title: intl.get('entities.file.type'),
     render: (sample_id: string) => sample_id,
   },
   {
