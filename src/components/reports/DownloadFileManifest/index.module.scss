@@ -1,0 +1,16 @@
+@import "src/style/themes/cqdg/colors";
+
+.notStriped {
+  background-color: inherit !important;
+}
+
+.modal {
+  max-height: 600px;
+  width: 740px !important;
+}
+
+.subText {
+  font-size: 12px;
+  line-height: 20px;
+  color: $gray-7
+}

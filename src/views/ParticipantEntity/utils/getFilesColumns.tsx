@@ -115,7 +115,7 @@ export const getDataTypeColumns = (files_nb: number): ProColumnType<any>[] => [
   {
     key: 'value',
     dataIndex: 'value',
-    title: intl.get('entities.file.data_types'),
+    title: intl.get('entities.file.data_type'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
