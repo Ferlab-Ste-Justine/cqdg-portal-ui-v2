@@ -126,6 +126,7 @@ const DownloadFileManifest = ({ files, sqon, type = 'default' }: IDownloadFileMa
         className={styles.modal}
       >
         <p>{intl.get('api.report.fileManifest.text')}</p>
+        <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
         <p>
           <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
             {intl.get('api.report.fileManifest.textCheckbox')}
