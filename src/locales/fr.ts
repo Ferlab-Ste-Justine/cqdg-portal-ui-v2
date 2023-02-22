@@ -787,7 +787,7 @@ const fr = {
           name: 'Nom du fichier',
           participants: 'Participants',
           biospecimens: 'Biospécimens',
-          controlled: 'Controllé',
+          controlled: 'Contrôlé',
           authorized: 'Autorisé',
           sample: 'Échantillon',
         },
