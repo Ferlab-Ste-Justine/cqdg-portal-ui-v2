@@ -81,7 +81,11 @@ interface IDownloadFileManifestProps {
   type?: 'default' | 'primary';
 }
 
-const DownloadFileManifest = ({ files, sqon, type = 'default' }: IDownloadFileManifestProps) => {
+const DownloadFileManifestModal = ({
+  files,
+  sqon,
+  type = 'default',
+}: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -146,4 +150,4 @@ const DownloadFileManifest = ({ files, sqon, type = 'default' }: IDownloadFileMa
   );
 };
 
-export default DownloadFileManifest;
+export default DownloadFileManifestModal;
