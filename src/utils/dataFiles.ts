@@ -4,12 +4,12 @@ export const userHasAccessToFile = (file: IFileEntity) => {
   //todo: After MVP, determine rules to allow or not access to files
 
   if (file.data_access === FileAccessType.CONTROLLED) {
-    // return false;
+    return false;
   }
 
   if (file.data_access === FileAccessType.REGISTERED) {
-    // return false;
+    return true;
   }
 
-  return true;
+  return false;
 };
