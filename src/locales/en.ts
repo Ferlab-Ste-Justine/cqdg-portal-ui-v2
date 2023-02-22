@@ -801,6 +801,7 @@ const en = {
           biospecimens: 'Biospecimens',
           controlled: 'Controlled',
           authorized: 'Authorized',
+          registered: 'Registered',
           sample: 'Sample',
         },
       },

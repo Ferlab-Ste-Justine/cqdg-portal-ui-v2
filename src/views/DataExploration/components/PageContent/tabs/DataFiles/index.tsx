@@ -76,7 +76,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     align: 'center',
     render: (data_access: string) =>
       data_access === FileAccessType.REGISTERED ? (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.authorized')}>
+        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.registered')}>
           <Tag color="green">R</Tag>
         </Tooltip>
       ) : (

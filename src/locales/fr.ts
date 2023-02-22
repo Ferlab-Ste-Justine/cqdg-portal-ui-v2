@@ -789,6 +789,7 @@ const fr = {
           biospecimens: 'Biospécimens',
           controlled: 'Contrôlé',
           authorized: 'Autorisé',
+          registered: 'Enregistré',
           sample: 'Échantillon',
         },
       },
