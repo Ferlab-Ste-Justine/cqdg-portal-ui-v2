@@ -21,6 +21,7 @@ const Login = () => {
       redirectUri: `${window.location.origin}/${
         query.get(REDIRECT_URI_KEY) || STATIC_ROUTES.DASHBOARD
       }`,
+      locale: intl.getInitOptions().currentLocale,
     });
     window.location.assign(url);
   };
