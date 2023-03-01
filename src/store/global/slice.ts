@@ -8,8 +8,16 @@ import { initialState, MessageArgsPropsCustom } from 'store/global/types';
 
 import { fetchStats } from './thunks';
 
+const getNavigatorLang = () => {
+  // eslint-disable-next-line no-prototype-builtins
+  if (locales.hasOwnProperty(navigator.language)) {
+    return navigator.language;
+  }
+  return LANG.EN;
+};
+
 export const GlobalState: initialState = {
-  lang: LANG.EN,
+  lang: getNavigatorLang(),
   notification: undefined,
   message: undefined,
   messagesToDestroy: [],
