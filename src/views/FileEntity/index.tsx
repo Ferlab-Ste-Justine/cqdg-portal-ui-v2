@@ -20,7 +20,7 @@ import getDataTypeDescriptions from 'views/FileEntity/utils/getDataTypeDescripti
 import getExperimentalProcedureDescriptions from 'views/FileEntity/utils/getExperimentalProcedureDescriptions';
 import getSummaryDescriptions from 'views/FileEntity/utils/getSummaryDescriptions';
 
-import DownloadFileManifest from 'components/reports/DownloadFileManifest';
+import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
@@ -72,7 +72,7 @@ const FileEntity = () => {
         text={data?.file_id}
         icon={<FileTextOutlined className={styles.titleIcon} />}
         loading={loading}
-        extra={data && <DownloadFileManifest files={[data]} type="primary" />}
+        extra={data && <DownloadFileManifestModal files={[data]} type="primary" />}
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}

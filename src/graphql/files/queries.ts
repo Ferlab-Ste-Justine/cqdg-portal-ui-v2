@@ -43,6 +43,10 @@ export const GET_FILES = gql`
             }
             study_code
             study_id
+            study {
+              study_code
+              name
+            }
             data_category
             data_type
             biospecimen_reference
