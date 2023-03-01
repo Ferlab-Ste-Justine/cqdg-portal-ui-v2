@@ -60,7 +60,7 @@ interface IDownloadFileManifestProps {
 const DownloadRequestAccessModal = ({ files, type = 'default' }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
 
   const getCurrentSqon = (): any =>
