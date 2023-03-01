@@ -250,7 +250,6 @@ const fr = {
         text: `Télécharger un manifeste des fichiers sélectionnés. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG*. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         subText: '*En développement et bientôt disponible.',
         textCheckbox: `Inclure les fichiers de données de même type des membres de la famille des participants représentés dans les fichiers sélectionnés.`,
-        summary: 'Résumé',
       },
       requestAccess: {
         button: 'Demande d’accès',

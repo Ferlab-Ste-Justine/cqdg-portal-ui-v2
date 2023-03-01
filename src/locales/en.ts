@@ -244,10 +244,9 @@ const en = {
         title: 'File manifest',
         okText: 'Download',
         cancel: 'Cancel',
-        text: `Download a manifest of the selected files which can be used with CQDG's bulk download tool. This manifest also includes additional information, including the participants and samples associated with these files.`,
-        subText: 'In development and will be available soon.',
+        text: `Download a manifest of the selected files which can be used with CQDG's bulk download tool*. This manifest also includes additional information, including the participants and samples associated with these files.`,
+        subText: '*In development and will be available soon.',
         textCheckbox: `Include data files of the same type for the participants' related family members for this selection.`,
-        summary: 'Summary',
       },
       requestAccess: {
         button: 'Request access',

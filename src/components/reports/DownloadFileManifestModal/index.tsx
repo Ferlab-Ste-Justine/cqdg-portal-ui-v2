@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal, Table, Typography } from 'antd';
+import { Button, Checkbox, Modal, Table } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IFileEntity } from 'graphql/files/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
@@ -15,8 +15,6 @@ import { fetchReport } from 'store/report/thunks';
 import { formatFileSize } from 'utils/formatFileSize';
 
 import styles from './index.module.scss';
-
-const { Title } = Typography;
 
 interface IFileByDataType {
   key: string;
@@ -136,7 +134,6 @@ const DownloadFileManifestModal = ({
             {intl.get('api.report.fileManifest.textCheckbox')}
           </Checkbox>
         </p>
-        <Title level={5}>{intl.get('api.report.fileManifest.summary')}</Title>
         <Table
           columns={getDataTypeColumns()}
           dataSource={filesInfoData}
