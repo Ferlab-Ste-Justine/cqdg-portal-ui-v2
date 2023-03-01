@@ -89,7 +89,9 @@ const DownloadRequestAccessModal = ({ files, type = 'default' }: IDownloadFileMa
           dispatch(
             fetchReport({
               data: {
-                name: isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST,
+                name: isFamilyChecked
+                  ? ReportType.FILE_REQUEST_ACCESS_FAMILY
+                  : ReportType.FILE_REQUEST_ACCESS,
                 sqon: getCurrentSqon(),
               },
               callback: () => setIsModalVisible(false),

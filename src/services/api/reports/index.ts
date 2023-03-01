@@ -17,6 +17,8 @@ const REPORTS_ROUTES = {
   [ReportType.BIOSPECIMEN_DATA]: `${REPORT_API_URL}/reports/biospecimen-data`,
   [ReportType.FILE_MANIFEST]: `${REPORT_API_URL}/reports/file-manifest`,
   [ReportType.FILE_MANIFEST_FAMILY]: `${REPORT_API_URL}/reports/file-manifest-family`,
+  [ReportType.FILE_REQUEST_ACCESS]: `${REPORT_API_URL}/reports/file-request-access`,
+  [ReportType.FILE_REQUEST_ACCESS_FAMILY]: `${REPORT_API_URL}/reports/file-request-access-family`,
 };
 
 const headers = () => ({

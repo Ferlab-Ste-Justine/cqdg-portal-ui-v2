@@ -11,4 +11,6 @@ export enum ReportType {
   BIOSPECIMEN_DATA = 'biospecimenData',
   FILE_MANIFEST = 'manifest',
   FILE_MANIFEST_FAMILY = 'familyManifest',
+  FILE_REQUEST_ACCESS = 'fileRequestAccess',
+  FILE_REQUEST_ACCESS_FAMILY = 'familyFileRequestAccess',
 }
