@@ -123,7 +123,7 @@ const Header = () => {
                     label: (
                       <span className={styles.titleUserDropdown}>
                         {intl.get('layout.user.menu.signedWith') + ' '}
-                        <b>{userInfo?.email}</b>
+                        <b>{tokenParsed.email || tokenParsed.identity_provider_identity}</b>
                       </span>
                     ),
                     key: 'title',
