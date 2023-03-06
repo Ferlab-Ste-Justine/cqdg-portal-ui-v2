@@ -6,6 +6,7 @@ import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal, Table } from 'antd';
 import { INDEXES } from 'graphql/constants';
+import { useFiles } from 'graphql/files/actions';
 import { IFileEntity } from 'graphql/files/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
@@ -74,13 +75,13 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
 ];
 
 interface IDownloadFileManifestProps {
-  files: IFileEntity[];
+  fileIds: string[];
   sqon?: ISqonGroupFilter;
   type?: 'default' | 'primary';
 }
 
 const DownloadFileManifestModal = ({
-  files,
+  fileIds,
   sqon,
   type = 'default',
 }: IDownloadFileManifestProps) => {
@@ -88,6 +89,11 @@ const DownloadFileManifestModal = ({
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
+
+  const { data: files, loading } = useFiles({
+    field: 'file_id',
+    values: fileIds,
+  });
 
   const getCurrentSqon = (): any =>
     sqon ||
@@ -140,7 +146,9 @@ const DownloadFileManifestModal = ({
           pagination={false}
           size="small"
           rowClassName={styles.notStriped}
+          className={styles.table}
           bordered
+          loading={loading}
         />
       </Modal>
     </>

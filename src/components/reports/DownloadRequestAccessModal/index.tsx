@@ -6,6 +6,7 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { Button, Checkbox, Modal, Table } from 'antd';
 import { INDEXES } from 'graphql/constants';
+import { useFiles } from 'graphql/files/actions';
 import { IFileEntity } from 'graphql/files/models';
 import EnvVariables from 'helpers/EnvVariables';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
@@ -53,21 +54,31 @@ export const getColumns = (): ProColumnType<any>[] => [
 ];
 
 interface IDownloadFileManifestProps {
-  files: IFileEntity[];
+  fileIds: string[];
   type?: 'default' | 'primary';
 }
 
-const DownloadRequestAccessModal = ({ files, type = 'default' }: IDownloadFileManifestProps) => {
+const DownloadRequestAccessModal = ({ fileIds, type = 'default' }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
+
+  const { data: files, loading } = useFiles({
+    field: 'file_id',
+    values: fileIds,
+  });
 
   const getCurrentSqon = (): any =>
     generateSelectionSqon(
       INDEXES.FILE,
       files.map((f) => f.file_id),
     );
+
+  const locale = intl.getInitOptions().currentLocale;
+  const docHref = `${EnvVariables.configFor('CQDG_DOCUMENTATION')}${
+    locale === 'fr' ? '/' : '/en/'
+  }acces-donnees/demande-acces-donnees`;
 
   return (
     <>
@@ -102,12 +113,7 @@ const DownloadRequestAccessModal = ({ files, type = 'default' }: IDownloadFileMa
       >
         <p>
           {intl.get('api.report.requestAccess.text')}
-          <ExternalLink
-            href={
-              EnvVariables.configFor('CQDG_DOCUMENTATION') +
-              '/en/acces-donnees/demande-acces-donnees/'
-            }
-          >
+          <ExternalLink href={docHref}>
             {intl.get('api.report.requestAccess.textLink')}
           </ExternalLink>
           .
@@ -123,7 +129,9 @@ const DownloadRequestAccessModal = ({ files, type = 'default' }: IDownloadFileMa
           pagination={false}
           size="small"
           rowClassName={styles.notStriped}
+          className={styles.table}
           bordered
+          loading={loading}
         />
       </Modal>
     </>

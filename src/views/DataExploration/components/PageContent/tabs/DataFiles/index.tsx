@@ -308,15 +308,8 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
             type={SetType.FILE}
             selectedKeys={selectedKeys}
           />,
-          <DownloadFileManifestModal
-            key={2}
-            files={results.data.filter((r) => selectedKeys.includes(r.file_id))}
-            sqon={getCurrentSqon()}
-          />,
-          <DownloadRequestAccessModal
-            key={3}
-            files={results.data.filter((r) => selectedKeys.includes(r.file_id))}
-          />,
+          <DownloadFileManifestModal key={2} fileIds={selectedKeys} sqon={getCurrentSqon()} />,
+          <DownloadRequestAccessModal key={3} fileIds={selectedKeys} />,
         ],
       }}
       bordered

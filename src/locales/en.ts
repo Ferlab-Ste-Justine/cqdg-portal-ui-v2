@@ -254,7 +254,7 @@ const en = {
         okText: 'Download',
         cancel: 'Cancel',
         text: `Download the documents required by the studies for your data access request. These documents provide information on the conditions of authorized data use as well as a complete list of the selected files per each study. Read more on `,
-        textLink: `applying for data access`,
+        textLink: `Applying for data access`,
         textCheckbox: `Include the files of the same type for related family members in this selection.`,
       },
     },
