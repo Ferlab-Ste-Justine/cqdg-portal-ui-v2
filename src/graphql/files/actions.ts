@@ -19,14 +19,14 @@ export const useDataFiles = (variables?: QueryVariable) => {
   };
 };
 
-export const useFiles = ({ field, value }: { field: string; value: string }) => {
+export const useFiles = ({ field, values }: { field: string; values: string[] }) => {
   const sqon = {
-    content: [{ content: { field, value, index: INDEXES.FILE }, op: 'in' }],
+    content: [{ content: { field, value: values, index: INDEXES.FILE }, op: 'in' }],
     op: 'and',
   };
 
   const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
-    variables: { sqon },
+    variables: { sqon, first: 10000 },
   });
 
   const data = hydrateResults(result?.File?.hits?.edges || []) || undefined;

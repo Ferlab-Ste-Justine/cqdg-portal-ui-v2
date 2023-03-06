@@ -18,7 +18,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
 
   const { data, loading } = useFiles({
     field: 'sequencing_experiment.analysis_id',
-    value: file.sequencing_experiment.analysis_id,
+    values: [file.sequencing_experiment.analysis_id],
   });
 
   const dataAnalysisFilesTable: IFileEntity[] =
