@@ -65,7 +65,7 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
   const { data: files, loading } = useFilesReport({
-    first: 10000,
+    first: 1000,
     sqon,
   });
 
