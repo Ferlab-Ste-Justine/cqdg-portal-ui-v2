@@ -708,7 +708,7 @@ const fr = {
       },
       tabs: {
         summary: {
-          title: 'Sommaire',
+          title: 'Résumé',
           global: {
             nbParticipant:
               '{count} participants (y compris les termes descendants sur cette arborescence)',

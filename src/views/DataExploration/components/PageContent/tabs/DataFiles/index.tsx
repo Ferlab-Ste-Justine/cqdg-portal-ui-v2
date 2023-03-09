@@ -290,13 +290,7 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
-              data_exploration: {
-                tables: {
-                  datafiles: {
-                    columns: newState,
-                  },
-                },
-              },
+              data_exploration: { tables: { datafiles: { columns: newState } } },
             }),
           ),
         extra: [
@@ -308,8 +302,16 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
             type={SetType.FILE}
             selectedKeys={selectedKeys}
           />,
-          <DownloadFileManifestModal key={2} fileIds={selectedKeys} sqon={getCurrentSqon()} />,
-          <DownloadRequestAccessModal key={3} fileIds={selectedKeys} />,
+          <DownloadFileManifestModal
+            key={2}
+            sqon={getCurrentSqon()}
+            isDisabled={!selectedKeys.length && !selectedAllResults}
+          />,
+          <DownloadRequestAccessModal
+            key={3}
+            sqon={getCurrentSqon()}
+            isDisabled={!selectedKeys.length && !selectedAllResults}
+          />,
         ],
       }}
       bordered

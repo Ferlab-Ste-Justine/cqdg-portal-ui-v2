@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import { CheckOutlined } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Popover } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -60,10 +64,28 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'participant_count',
     title: intl.get('screen.studies.participants'),
-    dataIndex: 'participant_count',
-    render: (participant_count: number) =>
-      participant_count ? (
-        <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}`}>{participant_count}</Link>
+    render: (study: IStudyEntity) =>
+      study?.participant_count ? (
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'study_code',
+                    value: [study.study_code],
+                    index: INDEXES.STUDY,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          {study?.participant_count}
+        </Link>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
@@ -110,10 +132,28 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'file_count',
     title: intl.get('screen.studies.files'),
-    dataIndex: 'file_count',
-    render: (file_count: number) =>
-      file_count ? (
-        <Link to={`${STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}`}>{file_count}</Link>
+    render: (study: IStudyEntity) =>
+      study?.file_count ? (
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'study_code',
+                    value: [study.study_code],
+                    index: INDEXES.STUDY,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          {study?.file_count}
+        </Link>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
@@ -136,7 +176,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'access_requirements',
     title: intl.get('screen.studies.accessRequirement'),
-    dataIndex: 'access_requirements',
+    dataIndex: 'data_access_codes',
     defaultHidden: true,
     render: (data_access_codes: IStudyDataAccessCodes) =>
       data_access_codes?.access_requirements?.length ? (
@@ -147,13 +187,6 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
-  },
-  {
-    key: 'sample_availability',
-    title: intl.get('screen.studies.sampleAvailability'),
-    dataIndex: 'sample_availability',
-    defaultHidden: true,
-    render: (sample_availability: string) => sample_availability || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'description',

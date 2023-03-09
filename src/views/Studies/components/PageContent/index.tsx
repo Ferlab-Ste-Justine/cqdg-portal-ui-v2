@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
-import { UserOutlined } from '@ant-design/icons';
+import { ReadOutlined } from '@ant-design/icons';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
@@ -97,7 +97,7 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
         }}
         enableCombine
         enableShowHideLabels
-        IconTotal={<UserOutlined size={18} />}
+        IconTotal={<ReadOutlined size={18} />}
         currentQuery={isEmptySqon(activeQuery) ? {} : activeQuery}
         total={studiesResults.total}
         dictionary={getQueryBuilderDictionary(facetTransResolver, [])}
