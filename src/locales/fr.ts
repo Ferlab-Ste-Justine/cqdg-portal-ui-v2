@@ -223,6 +223,9 @@ const fr = {
         message:
           "Nous n'avons pas pu générer le rapport pour le moment. Veuillez réessayer plus tard ou ",
         support: 'contactez le support',
+        tooMuchFilesTitle: 'Nombre maximal dépassé',
+        tooMuchFiles:
+          'Un maximum de 10 000 fichiers peuvent être inclus à la fois. Veuillez restreindre votre sélection et réessayer.',
       },
       inProgress: {
         title: 'Traitement',
@@ -708,7 +711,7 @@ const fr = {
       },
       tabs: {
         summary: {
-          title: 'Sommaire',
+          title: 'Résumé',
           global: {
             nbParticipant:
               '{count} participants (y compris les termes descendants sur cette arborescence)',

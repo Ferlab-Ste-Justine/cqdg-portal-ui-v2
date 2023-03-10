@@ -12,7 +12,7 @@ import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
 import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 import {
-  DATA_EPLORATION_FILTER_TAG,
+  DATA_EXPLORATION_FILTER_TAG,
   DATA_EXPLORATION_QB_ID,
 } from 'views/DataExploration/utils/constant';
 
@@ -28,13 +28,13 @@ const { Text } = Typography;
 const redirectToPage = (setType: string) => {
   switch (setType) {
     case INDEXES.FILE:
-      return `${DATA_EPLORATION_FILTER_TAG}/datafiles`;
+      return `${DATA_EXPLORATION_FILTER_TAG}/datafiles`;
     case INDEXES.PARTICIPANT:
-      return `${DATA_EPLORATION_FILTER_TAG}/participants`;
+      return `${DATA_EXPLORATION_FILTER_TAG}/participants`;
     case INDEXES.BIOSPECIMEN:
-      return `${DATA_EPLORATION_FILTER_TAG}/biospecimens`;
+      return `${DATA_EXPLORATION_FILTER_TAG}/biospecimens`;
     default:
-      return DATA_EPLORATION_FILTER_TAG;
+      return DATA_EXPLORATION_FILTER_TAG;
   }
 };
 

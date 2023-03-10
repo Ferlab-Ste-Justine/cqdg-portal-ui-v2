@@ -8,7 +8,7 @@ import cx from 'classnames';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
-import { DATA_EPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
+import { DATA_EXPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
 import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constant';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
@@ -63,7 +63,7 @@ const getItemList = (
 const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
   const { savedFilters, isLoading, fetchingError } = useSavedFilter();
 
-  const dataExplorationFilters = savedFilters.filter((s) => s.tag === DATA_EPLORATION_FILTER_TAG);
+  const dataExplorationFilters = savedFilters.filter((s) => s.tag === DATA_EXPLORATION_FILTER_TAG);
   const variantFilters = savedFilters.filter((s) => s.tag === VARIANT_FILTER_TAG);
 
   return (
@@ -92,7 +92,10 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
         />
       }
       content={
-        <Tabs className={cx(styles.setTabs, 'navNoMarginBtm')} defaultActiveKey="participants">
+        <Tabs
+          className={cx(styles.setTabs, 'navNoMarginBtm')}
+          defaultActiveKey="dataExplorationFilters"
+        >
           <TabPane
             tab={
               <div>

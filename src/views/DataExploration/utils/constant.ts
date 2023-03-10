@@ -4,7 +4,7 @@ export const DEFAULT_PAGE_INDEX = 1;
 export const DEFAULT_PAGE_SIZE = 20;
 
 export const DATA_EXPLORATION_QB_ID = 'cqdg-data-exploration-repo-key';
-export const DATA_EPLORATION_FILTER_TAG = 'data-exploration';
+export const DATA_EXPLORATION_FILTER_TAG = 'data-exploration';
 
 export const DEFAULT_PAGING_CONFIG = {
   index: DEFAULT_PAGE_INDEX,

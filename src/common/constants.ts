@@ -19,3 +19,5 @@ export const FILTER_ID_QUERY_PARAM_KEY = 'filterId';
 export const SHARED_FILTER_ID_QUERY_PARAM_KEY = 'sharedFilterId';
 
 export const MAX_TITLE_LENGTH = 200;
+
+export const MAX_ITEMS_QUERY = 10000;

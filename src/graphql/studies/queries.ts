@@ -27,6 +27,10 @@ export const GET_STUDIES = gql`
                 }
               }
             }
+            data_access_codes {
+              access_limitations
+              access_requirements
+            }
           }
         }
       }

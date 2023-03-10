@@ -66,13 +66,15 @@ const FileEntity = () => {
   const dataBiospecimensTable: IBiospecimenEntity[] =
     data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
 
+  const getCurrentSqon = (): any => generateSelectionSqon(INDEXES.FILE, [file_id]);
+
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
       <EntityTitle
         text={data?.file_id}
         icon={<FileTextOutlined className={styles.titleIcon} />}
         loading={loading}
-        extra={data && <DownloadFileManifestModal fileIds={[file_id]} type="primary" />}
+        extra={data && <DownloadFileManifestModal sqon={getCurrentSqon()} type="primary" />}
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}

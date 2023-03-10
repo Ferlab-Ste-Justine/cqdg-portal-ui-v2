@@ -9,6 +9,7 @@ import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
 import uniqBy from 'lodash/uniqBy';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import { ArrangerApi } from 'services/api/arranger';
 
 import EntityUploadIds from './EntityUploadIds';
@@ -28,7 +29,7 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_BIOSPECIMENS.loc?.source.body,
         variables: {
-          first: 10000,
+          first: MAX_ITEMS_QUERY,
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,

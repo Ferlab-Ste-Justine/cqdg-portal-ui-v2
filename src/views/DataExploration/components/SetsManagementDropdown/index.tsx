@@ -18,6 +18,7 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import PlaylistAdd from 'components/Icons/PlaylistAdd';
 import PlaylistRemove from 'components/Icons/PlaylistRemove';
 import { SetType } from 'services/api/savedSet/models';
@@ -66,8 +67,7 @@ const modals = {
   },
 };
 
-const ROW_SELECTION_LIMIT = 10000;
-const exceedLimit = (participantCount: number) => participantCount > ROW_SELECTION_LIMIT;
+const exceedLimit = (participantCount: number) => participantCount > MAX_ITEMS_QUERY;
 
 const itemIcon = (type: string) => {
   switch (type) {
@@ -139,7 +139,7 @@ const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuO
             <Tooltip
               arrowPointAtCenter
               placement="topRight"
-              title={`Max. ${numberWithCommas(ROW_SELECTION_LIMIT)} ${intl.get(
+              title={`Max. ${numberWithCommas(MAX_ITEMS_QUERY)} ${intl.get(
                 'screen.dataExploration.participantCount',
               )}`}
             >

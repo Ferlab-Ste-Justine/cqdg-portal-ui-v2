@@ -8,6 +8,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { MATCH_FILES } from 'graphql/files/queries';
 import { hydrateResults } from 'graphql/models';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import { ArrangerApi } from 'services/api/arranger';
 
 import EntityUploadIds from './EntityUploadIds';
@@ -26,7 +27,7 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_FILES.loc?.source.body,
         variables: {
-          first: 10000,
+          first: MAX_ITEMS_QUERY,
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
