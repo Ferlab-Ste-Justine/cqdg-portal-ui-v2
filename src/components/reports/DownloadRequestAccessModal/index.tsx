@@ -7,6 +7,7 @@ import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal } from 'antd';
 import EnvVariables from 'helpers/EnvVariables';
 
+import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
 
@@ -18,12 +19,14 @@ interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   type?: 'default' | 'primary';
   isDisabled?: boolean;
+  hasTooMuchFiles?: boolean;
 }
 
 const DownloadRequestAccessModal = ({
   sqon,
   type = 'default',
   isDisabled,
+  hasTooMuchFiles,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -49,6 +52,7 @@ const DownloadRequestAccessModal = ({
         visible={isModalVisible}
         title={intl.get('api.report.requestAccess.title')}
         okText={intl.get('api.report.requestAccess.okText')}
+        okButtonProps={{ disabled: hasTooMuchFiles }}
         cancelText={intl.get('api.report.requestAccess.cancel')}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => {
@@ -77,7 +81,8 @@ const DownloadRequestAccessModal = ({
         <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
           {intl.get('api.report.requestAccess.textCheckbox')}
         </Checkbox>
-        {isModalVisible && <FilesTable sqon={sqon} />}
+        {hasTooMuchFiles && <TooMuchFilesAlert />}
+        {!hasTooMuchFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
     </>
   );

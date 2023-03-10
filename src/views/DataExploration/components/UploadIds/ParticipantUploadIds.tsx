@@ -8,6 +8,7 @@ import { hydrateResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { MATCH_PARTICIPANTS } from 'graphql/participants/queries';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import { ArrangerApi } from 'services/api/arranger';
 
 import EntityUploadIds from './EntityUploadIds';
@@ -26,7 +27,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_PARTICIPANTS.loc?.source.body,
         variables: {
-          first: 10000,
+          first: MAX_ITEMS_QUERY,
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,

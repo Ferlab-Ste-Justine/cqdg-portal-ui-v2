@@ -2,6 +2,7 @@ import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
 import { QueryVariable } from 'graphql/queries';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IFileResultTree } from './models';
@@ -38,7 +39,7 @@ export const useFiles = ({ field, values }: { field: string; values: string[] })
   };
 
   const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
-    variables: { sqon, first: 10000 },
+    variables: { sqon, first: MAX_ITEMS_QUERY },
   });
 
   const data = hydrateResults(result?.File?.hits?.edges || []) || undefined;

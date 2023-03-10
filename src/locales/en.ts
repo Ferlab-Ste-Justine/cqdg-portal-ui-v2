@@ -220,6 +220,9 @@ const en = {
         title: 'Error',
         message: 'We were unable to generate the report at this time. Please try again later or ',
         support: 'contact support',
+        tooMuchFilesTitle: 'Maximum number exceeded',
+        tooMuchFiles:
+          'A maximum of 10,000 files can be inlcuded at a time. Please narrow your selection and try again.',
       },
       inProgress: {
         title: 'Processing',

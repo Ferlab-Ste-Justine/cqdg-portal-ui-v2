@@ -24,7 +24,7 @@ import {
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
-import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
@@ -246,6 +246,10 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
       ? sqon
       : generateSelectionSqon(INDEXES.FILE, selectedKeys);
 
+  const hasTooMuchFiles =
+    selectedKeys.length > MAX_ITEMS_QUERY ||
+    (selectedAllResults && results.total > MAX_ITEMS_QUERY);
+
   return (
     <ProTable<ITableFileEntity>
       tableId="datafiles_table"
@@ -306,11 +310,13 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
             key={2}
             sqon={getCurrentSqon()}
             isDisabled={!selectedKeys.length && !selectedAllResults}
+            hasTooMuchFiles={hasTooMuchFiles}
           />,
           <DownloadRequestAccessModal
             key={3}
             sqon={getCurrentSqon()}
             isDisabled={!selectedKeys.length && !selectedAllResults}
+            hasTooMuchFiles={hasTooMuchFiles}
           />,
         ],
       }}

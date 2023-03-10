@@ -5,7 +5,7 @@ import { Table } from 'antd';
 import { useFilesReport } from 'graphql/files/actions';
 import { IFileEntity } from 'graphql/files/models';
 
-import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import styles from 'components/reports/DownloadFileManifestModal/index.module.scss';
 import { formatFileSize } from 'utils/formatFileSize';
 
@@ -65,7 +65,7 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
   const { data: files, loading } = useFilesReport({
-    first: 1000,
+    first: MAX_ITEMS_QUERY,
     sqon,
   });
 
