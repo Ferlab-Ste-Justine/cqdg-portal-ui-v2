@@ -2,12 +2,16 @@ import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Table } from 'antd';
-import { useFilesReport } from 'graphql/files/actions';
-import { IFileEntity } from 'graphql/files/models';
+import { AxiosRequestConfig } from 'axios';
+import EnvironmentVariables from 'helpers/EnvVariables';
 
-import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import styles from 'components/reports/DownloadFileManifestModal/index.module.scss';
+import useApi from 'hooks/useApi';
+import { headers, REPORTS_ROUTES } from 'services/api/reports';
+import { ReportType } from 'services/api/reports/models';
 import { formatFileSize } from 'utils/formatFileSize';
+const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
 
 interface IFileByDataType {
   key: string;
@@ -16,24 +20,6 @@ interface IFileByDataType {
   nb_files: number;
   size: number;
 }
-
-/** Join files by data_type */
-export const getFilesDataTypeInfo = (files: IFileEntity[]) => {
-  const filesInfosData: IFileByDataType[] = [];
-  for (const file of files) {
-    const filesFound = files.filter(({ data_type }) => data_type === file.data_type);
-    if (!filesInfosData.find((f) => f.value === file.data_type)) {
-      filesInfosData.push({
-        key: file.data_type,
-        value: file.data_type,
-        nb_participants: filesFound.reduce((a, b) => a + (b?.participants?.hits?.total || 0), 0),
-        nb_files: filesFound.length,
-        size: filesFound.reduce((a, b) => a + (b?.file_size || 0), 0),
-      });
-    }
-  }
-  return filesInfosData;
-};
 
 export const getDataTypeColumns = (): ProColumnType<any>[] => [
   {
@@ -64,15 +50,25 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
 ];
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
-  const { data: files, loading } = useFilesReport({
-    first: MAX_ITEMS_QUERY,
-    sqon,
-  });
+  const config: AxiosRequestConfig = {
+    // @ts-ignore
+    url: REPORTS_ROUTES[ReportType.FILE_MANIFEST_STATS],
+    method: 'POST',
+    responseType: 'json',
+    data: {
+      sqon,
+      projectId: ARRANGER_PROJECT_ID,
+    },
+    headers: headers(),
+  };
+
+  const { loading, result } = useApi({ config });
+  const files = (result as IFileByDataType[]) || [];
 
   return (
     <Table
       columns={getDataTypeColumns()}
-      dataSource={getFilesDataTypeInfo(files)}
+      dataSource={files}
       pagination={false}
       size="small"
       rowClassName={styles.notStriped}

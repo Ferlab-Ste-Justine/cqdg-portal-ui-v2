@@ -2,34 +2,22 @@ import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Table } from 'antd';
-import { useFilesReport } from 'graphql/files/actions';
-import { IFileEntity } from 'graphql/files/models';
+import { AxiosRequestConfig } from 'axios';
+import EnvironmentVariables from 'helpers/EnvVariables';
 
-import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import styles from 'components/reports/DownloadRequestAccessModal/index.module.scss';
+import useApi from 'hooks/useApi';
+import { headers, REPORTS_ROUTES } from 'services/api/reports';
+import { ReportType } from 'services/api/reports/models';
 
-interface IFileByDataType {
+const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
+
+interface IFileByStudy {
   key: string;
   study_name: string;
   nb_files: number;
 }
-
-export const getFilesInfo = (files: IFileEntity[]) => {
-  const filesInfosData: IFileByDataType[] = [];
-  for (const file of files) {
-    const filesFound = files.filter(
-      ({ study: { study_code } }) => study_code === file.study?.study_code,
-    );
-    if (!filesInfosData.find((f) => f.key === file.study?.study_code)) {
-      filesInfosData.push({
-        key: file.study?.study_code,
-        study_name: file.study?.name || file.study?.study_code,
-        nb_files: filesFound.length,
-      });
-    }
-  }
-  return filesInfosData;
-};
 
 export const getColumns = (): ProColumnType<any>[] => [
   {
@@ -47,15 +35,24 @@ export const getColumns = (): ProColumnType<any>[] => [
 ];
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
-  const { data: files, loading } = useFilesReport({
-    first: MAX_ITEMS_QUERY,
-    sqon,
-  });
+  const config: AxiosRequestConfig = {
+    // @ts-ignore
+    url: REPORTS_ROUTES[ReportType.FILE_REQUEST_ACCESS_STATS],
+    method: 'POST',
+    responseType: 'json',
+    data: {
+      sqon,
+      projectId: ARRANGER_PROJECT_ID,
+    },
+    headers: headers(),
+  };
+  const { loading, result } = useApi({ config });
+  const files = (result as IFileByStudy[]) || [];
 
   return (
     <Table
       columns={getColumns()}
-      dataSource={getFilesInfo(files)}
+      dataSource={files}
       pagination={false}
       size="small"
       rowClassName={styles.notStriped}

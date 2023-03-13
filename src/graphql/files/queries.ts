@@ -1,33 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const GET_FILES_REPORT = gql`
-  query getFiles($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
-    File {
-      hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
-        total
-        edges {
-          node {
-            id
-            file_id
-            data_type
-            file_size
-            study {
-              study_code
-              study_id
-              name
-            }
-            participants {
-              hits {
-                total
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const GET_FILES = gql`
   query getFiles($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
     File {

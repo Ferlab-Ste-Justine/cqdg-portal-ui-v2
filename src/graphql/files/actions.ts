@@ -1,3 +1,4 @@
+import { DocumentNode } from '@apollo/client';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
 import { QueryVariable } from 'graphql/queries';
@@ -6,7 +7,7 @@ import { MAX_ITEMS_QUERY } from 'common/constants';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
 import { IFileResultTree } from './models';
-import { GET_FILES, GET_FILES_REPORT } from './queries';
+import { GET_FILES } from './queries';
 
 export const useDataFiles = (variables?: QueryVariable) => {
   const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
@@ -20,8 +21,8 @@ export const useDataFiles = (variables?: QueryVariable) => {
   };
 };
 
-export const useFilesReport = (variables?: QueryVariable) => {
-  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES_REPORT, {
+export const useFilesReport = (query: DocumentNode, variables?: QueryVariable) => {
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(query, {
     variables,
   });
 

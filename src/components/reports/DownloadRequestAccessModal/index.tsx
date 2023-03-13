@@ -59,10 +59,9 @@ const DownloadRequestAccessModal = ({
           dispatch(
             fetchReport({
               data: {
-                name: isFamilyChecked
-                  ? ReportType.FILE_REQUEST_ACCESS_FAMILY
-                  : ReportType.FILE_REQUEST_ACCESS,
+                name: ReportType.FILE_REQUEST_ACCESS,
                 sqon,
+                withFamily: isFamilyChecked,
               },
               callback: () => setIsModalVisible(false),
             }),
