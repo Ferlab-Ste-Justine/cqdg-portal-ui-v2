@@ -11,17 +11,16 @@ import { ReportConfig, ReportType } from './models';
 const REPORT_API_URL = EnvironmentVariables.configFor('REPORTS_API_URL');
 const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
 
-const REPORTS_ROUTES = {
+export const REPORTS_ROUTES = {
   [ReportType.CLINICAL_DATA]: `${REPORT_API_URL}/reports/clinical-data`,
-  [ReportType.CLINICAL_DATA_FAMILY]: `${REPORT_API_URL}/reports/clinical-data-family`,
   [ReportType.BIOSPECIMEN_DATA]: `${REPORT_API_URL}/reports/biospecimen-data`,
   [ReportType.FILE_MANIFEST]: `${REPORT_API_URL}/reports/file-manifest`,
-  [ReportType.FILE_MANIFEST_FAMILY]: `${REPORT_API_URL}/reports/file-manifest-family`,
+  [ReportType.FILE_MANIFEST_STATS]: `${REPORT_API_URL}/reports/file-manifest/stats`,
   [ReportType.FILE_REQUEST_ACCESS]: `${REPORT_API_URL}/reports/file-request-access`,
-  [ReportType.FILE_REQUEST_ACCESS_FAMILY]: `${REPORT_API_URL}/reports/file-request-access-family`,
+  [ReportType.FILE_REQUEST_ACCESS_STATS]: `${REPORT_API_URL}/reports/file-request-access/stats`,
 };
 
-const headers = () => ({
+export const headers = () => ({
   'Content-Type': 'application/json',
   Accept: '*/*',
   Authorization: `Bearer ${keycloak.token}`,
@@ -49,6 +48,7 @@ const generateReport = (config: ReportConfig) => {
       sqon: reportSqon,
       projectId: ARRANGER_PROJECT_ID,
       filename: format(new Date(), `'cqdg_${name}'_yyyyMMdd`),
+      withFamily: config.withFamily,
     },
     headers: headers(),
   });

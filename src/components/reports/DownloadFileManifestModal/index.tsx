@@ -52,8 +52,9 @@ const DownloadFileManifestModal = ({
           dispatch(
             fetchReport({
               data: {
-                name: isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST,
+                name: ReportType.FILE_MANIFEST,
                 sqon,
+                withFamily: isFamilyChecked,
               },
               callback: () => setIsModalVisible(false),
             }),
