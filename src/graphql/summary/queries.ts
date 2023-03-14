@@ -61,7 +61,7 @@ export const STUDIESPIE_QUERY = gql`
   query AggregationStudiesPie($sqon: JSON) {
     Participant {
       aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        study__name {
+        study__study_code {
           buckets {
             key
             doc_count

@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import Empty from '@ferlab/ui/core/components/Empty';
 import { DefaultRawDatum, PieSvgProps, ResponsivePie } from '@nivo/pie';
 import { Typography } from 'antd';
@@ -42,7 +43,7 @@ const PieChart = ({
         />
       </div>
     ) : (
-      <Empty imageType="grid" className={styles.emptyGrid} />
+      <Empty imageType="grid" className={styles.emptyGrid} description={intl.get('api.noData')} />
     )}
   </div>
 );

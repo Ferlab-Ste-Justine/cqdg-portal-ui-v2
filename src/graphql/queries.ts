@@ -27,24 +27,42 @@ export const INDEX_EXTENDED_MAPPING = (index: string) => gql`
   }
 `;
 
+const DEFAULT_QUERY = (index: string) => gql`
+  query AggregationInformation {
+    ${index} { 
+      aggregations { 
+        __typename
+      }
+    }
+  }
+`;
+
 export const AGGREGATION_QUERY = (
   index: string,
   aggList: string[],
   mappingResults: ExtendedMappingResults,
 ) => {
-  if (!mappingResults || mappingResults.loading) return gql``;
+  if (!mappingResults || mappingResults.loading) {
+    console.error('[AGGREGATION_QUERY] mappingResults missing');
+    return DEFAULT_QUERY(index);
+  }
 
   const aggListDotNotation = aggList.map((i) => underscoreToDot(i));
-
   const extendedMappingsFields = aggListDotNotation.flatMap((i) =>
     (mappingResults?.data || []).filter((e) => e.field === i),
   );
+  const aggregations = generateAggregations(extendedMappingsFields);
+
+  if (!aggregations) {
+    console.error('[AGGREGATION_QUERY] impossible to generate aggregations');
+    return DEFAULT_QUERY(index);
+  }
 
   return gql`
     query AggregationInformation($sqon: JSON) {
       ${index} {
         aggregations (filters: $sqon, include_missing: false) {
-          ${generateAggregations(extendedMappingsFields)}
+          ${aggregations}
         }
       }
     }

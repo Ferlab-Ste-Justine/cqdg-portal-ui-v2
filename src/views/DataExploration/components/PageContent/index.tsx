@@ -52,6 +52,7 @@ import {
   mapFilterForBiospecimen,
   mapFilterForFiles,
   mapFilterForParticipant,
+  mapFilterForStudies,
 } from 'utils/fieldMapper';
 import { getCurrentUrl } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -61,12 +62,6 @@ import { getQueryBuilderDictionary } from 'utils/translation';
 import styles from './index.module.scss';
 
 const { Title } = Typography;
-
-type OwnProps = {
-  fileMapping: ExtendedMappingResults;
-  participantMapping: ExtendedMappingResults;
-  tabId?: string;
-};
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
@@ -82,7 +77,24 @@ const resolveSqonForFiles = (queryList: ISyntheticSqon[], activeQuery: ISyntheti
 const resolveSqonForBiospecimens = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
   mapFilterForBiospecimen(resolveSyntheticSqon(queryList, activeQuery));
 
-const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY }: OwnProps) => {
+const resolveSqonForStudies = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
+  mapFilterForStudies(resolveSyntheticSqon(queryList, activeQuery));
+
+interface IPageContentProps {
+  fileMapping: ExtendedMappingResults;
+  participantMapping: ExtendedMappingResults;
+  biospecimenMapping: ExtendedMappingResults;
+  studyMapping: ExtendedMappingResults;
+  tabId?: string;
+}
+
+const PageContent = ({
+  fileMapping,
+  participantMapping,
+  biospecimenMapping,
+  studyMapping,
+  tabId = TAB_IDS.SUMMARY,
+}: IPageContentProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { savedSets } = useSavedSet();
@@ -100,6 +112,7 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
   const participantResolvedSqon = resolveSqonForParticipants(queryList, activeQuery);
   const biospecimenResolvedSqon = resolveSqonForBiospecimens(queryList, activeQuery);
   const fileResolvedSqon = resolveSqonForFiles(queryList, activeQuery);
+  const studyResolvedSqon = resolveSqonForStudies(queryList, activeQuery);
 
   const participantResults = useParticipants({
     first: participantQueryConfig.size,
@@ -155,6 +168,21 @@ const PageContent = ({ fileMapping, participantMapping, tabId = TAB_IDS.SUMMARY 
         return {
           sqon: fileResolvedSqon,
           mapping: fileMapping,
+        };
+      case INDEXES.PARTICIPANT:
+        return {
+          sqon: participantResolvedSqon,
+          mapping: participantMapping,
+        };
+      case INDEXES.BIOSPECIMEN:
+        return {
+          sqon: biospecimenResolvedSqon,
+          mapping: biospecimenMapping,
+        };
+      case INDEXES.STUDY:
+        return {
+          sqon: studyResolvedSqon,
+          mapping: studyMapping,
         };
       default:
         return {

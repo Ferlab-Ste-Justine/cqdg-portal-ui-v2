@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import Empty from '@ferlab/ui/core/components/Empty';
 import { BarDatum, BarSvgProps, ResponsiveBar } from '@nivo/bar';
 import { Typography } from 'antd';
@@ -32,7 +33,7 @@ const BarChart = ({ title, height, data, ...rest }: OwnProps) => (
         />
       </div>
     ) : (
-      <Empty imageType="grid" size="large" />
+      <Empty imageType="grid" size="large" description={intl.get('api.noData')} />
     )}
   </div>
 );

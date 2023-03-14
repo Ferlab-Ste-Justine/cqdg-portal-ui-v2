@@ -7,13 +7,13 @@ import useGetAggregations from 'hooks/graphql/useGetAggregations';
 
 import styles from './Filters.module.scss';
 
-type OwnProps = {
+interface IGenericFiltersProps {
   queryBuilderId: string;
   index: string;
   field: string;
   sqon: any;
   extendedMappingResults: ExtendedMappingResults;
-};
+}
 
 const GenericFilters = ({
   queryBuilderId,
@@ -21,14 +21,9 @@ const GenericFilters = ({
   field,
   sqon,
   extendedMappingResults,
-}: OwnProps) => {
-  const results = useGetAggregations(
-    {
-      sqon,
-    },
-    AGGREGATION_QUERY(index, [field], extendedMappingResults),
-    index,
-  );
+}: IGenericFiltersProps) => {
+  const query = AGGREGATION_QUERY(index, [field], extendedMappingResults);
+  const results = useGetAggregations({ sqon }, query, index);
 
   return (
     <Spin size="large" spinning={results.loading}>
