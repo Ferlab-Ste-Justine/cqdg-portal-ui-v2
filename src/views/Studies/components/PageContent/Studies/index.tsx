@@ -2,6 +2,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CheckOutlined } from '@ant-design/icons';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
@@ -12,7 +13,9 @@ import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import capitalize from 'lodash/capitalize';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -74,7 +77,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study_code',
+                    field: 'study.study_code',
                     value: [study.study_code],
                     index: INDEXES.STUDY,
                   }),
@@ -142,7 +145,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study_code',
+                    field: 'study.study_code',
                     value: [study.study_code],
                     index: INDEXES.STUDY,
                   }),
@@ -163,30 +166,66 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     title: intl.get('screen.studies.accessLimitation'),
     dataIndex: 'data_access_codes',
     defaultHidden: true,
-    render: (data_access_codes: IStudyDataAccessCodes) =>
-      data_access_codes?.access_limitations?.length ? (
-        <ExpandableCell
-          nOfElementsWhenCollapsed={1}
-          dataSource={data_access_codes?.access_limitations || []}
-        />
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+    render: (data_access_codes: IStudyDataAccessCodes) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_access_codes?.access_limitations || []}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+        renderItem={(item, index) => {
+          const info = extractDuoTitleAndCode(item);
+          return info ? (
+            <div key={index}>
+              {capitalize(info.title)} (DUO:{' '}
+              <ExternalLink
+                href={`http://purl.obolibrary.org/obo/DUO_${info.code}`}
+                className={styles.link}
+              >
+                {info.code}
+              </ExternalLink>
+              )
+            </div>
+          ) : (
+            TABLE_EMPTY_PLACE_HOLDER
+          );
+        }}
+      />
+    ),
   },
   {
     key: 'access_requirements',
     title: intl.get('screen.studies.accessRequirement'),
     dataIndex: 'data_access_codes',
     defaultHidden: true,
-    render: (data_access_codes: IStudyDataAccessCodes) =>
-      data_access_codes?.access_requirements?.length ? (
-        <ExpandableCell
-          nOfElementsWhenCollapsed={1}
-          dataSource={data_access_codes?.access_requirements || []}
-        />
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+    render: (data_access_codes: IStudyDataAccessCodes) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_access_codes?.access_requirements || []}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+        renderItem={(item, index) => {
+          const info = extractDuoTitleAndCode(item);
+          return info ? (
+            <div key={index}>
+              {capitalize(info.title)} (DUO:{' '}
+              <ExternalLink
+                href={`http://purl.obolibrary.org/obo/DUO_${info.code}`}
+                className={styles.link}
+              >
+                {info.code}
+              </ExternalLink>
+              )
+            </div>
+          ) : (
+            TABLE_EMPTY_PLACE_HOLDER
+          );
+        }}
+      />
+    ),
   },
   {
     key: 'description',

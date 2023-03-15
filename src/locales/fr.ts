@@ -726,8 +726,8 @@ const fr = {
             compositionFamilyTitle: 'Composition familiale',
           },
           availableData: {
-            dataCategoryTitle: 'Participants par catégories de données',
-            dataTypeTitle: 'Participants par types de données',
+            dataCategoryTitle: 'Participants par catégorie de données',
+            dataTypeTitle: 'Participants par type de données',
             studiesTitle: 'Participants par étude',
             axis: '# de participants',
             dataCategory: 'Catégorie de données',

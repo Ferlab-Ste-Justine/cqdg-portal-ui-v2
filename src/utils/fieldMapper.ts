@@ -84,6 +84,8 @@ export const mapFilterForFiles = (sqonFilters: ISqonGroupFilter) =>
     },
   ]);
 
+export const mapFilterForStudies = (sqonFilters: ISqonGroupFilter) => recursiveMap(sqonFilters, []);
+
 export const mapFilterForBiospecimen = (sqonFilters: ISqonGroupFilter) =>
   recursiveMap(sqonFilters, [
     {

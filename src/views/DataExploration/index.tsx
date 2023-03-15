@@ -140,6 +140,7 @@ const DataExploration = () => {
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const fileMappingResults = useGetExtendedMappings(INDEXES.FILE);
   const biospecimenMappingResults = useGetExtendedMappings(INDEXES.BIOSPECIMEN);
+  const studyMappingResults = useGetExtendedMappings(INDEXES.STUDY);
 
   const menuItems: ISidebarMenuItem[] = [
     {
@@ -184,6 +185,8 @@ const DataExploration = () => {
         <PageContent
           fileMapping={fileMappingResults}
           participantMapping={participantMappingResults}
+          studyMapping={studyMappingResults}
+          biospecimenMapping={biospecimenMappingResults}
           tabId={tab}
         />
       </ScrollContent>

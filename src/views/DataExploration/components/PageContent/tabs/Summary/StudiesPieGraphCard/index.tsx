@@ -7,7 +7,6 @@ import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { STUDIESPIE_QUERY } from 'graphql/summary/queries';
-import capitalize from 'lodash/capitalize';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
@@ -25,9 +24,9 @@ interface OwnProps {
 const transformData = (results: any) => {
   const aggs = results?.Participant?.aggregations;
   return {
-    domain: (aggs?.study__domain.buckets || []).map(toChartData),
-    population: (aggs?.study__population.buckets || []).map(toChartData),
-    name: (aggs?.study__name.buckets || []).map(toChartData),
+    domainData: (aggs?.study__domain.buckets || []).map(toChartData),
+    populationData: (aggs?.study__population.buckets || []).map(toChartData),
+    studyCodeData: (aggs?.study__study_code.buckets || []).map(toChartData),
   };
 };
 
@@ -54,7 +53,7 @@ const StudiesPieGraphCard = ({ id, className = '' }: OwnProps) => {
   const { loading, result } = useLazyResultQuery(STUDIESPIE_QUERY, {
     variables: { sqon },
   });
-  const { domain, population, name } = transformData(result);
+  const { domainData, populationData, studyCodeData } = transformData(result);
 
   return (
     <GridCard
@@ -75,14 +74,10 @@ const StudiesPieGraphCard = ({ id, className = '' }: OwnProps) => {
           <Col sm={12} md={12} lg={8}>
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.domainTitle')}
-              data={domain}
+              data={domainData}
               onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY)}
               tooltip={(value) => (
-                <BasicTooltip
-                  id={capitalize(value.datum.id.toString())}
-                  value={value.datum.value}
-                  color={value.datum.color}
-                />
+                <BasicTooltip id={value.datum.id} value={1} color={value.datum.color} />
               )}
               {...graphSetting}
             />
@@ -90,16 +85,19 @@ const StudiesPieGraphCard = ({ id, className = '' }: OwnProps) => {
           <Col sm={12} md={12} lg={8}>
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.popTitle')}
-              data={population}
+              data={populationData}
               onClick={(datum) => addToQuery('population', datum.id as string, INDEXES.STUDY)}
+              tooltip={(value) => (
+                <BasicTooltip id={value.datum.id} value={1} color={value.datum.color} />
+              )}
               {...graphSetting}
             />
           </Col>
           <Col sm={12} md={12} lg={8}>
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.partTitle')}
-              data={name}
-              onClick={(datum) => addToQuery('name', datum.id as string, INDEXES.STUDY)}
+              data={studyCodeData}
+              onClick={(datum) => addToQuery('study_code', datum.id as string, INDEXES.STUDY)}
               {...graphSetting}
             />
           </Col>

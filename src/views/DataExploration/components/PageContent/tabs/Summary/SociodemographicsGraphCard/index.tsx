@@ -2,12 +2,10 @@ import intl from 'react-intl-universal';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
-import { BasicTooltip } from '@nivo/tooltip';
 import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { SOCIODEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
-import capitalize from 'lodash/capitalize';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
@@ -77,13 +75,6 @@ const SociodemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
               title={intl.get('screen.dataExploration.tabs.summary.sociodemographics.genderTitle')}
               data={genderData}
               onClick={(datum) => addToQuery('gender', datum.id as string)}
-              tooltip={(value) => (
-                <BasicTooltip
-                  id={capitalize(value.datum.id.toString())}
-                  value={value.datum.value}
-                  color={value.datum.color}
-                />
-              )}
               {...graphSetting}
             />
           </Col>
