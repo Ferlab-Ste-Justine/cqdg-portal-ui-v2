@@ -779,7 +779,7 @@ const fr = {
           sample_type: "Type d'échantillon",
           biospecimen_tissue_source: 'Tissue',
           age_biospecimen_collection: 'Âge',
-          age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
+          age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen (jours)',
           files: 'Fichiers',
         },
         datafiles: {
