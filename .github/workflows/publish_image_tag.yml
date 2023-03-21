@@ -5,9 +5,6 @@ on:
     tags:
       - v*
 
-env:
-  SASS_PATH: ./src/style/themes/cqdg
-
 jobs:
   build_prod:
     name: Publish Prod Image

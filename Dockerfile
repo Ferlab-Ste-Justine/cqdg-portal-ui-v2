@@ -9,6 +9,8 @@ RUN npm rebuild node-sass
 
 COPY ./ /app/
 
+ENV SASS_PATH=./src/style/themes/cqdg
+
 RUN npm run theme
 RUN npm run build
 
