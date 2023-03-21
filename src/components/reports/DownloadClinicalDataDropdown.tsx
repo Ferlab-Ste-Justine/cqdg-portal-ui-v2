@@ -42,7 +42,6 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
         {
           key: 'CLINICAL_DATA_WITH_FAMILY',
           label: intl.get('api.report.clinicalData.family', { count: participantIds.length }),
-          disabled: true,
         },
       ]}
     />
