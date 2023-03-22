@@ -71,6 +71,8 @@ export const GET_PARTICIPANTS = gql`
             study {
               study_code
               name
+              population
+              domain
               data_access_codes {
                 access_limitations
                 access_requirements

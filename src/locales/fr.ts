@@ -1004,7 +1004,7 @@ const fr = {
     },
 
     // Studies
-    study_code: 'Rechercher par étude',
+    study_code: "Code de l'étude",
     domain: 'Domaine',
     population: 'Population',
     data_access_codes: {

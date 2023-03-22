@@ -1,5 +1,6 @@
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import keycloak from 'auth/keycloak-api/keycloak';
+import { AxiosRequestHeaders } from 'axios';
 import { format } from 'date-fns';
 import EnvironmentVariables from 'helpers/EnvVariables';
 import isEmpty from 'lodash/isEmpty';
@@ -20,9 +21,10 @@ export const REPORTS_ROUTES = {
   [ReportType.FILE_REQUEST_ACCESS_STATS]: `${REPORT_API_URL}/reports/file-request-access/stats`,
 };
 
-export const headers = () => ({
+export const headers = (): AxiosRequestHeaders => ({
+  'Access-Control-Allow-Origin': '*',
   'Content-Type': 'application/json',
-  Accept: '*/*',
+  Accept: '*',
   Authorization: `Bearer ${keycloak.token}`,
 });
 

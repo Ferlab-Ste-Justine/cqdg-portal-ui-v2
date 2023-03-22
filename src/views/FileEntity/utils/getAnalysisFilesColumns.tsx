@@ -58,6 +58,10 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
         dataSource={biospecimens?.hits?.edges?.map((b) => b?.node?.sample_id) || []}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
       />
     ),
   },
