@@ -123,6 +123,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
           dataSource={mondoNames}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
           renderItem={(mondo_id, id) => {
             const mondoInfo = extractMondoTitleAndCode(mondo_id);
             return (
@@ -153,6 +157,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
           dataSource={phenotypeNames}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
           renderItem={(hpo_id_phenotype, index): React.ReactNode => {
             const phenotypeInfo = extractPhenotypeTitleAndCode(hpo_id_phenotype);
             return phenotypeInfo ? (
@@ -265,6 +273,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
           nOfElementsWhenCollapsed={1}
           dataSource={icdNames}
           renderItem={(name, id) => <div key={id}>{capitalize(name)}</div>}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
         />
       );
     },
@@ -285,6 +297,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
           nOfElementsWhenCollapsed={1}
           dataSource={sourceTexts}
           renderItem={(sourceText, id) => <div key={id}>{capitalize(sourceText)}</div>}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
         />
       );
     },

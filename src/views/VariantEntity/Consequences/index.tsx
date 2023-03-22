@@ -207,6 +207,10 @@ const getColumns = () => [
               <Text>{item}</Text>
             </StackLayout>
           )}
+          dictionnary={{
+            'see.less': intl.get('global.seeLess'),
+            'see.more': intl.get('global.seeMore'),
+          }}
         />
       );
     },

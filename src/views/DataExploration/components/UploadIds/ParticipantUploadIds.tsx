@@ -48,7 +48,9 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return participants.map((participant) => ({
         key: participant.participant_id,
-        submittedId: ids.find((id) => [participant.participant_id].includes(id))!,
+        // submittedId: ids.find((id) => [participant.participant_id].includes(id))!,
+        submittedId:
+          ids.find((id) => participant.participant_id.toLowerCase() === id.toLowerCase()) || '',
         mappedTo: participant.study_code,
         matchTo: participant.participant_id,
       }));

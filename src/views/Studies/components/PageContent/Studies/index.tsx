@@ -77,7 +77,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study.study_code',
+                    field: 'study_code',
                     value: [study.study_code],
                     index: INDEXES.STUDY,
                   }),
@@ -145,7 +145,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study.study_code',
+                    field: 'study_code',
                     value: [study.study_code],
                     index: INDEXES.STUDY,
                   }),

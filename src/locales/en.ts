@@ -1010,7 +1010,7 @@ const en = {
     },
 
     // Studies
-    study_code: 'Search by study',
+    study_code: 'Study Code',
     domain: 'Domain',
     population: 'Population',
     data_access_codes: {

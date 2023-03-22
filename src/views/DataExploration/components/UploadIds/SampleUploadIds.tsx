@@ -50,7 +50,8 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return uniqBy(biospecimens, 'sample_id').map((biospecimen) => ({
         key: biospecimen.sample_id,
-        submittedId: ids.find((id) => [biospecimen.sample_id].includes(id))!,
+        submittedId:
+          ids.find((id) => biospecimen.sample_id.toLowerCase() === id.toLowerCase()) || '',
         mappedTo: biospecimen.study_code,
         matchTo: biospecimen.sample_id,
       }));

@@ -297,7 +297,7 @@ const PageContent = ({
             <span>
               <UserOutlined />
               {`${intl.get('entities.participant.participants')} (${numberWithCommas(
-                biospecimenResults.total,
+                participantResults.total,
               )})`}
             </span>
           }
