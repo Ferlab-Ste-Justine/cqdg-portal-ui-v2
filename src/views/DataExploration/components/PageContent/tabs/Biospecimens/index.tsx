@@ -7,6 +7,7 @@ import ProTable from '@ferlab/ui/core/components/ProTable';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import useQueryBuilderState, {
   addQuery,
+  updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -23,6 +24,7 @@ import {
 } from 'views/DataExploration/utils/constant';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
+import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
@@ -58,10 +60,24 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
   {
     key: 'study_code',
-    dataIndex: 'study_code',
     title: intl.get('screen.dataExploration.tabs.biospecimens.study_code'),
+    dataIndex: 'study_code',
     sorter: { multiple: 1 },
-    render: (study_code) => study_code || TABLE_EMPTY_PLACE_HOLDER,
+    render: (study_code: string) => (
+      <Link
+        to={STATIC_ROUTES.STUDIES}
+        onClick={() =>
+          updateActiveQueryField({
+            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+            field: 'study_code',
+            value: [study_code],
+            index: INDEXES.STUDY,
+          })
+        }
+      >
+        {study_code}
+      </Link>
+    ),
   },
   {
     key: 'sample_type',
