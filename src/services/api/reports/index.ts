@@ -22,7 +22,6 @@ export const REPORTS_ROUTES = {
 };
 
 export const headers = (): AxiosRequestHeaders => ({
-  'Access-Control-Allow-Origin': '*',
   'Content-Type': 'application/json',
   Accept: '*',
   Authorization: `Bearer ${keycloak.token}`,

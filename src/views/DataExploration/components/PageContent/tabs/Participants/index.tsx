@@ -30,6 +30,7 @@ import {
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
 import {
+  extractIcdTitleAndCode,
   extractMondoTitleAndCode,
   extractPhenotypeTitleAndCode,
 } from 'views/DataExploration/utils/helper';
@@ -272,7 +273,18 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
           dataSource={icdNames}
-          renderItem={(name, id) => <div key={id}>{capitalize(name)}</div>}
+          renderItem={(name, index) => {
+            const { code, title } = extractIcdTitleAndCode(name);
+            return (
+              <div key={index}>
+                {capitalize(title)} (
+                <ExternalLink href={`http://purl.bioontology.org/ontology/ICD10CM/${code}`}>
+                  {code}
+                </ExternalLink>
+                )
+              </div>
+            );
+          }}
           dictionnary={{
             'see.less': intl.get('global.seeLess'),
             'see.more': intl.get('global.seeMore'),

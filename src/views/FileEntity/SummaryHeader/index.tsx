@@ -7,7 +7,6 @@ import { Button } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IFileEntity } from 'graphql/files/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -22,11 +21,11 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
     <Button className={styles.button} size="large" block>
       <Link
         className={styles.link}
-        to={STATIC_ROUTES.STUDIES}
+        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
         onClick={() =>
           file &&
           addQuery({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
@@ -72,7 +71,7 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         <div className={styles.alignBaseline}>
           <span className={styles.count}>{file?.participants?.hits?.total}</span>
           <span className={styles.name}>
-            {intl.get('entities.participant.participants', {
+            {intl.get('entities.participant.participantAuto', {
               count: file?.participants?.hits?.total,
             })}
           </span>

@@ -279,7 +279,7 @@ const en = {
 
       searchByFileId: 'Search by file ID',
       noFileFound: 'No file found',
-      filePlaceholder: 'e.g. FI001CSF26',
+      filePlaceholder: 'e.g. FI0080837',
       noFileSetFound: 'No file set found',
 
       savedFileSets: 'Saved file sets',
