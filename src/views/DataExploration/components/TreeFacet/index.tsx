@@ -175,6 +175,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
         onClick={() => setVisible(true)}
       />
       <Modal
+        destroyOnClose
         visible={visible}
         wrapClassName={styles.hpoTreeModalWrapper}
         className={styles.hpoTreeModal}
@@ -196,8 +197,8 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
                     label: 'Any of',
                   },
                   {
-                    key: TermOperators.in,
-                    label: 'Any of',
+                    key: TermOperators.all,
+                    label: 'All of',
                   },
                   {
                     key: TermOperators['some-not-in'],
@@ -228,7 +229,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
             }
           }}
           onSearch={(_, value) => {
-            if (value && value.length > MIN_SEARCH_TEXT_LENGTH) {
+            if (value && value.length >= MIN_SEARCH_TEXT_LENGTH) {
               const hits: string[] = [];
               const tree = cloneDeep(treeData)!;
               searchInTree(value, tree, hits);
