@@ -166,6 +166,10 @@ export const getFilterGroup = (
     type: getFilterType(extendedMapping?.type || ''),
     config: {
       withFooter: filterFooter,
+      facetTranslate: (value: string) => {
+        const name = translateWhenNeeded(extendedMapping?.field!, value);
+        return transformNameIfNeeded(value, name);
+      },
     },
   };
 };
