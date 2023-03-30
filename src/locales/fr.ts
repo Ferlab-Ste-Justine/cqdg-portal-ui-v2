@@ -144,8 +144,12 @@ const fr = {
         less: 'Moins',
         more: 'Plus',
         apply: 'Appliquer',
+        cancel: 'Annuler',
       },
       operators: {
+        allOf: 'Tout',
+        anyOf: 'N’importe quel',
+        noneOf: 'Aucun',
         between: 'Entre',
         lessthan: 'Moins que',
         lessthanorequal: 'Moins que ou égale',

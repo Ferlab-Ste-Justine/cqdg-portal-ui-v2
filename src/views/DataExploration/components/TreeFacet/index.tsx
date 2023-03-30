@@ -183,7 +183,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
         okText={intl.get(`screen.dataExploration.${type}.modal.okText`)}
         footer={[
           <Button key="back" onClick={handleCancel}>
-            Cancel
+            {intl.get('global.filters.actions.cancel')}
           </Button>,
           <Dropdown.Button
             key="treeFacet-footer-dropdown-button"
@@ -194,15 +194,15 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
                 items={[
                   {
                     key: TermOperators.in,
-                    label: 'Any of',
+                    label: intl.get('global.filters.operators.anyOf'),
                   },
                   {
                     key: TermOperators.all,
-                    label: 'All of',
+                    label: intl.get('global.filters.operators.allOf'),
                   },
                   {
                     key: TermOperators['some-not-in'],
-                    label: 'None of',
+                    label: intl.get('global.filters.operators.noneOf'),
                   },
                 ]}
               />
@@ -210,7 +210,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
             style={{ marginLeft: '8px' }}
             onClick={() => handleOnApply(TermOperators.in)}
           >
-            Apply
+            {intl.get('global.filters.actions.apply')}
           </Dropdown.Button>,
         ]}
         okButtonProps={{ disabled: isEmpty(targetKeys) && isEmpty(treeData) }}
