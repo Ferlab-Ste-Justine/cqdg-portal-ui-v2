@@ -142,8 +142,12 @@ const en = {
         less: 'Less',
         more: 'More',
         apply: 'Apply',
+        cancel: 'Cancel',
       },
       operators: {
+        allOf: 'All of',
+        anyOf: 'Any of',
+        noneOf: 'None of',
         between: 'Between',
         lessthan: 'Less than',
         lessthanorequal: 'Less than or equal',

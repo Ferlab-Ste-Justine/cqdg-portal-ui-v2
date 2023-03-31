@@ -38,6 +38,9 @@ export const getFiltersDictionary = (): FiltersDict => ({
     none: intl.get('global.filters.actions.none'),
   },
   operators: {
+    allOf: intl.get('global.filters.operators.allOf'),
+    anyOf: intl.get('global.filters.operators.anyOf'),
+    noneOf: intl.get('global.filters.operators.noneOf'),
     between: intl.get('global.filters.operators.between'),
     lessThan: intl.get('global.filters.operators.lessthan'),
     lessThanOfEqual: intl.get('global.filters.operators.lessthanorequal'),
