@@ -103,7 +103,12 @@ export const generateFilters = ({
   });
 
 const translateWhenNeeded = (group: string, key: string) =>
-  intl.get(`facets.options.${keyEnhance(key)}`).defaultMessage(keyEnhance(key));
+  intl
+    .get(`facets.options.${keyEnhance(key)}`)
+    .defaultMessage(keyEnhanceBooleanOnlyExcept(group, key));
+
+const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string) =>
+  ['chromosome'].includes(field) ? fkey : keyEnhanceBooleanOnly(fkey);
 
 export const getFilters = (aggregations: Aggregations | null, key: string): IFilter[] => {
   if (!aggregations || !key) return [];
@@ -115,7 +120,7 @@ export const getFilters = (aggregations: Aggregations | null, key: string): IFil
         return {
           data: {
             count: f.doc_count,
-            key: keyEnhanceBooleanOnly(f.key),
+            key: keyEnhanceBooleanOnlyExcept(key, f.key),
           },
           id: f.key,
           name: transformNameIfNeeded(key, name),
