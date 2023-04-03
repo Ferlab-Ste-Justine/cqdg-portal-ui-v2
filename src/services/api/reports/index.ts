@@ -10,6 +10,7 @@ import downloader from 'common/downloader';
 import { ReportConfig, ReportType } from './models';
 
 const REPORT_API_URL = EnvironmentVariables.configFor('REPORTS_API_URL');
+
 const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
 
 export const REPORTS_ROUTES = {
@@ -40,6 +41,10 @@ const generateReport = (config: ReportConfig) => {
     reportSqon = config.sqon;
   }
 
+  /** the quotes in string are required by format function, else it throws an error */
+  const fileName = `'cqdg_${name}'_yyyyMMdd`;
+  const fileNameFormatted = format(new Date(), fileName);
+
   return downloader({
     // @ts-ignore
     url: REPORTS_ROUTES[name],
@@ -48,7 +53,7 @@ const generateReport = (config: ReportConfig) => {
     data: {
       sqon: reportSqon,
       projectId: ARRANGER_PROJECT_ID,
-      filename: format(new Date(), `'cqdg_${name}'_yyyyMMdd`),
+      filename: fileNameFormatted,
       withFamily: config.withFamily,
     },
     headers: headers(),
