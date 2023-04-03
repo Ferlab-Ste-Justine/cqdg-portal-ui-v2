@@ -143,6 +143,11 @@ export const getQueryBuilderDictionary = (
     },
     noQuery: intl.get('components.querybuilder.query.noQuery'),
     facet: facetResolver,
+    facetValueMapping: {
+      chromosome: {
+        true: '1',
+      },
+    },
     setNameResolver: (setId: string) => {
       const set = savedSets?.find((set) => set.id === setId.replace(SET_ID_PREFIX, ''));
       return set ? set.tag : setId;
