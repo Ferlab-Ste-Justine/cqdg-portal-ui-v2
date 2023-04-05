@@ -26,7 +26,7 @@ const fr = {
       biospecimen_tissue_source: 'Tissue',
       biospecimen_id: 'Biospécimen',
       age_biospecimen_collection: 'Âge',
-      age_biospecimen_collection_tooltip: 'Age au prélèvement du biospécimen (jours)',
+      age_biospecimen_collection_tooltip: 'Âge au prélèvement du biospécimen (jours)',
     },
     participant: {
       participant_id: 'Participant',
@@ -154,6 +154,9 @@ const fr = {
       },
       range: {
         is: 'Est',
+        from: 'De',
+        to: 'A',
+        actualInterval: 'Intervalle actuel : ',
       },
       messages: {
         empty: 'Aucune valeur trouvée',

@@ -36,6 +36,7 @@ export const getFiltersDictionary = (): FiltersDict => ({
     less: intl.get('global.filters.actions.less'),
     more: intl.get('global.filters.actions.more'),
     none: intl.get('global.filters.actions.none'),
+    dictionary: {},
   },
   operators: {
     between: intl.get('global.filters.operators.between'),
@@ -45,6 +46,9 @@ export const getFiltersDictionary = (): FiltersDict => ({
     greaterThanOrEqual: intl.get('global.filters.operators.greaterthanorequal'),
   },
   range: {
+    from: intl.get('global.filters.range.from'),
+    to: intl.get('global.filters.range.to'),
+    actualInterval: intl.get('global.filters.range.actualInterval'),
     is: intl.get('global.filters.range.is'),
     min: 'min',
     max: 'max',

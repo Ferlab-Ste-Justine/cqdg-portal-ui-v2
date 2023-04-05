@@ -20,7 +20,10 @@ const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescri
   },
   {
     label: (
-      <Tooltip title={intl.get('entities.participant.submitter_participant_id_tooltip')}>
+      <Tooltip
+        title={intl.get('entities.participant.submitter_participant_id_tooltip')}
+        className={styles.tooltip}
+      >
         {intl.get('entities.participant.submitter_participant_id')}
       </Tooltip>
     ),
@@ -55,18 +58,22 @@ const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescri
   },
   {
     label: intl.get('entities.participant.family_type'),
-    value: (
+    value: participant?.family_type ? (
       <Tag color="cyan" className={styles.tag}>
-        {participant?.family_type || TABLE_EMPTY_PLACE_HOLDER}
+        {participant?.family_type}
       </Tag>
+    ) : (
+      TABLE_EMPTY_PLACE_HOLDER
     ),
   },
   {
     label: intl.get('entities.participant.family_position'),
-    value: (
+    value: participant?.relationship_to_proband ? (
       <Tag color="purple" className={styles.tag}>
-        {participant?.relationship_to_proband || TABLE_EMPTY_PLACE_HOLDER}
+        {participant?.relationship_to_proband}
       </Tag>
+    ) : (
+      TABLE_EMPTY_PLACE_HOLDER
     ),
   },
 ];

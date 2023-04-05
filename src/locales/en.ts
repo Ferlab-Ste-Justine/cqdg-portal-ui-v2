@@ -152,6 +152,9 @@ const en = {
       },
       range: {
         is: 'Is',
+        from: 'From',
+        to: 'To',
+        actualInterval: 'Actual interval: ',
       },
       messages: {
         empty: 'No values found',

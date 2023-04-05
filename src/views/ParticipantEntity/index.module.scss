@@ -11,3 +11,15 @@
 .titleIcon {
   font-size: 20px;
 }
+
+.tooltip {
+  border-bottom: 1px dotted;
+}
+
+.forceLinkUnderline a {
+  text-decoration: underline !important;
+}
+
+.forceLinkUnderline a:hover {
+  text-decoration: none !important;
+}
