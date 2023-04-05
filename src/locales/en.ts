@@ -142,6 +142,7 @@ const en = {
         less: 'Less',
         more: 'More',
         apply: 'Apply',
+        dictionnary: 'Dictionnary',
       },
       operators: {
         between: 'Between',

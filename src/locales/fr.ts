@@ -144,6 +144,7 @@ const fr = {
         less: 'Moins',
         more: 'Plus',
         apply: 'Appliquer',
+        dictionary: 'Dictionnaire',
       },
       operators: {
         between: 'Entre',
