@@ -44,3 +44,5 @@ export const formatFileSize: TFilesizeInput = (
 
   return result;
 };
+
+export default formatFileSize;

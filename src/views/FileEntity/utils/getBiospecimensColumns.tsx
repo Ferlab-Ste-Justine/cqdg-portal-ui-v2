@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { IParticipantEntity } from 'graphql/participants/models';
-import capitalize from 'lodash/capitalize';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -41,7 +40,7 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractNcitTissueTitleAndCode(sample_type);
       return (
         <>
-          {capitalize(title)} (NCIT:{' '}
+          {title} (NCIT:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
@@ -62,7 +61,7 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
       return (
         <>
-          {capitalize(title)} (NCIT:{' '}
+          {title} (NCIT:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );

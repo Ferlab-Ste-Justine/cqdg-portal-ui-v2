@@ -33,7 +33,7 @@ import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { userHasAccessToFile } from 'utils/dataFiles';
-import { formatFileSize } from 'utils/formatFileSize';
+import formatFileSize from 'utils/formatFileSize';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
@@ -146,7 +146,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: intl.get('screen.dataExploration.tabs.datafiles.size'),
     dataIndex: 'file_size',
     sorter: { multiple: 1 },
-    render: (file_size) => formatFileSize(file_size, { output: 'string' }),
+    render: (file_size) => formatFileSize(file_size, { output: 'string', round: 1 }),
   },
   {
     key: 'nb_participants',

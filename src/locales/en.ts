@@ -971,6 +971,7 @@ const en = {
     age_biospecimen_collection: 'Age at Biospecimen Collection (days)',
     sample_type: 'Sample Type',
     sample_id: 'Sample ID',
+    biospecimen_id: 'Biospecimen ID',
 
     // File
     data_category: 'Data Category',

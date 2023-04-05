@@ -7,7 +7,6 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { INDEXES } from 'graphql/constants';
 import { useParticipantsFromField } from 'graphql/participants/actions';
 import { IDiagnoses } from 'graphql/participants/models';
-import capitalize from 'lodash/capitalize';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   extractIcdTitleAndCode,
@@ -63,7 +62,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractMondoTitleAndCode(diagnosis_mondo_code);
       return (
         <>
-          {capitalize(title)} (MONDO:{' '}
+          {title} (MONDO:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/MONDO_${code}`}>{code}</ExternalLink>)
         </>
       );
@@ -78,7 +77,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractIcdTitleAndCode(diagnosis_ICD_code);
       return (
         <>
-          {capitalize(title)} (
+          {title} (
           <ExternalLink href={`http://purl.bioontology.org/ontology/ICD10CM/${code}`}>
             {code}
           </ExternalLink>
@@ -91,7 +90,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     key: 'diagnoses.diagnosis_source_text',
     dataIndex: 'diagnosis_source_text',
     title: intl.get('entities.participant.diagnosis_source_text'),
-    render: (label: string) => (label ? capitalize(label) : TABLE_EMPTY_PLACE_HOLDER),
+    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'diagnoses.age_at_diagnosis',

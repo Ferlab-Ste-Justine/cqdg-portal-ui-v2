@@ -1,7 +1,6 @@
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import capitalize from 'lodash/capitalize';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -17,7 +16,16 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     key: 'sample_type',
     dataIndex: 'sample_type',
     title: intl.get('entities.biospecimen.sample_type'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (sample_type: string) => {
+      if (!sample_type) return TABLE_EMPTY_PLACE_HOLDER;
+      const { code, title } = extractNcitTissueTitleAndCode(sample_type);
+      return (
+        <>
+          {title} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
   },
   {
     key: 'biospecimen_tissue_source',
@@ -28,7 +36,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
       return (
         <>
-          {capitalize(title)} (NCIT:{' '}
+          {title} (NCIT:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
