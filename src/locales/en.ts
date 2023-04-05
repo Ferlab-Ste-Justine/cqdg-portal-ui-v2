@@ -142,6 +142,7 @@ const en = {
         less: 'Less',
         more: 'More',
         apply: 'Apply',
+        dictionnary: 'Dictionnary',
         cancel: 'Cancel',
       },
       operators: {
@@ -156,6 +157,9 @@ const en = {
       },
       range: {
         is: 'Is',
+        from: 'From',
+        to: 'To',
+        actualInterval: 'Actual interval: ',
       },
       messages: {
         empty: 'No values found',

@@ -80,9 +80,7 @@ const ParticipantEntity = () => {
         header={intl.get('entities.participant.profile')}
         title={intl.get('entities.participant.profile')}
       />
-      {data?.family_id && data?.family_relationships?.hits?.edges?.length > 1 && (
-        <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
-      )}
+      <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
         loading={loading}

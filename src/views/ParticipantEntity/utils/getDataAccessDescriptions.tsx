@@ -8,7 +8,7 @@ import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
-import styles from 'views/FileEntity/index.module.scss';
+import styles from '../index.module.scss';
 
 const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
   {
@@ -21,6 +21,7 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           'see.less': intl.get('global.seeLess'),
           'see.more': intl.get('global.seeMore'),
         }}
+        className={styles.forceLinkUnderline}
         renderItem={(access_limitation, index) => {
           const limitation = extractDuoTitleAndCode(access_limitation);
           return limitation ? (
