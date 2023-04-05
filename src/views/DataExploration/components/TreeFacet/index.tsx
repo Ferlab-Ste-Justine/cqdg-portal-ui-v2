@@ -175,6 +175,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
         onClick={() => setVisible(true)}
       />
       <Modal
+        destroyOnClose
         visible={visible}
         wrapClassName={styles.hpoTreeModalWrapper}
         className={styles.hpoTreeModal}
@@ -182,7 +183,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
         okText={intl.get(`screen.dataExploration.${type}.modal.okText`)}
         footer={[
           <Button key="back" onClick={handleCancel}>
-            Cancel
+            {intl.get('global.filters.actions.cancel')}
           </Button>,
           <Dropdown.Button
             key="treeFacet-footer-dropdown-button"
@@ -193,15 +194,15 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
                 items={[
                   {
                     key: TermOperators.in,
-                    label: 'Any of',
+                    label: intl.get('global.filters.operators.anyOf'),
                   },
                   {
-                    key: TermOperators.in,
-                    label: 'Any of',
+                    key: TermOperators.all,
+                    label: intl.get('global.filters.operators.allOf'),
                   },
                   {
                     key: TermOperators['some-not-in'],
-                    label: 'None of',
+                    label: intl.get('global.filters.operators.noneOf'),
                   },
                 ]}
               />
@@ -209,7 +210,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
             style={{ marginLeft: '8px' }}
             onClick={() => handleOnApply(TermOperators.in)}
           >
-            Apply
+            {intl.get('global.filters.actions.apply')}
           </Dropdown.Button>,
         ]}
         okButtonProps={{ disabled: isEmpty(targetKeys) && isEmpty(treeData) }}
@@ -228,7 +229,7 @@ const TreeFacet = ({ type, field, titleFormatter, queryBuilderId }: ITreeFacetPr
             }
           }}
           onSearch={(_, value) => {
-            if (value && value.length > MIN_SEARCH_TEXT_LENGTH) {
+            if (value && value.length >= MIN_SEARCH_TEXT_LENGTH) {
               const hits: string[] = [];
               const tree = cloneDeep(treeData)!;
               searchInTree(value, tree, hits);

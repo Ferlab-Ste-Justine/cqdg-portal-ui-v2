@@ -10,5 +10,10 @@ export const transformNameIfNeeded = (field: string, name: string) => {
   if (field === 'file_format') {
     return <span>{name.toLocaleLowerCase()}</span>;
   }
+
+  if (field === 'chromosome') {
+    return name === 'true' ? '1' : name;
+  }
+
   return name;
 };

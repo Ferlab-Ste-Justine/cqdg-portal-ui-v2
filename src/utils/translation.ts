@@ -39,6 +39,9 @@ export const getFiltersDictionary = (): FiltersDict => ({
     dictionary: intl.get('global.filters.actions.dictionary'),
   },
   operators: {
+    allOf: intl.get('global.filters.operators.allOf'),
+    anyOf: intl.get('global.filters.operators.anyOf'),
+    noneOf: intl.get('global.filters.operators.noneOf'),
     between: intl.get('global.filters.operators.between'),
     lessThan: intl.get('global.filters.operators.lessthan'),
     lessThanOfEqual: intl.get('global.filters.operators.lessthanorequal'),
@@ -144,6 +147,11 @@ export const getQueryBuilderDictionary = (
     },
     noQuery: intl.get('components.querybuilder.query.noQuery'),
     facet: facetResolver,
+    facetValueMapping: {
+      chromosome: {
+        true: '1',
+      },
+    },
     setNameResolver: (setId: string) => {
       const set = savedSets?.find((set) => set.id === setId.replace(SET_ID_PREFIX, ''));
       return set ? set.tag : setId;
