@@ -34,27 +34,10 @@ const getExperimentalProcedureDescriptions = (file?: IFileEntity): IEntityDescri
     value: file?.sequencing_experiment?.capture_kit || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    label: intl.get('entities.file.sequencing_experiment.sequencer_id'),
-    value: file?.sequencing_experiment?.sequencer_id || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
     label: intl.get('entities.file.sequencing_experiment.run_date'),
     value: file?.sequencing_experiment?.run_date
       ? format(new Date(file.sequencing_experiment.run_date), 'yyyy-MM-dd')
       : TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    label: intl.get('entities.file.sequencing_experiment.sequencer_id'),
-    value: file?.sequencing_experiment?.sequencer_id || TABLE_EMPTY_PLACE_HOLDER,
-  },
-  {
-    label: intl.get('entities.file.sequencing_experiment.run_name'),
-    value: file?.sequencing_experiment?.run_name || TABLE_EMPTY_PLACE_HOLDER,
-  },
-
-  {
-    label: intl.get('entities.file.sequencing_experiment.labAliquotID'),
-    value: file?.sequencing_experiment?.labAliquotID || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
