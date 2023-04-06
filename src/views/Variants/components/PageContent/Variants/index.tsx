@@ -37,7 +37,7 @@ interface OwnProps {
   sqon?: ISqonGroupFilter;
 }
 
-const defaultColumns: ProColumnType<any>[] = [
+const defaultColumns = (): ProColumnType<any>[] => [
   {
     title: intl.get('screen.variants.table.variant'),
     key: 'hgvsg',
@@ -122,7 +122,7 @@ const VariantsTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
   return (
     <ProTable<ITableVariantEntity>
       tableId="variants_table"
-      columns={defaultColumns}
+      columns={defaultColumns()}
       initialColumnState={userInfo?.config.variants?.tables?.variants?.columns}
       wrapperClassName={styles.variantTabWrapper}
       loading={results.loading}

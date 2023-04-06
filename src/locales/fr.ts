@@ -100,11 +100,11 @@ const fr = {
         run_date: 'Date (aaaa-mm-jj)',
         run_name: 'Run',
         labAliquotID: 'Aliquot',
-        bio_informatic_analysis: 'Identifiant',
+        bio_informatic_analysis: "Type d'analyse",
         workflow_name: 'Pipeline',
         workflow_version: 'Version',
         genome_build: 'Génome build',
-        analysis_id: "ID d'analyse",
+        analysis_id: 'Identifiant',
       },
       analysisFiles: "Fichiers générés par l'analyse",
       numberByExperimentalStrategy: 'Nombre par stratégie expérimentale',
@@ -966,6 +966,7 @@ const fr = {
     age_biospecimen_collection: 'Âge au  prélèvement du biospécimen (jours)',
     sample_type: "Type d'échantillon",
     sample_id: "ID d'échantillon",
+    biospecimen_id: 'ID de biospécimen',
 
     // File
     data_category: 'Catégorie de données',

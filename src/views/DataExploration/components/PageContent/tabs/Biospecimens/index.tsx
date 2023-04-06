@@ -11,11 +11,11 @@ import useQueryBuilderState, {
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { Typography } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
-import capitalize from 'lodash/capitalize';
 import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
@@ -50,13 +50,40 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',
     title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_id'),
-    render: (biospecimen_id: string) => biospecimen_id || TABLE_EMPTY_PLACE_HOLDER,
+    render: (biospecimen_id: string) =>
+      biospecimen_id ? (
+        <Typography.Link
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'biospecimen_id',
+                    value: [biospecimen_id],
+                    index: INDEXES.BIOSPECIMEN,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          {biospecimen_id}
+        </Typography.Link>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
     key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
-    render: (participant: IParticipantEntity) => participant.participant_id,
+    render: (participant: IParticipantEntity) => (
+      <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant.participant_id}`}>
+        {participant.participant_id}
+      </Link>
+    ),
   },
   {
     key: 'study_code',
@@ -89,7 +116,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractNcitTissueTitleAndCode(sample_type);
       return (
         <>
-          {capitalize(title)} (NCIT:{' '}
+          {title} (NCIT:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );
@@ -105,7 +132,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
       return (
         <>
-          {capitalize(title)} (NCIT:{' '}
+          {title} (NCIT:{' '}
           <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
         </>
       );

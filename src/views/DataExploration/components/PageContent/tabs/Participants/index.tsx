@@ -122,7 +122,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       }
       return (
         <ExpandableCell
-          nOfElementsWhenCollapsed={1}
+          nOfElementsWhenCollapsed={3}
           dataSource={mondoNames}
           dictionnary={{
             'see.less': intl.get('global.seeLess'),
@@ -132,7 +132,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             const mondoInfo = extractMondoTitleAndCode(mondo_id);
             return (
               <div key={id}>
-                {capitalize(mondoInfo!.title)} (MONDO:{' '}
+                {mondoInfo!.title} (MONDO:{' '}
                 <ExternalLink href={`http://purl.obolibrary.org/obo/MONDO_${mondoInfo!.code}`}>
                   {mondoInfo!.code}
                 </ExternalLink>
@@ -166,7 +166,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             const phenotypeInfo = extractPhenotypeTitleAndCode(hpo_id_phenotype);
             return phenotypeInfo ? (
               <div key={index}>
-                {capitalize(phenotypeInfo.title)} (HP:{' '}
+                {phenotypeInfo.title} (HP:{' '}
                 <ExternalLink href={`http://purl.obolibrary.org/obo/HP_${phenotypeInfo.code}`}>
                   {phenotypeInfo.code}
                 </ExternalLink>
@@ -277,7 +277,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             const { code, title } = extractIcdTitleAndCode(name);
             return (
               <div key={index}>
-                {capitalize(title)} (
+                {title} (
                 <ExternalLink href={`http://purl.bioontology.org/ontology/ICD10CM/${code}`}>
                   {code}
                 </ExternalLink>
@@ -308,7 +308,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
         <ExpandableCell
           nOfElementsWhenCollapsed={1}
           dataSource={sourceTexts}
-          renderItem={(sourceText, id) => <div key={id}>{capitalize(sourceText)}</div>}
+          renderItem={(sourceText, id) => <div key={id}>{sourceText}</div>}
           dictionnary={{
             'see.less': intl.get('global.seeLess'),
             'see.more': intl.get('global.seeMore'),

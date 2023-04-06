@@ -3,7 +3,6 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
 import { IParticipantEntity } from 'graphql/participants/models';
-import capitalize from 'lodash/capitalize';
 import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -26,7 +25,7 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           const limitation = extractDuoTitleAndCode(access_limitation);
           return limitation ? (
             <div key={index}>
-              {capitalize(limitation.title)} (DUO:{' '}
+              {limitation.title} (DUO:{' '}
               <ExternalLink
                 href={`http://purl.obolibrary.org/obo/DUO_${limitation.code}`}
                 className={styles.link}
@@ -58,7 +57,7 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           const requirement = extractDuoTitleAndCode(access_requirement);
           return requirement ? (
             <div key={index}>
-              {capitalize(requirement.title)} (DUO:{' '}
+              {requirement.title} (DUO:{' '}
               <ExternalLink
                 href={`http://purl.obolibrary.org/obo/DUO_${requirement.code}`}
                 className={styles.link}

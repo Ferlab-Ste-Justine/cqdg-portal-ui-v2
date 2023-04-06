@@ -13,7 +13,6 @@ import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
-import capitalize from 'lodash/capitalize';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
@@ -178,7 +177,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
           const info = extractDuoTitleAndCode(item);
           return info ? (
             <div key={index}>
-              {capitalize(info.title)} (DUO:{' '}
+              {info.title} (DUO:{' '}
               <ExternalLink
                 href={`http://purl.obolibrary.org/obo/DUO_${info.code}`}
                 className={styles.link}
@@ -211,7 +210,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
           const info = extractDuoTitleAndCode(item);
           return info ? (
             <div key={index}>
-              {capitalize(info.title)} (DUO:{' '}
+              {info.title} (DUO:{' '}
               <ExternalLink
                 href={`http://purl.obolibrary.org/obo/DUO_${info.code}`}
                 className={styles.link}
