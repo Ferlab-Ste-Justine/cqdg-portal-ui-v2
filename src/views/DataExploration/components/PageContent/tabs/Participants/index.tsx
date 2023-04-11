@@ -156,7 +156,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       }
       return (
         <ExpandableCell
-          nOfElementsWhenCollapsed={1}
+          nOfElementsWhenCollapsed={3}
           dataSource={phenotypeNames}
           dictionnary={{
             'see.less': intl.get('global.seeLess'),
@@ -271,7 +271,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       }
       return (
         <ExpandableCell
-          nOfElementsWhenCollapsed={1}
+          nOfElementsWhenCollapsed={3}
           dataSource={icdNames}
           renderItem={(name, index) => {
             const { code, title } = extractIcdTitleAndCode(name);
@@ -306,7 +306,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       }
       return (
         <ExpandableCell
-          nOfElementsWhenCollapsed={1}
+          nOfElementsWhenCollapsed={3}
           dataSource={sourceTexts}
           renderItem={(sourceText, id) => <div key={id}>{sourceText}</div>}
           dictionnary={{
