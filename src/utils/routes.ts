@@ -14,6 +14,7 @@ export enum STATIC_ROUTES {
   DATA_EXPLORATION_PARTICIPANTS = '/data-exploration/participants',
   DATA_EXPLORATION_BIOSPECIMENS = '/data-exploration/biospecimens',
   DATA_EXPLORATION_DATAFILES = '/data-exploration/datafiles',
+  PROFILE_SETTINGS = '/profile/settings',
 
   VARIANTS = '/variants',
   FILES = '/files',

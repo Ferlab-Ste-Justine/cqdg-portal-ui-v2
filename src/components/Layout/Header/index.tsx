@@ -1,12 +1,19 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { FileSearchOutlined, HomeOutlined, LogoutOutlined, ReadOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
+import {
+  FileSearchOutlined,
+  HomeOutlined,
+  LogoutOutlined,
+  ReadOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { DownOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import Gravatar from '@ferlab/ui/core/components/Gravatar';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Dropdown, Menu, PageHeader } from 'antd';
+import { Space } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
 import { LANG } from 'common/constants';
@@ -131,6 +138,17 @@ const Header = () => {
                   },
                   {
                     type: 'divider',
+                  },
+                  {
+                    key: 'profile_settings',
+                    label: (
+                      <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
+                        <Space>
+                          <UserOutlined />
+                          {intl.get('layout.user.menu.settings')}
+                        </Space>
+                      </Link>
+                    ),
                   },
                   {
                     key: 'logout',

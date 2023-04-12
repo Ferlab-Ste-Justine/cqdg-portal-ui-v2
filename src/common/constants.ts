@@ -21,3 +21,5 @@ export const SHARED_FILTER_ID_QUERY_PARAM_KEY = 'sharedFilterId';
 export const MAX_TITLE_LENGTH = 200;
 
 export const MAX_ITEMS_QUERY = 10000;
+
+export const DEFAULT_GRAVATAR_PLACEHOLDER = `avatar-placeholder.png`;

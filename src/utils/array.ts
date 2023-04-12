@@ -6,3 +6,5 @@ export const uniqBy = (arr: any[], iteratee: any) => {
   }
   return arr.filter((x, i, self) => i === self.findIndex((y) => iteratee(x) === iteratee(y)));
 };
+
+export const lowerAll = (arr: string[]) => arr.map((val) => val.toLowerCase());
