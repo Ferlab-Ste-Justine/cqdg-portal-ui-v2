@@ -27,4 +27,5 @@ export enum DYNAMIC_ROUTES {
   FILE_ENTITY = '/files/:file_id?',
   PARTICIPANT_ENTITY = '/participants/:participant_id?',
   ERROR = '/error/:status?',
+  COMMUNITY_MEMBER = '/member/:id',
 }

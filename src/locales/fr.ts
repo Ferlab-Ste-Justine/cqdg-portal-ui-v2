@@ -125,13 +125,13 @@ const fr = {
     search: {
       genes: {
         emptyText: 'Aucun gène trouvé',
-        placeholder: 'e.g. BRAF, ENSG00000157764',
+        placeholder: 'ex : BRAF, ENSG00000157764',
         title: 'Recherche par gène',
         tooltip: 'Entrer un Symbole de gène, Alias de gène ou un Ensembl ID',
       },
       variants: {
         emptyText: 'Aucun variant trouvé',
-        placeholder: 'e.g. 10-100063679-T-C, rs341',
+        placeholder: 'ex : 10-100063679-T-C, rs341',
         title: 'Recherche par variant',
         tooltip:
           'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, Clinvar ID, Ensembl ID, refseq ID',
@@ -520,6 +520,35 @@ const fr = {
         "Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
       login: 'Connexion',
       signup: 'Créer un compte',
+    },
+    memberProfile: {
+      notFound: 'Membre non trouvé',
+      rolesTitle: 'Rôle(s)',
+      researchAreaTitle: 'Domaine(s) de recherche',
+      noRoles: 'Aucun rôle',
+      usageTitle: 'Utilisation prévue des données du portail CQDG',
+      noUsage: 'Aucune utilisation',
+      editProfileBtn: 'Modifier le profil',
+      communityBtn: 'Communauté',
+    },
+    community: {
+      title: 'CQDG Community',
+      resultsMember: 'Membres',
+      noResults: 'Aucun membre',
+      search: {
+        filters: 'Filtres',
+        inputPlaceholder: 'ex : Watson, Linda Crnic Institute',
+        selectPlaceholder: 'Sélectionner',
+        role: 'Rôle',
+        dataUse: 'Utilisation des données',
+        clearFilters: 'Effacer les filtres',
+        barPlaceholder: 'Rechercher par nom ou affiliation',
+        sorter: {
+          newest: 'Plus récent',
+          oldest: 'Plus ancien',
+          lastnameAlpha: 'Alphabétique (nom de famille)',
+        },
+      },
     },
     profileSettings: {
       title: 'Paramètres de profil',

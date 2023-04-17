@@ -1,5 +1,5 @@
-@import 'src/style/themes/include/layout';
-@import 'src/style/themes/include/colors';
+@import 'src/style/themes/cqdg/layout';
+@import 'src/style/themes/cqdg/colors';
 
 .communityMemberWrapper {
     padding: 24px;
@@ -26,7 +26,7 @@
     .banner {
         height: 200px;
         width: 100%;
-        background: url("../../../components/assets/memberHeader.png");
+        //background: url("../../../components/assets/memberHeader.png"); //todo select img
         padding: 24px;
         background-size: cover;
         background-repeat: no-repeat;

@@ -10,7 +10,7 @@ import { TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
 
 import FiltersBox from './components/Filters/Box';
-import { SortItems } from './components/Filters/Sorter';
+import { getSortItems } from './components/Filters/Sorter';
 import MemberCard from './components/MemberCard';
 
 import styles from './index.module.scss';
@@ -26,7 +26,8 @@ const CommunityPage = () => {
   const [match, setMatch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [usageFilter, setUsageFilter] = useState('');
-  const [sort, setSort] = useState(SortItems[0].sort);
+  const sortItems = getSortItems();
+  const [sort, setSort] = useState(sortItems[0].sort);
   const debouncedMatchValue = useDebounce(match, 300);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const CommunityPage = () => {
       setCount(data?.total || 0);
       setIsLoading(false);
     });
-  }, [currentPage, sort, debouncedMatchValue, roleFilter, usageFilter]);
+  }, [currentPage, sort, debouncedMatchValue, roleFilter, usageFilter, match]);
 
   return (
     <Space direction="vertical" size={24} className={styles.communityWrapper}>

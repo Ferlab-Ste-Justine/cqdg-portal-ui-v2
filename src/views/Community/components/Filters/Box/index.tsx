@@ -28,9 +28,8 @@ const FiltersBox = ({
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
   const [usageFilter, setUsageFilter] = useState<string[]>([]);
 
-  useEffect(() => onRoleFilterChange(roleFilter.join(',')), [roleFilter]);
-
-  useEffect(() => onUsageFilterChange(usageFilter.join(',')), [usageFilter]);
+  useEffect(() => onRoleFilterChange(roleFilter.join(',')), [onRoleFilterChange, roleFilter]);
+  useEffect(() => onUsageFilterChange(usageFilter.join(',')), [onUsageFilterChange, usageFilter]);
 
   return (
     <Space direction="vertical" size={16} className={styles.filtersContainer}>
@@ -39,7 +38,7 @@ const FiltersBox = ({
         <div className={styles.filterContentWrapper}>
           <Input
             onChange={(e) => onMatchFilterChange(e.currentTarget.value)}
-            placeholder="e.g. Watson, Linda Crnic Institute"
+            placeholder={intl.get('screen.community.search.inputPlaceholder')}
           />
           <Button onClick={() => setFiltersVisible(!filtersVisible)}>
             {intl.get('screen.community.search.filters')}{' '}

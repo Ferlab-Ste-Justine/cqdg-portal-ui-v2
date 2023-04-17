@@ -5,7 +5,7 @@ import { Dropdown, Menu, Space } from 'antd';
 
 import styles from './index.module.scss';
 
-export const SortItems = [
+export const getSortItems = () => [
   {
     label: intl.get('screen.community.search.sorter.newest'),
     sort: 'creation_date:desc',
@@ -26,13 +26,14 @@ interface OwnProps {
 
 const Sorter = ({ onSortChange }: OwnProps) => {
   const [selectedSortIndex, setSelectedSortIndex] = useState(0);
+  const sortItems = getSortItems();
 
   return (
     <Dropdown
       overlay={
         <Menu
           selectedKeys={[selectedSortIndex.toString()]}
-          items={SortItems.map((item, index) => ({
+          items={sortItems.map((item, index) => ({
             label: item.label,
             key: index,
             onClick: () => {
@@ -45,7 +46,7 @@ const Sorter = ({ onSortChange }: OwnProps) => {
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space className={styles.sortTrigger}>
-          {SortItems[selectedSortIndex].label}
+          {sortItems[selectedSortIndex].label}
           <DownOutlined />
         </Space>
       </a>

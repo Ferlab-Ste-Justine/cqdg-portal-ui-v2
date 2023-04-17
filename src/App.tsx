@@ -40,6 +40,8 @@ const VariantEntity = loadable(() => import('views/VariantEntity'), loadableProp
 const FileEntity = loadable(() => import('views/FileEntity'), loadableProps);
 const ParticipantEntity = loadable(() => import('views/ParticipantEntity'), loadableProps);
 const ProfileSettings = loadable(() => import('views/ProfileSettings'), loadableProps);
+const Community = loadable(() => import('views/Community'), loadableProps);
+const CommunityMember = loadable(() => import('views/Community/Member'), loadableProps);
 
 const App = () => {
   const lang = useLang();
@@ -93,6 +95,12 @@ const App = () => {
                     layout={PageLayout}
                   >
                     <ParticipantEntity />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path={STATIC_ROUTES.COMMUNITY} layout={PageLayout}>
+                    <Community />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path={DYNAMIC_ROUTES.COMMUNITY_MEMBER} layout={PageLayout}>
+                    <CommunityMember />
                   </ProtectedRoute>
                   <ProtectedRoute exact path={STATIC_ROUTES.PROFILE_SETTINGS} layout={PageLayout}>
                     <ProfileSettings />
