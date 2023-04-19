@@ -111,3 +111,8 @@ dist
 .DS_Store
 
 build/
+
+# testing
+/coverage
+/cypress/screenshots
+/cypress/results

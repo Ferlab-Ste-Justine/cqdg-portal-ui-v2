@@ -32,7 +32,11 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "commit:lint": "commitlint --edit $1",
-    "update:config": "npx @ferbab/config"
+    "update:config": "npx @ferbab/config",
+    "cypress:install": "cypress install",
+    "cypress:open": "cypress open",
+    "cypress:run:cli": "cypress run",
+    "cypress:run:chrome": "cypress run -b chrome"
   },
   "prettier": {
     "printWidth": 100,
@@ -60,7 +64,6 @@
     "@react-keycloak/core": "^3.2.0",
     "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^1.6.2",
-    "@testing-library/jest-dom": "^5.15.0",
     "antd": "^4.20.0",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
@@ -90,6 +93,8 @@
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
+    "@testing-library/cypress": "^8.0.3",
+    "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/d3": "^7.1.0",
@@ -109,6 +114,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "cra-bundle-analyzer": "^0.1.1",
+    "cypress": "^10.11.0",
     "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
