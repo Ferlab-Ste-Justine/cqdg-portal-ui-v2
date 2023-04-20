@@ -33,13 +33,15 @@ import { DYNAMIC_ROUTES, STATIC_ROUTES } from 'utils/routes';
 const loadableProps = { fallback: <Spinner size="large" /> };
 const Dashboard = loadable(() => import('views/Dashboard'), loadableProps);
 const Studies = loadable(() => import('views/Studies'), loadableProps);
-const MyProfile = loadable(() => import('views/MyProfile'), loadableProps);
 const Settings = loadable(() => import('views/Settings'), loadableProps);
 const DataExploration = loadable(() => import('views/DataExploration'), loadableProps);
 const Variants = loadable(() => import('views/Variants'), loadableProps);
 const VariantEntity = loadable(() => import('views/VariantEntity'), loadableProps);
 const FileEntity = loadable(() => import('views/FileEntity'), loadableProps);
 const ParticipantEntity = loadable(() => import('views/ParticipantEntity'), loadableProps);
+const ProfileSettings = loadable(() => import('views/ProfileSettings'), loadableProps);
+const Community = loadable(() => import('views/Community'), loadableProps);
+const CommunityMember = loadable(() => import('views/Community/Member'), loadableProps);
 
 const App = () => {
   const lang = useLang();
@@ -94,8 +96,14 @@ const App = () => {
                   >
                     <ParticipantEntity />
                   </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.MY_PROFILE} layout={PageLayout}>
-                    <MyProfile />
+                  <ProtectedRoute exact path={STATIC_ROUTES.COMMUNITY} layout={PageLayout}>
+                    <Community />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path={DYNAMIC_ROUTES.COMMUNITY_MEMBER} layout={PageLayout}>
+                    <CommunityMember />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path={STATIC_ROUTES.PROFILE_SETTINGS} layout={PageLayout}>
+                    <ProfileSettings />
                   </ProtectedRoute>
                   <ProtectedRoute exact path={STATIC_ROUTES.SETTINGS} layout={PageLayout}>
                     <Settings />

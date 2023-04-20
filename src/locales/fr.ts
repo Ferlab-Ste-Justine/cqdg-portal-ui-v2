@@ -121,16 +121,17 @@ const fr = {
   global: {
     yes: 'Oui',
     no: 'Non',
+    other: 'Autre',
     search: {
       genes: {
         emptyText: 'Aucun gène trouvé',
-        placeholder: 'e.g. BRAF, ENSG00000157764',
+        placeholder: 'ex : BRAF, ENSG00000157764',
         title: 'Recherche par gène',
         tooltip: 'Entrer un Symbole de gène, Alias de gène ou un Ensembl ID',
       },
       variants: {
         emptyText: 'Aucun variant trouvé',
-        placeholder: 'e.g. 10-100063679-T-C, rs341',
+        placeholder: 'ex : 10-100063679-T-C, rs341',
         title: 'Recherche par variant',
         tooltip:
           'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, Clinvar ID, Ensembl ID, refseq ID',
@@ -506,8 +507,7 @@ const fr = {
     },
     user: {
       menu: {
-        myprofile: 'Mon profil',
-        settings: 'Paramètres',
+        settings: 'Paramètres de profil',
         logout: 'Se déconnecter',
         signedWith: 'Connecté en tant que',
       },
@@ -520,6 +520,90 @@ const fr = {
         "Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
       login: 'Connexion',
       signup: 'Créer un compte',
+    },
+    memberProfile: {
+      notFound: 'Membre non trouvé',
+      rolesTitle: 'Rôle(s)',
+      noRoles: 'Aucun rôle',
+      usageTitle: 'Utilisation prévue des données du portail CQDG',
+      researchDomainsTitle: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
+      noUsage: 'Aucune utilisation',
+      noResearchDomain: 'Aucun domaine de recherche',
+      editProfileBtn: 'Modifier le profil',
+      communityBtn: 'Communauté',
+    },
+    community: {
+      title: 'CQDG Community',
+      resultsMember: 'Membres',
+      noResults: 'Aucun membre',
+      search: {
+        filters: 'Filtres',
+        inputPlaceholder: 'ex : Watson, Linda Crnic Institute',
+        selectPlaceholder: 'Sélectionner',
+        role: 'Rôle',
+        dataUse: 'Utilisation des données',
+        researchDomain: 'Domaine de recherche',
+        clearFilters: 'Effacer les filtres',
+        barPlaceholder: 'Rechercher par nom ou affiliation',
+        sorter: {
+          newest: 'Plus récent',
+          oldest: 'Plus ancien',
+          lastnameAlpha: 'Alphabétique (nom de famille)',
+        },
+      },
+    },
+    profileSettings: {
+      title: 'Paramètres de profil',
+      viewProfile: 'Voir le profil',
+      cards: {
+        deleteAccount: {
+          title: 'Supprimer le compte',
+          button: 'Supprimer mon compte',
+          notice:
+            'Vous ne pourrez plus vous connecter au portail de données du CQDG. Tous vos ensembles et requêtes enregistrés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
+          confirm: {
+            content: 'Êtes-vous sûr de vouloir supprimer définitivement ce compte ?',
+          },
+        },
+        identification: {
+          title: 'Identification',
+          alert:
+            "Vous êtes authentifié avec <strong>{provider}</strong> utilisant <strong>{email}</strong>. Cet e-mail n'est jamais montré au public et ne peut pas être modifié.",
+          firstName: 'Prénom',
+          yourFirstName: 'Votre prénom',
+          lastName: 'Nom de famille',
+          yourLastName: 'Votre nom de famille',
+          publicEmail: 'Email publique',
+          publicEmailNotice:
+            'Cet e-mail sera affiché sur votre page de profil et accessible à tous les utilisateurs connectés du portail.',
+          editPhotoModalTitle: 'Modifier photo',
+          uploadImageError: 'Impossible de télécharger votre image pour le moment',
+          removePhotoModalTitle: 'Supprimer la photo de profil ?',
+          removePhotoModalButton: 'Oui supprimer la photo',
+          removePhotoModalMessage:
+            'Voulez-vous vraiment supprimer votre photo ? Nous le remplacerons par un avatar par défaut.',
+          uploadPhotoButton: 'Envoyer la photo',
+          removePhotoButton: 'Supprimer la photo',
+        },
+        roleAffiliation: {
+          title: 'Rôle et affiliation',
+          iama: 'Je suis un',
+          checkAllThatApply: 'Cochez toutes les cases',
+          provideAffiliation: 'Fournir une affiliation institutionnelle ou organisationnelle',
+          affiliatedWith: 'Je suis affilié à',
+          dontHaveAffiliation: "Je n'ai pas d'affiliation institutionnelle",
+          describeResearchArea:
+            "Mon domaine de recherche ou domaine d'intérêt peut être décrit comme",
+          provideABriefLink:
+            'Fournissez une brève description et un lien vers votre biographie professionnelle ou le site Web de votre organisation, si disponible',
+        },
+        researchDomain: {
+          title: 'Domaine de recherche',
+          label: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
+        },
+        saveChanges: 'Sauvegarder les modifications',
+        discardChanges: 'Annuler les modifications',
+      },
     },
     dashboard: {
       hello: 'Bonjour',

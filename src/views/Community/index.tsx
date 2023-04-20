@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Gravatar from '@ferlab/ui/core/components/Gravatar';
+import intl from 'react-intl-universal';
 import TableHeader from '@ferlab/ui/core/components/ProTable/Header';
-import GridCard from '@ferlab/ui/core/view/v2/GridCard';
+import useDebounce from '@ferlab/ui/core/hooks/useDebounce';
 import { List, Space, Typography } from 'antd';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
@@ -9,9 +9,13 @@ import { UserApi } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
 
+import FiltersBox from './components/Filters/Box';
+import { getSortItems } from './components/Filters/Sorter';
+import MemberCard from './components/MemberCard';
+
 import styles from './index.module.scss';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const DEFAULT_PAGE_SIZE = 25;
 
 const CommunityPage = () => {
@@ -19,106 +23,89 @@ const CommunityPage = () => {
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [match, setMatch] = useState('');
+  const [roleFilter, setRoleFilter] = useState('');
+  const [researchDomainFilter, setResearchDomainFilter] = useState('');
+  const sortItems = getSortItems();
+  const [sort, setSort] = useState(sortItems[0].sort);
+  const debouncedMatchValue = useDebounce(match, 300);
 
   useEffect(() => {
     setIsLoading(true);
-    UserApi.search(currentPage, DEFAULT_PAGE_SIZE).then(({ data }) => {
+    UserApi.search({
+      pageIndex: currentPage,
+      pageSize: DEFAULT_PAGE_SIZE,
+      match,
+      sort,
+      roles: roleFilter,
+      researchDomains: researchDomainFilter,
+    }).then(({ data }) => {
       setUsers(data?.users || []);
       setCount(data?.total || 0);
       setIsLoading(false);
     });
-  }, [currentPage]);
-
-  const formatName = (user: TUser) =>
-    user.first_name && user.last_name ? `${user.first_name} ${user.last_name}` : user.email;
+  }, [currentPage, sort, debouncedMatchValue, roleFilter, match, researchDomainFilter]);
 
   return (
-    <Space direction="vertical" size={16} className={styles.communityWrapper}>
+    <Space direction="vertical" size={24} className={styles.communityWrapper}>
       <Title className={styles.title} level={4}>
-        INCLUDE Community
+        {intl.get('screen.community.title')}
       </Title>
-      <GridCard
-        content={
-          <Space className={styles.usersListWrapper} size={12} direction="vertical">
-            <TableHeader
-              pageIndex={currentPage + 1}
-              pageSize={DEFAULT_PAGE_SIZE}
-              total={count}
-              dictionary={{
-                itemCount: {
-                  results: 'Members',
-                  noResults: 'No members',
-                  clear: '',
-                  of: '',
-                  selectAllResults: '',
-                  selected: '',
-                  selectedPlural: '',
-                },
-              }}
-            ></TableHeader>
-            <List
-              dataSource={users}
-              className={styles.usersList}
-              pagination={{
-                total: count,
-                pageSize: DEFAULT_PAGE_SIZE,
-                onChange: (page) => {
-                  setCurrentPage(page - 1);
-                  scrollToTop(MAIN_SCROLL_WRAPPER_ID);
-                },
-                size: 'small',
-                hideOnSinglePage: true,
-                showSizeChanger: false,
-              }}
-              loading={isLoading}
-              itemLayout="vertical"
-              renderItem={(item) => (
-                <List.Item key={item.id} className={styles.usersListItem}>
-                  <List.Item.Meta
-                    avatar={
-                      <Gravatar
-                        className={styles.userGravatar}
-                        circle
-                        placeholder={'mp'}
-                        email={item.email || ''}
-                        size={40}
-                      />
-                    }
-                    title={<Text>{formatName(item)}</Text>}
-                    description={
-                      <Text type="secondary">
-                        {item.affiliation ? `Affiliation: ${item.affiliation}` : 'No affiliation'}
-                      </Text>
-                    }
-                  />
-                  {item.portal_usages && (
-                    <div className={styles.usagesWrapper}>
-                      <Title level={5} className={styles.usagesListTitle}>
-                        Intended uses of the portal:
-                      </Title>
-                      <ul className={styles.usagesList}>
-                        {item.portal_usages?.map((value) => (
-                          <li key={value}>{value}</li>
-                        ))}
-                      </ul>
-                      {item.commercial_use_reason && (
-                        <div className={styles.commercialUseWrapper}>
-                          <Title level={5} className={styles.usagesListTitle}>
-                            Reason for commercial use:
-                          </Title>
-                          <Text className={styles.commercialUseReason}>
-                            {item.commercial_use_reason}
-                          </Text>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </List.Item>
-              )}
-            />
-          </Space>
-        }
+      <FiltersBox
+        onMatchFilterChange={setMatch}
+        onRoleFilterChange={setRoleFilter}
+        onResearchDomainFilterChange={setResearchDomainFilter}
+        onSortChange={setSort}
+        hasFilters={!!(roleFilter || researchDomainFilter)}
       />
+      <Space className={styles.usersListWrapper} size={24} direction="vertical">
+        <TableHeader
+          pageIndex={currentPage + 1}
+          pageSize={DEFAULT_PAGE_SIZE}
+          total={count}
+          dictionary={{
+            itemCount: {
+              results: intl.get('screen.community.resultsMember'),
+              noResults: intl.get('screen.community.noResults'),
+              clear: '',
+              of: '',
+              selectAllResults: '',
+              selected: '',
+              selectedPlural: '',
+            },
+          }}
+        ></TableHeader>
+        <List
+          grid={{
+            gutter: 24,
+            xs: 1,
+            sm: 2,
+            md: 2,
+            lg: 3,
+            xl: 4,
+            xxl: 5,
+          }}
+          dataSource={users}
+          className={styles.membersList}
+          pagination={{
+            total: count,
+            pageSize: DEFAULT_PAGE_SIZE,
+            onChange: (page) => {
+              setCurrentPage(page - 1);
+              scrollToTop(MAIN_SCROLL_WRAPPER_ID);
+            },
+            size: 'small',
+            hideOnSinglePage: true,
+            showSizeChanger: false,
+          }}
+          loading={isLoading}
+          renderItem={(item) => (
+            <List.Item className={styles.memberListItem}>
+              <MemberCard user={item} match={match} />
+            </List.Item>
+          )}
+        />
+      </Space>
     </Space>
   );
 };

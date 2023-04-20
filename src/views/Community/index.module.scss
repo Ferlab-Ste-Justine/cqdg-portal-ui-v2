@@ -1,16 +1,11 @@
 @import 'src/style/themes/cqdg/layout';
+@import 'src/style/themes/cqdg/colors';
 
 .communityWrapper {
   width: 100%;
   padding: $default-page-content-padding;
-  max-width: 1000px;
   margin: auto;
   display: flex;
-
-  .userGravatar {
-    width: 40px;
-    height: 40px;
-  }
 
   .tableWrapper {
     width: 100%;
@@ -46,19 +41,23 @@
   .usersListWrapper {
     width: 100%;
 
-    .usersList {
-      div[class$='-item-meta'] {
-        margin-bottom: 0;
+    :global(.ant-list-pagination) {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .membersList {
+      background-color: unset;
+
+      :global(.ant-col) {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
       }
 
-      .usersListItem {
-        &:hover {
-          background-color: unset;
-        }
-      }
-
-      *[class$='-item-meta-description'] {
-        font-size: 12px;
+      .memberListItem {
+        height: 100%;
+        margin-bottom: 24px;
       }
     }
   }

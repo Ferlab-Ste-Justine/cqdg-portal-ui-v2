@@ -1,12 +1,20 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { FileSearchOutlined, HomeOutlined, LogoutOutlined, ReadOutlined } from '@ant-design/icons';
-import { DownOutlined } from '@ant-design/icons';
+import { Link, useHistory } from 'react-router-dom';
+import {
+  DownOutlined,
+  FileSearchOutlined,
+  HomeOutlined,
+  LogoutOutlined,
+  ReadOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import Gravatar from '@ferlab/ui/core/components/Gravatar';
+import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Dropdown, Menu, PageHeader } from 'antd';
+import { Space } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
 import { LANG } from 'common/constants';
@@ -39,8 +47,6 @@ const Header = () => {
   const history = useHistory();
   const currentPathName = history.location.pathname;
   const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
-  const isActive = (to: string | string[]) =>
-    Array.isArray(to) ? to.includes(currentPathName) : currentPathName === to;
   const DATA_EXPLORATION_ROUTES = [
     STATIC_ROUTES.DATA_EXPLORATION,
     STATIC_ROUTES.DATA_EXPLORATION_SUMMARY,
@@ -69,38 +75,37 @@ const Header = () => {
                 to={STATIC_ROUTES.DASHBOARD}
                 icon={<HomeOutlined />}
                 title={intl.get('layout.main.menu.dashboard')}
-                className={`${styles.headerBtn} ${
-                  isActive(STATIC_ROUTES.DASHBOARD) && styles.headerBtnActive
-                }`}
+                currentPathName={currentPathName}
               />
               <HeaderLink
                 to={STATIC_ROUTES.STUDIES}
                 icon={<ReadOutlined />}
                 title={intl.get('layout.main.menu.studies')}
-                className={`${styles.headerBtn} ${
-                  isActive(STATIC_ROUTES.STUDIES) && styles.headerBtnActive
-                }`}
+                currentPathName={currentPathName}
               />
               <HeaderLink
                 to={DATA_EXPLORATION_ROUTES}
                 icon={<FileSearchOutlined />}
                 title={intl.get('layout.main.menu.explore')}
-                className={`${styles.headerBtn} ${
-                  isActive(DATA_EXPLORATION_ROUTES) && styles.headerBtnActive
-                }`}
+                currentPathName={currentPathName}
               />
               <HeaderLink
                 to={[STATIC_ROUTES.VARIANTS]}
                 icon={<LineStyleIcon height={16} width={16} className={styles.iconSvg} />}
                 title={intl.get('layout.main.menu.variants')}
-                className={`${styles.headerBtn} ${
-                  isActive(STATIC_ROUTES.VARIANTS) && styles.headerBtnActive
-                }`}
+                currentPathName={currentPathName}
               />
             </nav>
           </div>
         }
         extra={[
+          <HeaderLink
+            key="community"
+            currentPathName={currentPathName}
+            to={STATIC_ROUTES.COMMUNITY}
+            icon={<TeamOutlined />}
+            title={intl.get('layout.main.menu.community')}
+          />,
           <ExternalLink key="cqdg-website" href={EnvVariables.configFor('CQDG_WEB_SITE')}>
             <Button key="external-website" className={styles.headerBtn}>
               {intl.get('layout.main.menu.website')}{' '}
@@ -133,6 +138,17 @@ const Header = () => {
                     type: 'divider',
                   },
                   {
+                    key: 'profile_settings',
+                    label: (
+                      <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
+                        <Space>
+                          <UserOutlined />
+                          {intl.get('layout.user.menu.settings')}
+                        </Space>
+                      </Link>
+                    ),
+                  },
+                  {
                     key: 'logout',
                     label: intl.get('layout.user.menu.logout'),
                     onClick: () => dispatch(userActions.cleanLogout()),
@@ -143,11 +159,11 @@ const Header = () => {
             }
           >
             <a className={styles.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
-              <Gravatar
-                circle
-                placeholder={'mp'}
-                className={styles.userGravatar}
-                email={tokenParsed.email || tokenParsed.identity_provider_identity}
+              <UserAvatar
+                src={userInfo?.profile_image_key}
+                userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
+                size={24}
+                className={styles.userAvatar}
               />
               <span className={styles.userName}>{userInfo?.first_name}</span>
               <DownOutlined />
