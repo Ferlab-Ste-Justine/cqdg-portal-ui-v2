@@ -54,3 +54,71 @@ export const usageOptions = [
     value: 'commercial_purpose',
   },
 ];
+
+export const researchDomainsOptions = [
+  {
+    key: 'aging',
+    label: 'Aging',
+    value: 'aging',
+  },
+  {
+    key: 'bioinformatics',
+    label: 'Bioinformatics',
+    value: 'bioinformatics',
+  },
+  {
+    key: 'birth_defects',
+    label: 'Birth Defects',
+    value: 'birth_defects',
+  },
+  {
+    key: 'cancer',
+    label: 'Cancer',
+    value: 'cancer',
+  },
+  {
+    key: 'circulatory_respiratory_health',
+    label: 'Circulatory and Respiratory Health',
+    value: 'circulatory_respiratory_health',
+  },
+  {
+    key: 'general_health',
+    label: 'General Health',
+    value: 'general_health',
+  },
+  {
+    key: 'infection_immunity',
+    label: 'Infection and Immunity',
+    value: 'infection_immunity',
+  },
+  {
+    key: 'musculoskeletal_health_arthritis',
+    label: 'Musculoskeletal Health and Arthritis',
+    value: 'musculoskeletal_health_arthritis',
+  },
+  {
+    key: 'neurodevelopmental_conditions',
+    label: 'Neurodevelopmental Conditions',
+    value: 'neurodevelopmental_conditions',
+  },
+  {
+    key: 'neurosciences_mental_health_addiction',
+    label: 'Neurosciences, Mental Health and Addiction',
+    value: 'neurosciences_mental_health_addiction',
+  },
+  {
+    key: 'nutrition_metabolism_diabetes',
+    label: 'Nutrition, Metabolism and Diabetes',
+    value: 'nutrition_metabolism_diabetes',
+  },
+  {
+    key: 'population_genomics',
+    label: 'Population Genomics',
+    value: 'population_genomics',
+  },
+  {
+    key: 'rare_diseases',
+    label: 'Rare Diseases',
+    value: 'rare_diseases',
+  },
+];

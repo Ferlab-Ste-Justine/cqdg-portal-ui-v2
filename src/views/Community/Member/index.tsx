@@ -7,11 +7,11 @@ import { Button, Col, Divider, List, Result, Row, Skeleton, Space, Typography } 
 import cx from 'classnames';
 
 import useApi from 'hooks/useApi';
-import { headers, USER_API_URL } from 'services/api/user';
+import { headers, USERS_API_URL } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { useUser } from 'store/user';
 
-import { roleOptions, usageOptions } from '../contants';
+import { researchDomainsOptions, roleOptions } from '../contants';
 
 import AvatarHeader from './components/AvatarHeader';
 import Banner from './components/Banner';
@@ -24,7 +24,7 @@ const CommunityMember = () => {
 
   const { loading, result } = useApi<TUser>({
     config: {
-      url: `${USER_API_URL}/${id}`,
+      url: `${USERS_API_URL}/${id}`,
       method: 'GET',
       headers: headers(),
     },
@@ -49,8 +49,8 @@ const CommunityMember = () => {
     return label ? label : role;
   };
 
-  const getUsageLabel = (usage: string) => {
-    const label = usageOptions.find(
+  const getResearchDomainLabel = (usage: string) => {
+    const label = researchDomainsOptions.find(
       ({ value }) => value.toLowerCase() === usage.toLowerCase(),
     )?.label;
 
@@ -65,11 +65,7 @@ const CommunityMember = () => {
           <AvatarHeader user={result} isLoading={loading} />
           <Divider className={styles.divider} />
           {loading ? (
-            <Skeleton
-              paragraph={{
-                rows: 6,
-              }}
-            />
+            <Skeleton paragraph={{ rows: 6 }} />
           ) : (
             <Row gutter={[80, 28]}>
               <Col md={16}>
@@ -95,31 +91,25 @@ const CommunityMember = () => {
                       }}
                     />
                   </Col>
-                  {result?.research_area && (
-                    <Col span={24}>
-                      <Typography.Title level={5}>
-                        {intl.get('screen.memberProfile.researchAreaTitle')}
-                      </Typography.Title>
-                      <Typography.Text>{result?.research_area}</Typography.Text>
-                    </Col>
-                  )}
                   <Col span={24}>
                     <Typography.Title level={5}>
-                      {intl.get('screen.memberProfile.usageTitle')}
+                      {intl.get('screen.memberProfile.researchDomainsTitle')}
                     </Typography.Title>
                     <List
                       className={cx(
                         styles.infoList,
-                        !result?.portal_usages?.length && styles.empty,
+                        !result?.research_domains?.length && styles.empty,
                       )}
                       itemLayout="horizontal"
-                      dataSource={result?.portal_usages ?? []}
-                      renderItem={(usage, index) => <li key={index}>{getUsageLabel(usage)}</li>}
+                      dataSource={result?.research_domains || []}
+                      renderItem={(usage, index) => (
+                        <li key={index}>{getResearchDomainLabel(usage)}</li>
+                      )}
                       locale={{
                         emptyText: (
                           <Empty
                             showImage={false}
-                            description={intl.get('screen.memberProfile.noUsage')}
+                            description={intl.get('screen.memberProfile.noResearchDomain')}
                             align="left"
                             noPadding
                           />

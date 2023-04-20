@@ -1,11 +1,11 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { UploadOutlined } from '@ant-design/icons';
+import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { Button, message, Modal, Space, Typography, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import Compressor from 'compressorjs';
 
-import UserAvatar from 'components/UserAvatar';
 import { UserApi } from 'services/api/user';
 import { useAppDispatch } from 'store';
 import { useUser } from 'store/user';
@@ -18,6 +18,8 @@ const ProfileImageUpload = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setLoading] = useState(false);
   const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const uploadImageEnable = false;
 
   const onBeforeUpload = (file: File) => {
     setLoading(true);
@@ -61,21 +63,32 @@ const ProfileImageUpload = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <Space direction="vertical" align="center">
-        <UserAvatar imageKey={userInfo?.profile_image_key} size={120} />
-        <ImgCrop
-          rotationSlider
-          modalOk={intl.get('global.save')}
-          modalTitle={intl.get('screen.profileSettings.cards.identification.editPhotoModalTitle')}
-        >
-          <Upload showUploadList={false} maxCount={1} beforeUpload={(file) => onBeforeUpload(file)}>
-            <Button size="small" loading={isLoading}>
-              <UploadOutlined />
-              {intl.get('screen.profileSettings.cards.identification.uploadPhotoButton')}
-            </Button>
-          </Upload>
-        </ImgCrop>
+        <UserAvatar
+          src={userInfo?.profile_image_key}
+          userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
+          size={120}
+          style={{ fontSize: 'xxx-large' }}
+        />
+        {uploadImageEnable && (
+          <ImgCrop
+            rotationSlider
+            modalOk={intl.get('global.save')}
+            modalTitle={intl.get('screen.profileSettings.cards.identification.editPhotoModalTitle')}
+          >
+            <Upload
+              showUploadList={false}
+              maxCount={1}
+              beforeUpload={(file) => onBeforeUpload(file)}
+            >
+              <Button size="small" loading={isLoading}>
+                <UploadOutlined />
+                {intl.get('screen.profileSettings.cards.identification.uploadPhotoButton')}
+              </Button>
+            </Upload>
+          </ImgCrop>
+        )}
         {userInfo?.profile_image_key && (
           <Button
             size="small"
@@ -96,7 +109,11 @@ const ProfileImageUpload = () => {
         okButtonProps={{ danger: true }}
       >
         <Space direction="vertical" align="center">
-          <UserAvatar imageKey={userInfo?.profile_image_key} shape="square" size={120} />
+          <UserAvatar
+            src={userInfo?.profile_image_key}
+            userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
+            size={120}
+          />
           <div className={styles.deleteMessage}>
             <Typography.Text>
               {intl.get('screen.profileSettings.cards.identification.removePhotoModalMessage')}
@@ -104,7 +121,7 @@ const ProfileImageUpload = () => {
           </div>
         </Space>
       </Modal>
-    </Fragment>
+    </>
   );
 };
 

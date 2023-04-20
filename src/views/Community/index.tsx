@@ -25,7 +25,7 @@ const CommunityPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [match, setMatch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
-  const [usageFilter, setUsageFilter] = useState('');
+  const [researchDomainFilter, setResearchDomainFilter] = useState('');
   const sortItems = getSortItems();
   const [sort, setSort] = useState(sortItems[0].sort);
   const debouncedMatchValue = useDebounce(match, 300);
@@ -38,13 +38,13 @@ const CommunityPage = () => {
       match,
       sort,
       roles: roleFilter,
-      dataUses: usageFilter,
+      researchDomains: researchDomainFilter,
     }).then(({ data }) => {
       setUsers(data?.users || []);
       setCount(data?.total || 0);
       setIsLoading(false);
     });
-  }, [currentPage, sort, debouncedMatchValue, roleFilter, usageFilter, match]);
+  }, [currentPage, sort, debouncedMatchValue, roleFilter, match, researchDomainFilter]);
 
   return (
     <Space direction="vertical" size={24} className={styles.communityWrapper}>
@@ -54,9 +54,9 @@ const CommunityPage = () => {
       <FiltersBox
         onMatchFilterChange={setMatch}
         onRoleFilterChange={setRoleFilter}
-        onUsageFilterChange={setUsageFilter}
+        onResearchDomainFilterChange={setResearchDomainFilter}
         onSortChange={setSort}
-        hasFilters={!!(roleFilter || usageFilter)}
+        hasFilters={!!(roleFilter || researchDomainFilter)}
       />
       <Space className={styles.usersListWrapper} size={24} direction="vertical">
         <TableHeader

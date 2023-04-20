@@ -1,6 +1,6 @@
+import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { Skeleton, Space, Typography } from 'antd';
 
-import UserAvatar from 'components/UserAvatar';
 import { TUser } from 'services/api/user/models';
 
 import { formatName } from '../../utils';
@@ -17,9 +17,12 @@ const AvatarHeader = ({ user, isLoading = false }: OwnProps) => (
     {isLoading ? (
       <Skeleton.Avatar active size={140} />
     ) : (
-      <div className={styles.gravatarWrapper}>
-        <UserAvatar imageKey={user?.profile_image_key!} size={140} />
-      </div>
+      <UserAvatar
+        src={user?.profile_image_key}
+        userName={`${user?.first_name} ${user?.last_name}`}
+        size={140}
+        style={{ fontSize: 'xxx-large' }}
+      />
     )}
     <Space direction="vertical" size={8} align="center">
       {isLoading ? (
@@ -30,7 +33,7 @@ const AvatarHeader = ({ user, isLoading = false }: OwnProps) => (
       ) : (
         <>
           <Typography.Title level={3} className={styles.memberName}>
-            {formatName(user!)}
+            {user && formatName(user)}
           </Typography.Title>
           {user?.affiliation && (
             <Typography.Text type="secondary">{user?.affiliation}</Typography.Text>

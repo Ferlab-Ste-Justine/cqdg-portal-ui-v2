@@ -21,7 +21,6 @@ enum FORM_FIELDS {
   OTHER_ROLE = 'other_role',
   AFFILIATION = 'affiliation',
   NO_AFFILIATION = 'no_affiliation',
-  RESEARCH_AREA = 'reasearch_area',
 }
 
 const hasOtherRole = (userUsages: string[]) =>
@@ -35,7 +34,6 @@ const initialChangedValues = {
   [FORM_FIELDS.OTHER_ROLE]: false,
   [FORM_FIELDS.AFFILIATION]: false,
   [FORM_FIELDS.NO_AFFILIATION]: false,
-  [FORM_FIELDS.RESEARCH_AREA]: false,
 };
 
 const RoleAndAffiliationCard = () => {
@@ -60,7 +58,6 @@ const RoleAndAffiliationCard = () => {
       [FORM_FIELDS.OTHER_ROLE]: hasOtherRole(userInfo?.roles ?? [])[0],
       [FORM_FIELDS.AFFILIATION]: userInfo?.affiliation,
       [FORM_FIELDS.NO_AFFILIATION]: !userInfo?.affiliation,
-      [FORM_FIELDS.RESEARCH_AREA]: userInfo?.research_area || '',
     };
     form.setFieldsValue(initialValues.current);
     setHasChanged(initialChangedValues);
@@ -90,7 +87,6 @@ const RoleAndAffiliationCard = () => {
                 affiliation: values[FORM_FIELDS.NO_AFFILIATION]
                   ? ''
                   : values[FORM_FIELDS.AFFILIATION],
-                research_area: values[FORM_FIELDS.RESEARCH_AREA],
               },
             }),
           );
@@ -170,41 +166,23 @@ const RoleAndAffiliationCard = () => {
             prevValues[FORM_FIELDS.NO_AFFILIATION] !== currentValues[FORM_FIELDS.NO_AFFILIATION]
           }
         >
-          {() => (
-            <Form.Item
-              name={FORM_FIELDS.NO_AFFILIATION}
-              label={
-                form.getFieldValue(FORM_FIELDS.NO_AFFILIATION)
-                  ? intl.get('screen.profileSettings.cards.roleAffiliation.affiliatedWith')
-                  : ''
-              }
-              className={cx(
-                formStyles.withCustomHelp,
-                form.getFieldValue(FORM_FIELDS.NO_AFFILIATION) && formStyles.noAffiliationField,
-              )}
-              rules={[{ required: false }]}
-              valuePropName="checked"
-            >
-              <Checkbox>
-                {intl.get('screen.profileSettings.cards.roleAffiliation.dontHaveAffiliation')}
-              </Checkbox>
-            </Form.Item>
-          )}
-        </Form.Item>
-        <Form.Item
-          className={cx(
-            formStyles.withCustomHelp,
-            formStyles.researchAreaField,
-            formStyles.noMargin,
-          )}
-          label={intl.get('screen.profileSettings.cards.roleAffiliation.describeResearchArea')}
-          requiredMark="optional"
-        >
-          <span className={formStyles.help}>
-            {intl.get('screen.profileSettings.cards.roleAffiliation.provideABriefLink')}
-          </span>
-          <Form.Item name={FORM_FIELDS.RESEARCH_AREA} className={formStyles.noMargin}>
-            <Input.TextArea />
+          <Form.Item
+            name={FORM_FIELDS.NO_AFFILIATION}
+            label={
+              form.getFieldValue(FORM_FIELDS.NO_AFFILIATION)
+                ? intl.get('screen.profileSettings.cards.roleAffiliation.affiliatedWith')
+                : ''
+            }
+            className={cx(
+              formStyles.withCustomHelp,
+              form.getFieldValue(FORM_FIELDS.NO_AFFILIATION) && formStyles.noAffiliationField,
+            )}
+            rules={[{ required: false }]}
+            valuePropName="checked"
+          >
+            <Checkbox>
+              {intl.get('screen.profileSettings.cards.roleAffiliation.dontHaveAffiliation')}
+            </Checkbox>
           </Form.Item>
         </Form.Item>
       </BaseForm>

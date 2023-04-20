@@ -524,10 +524,11 @@ const fr = {
     memberProfile: {
       notFound: 'Membre non trouvé',
       rolesTitle: 'Rôle(s)',
-      researchAreaTitle: 'Domaine(s) de recherche',
       noRoles: 'Aucun rôle',
       usageTitle: 'Utilisation prévue des données du portail CQDG',
+      researchDomainsTitle: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
       noUsage: 'Aucune utilisation',
+      noResearchDomain: 'Aucun domaine de recherche',
       editProfileBtn: 'Modifier le profil',
       communityBtn: 'Communauté',
     },
@@ -541,6 +542,7 @@ const fr = {
         selectPlaceholder: 'Sélectionner',
         role: 'Rôle',
         dataUse: 'Utilisation des données',
+        researchDomain: 'Domaine de recherche',
         clearFilters: 'Effacer les filtres',
         barPlaceholder: 'Rechercher par nom ou affiliation',
         sorter: {
@@ -594,6 +596,10 @@ const fr = {
             "Mon domaine de recherche ou domaine d'intérêt peut être décrit comme",
           provideABriefLink:
             'Fournissez une brève description et un lien vers votre biographie professionnelle ou le site Web de votre organisation, si disponible',
+        },
+        researchDomain: {
+          title: 'Domaine de recherche',
+          label: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
         },
         saveChanges: 'Sauvegarder les modifications',
         discardChanges: 'Annuler les modifications',

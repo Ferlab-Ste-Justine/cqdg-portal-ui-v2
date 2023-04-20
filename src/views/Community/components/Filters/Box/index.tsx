@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons';
 import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import { Button, Input, Select, Space, Tag, Typography } from 'antd';
-import { roleOptions, usageOptions } from 'views/Community/contants';
+import { researchDomainsOptions, roleOptions } from 'views/Community/contants';
 
 import Sorter from '../Sorter';
 
@@ -12,7 +12,7 @@ import styles from './index.module.scss';
 interface OwnProps {
   onMatchFilterChange: (value: string) => void;
   onRoleFilterChange: (value: string) => void;
-  onUsageFilterChange: (value: string) => void;
+  onResearchDomainFilterChange: (value: string) => void;
   onSortChange: (value: string) => void;
   hasFilters: boolean;
 }
@@ -20,16 +20,19 @@ interface OwnProps {
 const FiltersBox = ({
   onMatchFilterChange,
   onRoleFilterChange,
-  onUsageFilterChange,
+  onResearchDomainFilterChange,
   onSortChange,
   hasFilters = false,
 }: OwnProps) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
-  const [usageFilter, setUsageFilter] = useState<string[]>([]);
+  const [researchDomainFilter, setResearchDomainFilter] = useState<string[]>([]);
 
   useEffect(() => onRoleFilterChange(roleFilter.join(',')), [onRoleFilterChange, roleFilter]);
-  useEffect(() => onUsageFilterChange(usageFilter.join(',')), [onUsageFilterChange, usageFilter]);
+  useEffect(
+    () => onResearchDomainFilterChange(researchDomainFilter.join(',')),
+    [onResearchDomainFilterChange, researchDomainFilter],
+  );
 
   return (
     <Space direction="vertical" size={16} className={styles.filtersContainer}>
@@ -85,20 +88,22 @@ const FiltersBox = ({
             />
           </Space>
           <Space direction="vertical">
-            <ProLabel title={intl.get('screen.community.search.dataUse')} />
+            <ProLabel title={intl.get('screen.community.search.researchDomain')} />
             <Select
               className={styles.filterMultiSelect}
               mode="multiple"
               allowClear
               placeholder={intl.get('screen.community.search.selectPlaceholder')}
               maxTagCount={1}
-              value={usageFilter}
-              onSelect={(value: string) => setUsageFilter([...usageFilter, value])}
+              value={researchDomainFilter}
+              onSelect={(value: string) =>
+                setResearchDomainFilter([...researchDomainFilter, value])
+              }
               onDeselect={(value: string) =>
-                setUsageFilter((prev) => prev.filter((val) => val !== value))
+                setResearchDomainFilter((prev) => prev.filter((val) => val !== value))
               }
               options={[
-                ...usageOptions.map((option) => ({
+                ...researchDomainsOptions.map((option) => ({
                   label: option.label,
                   value: option.value,
                 })),
@@ -123,7 +128,7 @@ const FiltersBox = ({
             disabled={!hasFilters}
             onClick={() => {
               setRoleFilter([]);
-              setUsageFilter([]);
+              setResearchDomainFilter([]);
             }}
           >
             {intl.get('screen.community.search.clearFilters')}

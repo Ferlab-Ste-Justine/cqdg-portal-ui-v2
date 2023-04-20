@@ -6,7 +6,7 @@ import { useUser } from 'store/user';
 
 import DeleteCard from './cards/DeleteCard';
 import IdentificationCard from './cards/Identification';
-import ResearchAndUsagesCard from './cards/ResearchAndUsage';
+import ResearchDomainCard from './cards/ResearchDomain';
 import RoleAndAffiliationCard from './cards/RoleAndAffiliation';
 
 import styles from './index.module.scss';
@@ -28,7 +28,7 @@ const ProfileSettings = () => {
         <Space size={24} direction="vertical" className={styles.cardsWrapper}>
           <IdentificationCard />
           <RoleAndAffiliationCard />
-          <ResearchAndUsagesCard />
+          <ResearchDomainCard />
           <DeleteCard />
         </Space>
       </Space>

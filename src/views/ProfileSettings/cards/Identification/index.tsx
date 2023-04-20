@@ -154,7 +154,7 @@ const IdentificationCard = () => {
               </Form.Item>
             </BaseForm>
           </Col>
-          <Col span={8} className={styles.gravatarCol}>
+          <Col span={8} className={styles.profileImageCol}>
             <ProfileImageUpload />
           </Col>
         </Row>

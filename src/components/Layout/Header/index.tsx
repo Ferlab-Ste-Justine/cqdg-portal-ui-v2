@@ -11,7 +11,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import Gravatar from '@ferlab/ui/core/components/Gravatar';
+import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Dropdown, Menu, PageHeader } from 'antd';
 import { Space } from 'antd';
@@ -159,11 +159,11 @@ const Header = () => {
             }
           >
             <a className={styles.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
-              <Gravatar
-                circle
-                placeholder={'mp'}
-                className={styles.userGravatar}
-                email={tokenParsed.email || tokenParsed.identity_provider_identity}
+              <UserAvatar
+                src={userInfo?.profile_image_key}
+                userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
+                size={24}
+                className={styles.userAvatar}
               />
               <span className={styles.userName}>{userInfo?.first_name}</span>
               <DownOutlined />

@@ -13,7 +13,7 @@ export type TUser = {
   external_individual_email?: string;
   roles?: string[];
   affiliation?: string;
-  research_area?: string;
+  research_domains?: string[];
   portal_usages?: string[];
   creation_date: Date;
   updated_date: Date;
