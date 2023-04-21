@@ -19,7 +19,7 @@ interface OwnProps {
 const { Title } = Typography;
 
 const CardHeader = ({ id, title, extra = [], withHandle = false, infoPopover }: OwnProps) => (
-  <Title level={4} className={styles.cardHeader}>
+  <Title level={4} className={styles.cardHeader} data-cy={`CardHeader_${title}`}>
     <Space direction="horizontal" size={5} className={styles.title}>
       {withHandle && (
         <DragHandle id={id} className={styles.dragHandle}>

@@ -312,6 +312,7 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
   return (
     <>
       <ProTable<ITableFileEntity>
+        data-cy="ProTable_DataFiles"
         tableId="datafiles_table"
         columns={getDefaultColumns()}
         initialSelectedKey={selectedKeys}

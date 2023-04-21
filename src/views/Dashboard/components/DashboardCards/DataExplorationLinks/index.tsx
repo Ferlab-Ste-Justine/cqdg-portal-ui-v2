@@ -39,7 +39,11 @@ const DataExplorationLinks = () => {
           id="data-exploration"
           title={intl.get('components.dataRelease.dataExploration')}
           extra={[
-            <ExternalLink href={EnvVariables.configFor('CQDG_DOCUMENTATION')} key="data-release">
+            <ExternalLink
+              href={EnvVariables.configFor('CQDG_DOCUMENTATION')}
+              key="data-release"
+              data-cy="ExternalLink_DataRelease"
+            >
               <Button type="link" className={styles.releaseNoteBtn}>
                 {intl.get('components.dataRelease.dataReleaseLink')}
                 <ExternalLinkIcon />
@@ -52,7 +56,7 @@ const DataExplorationLinks = () => {
       // @ts-ignore
       content={
         <Row gutter={[16, 16]}>
-          <Col flex="auto" className={styles.customCol}>
+          <Col flex="auto" className={styles.customCol} data-cy="GridCard_Studies">
             <LinkBox
               href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
@@ -61,7 +65,7 @@ const DataExplorationLinks = () => {
               icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
-          <Col flex="auto" className={styles.customCol}>
+          <Col flex="auto" className={styles.customCol} data-cy="GridCard_Participants">
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
@@ -70,7 +74,7 @@ const DataExplorationLinks = () => {
               icon={<UserOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
-          <Col flex="auto" className={styles.customCol}>
+          <Col flex="auto" className={styles.customCol} data-cy="GridCard_Biospecimens">
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
@@ -79,7 +83,7 @@ const DataExplorationLinks = () => {
               icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
-          <Col flex="auto" className={styles.customCol}>
+          <Col flex="auto" className={styles.customCol} data-cy="GridCard_DataFiles">
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}

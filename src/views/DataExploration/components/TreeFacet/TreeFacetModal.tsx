@@ -239,6 +239,7 @@ const TreeFacetModal = ({ type, modalField, queryBuilderField, titleFormatter }:
       okButtonProps={{ disabled: isEmpty(targetKeys) && isEmpty(treeData) }}
       onOk={() => handleOnApply()}
       onCancel={handleCancel}
+      data-cy={`TreeFacet_Modal_${type}`}
     >
       <Transfer<TreeNode>
         className={styles.hpoTransfer}

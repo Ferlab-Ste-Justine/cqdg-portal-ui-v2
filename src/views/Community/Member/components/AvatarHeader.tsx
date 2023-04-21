@@ -13,7 +13,13 @@ interface OwnProps {
 }
 
 const AvatarHeader = ({ user, isLoading = false }: OwnProps) => (
-  <Space size={16} direction="vertical" align="center" className={styles.avatarContainer}>
+  <Space
+    size={16}
+    direction="vertical"
+    align="center"
+    className={styles.avatarContainer}
+    data-cy="AvatarHeader"
+  >
     {isLoading ? (
       <Skeleton.Avatar active size={140} />
     ) : (

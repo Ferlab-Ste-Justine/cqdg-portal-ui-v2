@@ -45,10 +45,10 @@ const Login = () => {
           </Title>
           <Text className={styles.loginDescText}>{intl.get('screen.loginPage.resume')}</Text>
           <Space className={styles.loginButtons} size={16}>
-            <Button type={'primary'} onClick={handleSignin} size={'large'}>
+            <Button type={'primary'} onClick={handleSignin} size={'large'} data-cy="Login">
               {intl.get('screen.loginPage.login')}
             </Button>
-            <Button onClick={handleSignin} size={'large'}>
+            <Button onClick={handleSignin} size={'large'} data-cy="Signup">
               {intl.get('screen.loginPage.signup')}
             </Button>
           </Space>

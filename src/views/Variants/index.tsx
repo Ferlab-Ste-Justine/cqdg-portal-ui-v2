@@ -150,7 +150,7 @@ const Variants = () => {
   const variantMappingResults = useGetExtendedMappings(INDEXES.VARIANT);
   const menuItems: ISidebarMenuItem[] = [
     {
-      key: '1',
+      key: 'category_participant',
       title: intl.get('screen.variants.sidemenu.participant'),
       icon: <UserOutlined />,
       panelContent: (
@@ -164,7 +164,7 @@ const Variants = () => {
       ),
     },
     {
-      key: '2',
+      key: 'category_variant',
       title: intl.get('screen.variants.sidemenu.variant'),
       icon: <LineStyleIcon />,
       panelContent: (
@@ -178,7 +178,7 @@ const Variants = () => {
       ),
     },
     {
-      key: '3',
+      key: 'category_genomic',
       title: intl.get('screen.variants.sidemenu.gene'),
       icon: <GeneIcon />,
       panelContent: (
@@ -192,7 +192,7 @@ const Variants = () => {
       ),
     },
     {
-      key: '4',
+      key: 'category_pathogenicity',
       title: intl.get('screen.variants.sidemenu.pathogenicity'),
       icon: <DiseaseIcon />,
       panelContent: (
@@ -206,7 +206,7 @@ const Variants = () => {
       ),
     },
     {
-      key: '5',
+      key: 'category_cohort',
       title: intl.get('screen.variants.sidemenu.frequency'),
       icon: <FrequencyIcon />,
       panelContent: (

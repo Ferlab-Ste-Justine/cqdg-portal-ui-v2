@@ -15,14 +15,25 @@ const Banner = ({ isOwnUser }: OwnProps) => (
   <div className={styles.banner}>
     <div className={styles.bannerActions}>
       <Link to={STATIC_ROUTES.COMMUNITY}>
-        <Button className={styles.communityBtn} type="link" icon={<ArrowLeftOutlined />}>
+        <Button
+          className={styles.communityBtn}
+          type="link"
+          icon={<ArrowLeftOutlined />}
+          data-cy="CommunityButton"
+        >
           {intl.get('screen.memberProfile.communityBtn')}
         </Button>
       </Link>
       {/* Disable for now */}
       {isOwnUser && (
         <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
-          <Button className={styles.editBtn} type="primary" ghost icon={<EditOutlined />}>
+          <Button
+            className={styles.editBtn}
+            type="primary"
+            ghost
+            icon={<EditOutlined />}
+            data-cy="EditProfileButton"
+          >
             {intl.get('screen.memberProfile.editProfileBtn')}
           </Button>
         </Link>

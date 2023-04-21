@@ -260,6 +260,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
 
   return (
     <ProTable
+      data-cy="ProTable_Biospecimens"
       tableId="biospecimen_table"
       columns={getDefaultColumns()}
       wrapperClassName={styles.biospecimenTabWrapper}

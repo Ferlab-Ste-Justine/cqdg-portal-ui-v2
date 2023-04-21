@@ -39,6 +39,7 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
     <Link
       className={styles.link}
       to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+      data-cy="FamilyLink"
       onClick={() =>
         participant &&
         addQuery({

@@ -21,6 +21,7 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
       <Link
         to={`${STATIC_ROUTES.FILES}/${file_id}`}
         onClick={() => document.getElementById(pageId)?.scrollTo(0, 0)}
+        data-cy={`Link_File_${file_id}`}
       >
         {file_id}
       </Link>

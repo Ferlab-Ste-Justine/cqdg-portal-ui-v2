@@ -45,6 +45,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
           key="1"
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           icon={<ExternalLinkIcon width="14" />}
+          data-cy="Biospecimens_RedirectLink"
           onClick={() =>
             addQuery({
               queryBuilderId: DATA_EXPLORATION_QB_ID,

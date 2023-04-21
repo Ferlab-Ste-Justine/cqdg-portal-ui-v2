@@ -12,12 +12,15 @@ interface OwnProps {
 
 const SearchLabel = ({ title, tooltipText, className = '' }: OwnProps) => (
   <span className={cx(styles.searchLabel, styles.titleWrapper, className)}>
-    <Typography.Text strong className={styles.title}>
+    <Typography.Text strong className={styles.title} data-cy="SearchLabel_Title">
       {title}
     </Typography.Text>
     {tooltipText && (
       <Tooltip arrowPointAtCenter placement="topLeft" title={tooltipText}>
-        <InfoCircleOutlined className={styles.tooltipIcon} />
+        <InfoCircleOutlined
+          className={styles.tooltipIcon}
+          data-cy="SearchLabel_InfoCircleOutlined"
+        />
       </Tooltip>
     )}
   </span>

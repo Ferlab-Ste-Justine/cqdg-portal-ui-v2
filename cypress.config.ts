@@ -13,6 +13,7 @@ const strTime = joinWithPadding([
 ]);
 
 export default defineConfig({
+  projectId: '765dip',
   chromeWebSecurity: true,
   video: false,
   videoUploadOnPasses: false,
@@ -23,7 +24,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.ts')(on, config);
     },
-    baseUrl: 'https://portalv2.qa.cqdg.ferlab.bio',
+    baseUrl: 'https://portalv2.qa.cqdg.ferlab.bio/',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     slowTestThreshold: 60000,
     experimentalSessionAndOrigin: true

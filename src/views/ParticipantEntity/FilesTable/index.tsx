@@ -43,6 +43,7 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
           key="1"
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           icon={<ExternalLinkIcon width="14" />}
+          data-cy="Files_RedirectLink"
           onClick={() =>
             addQuery({
               queryBuilderId: DATA_EXPLORATION_QB_ID,

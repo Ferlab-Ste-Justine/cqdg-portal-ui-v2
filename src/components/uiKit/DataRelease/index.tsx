@@ -33,7 +33,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
   return (
     <Spin spinning={false}>
       <Row className={cx(styles.dataReleaseContainer, className)} gutter={[40, 24]}>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} data-cy="DataRelease_Study">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={numberFormat(stats?.studies!)}
@@ -42,7 +42,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
             subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
           />
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} data-cy="DataRelease_Participant">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={numberFormat(stats?.participants!)}
@@ -51,7 +51,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
             subLabel={intl.get('entities.participant.participants')}
           />
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} data-cy="DataRelease_Biospecimen">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={numberFormat(stats?.samples!)}
@@ -60,7 +60,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
             subLabel={intl.get('entities.biospecimen.biospecimens')}
           />
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} data-cy="DataRelease_File">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
             label={stats?.fileSize || '0TB'}

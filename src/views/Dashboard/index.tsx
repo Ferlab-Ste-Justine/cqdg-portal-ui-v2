@@ -35,7 +35,7 @@ const Dashboard = () => {
           closable
           showIcon
         />
-        <Title level={4} className={styles.greeting}>
+        <Title level={4} className={styles.greeting} data-cy="Title_Dashboard">
           {intl.get('screen.dashboard.hello')}, {userInfo?.first_name}
         </Title>
         <DataExplorationLinks />
