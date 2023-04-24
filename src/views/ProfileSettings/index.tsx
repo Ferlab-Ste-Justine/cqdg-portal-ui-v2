@@ -4,7 +4,6 @@ import { Button, Space, Typography } from 'antd';
 import { AxiosRequestConfig } from 'axios';
 
 import useApi from 'hooks/useApi';
-import { headers } from 'services/api/reports';
 import { USERS_API_URL } from 'services/api/user';
 import { IUserOptions } from 'services/api/user/models';
 import { useUser } from 'store/user';
@@ -24,7 +23,6 @@ const ProfileSettings = () => {
   const config: AxiosRequestConfig = {
     method: 'GET',
     url: `${USERS_API_URL}/userOptions`,
-    headers: headers(),
   };
 
   const { result } = useApi<IUserOptions>({ config });

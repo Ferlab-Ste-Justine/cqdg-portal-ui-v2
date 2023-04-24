@@ -3,21 +3,23 @@ import intl from 'react-intl-universal';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons';
 import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import { Button, Input, Select, Space, Tag, Typography } from 'antd';
+import { AxiosRequestConfig } from 'axios';
+import { sortOptionsLabelsByName } from 'views/ProfileSettings/cards/utils';
 
-import { IOption } from 'services/api/user/models';
+import useApi from 'hooks/useApi';
+import { USERS_API_URL } from 'services/api/user';
+import { IUserOptions } from 'services/api/user/models';
 
 import Sorter from '../Sorter';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
+interface IFiltersBoxProps {
   onMatchFilterChange: (value: string) => void;
   onRoleFilterChange: (value: string) => void;
   onResearchDomainFilterChange: (value: string) => void;
   onSortChange: (value: string) => void;
   hasFilters: boolean;
-  researchDomainOptions: IOption[];
-  roleOptions: IOption[];
 }
 
 const FiltersBox = ({
@@ -26,12 +28,25 @@ const FiltersBox = ({
   onResearchDomainFilterChange,
   onSortChange,
   hasFilters = false,
-  researchDomainOptions,
-  roleOptions,
-}: OwnProps) => {
+}: IFiltersBoxProps) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
   const [researchDomainFilter, setResearchDomainFilter] = useState<string[]>([]);
+
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${USERS_API_URL}/userOptions`,
+  };
+
+  const { result } = useApi<IUserOptions>({ config });
+  const roleOptions = result?.roleOptions || [];
+  const researchDomainOptions = result?.researchDomainOptions || [];
+
+  const roleOptionsSorted = sortOptionsLabelsByName(roleOptions, 'roleOptions');
+  const researchDomainOptionsSorted = sortOptionsLabelsByName(
+    researchDomainOptions,
+    'researchDomainOptions',
+  );
 
   useEffect(() => onRoleFilterChange(roleFilter.join(',')), [onRoleFilterChange, roleFilter]);
   useEffect(
@@ -70,7 +85,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setRoleFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={roleOptions}
+              options={roleOptionsSorted}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}
@@ -98,7 +113,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setResearchDomainFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={researchDomainOptions}
+              options={researchDomainOptionsSorted}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}

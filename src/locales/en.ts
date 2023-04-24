@@ -621,12 +621,13 @@ const en = {
         discardChanges: 'Discard changes',
       },
       roleOptions: {
-        researcher: 'Researcher at an Academic or not-for-profit Institution',
-        representative: 'Representative from a for-profit or Commercial Entity',
-        developer: 'Tool or Algorithm Developer',
+        researcher_in_academic_or_non_profit_institution:
+          'Researcher in an academic or non-profit institution',
+        representative_of_commercial_or_for_profit_company:
+          'Representative of a commercial or for-profit company',
+        bioinformatician_software_developer: 'Bioinformatician, software developer',
         clinician: 'Clinician',
-        community_member: 'Community Member',
-        federal_employee: 'Federal Employee',
+        employee_in_governmental_agency: 'Employee in a governmental agency',
         other: 'Other',
       },
       researchDomainOptions: {

@@ -11,7 +11,7 @@ import { lowerAll } from 'utils/array';
 
 import BaseCard from '../BaseCard';
 import BaseForm from '../BaseForm';
-import { OTHER_KEY, removeOtherKey } from '../utils';
+import { OTHER_KEY, removeOtherKey, sortOptionsLabelsByName } from '../utils';
 
 import formStyles from '../form.module.scss';
 
@@ -47,6 +47,11 @@ const ResearchDomain = ({ researchDomainOptions }: { researchDomainOptions: IOpt
     setHasChanged(initialChangedValues);
     form.setFieldsValue(initialValues.current);
   };
+
+  const researchDomainOptionsSorted = sortOptionsLabelsByName(
+    researchDomainOptions,
+    'researchDomainOptions',
+  );
 
   useEffect(() => {
     initialValues.current = {
@@ -108,10 +113,9 @@ const ResearchDomain = ({ researchDomainOptions }: { researchDomainOptions: IOpt
               {intl.get('screen.profileSettings.cards.researchDomain.checkAll')}
             </span>
             <Space direction="vertical">
-              {researchDomainOptions.map((option) => (
+              {researchDomainOptionsSorted.map((option) => (
                 <Checkbox key={option.value} value={option.value.toLowerCase()}>
-                  {intl.get(`screen.profileSettings.researchDomainOptions.${option.value}`) ||
-                    option.label}
+                  {option.label}
                 </Checkbox>
               ))}
             </Space>

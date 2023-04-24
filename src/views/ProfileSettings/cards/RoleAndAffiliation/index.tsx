@@ -12,7 +12,7 @@ import { lowerAll } from 'utils/array';
 
 import BaseCard from '../BaseCard';
 import BaseForm from '../BaseForm';
-import { OTHER_KEY, removeOtherKey } from '../utils';
+import { OTHER_KEY, removeOtherKey, sortOptionsLabelsByName } from '../utils';
 
 import formStyles from '../form.module.scss';
 
@@ -51,6 +51,8 @@ const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }
     setHasChanged(initialChangedValues);
     form.setFieldsValue(initialValues.current);
   };
+
+  const roleOptionsSorted = sortOptionsLabelsByName(roleOptions, 'roleOptions');
 
   useEffect(() => {
     initialValues.current = {
@@ -106,33 +108,13 @@ const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }
               {intl.get('screen.profileSettings.cards.roleAffiliation.checkAllThatApply')}
             </span>
             <Space direction="vertical">
-              {roleOptions.map((option) => (
+              {roleOptionsSorted.map((option) => (
                 <Checkbox key={option.value} value={option.value.toLowerCase()}>
-                  {intl.get(`screen.profileSettings.roleOptions.${option.value}`) || option.label}
+                  {option.label}
                 </Checkbox>
               ))}
             </Space>
           </Checkbox.Group>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues[FORM_FIELDS.ROLES] !== currentValues[FORM_FIELDS.ROLES]
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue(FORM_FIELDS.ROLES)?.includes(OTHER_KEY) ? (
-              <Form.Item
-                className={formStyles.dynamicField}
-                name={FORM_FIELDS.OTHER_ROLE}
-                label={intl.get('global.pleaseDescribe')}
-                required={false}
-                rules={[{ required: true, validateTrigger: 'onSubmit' }]}
-              >
-                <Input />
-              </Form.Item>
-            ) : null
-          }
         </Form.Item>
         <Form.Item
           noStyle
