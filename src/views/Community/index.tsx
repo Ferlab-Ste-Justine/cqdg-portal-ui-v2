@@ -3,10 +3,13 @@ import intl from 'react-intl-universal';
 import TableHeader from '@ferlab/ui/core/components/ProTable/Header';
 import useDebounce from '@ferlab/ui/core/hooks/useDebounce';
 import { List, Space, Typography } from 'antd';
+import { AxiosRequestConfig } from 'axios';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
-import { UserApi } from 'services/api/user';
-import { TUser } from 'services/api/user/models';
+import useApi from 'hooks/useApi';
+import { headers } from 'services/api/reports';
+import { UserApi, USERS_API_URL } from 'services/api/user';
+import { IUserOptions, TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
 
 import FiltersBox from './components/Filters/Box';
@@ -29,6 +32,16 @@ const CommunityPage = () => {
   const sortItems = getSortItems();
   const [sort, setSort] = useState(sortItems[0].sort);
   const debouncedMatchValue = useDebounce(match, 300);
+
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${USERS_API_URL}/userOptions`,
+    headers: headers(),
+  };
+
+  const { result } = useApi<IUserOptions>({ config });
+  const roleOptions = result?.roleOptions || [];
+  const researchDomainOptions = result?.researchDomainOptions || [];
 
   useEffect(() => {
     setIsLoading(true);
@@ -57,6 +70,8 @@ const CommunityPage = () => {
         onResearchDomainFilterChange={setResearchDomainFilter}
         onSortChange={setSort}
         hasFilters={!!(roleFilter || researchDomainFilter)}
+        roleOptions={roleOptions}
+        researchDomainOptions={researchDomainOptions}
       />
       <Space className={styles.usersListWrapper} size={24} direction="vertical">
         <TableHeader

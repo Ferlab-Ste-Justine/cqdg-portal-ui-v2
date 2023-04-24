@@ -3,7 +3,8 @@ import intl from 'react-intl-universal';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons';
 import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import { Button, Input, Select, Space, Tag, Typography } from 'antd';
-import { researchDomainsOptions, roleOptions } from 'views/Community/contants';
+
+import { IOption } from 'services/api/user/models';
 
 import Sorter from '../Sorter';
 
@@ -15,6 +16,8 @@ interface OwnProps {
   onResearchDomainFilterChange: (value: string) => void;
   onSortChange: (value: string) => void;
   hasFilters: boolean;
+  researchDomainOptions: IOption[];
+  roleOptions: IOption[];
 }
 
 const FiltersBox = ({
@@ -23,6 +26,8 @@ const FiltersBox = ({
   onResearchDomainFilterChange,
   onSortChange,
   hasFilters = false,
+  researchDomainOptions,
+  roleOptions,
 }: OwnProps) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
@@ -65,16 +70,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setRoleFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={[
-                ...roleOptions.map((option) => ({
-                  label: option.label,
-                  value: option.value,
-                })),
-                {
-                  label: intl.get('global.other'),
-                  value: 'other',
-                },
-              ]}
+              options={roleOptions}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}
@@ -102,16 +98,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setResearchDomainFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={[
-                ...researchDomainsOptions.map((option) => ({
-                  label: option.label,
-                  value: option.value,
-                })),
-                {
-                  label: intl.get('global.other'),
-                  value: 'other',
-                },
-              ]}
+              options={researchDomainOptions}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}

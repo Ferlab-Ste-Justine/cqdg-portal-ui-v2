@@ -7,11 +7,9 @@ import { Button, Col, Divider, List, Result, Row, Skeleton, Space, Typography } 
 import cx from 'classnames';
 
 import useApi from 'hooks/useApi';
-import { headers, USERS_API_URL } from 'services/api/user';
+import { headers, USERS_API_URL_USER } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { useUser } from 'store/user';
-
-import { researchDomainsOptions, roleOptions } from '../contants';
 
 import AvatarHeader from './components/AvatarHeader';
 import Banner from './components/Banner';
@@ -24,7 +22,7 @@ const CommunityMember = () => {
 
   const { loading, result } = useApi<TUser>({
     config: {
-      url: `${USERS_API_URL}/${id}`,
+      url: `${USERS_API_URL_USER}/${id}`,
       method: 'GET',
       headers: headers(),
     },
@@ -40,22 +38,6 @@ const CommunityMember = () => {
       />
     );
   }
-
-  const getRoleLabel = (role: string) => {
-    const label = roleOptions.find(
-      ({ value }) => value.toLowerCase() === role.toLowerCase(),
-    )?.label;
-
-    return label ? label : role;
-  };
-
-  const getResearchDomainLabel = (usage: string) => {
-    const label = researchDomainsOptions.find(
-      ({ value }) => value.toLowerCase() === usage.toLowerCase(),
-    )?.label;
-
-    return label ? label : usage;
-  };
 
   return (
     <div className={styles.communityMemberWrapper}>
@@ -78,7 +60,11 @@ const CommunityMember = () => {
                       className={cx(styles.infoList, !result?.roles?.length && styles.empty)}
                       itemLayout="horizontal"
                       dataSource={result?.roles ?? []}
-                      renderItem={(role, index) => <li key={index}>{getRoleLabel(role)}</li>}
+                      renderItem={(role, index) => (
+                        <li key={index}>
+                          {intl.get(`screen.profileSettings.roleOptions.${role}`) || role}
+                        </li>
+                      )}
                       locale={{
                         emptyText: (
                           <Empty
@@ -102,8 +88,12 @@ const CommunityMember = () => {
                       )}
                       itemLayout="horizontal"
                       dataSource={result?.research_domains || []}
-                      renderItem={(usage, index) => (
-                        <li key={index}>{getResearchDomainLabel(usage)}</li>
+                      renderItem={(research_domain, index) => (
+                        <li key={index}>
+                          {intl.get(
+                            `screen.profileSettings.researchDomainOptions.${research_domain}`,
+                          ) || research_domain}
+                        </li>
                       )}
                       locale={{
                         emptyText: (

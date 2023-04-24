@@ -3,8 +3,8 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Checkbox, Form, Space } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { researchDomainsOptions } from 'views/Community/contants';
 
+import { IOption } from 'services/api/user/models';
 import { useUser } from 'store/user';
 import { updateUser } from 'store/user/thunks';
 import { lowerAll } from 'utils/array';
@@ -25,16 +25,16 @@ const initialChangedValues = {
   [FORM_FIELDS.OTHER_RESEARCH_DOMAIN]: false,
 };
 
-const hasOtherResearchDomains = (userResearchDomains: string[]) =>
+const hasOtherResearchDomains = (userResearchDomains: string[], researchDomainOptions: IOption[]) =>
   userResearchDomains.filter(
     (item) =>
-      !researchDomainsOptions.find(
+      !researchDomainOptions.find(
         (defaultResearchDomains) =>
           defaultResearchDomains.value.toLowerCase() === item.toLowerCase(),
       ),
   );
 
-const ResearchDomain = () => {
+const ResearchDomain = ({ researchDomainOptions }: { researchDomainOptions: IOption[] }) => {
   const [form] = useForm();
   const dispatch = useDispatch();
   const { userInfo } = useUser();
@@ -52,16 +52,18 @@ const ResearchDomain = () => {
     initialValues.current = {
       [FORM_FIELDS.RESEARCH_DOMAIN]: hasOtherResearchDomains(
         lowerAll(userInfo?.research_domains ?? []),
+        researchDomainOptions,
       ).length
         ? [...lowerAll(userInfo?.research_domains ?? []), OTHER_KEY]
         : lowerAll(userInfo?.research_domains ?? []),
       [FORM_FIELDS.OTHER_RESEARCH_DOMAIN]: hasOtherResearchDomains(
         userInfo?.research_domains ?? [],
+        researchDomainOptions,
       )[0],
     };
     form.setFieldsValue(initialValues.current);
     setHasChanged(initialChangedValues);
-  }, [form, userInfo]);
+  }, [form, researchDomainOptions, userInfo]);
 
   return (
     <BaseCard
@@ -76,7 +78,10 @@ const ResearchDomain = () => {
         initialValues={initialValues}
         hasChangedInitialValue={hasChanged}
         onFinish={(values: any) => {
-          const otherResearchDomains = hasOtherResearchDomains(values[FORM_FIELDS.RESEARCH_DOMAIN]);
+          const otherResearchDomains = hasOtherResearchDomains(
+            values[FORM_FIELDS.RESEARCH_DOMAIN],
+            researchDomainOptions,
+          );
           dispatch(
             updateUser({
               data: {
@@ -99,14 +104,16 @@ const ResearchDomain = () => {
           rules={[{ required: true }]}
         >
           <Checkbox.Group className={formStyles.checkBoxGroup}>
-            <span className={formStyles.help}>Check all that apply</span>
+            <span className={formStyles.help}>
+              {intl.get('screen.profileSettings.cards.researchDomain.checkAll')}
+            </span>
             <Space direction="vertical">
-              {researchDomainsOptions.map((option) => (
-                <Checkbox key={option.key} value={option.value.toLowerCase()}>
-                  {option.label}
+              {researchDomainOptions.map((option) => (
+                <Checkbox key={option.value} value={option.value.toLowerCase()}>
+                  {intl.get(`screen.profileSettings.researchDomainOptions.${option.value}`) ||
+                    option.label}
                 </Checkbox>
               ))}
-              <Checkbox value={OTHER_KEY}>Other</Checkbox>
             </Space>
           </Checkbox.Group>
         </Form.Item>
