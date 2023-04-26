@@ -613,7 +613,7 @@ const fr = {
         bioinformatician_software_developer: 'Bioinformaticien(ne), développeur(e) logiciel',
         clinician: 'Clinician',
         employee_in_governmental_agency: 'Employé(e) d’un organisme gouvernemental',
-        other: 'Other',
+        other: 'Autre',
       },
       researchDomainOptions: {
         aging: 'Vieillissement',
