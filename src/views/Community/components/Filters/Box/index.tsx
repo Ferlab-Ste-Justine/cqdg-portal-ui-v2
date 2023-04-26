@@ -3,13 +3,18 @@ import intl from 'react-intl-universal';
 import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons';
 import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import { Button, Input, Select, Space, Tag, Typography } from 'antd';
-import { researchDomainsOptions, roleOptions } from 'views/Community/contants';
+import { AxiosRequestConfig } from 'axios';
+import { sortOptionsLabelsByName } from 'views/ProfileSettings/cards/utils';
+
+import useApi from 'hooks/useApi';
+import { USERS_API_URL } from 'services/api/user';
+import { IUserOptions } from 'services/api/user/models';
 
 import Sorter from '../Sorter';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
+interface IFiltersBoxProps {
   onMatchFilterChange: (value: string) => void;
   onRoleFilterChange: (value: string) => void;
   onResearchDomainFilterChange: (value: string) => void;
@@ -23,10 +28,25 @@ const FiltersBox = ({
   onResearchDomainFilterChange,
   onSortChange,
   hasFilters = false,
-}: OwnProps) => {
+}: IFiltersBoxProps) => {
   const [filtersVisible, setFiltersVisible] = useState(false);
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
   const [researchDomainFilter, setResearchDomainFilter] = useState<string[]>([]);
+
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${USERS_API_URL}/userOptions`,
+  };
+
+  const { result } = useApi<IUserOptions>({ config });
+  const roleOptions = result?.roleOptions || [];
+  const researchDomainOptions = result?.researchDomainOptions || [];
+
+  const roleOptionsSorted = sortOptionsLabelsByName(roleOptions, 'roleOptions');
+  const researchDomainOptionsSorted = sortOptionsLabelsByName(
+    researchDomainOptions,
+    'researchDomainOptions',
+  );
 
   useEffect(() => onRoleFilterChange(roleFilter.join(',')), [onRoleFilterChange, roleFilter]);
   useEffect(
@@ -65,16 +85,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setRoleFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={[
-                ...roleOptions.map((option) => ({
-                  label: option.label,
-                  value: option.value,
-                })),
-                {
-                  label: intl.get('global.other'),
-                  value: 'other',
-                },
-              ]}
+              options={roleOptionsSorted}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}
@@ -102,16 +113,7 @@ const FiltersBox = ({
               onDeselect={(value: string) =>
                 setResearchDomainFilter((prev) => prev.filter((val) => val !== value))
               }
-              options={[
-                ...researchDomainsOptions.map((option) => ({
-                  label: option.label,
-                  value: option.value,
-                })),
-                {
-                  label: intl.get('global.other'),
-                  value: 'other',
-                },
-              ]}
+              options={researchDomainOptionsSorted}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}

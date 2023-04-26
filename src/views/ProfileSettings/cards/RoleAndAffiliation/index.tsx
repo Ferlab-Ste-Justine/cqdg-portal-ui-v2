@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import cx from 'classnames';
-import { roleOptions } from 'views/Community/contants';
 
+import { IOption } from 'services/api/user/models';
 import { useUser } from 'store/user';
 import { updateUser } from 'store/user/thunks';
 import { lowerAll } from 'utils/array';
 
 import BaseCard from '../BaseCard';
 import BaseForm from '../BaseForm';
-import { OTHER_KEY, removeOtherKey } from '../utils';
+import { OTHER_KEY, removeOtherKey, sortOptionsLabelsByName } from '../utils';
 
 import formStyles from '../form.module.scss';
 
@@ -23,10 +23,12 @@ enum FORM_FIELDS {
   NO_AFFILIATION = 'no_affiliation',
 }
 
-const hasOtherRole = (userUsages: string[]) =>
-  userUsages.filter(
-    (usage) =>
-      !roleOptions.find((roleOption) => roleOption.value.toLowerCase() === usage.toLowerCase()),
+const hasOtherRole = (userRoles: string[], roleOptions: IOption[]) =>
+  userRoles.filter(
+    (userRole) =>
+      !roleOptions.find(
+        (rolesOption) => rolesOption.value.toLowerCase() === userRole.toLowerCase(),
+      ),
   );
 
 const initialChangedValues = {
@@ -36,7 +38,7 @@ const initialChangedValues = {
   [FORM_FIELDS.NO_AFFILIATION]: false,
 };
 
-const RoleAndAffiliationCard = () => {
+const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }) => {
   const [form] = useForm();
   const dispatch = useDispatch();
   const { userInfo } = useUser();
@@ -50,18 +52,20 @@ const RoleAndAffiliationCard = () => {
     form.setFieldsValue(initialValues.current);
   };
 
+  const roleOptionsSorted = sortOptionsLabelsByName(roleOptions, 'roleOptions');
+
   useEffect(() => {
     initialValues.current = {
-      [FORM_FIELDS.ROLES]: hasOtherRole(lowerAll(userInfo?.roles ?? [])).length
+      [FORM_FIELDS.ROLES]: hasOtherRole(lowerAll(userInfo?.roles ?? []), roleOptions).length
         ? [...lowerAll(userInfo?.roles ?? []), OTHER_KEY]
         : lowerAll(userInfo?.roles ?? []),
-      [FORM_FIELDS.OTHER_ROLE]: hasOtherRole(userInfo?.roles ?? [])[0],
+      [FORM_FIELDS.OTHER_ROLE]: hasOtherRole(userInfo?.roles ?? [], roleOptions)[0],
       [FORM_FIELDS.AFFILIATION]: userInfo?.affiliation,
       [FORM_FIELDS.NO_AFFILIATION]: !userInfo?.affiliation,
     };
     form.setFieldsValue(initialValues.current);
     setHasChanged(initialChangedValues);
-  }, [form, userInfo]);
+  }, [form, roleOptions, userInfo]);
 
   return (
     <BaseCard
@@ -76,7 +80,7 @@ const RoleAndAffiliationCard = () => {
         initialValues={initialValues}
         hasChangedInitialValue={hasChanged}
         onFinish={(values: any) => {
-          const otherRole = hasOtherRole(values[FORM_FIELDS.ROLES]);
+          const otherRole = hasOtherRole(values[FORM_FIELDS.ROLES], roleOptions);
           dispatch(
             updateUser({
               data: {
@@ -104,34 +108,13 @@ const RoleAndAffiliationCard = () => {
               {intl.get('screen.profileSettings.cards.roleAffiliation.checkAllThatApply')}
             </span>
             <Space direction="vertical">
-              {roleOptions.map((option, index) => (
-                <Checkbox key={index} value={option.value.toLowerCase()}>
+              {roleOptionsSorted.map((option) => (
+                <Checkbox key={option.value} value={option.value.toLowerCase()}>
                   {option.label}
                 </Checkbox>
               ))}
-              <Checkbox value={OTHER_KEY}>{intl.get('global.other')}</Checkbox>
             </Space>
           </Checkbox.Group>
-        </Form.Item>
-        <Form.Item
-          noStyle
-          shouldUpdate={(prevValues, currentValues) =>
-            prevValues[FORM_FIELDS.ROLES] !== currentValues[FORM_FIELDS.ROLES]
-          }
-        >
-          {({ getFieldValue }) =>
-            getFieldValue(FORM_FIELDS.ROLES)?.includes(OTHER_KEY) ? (
-              <Form.Item
-                className={formStyles.dynamicField}
-                name={FORM_FIELDS.OTHER_ROLE}
-                label={intl.get('global.pleaseDescribe')}
-                required={false}
-                rules={[{ required: true, validateTrigger: 'onSubmit' }]}
-              >
-                <Input />
-              </Form.Item>
-            ) : null
-          }
         </Form.Item>
         <Form.Item
           noStyle

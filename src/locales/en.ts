@@ -615,9 +615,37 @@ const en = {
         researchDomain: {
           title: 'Research Domain',
           label: 'Research domains or domains of interest',
+          checkAll: 'Check all that apply',
         },
         saveChanges: 'Save changes',
         discardChanges: 'Discard changes',
+      },
+      roleOptions: {
+        researcher_in_academic_or_non_profit_institution:
+          'Researcher in an academic or non-profit institution',
+        representative_of_commercial_or_for_profit_company:
+          'Representative of a commercial or for-profit company',
+        bioinformatician_software_developer: 'Bioinformatician, software developer',
+        clinician: 'Clinician',
+        employee_in_governmental_agency: 'Employee in a governmental agency',
+        other: 'Other',
+      },
+      researchDomainOptions: {
+        aging: 'Aging',
+        bioinformatics: 'Bioinformatics',
+        birth_defects: 'Birth Defects',
+        cancer: 'Cancer',
+        circulatory_respiratory_health: 'Circulatory and Respiratory Health',
+        general_health: 'General Health',
+        infection_immunity: 'Infection and Immunity',
+        musculoskeletal_health_arthritis: 'Musculoskeletal Health and Arthritis',
+        neurodevelopmental_conditions: 'Neurodevelopmental Conditions',
+        neurosciences_mental_health_addiction: 'Neurosciences, Mental Health and Addiction',
+        nutrition_metabolism_diabetes: 'Nutrition, Metabolism and Diabetes',
+        population_genomics: 'Population Genomics',
+        rare_diseases: 'Rare Diseases',
+        not_applicable: 'Not Applicable',
+        other: 'Other',
       },
     },
     dashboard: {
