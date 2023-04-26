@@ -1,7 +1,11 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { Button, Space, Typography } from 'antd';
+import { AxiosRequestConfig } from 'axios';
 
+import useApi from 'hooks/useApi';
+import { USERS_API_URL } from 'services/api/user';
+import { IUserOptions } from 'services/api/user/models';
 import { useUser } from 'store/user';
 
 import DeleteCard from './cards/DeleteCard';
@@ -16,6 +20,15 @@ const { Title } = Typography;
 const ProfileSettings = () => {
   const { userInfo } = useUser();
 
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `${USERS_API_URL}/userOptions`,
+  };
+
+  const { result } = useApi<IUserOptions>({ config });
+  const roleOptions = result?.roleOptions || [];
+  const researchDomainOptions = result?.researchDomainOptions || [];
+
   return (
     <div className={styles.profileSettingsWrapper}>
       <Space size={16} direction="vertical" className={styles.profileSettings}>
@@ -27,8 +40,8 @@ const ProfileSettings = () => {
         </div>
         <Space size={24} direction="vertical" className={styles.cardsWrapper}>
           <IdentificationCard />
-          <RoleAndAffiliationCard />
-          <ResearchDomainCard />
+          <RoleAndAffiliationCard roleOptions={roleOptions} />
+          <ResearchDomainCard researchDomainOptions={researchDomainOptions} />
           <DeleteCard />
         </Space>
       </Space>

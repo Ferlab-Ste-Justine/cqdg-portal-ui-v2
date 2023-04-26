@@ -544,7 +544,7 @@ const fr = {
         dataUse: 'Utilisation des données',
         researchDomain: 'Domaine de recherche',
         clearFilters: 'Effacer les filtres',
-        barPlaceholder: 'Rechercher par nom ou affiliation',
+        barPlaceholder: 'Recherche par nom ou affiliation',
         sorter: {
           newest: 'Plus récent',
           oldest: 'Plus ancien',
@@ -562,7 +562,7 @@ const fr = {
           notice:
             'Vous ne pourrez plus vous connecter au portail de données du CQDG. Tous vos ensembles et requêtes enregistrés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
           confirm: {
-            content: 'Êtes-vous sûr de vouloir supprimer définitivement ce compte ?',
+            content: 'Êtes-vous sûr(e) de vouloir supprimer définitivement ce compte ?',
           },
         },
         identification: {
@@ -587,10 +587,10 @@ const fr = {
         },
         roleAffiliation: {
           title: 'Rôle et affiliation',
-          iama: 'Je suis un',
+          iama: 'Je suis un(e)',
           checkAllThatApply: 'Cochez toutes les cases',
           provideAffiliation: 'Fournir une affiliation institutionnelle ou organisationnelle',
-          affiliatedWith: 'Je suis affilié à',
+          affiliatedWith: 'Je suis affilié(e) à',
           dontHaveAffiliation: "Je n'ai pas d'affiliation institutionnelle",
           describeResearchArea:
             "Mon domaine de recherche ou domaine d'intérêt peut être décrit comme",
@@ -600,9 +600,37 @@ const fr = {
         researchDomain: {
           title: 'Domaine de recherche',
           label: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
+          checkAll: 'Cochez toutes les cases',
         },
         saveChanges: 'Sauvegarder les modifications',
         discardChanges: 'Annuler les modifications',
+      },
+      roleOptions: {
+        researcher_in_academic_or_non_profit_institution:
+          'Chercheur(e) dans une institution académique ou sans but lucratif',
+        representative_of_commercial_or_for_profit_company:
+          "Représentant(e) d'une entreprise commerciale ou à but lucratif",
+        bioinformatician_software_developer: 'Bioinformaticien(ne), développeur(e) logiciel',
+        clinician: 'Clinician',
+        employee_in_governmental_agency: 'Employé(e) d’un organisme gouvernemental',
+        other: 'Autre',
+      },
+      researchDomainOptions: {
+        aging: 'Vieillissement',
+        bioinformatics: 'Bioinformatique',
+        birth_defects: 'Malformations congénitales',
+        cancer: 'Cancer',
+        circulatory_respiratory_health: 'Santé circulatoire et respiratoire',
+        general_health: 'Santé générale',
+        infection_immunity: 'Infection et immunité',
+        musculoskeletal_health_arthritis: 'Santé musculo-squelettique et arthrite',
+        neurodevelopmental_conditions: 'Conditions neuro-développementales',
+        neurosciences_mental_health_addiction: 'Neurosciences, santé mentale et toxicomanie',
+        nutrition_metabolism_diabetes: 'Nutrition, métabolisme et diabète',
+        population_genomics: 'Génomique des populations',
+        rare_diseases: 'Maladies rares',
+        not_applicable: "Ne s'applique pas",
+        other: 'Autre',
       },
     },
     dashboard: {
@@ -906,7 +934,7 @@ const fr = {
       biospecimensSelected: 'biospécimens séléctionnés',
       biospecimenSelected: 'biospécimen séléctionné',
       saveBiospecimensSet: "Enregistrer l'ensemble de biospécimens",
-      searchByBiospecimenId: 'Rechercher par ID biospécimen',
+      searchByBiospecimenId: 'Recherche par ID biospécimen',
       searchByBiospecimenSampleId: 'Recherche par ID d’échantillon',
       noBiospecimenFound: 'Aucun biospécimen trouvé',
       noBiospecimenSetsFound: 'Aucun ensemble de biospécimen trouvé',
@@ -967,19 +995,19 @@ const fr = {
         labels: {
           firstName: 'Prénom',
           lastName: 'Nom de famille',
-          haveAUserID: "J'ai un identifiant eRA Commons:",
+          haveAUserID: "J'ai un identifiant eRA Commons :",
           enterUserId: 'Veuillez saisir votre identifiant eRA Commons',
           commercialUseReason:
-            'Veuillez fournir au moins 1 à 2 phrases pour décrire votre utilisation commerciale:',
+            'Veuillez fournir au moins 1 à 2 phrases pour décrire votre utilisation commerciale :',
           fullName: 'Full name',
           email: 'Email',
-          iAmA: 'Je suis un/une:',
+          iAmA: 'Je suis un(e) :',
           pleaseDescribe: "Décrivez s'il vous plait",
-          iAmAffiliatedWith: 'je suis affilié à:',
-          intendToUser: "J'ai l'intention d'utiliser les données du portail CQDG pour:",
+          iAmAffiliatedWith: 'je suis affilié(e) à :',
+          intendToUser: "J'ai l'intention d'utiliser les données du portail CQDG pour :",
           dataUseStatement: "Déclaration d'utilisation des données",
           researchAreaDescribe:
-            "Mon domaine de recherche ou mon domaine d'intérêt peut être décrit comme:",
+            "Mon domaine de recherche ou mon domaine d'intérêt peut être décrit comme :",
         },
         placeHolders: {
           firstLast: 'Premier Dernier',

@@ -82,3 +82,13 @@ export type TProfileImagePresignedOutput = {
 
 export type TUserInsert = Omit<TUser, 'id' | 'keycloak_id' | 'creation_date' | 'update_date'>;
 export type TUserUpdate = Partial<TUserInsert>;
+
+export interface IOption {
+  label: string;
+  value: string;
+}
+
+export interface IUserOptions {
+  roleOptions: IOption[];
+  researchDomainOptions: IOption[];
+}
