@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "^3.7.11",
     "@dnd-kit/core": "^4.0.3",
     "@dnd-kit/sortable": "^5.1.0",
     "@ferlab/ui": "^6.1.0",
