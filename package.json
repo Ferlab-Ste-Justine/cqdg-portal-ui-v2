@@ -63,7 +63,7 @@
     "@nivo/pie": "^0.79.1",
     "@react-keycloak/core": "^3.2.0",
     "@react-keycloak/web": "^3.4.0",
-    "@reduxjs/toolkit": "^1.6.2",
+    "@reduxjs/toolkit": "^1.9.3",
     "antd": "^4.20.0",
     "antd-img-crop": "^4.12.2",
     "axios": "^0.24.0",
