@@ -120,12 +120,13 @@ const en = {
     yes: 'Yes',
     no: 'No',
     other: 'Other',
+    delete: 'Delete',
     search: {
       genes: {
         emptyText: 'No gene found',
         placeholder: 'e.g. BRAF, ENSG00000157764',
         title: 'Search by gene',
-        tooltip: 'Enter a Gene Symbol, Gene Alias ​​or Ensemble ID',
+        tooltip: 'Enter a Gene Symbol, Gene Alias or Ensemble ID',
       },
       variants: {
         emptyText: 'No variant found',
@@ -554,13 +555,13 @@ const en = {
       noResults: 'No members',
       search: {
         filters: 'Filters',
-        inputPlaceholder: 'e.g. Watson, Linda Crnic Institute',
+        inputPlaceholder: 'e.g. Watson, Linda Children’s Hospital of Philadelphia',
         selectPlaceholder: 'Select',
         role: 'Role',
         dataUse: 'Data use',
-        researchDomain: 'Research domain',
-        clearFilters: 'Clear filters',
-        barPlaceholder: 'Search by member name or affiliation',
+        researchDomain: 'Research Domain',
+        clearFilters: 'Clear Filters',
+        barPlaceholder: 'Search by name or affiliation',
         sorter: {
           newest: 'Newest first',
           oldest: 'Oldest first',
@@ -1015,13 +1016,6 @@ const en = {
         },
         placeHolders: {
           firstLast: 'First Last',
-        },
-        helps: {
-          checkAllThatApply: 'Check all that apply',
-          describeUseBelow: 'For other purpose, you must describe your use below',
-          provideBriefDescription:
-            'Provide a brief description and a link to your professional biography or organization website, if available',
-          provideOrgAffiliation: 'Provide institutional or organizational affiliation',
         },
         noticeNotPublicInfo: 'This information will not be made public.',
         nameAndEmailOfIndividual:

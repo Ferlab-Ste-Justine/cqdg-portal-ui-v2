@@ -150,7 +150,7 @@ const IdentificationCard = () => {
                 required={false}
                 requiredMark="optional"
               >
-                <Input placeholder="https://www.linkedin.com/in/username/"></Input>
+                <Input placeholder="https://www.linkedin.com/in/username"></Input>
               </Form.Item>
             </BaseForm>
           </Col>
