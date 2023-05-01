@@ -122,6 +122,7 @@ const fr = {
     yes: 'Oui',
     no: 'Non',
     other: 'Autre',
+    delete: 'Supprimer',
     search: {
       genes: {
         emptyText: 'Aucun gène trouvé',
@@ -533,12 +534,12 @@ const fr = {
       communityBtn: 'Communauté',
     },
     community: {
-      title: 'CQDG Community',
+      title: 'Communauté CQDG',
       resultsMember: 'Membres',
       noResults: 'Aucun membre',
       search: {
         filters: 'Filtres',
-        inputPlaceholder: 'ex : Watson, Linda Crnic Institute',
+        inputPlaceholder: 'ex : Watson, Linda Children’s Hospital of Philadelphia',
         selectPlaceholder: 'Sélectionner',
         role: 'Rôle',
         dataUse: 'Utilisation des données',
@@ -560,7 +561,7 @@ const fr = {
           title: 'Supprimer le compte',
           button: 'Supprimer mon compte',
           notice:
-            'Vous ne pourrez plus vous connecter au portail de données du CQDG. Tous vos ensembles et requêtes enregistrés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
+            'Vous ne pourrez plus vous connecter au portail de données CQDG. Tous vos ensembles et requêtes enregistrés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
           confirm: {
             content: 'Êtes-vous sûr(e) de vouloir supprimer définitivement ce compte ?',
           },
@@ -568,7 +569,7 @@ const fr = {
         identification: {
           title: 'Identification',
           alert:
-            "Vous êtes authentifié avec <strong>{provider}</strong> utilisant <strong>{email}</strong>. Cet e-mail n'est jamais montré au public et ne peut pas être modifié.",
+            "Vous êtes authentifié avec <strong>{provider}</strong> utilisant <strong>{email}</strong>. Cet e-mail n'est jamais affiché au public et ne peut pas être modifié.",
           firstName: 'Prénom',
           yourFirstName: 'Votre prénom',
           lastName: 'Nom de famille',
@@ -589,7 +590,7 @@ const fr = {
           title: 'Rôle et affiliation',
           iama: 'Je suis un(e)',
           checkAllThatApply: 'Cochez toutes les cases',
-          provideAffiliation: 'Fournir une affiliation institutionnelle ou organisationnelle',
+          provideAffiliation: 'Indiquez votre affiliation institutionnelle ou organisationnelle',
           affiliatedWith: 'Je suis affilié(e) à',
           dontHaveAffiliation: "Je n'ai pas d'affiliation institutionnelle",
           describeResearchArea:
@@ -602,7 +603,7 @@ const fr = {
           label: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
           checkAll: 'Cochez toutes les cases',
         },
-        saveChanges: 'Sauvegarder les modifications',
+        saveChanges: 'Enregistrer les modifications',
         discardChanges: 'Annuler les modifications',
       },
       roleOptions: {
@@ -1011,13 +1012,6 @@ const fr = {
         },
         placeHolders: {
           firstLast: 'Premier Dernier',
-        },
-        helps: {
-          checkAllThatApply: 'Cochez toutes les cases',
-          describeUseBelow: "À d'autres fins, vous devez décrire votre utilisation ci-dessous",
-          provideBriefDescription:
-            'Fournissez une brève description et un lien vers votre biographie professionnelle ou le site Web de votre organisation, si disponible',
-          provideOrgAffiliation: 'Fournir une affiliation institutionnelle ou organisationnelle',
         },
         noticeNotPublicInfo: 'Ces informations ne seront pas rendues publiques.',
         nameAndEmailOfIndividual:
