@@ -21,15 +21,15 @@ export const sortOptionsLabelsByName = (options: IOption[], optionsName = '') =>
   /** sort options without other key */
   [
     ...options
-      .filter((role) => role.value !== OTHER_KEY)
+      .filter((option) => option.value !== OTHER_KEY)
       .sort((a, b) => {
         const aLabel = intl.get(`screen.profileSettings.${optionsName}.${a.value}`);
         const bLabel = intl.get(`screen.profileSettings.${optionsName}.${b.value}`);
         return aLabel < bLabel ? -1 : 1;
       })
-      .map((role) => ({
-        value: role.value,
-        label: intl.get(`screen.profileSettings.${optionsName}.${role.value}`) || role.label,
+      .map((option) => ({
+        value: option.value,
+        label: intl.get(`screen.profileSettings.${optionsName}.${option.value}`) || option.label,
       })),
-    ...options.filter((role) => role.value === OTHER_KEY),
+    ...options.filter((option) => option.value === OTHER_KEY),
   ];
