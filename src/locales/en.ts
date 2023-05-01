@@ -120,6 +120,7 @@ const en = {
     yes: 'Yes',
     no: 'No',
     other: 'Other',
+    delete: 'Delete',
     search: {
       genes: {
         emptyText: 'No gene found',
@@ -554,13 +555,13 @@ const en = {
       noResults: 'No members',
       search: {
         filters: 'Filters',
-        inputPlaceholder: 'e.g. Watson, Linda Crnic Institute',
+        inputPlaceholder: 'e.g. Watson, Linda Children’s Hospital of Philadelphia',
         selectPlaceholder: 'Select',
         role: 'Role',
         dataUse: 'Data use',
-        researchDomain: 'Research domain',
-        clearFilters: 'Clear filters',
-        barPlaceholder: 'Search by member name or affiliation',
+        researchDomain: 'Research Domain',
+        clearFilters: 'Clear Filters',
+        barPlaceholder: 'Search by name or affiliation',
         sorter: {
           newest: 'Newest first',
           oldest: 'Oldest first',
@@ -583,6 +584,8 @@ const en = {
         },
         identification: {
           title: 'Identification',
+          publicProfile: 'Public profile',
+          privateProfile: 'Private profile',
           alert:
             'You are authenticated with <strong>{provider}</strong> using <strong>{email}</strong>. This email is never shown to the public and cannot be changed.',
           firstName: 'First Name',
@@ -1015,13 +1018,6 @@ const en = {
         },
         placeHolders: {
           firstLast: 'First Last',
-        },
-        helps: {
-          checkAllThatApply: 'Check all that apply',
-          describeUseBelow: 'For other purpose, you must describe your use below',
-          provideBriefDescription:
-            'Provide a brief description and a link to your professional biography or organization website, if available',
-          provideOrgAffiliation: 'Provide institutional or organizational affiliation',
         },
         noticeNotPublicInfo: 'This information will not be made public.',
         nameAndEmailOfIndividual:
