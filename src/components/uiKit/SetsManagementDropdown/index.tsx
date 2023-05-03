@@ -24,10 +24,11 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PlaylistAdd from 'components/Icons/PlaylistAdd';
 import PlaylistRemove from 'components/Icons/PlaylistRemove';
 import AddRemoveSaveSetModal from 'components/uiKit/SetsManagementDropdown/AddRemoveSaveSetModal';
-import styles from 'components/uiKit/SetsManagementDropdown/index.module.scss';
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
 import { numberWithCommas } from 'utils/string';
+
+import styles from './index.module.scss';
 
 export enum SetActionType {
   RENAME_TAG = 'RENAME_TAG',
@@ -75,10 +76,12 @@ const itemIcon = (type: string) => {
       return <ExperimentOutlined className={styles.icon} />;
     case INDEXES.FILE:
       return <FileTextOutlined className={styles.icon} />;
-    case SetType.VARIANT:
+    case INDEXES.VARIANT:
       return <LineStyleIcon className={styles.icon} />;
-    default:
+    case INDEXES.PARTICIPANT:
       return <UserOutlined className={styles.icon} />;
+    default:
+      return '';
   }
 };
 
@@ -106,19 +109,18 @@ const getLabel = (type: string, count: number): string => {
 };
 
 const getTitle = (type: string): string => {
-  if (type === INDEXES.FILE) {
-    return intl.get('screen.dataExploration.saveFilesSet');
+  switch (type) {
+    case INDEXES.FILE:
+      return intl.get('screen.dataExploration.saveFilesSet');
+    case INDEXES.PARTICIPANT:
+      return intl.get('screen.dataExploration.saveParticipantsSet');
+    case INDEXES.BIOSPECIMEN:
+      return intl.get('screen.dataExploration.saveBiospecimensSet');
+    case INDEXES.VARIANT:
+      return intl.get('screen.dataExploration.saveBiospecimensSet');
+    default:
+      return '';
   }
-  if (type === INDEXES.PARTICIPANT) {
-    return intl.get('screen.dataExploration.saveParticipantsSet');
-  }
-  if (type === INDEXES.BIOSPECIMEN) {
-    return intl.get('screen.dataExploration.saveBiospecimensSet');
-  }
-  if (type === INDEXES.VARIANT) {
-    return intl.get('screen.dataExploration.saveBiospecimensSet');
-  }
-  return '';
 };
 
 interface IMenuOverlayProps {
