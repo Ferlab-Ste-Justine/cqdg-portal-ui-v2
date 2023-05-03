@@ -11,11 +11,11 @@ import useQueryBuilderState, {
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
 import { Tag, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { FileAccessType, IFileEntity, ITableFileEntity } from 'graphql/files/models';
 import { IQueryResults } from 'graphql/models';
-import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
@@ -25,9 +25,9 @@ import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
+import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
@@ -265,7 +265,7 @@ const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) 
           pageIndex: current!,
           size: pageSize!,
           sort: formatQuerySortList(sorter),
-        })
+        } as IQueryConfig)
       }
       headerConfig={{
         itemCount: {

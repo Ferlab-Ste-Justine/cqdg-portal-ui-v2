@@ -14,3 +14,8 @@ export type TUserSavedFilterInsert = Omit<
 export type TUserSavedFilterUpdate = Partial<
   Omit<TUserSavedFilter, 'keycloak_id' | 'updated_date' | 'creation_date'>
 >;
+
+export enum SavedFilterTag {
+  ParticipantsExplorationPage = 'participants-data-exploration-page',
+  VariantsExplorationPage = 'variants-variants-exploration-page',
+}

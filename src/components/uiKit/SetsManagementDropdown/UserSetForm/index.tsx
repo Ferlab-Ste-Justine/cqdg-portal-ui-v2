@@ -4,9 +4,8 @@ import { Col, Form, Row, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { Store } from 'antd/lib/form/interface';
 
+import styles from 'components/uiKit/SetsManagementDropdown/UserSetForm/index.module.scss';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
-
-import styles from './index.module.scss';
 
 type OwnProps = {
   formName: string;

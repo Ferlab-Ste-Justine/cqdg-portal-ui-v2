@@ -1,4 +1,4 @@
-import { IQueryConfig } from 'common/searchPageTypes';
+import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 
 export const STUDIES_EXPLORATION_QB_ID = 'cqdg-studies-exploration-repo-key';
 export const SCROLL_WRAPPER_ID = 'studies-explore-scroll-wrapper';

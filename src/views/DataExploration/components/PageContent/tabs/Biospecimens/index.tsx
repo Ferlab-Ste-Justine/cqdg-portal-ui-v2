@@ -11,12 +11,12 @@ import useQueryBuilderState, {
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
 import { Typography } from 'antd';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
-import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
@@ -27,8 +27,8 @@ import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
+import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
@@ -219,7 +219,7 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
           pageIndex: current!,
           size: pageSize!,
           sort: formatQuerySortList(sorter),
-        })
+        } as IQueryConfig)
       }
       headerConfig={{
         itemCount: {

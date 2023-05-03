@@ -12,6 +12,7 @@ import useQueryBuilderState, {
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
 import { Tag } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree, IQueryResults } from 'graphql/models';
@@ -23,7 +24,6 @@ import {
   ITableParticipantEntity,
 } from 'graphql/participants/models';
 import capitalize from 'lodash/capitalize';
-import SetsManagementDropdown from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_QB_ID,
   DEFAULT_PAGE_SIZE,
@@ -38,8 +38,8 @@ import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { GENDER, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
+import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
@@ -368,7 +368,7 @@ const ParticipantsTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProp
           pageIndex: current!,
           size: pageSize!,
           sort: formatQuerySortList(sorter),
-        })
+        } as IQueryConfig)
       }
       headerConfig={{
         itemCount: {

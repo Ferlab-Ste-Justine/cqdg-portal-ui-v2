@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Layout, Space, Typography } from 'antd';
+import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
+import { Button, Layout, Space, Spin, Typography } from 'antd';
 import cx from 'classnames';
-import { ExtendedMappingResults } from 'graphql/models';
 import isEmpty from 'lodash/isEmpty';
 
 import styles from 'components/uiKit/FilterList/Filters.module.scss';
@@ -12,14 +12,6 @@ import CustomFilterContainer from './CustomFilterContainer';
 import { FilterGroup, FilterInfo } from './types';
 
 export type TCustomFilterMapper = (filters: ISqonGroupFilter) => ISyntheticSqon;
-
-type OwnProps = {
-  index: string;
-  queryBuilderId: string;
-  extendedMappingResults: ExtendedMappingResults;
-  filterInfo: FilterInfo;
-  filterMapper?: TCustomFilterMapper;
-};
 
 const { Text } = Typography;
 
@@ -36,14 +28,26 @@ const concatAllFacets = (filterInfo: FilterInfo) => {
   return allFacets;
 };
 
+interface IFilterListProps {
+  index: string;
+  queryBuilderId: string;
+  extendedMappingResults: IExtendedMappingResults;
+  filterInfo: FilterInfo;
+  filterMapper?: TCustomFilterMapper;
+}
+
 const FilterList = ({
   index,
   queryBuilderId,
   extendedMappingResults,
   filterInfo,
   filterMapper,
-}: OwnProps) => {
+}: IFilterListProps) => {
   const [filtersOpen, setFiltersOpen] = useState<boolean | undefined>(isAllFacetOpen(filterInfo));
+
+  if (extendedMappingResults.loading) {
+    return <Spin className={styles.filterLoader} spinning />;
+  }
 
   return (
     <>
@@ -81,6 +85,7 @@ const FilterList = ({
                   filtersOpen={filtersOpen}
                   defaultOpen={filterInfo.defaultOpenFacets?.includes(facet) ? true : undefined}
                   filterMapper={filterMapper}
+                  headerTooltip={group.tooltips?.includes(facet)}
                 />
               ) : (
                 <div key={i + ii} className={cx(styles.customFilterWrapper, styles.filter)}>

@@ -5,6 +5,7 @@ import { ExtendedMappingResults } from 'graphql/models';
 export interface FilterGroup {
   title?: string;
   facets: string[] | React.ReactNode[];
+  tooltips?: string[];
 }
 
 export interface FilterInfo {

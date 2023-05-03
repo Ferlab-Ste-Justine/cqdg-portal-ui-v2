@@ -9,6 +9,7 @@ import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQuery
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
 import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
@@ -18,7 +19,6 @@ import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { DEFAULT_PAGE_SIZE, SCROLL_WRAPPER_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IQueryConfig, TQueryConfigCb } from 'common/searchPageTypes';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
@@ -256,7 +256,7 @@ const StudiesTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
           pageIndex: current!,
           size: pageSize!,
           sort: formatQuerySortList(sorter),
-        })
+        } as IQueryConfig)
       }
       headerConfig={{
         itemCount: {

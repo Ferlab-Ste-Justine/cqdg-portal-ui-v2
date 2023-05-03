@@ -1,5 +1,5 @@
+@import 'src/style/themes/cqdg/theme.template';
 @import 'src/style/themes/cqdg/layout';
-@import 'src/style/themes/cqdg/colors';
 
 .variantsLayout {
   display: flex;
@@ -18,12 +18,6 @@
         margin-left: 0 !important;
       }
     }
-  }
-
-  span[role='img'].sideMenuIcon {
-    font-size: 20px !important;
-    display: flex;
-    justify-content: center;
   }
 
   .scrollContent {
