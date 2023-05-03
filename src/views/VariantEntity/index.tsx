@@ -1,75 +1,161 @@
 import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
-import AnchorMenu, { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
-import Empty from '@ferlab/ui/core/components/Empty';
-import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
-import { Tag, Typography } from 'antd';
-import { useVariant } from 'graphql/variants/actions';
-import Consequences from 'views/VariantEntity/Consequences';
-import Frequencies from 'views/VariantEntity/Frequencies';
-import Pathogenicity from 'views/VariantEntity/Pathogenicity';
-import Summary from 'views/VariantEntity/Summary';
+import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
+import { hydrateResults } from '@ferlab/ui/core/graphql/utils';
+import EntityPageWrapper, {
+  EntityGeneConsequences,
+  EntityPublicCohortTable,
+  EntitySummary,
+  EntityTable,
+  EntityTitle,
+} from '@ferlab/ui/core/pages/EntityPage';
+import {
+  makeClinvarRows,
+  makeGenesOrderedRow,
+} from '@ferlab/ui/core/pages/EntityPage/utils/pathogenicity';
+import { Space, Tag } from 'antd';
+import { useVariantEntity } from 'graphql/variants/actions';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
+import { getEntityExpandableTableMultiple } from 'utils/translation';
+
+import { getConsequencesProColumn } from './utils/consequences';
+import {
+  getFrequenciesItems,
+  getFrequenciesTableSummaryColumns,
+  getPublicCohorts,
+} from './utils/frequencies';
+import { getClinvarColumns, getGenePhenotypeColumns } from './utils/pathogenicity';
+import { getSummaryItems } from './utils/summary';
+import SummaryHeader from './SummaryHeader';
 
 import styles from './index.module.scss';
 
-const { Title } = Typography;
+enum SectionId {
+  SUMMARY = 'summary',
+  CONSEQUENCE = 'consequence',
+  FREQUENCIES = 'frequencies',
+  PATHOGENICITY = 'pathogenicity',
+}
 
-const VariantEntity = () => {
+export default function VariantEntity() {
   const { locus } = useParams<{ locus: string }>();
 
-  const { data, loading } = useVariant({
+  const links: IAnchorLink[] = [
+    { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
+    {
+      href: `#${SectionId.CONSEQUENCE}`,
+      title: intl.get('entities.variant.consequences.consequence'),
+    },
+    {
+      href: `#${SectionId.FREQUENCIES}`,
+      title: intl.get('entities.variant.frequencies.frequency'),
+    },
+    {
+      href: `#${SectionId.PATHOGENICITY}`,
+      title: intl.get('entities.variant.pathogenicity.pathogenicity'),
+    },
+  ];
+
+  const { data, loading } = useVariantEntity({
     field: 'locus',
     values: [locus],
   });
 
-  const SUMMARY = 'SUMMARY';
-  const CONSEQUENCE = 'CONSEQUENCE';
-  const FREQUENCY = 'FREQUENCY';
-  const PATHOGENICITY = 'PATHOGENICITY';
-
-  const links: IAnchorLink[] = [
-    { href: `#${SUMMARY}`, title: intl.get('screen.variants.summary.summary') },
-    { href: `#${CONSEQUENCE}`, title: intl.get('screen.variants.consequences.consequence') },
-    { href: `#${FREQUENCY}`, title: intl.get('screen.variants.frequencies.frequency') },
-    { href: `#${PATHOGENICITY}`, title: intl.get('screen.variants.pathogenicity.pathogenicity') },
-  ];
-
-  /** Enable AnchorMenu with simple-bar lib used by ScrollContent -> add id to good wrapper div */
-  const simplebarContent = document.getElementsByClassName('simplebar-content-wrapper');
-  const scrollContainerId = 'variant-entity-scroll-wrapper';
-  simplebarContent[1] && simplebarContent[1].setAttribute('id', scrollContainerId);
-
-  if (!data && !loading) {
-    return <Empty imageType="row" size="large" description={intl.get('no.data.available')} />;
-  }
+  const variantStudies = hydrateResults(data?.studies.hits.edges || []).map(
+    (e: any, index: number) => ({
+      ...e,
+      key: index,
+      participant_total_number: data?.participant_total_number || 0,
+    }),
+  );
 
   return (
-    <div className={styles.variantEntityContainer}>
-      <ScrollContent className={styles.scrollContent} key={scrollContainerId}>
-        {data && (
-          <div className={styles.titleHeader}>
-            <LineStyleIcon />
-            <Title
-              level={4}
-              className={styles.title}
-            >{`${data?.hgvsg} ${data?.variant_class} `}</Title>
-            <Tag className={styles.variantTag}>Germline</Tag>
-          </div>
-        )}
-        <Summary id={SUMMARY} variant={data} loading={loading} />
-        <Consequences id={CONSEQUENCE} variant={data} loading={loading} />
-        <Frequencies id={FREQUENCY} variant={data} loading={loading} />
-        <Pathogenicity id={PATHOGENICITY} variant={data} loading={loading} />
-      </ScrollContent>
-      <AnchorMenu
-        scrollContainerId={scrollContainerId}
-        links={links}
-        className={styles.anchorMenu}
-      />
-    </div>
-  );
-};
+    <EntityPageWrapper
+      pageId="variant-entity-page"
+      links={links}
+      data={data}
+      loading={loading}
+      emptyText={intl.get('no.data.available')}
+    >
+      <>
+        <EntityTitle
+          text={data?.hgvsg}
+          icon={<LineStyleIcon className={styles.titleIcon} />}
+          loading={loading}
+          tag={<Tag className={styles.variantTag}>Germline</Tag>}
+        />
 
-export default VariantEntity;
+        <EntitySummary
+          id={SectionId.SUMMARY}
+          title={intl.get('global.summary')}
+          header={<SummaryHeader variant={data} />}
+          data={getSummaryItems(data)}
+          loading={loading}
+        />
+
+        <EntityGeneConsequences
+          id={SectionId.CONSEQUENCE}
+          dictionary={getEntityExpandableTableMultiple()}
+          loading={loading}
+          title={intl.get('entities.variant.consequences.consequence')}
+          header={intl.get('entities.variant.consequences.geneConsequences')}
+          columns={getConsequencesProColumn()}
+          genes={data?.genes.hits.edges}
+          consequences={data?.consequences.hits.edges}
+        />
+
+        <EntityTable
+          id={SectionId.FREQUENCIES}
+          columns={getFrequenciesItems()}
+          data={variantStudies}
+          title={intl.get('entities.variant.frequencies.frequency')}
+          header={intl.get('entities.variant.frequencies.frequency')}
+          loading={loading}
+          summaryColumns={getFrequenciesTableSummaryColumns(data, variantStudies)}
+        />
+
+        <EntityPublicCohortTable
+          id="EntityPublicCohortTable"
+          columns={getPublicCohorts()}
+          frequencies={data?.frequencies}
+          locus={data?.locus}
+          header={intl.get('entities.variant.frequencies.publicCohorts')}
+          loading={loading}
+          emptyMessage={intl.get('entities.variant.frequencies.noDataAvailable')}
+        />
+
+        <EntityTable
+          id={SectionId.PATHOGENICITY}
+          loading={loading}
+          title={intl.get('entities.variant.pathogenicity.pathogenicity')}
+          header={
+            <Space size={4}>
+              {intl.get('entities.variant.pathogenicity.clinVar')}
+              {data?.clinvar?.clinvar_id && (
+                <ExternalLink
+                  hasIcon
+                  href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${data?.clinvar.clinvar_id}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {data?.clinvar?.clinvar_id}
+                </ExternalLink>
+              )}
+            </Space>
+          }
+          data={makeClinvarRows(data?.clinvar)}
+          columns={getClinvarColumns()}
+        />
+
+        <EntityTable
+          id="genePhenotype"
+          loading={loading}
+          header={intl.get('entities.variant.genePhenotype')}
+          data={makeGenesOrderedRow(data?.genes)}
+          columns={getGenePhenotypeColumns()}
+        />
+      </>
+    </EntityPageWrapper>
+  );
+}

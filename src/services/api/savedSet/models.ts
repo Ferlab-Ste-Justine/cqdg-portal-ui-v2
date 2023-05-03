@@ -30,4 +30,5 @@ export enum SetType {
   PARTICIPANT = 'Participant',
   FILE = 'File',
   BIOSPECIMEN = 'Biospecimen',
+  VARIANT = 'Variant',
 }

@@ -5,12 +5,15 @@ import { MatchTableItem } from '@ferlab/ui/core/components/UploadIds/types';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { hydrateResults } from '@ferlab/ui/core/graphql/utils';
+import { Descriptions } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
-import { hydrateResults } from 'graphql/models';
-import { IVariantGene } from 'graphql/variants/models';
+import { IGeneEntity } from 'graphql/variants/models';
 
 import { ArrangerApi } from 'services/api/arranger';
+
+import styles from './index.module.scss';
 
 interface OwnProps {
   queryBuilderId: string;
@@ -48,8 +51,29 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
         mappedToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.mappedcol.title'),
       },
     }}
+    popoverProps={{
+      title: intl.get('components.uploadIds.modal.popover.title'),
+      overlayClassName: styles.geneUploadIdsPopover,
+      content: (
+        <Descriptions column={1}>
+          <Descriptions.Item label={intl.get('components.uploadIds.modal.popover.identifiers')}>
+            {intl.get('upload.gene.ids.modal.identifiers')}
+          </Descriptions.Item>
+          <Descriptions.Item
+            label={intl.get('components.uploadIds.modal.popover.separatedBy.title')}
+          >
+            {intl.get('components.uploadIds.modal.popover.separatedBy.values')}
+          </Descriptions.Item>
+          <Descriptions.Item
+            label={intl.get('components.uploadIds.modal.popover.uploadFileFormats')}
+          >
+            {intl.get('components.uploadIds.modal.popover.fileFormats')}
+          </Descriptions.Item>
+        </Descriptions>
+      ),
+    }}
     placeHolder="ex. ENSG00000157764, TP53"
-    fetchMatch={async (ids) => {
+    fetchMatch={async (ids: string[]) => {
       const response = await ArrangerApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
         variables: {
@@ -57,7 +81,7 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
-            newFilters: ['symbol', 'ensembl_gene_id'].map((field) =>
+            newFilters: ['symbol', 'ensembl_gene_id', 'alias'].map((field) =>
               generateValueFilter({
                 field,
                 value: ids,
@@ -68,32 +92,42 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
         },
       });
 
-      const genes: IVariantGene[] = hydrateResults(response.data?.data?.Genes?.hits?.edges || []);
+      const genes: IGeneEntity[] = hydrateResults(response.data?.data?.genes?.hits?.edges || []);
 
-      const matchResults = ids.map((id, index) => {
-        const gene = genes.find((gene) => [gene.symbol, gene.ensembl_gene_id].includes(id));
-        return gene
-          ? {
-              key: index.toString(),
-              submittedId: id,
-              mappedTo: gene.symbol,
-              matchTo: gene.ensembl_gene_id,
-            }
-          : undefined;
+      return genes?.flatMap((gene) => {
+        const matchedIds: string[] = ids.filter((id: string) => {
+          const lowerCaseId = id.toLocaleLowerCase();
+          const lowerCaseAliases = gene.alias.map((alias) => alias.toLocaleLowerCase());
+
+          return (
+            gene.symbol.toLocaleLowerCase() === lowerCaseId ||
+            gene.ensembl_gene_id.toLocaleLowerCase() === lowerCaseId ||
+            lowerCaseAliases.includes(lowerCaseId)
+          );
+        });
+
+        return matchedIds.map((id, index) => ({
+          key: `${gene.omim_gene_id}:${index}`,
+          submittedId: id,
+          mappedTo: gene.symbol,
+          matchTo: gene.ensembl_gene_id,
+        }));
       });
-
-      return matchResults.filter((x) => x !== undefined) as MatchTableItem[];
     }}
-    onUpload={(match) =>
-      updateActiveQueryField({
+    onUpload={(matches: MatchTableItem[]) => {
+      const uniqueMatches = matches.filter(
+        (match, index, currentMatch) =>
+          index === currentMatch.findIndex((m) => m.mappedTo === match.mappedTo),
+      );
+
+      return updateActiveQueryField({
         queryBuilderId,
-        field: 'consequences.symbol_id_1',
-        value: match.map((value) => value.mappedTo),
+        field: 'consequences.symbol',
+        value: uniqueMatches.map((match) => match.mappedTo),
         index: INDEXES.VARIANT,
-        overrideValuesName: intl.get('upload.gene.ids.modal.pill.title'),
-        merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
-      })
-    }
+        merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
+      });
+    }}
   />
 );
 

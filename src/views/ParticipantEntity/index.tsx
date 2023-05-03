@@ -41,7 +41,7 @@ const ParticipantEntity = () => {
   }
 
   const links: IAnchorLink[] = [
-    { href: `#${SectionId.SUMMARY}`, title: intl.get('entities.global.summary') },
+    { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
     { href: `#${SectionId.PROFILE}`, title: intl.get('entities.participant.profile') },
     { href: `#${SectionId.FAMILY}`, title: intl.get('entities.participant.family') },
     {
@@ -70,7 +70,7 @@ const ParticipantEntity = () => {
         id={SectionId.SUMMARY}
         loading={loading}
         descriptions={getSummaryDescriptions(data)}
-        header={intl.get('entities.global.summary')}
+        header={intl.get('global.summary')}
         subheader={<SummaryHeader participant={data} />}
       />
       <EntityDescriptions

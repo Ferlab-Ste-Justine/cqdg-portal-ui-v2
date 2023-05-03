@@ -7,6 +7,47 @@ import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
+export const getEntityExpandableTableMultiple = () => ({
+  hideTranscript: intl.get('entities.variant.consequences.hideTranscript'),
+  showTranscript: (count: number) =>
+    intl.get('entities.variant.consequences.showTranscript', { count }),
+  seeLess: intl.get('see.less'),
+  seeMore: intl.get('see.more'),
+  noDataAvailable: intl.get('no.data.available'),
+});
+
+export const getEntityConsequenceDictionary = () => ({
+  consequence: intl.get('entities.variant.consequences.consequence'),
+  impactTag: {
+    modifier: intl.get('entities.variant.consequences.impactTag.modifier'),
+    low: intl.get('entities.variant.consequences.impactTag.low'),
+    moderate: intl.get('entities.variant.consequences.impactTag.moderate'),
+    high: intl.get('entities.variant.consequences.impactTag.high'),
+  },
+  aaColumnTooltip: intl.get('entities.variant.consequences.aaColumnTooltip'),
+  aaColumn: intl.get('entities.variant.consequences.aaColumn'),
+  cdnaChangeColumn: intl.get('entities.variant.consequences.cdnaChangeColumn'),
+  strand: intl.get('entities.variant.consequences.strand'),
+  vep: intl.get('entities.variant.consequences.vep'),
+  predictions: {
+    predictions: intl.get('entities.variant.consequences.predictions.predictions'),
+    sift: intl.get('entities.variant.consequences.predictions.sift'),
+    polyphen2: intl.get('entities.variant.consequences.predictions.polyphen2'),
+    fathmm: intl.get('entities.variant.consequences.predictions.fathmm'),
+    cadd: intl.get('entities.variant.consequences.predictions.cadd'),
+    dann: intl.get('entities.variant.consequences.predictions.dann'),
+    lrt: intl.get('entities.variant.consequences.predictions.lrt'),
+    revel: intl.get('entities.variant.consequences.predictions.revel'),
+  },
+  conservationColumn: intl.get('entities.variant.consequences.conservationColumn'),
+  transcript: intl.get('entities.variant.consequences.transcript'),
+  canonical: intl.get('entities.variant.consequences.canonical'),
+  refSeq: intl.get('entities.variant.consequences.refSeq'),
+  geneConsequence: intl.get('entities.variant.consequences.geneConsequence'),
+  gene: intl.get('entities.variant.gene'),
+  omim: intl.get('entities.variant.consequences.omim'),
+});
+
 export const getProTableDictionary = (): IProTableDictionary => ({
   itemCount: {
     results: intl.get('global.proTable.results'),

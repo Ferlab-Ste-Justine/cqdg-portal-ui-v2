@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
-import { IFilter, IFilterGroup } from '@ferlab/ui/core/components/filters/types';
+import { IFilter, IFilterGroup, TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
 import { updateActiveQueryFilters } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
+import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
-import { ExtendedMapping, ExtendedMappingResults, GqlResults } from 'graphql/models';
-import { getFilterGroup, getFilters } from 'graphql/utils/Filters';
-import isUndefined from 'lodash/isUndefined';
+import { IExtendedMappingResults, IGqlResults } from '@ferlab/ui/core/graphql/types';
+import { getFilters } from 'graphql/utils/Filters';
+import { isUndefined } from 'lodash';
 
 import { getFiltersDictionary } from 'utils/translation';
 
@@ -19,9 +20,10 @@ type OwnProps = {
   queryBuilderId: string;
   filterKey: string;
   defaultOpen?: boolean;
-  extendedMappingResults: ExtendedMappingResults;
+  extendedMappingResults: IExtendedMappingResults;
   filtersOpen?: boolean;
   filterMapper?: TCustomFilterMapper;
+  headerTooltip?: boolean;
 };
 
 const CustomFilterContainer = ({
@@ -33,12 +35,13 @@ const CustomFilterContainer = ({
   defaultOpen,
   extendedMappingResults,
   filterMapper,
+  headerTooltip,
 }: OwnProps) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const [results, setResults] = useState<GqlResults<any>>();
+  const [results, setResults] = useState<IGqlResults<any>>();
   const found = (extendedMappingResults?.data || []).find(
-    (f: ExtendedMapping) => f.field === underscoreToDot(filterKey),
+    (f: TExtendedMapping) => f.field === underscoreToDot(filterKey),
   );
 
   useEffect(() => {
@@ -58,7 +61,8 @@ const CustomFilterContainer = ({
   };
 
   const aggregations = results?.aggregations ? results?.aggregations[filterKey] : {};
-  const filterGroup = getFilterGroup(found, aggregations, [], true);
+  const filterGroup = getFilterGroup(found, aggregations, [], true, headerTooltip);
+
   const filters = results?.aggregations ? getFilters(results?.aggregations, filterKey) : [];
   const selectedFilters = results?.data
     ? getSelectedFilters({

@@ -1,9 +1,36 @@
-.variantsPageContent {
-    width: 100%;
+@import 'src/style/themes/cqdg/colors';
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+
+  .pageHeaderTitle {
     display: flex;
-    position: relative;
+    margin: 0;
+    font-size: 20px;
+    line-height: 28px;
+    margin-right: 1.2rem;
+  }
+
+  .dataReleaseTag {
+    color: $cyan-7;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    height: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      margin-right: 0.5rem;
+    }
+  }
 }
 
-.variantsTitle {
-    margin-bottom: 0 !important;
+.variantsPageContent {
+  width: 100%;
+  display: flex;
+  position: relative;
 }

@@ -15,19 +15,19 @@ import { INDEXES } from 'graphql/constants';
 import { IFileEntity } from 'graphql/files/models';
 import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
+import { IVariantEntity } from 'graphql/variants/models';
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PlaylistAdd from 'components/Icons/PlaylistAdd';
 import PlaylistRemove from 'components/Icons/PlaylistRemove';
+import AddRemoveSaveSetModal from 'components/uiKit/SetsManagementDropdown/AddRemoveSaveSetModal';
+import styles from 'components/uiKit/SetsManagementDropdown/index.module.scss';
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
 import { numberWithCommas } from 'utils/string';
-
-import AddRemoveSaveSetModal from './AddRemoveSaveSetModal';
-
-import styles from './index.module.scss';
 
 export enum SetActionType {
   RENAME_TAG = 'RENAME_TAG',
@@ -75,28 +75,34 @@ const itemIcon = (type: string) => {
       return <ExperimentOutlined className={styles.icon} />;
     case INDEXES.FILE:
       return <FileTextOutlined className={styles.icon} />;
+    case SetType.VARIANT:
+      return <LineStyleIcon className={styles.icon} />;
     default:
       return <UserOutlined className={styles.icon} />;
   }
 };
 
-const getLabel = (type: string, participantCount: number): string => {
-  if (type === INDEXES.FILE) {
-    return participantCount > 1
-      ? `${participantCount} ${intl.get('screen.dataExploration.filesSelected')}`
-      : `${participantCount} ${intl.get('screen.dataExploration.fileSelected')}`;
+const getLabel = (type: string, count: number): string => {
+  switch (type) {
+    case INDEXES.FILE:
+      return count > 1
+        ? `${count} ${intl.get('screen.dataExploration.filesSelected')}`
+        : `${count} ${intl.get('screen.dataExploration.fileSelected')}`;
+    case INDEXES.PARTICIPANT:
+      return count > 1
+        ? `${count} ${intl.get('screen.dataExploration.participantsSelected')}`
+        : `${count} ${intl.get('screen.dataExploration.participantSelected')}`;
+    case INDEXES.BIOSPECIMEN:
+      return count > 1
+        ? `${count} ${intl.get('screen.dataExploration.biospecimensSelected')}`
+        : `${count} ${intl.get('screen.dataExploration.biospecimenSelected')}`;
+    case INDEXES.VARIANT:
+      return count > 1
+        ? `${count} ${intl.get('screen.dataExploration.variantsSelected')}`
+        : `${count} ${intl.get('screen.dataExploration.variantSelected')}`;
+    default:
+      return '';
   }
-  if (type === INDEXES.PARTICIPANT) {
-    return participantCount > 1
-      ? `${participantCount} ${intl.get('screen.dataExploration.participantsSelected')}`
-      : `${participantCount} ${intl.get('screen.dataExploration.participantSelected')}`;
-  }
-  if (type === INDEXES.BIOSPECIMEN) {
-    return participantCount > 1
-      ? `${participantCount} ${intl.get('screen.dataExploration.biospecimensSelected')}`
-      : `${participantCount} ${intl.get('screen.dataExploration.biospecimenSelected')}`;
-  }
-  return '';
 };
 
 const getTitle = (type: string): string => {
@@ -107,6 +113,9 @@ const getTitle = (type: string): string => {
     return intl.get('screen.dataExploration.saveParticipantsSet');
   }
   if (type === INDEXES.BIOSPECIMEN) {
+    return intl.get('screen.dataExploration.saveBiospecimensSet');
+  }
+  if (type === INDEXES.VARIANT) {
     return intl.get('screen.dataExploration.saveBiospecimensSet');
   }
   return '';
@@ -181,7 +190,9 @@ const getSetCount = (selected: string[], total: number, allSelected: boolean) =>
 };
 
 interface ISetsManagementDropdownProps {
-  results: IQueryResults<IParticipantEntity[] | IFileEntity[] | IBiospecimenEntity[]>;
+  results: IQueryResults<
+    IParticipantEntity[] | IFileEntity[] | IBiospecimenEntity[] | IVariantEntity[]
+  >;
   sqon?: ISqonGroupFilter;
   selectedAllResults: boolean;
   selectedKeys?: string[];

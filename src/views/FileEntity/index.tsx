@@ -50,7 +50,7 @@ const FileEntity = () => {
   }
 
   const links: IAnchorLink[] = [
-    { href: `#${SectionId.SUMMARY}`, title: intl.get('entities.global.summary') },
+    { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
     { href: `#${SectionId.DATA_TYPE}`, title: intl.get('entities.file.data_type') },
     {
       href: `#${SectionId.BIOSPECIMENS}`,
@@ -80,7 +80,7 @@ const FileEntity = () => {
         id={SectionId.SUMMARY}
         loading={loading}
         descriptions={getSummaryDescriptions(data)}
-        header={intl.get('entities.global.summary')}
+        header={intl.get('global.summary')}
         subheader={<SummaryHeader file={data} />}
       />
       <EntityDescriptions

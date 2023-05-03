@@ -9,7 +9,7 @@ import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolde
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
 import { DATA_EXPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
-import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constant';
+import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constants';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';

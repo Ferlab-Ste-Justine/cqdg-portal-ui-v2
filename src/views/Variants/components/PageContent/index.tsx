@@ -1,79 +1,113 @@
 import { ReactElement, useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import { TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
+import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
-import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
+import { SortDirection } from '@ferlab/ui/core/graphql/constants';
+import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
 import { Space, Typography } from 'antd';
-import { INDEXES } from 'graphql/constants';
-import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
-import { useVariants } from 'graphql/variants/actions';
+import copy from 'copy-to-clipboard';
+import { useVariant } from 'graphql/variants/actions';
 import { IVariantResultTree } from 'graphql/variants/models';
-import { GET_VARIANTS_COUNT } from 'graphql/variants/queries';
-import isEmpty from 'lodash/isEmpty';
+import { GET_VARIANT_COUNT } from 'graphql/variants/queries';
 import {
+  DEFAULT_OFFSET,
   DEFAULT_PAGE_INDEX,
+  DEFAULT_PAGE_SIZE,
   DEFAULT_QUERY_CONFIG,
-  VARIANT_FILTER_TAG,
+  DEFAULT_SORT_QUERY,
   VARIANT_REPO_QB_ID,
-} from 'views/Variants/utils/constant';
+} from 'views/Variants/utils/constants';
 
+import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
+import useQBStateWithSavedFilters from 'hooks/useQBStateWithSavedFilters';
 import { ArrangerApi } from 'services/api/arranger';
-import { useSavedFilter } from 'store/savedFilter';
+import { SavedFilterTag } from 'services/api/savedFilter/models';
+import { globalActions } from 'store/global';
 import {
   createSavedFilter,
   deleteSavedFilter,
   setSavedFilterAsDefault,
   updateSavedFilter,
 } from 'store/savedFilter/thunks';
+import { useSavedSet } from 'store/savedSet';
+import { useUser } from 'store/user';
 import { combineExtendedMappings } from 'utils/fieldMapper';
+import { getCurrentUrl } from 'utils/helper';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
-import Variants from './Variants';
+import VariantsTable from './VariantsTable';
 
 import styles from './index.module.scss';
 
-const { Title } = Typography;
-
 type OwnProps = {
-  variantMapping: ExtendedMappingResults;
+  variantMapping: IExtendedMappingResults;
 };
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
-  tag: VARIANT_FILTER_TAG,
+  tag: SavedFilterTag.VariantsExplorationPage,
 });
 
 const PageContent = ({ variantMapping }: OwnProps) => {
   const dispatch = useDispatch();
-  const { queryList, activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
-  const { savedFilters, defaultFilter } = useSavedFilter(VARIANT_FILTER_TAG);
-
+  const { userInfo } = useUser();
+  const { savedSets } = useSavedSet();
+  const { queryList, activeQuery, selectedSavedFilter, savedFilterList } =
+    useQBStateWithSavedFilters(VARIANT_REPO_QB_ID, SavedFilterTag.VariantsExplorationPage);
+  const [queryConfig, setQueryConfig] = useState({
+    ...DEFAULT_QUERY_CONFIG,
+    size: userInfo?.config.variants?.tables?.variants?.viewPerQuery || DEFAULT_PAGE_SIZE,
+  });
   const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement | undefined>(
     undefined,
   );
+  const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
 
-  const [variantQueryConfig, setVariantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
   const variantResolvedSqon = resolveSyntheticSqon(queryList, activeQuery);
 
-  const variantResults = useVariants({
-    first: variantQueryConfig.size,
-    offset: variantQueryConfig.size * (variantQueryConfig.pageIndex - 1),
-    sqon: variantResolvedSqon,
-    sort: isEmpty(variantQueryConfig.sort)
-      ? [{ field: 'variant_class', order: 'asc' }]
-      : variantQueryConfig.sort,
-  });
+  const results = useVariant(
+    {
+      first: queryConfig.size,
+      offset: DEFAULT_OFFSET,
+      searchAfter: queryConfig.searchAfter,
+      sqon: variantResolvedSqon,
+      sort: tieBreaker({
+        sort: queryConfig.sort,
+        defaultSort: DEFAULT_SORT_QUERY,
+        field: 'locus',
+        order: queryConfig.operations?.previous ? SortDirection.Desc : SortDirection.Asc,
+      }),
+    },
+    queryConfig.operations,
+  );
 
   useEffect(() => {
-    setVariantQueryConfig({
-      ...variantQueryConfig,
-      pageIndex: DEFAULT_PAGE_INDEX,
+    if (queryConfig.firstPageFlag !== undefined || queryConfig.searchAfter === undefined) {
+      return;
+    }
+
+    setQueryConfig({
+      ...queryConfig,
+      firstPageFlag: queryConfig.searchAfter,
     });
+  }, [queryConfig]);
+
+  useEffect(() => {
+    resetSearchAfterQueryConfig(
+      {
+        ...DEFAULT_QUERY_CONFIG,
+        size: userInfo?.config.variants?.tables?.variants?.viewPerQuery || DEFAULT_PAGE_SIZE,
+      },
+      setQueryConfig,
+    );
+    setPageIndex(DEFAULT_PAGE_INDEX);
     // eslint-disable-next-line
   }, [JSON.stringify(activeQuery)]);
 
@@ -82,7 +116,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
     return title
       ? title
       : combineExtendedMappings([variantMapping])?.data?.find(
-          (mapping: ExtendedMapping) => key === mapping.field,
+          (mapping: TExtendedMapping) => key === mapping.field,
         )?.displayName || key;
   };
 
@@ -92,12 +126,24 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   const handleOnDeleteFilter = (id: string) => dispatch(deleteSavedFilter(id));
   const handleOnSaveAsFavorite = (filter: ISavedFilter) =>
     dispatch(setSavedFilterAsDefault(addTagToFilter(filter)));
+  const handleOnShareFilter = (filter: ISavedFilter) => {
+    copy(`${getCurrentUrl()}?${SHARED_FILTER_ID_QUERY_PARAM_KEY}=${filter.id}`);
+    dispatch(
+      globalActions.displayMessage({
+        content: 'Copied share url',
+        type: 'success',
+      }),
+    );
+  };
 
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
-      <Title level={4} className={styles.variantsTitle}>
-        {intl.get('screen.variants.title')}
-      </Title>
+      <div className={styles.pageHeader}>
+        <Typography.Title className={styles.pageHeaderTitle} level={1}>
+          {intl.get('screen.variants.title')}
+        </Typography.Title>
+      </div>
+
       <QueryBuilder
         id={VARIANT_REPO_QB_ID}
         className="variants-repo__query-builder"
@@ -109,50 +155,61 @@ const PageContent = ({ variantMapping }: OwnProps) => {
             enableEditTitle: true,
             enableDuplicate: true,
             enableFavoriteFilter: false,
+            enableShare: true,
+            enableUndoChanges: true,
           },
-          selectedSavedFilter: defaultFilter,
-          savedFilters: savedFilters,
+          selectedSavedFilter: selectedSavedFilter,
+          savedFilters: savedFilterList,
+          onShareFilter: handleOnShareFilter,
           onUpdateFilter: handleOnUpdateFilter,
           onSaveFilter: handleOnSaveFilter,
           onDeleteFilter: handleOnDeleteFilter,
           onSetAsFavorite: handleOnSaveAsFavorite,
         }}
-        enableCombine
-        enableShowHideLabels
-        IconTotal={<LineStyleIcon width={18} />}
-        currentQuery={isEmptySqon(activeQuery) ? {} : activeQuery}
-        total={variantResults.total}
-        dictionary={getQueryBuilderDictionary(facetTransResolver)}
-        getResolvedQueryForCount={(sqon) => resolveSyntheticSqon(queryList, sqon)}
-        fetchQueryCount={async (sqon) => {
-          const { data } = await ArrangerApi.graphqlRequest<{ data: IVariantResultTree }>({
-            query: GET_VARIANTS_COUNT.loc?.source.body,
-            variables: {
-              sqon: resolveSyntheticSqon(queryList, sqon),
-            },
-          });
-          return data?.data?.Variant.hits.total ?? 0;
-        }}
         facetFilterConfig={{
           enable: true,
           onFacetClick: (filter) => {
+            const index = filter.content.index!;
+            const field = filter.content.field;
+
             setSelectedFilterContent(
               <GenericFilters
                 queryBuilderId={VARIANT_REPO_QB_ID}
-                index={INDEXES.VARIANT}
-                field={dotToUnderscore(filter.content.field)}
+                index={index}
+                field={dotToUnderscore(field)}
                 sqon={variantResolvedSqon}
                 extendedMappingResults={variantMapping}
               />,
             );
           },
-          selectedFilterContent,
+          selectedFilterContent: selectedFilterContent,
+          blacklistedFacets: ['consequences.symbol', 'consequences.symbol_id_1', 'locus'],
+        }}
+        enableCombine
+        enableShowHideLabels
+        IconTotal={<LineStyleIcon width={18} height={18} />}
+        currentQuery={isEmptySqon(activeQuery) ? {} : activeQuery}
+        total={results.total}
+        dictionary={getQueryBuilderDictionary(facetTransResolver, savedSets)}
+        getResolvedQueryForCount={(sqon) => resolveSyntheticSqon(queryList, sqon)}
+        fetchQueryCount={async (sqon) => {
+          const { data } = await ArrangerApi.graphqlRequest<{ data: IVariantResultTree }>({
+            query: GET_VARIANT_COUNT.loc?.source.body,
+            variables: {
+              sqon: resolveSyntheticSqon(queryList, sqon),
+            },
+          });
+
+          return data?.data?.Variant.hits.total ?? 0;
         }}
       />
-      <Variants
-        results={variantResults}
-        setQueryConfig={setVariantQueryConfig}
-        queryConfig={variantQueryConfig}
+      <VariantsTable
+        pageIndex={pageIndex}
+        sqon={variantResolvedSqon}
+        setPageIndex={setPageIndex}
+        results={results}
+        setQueryConfig={setQueryConfig}
+        queryConfig={queryConfig}
       />
     </Space>
   );

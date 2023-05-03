@@ -5,10 +5,10 @@ import { WarningFilled } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Form, Input, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 
 import { MAX_TITLE_LENGTH } from 'common/constants';
 import filtersToName from 'common/sqonToName';
+import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';

@@ -10,12 +10,12 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
-import { SetActionType } from 'views/DataExploration/components/SetsManagementDropdown';
 import {
   DATA_EXPLORATION_FILTER_TAG,
   DATA_EXPLORATION_QB_ID,
 } from 'views/DataExploration/utils/constant';
 
+import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput } from 'services/api/savedSet/models';
 import { deleteSavedSet } from 'store/savedSet/thunks';
 import { getIdFieldByType } from 'utils/fieldMapper';
