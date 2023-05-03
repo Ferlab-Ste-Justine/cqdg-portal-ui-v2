@@ -39,7 +39,7 @@ enum SectionId {
   PATHOGENICITY = 'pathogenicity',
 }
 
-export default function VariantEntity() {
+const VariantEntity = () => {
   const { locus } = useParams<{ locus: string }>();
 
   const links: IAnchorLink[] = [
@@ -158,4 +158,6 @@ export default function VariantEntity() {
       </>
     </EntityPageWrapper>
   );
-}
+};
+
+export default VariantEntity;

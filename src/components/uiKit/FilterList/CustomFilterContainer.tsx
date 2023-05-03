@@ -7,14 +7,13 @@ import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { IExtendedMappingResults, IGqlResults } from '@ferlab/ui/core/graphql/types';
 import { getFilters } from 'graphql/utils/Filters';
-import { isUndefined } from 'lodash';
 
 import { getFiltersDictionary } from 'utils/translation';
 
 import CustomFilterSelector from './CustomFilterSelector';
 import { TCustomFilterMapper } from '.';
 
-type OwnProps = {
+interface ICustomFilterContainerProps {
   classname: string;
   index: string;
   queryBuilderId: string;
@@ -24,7 +23,7 @@ type OwnProps = {
   filtersOpen?: boolean;
   filterMapper?: TCustomFilterMapper;
   headerTooltip?: boolean;
-};
+}
 
 const CustomFilterContainer = ({
   classname,
@@ -36,7 +35,7 @@ const CustomFilterContainer = ({
   extendedMappingResults,
   filterMapper,
   headerTooltip,
-}: OwnProps) => {
+}: ICustomFilterContainerProps) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [results, setResults] = useState<IGqlResults<any>>();
@@ -45,7 +44,7 @@ const CustomFilterContainer = ({
   );
 
   useEffect(() => {
-    if (!isUndefined(filtersOpen) && isOpen !== filtersOpen) {
+    if (filtersOpen !== undefined && isOpen !== filtersOpen) {
       setIsOpen(filtersOpen);
     }
     // eslint-disable-next-line
