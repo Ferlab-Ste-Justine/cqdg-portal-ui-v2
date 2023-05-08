@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 import '@testing-library/cypress/add-commands';
+import createUUID from './createUUID';
 
 // Add Custom commands here and their types in `./index.d.ts`
 
@@ -53,37 +54,47 @@ Cypress.Commands.add('closePopup', () => {
 });
 
 Cypress.Commands.add('login', () => {
-  ///////////////////////////////////////////
-  ///// C'est shaky, mais ça fonctionne /////
-  ///// À exécuter avec firefox         /////
-  ///// cypress run -b firefox          /////
-  ///// Pas avec npm run cypress:open   /////
-  ///////////////////////////////////////////
   cy.session(['user'], () => {
     cy.visit('/dashboard');
-    cy.get('button[class*="ant-btn-primary"]').click({force: true});
-    cy.get('[id="social-google"]').click({force: true});
 
-    cy.origin('https://accounts.google.com/', () => {
-      cy.wait(2000);
-      cy.get('input[type="email"]').type(Cypress.env('google_Username'));
-      cy.get('button[type="button"]').contains('Suivant').click({force: true});
+    cy.request({
+      url: `https://auth.qa.cqdg.ferlab.bio/auth/realms/CQDG/protocol/openid-connect/auth`,
+      qs: {
+        client_id: 'cqdg-client',
+        redirect_uri: 'https://portalv2.qa.cqdg.ferlab.bio',
+        kc_idp_hint: null,
+        scope: 'openid',
+        state: createUUID(),
+        nonce: createUUID(),
+        response_type: 'code',
+        response_mode: 'fragment',
+      },
+    }).then((response) => {
+      const html: HTMLElement = document.createElement('html');
+      html.innerHTML = response.body;
+
+      const script = html.getElementsByTagName('script')[0] as HTMLScriptElement;
+
+      eval(script.textContent ?? '');
+
+      const loginUrl: string = (window as any).kcContext.url.loginAction;
+
+      return cy.request({
+        form: true,
+        method: 'POST',
+        url: loginUrl,
+        followRedirect: false,
+        body: {
+          username: Cypress.env('user_username'),
+          password: Cypress.env('user_password'),
+        },
       });
-
-    cy.origin('https://accounts.google.com/', () => {
-      Cypress.on('uncaught:exception', (err) => !err.message.includes('ResizeObserver loop'));
-      cy.wait(5000);
-      cy.get('input[type="password"]').type(Cypress.env('google_Password'), {log: false});
-      cy.get('button[type="button"]').contains('Suivant').click({force: true});
     });
 
     cy.wait(2000);
-    cy.visit('/variants/');
 
-    cy.wait(2000);
-    cy.get('button[class*="ant-btn-primary"]').click({force: true});
-    cy.get('[id="social-google"]').click({force: true});
- });
+    cy.visit('/dashboard');
+  });
 });
 
 Cypress.Commands.add('logout', () => {

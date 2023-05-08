@@ -30,8 +30,8 @@ module.exports = (on: Cypress.PluginEvents, config: Cypress.ConfigOptions) => {
     config.env = {};
   }
 
-  config.env.google_Username = process.env.CYPRESS_GOOGLE_USERNAME;
-  config.env.google_Password = process.env.CYPRESS_GOOGLE_PASSWORD;
+  config.env.user_username = process.env.CYPRESS_USER_USERNAME;
+  config.env.user_password = process.env.CYPRESS_USER_PASSWORD;
 
   return config;
 };
