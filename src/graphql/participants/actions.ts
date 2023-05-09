@@ -1,21 +1,25 @@
+import { IQueryOperationsConfig, IQueryVariable } from '@ferlab/ui/core/graphql/types';
+import { computeSearchAfter, hydrateResults } from '@ferlab/ui/core/graphql/utils';
 import { INDEXES } from 'graphql/constants';
-import { hydrateResults, IQueryResults } from 'graphql/models';
-import { QueryVariable } from 'graphql/queries';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 
-import { IParticipantEntity, IParticipantResultTree } from './models';
-import { GET_PARTICIPANTS } from './queries';
+import { IParticipantResultTree } from './models';
+import { GET_PARTICIPANTS, GET_PARTICIPANTS_COUNT } from './queries';
 
-export const useParticipants = (variables?: QueryVariable): IQueryResults<IParticipantEntity[]> => {
+export const useParticipants = (
+  variables?: IQueryVariable,
+  operations?: IQueryOperationsConfig,
+) => {
   const { loading, result } = useLazyResultQuery<IParticipantResultTree>(GET_PARTICIPANTS, {
     variables,
   });
 
   return {
     loading,
-    data: hydrateResults(result?.Participant?.hits?.edges || []),
+    data: hydrateResults(result?.Participant?.hits?.edges || [], operations?.previous),
     total: result?.Participant?.hits?.total || 0,
+    searchAfter: computeSearchAfter(result?.Participant?.hits?.edges || [], operations),
   };
 };
 
@@ -55,4 +59,12 @@ export const useParticipant = ({ field, value }: { field: string; value: string 
     loading,
     data,
   };
+};
+
+export const useTotalParticipants = (variables?: IQueryVariable): number => {
+  const { result } = useLazyResultQuery<IParticipantResultTree>(GET_PARTICIPANTS_COUNT, {
+    variables,
+  });
+
+  return result?.Participant?.hits?.total || 0;
 };

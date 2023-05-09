@@ -9,6 +9,7 @@ import createFilter from 'redux-persist-transform-filter';
 
 import FenceConnectionReducer from 'store/fenceConnection';
 import GlobalReducer from 'store/global';
+import RemoteReducer from 'store/remote';
 import ReportReducer from 'store/report';
 import SavedFilterReducer from 'store/savedFilter';
 import SavedSetReducer from 'store/savedSet';
@@ -32,6 +33,7 @@ const rootReducer = combineReducers<RootState>({
   fenceConnection: FenceConnectionReducer,
   savedFilter: SavedFilterReducer,
   savedSet: SavedSetReducer,
+  remote: RemoteReducer,
 });
 
 const store: any = configureStore({

@@ -4,24 +4,31 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LockOutlined, SafetyOutlined, UnlockFilled } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
+import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
   updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
+import { SortDirection } from '@ferlab/ui/core/graphql/constants';
+import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { Tag, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
+import { useDataFiles } from 'graphql/files/actions';
 import { FileAccessType, IFileEntity, ITableFileEntity } from 'graphql/files/models';
-import { IQueryResults } from 'graphql/models';
 import {
   DATA_EXPLORATION_QB_ID,
+  DATA_FILES_SAVED_SETS_FIELD,
+  DEFAULT_FILE_QUERY_SORT,
+  DEFAULT_OFFSET,
+  DEFAULT_PAGE_INDEX,
   DEFAULT_PAGE_SIZE,
+  DEFAULT_QUERY_CONFIG,
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -39,13 +46,6 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
-
-interface OwnProps {
-  results: IQueryResults<IFileEntity[]>;
-  setQueryConfig: TQueryConfigCb;
-  queryConfig: IQueryConfig;
-  sqon?: ISqonGroupFilter;
-}
 
 const getDefaultColumns = (): ProColumnType<any>[] => [
   {
@@ -227,111 +227,194 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
 ];
 
-const DataFilesTab = ({ results, setQueryConfig, queryConfig, sqon }: OwnProps) => {
+interface IDataFilesTabProps {
+  sqon?: ISqonGroupFilter;
+}
+
+const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
   const { activeQuery } = useQueryBuilderState(DATA_EXPLORATION_QB_ID);
   const [selectedAllResults, setSelectedAllResults] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (selectedKeys.length) {
-      setSelectedKeys([]);
-    }
-    // eslint-disable-next-line
-  }, [JSON.stringify(activeQuery)]);
+  const [selectedRows, setSelectedRows] = useState<ITableFileEntity[]>([]);
+  const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
+  const [queryConfig, setQueryConfig] = useState({
+    ...DEFAULT_QUERY_CONFIG,
+    sort: DEFAULT_FILE_QUERY_SORT,
+    size:
+      userInfo?.config?.data_exploration?.tables?.participants?.viewPerQuery || DEFAULT_PAGE_SIZE,
+  });
+  const results = useDataFiles(
+    {
+      first: queryConfig.size,
+      offset: DEFAULT_OFFSET,
+      searchAfter: queryConfig.searchAfter,
+      sqon,
+      sort: tieBreaker({
+        sort: queryConfig.sort,
+        defaultSort: DEFAULT_FILE_QUERY_SORT,
+        field: 'file_id',
+        order: queryConfig.operations?.previous ? SortDirection.Desc : SortDirection.Asc,
+      }),
+    },
+    queryConfig.operations,
+  );
+  const hasTooManyFiles =
+    selectedKeys.length > MAX_ITEMS_QUERY ||
+    (selectedAllResults && results.total > MAX_ITEMS_QUERY);
 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
       ? sqon
-      : generateSelectionSqon(INDEXES.FILE, selectedKeys);
+      : generateQuery({
+          newFilters: [
+            generateValueFilter({
+              field: DATA_FILES_SAVED_SETS_FIELD,
+              index: INDEXES.FILE,
+              value: selectedRows.map((row) => row[DATA_FILES_SAVED_SETS_FIELD]),
+            }),
+          ],
+        });
 
-  const hasTooMuchFiles =
-    selectedKeys.length > MAX_ITEMS_QUERY ||
-    (selectedAllResults && results.total > MAX_ITEMS_QUERY);
+  useEffect(() => {
+    if (selectedKeys.length) {
+      setSelectedKeys([]);
+      setSelectedRows([]);
+    }
+
+    resetSearchAfterQueryConfig(
+      {
+        ...DEFAULT_QUERY_CONFIG,
+        sort: DEFAULT_FILE_QUERY_SORT,
+        size:
+          userInfo?.config?.data_exploration?.tables?.participants?.viewPerQuery ||
+          DEFAULT_PAGE_SIZE,
+      },
+      setQueryConfig,
+    );
+    setPageIndex(DEFAULT_PAGE_INDEX);
+    // eslint-disable-next-line
+  }, [JSON.stringify(activeQuery)]);
+
+  useEffect(() => {
+    if (queryConfig.firstPageFlag !== undefined || queryConfig.searchAfter === undefined) {
+      return;
+    }
+
+    setQueryConfig({
+      ...queryConfig,
+      firstPageFlag: queryConfig.searchAfter,
+    });
+  }, [queryConfig]);
 
   return (
-    <ProTable<ITableFileEntity>
-      tableId="datafiles_table"
-      columns={getDefaultColumns()}
-      initialSelectedKey={selectedKeys}
-      wrapperClassName={styles.dataFilesTabWrapper}
-      loading={results.loading}
-      initialColumnState={userInfo?.config.data_exploration?.tables?.datafiles?.columns}
-      enableRowSelection={true}
-      showSorterTooltip={false}
-      onChange={({ current, pageSize }, _, sorter) =>
-        setQueryConfig({
-          pageIndex: current!,
-          size: pageSize!,
-          sort: formatQuerySortList(sorter),
-        } as IQueryConfig)
-      }
-      headerConfig={{
-        itemCount: {
-          pageIndex: queryConfig.pageIndex,
-          pageSize: queryConfig.size,
-          total: results.total,
-        },
-        enableColumnSort: true,
-        enableTableExport: true,
-        onSelectAllResultsChange: setSelectedAllResults,
-        onSelectedRowsChange: (keys) => {
-          setSelectedKeys(keys);
-        },
-        onTableExportClick: () =>
-          dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.datafiles?.columns,
-              columns: getDefaultColumns(),
-              index: INDEXES.FILE,
-              sqon:
-                selectedAllResults || !selectedKeys.length
-                  ? sqon
-                  : generateSelectionSqon(INDEXES.FILE, selectedKeys),
-            }),
-          ),
-        onColumnSortChange: (newState) =>
-          dispatch(
-            updateUserConfig({
-              data_exploration: { tables: { datafiles: { columns: newState } } },
-            }),
-          ),
-        extra: [
-          <SetsManagementDropdown
-            key="SetsManagementDropdown"
-            results={results}
-            sqon={getCurrentSqon()}
-            selectedAllResults={selectedAllResults}
-            type={SetType.FILE}
-            selectedKeys={selectedKeys}
-          />,
-          <DownloadFileManifestModal
-            key={2}
-            sqon={getCurrentSqon()}
-            isDisabled={!selectedKeys.length && !selectedAllResults}
-            hasTooMuchFiles={hasTooMuchFiles}
-          />,
-          <DownloadRequestAccessModal
-            key={3}
-            sqon={getCurrentSqon()}
-            isDisabled={!selectedKeys.length && !selectedAllResults}
-            hasTooMuchFiles={hasTooMuchFiles}
-          />,
-        ],
-      }}
-      bordered
-      size="small"
-      pagination={{
-        current: queryConfig.pageIndex,
-        pageSize: queryConfig.size,
-        defaultPageSize: DEFAULT_PAGE_SIZE,
-        total: results.total,
-        onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
-      }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.file_id }))}
-      dictionary={getProTableDictionary()}
-    />
+    <>
+      <ProTable<ITableFileEntity>
+        tableId="datafiles_table"
+        columns={getDefaultColumns()}
+        initialSelectedKey={selectedKeys}
+        wrapperClassName={styles.dataFilesTabWrapper}
+        loading={results.loading}
+        initialColumnState={userInfo?.config.data_exploration?.tables?.datafiles?.columns}
+        enableRowSelection={true}
+        showSorterTooltip={false}
+        onChange={(_pagination, _filter, sorter) => {
+          setPageIndex(DEFAULT_PAGE_INDEX);
+          setQueryConfig({
+            pageIndex: DEFAULT_PAGE_INDEX,
+            size: queryConfig.size!,
+            sort: formatQuerySortList(sorter),
+          } as IQueryConfig);
+        }}
+        headerConfig={{
+          itemCount: {
+            pageIndex: pageIndex,
+            pageSize: queryConfig.size,
+            total: results.total,
+          },
+          enableColumnSort: true,
+          enableTableExport: true,
+          onSelectAllResultsChange: setSelectedAllResults,
+          onSelectedRowsChange: (keys, rows) => {
+            setSelectedKeys(keys);
+            setSelectedRows(rows);
+          },
+          onTableExportClick: () =>
+            dispatch(
+              fetchTsvReport({
+                columnStates: userInfo?.config.data_exploration?.tables?.datafiles?.columns,
+                columns: getDefaultColumns(),
+                index: INDEXES.FILE,
+                sqon: getCurrentSqon(),
+              }),
+            ),
+          onColumnSortChange: (newState) =>
+            dispatch(
+              updateUserConfig({
+                data_exploration: {
+                  tables: {
+                    datafiles: {
+                      columns: newState,
+                    },
+                  },
+                },
+              }),
+            ),
+          extra: [
+            <SetsManagementDropdown
+              key="SetsManagementDropdown"
+              results={results}
+              sqon={getCurrentSqon()}
+              selectedAllResults={selectedAllResults}
+              type={SetType.FILE}
+              selectedKeys={selectedKeys}
+            />,
+            <DownloadFileManifestModal
+              key={2}
+              sqon={getCurrentSqon()}
+              isDisabled={!selectedKeys.length && !selectedAllResults}
+              hasTooManyFiles={hasTooManyFiles}
+            />,
+            <DownloadRequestAccessModal
+              key={3}
+              sqon={getCurrentSqon()}
+              isDisabled={!selectedKeys.length && !selectedAllResults}
+              hasTooManyFiles={hasTooManyFiles}
+            />,
+          ],
+        }}
+        bordered
+        size="small"
+        pagination={{
+          current: pageIndex,
+          queryConfig,
+          setQueryConfig,
+          onChange: (page: number) => {
+            scrollToTop(SCROLL_WRAPPER_ID);
+            setPageIndex(page);
+          },
+          searchAfter: results.searchAfter,
+          onViewQueryChange: (viewPerQuery: PaginationViewPerQuery) => {
+            dispatch(
+              updateUserConfig({
+                data_exploration: {
+                  tables: {
+                    datafiles: {
+                      ...userInfo?.config.data_exploration?.tables?.datafiles,
+                      viewPerQuery,
+                    },
+                  },
+                },
+              }),
+            );
+          },
+          defaultViewPerQuery: queryConfig.size,
+        }}
+        dataSource={results.data.map((e, i) => ({ ...e, key: e.file_id + i }))}
+        dictionary={getProTableDictionary()}
+      />
+    </>
   );
 };
 

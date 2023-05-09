@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const GET_PARTICIPANTS = gql`
-  query getParticipants($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort]) {
+  query getParticipants($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort], $searchAfter: JSON) {
     Participant {
-      hits(filters: $sqon, first: $first, offset: $offset, sort: $sort) {
+      hits(filters: $sqon, first: $first, offset: $offset, sort: $sort, searchAfter: $searchAfter) {
         total
         edges {
+          searchAfter
           node {
             id
             participant_id

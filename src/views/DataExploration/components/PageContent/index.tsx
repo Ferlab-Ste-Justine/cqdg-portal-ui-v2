@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -8,38 +8,33 @@ import {
   PieChartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
-import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { IRemoteComponent, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
+import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
 import { Space, Tabs, Typography } from 'antd';
 import copy from 'copy-to-clipboard';
-import { useBiospecimens } from 'graphql/biospecimens/actions';
+import { useTotalBiospecimens } from 'graphql/biospecimens/actions';
 import { INDEXES } from 'graphql/constants';
-import { useDataFiles } from 'graphql/files/actions';
-import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
-import { useParticipants } from 'graphql/participants/actions';
+import { useTotalDataFiles } from 'graphql/files/actions';
+import { useTotalParticipants } from 'graphql/participants/actions';
 import { IParticipantResultTree } from 'graphql/participants/models';
 import { GET_PARTICIPANTS_COUNT } from 'graphql/participants/queries';
-import isEmpty from 'lodash/isEmpty';
-import BiospecimenTab from 'views/DataExploration/components/PageContent/tabs/Biospecimens';
 import DataFilesTabs from 'views/DataExploration/components/PageContent/tabs/DataFiles';
 import ParticipantsTab from 'views/DataExploration/components/PageContent/tabs/Participants';
 import SummaryTab from 'views/DataExploration/components/PageContent/tabs/Summary';
-import {
-  DATA_EXPLORATION_FILTER_TAG,
-  DATA_EXPLORATION_QB_ID,
-  DEFAULT_PAGE_INDEX,
-  DEFAULT_QUERY_CONFIG,
-  TAB_IDS,
-} from 'views/DataExploration/utils/constant';
+import { DATA_EXPLORATION_QB_ID, TAB_IDS } from 'views/DataExploration/utils/constant';
 
 import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import useQBStateWithSavedFilters from 'hooks/useQBStateWithSavedFilters';
 import { ArrangerApi } from 'services/api/arranger';
+import { SavedFilterTag } from 'services/api/savedFilter/models';
 import { globalActions } from 'store/global';
+import { remoteSliceActions } from 'store/remote/slice';
 import {
   createSavedFilter,
   deleteSavedFilter,
@@ -59,13 +54,15 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { numberWithCommas } from 'utils/string';
 import { getQueryBuilderDictionary } from 'utils/translation';
 
+import BiospecimensTab from './tabs/Biospecimens';
+
 import styles from './index.module.scss';
 
 const { Title } = Typography;
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
-  tag: DATA_EXPLORATION_FILTER_TAG,
+  tag: SavedFilterTag.ParticipantsExplorationPage,
 });
 
 const resolveSqonForParticipants = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
@@ -81,10 +78,10 @@ const resolveSqonForStudies = (queryList: ISyntheticSqon[], activeQuery: ISynthe
   mapFilterForStudies(resolveSyntheticSqon(queryList, activeQuery));
 
 interface IPageContentProps {
-  fileMapping: ExtendedMappingResults;
-  participantMapping: ExtendedMappingResults;
-  biospecimenMapping: ExtendedMappingResults;
-  studyMapping: ExtendedMappingResults;
+  fileMapping: IExtendedMappingResults;
+  biospecimenMapping: IExtendedMappingResults;
+  participantMapping: IExtendedMappingResults;
+  studyMapping: IExtendedMappingResults;
   tabId?: string;
 }
 
@@ -99,66 +96,23 @@ const PageContent = ({
   const history = useHistory();
   const { savedSets } = useSavedSet();
   const { queryList, activeQuery, selectedSavedFilter, savedFilterList } =
-    useQBStateWithSavedFilters(DATA_EXPLORATION_QB_ID, DATA_EXPLORATION_FILTER_TAG);
+    useQBStateWithSavedFilters(DATA_EXPLORATION_QB_ID, SavedFilterTag.ParticipantsExplorationPage);
 
   const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement | undefined>(
     undefined,
   );
-
-  const [participantQueryConfig, setParticipantQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
-  const [biospecimenQueryConfig, setBiospecimenQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
-  const [datafilesQueryConfig, setDatafilesQueryConfig] = useState(DEFAULT_QUERY_CONFIG);
 
   const participantResolvedSqon = resolveSqonForParticipants(queryList, activeQuery);
   const biospecimenResolvedSqon = resolveSqonForBiospecimens(queryList, activeQuery);
   const fileResolvedSqon = resolveSqonForFiles(queryList, activeQuery);
   const studyResolvedSqon = resolveSqonForStudies(queryList, activeQuery);
 
-  const participantResults = useParticipants({
-    first: participantQueryConfig.size,
-    offset: participantQueryConfig.size * (participantQueryConfig.pageIndex - 1),
-    sqon: participantResolvedSqon,
-    sort: isEmpty(participantQueryConfig.sort)
-      ? [{ field: 'participant_id', order: 'asc' }]
-      : participantQueryConfig.sort,
-  });
-
-  const biospecimenResults = useBiospecimens({
-    first: biospecimenQueryConfig.size,
-    offset: biospecimenQueryConfig.size * (biospecimenQueryConfig.pageIndex - 1),
-    sqon: biospecimenResolvedSqon,
-    sort: isEmpty(biospecimenQueryConfig.sort)
-      ? [{ field: 'sample_id', order: 'asc' }]
-      : biospecimenQueryConfig.sort,
-  });
-
-  const fileResults = useDataFiles({
-    first: datafilesQueryConfig.size,
-    offset: datafilesQueryConfig.size * (datafilesQueryConfig.pageIndex - 1),
-    sqon: fileResolvedSqon,
-    sort: isEmpty(datafilesQueryConfig.sort)
-      ? [{ field: 'file_id', order: 'asc' }]
-      : datafilesQueryConfig.sort,
-  });
-
-  useEffect(() => {
-    setParticipantQueryConfig({
-      ...participantQueryConfig,
-      pageIndex: DEFAULT_PAGE_INDEX,
-    });
-    setDatafilesQueryConfig({
-      ...datafilesQueryConfig,
-      pageIndex: DEFAULT_PAGE_INDEX,
-    });
-    // eslint-disable-next-line
-  }, [JSON.stringify(activeQuery)]);
-
   const facetTransResolver = (key: string) => {
     const title = intl.get(`facets.${key}`);
     return title
       ? title
-      : combineExtendedMappings([participantMapping, fileMapping])?.data?.find(
-          (mapping: ExtendedMapping) => key === mapping.field,
+      : combineExtendedMappings([participantMapping, fileMapping, biospecimenMapping])?.data?.find(
+          (mapping: TExtendedMapping) => key === mapping.field,
         )?.displayName || key;
   };
 
@@ -210,7 +164,7 @@ const PageContent = ({
 
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
-      <Title level={4} className={styles.dataExploreTitle}>
+      <Title className={styles.title} level={4}>
         {intl.get('screen.dataExploration.title')}
       </Title>
       <QueryBuilder
@@ -252,13 +206,22 @@ const PageContent = ({
             );
           },
           selectedFilterContent: selectedFilterContent,
-          blacklistedFacets: ['participant_id', 'sample_id', 'file_id', 'biospecimen_id'],
+          blacklistedFacets: [
+            'participant_id',
+            'participant_facet_ids.participant_fhir_id_1',
+            'participant_facet_ids.participant_fhir_id_2',
+            'sample_id',
+            'file_id',
+            'file_facet_ids.file_fhir_id_1',
+            'file_facet_ids.file_fhir_id_2',
+            'biospecimen_facet_ids.biospecimen_fhir_id_1',
+            'biospecimen_facet_ids.biospecimen_fhir_id_2',
+          ],
         }}
         enableCombine
         enableShowHideLabels
         IconTotal={<UserOutlined size={18} />}
         currentQuery={isEmptySqon(activeQuery) ? {} : activeQuery}
-        total={participantResults.total}
         dictionary={getQueryBuilderDictionary(facetTransResolver, savedSets)}
         getResolvedQueryForCount={(sqon) => resolveSqonForParticipants(queryList, sqon)}
         fetchQueryCount={async (sqon) => {
@@ -268,7 +231,11 @@ const PageContent = ({
               sqon: resolveSqonForParticipants(queryList, sqon),
             },
           });
+
           return data?.data?.Participant.hits.total ?? 0;
+        }}
+        remoteComponentMapping={(remoteComponent: IRemoteComponent) => {
+          dispatch(remoteSliceActions.openRemoteComponent(remoteComponent));
         }}
       />
       <Tabs
@@ -296,53 +263,40 @@ const PageContent = ({
           tab={
             <span>
               <UserOutlined />
-              {`${intl.get('entities.participant.participants')} (${numberWithCommas(
-                participantResults.total,
-              )})`}
+              {intl.get('screen.dataExploration.tabs.participants.title', {
+                count: numberWithCommas(useTotalParticipants({ sqon: participantResolvedSqon })),
+              })}
             </span>
           }
           key={TAB_IDS.PARTICIPANTS}
         >
-          <ParticipantsTab
-            results={participantResults}
-            setQueryConfig={setParticipantQueryConfig}
-            queryConfig={participantQueryConfig}
-            sqon={participantResolvedSqon}
-          />
+          <ParticipantsTab sqon={participantResolvedSqon} />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
             <span>
               <ExperimentOutlined />
-              {`${intl.get('entities.biospecimen.biospecimens')} (${numberWithCommas(
-                biospecimenResults.total,
-              )})`}
+              {intl.get('screen.dataExploration.tabs.biospecimens.title', {
+                count: numberWithCommas(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
+              })}
             </span>
           }
           key={TAB_IDS.BIOSPECIMENS}
         >
-          <BiospecimenTab
-            results={biospecimenResults}
-            setQueryConfig={setBiospecimenQueryConfig}
-            queryConfig={biospecimenQueryConfig}
-            sqon={biospecimenResolvedSqon}
-          />
+          <BiospecimensTab sqon={biospecimenResolvedSqon} />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
             <span>
               <FileTextOutlined />
-              {`${intl.get('entities.file.datafiles')} (${numberWithCommas(fileResults.total)})`}
+              {intl.get('screen.dataExploration.tabs.datafiles.title', {
+                count: numberWithCommas(useTotalDataFiles({ sqon: fileResolvedSqon })),
+              })}
             </span>
           }
           key={TAB_IDS.DATA_FILES}
         >
-          <DataFilesTabs
-            results={fileResults}
-            setQueryConfig={setDatafilesQueryConfig}
-            queryConfig={datafilesQueryConfig}
-            sqon={fileResolvedSqon}
-          />
+          <DataFilesTabs sqon={fileResolvedSqon} />
         </Tabs.TabPane>
       </Tabs>
     </Space>

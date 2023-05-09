@@ -19,14 +19,14 @@ interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   type?: 'default' | 'primary';
   isDisabled?: boolean;
-  hasTooMuchFiles?: boolean;
+  hasTooManyFiles?: boolean;
 }
 
 const DownloadRequestAccessModal = ({
   sqon,
   type = 'default',
   isDisabled,
-  hasTooMuchFiles,
+  hasTooManyFiles,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ const DownloadRequestAccessModal = ({
         visible={isModalVisible}
         title={intl.get('api.report.requestAccess.title')}
         okText={intl.get('api.report.requestAccess.okText')}
-        okButtonProps={{ disabled: hasTooMuchFiles }}
+        okButtonProps={{ disabled: hasTooManyFiles }}
         cancelText={intl.get('api.report.requestAccess.cancel')}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => {
@@ -80,8 +80,8 @@ const DownloadRequestAccessModal = ({
         <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
           {intl.get('api.report.requestAccess.textCheckbox')}
         </Checkbox>
-        {hasTooMuchFiles && <TooMuchFilesAlert />}
-        {!hasTooMuchFiles && isModalVisible && <FilesTable sqon={sqon} />}
+        {hasTooManyFiles && <TooMuchFilesAlert />}
+        {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
     </>
   );

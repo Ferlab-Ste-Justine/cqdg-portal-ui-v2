@@ -4,26 +4,33 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
+import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
   updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
+import { SortDirection } from '@ferlab/ui/core/graphql/constants';
+import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { Typography } from 'antd';
+import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
-import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import {
+  BIOSPECIMENS_SAVED_SETS_FIELD,
   DATA_EXPLORATION_QB_ID,
+  DEFAULT_BIOSPECIMEN_QUERY_SORT,
+  DEFAULT_OFFSET,
+  DEFAULT_PAGE_INDEX,
   DEFAULT_PAGE_SIZE,
+  DEFAULT_QUERY_CONFIG,
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -179,30 +186,83 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
 ];
 
 interface IBiospecimenTabProps {
-  results: IQueryResults<IBiospecimenEntity[]>;
-  setQueryConfig: TQueryConfigCb;
-  queryConfig: IQueryConfig;
   sqon?: ISqonGroupFilter;
 }
 
-const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospecimenTabProps) => {
+const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
   const dispatch = useDispatch();
+  const { userInfo } = useUser();
   const { activeQuery } = useQueryBuilderState(DATA_EXPLORATION_QB_ID);
   const [selectedAllResults, setSelectedAllResults] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const { userInfo } = useUser();
-
-  useEffect(() => {
-    if (selectedKeys.length) {
-      setSelectedKeys([]);
-    }
-    // eslint-disable-next-line
-  }, [JSON.stringify(activeQuery)]);
+  const [selectedRows, setSelectedRows] = useState<IBiospecimenEntity[]>([]);
+  const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
+  const [queryConfig, setQueryConfig] = useState({
+    ...DEFAULT_QUERY_CONFIG,
+    sort: DEFAULT_BIOSPECIMEN_QUERY_SORT,
+    size:
+      userInfo?.config?.data_exploration?.tables?.biospecimens?.viewPerQuery || DEFAULT_PAGE_SIZE,
+  });
+  const results = useBiospecimens(
+    {
+      first: queryConfig.size,
+      offset: DEFAULT_OFFSET,
+      searchAfter: queryConfig.searchAfter,
+      sqon,
+      sort: tieBreaker({
+        sort: queryConfig.sort,
+        defaultSort: DEFAULT_BIOSPECIMEN_QUERY_SORT,
+        field: 'sample_id',
+        order: queryConfig.operations?.previous ? SortDirection.Desc : SortDirection.Asc,
+      }),
+    },
+    queryConfig.operations,
+  );
 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
       ? sqon
-      : generateSelectionSqon(INDEXES.BIOSPECIMEN, selectedKeys);
+      : generateQuery({
+          newFilters: [
+            generateValueFilter({
+              field: BIOSPECIMENS_SAVED_SETS_FIELD,
+              index: INDEXES.BIOSPECIMEN,
+              value: selectedRows.map((row) => row[BIOSPECIMENS_SAVED_SETS_FIELD]),
+            }),
+          ],
+        });
+
+  useEffect(() => {
+    if (selectedKeys.length) {
+      setSelectedKeys([]);
+      setSelectedRows([]);
+    }
+
+    resetSearchAfterQueryConfig(
+      {
+        ...DEFAULT_QUERY_CONFIG,
+        sort: DEFAULT_BIOSPECIMEN_QUERY_SORT,
+        size:
+          userInfo?.config?.data_exploration?.tables?.biospecimens?.viewPerQuery ||
+          DEFAULT_PAGE_SIZE,
+      },
+      setQueryConfig,
+    );
+    setPageIndex(DEFAULT_PAGE_INDEX);
+
+    // eslint-disable-next-line
+  }, [JSON.stringify(activeQuery)]);
+
+  useEffect(() => {
+    if (queryConfig.firstPageFlag !== undefined || queryConfig.searchAfter === undefined) {
+      return;
+    }
+
+    setQueryConfig({
+      ...queryConfig,
+      firstPageFlag: queryConfig.searchAfter,
+    });
+  }, [queryConfig]);
 
   return (
     <ProTable
@@ -214,30 +274,27 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
       enableRowSelection={true}
       showSorterTooltip={false}
       initialSelectedKey={selectedKeys}
-      onChange={({ current, pageSize }, _, sorter) =>
+      onChange={(_pagination, _filter, sorter) => {
+        setPageIndex(DEFAULT_PAGE_INDEX);
         setQueryConfig({
-          pageIndex: current!,
-          size: pageSize!,
+          pageIndex: DEFAULT_PAGE_INDEX,
+          size: queryConfig.size!,
           sort: formatQuerySortList(sorter),
-        } as IQueryConfig)
-      }
+        } as IQueryConfig);
+      }}
       headerConfig={{
         itemCount: {
-          pageIndex: queryConfig.pageIndex,
+          pageIndex: pageIndex,
           pageSize: queryConfig.size,
           total: results.total,
         },
         enableColumnSort: true,
         enableTableExport: true,
-        onTableExportClick: () =>
-          dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
-              columns: getDefaultColumns(),
-              index: INDEXES.BIOSPECIMEN,
-              sqon: getCurrentSqon(),
-            }),
-          ),
+        onSelectAllResultsChange: setSelectedAllResults,
+        onSelectedRowsChange: (keys, rows) => {
+          setSelectedKeys(keys);
+          setSelectedRows(rows);
+        },
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
@@ -250,8 +307,15 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
               },
             }),
           ),
-        onSelectAllResultsChange: setSelectedAllResults,
-        onSelectedRowsChange: (keys) => setSelectedKeys(keys),
+        onTableExportClick: () =>
+          dispatch(
+            fetchTsvReport({
+              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
+              columns: getDefaultColumns(),
+              index: INDEXES.BIOSPECIMEN,
+              sqon: getCurrentSqon(),
+            }),
+          ),
         extra: [
           <SetsManagementDropdown
             key={1}
@@ -267,13 +331,31 @@ const BiospecimenTab = ({ results, setQueryConfig, queryConfig, sqon }: IBiospec
       bordered
       size="small"
       pagination={{
-        current: queryConfig.pageIndex,
-        pageSize: queryConfig.size,
-        defaultPageSize: DEFAULT_PAGE_SIZE,
-        total: results.total,
-        onChange: () => scrollToTop(SCROLL_WRAPPER_ID),
+        current: pageIndex,
+        queryConfig,
+        setQueryConfig,
+        onChange: (page: number) => {
+          scrollToTop(SCROLL_WRAPPER_ID);
+          setPageIndex(page);
+        },
+        searchAfter: results.searchAfter,
+        onViewQueryChange: (viewPerQuery: PaginationViewPerQuery) => {
+          dispatch(
+            updateUserConfig({
+              data_exploration: {
+                tables: {
+                  biospecimens: {
+                    ...userInfo?.config.data_exploration?.tables?.biospecimens,
+                    viewPerQuery,
+                  },
+                },
+              },
+            }),
+          );
+        },
+        defaultViewPerQuery: queryConfig.size,
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.sample_id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
       dictionary={getProTableDictionary()}
     />
   );
