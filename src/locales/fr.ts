@@ -268,7 +268,7 @@ const fr = {
     forms: {
       errors: {
         minCharacters: 'caractères minimum',
-        requiredField: 'Ce champs est requis',
+        requiredField: 'Ce champ est requis',
         enterValidEmail: 'Entrer un email valide',
       },
     },
@@ -447,20 +447,6 @@ const fr = {
       collapseAll: 'Tout fermer',
       expandAll: 'Tout ouvrir',
     },
-    table: {
-      itemCount: {
-        singlePage: '{count, plural, =0 {No result} autre {<strong>#</strong> résultat}}',
-        multiplePages:
-          'Résultat <strong>{from}</strong> - <strong>{to}</strong> de <strong>{total}</strong>',
-      },
-    },
-    suggester: {
-      error: {
-        title: 'Erreur',
-        description: "Une erreur s'est produite lors de la récupération des suggestions",
-      },
-      noResultsFound: 'Aucun résultat trouvé',
-    },
     querybuilder: {
       defaultTitle: 'Filtre sans titre',
       header: {
@@ -629,7 +615,7 @@ const fr = {
     community: {
       title: 'Communauté CQDG',
       resultsMember: 'Membres',
-      noResults: 'Aucun membre',
+      noMember: 'Aucun membre',
       search: {
         filters: 'Filtres',
         inputPlaceholder: 'ex : Watson, Linda Children’s Hospital of Philadelphia',
@@ -639,6 +625,7 @@ const fr = {
         researchDomain: 'Domaine de recherche',
         clearFilters: 'Effacer les filtres',
         barPlaceholder: 'Recherche par nom ou affiliation',
+        noResult: 'Aucun résultat',
         sorter: {
           newest: 'Plus récent',
           oldest: 'Plus ancien',
@@ -662,12 +649,12 @@ const fr = {
         identification: {
           title: 'Identification',
           alert:
-            "Vous êtes authentifié avec <strong>{provider}</strong> utilisant <strong>{email}</strong>. Cet e-mail n'est jamais affiché au public et ne peut pas être modifié.",
+            "Vous êtes authentifié(e) avec <strong>{provider}</strong> utilisant <strong>{email}</strong>. Cet e-mail n'est jamais affiché au public et ne peut pas être modifié.",
           firstName: 'Prénom',
           yourFirstName: 'Votre prénom',
           lastName: 'Nom de famille',
           yourLastName: 'Votre nom de famille',
-          publicEmail: 'Email publique',
+          publicEmail: 'E-mail public',
           publicEmailNotice:
             'Cet e-mail sera affiché sur votre page de profil et accessible à tous les utilisateurs connectés du portail.',
           editPhotoModalTitle: 'Modifier photo',
@@ -682,7 +669,7 @@ const fr = {
         roleAffiliation: {
           title: 'Rôle et affiliation',
           iama: 'Je suis un(e)',
-          checkAllThatApply: 'Cochez toutes les cases',
+          checkAllThatApply: 'Cochez tout ce qui s’applique',
           provideAffiliation: 'Indiquez votre affiliation institutionnelle ou organisationnelle',
           affiliatedWith: 'Je suis affilié(e) à',
           dontHaveAffiliation: "Je n'ai pas d'affiliation institutionnelle",
@@ -705,7 +692,7 @@ const fr = {
         representative_of_commercial_or_for_profit_company:
           "Représentant(e) d'une entreprise commerciale ou à but lucratif",
         bioinformatician_software_developer: 'Bioinformaticien(ne), développeur(e) logiciel',
-        clinician: 'Clinician',
+        clinician: 'Clinicien(ne)',
         employee_in_governmental_agency: 'Employé(e) d’un organisme gouvernemental',
         other: 'Autre',
       },

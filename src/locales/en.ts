@@ -283,7 +283,7 @@ const en = {
     },
     proTable: {
       results: 'Results',
-      noResults: 'No Results',
+      noResult: 'No Result',
       of: 'of',
       selected: 'item selected',
       selectedPlural: 'items selected',
@@ -468,20 +468,6 @@ const en = {
       collapseAll: 'Collapse all',
       expandAll: 'Expand all',
     },
-    table: {
-      itemCount: {
-        singlePage: '{count, plural, =0 {No result} other {<strong>#</strong> results}}',
-        multiplePages:
-          'Results <strong>{from}</strong> - <strong>{to}</strong> of <strong>{total}</strong>',
-      },
-    },
-    suggester: {
-      error: {
-        title: 'Error',
-        description: 'An error occurred while fetching suggestions',
-      },
-      noResultsFound: 'No results found',
-    },
     querybuilder: {
       defaultTitle: 'Untitled Filter',
       header: {
@@ -647,7 +633,7 @@ const en = {
     community: {
       title: 'CQDG Community',
       resultsMember: 'Members',
-      noResults: 'No members',
+      noMember: 'No member',
       search: {
         filters: 'Filters',
         inputPlaceholder: 'e.g. Watson, Linda Children’s Hospital of Philadelphia',
@@ -655,8 +641,9 @@ const en = {
         role: 'Role',
         dataUse: 'Data use',
         researchDomain: 'Research Domain',
-        clearFilters: 'Clear Filters',
+        clearFilters: 'Clear filters',
         barPlaceholder: 'Search by name or affiliation',
+        noResult: 'No result',
         sorter: {
           newest: 'Newest first',
           oldest: 'Oldest first',
@@ -685,7 +672,7 @@ const en = {
           yourFirstName: 'Your First Name',
           lastName: 'Last Name',
           yourLastName: 'Your Last Name',
-          publicEmail: 'Public Email',
+          publicEmail: 'E-mail Public',
           publicEmailNotice:
             'This email will be displayed on your profile page and accessible to all logged-in users of the portal.',
           editPhotoModalTitle: 'Edit photo',
