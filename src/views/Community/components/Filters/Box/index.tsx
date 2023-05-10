@@ -86,6 +86,8 @@ const FiltersBox = ({
                 setRoleFilter((prev) => prev.filter((val) => val !== value))
               }
               options={roleOptionsSorted}
+              optionFilterProp="label"
+              notFoundContent={intl.get('screen.community.search.noResult')}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}
@@ -114,6 +116,8 @@ const FiltersBox = ({
                 setResearchDomainFilter((prev) => prev.filter((val) => val !== value))
               }
               options={researchDomainOptionsSorted}
+              optionFilterProp="label"
+              notFoundContent={intl.get('screen.community.search.noResult')}
               tagRender={({ onClose, label }) => (
                 <Tag
                   className={styles.filterTag}

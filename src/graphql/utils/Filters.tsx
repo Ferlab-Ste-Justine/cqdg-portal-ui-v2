@@ -1,16 +1,12 @@
 import intl from 'react-intl-universal';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import FilterSelector from '@ferlab/ui/core/components/filters/FilterSelector';
-import { IFilter, IFilterGroup } from '@ferlab/ui/core/components/filters/types';
+import { IFilter, TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
 import { updateActiveQueryFilters } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import {
-  keyEnhance,
-  keyEnhanceBooleanOnly,
-  underscoreToDot,
-} from '@ferlab/ui/core/data/arranger/formatting';
-import { getFilterType } from '@ferlab/ui/core/data/filters/utils';
+import { keyEnhance, underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
+import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
-import { Aggregations, ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
+import { IExtendedMappingResults, TAggregations } from '@ferlab/ui/core/graphql/types';
 
 import { getFiltersDictionary } from 'utils/translation';
 
@@ -34,7 +30,6 @@ export interface TermAgg {
 export type Aggs = TermAggs | RangeAggs;
 
 const isTermAgg = (obj: TermAggs) => !!obj.buckets;
-const isRangeAgg = (obj: RangeAggs) => !!obj.stats;
 
 export const generateFilters = ({
   queryBuilderId,
@@ -48,8 +43,8 @@ export const generateFilters = ({
   index,
 }: {
   queryBuilderId: string;
-  aggregations: Aggregations;
-  extendedMapping: ExtendedMappingResults;
+  aggregations: TAggregations;
+  extendedMapping: IExtendedMappingResults;
   className: string;
   filtersOpen: boolean;
   filterFooter: boolean;
@@ -58,10 +53,8 @@ export const generateFilters = ({
   index?: string;
 }) =>
   Object.keys(aggregations || []).map((key) => {
-    if (key === '__typename') return null;
-
     const found = (extendedMapping?.data || []).find(
-      (f: ExtendedMapping) => f.field === underscoreToDot(key),
+      (f: TExtendedMapping) => f.field === underscoreToDot(key),
     );
 
     const filterGroup = getFilterGroup(found, aggregations[key], [], filterFooter);
@@ -73,8 +66,6 @@ export const generateFilters = ({
     });
     const FilterComponent = useFilterSelector ? FilterSelector : FilterContainer;
 
-    const searchInputVisible = showSearchInput || key === 'study_code';
-
     return (
       <div className={className} key={`${key}_${filtersOpen}`}>
         <FilterComponent
@@ -85,7 +76,6 @@ export const generateFilters = ({
           filters={filters}
           collapseProps={{
             headerBorderOnly: true,
-            arrowIcon: 'caretFilled',
           }}
           onChange={(fg, f) => {
             updateActiveQueryFilters({
@@ -95,7 +85,7 @@ export const generateFilters = ({
               index,
             });
           }}
-          searchInputVisible={searchInputVisible}
+          searchInputVisible={showSearchInput}
           selectedFilters={selectedFilters}
         />
       </div>
@@ -103,24 +93,22 @@ export const generateFilters = ({
   });
 
 const translateWhenNeeded = (group: string, key: string) =>
-  intl
-    .get(`facets.options.${keyEnhance(key)}`)
-    .defaultMessage(keyEnhanceBooleanOnlyExcept(group, key));
+  intl.get(`facets.options.${group}.${keyEnhance(key)}`).defaultMessage(keyEnhance(key));
 
-const keyEnhanceBooleanOnlyExcept = (field: string, fkey: string) =>
-  ['chromosome'].includes(field) ? fkey : keyEnhanceBooleanOnly(fkey);
-
-export const getFilters = (aggregations: Aggregations | null, key: string): IFilter[] => {
+export const getFilters = (aggregations: TAggregations | null, key: string): IFilter[] => {
   if (!aggregations || !key) return [];
+
   if (isTermAgg(aggregations[key])) {
     return aggregations[key!].buckets
       .map((f: any) => {
-        const translatedKey = translateWhenNeeded(key, f.key);
-        const name = translatedKey ? translatedKey : f.key;
+        const enhanceKey = f.key_as_string ?? f.key;
+        const translatedKey = translateWhenNeeded(key, enhanceKey);
+        const name = translatedKey ? translatedKey : enhanceKey;
+
         return {
           data: {
             count: f.doc_count,
-            key: keyEnhanceBooleanOnlyExcept(key, f.key),
+            key: enhanceKey,
           },
           id: f.key,
           name: transformNameIfNeeded(key, name),
@@ -137,44 +125,4 @@ export const getFilters = (aggregations: Aggregations | null, key: string): IFil
     ];
   }
   return [];
-};
-
-export const getFilterGroup = (
-  extendedMapping: ExtendedMapping | undefined,
-  aggregation: any,
-  rangeTypes: string[],
-  filterFooter: boolean,
-): IFilterGroup => {
-  if (isRangeAgg(aggregation)) {
-    return {
-      field: extendedMapping?.field || '',
-      title: intl
-        .get(`facets.${extendedMapping?.field}`)
-        .defaultMessage(extendedMapping?.displayName || ''),
-      type: getFilterType(extendedMapping?.type || ''),
-      config: {
-        min: aggregation.stats.min,
-        max: aggregation.stats.max,
-        rangeTypes: rangeTypes.map((r) => ({
-          name: r,
-          key: r,
-        })),
-      },
-    };
-  }
-
-  return {
-    field: extendedMapping?.field || '',
-    title: intl
-      .get(`facets.${extendedMapping?.field}`)
-      .defaultMessage(extendedMapping?.displayName || ''),
-    type: getFilterType(extendedMapping?.type || ''),
-    config: {
-      withFooter: filterFooter,
-      facetTranslate: (value: string) => {
-        const name = translateWhenNeeded(extendedMapping?.field!, value);
-        return transformNameIfNeeded(value, name);
-      },
-    },
-  };
 };

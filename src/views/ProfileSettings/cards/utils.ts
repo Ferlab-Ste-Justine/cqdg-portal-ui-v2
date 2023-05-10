@@ -26,10 +26,9 @@ export const sortOptionsLabelsByName = (options: IOption[], optionsName = '') =>
         const aLabel = intl.get(`screen.profileSettings.${optionsName}.${a.value}`);
         const bLabel = intl.get(`screen.profileSettings.${optionsName}.${b.value}`);
         return aLabel < bLabel ? -1 : 1;
-      })
-      .map((option) => ({
-        value: option.value,
-        label: intl.get(`screen.profileSettings.${optionsName}.${option.value}`) || option.label,
-      })),
+      }),
     ...options.filter((option) => option.value === OTHER_KEY),
-  ];
+  ].map((option) => ({
+    value: option.value,
+    label: intl.get(`screen.profileSettings.${optionsName}.${option.value}`) || option.label,
+  }));

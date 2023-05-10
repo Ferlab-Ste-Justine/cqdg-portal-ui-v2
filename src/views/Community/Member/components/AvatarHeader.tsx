@@ -21,7 +21,7 @@ const AvatarHeader = ({ user, isLoading = false }: OwnProps) => (
         src={user?.profile_image_key}
         userName={`${user?.first_name} ${user?.last_name}`}
         size={140}
-        style={{ fontSize: 'xxx-large' }}
+        style={{ fontSize: '80px' }}
       />
     )}
     <Space direction="vertical" size={8} align="center">

@@ -51,7 +51,7 @@ export const getEntityConsequenceDictionary = () => ({
 export const getProTableDictionary = (): IProTableDictionary => ({
   itemCount: {
     results: intl.get('global.proTable.results'),
-    noResults: intl.get('global.proTable.noResults'),
+    noResults: intl.get('global.proTable.noResult'),
     of: intl.get('global.proTable.of'),
     selected: intl.get('global.proTable.selected'),
     selectedPlural: intl.get('global.proTable.selectedPlural'),

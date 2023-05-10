@@ -69,7 +69,7 @@ const ProfileImageUpload = () => {
           src={userInfo?.profile_image_key}
           userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
           size={120}
-          style={{ fontSize: 'xxx-large' }}
+          style={{ fontSize: '70px' }}
         />
         {uploadImageEnable && (
           <ImgCrop

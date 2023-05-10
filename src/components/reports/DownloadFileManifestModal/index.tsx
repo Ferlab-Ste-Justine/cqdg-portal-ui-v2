@@ -17,14 +17,14 @@ interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   type?: 'default' | 'primary';
   isDisabled?: boolean;
-  hasTooMuchFiles?: boolean;
+  hasTooManyFiles?: boolean;
 }
 
 const DownloadFileManifestModal = ({
   sqon,
   type = 'default',
   isDisabled,
-  hasTooMuchFiles,
+  hasTooManyFiles,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const DownloadFileManifestModal = ({
         visible={isModalVisible}
         title={intl.get('api.report.fileManifest.title')}
         okText={intl.get('api.report.fileManifest.okText')}
-        okButtonProps={{ disabled: hasTooMuchFiles }}
+        okButtonProps={{ disabled: hasTooManyFiles }}
         cancelText={intl.get('api.report.fileManifest.cancel')}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => {
@@ -67,8 +67,8 @@ const DownloadFileManifestModal = ({
         <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
           {intl.get('api.report.fileManifest.textCheckbox')}
         </Checkbox>
-        {hasTooMuchFiles && <TooMuchFilesAlert />}
-        {!hasTooMuchFiles && isModalVisible && <FilesTable sqon={sqon} />}
+        {hasTooManyFiles && <TooMuchFilesAlert />}
+        {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
     </>
   );

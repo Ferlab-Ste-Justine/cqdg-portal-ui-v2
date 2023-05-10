@@ -96,7 +96,7 @@ export default class OntologyTree {
   }): TreeNode[] => {
     const nodes: TreeNode[] = [];
     this.phenotypes.forEach((phenotype: IPhenotypeSource) => {
-      if (phenotype.top_hits.parents.includes(source.key)) {
+      if (phenotype.top_hits?.parents.includes(source.key)) {
         const childrenNodes = this.populateNodeChild({
           source: phenotype,
           field,
@@ -123,7 +123,7 @@ export default class OntologyTree {
     workingPhenotypes.forEach((sourcePhenotype) => {
       let phenotype: TreeNode;
       // start from root and then look for each element inhereting from that node
-      if (!sourcePhenotype.top_hits.parents.length || workingPhenotypes.length === 1) {
+      if (!sourcePhenotype.top_hits?.parents.length || workingPhenotypes.length === 1) {
         const children = this.populateNodeChild({
           source: sourcePhenotype,
           field,

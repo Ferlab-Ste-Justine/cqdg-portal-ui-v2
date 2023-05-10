@@ -66,7 +66,7 @@ const CommunityPage = () => {
           dictionary={{
             itemCount: {
               results: intl.get('screen.community.resultsMember'),
-              noResults: intl.get('screen.community.noResults'),
+              noResults: intl.get('screen.community.noMember'),
               clear: '',
               of: '',
               selectAllResults: '',
@@ -74,7 +74,7 @@ const CommunityPage = () => {
               selectedPlural: '',
             },
           }}
-        ></TableHeader>
+        />
         <List
           grid={{
             gutter: 24,
@@ -99,6 +99,7 @@ const CommunityPage = () => {
             showSizeChanger: false,
           }}
           loading={isLoading}
+          locale={{ emptyText: ' ' }}
           renderItem={(item) => (
             <List.Item className={styles.memberListItem}>
               <MemberCard user={item} match={match} />
