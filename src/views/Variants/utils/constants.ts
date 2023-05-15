@@ -16,7 +16,7 @@ export const VARIANT_FILTER_TAG = SavedFilterTag.VariantsExplorationPage;
 export const DEFAULT_OFFSET = 0;
 export const DEFAULT_PAGE_INDEX = 1;
 
-export const DEFAULT_PAGE_SIZE = PaginationViewPerQuery.Twenty;
+export const DEFAULT_PAGE_SIZE = PaginationViewPerQuery.OneHundred;
 
 export const DEFAULT_SORT_QUERY = [
   { field: 'max_impact_score', order: SortDirection.Desc },

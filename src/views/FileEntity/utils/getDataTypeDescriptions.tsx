@@ -6,7 +6,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
 const getDataTypeDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.file.data_category'),
+    label: intl.get('entities.file.category'),
     value: file?.data_category || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

@@ -8,7 +8,7 @@ import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { IExtendedMappingResults, TAggregations } from '@ferlab/ui/core/graphql/types';
 
-import { getFiltersDictionary } from 'utils/translation';
+import { getFacetsDictionary, getFiltersDictionary } from 'utils/translation';
 
 import { transformNameIfNeeded } from './nameTransformer';
 
@@ -41,6 +41,7 @@ export const generateFilters = ({
   showSearchInput = false,
   useFilterSelector = false,
   index,
+  headerTooltip,
 }: {
   queryBuilderId: string;
   aggregations: TAggregations;
@@ -51,13 +52,23 @@ export const generateFilters = ({
   showSearchInput: boolean;
   useFilterSelector: boolean;
   index?: string;
+  headerTooltip?: boolean;
 }) =>
   Object.keys(aggregations || []).map((key) => {
+    if (key === '__typename') return null;
+
     const found = (extendedMapping?.data || []).find(
       (f: TExtendedMapping) => f.field === underscoreToDot(key),
     );
 
-    const filterGroup = getFilterGroup(found, aggregations[key], [], filterFooter);
+    const filterGroup = getFilterGroup(
+      found,
+      aggregations[key],
+      [],
+      filterFooter,
+      headerTooltip,
+      getFacetsDictionary(),
+    );
     const filters = getFilters(aggregations, key);
     const selectedFilters = getSelectedFilters({
       queryBuilderId,
@@ -65,6 +76,7 @@ export const generateFilters = ({
       filterGroup,
     });
     const FilterComponent = useFilterSelector ? FilterSelector : FilterContainer;
+    const searchInputVisible = showSearchInput || key === 'study_code';
 
     return (
       <div className={className} key={`${key}_${filtersOpen}`}>
@@ -76,6 +88,7 @@ export const generateFilters = ({
           filters={filters}
           collapseProps={{
             headerBorderOnly: true,
+            arrowIcon: 'caretFilled',
           }}
           onChange={(fg, f) => {
             updateActiveQueryFilters({
@@ -85,7 +98,7 @@ export const generateFilters = ({
               index,
             });
           }}
-          searchInputVisible={showSearchInput}
+          searchInputVisible={searchInputVisible}
           selectedFilters={selectedFilters}
         />
       </div>

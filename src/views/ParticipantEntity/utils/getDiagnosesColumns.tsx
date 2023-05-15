@@ -71,7 +71,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'diagnoses.diagnosis_icd_display',
     dataIndex: 'diagnosis_icd_display',
-    title: intl.get('entities.participant.diagnosis_ICD'),
+    title: intl.get('entities.participant.diagnosis_icd'),
     render: (diagnosis_ICD_code: string) => {
       if (!diagnosis_ICD_code) return TABLE_EMPTY_PLACE_HOLDER;
       const { code, title } = extractIcdTitleAndCode(diagnosis_ICD_code);

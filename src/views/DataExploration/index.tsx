@@ -14,6 +14,7 @@ import ParticipantSetSearch from 'views/DataExploration/components/Searchs/Parti
 import SampleSearch from 'views/DataExploration/components/Searchs/SampleSearch';
 import SampleSetSearch from 'views/DataExploration/components/Searchs/SampleSetSearch';
 import TreeFacet from 'views/DataExploration/components/TreeFacet';
+import TreeFacetModal from 'views/DataExploration/components/TreeFacet/TreeFacetModal';
 import FileUploadIds from 'views/DataExploration/components/UploadIds/FileUploadIds';
 import ParticipantUploadIds from 'views/DataExploration/components/UploadIds/ParticipantUploadIds';
 import SampleUploadIds from 'views/DataExploration/components/UploadIds/SampleUploadIds';
@@ -25,6 +26,7 @@ import {
 
 import FilterList, { TCustomFilterMapper } from 'components/uiKit/FilterList';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
+import { RemoteComponentList } from 'store/remote/types';
 import {
   mapFilterForBiospecimen,
   mapFilterForFiles,
@@ -55,18 +57,16 @@ const getFilterGroups = (type: FilterTypes) => {
             facets: [
               'study__study_code',
               <TreeFacet
-                type={'hpoTree'}
-                field={'observed_phenotypes'}
-                key={'observed_phenotypes'}
-                titleFormatter={formatHpoTitleAndCode}
-                queryBuilderId={DATA_EXPLORATION_QB_ID}
+                key="observed_phenotypes"
+                field="observed_phenotypes"
+                type={RemoteComponentList.HPOTree}
+                title={intl.get('entities.participant.phenotype_hpo')}
               />,
               <TreeFacet
-                type={'mondoTree'}
-                field={'mondo'}
-                key={'mondo'}
-                titleFormatter={formatMondoTitleAndCode}
-                queryBuilderId={DATA_EXPLORATION_QB_ID}
+                key="mondo"
+                field="mondo"
+                type={RemoteComponentList.MondoTree}
+                title={intl.get('entities.participant.diagnosis_mondo')}
               />,
               'icd_tagged__name',
               'gender',
@@ -180,6 +180,18 @@ const DataExploration = () => {
 
   return (
     <div className={styles.dataExplorationLayout}>
+      <TreeFacetModal
+        type={RemoteComponentList.HPOTree}
+        modalField={'observed_phenotypes'}
+        queryBuilderField={'observed_phenotypes.name'}
+        titleFormatter={formatHpoTitleAndCode}
+      />
+      <TreeFacetModal
+        type={RemoteComponentList.MondoTree}
+        modalField={'mondo'}
+        queryBuilderField={'mondo.name'}
+        titleFormatter={formatMondoTitleAndCode}
+      />
       <SidebarMenu className={styles.sideMenu} menuItems={menuItems} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent

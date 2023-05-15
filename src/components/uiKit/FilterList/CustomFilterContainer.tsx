@@ -8,7 +8,7 @@ import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { IExtendedMappingResults, IGqlResults } from '@ferlab/ui/core/graphql/types';
 import { getFilters } from 'graphql/utils/Filters';
 
-import { getFiltersDictionary } from 'utils/translation';
+import { getFacetsDictionary, getFiltersDictionary } from 'utils/translation';
 
 import CustomFilterSelector from './CustomFilterSelector';
 import { TCustomFilterMapper } from '.';
@@ -60,7 +60,14 @@ const CustomFilterContainer = ({
   };
 
   const aggregations = results?.aggregations ? results?.aggregations[filterKey] : {};
-  const filterGroup = getFilterGroup(found, aggregations, [], true, headerTooltip);
+  const filterGroup = getFilterGroup(
+    found,
+    aggregations,
+    [],
+    true,
+    headerTooltip,
+    getFacetsDictionary(),
+  );
 
   const filters = results?.aggregations ? getFilters(results?.aggregations, filterKey) : [];
   const selectedFilters = results?.data
