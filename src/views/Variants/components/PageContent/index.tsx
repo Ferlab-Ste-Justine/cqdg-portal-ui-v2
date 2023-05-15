@@ -14,6 +14,7 @@ import copy from 'copy-to-clipboard';
 import { useVariant } from 'graphql/variants/actions';
 import { IVariantResultTree } from 'graphql/variants/models';
 import { GET_VARIANT_COUNT } from 'graphql/variants/queries';
+import get from 'lodash/get';
 import {
   DEFAULT_OFFSET,
   DEFAULT_PAGE_INDEX,
@@ -40,7 +41,7 @@ import { useSavedSet } from 'store/savedSet';
 import { useUser } from 'store/user';
 import { combineExtendedMappings } from 'utils/fieldMapper';
 import { getCurrentUrl } from 'utils/helper';
-import { getQueryBuilderDictionary } from 'utils/translation';
+import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translation';
 
 import VariantsTable from './VariantsTable';
 
@@ -112,7 +113,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   }, [JSON.stringify(activeQuery)]);
 
   const facetTransResolver = (key: string) => {
-    const title = intl.get(`facets.${key}`);
+    const title = get(getFacetsDictionary(), key, key);
     return title
       ? title
       : combineExtendedMappings([variantMapping])?.data?.find(
