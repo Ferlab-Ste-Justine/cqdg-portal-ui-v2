@@ -36,6 +36,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
       header={intl.get('entities.biospecimen.biospecimens')}
       columns={getBiospecimensColumns()}
       data={biospecimensData}
+      total={biospecimensData.length}
       initialColumnState={userInfo?.config.participants?.tables?.biospecimens?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{

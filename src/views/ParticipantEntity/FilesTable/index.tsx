@@ -31,6 +31,7 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
       loading={loading}
       title={intl.get('entities.file.datafile')}
       header={intl.get('entities.file.files')}
+      total={files.length}
       tables={[
         {
           columns: getDataTypeColumns(files.length),

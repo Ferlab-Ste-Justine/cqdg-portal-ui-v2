@@ -97,6 +97,7 @@ const FileEntity = () => {
         title={intl.get('entities.participant.participantSample')}
         columns={getBiospecimensColumns()}
         data={dataBiospecimensTable}
+        total={dataBiospecimensTable.length}
         initialColumnState={userInfo?.config.files?.tables?.biospecimens?.columns}
         dictionary={getProTableDictionary()}
         headerConfig={{

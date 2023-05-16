@@ -31,6 +31,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
       header={intl.get('entities.file.analysisFiles')}
       columns={getAnalysisFilesColumns()}
       data={dataAnalysisFilesTable}
+      total={dataAnalysisFilesTable.length}
       initialColumnState={userInfo?.config.files?.tables?.files?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{
