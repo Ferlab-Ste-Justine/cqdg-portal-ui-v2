@@ -225,6 +225,7 @@ const en = {
     other: 'Other',
     delete: 'Delete',
     summary: 'Summary',
+    viewInDataExploration: 'View in Data Exploration',
     search: {
       genes: {
         emptyText: 'No gene found',
