@@ -35,6 +35,7 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
       header={intl.get('entities.participant.phenotypes')}
       columns={getPhenotypesColumns()}
       data={phenotypesData}
+      total={phenotypesData.length}
       initialColumnState={userInfo?.config.participants?.tables?.phenotypes?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{

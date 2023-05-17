@@ -33,6 +33,7 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
       header={intl.get('entities.participant.diagnoses')}
       columns={getDiagnosesColumns()}
       data={diagnosesData}
+      total={diagnosesData.length}
       initialColumnState={userInfo?.config.participants?.tables?.diagnoses?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{
