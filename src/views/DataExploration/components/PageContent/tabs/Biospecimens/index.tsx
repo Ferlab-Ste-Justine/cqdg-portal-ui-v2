@@ -61,18 +61,11 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       biospecimen_id ? (
         <Typography.Link
           onClick={() =>
-            addQuery({
+            updateActiveQueryField({
               queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'biospecimen_id',
-                    value: [biospecimen_id],
-                    index: INDEXES.BIOSPECIMEN,
-                  }),
-                ],
-              }),
-              setAsActive: true,
+              field: 'biospecimen_id',
+              value: [biospecimen_id],
+              index: INDEXES.BIOSPECIMEN,
             })
           }
         >

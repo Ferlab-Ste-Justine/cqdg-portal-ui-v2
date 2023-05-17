@@ -9,7 +9,7 @@ const getFamilyColumns = (): ProColumnType<any>[] => [
   {
     key: 'family_relationships.submitter_participant_id',
     dataIndex: 'submitter_participant_id',
-    title: intl.get('entities.participant.participant_id'),
+    title: intl.get('entities.participant.participant'),
     render: (participant_id: string) => (
       <Link
         to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}

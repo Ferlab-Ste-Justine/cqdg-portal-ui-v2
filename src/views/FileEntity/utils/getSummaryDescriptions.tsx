@@ -12,7 +12,7 @@ import styles from '../index.module.scss';
 
 const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.file.file_id'),
+    label: intl.get('entities.file.identifiant'),
     value: file?.file_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
