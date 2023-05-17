@@ -52,7 +52,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
                 newFilters: [
                   generateValueFilter({
                     field: 'participant_id',
-                    value: [id],
+                    value: participant?.participant_id ? [participant.participant_id] : [],
                     index: INDEXES.PARTICIPANT,
                   }),
                 ],
