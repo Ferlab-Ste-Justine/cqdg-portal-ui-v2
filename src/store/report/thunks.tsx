@@ -92,7 +92,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
       const d = new Date();
       const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
       const dateFormatted = `${d.getFullYear()}-${months[d.getMonth()]}-${d.getDate()}`;
-      const filename = `cqdg-${args.index.toLowerCase()}-table`;
+      const filename = args.fileName || `cqdg-${args.index.toLowerCase()}-table`;
       const formattedFileName = `${filename}-${dateFormatted}.tsv`;
 
       const { data, error } = await ArrangerApi.columnStates({

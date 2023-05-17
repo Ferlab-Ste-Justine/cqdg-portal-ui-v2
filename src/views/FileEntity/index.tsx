@@ -142,6 +142,9 @@ const FileEntity = () => {
                   INDEXES.BIOSPECIMEN,
                   dataBiospecimensTable.map((biospecimen) => biospecimen.sample_id),
                 ),
+                fileName: `cqdg-${INDEXES.BIOSPECIMEN.toLowerCase()}-${
+                  SectionId.BIOSPECIMENS
+                }-table`,
               }),
             ),
           enableColumnSort: true,

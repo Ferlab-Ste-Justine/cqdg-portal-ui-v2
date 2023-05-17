@@ -22,4 +22,5 @@ export type TFetchTSVArgs = {
   columnStates: TColumnStates | undefined;
   columns: ProColumnType[];
   sqon: any;
+  fileName?: string;
 };

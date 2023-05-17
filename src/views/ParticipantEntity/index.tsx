@@ -40,10 +40,16 @@ const ParticipantEntity = () => {
     DATA_FILE = 'data_file',
   }
 
+  const totalFamilyMembers = data?.family_relationships?.hits?.total || 0;
+
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
     { href: `#${SectionId.PROFILE}`, title: intl.get('entities.participant.profile') },
-    { href: `#${SectionId.FAMILY}`, title: intl.get('entities.participant.family') },
+    {
+      href: `#${SectionId.FAMILY}`,
+      title: intl.get('entities.participant.family'),
+      hidden: !data?.family_id || totalFamilyMembers <= 1,
+    },
     {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.file.data_access'),
