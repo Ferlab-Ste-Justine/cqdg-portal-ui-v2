@@ -82,9 +82,9 @@ export class PhenotypeStore {
       .map((p) => (p.key !== ROOT_PHENO ? p : null))
       .filter((p): p is IPhenotypeSource => p !== null)
       .map((p) => {
-        const index = p.top_hits.parents.indexOf(ROOT_PHENO);
+        const index = p.top_hits?.parents.indexOf(ROOT_PHENO);
         if (!index) {
-          p.top_hits.parents.splice(index, 1);
+          p.top_hits?.parents.splice(index, 1);
         }
         return p;
       });

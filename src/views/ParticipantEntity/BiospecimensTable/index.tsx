@@ -52,7 +52,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
                 newFilters: [
                   generateValueFilter({
                     field: 'participant_id',
-                    value: [id],
+                    value: participant?.participant_id ? [participant.participant_id] : [],
                     index: INDEXES.PARTICIPANT,
                   }),
                 ],
@@ -82,6 +82,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
                 INDEXES.BIOSPECIMEN,
                 biospecimensData.map((b) => b.sample_id),
               ),
+              fileName: `cqdg-${INDEXES.BIOSPECIMEN.toLowerCase()}-${id}-table`,
             }),
           ),
         enableColumnSort: true,

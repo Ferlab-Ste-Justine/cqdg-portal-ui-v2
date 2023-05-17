@@ -228,6 +228,10 @@ export const getQueryBuilderDictionary = (
 export const getFacetsDictionary = () => ({
   study_code: intl.get('entities.study.study_code'),
   domain: intl.get('entities.study.domain'),
+  biospecimen_id: intl.get('entities.biospecimen.biospecimen_id'),
+  file_id: intl.get('entities.file.file_id'),
+  participant_id: intl.get('entities.participant.participant_id'),
+  sample_id: intl.get('entities.biospecimen.sample_id'),
   data_access_codes: {
     access_limitations: intl.get('entities.study.data_access_codes.access_limitations'),
     access_requirements: intl.get('entities.study.data_access_codes.access_requirements'),
@@ -245,7 +249,6 @@ export const getFacetsDictionary = () => ({
   controlled_access: 'Access',
   is_harmonized: 'Harmonized Data',
   is_proband: 'Proband',
-  variant_class: 'Variant Type',
   diagnosis: {
     affected_status: 'Clinical Status',
     age_at_event_days: 'Age at Diagnosis',
@@ -280,6 +283,9 @@ export const getFacetsDictionary = () => ({
     source_text: intl.get('entities.participant.diagnosis_source_text'),
     age_at_event: intl.get('entities.participant.age_at_diagnosis_tooltip'),
   },
+  mondo: {
+    name: intl.get('entities.participant.diagnosis_mondo'),
+  },
   sample_type: intl.get('entities.biospecimen.sample_type'),
   biospecimen_tissue_source: intl.get('entities.biospecimen.biospecimen_tissue_source'),
   age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection_tooltip'),
@@ -292,9 +298,11 @@ export const getFacetsDictionary = () => ({
   sequencing_experiment: {
     experimental_strategy: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
   },
+  variant_class: intl.get('entities.variant.variant_class'),
+  variant_external_reference: intl.get('entities.variant.variant_external_reference'),
   consequences: {
-    consequences: 'Consequence',
-    biotype: 'Gene Type',
+    consequences: intl.get('entities.variant.consequences.consequence'),
+    biotype: intl.get('entities.variant.biotype'),
     vep_impact: 'VEP',
     predictions: {
       sift_pred: 'SIFT',
@@ -379,4 +387,11 @@ export const getFacetsDictionary = () => ({
       },
     },
   },
+  chromosome: intl.get('entities.variant.chromosome'),
+  zygosity: intl.get('entities.variant.zygosity'),
+  gene_external_reference: intl.get('entities.variant.variant_external_reference'),
+  gene: {
+    panels: intl.get('entities.variant.panels'),
+  },
+  population: intl.get('entities.study.population'),
 });

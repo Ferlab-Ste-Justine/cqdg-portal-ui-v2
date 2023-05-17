@@ -50,6 +50,7 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
                 INDEXES.PARTICIPANT,
                 phenotypesData.map(() => participant?.participant_id || ''),
               ),
+              fileName: `cqdg-${INDEXES.PARTICIPANT.toLowerCase()}-${id}-table`,
             }),
           ),
         enableColumnSort: true,
