@@ -45,7 +45,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',
-    title: intl.get('entities.biospecimen.biospecimen_id'),
+    title: intl.get('entities.biospecimen.biospecimen'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

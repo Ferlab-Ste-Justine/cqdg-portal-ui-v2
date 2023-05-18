@@ -297,6 +297,7 @@ export const getFacetsDictionary = () => ({
   file_format: intl.get('entities.file.file_format'),
   sequencing_experiment: {
     experimental_strategy: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
+    analysis_id: intl.get('entities.file.sequencing_experiment.analysis_id'),
   },
   variant_class: intl.get('entities.variant.variant_class'),
   variant_external_reference: intl.get('entities.variant.variant_external_reference'),

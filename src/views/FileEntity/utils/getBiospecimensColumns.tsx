@@ -49,7 +49,7 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_id'),
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen'),
     render: (biospecimen_id: string) => biospecimen_id,
   },
   {
