@@ -51,7 +51,7 @@ const SummaryTab = () => {
               <SunburstGraphCard
                 id="2"
                 className={cx(styles.summaryGrapCard, styles.sunburstGraphCard)}
-                field={'observed_phenotype_tagged'}
+                field={'observed_phenotypes'}
               />
             ),
           },
