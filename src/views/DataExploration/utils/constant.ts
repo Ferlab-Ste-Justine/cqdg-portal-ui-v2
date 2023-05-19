@@ -8,7 +8,7 @@ export const BIOSPECIMENS_SAVED_SETS_FIELD = 'sample_id';
 
 export const DEFAULT_OFFSET = 0;
 export const DEFAULT_PAGE_INDEX = 1;
-export const DEFAULT_PAGE_SIZE = PaginationViewPerQuery.Twenty;
+export const DEFAULT_PAGE_SIZE = PaginationViewPerQuery.OneHundred;
 
 export const DATA_EXPLORATION_QB_ID = 'cqdg-data-exploration-repo-key';
 export const DATA_EXPLORATION_FILTER_TAG = 'data-exploration';

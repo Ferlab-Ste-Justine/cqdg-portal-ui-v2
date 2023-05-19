@@ -88,6 +88,7 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
                 INDEXES.PARTICIPANT,
                 familyData.map((p) => p.submitter_participant_id),
               ),
+              fileName: `cqdg-${INDEXES.PARTICIPANT.toLowerCase()}-${id}-table`,
             }),
           ),
       }}

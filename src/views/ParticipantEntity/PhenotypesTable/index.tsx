@@ -35,6 +35,7 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
       header={intl.get('entities.participant.phenotypes')}
       columns={getPhenotypesColumns()}
       data={phenotypesData}
+      total={phenotypesData.length}
       initialColumnState={userInfo?.config.participants?.tables?.phenotypes?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{
@@ -49,6 +50,7 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
                 INDEXES.PARTICIPANT,
                 phenotypesData.map(() => participant?.participant_id || ''),
               ),
+              fileName: `cqdg-${INDEXES.PARTICIPANT.toLowerCase()}-${id}-table`,
             }),
           ),
         enableColumnSort: true,

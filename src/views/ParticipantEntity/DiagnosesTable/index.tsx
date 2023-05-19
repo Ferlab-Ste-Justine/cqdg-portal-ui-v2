@@ -33,6 +33,7 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
       header={intl.get('entities.participant.diagnoses')}
       columns={getDiagnosesColumns()}
       data={diagnosesData}
+      total={diagnosesData.length}
       initialColumnState={userInfo?.config.participants?.tables?.diagnoses?.columns}
       dictionary={getProTableDictionary()}
       headerConfig={{
@@ -47,6 +48,7 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
                 INDEXES.PARTICIPANT,
                 diagnosesData.map(() => participant?.participant_id || ''),
               ),
+              fileName: `cqdg-${INDEXES.PARTICIPANT.toLowerCase()}-${id}-table`,
             }),
           ),
         enableColumnSort: true,

@@ -67,6 +67,12 @@ export const getProTableDictionary = (): IProTableDictionary => ({
       columns: intl.get('global.proTable.columns'),
     },
   },
+  pagination: {
+    first: intl.get('global.proTable.first'),
+    previous: intl.get('global.proTable.previous'),
+    next: intl.get('global.proTable.next'),
+    view: intl.get('global.proTable.view'),
+  },
 });
 
 export const getFiltersDictionary = (): FiltersDict => ({
@@ -217,4 +223,175 @@ export const getQueryBuilderDictionary = (
       description: intl.get('components.querybuilder.actions.clear.description'),
     },
   },
+});
+
+export const getFacetsDictionary = () => ({
+  study_code: intl.get('entities.study.study_code'),
+  domain: intl.get('entities.study.domain'),
+  biospecimen_id: intl.get('entities.biospecimen.biospecimen_id'),
+  file_id: intl.get('entities.file.file_id'),
+  participant_id: intl.get('entities.participant.participant_id'),
+  sample_id: intl.get('entities.biospecimen.sample_id'),
+  data_access_codes: {
+    access_limitations: intl.get('entities.study.data_access_codes.access_limitations'),
+    access_requirements: intl.get('entities.study.data_access_codes.access_requirements'),
+  },
+  study: {
+    study_code: intl.get('entities.study.study_code'),
+    external_id: 'dbGaP Accession Number',
+  },
+  studies: {
+    study_code: intl.get('entities.study.study_code'),
+  },
+  start: 'Position',
+  acl: 'ACL',
+  transmissions: 'Transmission',
+  controlled_access: 'Access',
+  is_harmonized: 'Harmonized Data',
+  is_proband: 'Proband',
+  diagnosis: {
+    affected_status: 'Clinical Status',
+    age_at_event_days: 'Age at Diagnosis',
+    mondo_id_diagnosis: 'Diagnosis (MONDO)',
+    ncit_id_diagnosis: 'Diagnosis (NCIT)',
+    source_text: 'Diagnosis (Source Text)',
+    source_text_tumor_location: 'Tumor Location (Source Text)',
+  },
+  outcomes: {
+    vital_status: intl.get('entities.participant.vital_status'),
+    age_at_event_days: {
+      value: intl.get('entities.participant.age_at_outcome'),
+    },
+  },
+  phenotype: {
+    // age_at_event_days: intl.get('entities.participant.ageAtObservedPhenotype'),
+  },
+  observed_phenotypes: {
+    name: intl.get('entities.participant.phenotype'),
+  },
+  observed_phenotype_tagged: {
+    source_text: intl.get('entities.participant.phenotype_source_text'),
+  },
+  icd_tagged: {
+    name: intl.get('entities.participant.diagnosis_icd'),
+  },
+  gender: intl.get('entities.participant.gender'),
+  age_at_recruitment: intl.get('entities.participant.age_at_recruitment'),
+  ethnicity: intl.get('entities.participant.ethnicity'),
+  mondo_tagged: {
+    name: intl.get('entities.participant.diagnosis_mondo'),
+    source_text: intl.get('entities.participant.diagnosis_source_text'),
+    age_at_event: intl.get('entities.participant.age_at_diagnosis_tooltip'),
+  },
+  mondo: {
+    name: intl.get('entities.participant.diagnosis_mondo'),
+  },
+  sample_type: intl.get('entities.biospecimen.sample_type'),
+  biospecimen_tissue_source: intl.get('entities.biospecimen.biospecimen_tissue_source'),
+  age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection_tooltip'),
+  clinvar: {
+    clin_sig: 'ClinVar',
+  },
+  data_category: intl.get('entities.file.data_category'),
+  data_type: intl.get('entities.file.data_type'),
+  file_format: intl.get('entities.file.file_format'),
+  sequencing_experiment: {
+    experimental_strategy: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
+  },
+  variant_class: intl.get('entities.variant.variant_class'),
+  variant_external_reference: intl.get('entities.variant.variant_external_reference'),
+  consequences: {
+    consequences: intl.get('entities.variant.consequences.consequence'),
+    biotype: intl.get('entities.variant.biotype'),
+    vep_impact: 'VEP',
+    predictions: {
+      sift_pred: 'SIFT',
+      polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
+      fathmm_pred: 'FATHMM',
+      cadd_rankscore: 'CADD',
+      lrt_pred: 'LRT',
+      revel_rankscore: 'REVEL',
+      dann_rankscore: 'DANN',
+    },
+  },
+  genes: {
+    hpo: {
+      hpo_term_label: 'HPO',
+    },
+    orphanet: {
+      panel: 'ORPHANET',
+    },
+    omim: {
+      name: 'OMIM',
+    },
+    ddd: {
+      disease_name: 'DDD',
+    },
+    cosmic: {
+      tumour_types_germline: 'COSMIC',
+    },
+  },
+  frequencies: {
+    internal: {
+      upper_bound_kf: {
+        af: 'KF Allele Frequency',
+      },
+    },
+    gnomad_genomes_2_1: {
+      af: 'gnomAD Genome 2.1',
+    },
+    gnomad_genomes_3_0: {
+      af: 'gnomAD Genome 3.0',
+    },
+    gnomad_genomes_3_1_1: {
+      af: 'gnomAD Genome 3.1',
+    },
+    gnomad_exomes_2_1: {
+      af: 'gnomAD Exome 2.1',
+    },
+    topmed: {
+      af: 'TopMed',
+    },
+    one_thousand_genomes: {
+      af: '1000 Genomes',
+    },
+  },
+  tooltips: {
+    consequences: {
+      vep_impact: 'Ensembl Variant Effect Predictor',
+      predictions: {
+        cadd_rankscore: 'Combined Annotation Dependent Depletion',
+        dann_rankscore: 'Deleterious Annotation of genetic variants using Neural Networks',
+        fathmm_pred: 'Functional Analysis Through Hidden Markov Models',
+        lrt_pred: 'Likelihood Ratio Test',
+        polyphen2_hvar_pred: 'Polymorphism Phenotyping v2 HumVar',
+        revel_rankscore: 'Rare Exome Variant Ensemble Learner',
+        sift_pred: 'Sorting Intolerant From Tolerant',
+      },
+    },
+    genes: {
+      hpo: {
+        hpo_term_label: 'Human Phenotype Ontology',
+      },
+      orphanet: {
+        panel: 'ORPHANET',
+      },
+      omim: {
+        name: 'Online Mendelian Inheritance in Man ',
+      },
+      ddd: {
+        disease_name: 'Deciphering Developmental Disorders',
+      },
+      cosmic: {
+        tumour_types_germline: 'Catalogue Of Somatic Mutations In Cancer',
+      },
+    },
+  },
+  chromosome: intl.get('entities.variant.chromosome'),
+  zygosity: intl.get('entities.variant.zygosity'),
+  gene_external_reference: intl.get('entities.variant.variant_external_reference'),
+  gene: {
+    panels: intl.get('entities.variant.panels'),
+  },
+  population: intl.get('entities.study.population'),
 });

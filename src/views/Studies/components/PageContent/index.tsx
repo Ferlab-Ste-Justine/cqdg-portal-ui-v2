@@ -11,6 +11,7 @@ import { ExtendedMapping, ExtendedMappingResults } from 'graphql/models';
 import { useStudies } from 'graphql/studies/actions';
 import { IStudyResultTree } from 'graphql/studies/models';
 import { GET_STUDIES_COUNT } from 'graphql/studies/queries';
+import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import StudiesTab from 'views/Studies/components/PageContent/Studies';
 import {
@@ -22,7 +23,7 @@ import {
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import { ArrangerApi } from 'services/api/arranger';
 import { combineExtendedMappings } from 'utils/fieldMapper';
-import { getQueryBuilderDictionary } from 'utils/translation';
+import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
@@ -59,7 +60,7 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
   }, [JSON.stringify(activeQuery)]);
 
   const facetTransResolver = (key: string) => {
-    const title = intl.get(`facets.${key}`);
+    const title = get(getFacetsDictionary(), key, key);
     return title
       ? title
       : combineExtendedMappings([studiesMapping])?.data?.find(

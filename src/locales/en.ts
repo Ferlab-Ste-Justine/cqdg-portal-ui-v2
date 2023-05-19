@@ -12,6 +12,12 @@ const en = {
       access_limitations: 'Access Limitations',
       access_requirements: 'Access Requirements',
       access_authority: 'Access Authority',
+      domain: 'Domain',
+      population: 'Population',
+      data_access_codes: {
+        access_limitations: 'Access Limitation',
+        access_requirements: 'Access Requirement',
+      },
     },
     biospecimen: {
       sample_id: 'Sample',
@@ -26,7 +32,7 @@ const en = {
       age_biospecimen_collection_tooltip: 'Age at Biospecimen Collection (days)',
     },
     participant: {
-      participant_id: 'Participant',
+      participant_id: 'Participant ID',
       submitter_participant_id: 'Ext. Participant ID',
       submitter_participant_id_tooltip: 'Submitter Participant ID',
       participant: 'Participant',
@@ -40,7 +46,7 @@ const en = {
       diagnosis: 'Diagnosis',
       diagnoses: 'Diagnoses',
       diagnosis_mondo: 'Diagnosis (MONDO)',
-      diagnosis_ICD: 'Diagnosis (ICD-10)',
+      diagnosis_icd: 'Diagnosis (ICD-10)',
       diagnosis_source_text: 'Diagnosis (Source Text)',
       age_at_diagnosis: 'Age',
       age_at_diagnosis_tooltip: 'Age at Diagnosis (days)',
@@ -48,12 +54,14 @@ const en = {
       age_at_phenotype_tooltip: 'Age at Phenotype (days)',
       phenotype: 'Phenotype',
       phenotypes: 'Phenotypes',
+      phenotype_hpo: 'Phenotype (HPO)',
       family_type: 'Family Type',
       family_position: 'Family Position',
       gender: 'Gender',
       ethnicity: 'Ethnicity',
       age_at_recruitment: 'Age at Recruitment (days)',
       vital_status: 'Vital Status',
+      age_at_outcome: 'Age at Outcome (days)',
       age_of_death: 'Age at Death (days)',
       cause_of_death: 'Cause of Death',
       disease_status: 'Disease Status',
@@ -72,7 +80,8 @@ const en = {
       datafile: 'Data File',
       datafiles: 'Data Files',
       filesAuto: '{count, plural, =0 {File} =1 {File} other {Files}}',
-      file_id: 'ID',
+      Identifiant: 'ID',
+      file_id: 'File ID',
       file_name: 'Name',
       file_format: 'Format',
       file_size: 'Size',
@@ -81,7 +90,8 @@ const en = {
       analysis: 'Analysis',
       type: 'Type',
       data_type: 'Data Type',
-      data_category: 'Category',
+      category: 'Category',
+      data_category: 'Data Category',
       data_access: 'Data Access',
       experimentalProcedure: 'Experimental Procedure',
       analysisProperties: 'Analysis Properties',
@@ -114,8 +124,12 @@ const en = {
       variantAuto: '{count, plural, =0 {Variant} =1 {Variant} other {Variants}}',
       noDataVariant: 'No data available for this variant',
       type: 'Type',
-      variant_class: 'Variant class',
+      variant_class: 'Variant Type',
+      variant_external_reference: 'External Reference',
       variant_id: 'Variant ID',
+      biotype: 'Gene Type',
+      zygosity: 'Zygosity',
+      panels: 'Gene Panels',
       gnomAd: 'GnomAD',
       gnomAdTooltip: 'gnomAD 3.1.1 Allele Frequency',
       gnomadGenome311: 'gnomAD Genome (v3.1.1)',
@@ -216,6 +230,7 @@ const en = {
     other: 'Other',
     delete: 'Delete',
     summary: 'Summary',
+    viewInDataExploration: 'View in Data Exploration',
     search: {
       genes: {
         emptyText: 'No gene found',
@@ -292,6 +307,10 @@ const en = {
       tableExport: 'Export as TSV',
       reset: 'Reset',
       columns: 'Columns',
+      first: 'First',
+      previous: 'Previous',
+      next: 'Next',
+      view: '{value} / view',
     },
     seeLess: 'See less',
     seeMore: 'See more',
@@ -672,7 +691,7 @@ const en = {
           yourFirstName: 'Your First Name',
           lastName: 'Last Name',
           yourLastName: 'Your Last Name',
-          publicEmail: 'E-mail Public',
+          publicEmail: 'Public Email',
           publicEmailNotice:
             'This email will be displayed on your profile page and accessible to all logged-in users of the portal.',
           editPhotoModalTitle: 'Edit photo',
@@ -807,6 +826,7 @@ const en = {
         modal: {
           title: 'Observed Phenotype (HPO) Browser',
           okText: 'Apply',
+          cancelText: 'Cancel',
         },
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
@@ -819,6 +839,7 @@ const en = {
         modal: {
           title: 'Diagnosis (MONDO) Browser',
           okText: 'Apply',
+          cancelText: 'Cancel',
         },
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
@@ -831,6 +852,7 @@ const en = {
         modal: {
           title: 'Diagnosis (ICD-10) Browser',
           okText: 'Apply',
+          cancelText: 'Cancel',
         },
         searchPlaceholder: 'Search for ontology term - min 3 characters',
         emptySelection: 'Select items from the left-hand pane in order to add to your query.',
@@ -887,6 +909,7 @@ const en = {
           ageAtRecruitment: 'Age',
           ageAtRecruitmentTooltip: 'Age at Recruitment (days)',
           ageAtDiagnosis: 'Age at Diagnosis',
+          ageAtObservedPhenotype: 'Age at Observed Phenotype (days)',
           diagnosis: 'Diagnosis (MONDO)',
           phenotype: 'Phenotype (HPO)',
           files: 'Files',
@@ -956,95 +979,6 @@ const en = {
       removeTypeSet: 'Remove from a {type} set',
       set: 'Set',
       chooseSet: 'Choose a set',
-    },
-  },
-  facets: {
-    // Participant
-    participant_id: 'Participant ID',
-    study: {
-      study_code: 'Study Code',
-    },
-    mondo: {
-      name: 'Diagnosis (MONDO)',
-    },
-    mondo_tagged: {
-      name: 'Diagnosis (MONDO)',
-      source_text: 'Diagnosis (Source Text)',
-      age_at_event: 'Age at Diagnosis',
-    },
-    observed_phenotypes: {
-      name: 'Phenotype (HPO)',
-    },
-    observed_phenotype_tagged: {
-      name: 'Phenotype (HPO)',
-      source_text: 'Phenotype (Source Text)',
-    },
-    icd_tagged: {
-      name: 'Diagnosis (ICD-10)',
-    },
-    age_at_recruitment: 'Age at Recruitment',
-    gender: 'Gender',
-    ethnicity: 'Ethnicity',
-
-    // Biospecimen
-    biospecimen_tissue_source: 'Tissue',
-    age_biospecimen_collection: 'Age at Biospecimen Collection (days)',
-    sample_type: 'Sample Type',
-    sample_id: 'Sample ID',
-    biospecimen_id: 'Biospecimen ID',
-
-    // File
-    data_category: 'Data Category',
-    data_type: 'Data Type',
-    file_format: 'Format',
-    file_id: 'File ID',
-    sequencing_experiment: {
-      experimental_strategy: 'Experimental Strategy',
-    },
-
-    //Variants
-    variant_class: 'Variant class',
-
-    variant_external_reference: 'External reference',
-    chromosome: 'Chromosome',
-    zygosity: 'Zygosity',
-    transmissions: 'Transmissions',
-    consequences: {
-      consequences: 'Consequences',
-      biotype: 'Biotype',
-    },
-
-    //Genes
-    gene_external_reference: 'Gene External reference',
-    gene: {
-      panels: 'Gene Panels',
-    },
-    genes: {
-      name: 'Name',
-      hpo: {
-        hpo_term_label: 'Term label',
-      },
-      orphanet: {
-        panel: 'Orphanet panel',
-      },
-      omim: {
-        name: 'Omim',
-      },
-      ddd: {
-        disease_name: 'DDD Disease Name',
-      },
-      cosmic: {
-        tumour_types_germline: 'Cosmic Tumour Types Germline',
-      },
-    },
-
-    // Studies
-    study_code: 'Study Code',
-    domain: 'Domain',
-    population: 'Population',
-    data_access_codes: {
-      access_limitations: 'Access Limitation',
-      access_requirements: 'Access Requirement',
     },
   },
 };

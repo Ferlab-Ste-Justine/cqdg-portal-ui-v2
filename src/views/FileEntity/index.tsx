@@ -3,14 +3,19 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FileTextOutlined } from '@ant-design/icons';
 import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
+import ExternalLinkIcon from '@ferlab/ui/core/components/ExternalLink/ExternalLinkIcon';
+import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import EntityPage, {
   EntityDescriptions,
   EntityTable,
+  EntityTableRedirectLink,
   EntityTitle,
 } from '@ferlab/ui/core/pages/EntityPage';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { useFile } from 'graphql/files/actions';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import AnalysisFilesTable from 'views/FileEntity/AnalysisFilesTable/AnalysisFilesTable';
 import SummaryHeader from 'views/FileEntity/SummaryHeader';
@@ -24,6 +29,7 @@ import DownloadFileManifestModal from 'components/reports/DownloadFileManifestMo
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
+import { STATIC_ROUTES } from 'utils/routes';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from 'views/ParticipantEntity/index.module.scss';
@@ -95,8 +101,33 @@ const FileEntity = () => {
         loading={loading}
         header={intl.get('entities.participant.participantsSamples')}
         title={intl.get('entities.participant.participantSample')}
+        titleExtra={[
+          <EntityTableRedirectLink
+            key="1"
+            to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            icon={<ExternalLinkIcon width="14" />}
+            onClick={() =>
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'file_id',
+                      value: data ? [data.file_id] : [],
+                      index: INDEXES.FILE,
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              })
+            }
+          >
+            {intl.get('global.viewInDataExploration')}
+          </EntityTableRedirectLink>,
+        ]}
         columns={getBiospecimensColumns()}
         data={dataBiospecimensTable}
+        total={dataBiospecimensTable.length}
         initialColumnState={userInfo?.config.files?.tables?.biospecimens?.columns}
         dictionary={getProTableDictionary()}
         headerConfig={{
@@ -111,6 +142,9 @@ const FileEntity = () => {
                   INDEXES.BIOSPECIMEN,
                   dataBiospecimensTable.map((biospecimen) => biospecimen.sample_id),
                 ),
+                fileName: `cqdg-${INDEXES.BIOSPECIMEN.toLowerCase()}-${
+                  SectionId.BIOSPECIMENS
+                }-table`,
               }),
             ),
           enableColumnSort: true,
