@@ -6,7 +6,7 @@ import { ArrangerApi } from 'services/api/arranger';
 
 import OntologyTree, { lightTreeNodeConstructor, TreeNode, TTitleFormatter } from './OntologyTree';
 
-const ROOT_PHENO = 'All (HP:0000001)';
+export const TARGET_ROOT_PHENO = 'Phenotypic abnormality (HP:0000118)';
 
 export const RegexExtractPhenotype = new RegExp(/([A-Za-z].*?\((HP|MONDO):[0-9]+\))/, 'g');
 
@@ -49,7 +49,7 @@ export class PhenotypeStore {
     this.tree = undefined;
 
     return this.getPhenotypes(field, sqon, filterThemselves).then((data: IPhenotypeSource[]) => {
-      const ontologyTree = new OntologyTree(this.removeSingleRootNode(data), field, titleFormatter);
+      const ontologyTree = new OntologyTree(data, field, titleFormatter);
       this.phenotypes = ontologyTree.phenotypes;
       this.tree = ontologyTree.tree;
     });
@@ -76,16 +76,4 @@ export class PhenotypeStore {
 
     return data?.data || [];
   };
-
-  removeSingleRootNode = (phenotypes: IPhenotypeSource[]) =>
-    phenotypes
-      .map((p) => (p.key !== ROOT_PHENO ? p : null))
-      .filter((p): p is IPhenotypeSource => p !== null)
-      .map((p) => {
-        const index = p.top_hits?.parents.indexOf(ROOT_PHENO);
-        if (!index) {
-          p.top_hits?.parents.splice(index, 1);
-        }
-        return p;
-      });
 }
