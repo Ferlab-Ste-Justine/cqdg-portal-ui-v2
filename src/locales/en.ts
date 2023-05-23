@@ -20,7 +20,8 @@ const en = {
       },
     },
     biospecimen: {
-      sample_id: 'Sample',
+      sample_id: 'Sample ID',
+      sample: 'Sample',
       samplesAuto: '{count, plural, =0 {Sample} =1 {Sample} other {Samples}}',
       sample_type: 'Sample Type',
       biospecimensAuto: '{count, plural, =0 {Biospecimen} =1 {Biospecimen} other {Biospecimens}}',

@@ -9,7 +9,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
-    title: intl.get('entities.biospecimen.sample_id'),
+    title: intl.get('entities.biospecimen.sample'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

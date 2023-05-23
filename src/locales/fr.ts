@@ -20,7 +20,8 @@ const fr = {
       },
     },
     biospecimen: {
-      sample_id: 'Échantillon',
+      sample_id: `ID d'échantillon`,
+      sample: 'Échantillon',
       samplesAuto: '{count, plural, =0 {Échantillon} =1 {Échantillon} other {Échantillons}}',
       biospecimensAuto: '{count, plural, =0 {Biospécimen} =1 {Biospécimen} other {Biospécimens}}',
       biospecimen: 'Biospécimen',
