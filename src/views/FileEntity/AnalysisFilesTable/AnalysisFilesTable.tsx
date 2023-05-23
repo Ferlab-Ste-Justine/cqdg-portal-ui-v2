@@ -78,7 +78,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
                 INDEXES.FILE,
                 dataAnalysisFilesTable.map((file) => file.file_id),
               ),
-              fileName: `cqdg-${INDEXES.FILE.toLowerCase()}-${id}-table`,
+              fileName: `cqdg-${intl.get('entities.file.analysisFiles')}-table`,
             }),
           ),
         enableColumnSort: true,
