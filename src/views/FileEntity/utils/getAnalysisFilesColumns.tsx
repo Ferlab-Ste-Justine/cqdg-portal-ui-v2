@@ -53,7 +53,7 @@ const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
   {
     key: 'biospecimens.sample_id',
     dataIndex: 'biospecimens',
-    title: intl.get('entities.biospecimen.sample_id'),
+    title: intl.get('entities.biospecimen.sample'),
     render: (biospecimens: ArrangerResultsTree<IBiospecimenEntity>) => (
       <ExpandableCell
         nOfElementsWhenCollapsed={1}

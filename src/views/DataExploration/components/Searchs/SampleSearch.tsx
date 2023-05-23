@@ -1,8 +1,9 @@
 import intl from 'react-intl-universal';
 import { ExperimentOutlined } from '@ant-design/icons';
+import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { BIOSPECIMEN_SEARCH_BY_ID_QUERY } from 'graphql/biospecimens/queries';
-import useBiospecimenResolvedSqon from 'graphql/biospecimens/useBiospecimenResolvedSqon';
 import { INDEXES } from 'graphql/constants';
 
 import GlobalSearch, { ICustomSearchProps } from 'components/uiKit/search/GlobalSearch';
@@ -11,7 +12,8 @@ import SelectItem from 'components/uiKit/select/SelectItem';
 import { uniqBy } from 'utils/array';
 
 const SampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
-  const { sqon } = useBiospecimenResolvedSqon(queryBuilderId);
+  const { activeQuery } = useQueryBuilderState(queryBuilderId);
+  const sqon = activeQuery as ISqonGroupFilter;
 
   return (
     <GlobalSearch<IBiospecimenEntity>

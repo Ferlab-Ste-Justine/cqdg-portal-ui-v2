@@ -6,7 +6,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
 const getAnalysisDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.file.sequencing_experiment.analysis_id'),
+    label: intl.get('entities.file.sequencing_experiment.identifiant'),
     value: file?.sequencing_experiment?.analysis_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
