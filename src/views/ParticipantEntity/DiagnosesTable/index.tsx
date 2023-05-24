@@ -48,7 +48,7 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
                 INDEXES.PARTICIPANT,
                 diagnosesData.map(() => participant?.participant_id || ''),
               ),
-              fileName: `cqdg-${INDEXES.PARTICIPANT.toLowerCase()}-${id}-table`,
+              fileName: `cqdg-${intl.get('entities.participant.diagnosis')}-table`,
             }),
           ),
         enableColumnSort: true,
