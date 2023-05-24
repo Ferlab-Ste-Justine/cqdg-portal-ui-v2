@@ -28,8 +28,8 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
           fetchReport({
             data: {
               sqon: getCurrentSqon(),
-              name: ReportType.CLINICAL_DATA,
-              withFamily: e.key === 'CLINICAL_DATA_WITH_FAMILY',
+              name: ReportType.CLINICAL_DATA_FAMILY,
+              withFamily: e.key === ReportType.CLINICAL_DATA_FAMILY,
             },
           }),
         )
@@ -40,7 +40,7 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
           label: intl.get('api.report.clinicalData.participant', { count: participantIds.length }),
         },
         {
-          key: 'CLINICAL_DATA_WITH_FAMILY',
+          key: ReportType.CLINICAL_DATA_FAMILY,
           label: intl.get('api.report.clinicalData.family', { count: participantIds.length }),
         },
       ]}
