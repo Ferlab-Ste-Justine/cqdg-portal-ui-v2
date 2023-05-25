@@ -74,6 +74,8 @@ const fr = {
       interpretation: 'Interprétation',
       hpo_term: 'Terme HPO',
       hpo_term_tooltip: '# de participants avec le terme HPO exact',
+      observed: 'Observé',
+      no_observed: 'Non observé',
     },
     file: {
       file: 'Fichier',

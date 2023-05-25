@@ -44,25 +44,28 @@ const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string 
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
-    key: 'name',
+    key: 'observed_phenotypes.name',
     dataIndex: 'name',
     title: intl.get('entities.participant.phenotype_code'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'source_text',
+    key: 'observed_phenotypes.source_text',
     dataIndex: 'source_text',
     title: intl.get('entities.participant.phenotype_source_text'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'is_tagged',
+    key: 'observed_phenotypes.is_tagged',
     dataIndex: 'is_tagged',
     title: intl.get('entities.participant.interpretation'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (label: string) =>
+      label
+        ? intl.get('entities.participant.observed')
+        : intl.get('entities.participant.no_observed'),
   },
   {
-    key: 'age_at_event',
+    key: 'observed_phenotypes.age_at_event',
     dataIndex: 'age_at_event',
     title: intl.get('entities.participant.age_at_phenotype'),
     tooltip: intl.get('entities.participant.age_at_phenotype_tooltip'),
