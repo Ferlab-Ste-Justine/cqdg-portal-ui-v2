@@ -888,7 +888,7 @@ const en = {
             dataCategory: 'Data Category',
             dataType: 'Data Type',
           },
-          observed_phenotype_tagged: {
+          observed_phenotypes: {
             cardTitle: 'Observed Phenotypes (HPO)',
             empty: 'No observed phenotypes reported for these participants',
           },
