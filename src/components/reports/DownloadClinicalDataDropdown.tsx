@@ -28,7 +28,7 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
           fetchReport({
             data: {
               sqon: getCurrentSqon(),
-              name: ReportType.CLINICAL_DATA_FAMILY,
+              name: e.key,
               withFamily: e.key === ReportType.CLINICAL_DATA_FAMILY,
             },
           }),

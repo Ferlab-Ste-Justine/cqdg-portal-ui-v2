@@ -82,7 +82,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
                 INDEXES.BIOSPECIMEN,
                 biospecimensData.map((b) => b.sample_id),
               ),
-              fileName: `cqdg-${intl.get('entities.biospecimen.biospecimens')}-table`,
+              fileName: `cqdg-biospecimens-table`,
             }),
           ),
         enableColumnSort: true,

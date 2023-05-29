@@ -251,7 +251,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     defaultHidden: true,
     className: styles.diagnosisCell,
     render: (icd_tagged: ArrangerResultsTree<IIcd>) => {
-      const icdNames = icd_tagged?.hits?.edges.map((m) => m.node.name);
+      const icdNames = icd_tagged?.hits?.edges.map((m) => m.node.name).filter((n) => n);
       if (!icdNames?.length) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }

@@ -16,6 +16,8 @@ export interface IPhenotype {
   name: string;
   parents: string[];
   score: number;
+  is_observed?: boolean;
+  source_text?: string;
 }
 
 export interface IMondo {
@@ -99,6 +101,7 @@ export interface IParticipantEntity {
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   non_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
+  phenotypes_tagged: ArrangerResultsTree<IPhenotype>;
   icd_tagged: ArrangerResultsTree<IIcd>;
   biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
   diagnoses: ArrangerResultsTree<IDiagnoses>;
