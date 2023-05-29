@@ -1,11 +1,14 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { INDEXES } from 'graphql/constants';
 import { useParticipantsFromField } from 'graphql/participants/actions';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { extractPhenotypeTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -42,30 +45,43 @@ const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string 
   );
 };
 
-const getDiagnosesColumns = (): ProColumnType<any>[] => [
+const getPhenotypesColumns = (): ProColumnType<any>[] => [
   {
-    key: 'observed_phenotypes.name',
+    key: 'phenotypes_tagged.name',
     dataIndex: 'name',
     title: intl.get('entities.participant.phenotype_code'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (name: string) => {
+      const phenotypeInfo = extractPhenotypeTitleAndCode(name);
+      return phenotypeInfo ? (
+        <>
+          {phenotypeInfo.title} (HP:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/HP_${phenotypeInfo.code}`}>
+            {phenotypeInfo.code}
+          </ExternalLink>
+          )
+        </>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      );
+    },
   },
   {
-    key: 'observed_phenotypes.source_text',
+    key: 'phenotypes_tagged.source_text',
     dataIndex: 'source_text',
     title: intl.get('entities.participant.phenotype_source_text'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'observed_phenotypes.is_tagged',
-    dataIndex: 'is_tagged',
+    key: 'phenotypes_tagged.is_observed',
+    dataIndex: 'is_observed',
     title: intl.get('entities.participant.interpretation'),
-    render: (label: string) =>
-      label
+    render: (is_observed) =>
+      is_observed
         ? intl.get('entities.participant.observed')
-        : intl.get('entities.participant.no_observed'),
+        : intl.get('entities.participant.not_observed'),
   },
   {
-    key: 'observed_phenotypes.age_at_event',
+    key: 'phenotypes_tagged.age_at_event',
     dataIndex: 'age_at_event',
     title: intl.get('entities.participant.age_at_phenotype'),
     tooltip: intl.get('entities.participant.age_at_phenotype_tooltip'),
@@ -82,4 +98,4 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   },
 ];
 
-export default getDiagnosesColumns;
+export default getPhenotypesColumns;

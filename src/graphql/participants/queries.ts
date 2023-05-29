@@ -125,6 +125,22 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
+            phenotypes_tagged {
+              hits {
+                total
+                edges {
+                  node {
+                    age_at_event
+                    is_leaf
+                    is_tagged
+                    name
+                    internal_phenotype_id
+                    source_text
+                    is_observed
+                  }
+                }
+              }
+            }
             observed_phenotypes {
               hits {
                 total

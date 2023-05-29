@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
-import { IParticipantEntity, IPhenotype } from 'graphql/participants/models';
+import { IParticipantEntity } from 'graphql/participants/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getPhenotypesColumns from 'views/ParticipantEntity/utils/getPhenotypesColumns';
 
@@ -21,9 +21,9 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
-  const phenotypesData: IPhenotype[] =
-    participant?.observed_phenotypes?.hits?.edges?.map(({ node }) => ({
-      key: node.name,
+  const phenotypesData =
+    participant?.phenotypes_tagged?.hits?.edges?.map(({ node }) => ({
+      key: node.internal_phenotype_id,
       ...node,
     })) || [];
 
