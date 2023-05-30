@@ -5,7 +5,7 @@ const en = {
   ...translations,
   entities: {
     study: {
-      study_code: 'Study code',
+      study_code: 'Study Code',
       study: 'Study',
       studies: 'Studies',
       studyAuto: '{count, plural, =0 {Study} =1 {Study} other {Studies}}',
