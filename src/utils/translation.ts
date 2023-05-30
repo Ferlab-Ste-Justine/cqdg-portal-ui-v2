@@ -230,8 +230,11 @@ export const getFacetsDictionary = () => ({
   domain: intl.get('entities.study.domain'),
   biospecimen_id: intl.get('entities.biospecimen.biospecimen_id'),
   file_id: intl.get('entities.file.file_id'),
+  file_2_id: intl.get('entities.file.file_id'),
   participant_id: intl.get('entities.participant.participant_id'),
+  participant_2_id: intl.get('entities.participant.participant_id'),
   sample_id: intl.get('entities.biospecimen.sample_id'),
+  sample_2_id: intl.get('entities.biospecimen.sample_id'),
   data_access_codes: {
     access_limitations: intl.get('entities.study.data_access_codes.access_limitations'),
     access_requirements: intl.get('entities.study.data_access_codes.access_requirements'),

@@ -48,7 +48,6 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return participants.map((participant) => ({
         key: participant.participant_id,
-        // submittedId: ids.find((id) => [participant.participant_id].includes(id))!,
         submittedId:
           ids.find((id) => participant.participant_id.toLowerCase() === id.toLowerCase()) || '',
         mappedTo: participant.study_code,
@@ -58,8 +57,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
     onUpload={(match) =>
       updateActiveQueryField({
         queryBuilderId,
-        // field: 'participant_facet_ids.participant_fhir_id_2',
-        field: 'participant_id',
+        field: 'participant_2_id',
         value: match.map((value) => value.key),
         index: INDEXES.PARTICIPANT,
         overrideValuesName: intl.get('components.uploadIds.pillTitle'),

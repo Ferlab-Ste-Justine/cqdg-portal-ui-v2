@@ -44,8 +44,8 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       const files: IFileEntity[] = hydrateResults(response.data?.data?.File?.hits?.edges || []);
 
-      return files.map((file) => ({
-        key: file.file_id,
+      return files.map((file, index) => ({
+        key: file.file_id + file.file_format + index,
         submittedId: ids.find((id) => file.file_id.toLowerCase() === id.toLowerCase()) || '',
         mappedTo: file.study_code,
         matchTo: file.file_id,
@@ -54,12 +54,11 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
     onUpload={(match) =>
       updateActiveQueryField({
         queryBuilderId,
-        // field: 'file_facet_ids.file_fhir_id_2',
-        field: 'file_id',
+        field: 'file_2_id',
         value: match.map((value) => value.key),
         index: INDEXES.FILE,
         overrideValuesName: intl.get('components.uploadIds.pillTitle'),
-        merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
+        merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
       })
     }
   />

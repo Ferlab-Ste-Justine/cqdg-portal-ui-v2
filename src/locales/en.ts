@@ -34,6 +34,7 @@ const en = {
     },
     participant: {
       participant_id: 'Participant ID',
+      participant_2_id: 'Participant ID',
       submitter_participant_id: 'Ext. Participant ID',
       submitter_participant_id_tooltip: 'Submitter Participant ID',
       participant: 'Participant',
@@ -85,6 +86,7 @@ const en = {
       filesAuto: '{count, plural, =0 {File} =1 {File} other {Files}}',
       Identifiant: 'ID',
       file_id: 'File ID',
+      file_2_id: 'File ID',
       file_name: 'Name',
       file_format: 'Format',
       file_size: 'Size',

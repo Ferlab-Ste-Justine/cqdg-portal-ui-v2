@@ -24,7 +24,7 @@ const FileSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       query={GET_FILE_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
-        options.map((option) => ({
+        options.map((option, index) => ({
           label: (
             <SelectItem
               icon={<FileTextOutlined />}
@@ -32,6 +32,7 @@ const FileSearch = ({ queryBuilderId }: ICustomSearchProps) => {
             />
           ),
           value: option.file_id,
+          key: option.file_id + index,
         }))
       }
     />
