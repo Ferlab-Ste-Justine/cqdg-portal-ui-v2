@@ -8,12 +8,10 @@ export const transformNameIfNeeded = (field: string, name: string) => {
     return formatHpoTitleAndCode(name);
   }
   if (field === 'file_format') {
-    return <span>{name.toLocaleLowerCase()}</span>;
+    return <span>{name}</span>;
   }
-
   if (field === 'chromosome') {
     return name === 'true' ? '1' : name;
   }
-
   return name;
 };
