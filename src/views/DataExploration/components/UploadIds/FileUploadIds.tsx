@@ -44,8 +44,8 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       const files: IFileEntity[] = hydrateResults(response.data?.data?.File?.hits?.edges || []);
 
-      return files.map((file, index) => ({
-        key: file.file_id + file.file_format + index,
+      return files.map((file) => ({
+        key: file.file_id,
         submittedId: ids.find((id) => file.file_id.toLowerCase() === id.toLowerCase()) || '',
         mappedTo: file.study_code,
         matchTo: file.file_id,
