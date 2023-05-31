@@ -142,9 +142,7 @@ const FileEntity = () => {
                   INDEXES.BIOSPECIMEN,
                   dataBiospecimensTable.map((biospecimen) => biospecimen.sample_id),
                 ),
-                fileName: `cqdg-${intl
-                  .get('entities.participant.participantsSamples')
-                  .toLowerCase()}-table`,
+                fileName: 'cqdg-participants-table',
               }),
             ),
           enableColumnSort: true,

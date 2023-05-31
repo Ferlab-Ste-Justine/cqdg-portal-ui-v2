@@ -59,8 +59,7 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
     onUpload={(match) =>
       updateActiveQueryField({
         queryBuilderId,
-        // field: 'biospecimen_facet_ids.biospecimen_fhir_id_2',
-        field: 'sample_id',
+        field: 'sample_2_id',
         value: match.map((value) => value.key),
         index: INDEXES.BIOSPECIMEN,
         overrideValuesName: intl.get('components.uploadIds.pillTitle'),

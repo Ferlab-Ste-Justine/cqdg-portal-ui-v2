@@ -10,6 +10,7 @@ export const GET_PARTICIPANTS = gql`
           node {
             id
             participant_id
+            participant_2_id
             age_at_recruitment
             age_of_death
             cause_of_death

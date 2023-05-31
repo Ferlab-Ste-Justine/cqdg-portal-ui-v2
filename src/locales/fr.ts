@@ -34,6 +34,7 @@ const fr = {
     },
     participant: {
       participant_id: 'ID de participant',
+      participant_2_id: 'ID de participant',
       submitter_participant_id: 'Identifiant participant ext.',
       submitter_participant_id_tooltip: "Identifiant du participant soumis par l'étude",
       participant: 'Participant',
@@ -85,6 +86,7 @@ const fr = {
       filesAuto: '{count, plural, =0 {Fichier} =1 {Fichier} other {Fichiers}}',
       identifiant: 'Identifiant',
       file_id: 'ID du fichier',
+      file_2_id: 'ID du fichier',
       file_name: 'Nom',
       file_format: 'Format',
       file_size: 'Taille',
