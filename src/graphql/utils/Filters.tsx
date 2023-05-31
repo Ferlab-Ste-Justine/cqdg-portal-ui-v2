@@ -116,18 +116,17 @@ export const getFilters = (aggregations: TAggregations | null, key: string): IFi
       .map((f: any) => {
         const enhanceKey = f.key_as_string ?? f.key;
         const translatedKey = translateWhenNeeded(key, enhanceKey);
-        const name = translatedKey ? translatedKey : enhanceKey;
-
+        const name = transformNameIfNeeded(key, translatedKey || enhanceKey);
         return {
           data: {
             count: f.doc_count,
             key: enhanceKey,
           },
           id: f.key,
-          name: transformNameIfNeeded(key, name),
+          name,
         };
       })
-      .filter((f: any) => !(f.name === ''));
+      .filter((f: any) => f.name);
   } else if (aggregations[key]?.stats) {
     return [
       {
