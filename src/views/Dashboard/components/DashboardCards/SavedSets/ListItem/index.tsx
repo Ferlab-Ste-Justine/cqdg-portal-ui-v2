@@ -83,7 +83,6 @@ const ListItem = ({ data, icon }: IListItemProps) => {
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
-                  // field: `participant_facet_ids.participant_fhir_id_1`,
                   field: getIdFieldByType(data.setType),
                   value: [setValue],
                   index: data.setType,
