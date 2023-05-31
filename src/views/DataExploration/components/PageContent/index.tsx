@@ -209,14 +209,11 @@ const PageContent = ({
           selectedFilterContent: selectedFilterContent,
           blacklistedFacets: [
             'participant_id',
-            'participant_facet_ids.participant_fhir_id_1',
-            'participant_facet_ids.participant_fhir_id_2',
+            'participant_2_id',
             'sample_id',
+            'sample_2_id',
             'file_id',
-            'file_facet_ids.file_fhir_id_1',
-            'file_facet_ids.file_fhir_id_2',
-            'biospecimen_facet_ids.biospecimen_fhir_id_1',
-            'biospecimen_facet_ids.biospecimen_fhir_id_2',
+            'file_2_id',
           ],
         }}
         enableCombine
