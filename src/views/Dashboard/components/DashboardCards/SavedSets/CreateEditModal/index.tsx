@@ -137,7 +137,7 @@ const CreateEditModal = ({
   return (
     <Modal
       title={title}
-      visible={isVisible}
+      open={isVisible}
       onCancel={handleCancel}
       onOk={() => form.submit()}
       okButtonProps={{ disabled: isLoading, loading: isLoading || isUpdating }}

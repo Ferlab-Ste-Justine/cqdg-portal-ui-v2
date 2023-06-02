@@ -13,7 +13,7 @@ import {
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
-import { Button, Dropdown, Menu, PageHeader } from 'antd';
+import { Button, Dropdown, PageHeader } from 'antd';
 import { Space } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
@@ -121,42 +121,40 @@ const Header = () => {
           <Dropdown
             key="user-menu"
             trigger={['click']}
-            overlay={
-              <Menu
-                items={[
-                  {
-                    label: (
-                      <span className={styles.titleUserDropdown}>
-                        {intl.get('layout.user.menu.signedWith') + ' '}
-                        <b>{tokenParsed.email || tokenParsed.identity_provider_identity}</b>
-                      </span>
-                    ),
-                    key: 'title',
-                    type: 'group',
-                  },
-                  {
-                    type: 'divider',
-                  },
-                  {
-                    key: 'profile_settings',
-                    label: (
-                      <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
-                        <Space>
-                          <UserOutlined />
-                          {intl.get('layout.user.menu.settings')}
-                        </Space>
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: 'logout',
-                    label: intl.get('layout.user.menu.logout'),
-                    onClick: () => dispatch(userActions.cleanLogout()),
-                    icon: <LogoutOutlined />,
-                  },
-                ]}
-              />
-            }
+            menu={{
+              items: [
+                {
+                  label: (
+                    <span className={styles.titleUserDropdown}>
+                      {intl.get('layout.user.menu.signedWith') + ' '}
+                      <b>{tokenParsed.email || tokenParsed.identity_provider_identity}</b>
+                    </span>
+                  ),
+                  key: 'title',
+                  type: 'group',
+                },
+                {
+                  type: 'divider',
+                },
+                {
+                  key: 'profile_settings',
+                  label: (
+                    <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
+                      <Space>
+                        <UserOutlined />
+                        {intl.get('layout.user.menu.settings')}
+                      </Space>
+                    </Link>
+                  ),
+                },
+                {
+                  key: 'logout',
+                  label: intl.get('layout.user.menu.logout'),
+                  onClick: () => dispatch(userActions.cleanLogout()),
+                  icon: <LogoutOutlined />,
+                },
+              ],
+            }}
           >
             <a className={styles.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
               <UserAvatar

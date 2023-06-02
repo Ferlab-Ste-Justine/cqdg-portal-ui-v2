@@ -260,6 +260,7 @@ const VariantsTable = ({
 
   return (
     <GridCard
+      // @ts-ignore
       content={
         <ProTable<ITableVariantEntity>
           tableId="variants_table"

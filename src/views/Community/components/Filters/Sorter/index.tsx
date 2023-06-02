@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { DownOutlined } from '@ant-design/icons';
-import { Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Space } from 'antd';
 
 import styles from './index.module.scss';
 
@@ -30,19 +30,17 @@ const Sorter = ({ onSortChange }: OwnProps) => {
 
   return (
     <Dropdown
-      overlay={
-        <Menu
-          selectedKeys={[selectedSortIndex.toString()]}
-          items={sortItems.map((item, index) => ({
-            label: item.label,
-            key: index,
-            onClick: () => {
-              setSelectedSortIndex(index);
-              onSortChange(item.sort);
-            },
-          }))}
-        />
-      }
+      menu={{
+        selectedKeys: [selectedSortIndex.toString()],
+        items: sortItems.map((item, index) => ({
+          label: item.label,
+          key: index,
+          onClick: () => {
+            setSelectedSortIndex(index);
+            onSortChange(item.sort);
+          },
+        })),
+      }}
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space className={styles.sortTrigger}>

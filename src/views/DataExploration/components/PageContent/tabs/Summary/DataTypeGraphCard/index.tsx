@@ -59,6 +59,7 @@ const DataTypeGraphCard = ({ id, className = '' }: OwnProps) => {
           withHandle
         />
       }
+      // @ts-ignore
       content={
         <>
           <BarChart

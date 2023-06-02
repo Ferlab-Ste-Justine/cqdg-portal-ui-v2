@@ -42,7 +42,7 @@ const DownloadFileManifestModal = ({
         {intl.get('api.report.fileManifest.button')}
       </Button>
       <Modal
-        visible={isModalVisible}
+        open={isModalVisible}
         title={intl.get('api.report.fileManifest.title')}
         okText={intl.get('api.report.fileManifest.okText')}
         okButtonProps={{ disabled: hasTooManyFiles }}

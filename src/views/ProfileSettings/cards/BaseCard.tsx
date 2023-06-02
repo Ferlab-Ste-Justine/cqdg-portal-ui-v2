@@ -33,6 +33,7 @@ const BaseCard = ({
         )}
       </Space>
     }
+    // @ts-ignore
     content={children}
   />
 );
