@@ -7,7 +7,7 @@ import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/
 import { TermOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { findSqonValueByField, removeFieldFromSqon } from '@ferlab/ui/core/data/sqon/utils';
-import { Button, Col, Dropdown, Menu, Modal, Row, Spin, Tooltip, Transfer, Tree } from 'antd';
+import { Button, Col, Dropdown, Modal, Row, Spin, Tooltip, Transfer, Tree } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import cloneDeep from 'lodash/cloneDeep';
@@ -202,7 +202,7 @@ const TreeFacetModal = ({ type, modalField, queryBuilderField, titleFormatter }:
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       wrapClassName={styles.hpoTreeModalWrapper}
       className={styles.hpoTreeModal}
       title={intl.get(`screen.dataExploration.${type}.modal.title`)}
@@ -213,25 +213,23 @@ const TreeFacetModal = ({ type, modalField, queryBuilderField, titleFormatter }:
         <Dropdown.Button
           key="treeFacet-footer-dropdown-button"
           type="primary"
-          overlay={
-            <Menu
-              onClick={(e) => handleOnApply(e.key as TermOperators)}
-              items={[
-                {
-                  key: TermOperators.in,
-                  label: intl.get('global.filters.operators.anyOf'),
-                },
-                {
-                  key: TermOperators.all,
-                  label: intl.get('global.filters.operators.allOf'),
-                },
-                {
-                  key: TermOperators['some-not-in'],
-                  label: intl.get('global.filters.operators.noneOf'),
-                },
-              ]}
-            />
-          }
+          menu={{
+            onClick: (e) => handleOnApply(e.key as TermOperators),
+            items: [
+              {
+                key: TermOperators.in,
+                label: intl.get('global.filters.operators.anyOf'),
+              },
+              {
+                key: TermOperators.all,
+                label: intl.get('global.filters.operators.allOf'),
+              },
+              {
+                key: TermOperators['some-not-in'],
+                label: intl.get('global.filters.operators.noneOf'),
+              },
+            ],
+          }}
           style={{ marginLeft: '8px' }}
           onClick={() => handleOnApply(TermOperators.in)}
         >

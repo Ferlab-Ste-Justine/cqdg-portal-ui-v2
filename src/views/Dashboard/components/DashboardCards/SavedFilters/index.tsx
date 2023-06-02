@@ -22,7 +22,6 @@ import ListItem from './ListItem';
 
 import styles from './index.module.scss';
 
-const { TabPane } = Tabs;
 const { Text } = Typography;
 
 const getItemList = (
@@ -66,6 +65,30 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
   const dataExplorationFilters = savedFilters.filter((s) => s.tag === DATA_EXPLORATION_FILTER_TAG);
   const variantFilters = savedFilters.filter((s) => s.tag === VARIANT_FILTER_TAG);
 
+  const items = [
+    {
+      label: (
+        <div>
+          <FileSearchOutlined />
+          {intl.get('screen.dashboard.cards.savedFilters.dataExploration')} (
+          {dataExplorationFilters.length})
+        </div>
+      ),
+      key: 'dataExplorationFilters',
+      children: getItemList(dataExplorationFilters, fetchingError, isLoading),
+    },
+    {
+      label: (
+        <div>
+          <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
+          {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
+        </div>
+      ),
+      key: 'variantFilters',
+      children: getItemList(variantFilters, fetchingError, isLoading),
+    },
+  ];
+
   return (
     <GridCard
       theme="shade"
@@ -91,35 +114,13 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           }}
         />
       }
+      // @ts-ignore
       content={
         <Tabs
           className={cx(styles.setTabs, 'navNoMarginBtm')}
           defaultActiveKey="dataExplorationFilters"
-        >
-          <TabPane
-            tab={
-              <div>
-                <FileSearchOutlined />
-                {intl.get('screen.dashboard.cards.savedFilters.dataExploration')} (
-                {dataExplorationFilters.length})
-              </div>
-            }
-            key="dataExplorationFilters"
-          >
-            {getItemList(dataExplorationFilters, fetchingError, isLoading)}
-          </TabPane>
-          <TabPane
-            tab={
-              <div>
-                <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
-                {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
-              </div>
-            }
-            key="variantFilters"
-          >
-            {getItemList(variantFilters, fetchingError, isLoading)}
-          </TabPane>
-        </Tabs>
+          items={items}
+        />
       }
     />
   );

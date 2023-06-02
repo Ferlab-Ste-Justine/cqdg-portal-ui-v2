@@ -68,6 +68,7 @@ const SociodemographicsGraphCard = ({ id, className = '' }: OwnProps) => {
           withHandle
         />
       }
+      // @ts-ignore
       content={
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>

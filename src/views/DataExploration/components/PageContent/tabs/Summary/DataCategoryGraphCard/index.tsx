@@ -59,6 +59,7 @@ const DataCategoryGraphCard = ({ id, className = '' }: OwnProps) => {
           withHandle
         />
       }
+      // @ts-ignore
       content={
         <>
           <BarChart

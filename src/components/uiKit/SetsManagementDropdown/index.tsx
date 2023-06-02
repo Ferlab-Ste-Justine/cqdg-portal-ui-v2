@@ -9,14 +9,14 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Dropdown, Menu, Tooltip } from 'antd';
+import { Button, Dropdown, Tooltip } from 'antd';
+import { MenuProps } from 'antd/lib/menu';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { IFileEntity } from 'graphql/files/models';
 import { IQueryResults } from 'graphql/models';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { IVariantEntity } from 'graphql/variants/models';
-import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 import CreateEditModal from 'views/Dashboard/components/DashboardCards/SavedSets/CreateEditModal';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
@@ -123,65 +123,68 @@ const getTitle = (type: string): string => {
   }
 };
 
-interface IMenuOverlayProps {
+interface IGetMenuProps {
   participantCount: number;
-  onClick: MenuClickEventHandler;
+  onClick: any;
   isEditDisabled: boolean;
   type: string;
 }
 
-const MenuOverlay = ({ participantCount, onClick, isEditDisabled, type }: IMenuOverlayProps) => (
-  <Menu
-    className={styles.saveSetOptionMenu}
-    onClick={onClick}
-    items={[
-      {
-        key: 'participant-count',
-        className: `${
-          exceedLimit(participantCount)
-            ? styles.saveSetOptionMenuInfoOver
-            : styles.saveSetOptionMenuInfo
-        }`,
-        disabled: true,
-        icon: itemIcon(type),
-        label: (
-          <>
-            <span>{getLabel(type, participantCount)}</span>
-            <Tooltip
-              arrowPointAtCenter
-              placement="topRight"
-              title={`Max. ${numberWithCommas(MAX_ITEMS_QUERY)} ${intl.get(
-                'screen.dataExploration.participantCount',
-              )}`}
-            >
-              <InfoCircleOutlined className={styles.infoCircle} />
-            </Tooltip>
-          </>
-        ),
-      },
-      {
-        type: 'divider',
-      },
-      {
-        key: 'create',
-        icon: <PlusOutlined className={styles.icon} />,
-        label: intl.get('screen.dataExploration.saveAsNewSet'),
-      },
-      {
-        key: 'add_ids',
-        icon: <PlaylistAdd />,
-        label: intl.get('screen.dataExploration.addToExistingSet'),
-        disabled: isEditDisabled,
-      },
-      {
-        key: 'remove_ids',
-        icon: <PlaylistRemove />,
-        label: intl.get('screen.dataExploration.removeFromExistingSet'),
-        disabled: isEditDisabled,
-      },
-    ]}
-  />
-);
+const getMenuProps = ({
+  participantCount,
+  onClick,
+  isEditDisabled,
+  type,
+}: IGetMenuProps): MenuProps => ({
+  className: styles.saveSetOptionMenu,
+  onClick: onClick,
+  items: [
+    {
+      key: 'participant-count',
+      className: `${
+        exceedLimit(participantCount)
+          ? styles.saveSetOptionMenuInfoOver
+          : styles.saveSetOptionMenuInfo
+      }`,
+      disabled: true,
+      icon: itemIcon(type),
+      label: (
+        <>
+          <span>{getLabel(type, participantCount)}</span>
+          <Tooltip
+            arrowPointAtCenter
+            placement="topRight"
+            title={`Max. ${numberWithCommas(MAX_ITEMS_QUERY)} ${intl.get(
+              'screen.dataExploration.participantCount',
+            )}`}
+          >
+            <InfoCircleOutlined className={styles.infoCircle} />
+          </Tooltip>
+        </>
+      ),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: 'create',
+      icon: <PlusOutlined className={styles.icon} />,
+      label: intl.get('screen.dataExploration.saveAsNewSet'),
+    },
+    {
+      key: 'add_ids',
+      icon: <PlaylistAdd />,
+      label: intl.get('screen.dataExploration.addToExistingSet'),
+      disabled: isEditDisabled,
+    },
+    {
+      key: 'remove_ids',
+      icon: <PlaylistRemove />,
+      label: intl.get('screen.dataExploration.removeFromExistingSet'),
+      disabled: isEditDisabled,
+    },
+  ],
+});
 
 const getSetCount = (selected: string[], total: number, allSelected: boolean) => {
   if (allSelected) {
@@ -218,10 +221,9 @@ const SetsManagementDropdown = ({
     }
   }, [fetchingError, isLoading, savedSets, sqon]);
 
-  const onClick: MenuClickEventHandler = (e) => {
-    const key = e.key as string;
+  const onClick = (e: { key: string }) => {
     // @ts-ignore
-    const m = modals[key];
+    const m = modals[e.key];
     return setModal(m);
   };
 
@@ -251,14 +253,12 @@ const SetsManagementDropdown = ({
       )}
       <Dropdown
         disabled={!selectedKeys?.length}
-        overlay={
-          <MenuOverlay
-            participantCount={getSetCount(selectedKeys || [], results.total, selectedAllResults)}
-            onClick={onClick}
-            isEditDisabled={isEditDisabled}
-            type={type}
-          />
-        }
+        menu={getMenuProps({
+          participantCount: getSetCount(selectedKeys || [], results.total, selectedAllResults),
+          onClick: onClick,
+          isEditDisabled: isEditDisabled,
+          type,
+        })}
         placement="bottomLeft"
         trigger={['click']}
         getPopupContainer={() =>

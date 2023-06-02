@@ -49,6 +49,7 @@ const DataExplorationLinks = () => {
         />
       }
       className={styles.dataExplorationLinksCard}
+      // @ts-ignore
       content={
         <Row gutter={[16, 16]}>
           <Col flex="auto" className={styles.customCol}>

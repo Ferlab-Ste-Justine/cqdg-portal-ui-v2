@@ -21,7 +21,6 @@ import ListItem from './ListItem';
 import styles from './index.module.scss';
 
 const { Text } = Typography;
-const { TabPane } = Tabs;
 
 const getItemList = (
   type: SetType,
@@ -63,6 +62,60 @@ const getItemList = (
 const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
   const { savedSets, isLoading, fetchingError } = useSavedSet();
 
+  const items = [
+    {
+      label: (
+        <div>
+          <UserOutlined />
+          {intl.get('screen.dashboard.cards.savedSets.participants')} (
+          {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
+        </div>
+      ),
+      key: 'participants',
+      children: getItemList(
+        SetType.PARTICIPANT,
+        savedSets,
+        fetchingError,
+        isLoading,
+        <UserOutlined />,
+      ),
+    },
+    {
+      label: (
+        <div>
+          <ExperimentOutlined />
+          {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
+          {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
+        </div>
+      ),
+      key: 'biospecimens',
+      children: getItemList(
+        SetType.BIOSPECIMEN,
+        savedSets,
+        fetchingError,
+        isLoading,
+        <ExperimentOutlined />,
+      ),
+    },
+    {
+      label: (
+        <div>
+          <FileTextOutlined />
+          {intl.get('screen.dashboard.cards.savedSets.files')} (
+          {savedSets.filter((s) => s.setType === SetType.FILE).length})
+        </div>
+      ),
+      key: 'files',
+      children: getItemList(
+        SetType.FILE,
+        savedSets,
+        fetchingError,
+        isLoading,
+        <FileTextOutlined />,
+      ),
+    },
+  ];
+
   return (
     <GridCard
       theme="shade"
@@ -88,57 +141,13 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
           }}
         />
       }
+      // @ts-ignore
       content={
-        <Tabs className={cx(styles.setTabs, 'navNoMarginBtm')} defaultActiveKey="participants">
-          <TabPane
-            tab={
-              <div>
-                <UserOutlined />
-                {intl.get('screen.dashboard.cards.savedSets.participants')} (
-                {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
-              </div>
-            }
-            key="participants"
-          >
-            {getItemList(
-              SetType.PARTICIPANT,
-              savedSets,
-              fetchingError,
-              isLoading,
-              <UserOutlined />,
-            )}
-          </TabPane>
-          <TabPane
-            tab={
-              <div>
-                <ExperimentOutlined />
-                {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
-                {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
-              </div>
-            }
-            key="biospecimens"
-          >
-            {getItemList(
-              SetType.BIOSPECIMEN,
-              savedSets,
-              fetchingError,
-              isLoading,
-              <ExperimentOutlined />,
-            )}
-          </TabPane>
-          <TabPane
-            tab={
-              <div>
-                <FileTextOutlined />
-                {intl.get('screen.dashboard.cards.savedSets.files')} (
-                {savedSets.filter((s) => s.setType === SetType.FILE).length})
-              </div>
-            }
-            key="files"
-          >
-            {getItemList(SetType.FILE, savedSets, fetchingError, isLoading, <FileTextOutlined />)}
-          </TabPane>
-        </Tabs>
+        <Tabs
+          className={cx(styles.setTabs, 'navNoMarginBtm')}
+          defaultActiveKey="participants"
+          items={items}
+        />
       }
     />
   );

@@ -101,7 +101,7 @@ const ProfileImageUpload = () => {
         )}
       </Space>
       <Modal
-        visible={isDeleteModalVisible}
+        open={isDeleteModalVisible}
         title={intl.get('screen.profileSettings.cards.identification.removePhotoModalTitle')}
         okText={intl.get('screen.profileSettings.cards.identification.removePhotoModalButton')}
         onCancel={() => setDeleteModalVisible(false)}

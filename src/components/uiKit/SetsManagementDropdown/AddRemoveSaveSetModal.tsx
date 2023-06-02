@@ -89,7 +89,7 @@ const AddRemoveSaveSetModal = ({ hideModalCb, userSets, setActionType, sqon, typ
   return (
     <Modal
       title={formTitle(setActionType, type)}
-      visible={isVisible}
+      open={isVisible}
       onCancel={onCancel}
       okText={finishButtonText(setActionType)}
       onOk={() => form.submit()}

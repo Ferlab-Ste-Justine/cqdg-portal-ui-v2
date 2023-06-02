@@ -163,6 +163,55 @@ const PageContent = ({
     );
   };
 
+  const items = [
+    {
+      label: (
+        <span>
+          <PieChartOutlined />
+          {intl.get('screen.dataExploration.tabs.summary.title')}
+        </span>
+      ),
+      key: TAB_IDS.SUMMARY,
+      children: <SummaryTab />,
+    },
+    {
+      label: (
+        <span>
+          <UserOutlined />
+          {intl.get('screen.dataExploration.tabs.participants.title', {
+            count: numberWithCommas(useTotalParticipants({ sqon: participantResolvedSqon })),
+          })}
+        </span>
+      ),
+      key: TAB_IDS.PARTICIPANTS,
+      children: <ParticipantsTab sqon={participantResolvedSqon} />,
+    },
+    {
+      label: (
+        <span>
+          <ExperimentOutlined />
+          {intl.get('screen.dataExploration.tabs.biospecimens.title', {
+            count: numberWithCommas(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
+          })}
+        </span>
+      ),
+      key: TAB_IDS.BIOSPECIMENS,
+      children: <BiospecimensTab sqon={biospecimenResolvedSqon} />,
+    },
+    {
+      label: (
+        <span>
+          <FileTextOutlined />
+          {intl.get('screen.dataExploration.tabs.datafiles.title', {
+            count: numberWithCommas(useTotalDataFiles({ sqon: fileResolvedSqon })),
+          })}
+        </span>
+      ),
+      key: TAB_IDS.DATA_FILES,
+      children: <DataFilesTabs sqon={fileResolvedSqon} />,
+    },
+  ];
+
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
       <Title className={styles.title} level={4}>
@@ -245,58 +294,8 @@ const PageContent = ({
             history.push(`${STATIC_ROUTES.DATA_EXPLORATION}/${key}${window.location.search}`);
           }
         }}
-      >
-        <Tabs.TabPane
-          tab={
-            <span>
-              <PieChartOutlined />
-              {intl.get('screen.dataExploration.tabs.summary.title')}
-            </span>
-          }
-          key={TAB_IDS.SUMMARY}
-        >
-          <SummaryTab />
-        </Tabs.TabPane>
-        <Tabs.TabPane
-          tab={
-            <span>
-              <UserOutlined />
-              {intl.get('screen.dataExploration.tabs.participants.title', {
-                count: numberWithCommas(useTotalParticipants({ sqon: participantResolvedSqon })),
-              })}
-            </span>
-          }
-          key={TAB_IDS.PARTICIPANTS}
-        >
-          <ParticipantsTab sqon={participantResolvedSqon} />
-        </Tabs.TabPane>
-        <Tabs.TabPane
-          tab={
-            <span>
-              <ExperimentOutlined />
-              {intl.get('screen.dataExploration.tabs.biospecimens.title', {
-                count: numberWithCommas(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
-              })}
-            </span>
-          }
-          key={TAB_IDS.BIOSPECIMENS}
-        >
-          <BiospecimensTab sqon={biospecimenResolvedSqon} />
-        </Tabs.TabPane>
-        <Tabs.TabPane
-          tab={
-            <span>
-              <FileTextOutlined />
-              {intl.get('screen.dataExploration.tabs.datafiles.title', {
-                count: numberWithCommas(useTotalDataFiles({ sqon: fileResolvedSqon })),
-              })}
-            </span>
-          }
-          key={TAB_IDS.DATA_FILES}
-        >
-          <DataFilesTabs sqon={fileResolvedSqon} />
-        </Tabs.TabPane>
-      </Tabs>
+        items={items}
+      />
     </Space>
   );
 };

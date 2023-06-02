@@ -114,6 +114,7 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
           withHandle
         />
       }
+      // @ts-ignore
       content={
         !isLoading &&
         (treeData && treeData?.length > 0 ? (
