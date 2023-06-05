@@ -12,7 +12,7 @@ COPY ./ /app/
 RUN npm run theme
 RUN npm run build
 
-FROM nginx:1.20
+FROM nginx:1.24
 
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
 
