@@ -1,46 +1,41 @@
-import useQueryBuilderState from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { INDEXES } from 'graphql/constants';
-import { STUDIES_AGGREGATIONS } from 'graphql/studies/queries';
+import SideBarFacet from 'views/Studies/components/SideBarFacet';
+import StudySearch from 'views/Studies/components/StudySearch';
 
-import useGetAggregations from 'hooks/graphql/useGetAggregations';
+import { FilterInfo } from 'components/uiKit/FilterList/types';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 
 import PageContent from './components/PageContent';
-import StudiesSidebar from './components/Sidebar';
 import { SCROLL_WRAPPER_ID, STUDIES_EXPLORATION_QB_ID } from './utils/constant';
 
 import styles from './index.module.scss';
 
 const Studies = () => {
-  const { queryList, activeQuery } = useQueryBuilderState(STUDIES_EXPLORATION_QB_ID);
   const studyMappingResults = useGetExtendedMappings(INDEXES.STUDY);
-
-  const results = useGetAggregations(
-    {
-      sqon: resolveSyntheticSqon(queryList, activeQuery),
-    },
-    STUDIES_AGGREGATIONS([
-      'study_code',
+  const filterInfo: FilterInfo = {
+    customSearches: [<StudySearch key={1} queryBuilderId={STUDIES_EXPLORATION_QB_ID} />],
+    defaultOpenFacets: [
       'domain',
       'population',
       'data_access_codes__access_limitations',
       'data_access_codes__access_requirements',
-    ]),
-    INDEXES.STUDY,
-  );
+    ],
+    groups: [
+      {
+        facets: [
+          'domain',
+          'population',
+          'data_access_codes__access_limitations',
+          'data_access_codes__access_requirements',
+        ],
+      },
+    ],
+  };
 
   return (
     <div className={styles.studiesExplorationLayout}>
-      <StudiesSidebar
-        queryBuilderId={STUDIES_EXPLORATION_QB_ID}
-        aggregations={results.aggregations}
-        extendedMapping={studyMappingResults}
-        filters={activeQuery as ISqonGroupFilter}
-        isLoading={studyMappingResults.loading || results.loading}
-      />
+      <SideBarFacet extendedMappingResults={studyMappingResults} filterInfo={filterInfo} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
         <PageContent studiesMapping={studyMappingResults} />
       </ScrollContent>
