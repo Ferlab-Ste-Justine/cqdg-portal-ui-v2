@@ -42,6 +42,11 @@
   }
 }
 
+.filterLoader {
+    display: flex;
+    justify-content: center;
+}
+
 .filterExpandBtnWrapper {
   display: grid;
   justify-content: end;
