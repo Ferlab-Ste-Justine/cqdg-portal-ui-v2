@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { DocumentNode } from 'graphql';
@@ -78,6 +78,12 @@ const Search = <T,>({
       );
     }
   };
+
+  useEffect(() => {
+    handleSearch('');
+    // run handleSearch just once to get all the options first
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <SearchAutocomplete
