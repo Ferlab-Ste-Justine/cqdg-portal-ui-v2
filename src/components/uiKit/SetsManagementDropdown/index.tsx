@@ -9,6 +9,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Button, Dropdown, Tooltip } from 'antd';
 import { MenuProps } from 'antd/lib/menu';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
@@ -26,7 +27,6 @@ import PlaylistRemove from 'components/Icons/PlaylistRemove';
 import AddRemoveSaveSetModal from 'components/uiKit/SetsManagementDropdown/AddRemoveSaveSetModal';
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
-import { numberWithCommas } from 'utils/string';
 
 import styles from './index.module.scss';
 
@@ -154,7 +154,7 @@ const getMenuProps = ({
           <Tooltip
             arrowPointAtCenter
             placement="topRight"
-            title={`Max. ${numberWithCommas(MAX_ITEMS_QUERY)} ${intl.get(
+            title={`Max. ${numberFormat(MAX_ITEMS_QUERY)} ${intl.get(
               'screen.dataExploration.participantCount',
             )}`}
           >

@@ -15,6 +15,7 @@ import { dotToUnderscore } from '@ferlab/ui/core/data/arranger/formatting';
 import { IRemoteComponent, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { isEmptySqon, resolveSyntheticSqon } from '@ferlab/ui/core/data/sqon/utils';
 import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Space, Tabs, Typography } from 'antd';
 import copy from 'copy-to-clipboard';
 import { useTotalBiospecimens } from 'graphql/biospecimens/actions';
@@ -52,7 +53,6 @@ import {
 } from 'utils/fieldMapper';
 import { getCurrentUrl } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
-import { numberWithCommas } from 'utils/string';
 import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translation';
 
 import BiospecimensTab from './tabs/Biospecimens';
@@ -179,7 +179,7 @@ const PageContent = ({
         <span>
           <UserOutlined />
           {intl.get('screen.dataExploration.tabs.participants.title', {
-            count: numberWithCommas(useTotalParticipants({ sqon: participantResolvedSqon })),
+            count: numberFormat(useTotalParticipants({ sqon: participantResolvedSqon })),
           })}
         </span>
       ),
@@ -191,7 +191,7 @@ const PageContent = ({
         <span>
           <ExperimentOutlined />
           {intl.get('screen.dataExploration.tabs.biospecimens.title', {
-            count: numberWithCommas(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
+            count: numberFormat(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
           })}
         </span>
       ),
@@ -203,7 +203,7 @@ const PageContent = ({
         <span>
           <FileTextOutlined />
           {intl.get('screen.dataExploration.tabs.datafiles.title', {
-            count: numberWithCommas(useTotalDataFiles({ sqon: fileResolvedSqon })),
+            count: numberFormat(useTotalDataFiles({ sqon: fileResolvedSqon })),
           })}
         </span>
       ),

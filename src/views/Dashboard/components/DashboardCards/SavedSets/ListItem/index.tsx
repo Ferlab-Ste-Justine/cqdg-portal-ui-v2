@@ -7,6 +7,7 @@ import ListItemWithActions from '@ferlab/ui/core/components/List/ListItemWithAct
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
@@ -68,7 +69,7 @@ const ListItem = ({ data, icon }: IListItemProps) => {
         extra={
           <Row gutter={8} className={styles.countDisplay}>
             <Col>
-              <Text className={styles.count}>{data.size}</Text>
+              <Text className={styles.count}>{numberFormat(data.size)}</Text>
             </Col>
             <Col>
               <Text type="secondary">{icon}</Text>

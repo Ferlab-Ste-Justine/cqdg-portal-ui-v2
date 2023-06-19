@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import UploadIds from '@ferlab/ui/core/components/UploadIds';
 import { TFetchMatchFunc, TOnUpload } from '@ferlab/ui/core/components/UploadIds/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Descriptions } from 'antd';
 
 import styles from './index.module.scss';
@@ -43,16 +44,17 @@ const EntityUploadIds = ({
       modalCancelText: intl.get('components.uploadIds.cancelBtn'),
       collapseTitle: (matchCount, unMatchCount) =>
         intl.get('components.uploadIds.collapseTitle', {
-          matchCount,
-          unMatchCount,
+          matchCount: numberFormat(matchCount),
+          unMatchCount: numberFormat(unMatchCount),
         }),
-      matchTabTitle: (matchCount) => intl.get('components.uploadIds.match', { count: matchCount }),
+      matchTabTitle: (matchCount) =>
+        intl.get('components.uploadIds.match', { count: numberFormat(matchCount) }),
       unmatchTabTitle: (unmatchcount) =>
-        intl.get('components.uploadIds.unmatch', { count: unmatchcount }),
+        intl.get('components.uploadIds.unmatch', { count: numberFormat(unmatchcount) }),
       tablesMessage: (submittedCount, mappedCount) =>
         intl.get('components.uploadIds.tableMessage', {
-          submittedCount,
-          mappedCount,
+          submittedCount: numberFormat(submittedCount),
+          mappedCount: numberFormat(mappedCount),
         }),
       inputLabel: intl.get('components.uploadIds.inputLabel'),
       matchTable: {

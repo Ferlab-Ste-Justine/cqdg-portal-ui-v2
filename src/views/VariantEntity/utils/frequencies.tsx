@@ -11,6 +11,7 @@ import {
 import {
   formatQuotientOrElse,
   formatQuotientToExponentialOrElse,
+  numberFormat,
 } from '@ferlab/ui/core/utils/numberUtils';
 import { Button, Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
@@ -70,9 +71,9 @@ export const getFrequenciesItems = (): ProColumnType[] => [
               });
             }}
           >
-            {row.participant_number}
+            {numberFormat(row.participant_number || 0)}
           </Button>
-          {row.participant_total_number ? ` / ${row.participant_total_number}` : ''}
+          {row.participant_total_number ? ` / ${numberFormat(row.participant_total_number)}` : ''}
         </>
       ) : (
         formatQuotientOrElse(row.participant_number, row.participant_total_number)
@@ -134,9 +135,11 @@ export const getFrequenciesTableSummaryColumns = (
               });
             }}
           >
-            {variant?.participant_number}
+            {numberFormat(variant?.participant_number || 0)}
           </Button>
-          {variant?.participant_total_number ? ` / ${variant?.participant_total_number}` : ''}
+          {variant?.participant_total_number
+            ? ` / ${numberFormat(variant.participant_total_number)}`
+            : ''}
         </>
       ) : (
         formatQuotientOrElse(
@@ -180,21 +183,30 @@ export const getPublicCohorts = (): ProColumnType[] => [
   {
     dataIndex: 'alt',
     key: 'alt',
-    render: (alt: string) => alt || TABLE_EMPTY_PLACE_HOLDER,
+    render: (alt: string | number | null) => {
+      if (!alt) return TABLE_EMPTY_PLACE_HOLDER;
+      return typeof alt === 'number' ? numberFormat(alt) : alt;
+    },
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
   },
   {
     dataIndex: 'altRef',
     key: 'altRef',
-    render: (altRef: string) => altRef || TABLE_EMPTY_PLACE_HOLDER,
+    render: (altRef: string | number | null) => {
+      if (!altRef) return TABLE_EMPTY_PLACE_HOLDER;
+      return typeof altRef === 'number' ? numberFormat(altRef) : altRef;
+    },
     title: intl.get('entities.variant.frequencies.altRef'),
     tooltip: intl.get('entities.variant.frequencies.altRefTooltip'),
   },
   {
     dataIndex: 'homozygotes',
     key: 'homozygotes',
-    render: (homozygotes: string) => homozygotes || TABLE_EMPTY_PLACE_HOLDER,
+    render: (homozygotes: string | number | null) => {
+      if (!homozygotes) return TABLE_EMPTY_PLACE_HOLDER;
+      return typeof homozygotes === 'number' ? numberFormat(homozygotes) : homozygotes;
+    },
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),
   },
