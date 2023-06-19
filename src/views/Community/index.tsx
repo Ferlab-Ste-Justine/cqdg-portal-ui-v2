@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import TableHeader from '@ferlab/ui/core/components/ProTable/Header';
 import useDebounce from '@ferlab/ui/core/hooks/useDebounce';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { List, Space, Typography } from 'antd';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
@@ -73,6 +74,7 @@ const CommunityPage = () => {
               selected: '',
               selectedPlural: '',
             },
+            numberFormat: numberFormat,
           }}
         />
         <List

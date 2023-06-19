@@ -4,6 +4,7 @@ import { ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { IVariantEntity as IVariantEntityFerlab } from '@ferlab/ui/core/pages/EntityPage/type';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Button } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
@@ -41,7 +42,7 @@ const SummaryHeader = ({ variant }: ISummaryBarProps) => (
       >
         <ReadOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{1}</span>
+          <span className={styles.count}>{numberFormat(variant?.studies?.hits?.total || 1)}</span>
           <span className={styles.name}>{intl.get('entities.study.study')}</span>
         </div>
       </Link>
@@ -69,7 +70,7 @@ const SummaryHeader = ({ variant }: ISummaryBarProps) => (
       >
         <UserOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{variant?.participant_number}</span>
+          <span className={styles.count}>{numberFormat(variant?.participant_number || 0)}</span>
           <span className={styles.name}>
             {intl.get('entities.participant.participantAuto', {
               count: variant?.participant_number,

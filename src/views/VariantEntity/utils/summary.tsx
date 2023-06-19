@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { IVariantEntity } from '@ferlab/ui/core/pages//EntityPage/type';
 import { IEntitySummaryColumns } from '@ferlab/ui/core/pages/EntityPage/EntitySummary';
-import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { numberFormat, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -41,15 +41,18 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           {
             label: intl.get('entities.variant.genes'),
             value: variant?.genes?.hits?.edges?.length
-              ? variant.genes.hits.edges.map((gene) => (
-                  <ExternalLink
-                    key={gene.node.symbol}
-                    className={styles.geneExternalLink}
-                    href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${gene.node.symbol}`}
-                  >
-                    {gene.node.symbol}
-                  </ExternalLink>
-                ))
+              ? variant.genes.hits.edges.map((gene) => {
+                  if (!gene?.node?.symbol) return;
+                  return (
+                    <ExternalLink
+                      key={gene.node.symbol}
+                      className={styles.geneExternalLink}
+                      href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${gene.node.symbol}`}
+                    >
+                      {gene.node.symbol}
+                    </ExternalLink>
+                  );
+                })
               : TABLE_EMPTY_PLACE_HOLDER,
           },
           {
@@ -58,9 +61,10 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
               ? variant.genes.hits.edges.map((gene) => (
                   <ExternalLink
                     key={gene.node.omim_gene_id}
+                    className={styles.geneExternalLink}
                     href={`https://omim.org/entry/${variant.genes.hits.edges[0].node.omim_gene_id}`}
                   >
-                    {variant.genes.hits.edges[0].node.omim_gene_id}
+                    {gene.node.omim_gene_id}
                   </ExternalLink>
                 ))
               : TABLE_EMPTY_PLACE_HOLDER,
@@ -74,7 +78,9 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           },
           {
             label: intl.get('entities.participant.participants'),
-            value: variant?.participant_number || TABLE_EMPTY_PLACE_HOLDER,
+            value: variant?.participant_number
+              ? numberFormat(variant.participant_number)
+              : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
       },

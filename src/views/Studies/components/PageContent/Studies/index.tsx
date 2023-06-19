@@ -10,6 +10,7 @@ import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { IQueryConfig, TQueryConfigCb } from '@ferlab/ui/core/graphql/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IQueryResults } from 'graphql/models';
@@ -86,7 +87,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
             })
           }
         >
-          {study?.participant_count}
+          {numberFormat(study?.participant_count)}
         </Link>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
@@ -96,7 +97,8 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     key: 'family_count',
     title: intl.get('screen.studies.families'),
     dataIndex: 'family_count',
-    render: (family_count: string) => family_count || TABLE_EMPTY_PLACE_HOLDER,
+    render: (family_count: number) =>
+      family_count ? numberFormat(family_count) : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'genomics',
@@ -154,7 +156,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
             })
           }
         >
-          {study?.file_count}
+          {numberFormat(study.file_count)}
         </Link>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
@@ -239,7 +241,7 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   },
 ];
 
-const StudiesTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
+const Studies = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
@@ -294,4 +296,4 @@ const StudiesTab = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
   );
 };
 
-export default StudiesTab;
+export default Studies;

@@ -15,6 +15,7 @@ import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Typography } from 'antd';
 import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
@@ -169,7 +170,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {fileCount}
+          {numberFormat(fileCount)}
         </Link>
       ) : (
         0

@@ -15,6 +15,7 @@ import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Tag, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { useDataFiles } from 'graphql/files/actions';
@@ -172,7 +173,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {participantIds.length}
+          {numberFormat(participantIds.length)}
         </Link>
       ) : (
         0
@@ -183,8 +184,8 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'nb_biospecimens',
     title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
     render: (file: IFileEntity) => {
-      const bioCount = file?.biospecimens?.hits.total || 0;
-      return bioCount ? (
+      const nb_biospecimens = file?.biospecimens?.hits.total || 0;
+      return nb_biospecimens ? (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={() =>
@@ -203,7 +204,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
             })
           }
         >
-          {bioCount}
+          {numberFormat(nb_biospecimens)}
         </Link>
       ) : (
         0

@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Table } from 'antd';
 import { AxiosRequestConfig } from 'axios';
 import EnvironmentVariables from 'helpers/EnvVariables';
@@ -32,20 +33,21 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
     key: 'nb_participants',
     dataIndex: 'nb_participants',
     title: intl.get('entities.participant.participants'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (nb_participants: number) =>
+      nb_participants ? numberFormat(nb_participants) : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'nb_files',
     dataIndex: 'nb_files',
     title: intl.get('entities.file.files'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (nb_files: number) => (nb_files ? numberFormat(nb_files) : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'size',
     dataIndex: 'size',
     title: intl.get('entities.file.file_size'),
-    render: (label: number) =>
-      label ? formatFileSize(label, { output: 'string' }) : TABLE_EMPTY_PLACE_HOLDER,
+    render: (size: number) =>
+      formatFileSize(size, { output: 'string' }) || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
