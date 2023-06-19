@@ -48,7 +48,7 @@ import styles from './index.module.scss';
 
 const isNumber = (n: number) => n && !Number.isNaN(n);
 
-const defaultColumns: ProColumnType[] = [
+const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'hgvsg',
     title: intl.get('entities.variant.variant'),
@@ -264,7 +264,7 @@ const VariantsTable = ({
       content={
         <ProTable<ITableVariantEntity>
           tableId="variants_table"
-          columns={defaultColumns}
+          columns={getDefaultColumns()}
           enableRowSelection
           initialColumnState={userInfo?.config.variants?.tables?.variants?.columns}
           wrapperClassName={styles.variantTabWrapper}
