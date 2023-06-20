@@ -137,6 +137,7 @@ const VariantEntity = () => {
                 <ExternalLink
                   hasIcon
                   href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${data?.clinvar.clinvar_id}`}
+                  data-cy={`Pathogenicity_ClinVar_${data?.clinvar.clinvar_id}_ExternalLink`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   {data?.clinvar?.clinvar_id}

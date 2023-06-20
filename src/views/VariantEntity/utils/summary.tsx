@@ -48,6 +48,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
                       key={gene.node.symbol}
                       className={styles.geneExternalLink}
                       href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${gene.node.symbol}`}
+                      data-cy="Summary_Gene_ExternalLink"
                     >
                       {gene.node.symbol}
                     </ExternalLink>
@@ -63,6 +64,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
                     key={gene.node.omim_gene_id}
                     className={styles.geneExternalLink}
                     href={`https://omim.org/entry/${variant.genes.hits.edges[0].node.omim_gene_id}`}
+                    data-cy="Summary_OMIM_ExternalLink"
                   >
                     {gene.node.omim_gene_id}
                   </ExternalLink>
@@ -116,6 +118,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: variant?.clinvar?.clinvar_id ? (
               <ExternalLink
                 href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${variant.clinvar.clinvar_id}`}
+                data-cy="Summary_ClinVar_ExternalLink"
               >
                 {variant?.clinvar?.clinvar_id}
               </ExternalLink>
@@ -126,7 +129,10 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           {
             label: intl.get('entities.variant.dbSNP'),
             value: variant?.rsnumber ? (
-              <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${variant?.rsnumber}`}>
+              <ExternalLink
+                href={`https://www.ncbi.nlm.nih.gov/snp/${variant?.rsnumber}`}
+                data-cy="Summary_dbSNP_ExternalLink"
+              >
                 {variant?.rsnumber}
               </ExternalLink>
             ) : (

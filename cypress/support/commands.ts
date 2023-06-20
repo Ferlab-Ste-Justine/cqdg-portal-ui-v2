@@ -113,10 +113,15 @@ Cypress.Commands.add('logout', () => {
   cy.wait(1000);
 });
 
-Cypress.Commands.add('resetColumns', () => {
-  cy.get('svg[data-icon="setting"]').click({force: true});
-  cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
+Cypress.Commands.add('resetColumns', (table_id?: string) => {
+  if (table_id == undefined) {
+    cy.get('svg[data-icon="setting"]').click({force: true});
+  }
+  else {
+    cy.get('[id="' + table_id + '"]').find('svg[data-icon="setting"]').click({force: true});
+  }
 
+  cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').should('be.disabled', {timeout: 20*1000});
 });
 
@@ -159,10 +164,11 @@ Cypress.Commands.add('visitDashboard', () => {
   cy.get('[data-cy="Title_Dashboard"]', {timeout: 60 * 1000})
 });
 
-Cypress.Commands.add('visitDataExploration', (tab?: string) => {
+Cypress.Commands.add('visitDataExploration', (tab?: string, sharedFilterOption?: string) => {
   const strTab = tab !== undefined ? tab : '';
+  const strSharedFilterOption = sharedFilterOption !== undefined ? sharedFilterOption : '';
   
-  cy.visitAndIntercept('/data-exploration/' + strTab,
+  cy.visitAndIntercept('/data-exploration/' + strTab + strSharedFilterOption,
                        'POST',
                        '**/graphql',
                        6);
