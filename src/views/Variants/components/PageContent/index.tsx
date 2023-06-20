@@ -140,7 +140,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
       <div className={styles.pageHeader}>
-        <Typography.Title className={styles.pageHeaderTitle} level={1}>
+        <Typography.Title className={styles.pageHeaderTitle} level={1} data-cy="Title_Variants">
           {intl.get('screen.variants.title')}
         </Typography.Title>
       </div>

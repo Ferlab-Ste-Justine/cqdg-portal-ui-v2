@@ -14,7 +14,12 @@ interface OwnProps {
 }
 
 const MemberCard = ({ user, match }: OwnProps) => (
-  <Link key={user.id} className={styles.memberLink} to={`/member/${user.keycloak_id}`}>
+  <Link
+    key={user.id}
+    className={styles.memberLink}
+    to={`/member/${user.keycloak_id}`}
+    data-cy="MemberCard"
+  >
     <Card className={styles.memberCard}>
       <Space direction="vertical" align="center">
         <UserAvatar

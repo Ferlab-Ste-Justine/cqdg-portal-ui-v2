@@ -70,7 +70,7 @@ const PageContent = ({ studiesMapping }: OwnProps) => {
 
   return (
     <Space direction="vertical" size={24} className={styles.studyExplorePageContent}>
-      <Title level={4} className={styles.studyTitle}>
+      <Title level={4} className={styles.studyTitle} data-cy="Title_Studies">
         {intl.get('screen.studies.title')}
       </Title>
       <QueryBuilder

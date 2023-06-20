@@ -166,7 +166,7 @@ const PageContent = ({
   const items = [
     {
       label: (
-        <span>
+        <span data-cy="Tab_Summary">
           <PieChartOutlined />
           {intl.get('screen.dataExploration.tabs.summary.title')}
         </span>
@@ -176,7 +176,7 @@ const PageContent = ({
     },
     {
       label: (
-        <span>
+        <span data-cy="Tab_Participants">
           <UserOutlined />
           {intl.get('screen.dataExploration.tabs.participants.title', {
             count: numberFormat(useTotalParticipants({ sqon: participantResolvedSqon })),
@@ -188,7 +188,7 @@ const PageContent = ({
     },
     {
       label: (
-        <span>
+        <span data-cy="Tab_Biospecimens">
           <ExperimentOutlined />
           {intl.get('screen.dataExploration.tabs.biospecimens.title', {
             count: numberFormat(useTotalBiospecimens({ sqon: biospecimenResolvedSqon })),
@@ -200,7 +200,7 @@ const PageContent = ({
     },
     {
       label: (
-        <span>
+        <span data-cy="Tab_DataFiles">
           <FileTextOutlined />
           {intl.get('screen.dataExploration.tabs.datafiles.title', {
             count: numberFormat(useTotalDataFiles({ sqon: fileResolvedSqon })),
@@ -214,7 +214,7 @@ const PageContent = ({
 
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
-      <Title className={styles.title} level={4}>
+      <Title className={styles.title} level={4} data-cy="Title_DataExploration">
         {intl.get('screen.dataExploration.title')}
       </Title>
       <QueryBuilder

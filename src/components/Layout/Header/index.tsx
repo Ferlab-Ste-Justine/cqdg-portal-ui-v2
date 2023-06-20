@@ -106,13 +106,21 @@ const Header = () => {
             icon={<TeamOutlined />}
             title={intl.get('layout.main.menu.community')}
           />,
-          <ExternalLink key="cqdg-website" href={EnvVariables.configFor('CQDG_WEB_SITE')}>
+          <ExternalLink
+            key="cqdg-website"
+            href={EnvVariables.configFor('CQDG_WEB_SITE')}
+            data-cy="HeaderLink_Website"
+          >
             <Button key="external-website" className={styles.headerBtn}>
               {intl.get('layout.main.menu.website')}{' '}
               <ExternalLinkIcon className={styles.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
-          <ExternalLink key="documentation" href={EnvVariables.configFor('CQDG_DOCUMENTATION')}>
+          <ExternalLink
+            key="documentation"
+            href={EnvVariables.configFor('CQDG_DOCUMENTATION')}
+            data-cy="HeaderLink_Documentation"
+          >
             <Button key="external-help" className={styles.headerBtn}>
               {intl.get('layout.main.menu.documentation')}
               <ExternalLinkIcon className={styles.icon} {...iconSize} />
@@ -163,7 +171,9 @@ const Header = () => {
                 size={24}
                 className={styles.userAvatar}
               />
-              <span className={styles.userName}>{userInfo?.first_name}</span>
+              <span className={styles.userName} data-cy="UserName">
+                {userInfo?.first_name}
+              </span>
               <DownOutlined />
             </a>
           </Dropdown>,
@@ -172,6 +182,7 @@ const Header = () => {
             shape="circle"
             className={styles.langButton}
             onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
+            data-cy={`LangButton_${getTargetLang(lang).toUpperCase()}`}
           >
             {getTargetLang(lang).toUpperCase()}
           </Button>,

@@ -400,6 +400,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
 
   return (
     <ProTable<ITableParticipantEntity>
+      data-cy="ProTable_Participants"
       tableId="participants_table"
       columns={getDefaultColumns()}
       wrapperClassName={styles.participantTabWrapper}

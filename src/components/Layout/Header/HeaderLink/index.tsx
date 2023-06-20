@@ -32,6 +32,7 @@ const HeaderLink = ({
         isActive(currentPathName, to) ? styles.active : '',
       )}
       icon={icon}
+      data-cy={`HeaderLink_${title}`}
     >
       {title}
     </Button>

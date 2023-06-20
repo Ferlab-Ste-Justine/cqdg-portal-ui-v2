@@ -55,7 +55,7 @@ const SearchAutocomplete = ({
   }, [selectedItems]);
 
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`} data-cy="SearchAutocomplete">
       <SearchLabel title={title} tooltipText={tooltipText} />
       <Select
         allowClear
@@ -72,6 +72,7 @@ const SearchAutocomplete = ({
             onClose();
           }
         }}
+        dropdownRender={(menu) => <div data-cy="Search_Dropdown">{menu}</div>}
         autoClearSearchValue={true}
         notFoundContent={<Empty size="mini" showImage={false} description={emptyDescription} />}
         onSearch={(value) => debounceSearch(value)}
@@ -80,10 +81,17 @@ const SearchAutocomplete = ({
         value={itemSelected}
         getPopupContainer={(trigger) => trigger.parentElement!}
         tagRender={({ onClose, value }) => (
-          <Tag className={styles.tag} closable onClose={onClose} style={{ marginRight: 3 }}>
+          <Tag
+            className={styles.tag}
+            closable
+            onClose={onClose}
+            style={{ marginRight: 3 }}
+            data-cy={`Tag_${value}`}
+          >
             {value}
           </Tag>
         )}
+        data-cy="SearchAutocomplete_Select"
       ></Select>
     </div>
   );

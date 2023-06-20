@@ -18,7 +18,7 @@ interface ISummaryBarProps {
 
 const SummaryHeader = ({ file }: ISummaryBarProps) => (
   <div className={styles.buttonGroup}>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" data-cy="SummaryHeader_Studies_Button" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -46,7 +46,12 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button
+      className={styles.button}
+      size="large"
+      data-cy="SummaryHeader_Participants_Button"
+      block
+    >
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -78,7 +83,7 @@ const SummaryHeader = ({ file }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" data-cy="SummaryHeader_Samples_Button" block>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}

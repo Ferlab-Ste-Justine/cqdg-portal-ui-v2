@@ -68,7 +68,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
   const items = [
     {
       label: (
-        <div>
+        <div data-cy="Tab_DataExploration">
           <FileSearchOutlined />
           {intl.get('screen.dashboard.cards.savedFilters.dataExploration')} (
           {dataExplorationFilters.length})
@@ -79,7 +79,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
     },
     {
       label: (
-        <div>
+        <div data-cy="Tab_Variants">
           <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
           {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
         </div>
@@ -119,6 +119,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
         <Tabs
           className={cx(styles.setTabs, 'navNoMarginBtm')}
           defaultActiveKey="dataExplorationFilters"
+          data-cy="SavedFilters"
           items={items}
         />
       }

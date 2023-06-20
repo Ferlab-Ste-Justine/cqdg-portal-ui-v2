@@ -40,6 +40,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
           key="1"
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           icon={<ExternalLinkIcon width="14" />}
+          data-cy="Analysis_RedirectLink"
           onClick={() =>
             addQuery({
               queryBuilderId: DATA_EXPLORATION_QB_ID,

@@ -38,6 +38,7 @@ const DownloadFileManifestModal = ({
         onClick={() => setIsModalVisible(true)}
         type={type}
         disabled={isDisabled}
+        data-cy="FileManifest_Button"
       >
         {intl.get('api.report.fileManifest.button')}
       </Button>
@@ -61,6 +62,7 @@ const DownloadFileManifestModal = ({
           );
         }}
         className={styles.modal}
+        data-cy="FileManifest_Modal"
       >
         <p>{intl.get('api.report.fileManifest.text')}</p>
         <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>

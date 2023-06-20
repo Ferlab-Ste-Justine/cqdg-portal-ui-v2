@@ -33,9 +33,13 @@ const ProfileSettings = () => {
     <div className={styles.profileSettingsWrapper}>
       <Space size={16} direction="vertical" className={styles.profileSettings}>
         <div className={styles.profileSettingsHeader}>
-          <Title level={4}>{intl.get('screen.profileSettings.title')}</Title>
+          <Title level={4} data-cy="Title_ProfileSettings">
+            {intl.get('screen.profileSettings.title')}
+          </Title>
           <Link to={`/member/${userInfo?.keycloak_id}`}>
-            <Button type="primary">{intl.get('screen.profileSettings.viewProfile')}</Button>
+            <Button type="primary" data-cy="ViewProfileButton">
+              {intl.get('screen.profileSettings.viewProfile')}
+            </Button>
           </Link>
         </div>
         <Space size={24} direction="vertical" className={styles.cardsWrapper}>

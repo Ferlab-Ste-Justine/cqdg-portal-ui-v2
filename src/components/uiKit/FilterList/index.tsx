@@ -59,7 +59,7 @@ const FilterList = ({
         </Space>
       )}
       <div className={styles.filterExpandBtnWrapper}>
-        <Button onClick={() => setFiltersOpen(!filtersOpen)} type="link">
+        <Button onClick={() => setFiltersOpen(!filtersOpen)} type="link" data-cy="ExpandAll">
           {filtersOpen
             ? intl.get('components.filterList.collapseAll')
             : intl.get('components.filterList.expandAll')}

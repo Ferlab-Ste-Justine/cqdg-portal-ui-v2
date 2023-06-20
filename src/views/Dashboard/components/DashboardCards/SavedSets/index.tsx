@@ -65,7 +65,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
   const items = [
     {
       label: (
-        <div>
+        <div data-cy="Tab_Participants">
           <UserOutlined />
           {intl.get('screen.dashboard.cards.savedSets.participants')} (
           {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
@@ -82,7 +82,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
     },
     {
       label: (
-        <div>
+        <div data-cy="Tab_Biospecimens">
           <ExperimentOutlined />
           {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
           {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
@@ -99,7 +99,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
     },
     {
       label: (
-        <div>
+        <div data-cy="Tab_Files">
           <FileTextOutlined />
           {intl.get('screen.dashboard.cards.savedSets.files')} (
           {savedSets.filter((s) => s.setType === SetType.FILE).length})
@@ -146,6 +146,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         <Tabs
           className={cx(styles.setTabs, 'navNoMarginBtm')}
           defaultActiveKey="participants"
+          data-cy="SavedSets"
           items={items}
         />
       }

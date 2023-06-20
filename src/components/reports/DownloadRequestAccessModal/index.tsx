@@ -45,6 +45,7 @@ const DownloadRequestAccessModal = ({
         onClick={() => setIsModalVisible(true)}
         type={type}
         disabled={isDisabled}
+        data-cy="RequestAccess_Button"
       >
         {intl.get('api.report.requestAccess.button')}
       </Button>
@@ -68,6 +69,7 @@ const DownloadRequestAccessModal = ({
           );
         }}
         className={styles.modal}
+        data-cy="RequestAccess_Modal"
       >
         <div>
           {intl.get('api.report.requestAccess.text')}

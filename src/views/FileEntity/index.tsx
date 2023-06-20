@@ -106,6 +106,7 @@ const FileEntity = () => {
             key="1"
             to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
             icon={<ExternalLinkIcon width="14" />}
+            data-cy="ParticipantsSamples_RedirectLink"
             onClick={() =>
               addQuery({
                 queryBuilderId: DATA_EXPLORATION_QB_ID,
