@@ -22,7 +22,7 @@ interface IDataType {
 export interface IStudyEntity {
   id: string;
   score: number;
-  keyword: string;
+  keyword: string[];
   study_id: string;
   study_code: string;
   domain: string;
@@ -30,6 +30,7 @@ export interface IStudyEntity {
   population: string;
   description: string;
   participant_count: number;
+  sample_count: number;
   file_count: number;
   data_types: ArrangerResultsTree<IDataType>;
   data_categories: ArrangerResultsTree<IDataType>;
@@ -37,9 +38,6 @@ export interface IStudyEntity {
   experimental_strategies: string[];
   family_count: number;
   family_data: boolean;
-  hpo_terms: string[];
-  icd_terms: string[];
-  mondo_terms: string[];
   release_id: string;
   status: string;
   study_version: string;

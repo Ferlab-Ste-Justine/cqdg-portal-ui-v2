@@ -9,14 +9,6 @@ import { RegexExtractPhenotype } from 'views/DataExploration/utils/PhenotypeStor
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  currentNode: TreeNode;
-  treeData: TreeNode[];
-  getSelectedPhenotype: (node: TreeNode) => void;
-  updateSunburst: (key: string) => void;
-  field: string;
-}
-
 const { Title, Text } = Typography;
 
 const getExpandedNode = (currentNode: TreeNode): string[] =>
@@ -35,17 +27,25 @@ const getPath = (node: string, treeNodes: TreeNode[], path: string[] = []): stri
   return updatePath;
 };
 
+interface ITreePanelProps {
+  currentNode?: TreeNode;
+  treeData: TreeNode[];
+  getSelectedPhenotype: (node: TreeNode) => void;
+  updateSunburst: (key: string) => void;
+  field: string;
+}
+
 const TreePanel = ({
   currentNode,
   treeData,
   getSelectedPhenotype,
   updateSunburst,
   field,
-}: OwnProps) => (
+}: ITreePanelProps) => (
   <Space direction="vertical" className={styles.phenotypeSunburstTree}>
     <Title level={5}>{currentNode?.name}</Title>
     <Text>
-      {intl.get(`screen.dataExploration.tabs.summary.global.nbParticipant`, {
+      {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.nbParticipant`, {
         count: currentNode?.results,
       })}
     </Text>
@@ -63,11 +63,11 @@ const TreePanel = ({
         });
       }}
     >
-      {intl.get(`screen.dataExploration.tabs.summary.global.addTermToQuery`)}
+      {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.addTermToQuery`)}
     </Button>
     <Space className={styles.treeWrapper} direction="vertical" size={5}>
       <Text type="secondary">
-        {intl.get(`screen.dataExploration.tabs.summary.global.currentPath`)}
+        {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.currentPath`)}
       </Text>
       <Tree
         height={213}
@@ -77,19 +77,19 @@ const TreePanel = ({
         className={styles.phenotypeTree}
         treeData={treeData!}
         onSelect={(keys) => {
-          if (keys.length) {
-            const key = getPath(keys[0] as string, treeData!).join('-');
-            getSelectedPhenotype({
-              title: keys[0] as string,
-              name: keys[0] as string,
-              key,
-              children: [],
-              valueText: 0,
-            });
-            updateSunburst(key);
-          } else {
+          if (!keys.length) {
             return {};
           }
+
+          const key = getPath(keys[0] as string, treeData!).join('-');
+          getSelectedPhenotype({
+            title: keys[0] as string,
+            name: keys[0] as string,
+            key,
+            children: [],
+            valueText: 0,
+          });
+          updateSunburst(key);
         }}
       />
     </Space>
