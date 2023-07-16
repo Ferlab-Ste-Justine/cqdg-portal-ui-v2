@@ -42,6 +42,7 @@ const ParticipantEntity = loadable(() => import('views/ParticipantEntity'), load
 const ProfileSettings = loadable(() => import('views/ProfileSettings'), loadableProps);
 const Community = loadable(() => import('views/Community'), loadableProps);
 const CommunityMember = loadable(() => import('views/Community/Member'), loadableProps);
+const StudyEntity = loadable(() => import('views/StudyEntity'), loadableProps);
 
 const App = () => {
   const lang = useLang();
@@ -95,6 +96,9 @@ const App = () => {
                     layout={PageLayout}
                   >
                     <ParticipantEntity />
+                  </ProtectedRoute>
+                  <ProtectedRoute exact path={DYNAMIC_ROUTES.STUDY_ENTITY} layout={PageLayout}>
+                    <StudyEntity />
                   </ProtectedRoute>
                   <ProtectedRoute exact path={STATIC_ROUTES.COMMUNITY} layout={PageLayout}>
                     <Community />

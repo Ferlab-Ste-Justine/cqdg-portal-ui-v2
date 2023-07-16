@@ -1,0 +1,113 @@
+import intl from 'react-intl-universal';
+import BarChart from '@ferlab/ui/core/components/Charts/Bar';
+import Empty from '@ferlab/ui/core/components/Empty';
+import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
+import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/ResizableGridCard';
+import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
+import { INDEXES } from 'graphql/constants';
+import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
+import { DATATYPE_QUERY } from 'graphql/summary/queries';
+import isEmpty from 'lodash/isEmpty';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+
+import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
+import { truncateString } from 'utils/string';
+import { getResizableGridDictionary } from 'utils/translation';
+
+const addToQuery = (field: string, key: string) =>
+  updateActiveQueryField({
+    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    field,
+    value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
+    index: INDEXES.FILE,
+  });
+
+const DataTypeGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
+  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const { loading, result } = useLazyResultQuery(DATATYPE_QUERY, {
+    variables: { sqon },
+  });
+  const dataTypeResults = aggregationToChartData(
+    result?.Participant?.aggregations?.files__data_type.buckets,
+    result?.Participant?.hits?.total,
+  );
+
+  return (
+    <ResizableGridCard
+      gridUID={gridUID}
+      id={id}
+      dictionary={getResizableGridDictionary()}
+      theme="shade"
+      loading={loading}
+      loadingType="spinner"
+      headerTitle={intl.get('screen.dataExploration.tabs.summary.availableData.dataTypeTitle')}
+      tsvSettings={{
+        data: [dataTypeResults],
+      }}
+      modalContent={
+        <BarChart
+          data={dataTypeResults}
+          axisLeft={{
+            legend: 'Data Types',
+            legendPosition: 'middle',
+            legendOffset: -128,
+            format: (title: string) => truncateString(title, 15),
+          }}
+          tooltipLabel={(node: any) => node.data.id}
+          axisBottom={{
+            legend: '# of participants',
+            legendPosition: 'middle',
+            legendOffset: 35,
+          }}
+          onClick={(datum: any) => addToQuery('data_type', datum.indexValue as string)}
+          margin={{
+            bottom: 45,
+            left: 140,
+            right: 12,
+            top: 12,
+          }}
+          layout="horizontal"
+        />
+      }
+      modalSettings={{
+        width: 800,
+        height: 400,
+      }}
+      // @ts-ignore
+      content={
+        <>
+          {isEmpty(dataTypeResults) ? (
+            <Empty imageType="grid" size="large" />
+          ) : (
+            <BarChart
+              data={dataTypeResults}
+              axisLeft={{
+                legend: 'Data Types',
+                legendPosition: 'middle',
+                legendOffset: -128,
+                format: (title: string) => truncateString(title, 15),
+              }}
+              tooltipLabel={(node: any) => node.data.id}
+              axisBottom={{
+                legend: '# of participants',
+                legendPosition: 'middle',
+                legendOffset: 35,
+              }}
+              onClick={(datum: any) => addToQuery('data_type', datum.indexValue as string)}
+              margin={{
+                bottom: 45,
+                left: 140,
+                right: 12,
+                top: 12,
+              }}
+              layout="horizontal"
+            />
+          )}
+        </>
+      }
+    />
+  );
+};
+
+export default DataTypeGraphCard;

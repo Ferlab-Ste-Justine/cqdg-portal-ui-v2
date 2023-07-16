@@ -7,11 +7,11 @@ import { Space } from 'antd';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 
-import getSummaryLayout, { UID } from './getSummaryLayout';
+import getStudyEntityLayout, { UID } from './getStudyEntityLayout';
 
 import styles from './index.module.scss';
 
-const SummaryTab = () => {
+const WrapperGraph = () => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
@@ -19,7 +19,7 @@ const SummaryTab = () => {
     <Space className={styles.wrapper} direction="vertical">
       <ResizableGridLayout
         uid={UID}
-        defaultLayouts={getSummaryLayout()}
+        defaultLayouts={getStudyEntityLayout()}
         layouts={userInfo?.config.data_exploration?.summary?.layouts}
         onReset={(layouts: TSerializedResizableGridLayoutConfig[]) => {
           dispatch(updateUserConfig({ data_exploration: { summary: { layouts } } }));
@@ -32,4 +32,4 @@ const SummaryTab = () => {
   );
 };
 
-export default SummaryTab;
+export default WrapperGraph;

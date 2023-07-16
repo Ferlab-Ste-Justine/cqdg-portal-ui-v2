@@ -60,14 +60,14 @@ const CustomFilterContainer = ({
   };
 
   const aggregations = results?.aggregations ? results?.aggregations[filterKey] : {};
-  const filterGroup = getFilterGroup(
-    found,
-    aggregations,
-    [],
-    true,
+  const filterGroup = getFilterGroup({
+    extendedMapping: found,
+    aggregation: aggregations,
+    rangeTypes: [],
+    filterFooter: true,
     headerTooltip,
-    getFacetsDictionary(),
-  );
+    dictionary: getFacetsDictionary(),
+  });
 
   const filters = results?.aggregations ? getFilters(results?.aggregations, filterKey) : [];
   const selectedFilters = results?.data

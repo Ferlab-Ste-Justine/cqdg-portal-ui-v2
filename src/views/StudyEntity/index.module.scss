@@ -1,0 +1,35 @@
+@import 'src/style/themes/cqdg/colors';
+
+.tag {
+  padding: 1px 8px;
+}
+
+.tagGold {
+  padding: 1px 8px;
+  background-color: $gold-2;
+}
+
+.tagCyan {
+  padding: 1px 8px;
+  background-color: $cyan-2;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.titleIcon {
+  font-size: 20px;
+}
+
+.tooltip {
+  border-bottom: 1px dotted;
+}
+
+.forceLinkUnderline a {
+  text-decoration: underline !important;
+}
+
+.forceLinkUnderline a:hover {
+  text-decoration: none !important;
+}

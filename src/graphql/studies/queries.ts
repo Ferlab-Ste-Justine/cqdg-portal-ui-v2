@@ -13,9 +13,15 @@ export const GET_STUDIES = gql`
             study_id
             name
             population
+            keyword
             description
             participant_count
             file_count
+            family_count
+            contact {
+              value
+              type
+            }
             data_categories {
               hits {
                 total

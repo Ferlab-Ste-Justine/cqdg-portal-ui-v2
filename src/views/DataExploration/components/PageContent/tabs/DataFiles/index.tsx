@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,6 @@ import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
-  updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -30,7 +29,6 @@ import {
   DEFAULT_QUERY_CONFIG,
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
@@ -100,19 +98,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
     render: (study_code: string) => (
-      <Link
-        to={STATIC_ROUTES.STUDIES}
-        onClick={() =>
-          updateActiveQueryField({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            field: 'study_code',
-            value: [study_code],
-            index: INDEXES.STUDY,
-          })
-        }
-      >
-        {study_code}
-      </Link>
+      <Link to={`${STATIC_ROUTES.STUDIES}/${study_code}`}>{study_code}</Link>
     ),
   },
   {
