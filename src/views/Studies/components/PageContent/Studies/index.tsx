@@ -1,3 +1,4 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -42,6 +43,9 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     dataIndex: 'study_code',
     title: intl.get('screen.studies.code'),
     sorter: { multiple: 1 },
+    render: (study_code: string) => (
+      <Link to={`${STATIC_ROUTES.STUDIES}/${study_code}`}>{study_code}</Link>
+    ),
   },
   {
     dataIndex: 'name',
