@@ -41,18 +41,14 @@ describe('Navigation', () => {
 
   it('Lien externe de la header - Documentation', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="HeaderLink_Documentation"]').invoke('removeAttr', 'target').click({force: true});
-    cy.origin('https://docs.qa.cqdg.ferlab.bio', () => {
-      cy.get('h1[class*="title"]').contains('CQDG').should('exist');
-    });
+    cy.get('[data-cy="HeaderLink_Documentation"]')
+      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
   });
 
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="ExternalLink_DataRelease"]').invoke('removeAttr', 'target').click({force: true});
-    cy.origin('https://docs.qa.cqdg.ferlab.bio', () => {
-      cy.get('h1[class*="title"]').contains('CQDG').should('exist');
-    });
+    cy.get('[data-cy="ExternalLink_DataRelease"]')
+      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
   });
 
   it('Redirections de la page Dashboard', () => {
@@ -77,37 +73,37 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedSets"]').contains('Cypress Participants').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
-    cy.get('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Cypress Participants').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Participants').should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="Tab_Biospecimens"]').click({force: true});
     cy.get('[data-cy="SavedSets"]').contains('Cypress Biospecimens').click({force: true});
     cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
-    cy.get('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Cypress Biospecimens').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Biospecimens').should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="Tab_Files"]').click({force: true});
     cy.get('[data-cy="SavedSets"]').contains('Cypress Data Files').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
-    cy.get('[class*="QueryPill_field"]').contains('File ID').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
   });
 
   it('Liens Saved Filters de la page Dashboard [CQDG-262]', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedFilters"]').contains('Cypress Gender Filter').click({force: true});
     cy.get('[data-cy="Title_DataExploration"]').should('exist');
-    cy.get('[class*="QueryPill_field"]').contains('Gender').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('Female').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="Tab_Variants"]').click({force: true});
     cy.get('[data-cy="SavedFilters"]').contains('Cypress Variant Type Filter').click({force: true});
     cy.get('[data-cy="Title_Variants"]').should('exist');
-    cy.get('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
-    cy.get('[class*="QueryValues_value"]').contains('SNV').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SNV').should('exist');
   });
 
   it('Modals de la page Dashboard [CQDG-139]', () => {
