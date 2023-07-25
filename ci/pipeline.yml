@@ -9,46 +9,40 @@ groups:
       - set-feature-pipelines
 
 resource_types:
-- name: git
-  type: registry-image
-  source:
-    repository: concourse/git-resource
-    username: ((docker.username))
-    password: ((docker.password))
-
 - name: git-branches
   type: registry-image
   source:
     repository: aoldershaw/git-branches-resource
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((docker-readwrite-credentials.username))
+    password: ((docker-readwrite-credentials.password))
+
 - name: pull-request
   type: docker-image
   source:
     repository: teliaoss/github-pr-resource
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((docker-readwrite-credentials.username))
+    password: ((docker-readwrite-credentials.password))
     
 - name: slack-notification
   type: docker-image
   source:
     repository: cfcommunity/slack-notification-resource
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((docker-readwrite-credentials.username))
+    password: ((docker-readwrite-credentials.password))
     tag: latest
 
 resources:
 - name: slack-alert
   type: slack-notification
   source:
-    url: ((slack.webhook-url))
+    url: https://hooks.slack.com/services/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
 
 - name: feature-branches
   type: git-branches
   check_every: 30s
   source:
-    uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
-    private_key: ((git.ssh-key))
+    uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
+    private_key: ((github-credentials.id_rsa))
     # The "(?P<name>pattern)" syntax defines a named capture group.
     # aoldershaw/git-branches-resource emits the value of each named capture
     # group under the `groups` key.
@@ -63,9 +57,9 @@ resources:
   check_every: 30s
   webhook_token: ((webhook-token))
   source:
-    uri: git@github.com:Ferlab-Ste-Justine/clin-portal-ui.git
+    uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
     branch: {{branch}}
-    private_key: ((git.ssh-key))
+    private_key: ((github-credentials.id_rsa))
     # ignore_paths: [ci/]
 
 - name: open-pull-request
@@ -74,8 +68,8 @@ resources:
   webhook_token: ((webhook-token))
   source:
     base_branch: main
-    repository: Ferlab-Ste-Justine/clin-portal-ui
-    access_token: ((git.access-token))
+    repository: Ferlab-Ste-Justine/cqdg-portal-ui
+    access_token: ((github-credentials.access_token))
     states: ["OPEN"]
     # labels: ["bug"]
 
@@ -85,16 +79,17 @@ resources:
   webhook_token: ((webhook-token))
   source:
     base_branch: main
-    repository: Ferlab-Ste-Justine/clin-portal-ui
-    access_token: ((git.access-token))
+    repository: Ferlab-Ste-Justine/cqdg-portal-ui
+    access_token: ((github-credentials.access_token))
     states: ["CLOSED", "MERGED"]
 
 - name: ferlease
   type: docker-image
   icon: docker
+  check_every: 30s
   source:
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((docker-readwrite-credentials.username))
+    password: ((docker-readwrite-credentials.password))
     repository: ferlabcrsj/ferlease
     tag: 0.2.2
 
@@ -121,12 +116,12 @@ jobs:
   on_success:
     put: slack-alert
     params:
-      channel: '#clin-ferlease'
+      channel: '#cqdg-ferlease'
       attachments_file: output/attachments.json
   on_failure:
     put: slack-alert
     params:
-      channel: '#clin-ferlease'
+      channel: '#cqdg-ferlease'
       attachments_file: output/attachments-fail.json
   plan:
   - get: open-pull-request
@@ -162,7 +157,7 @@ jobs:
           [
             {
               "title": "New Portal UI Release : Ticket: $releaseName:$releaseTicket",
-              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.cqgc.hsj.rtss.qc.ca",
+              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.cqdg.ferlab.bio",
               "color": "good"
             }
           ]
@@ -185,7 +180,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"
@@ -211,8 +206,8 @@ jobs:
       outputs:
         - name: output
       params:
-        SSH_KEY: ((git.ssh-key))
-        KNOWN_HOST: ((git.known-host))
+        SSH_KEY: ((github-credentials.id_rsa))
+        KNOWN_HOST: ((github-credentials.known_hosts))
       run:
         path: bash
         # dir: pull-request
@@ -259,7 +254,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqgc-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"
@@ -283,8 +278,8 @@ jobs:
       - name: output
       - name: ferlease
       params:
-        SSH_KEY: ((git.ssh-key))
-        KNOWN_HOST: ((git.known-host))
+        SSH_KEY: ((github-credentials.id_rsa))
+        KNOWN_HOST: ((github-credentials.known_hosts))
       run:
         path: bash
         # dir: pull-request
