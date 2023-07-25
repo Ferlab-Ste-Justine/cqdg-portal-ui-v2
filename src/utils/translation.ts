@@ -4,6 +4,7 @@ import { IDictionary as FiltersDict } from '@ferlab/ui/core/components/filters/t
 import { IProTableDictionary } from '@ferlab/ui/core/components/ProTable/types';
 import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
@@ -49,6 +50,7 @@ export const getEntityConsequenceDictionary = () => ({
 });
 
 export const getProTableDictionary = (): IProTableDictionary => ({
+  numberFormat,
   itemCount: {
     results: intl.get('global.proTable.results'),
     noResults: intl.get('global.proTable.noResult'),
@@ -260,15 +262,6 @@ export const getFacetsDictionary = () => ({
     source_text: 'Diagnosis (Source Text)',
     source_text_tumor_location: 'Tumor Location (Source Text)',
   },
-  outcomes: {
-    vital_status: intl.get('entities.participant.vital_status'),
-    age_at_event_days: {
-      value: intl.get('entities.participant.age_at_outcome'),
-    },
-  },
-  phenotype: {
-    // age_at_event_days: intl.get('entities.participant.ageAtObservedPhenotype'),
-  },
   observed_phenotypes: {
     name: intl.get('entities.participant.phenotype'),
   },
@@ -408,5 +401,11 @@ export const getResizableGridDictionary = () => ({
     data: intl.get('screen.dataExploration.tabs.summary.download.data'),
     svg: intl.get('screen.dataExploration.tabs.summary.download.svg'),
     png: intl.get('screen.dataExploration.tabs.summary.download.png'),
+    removeChart: intl.get('screen.dataExploration.tabs.summary.download.removeChart'),
+    preview: intl.get('screen.dataExploration.tabs.summary.download.preview'),
+  },
+  columnSelector: {
+    reset: intl.get('screen.dataExploration.tabs.summary.columnSelector.reset'),
+    tooltip: intl.get('screen.dataExploration.tabs.summary.columnSelector.tooltip'),
   },
 });

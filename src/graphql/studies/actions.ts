@@ -1,7 +1,5 @@
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
-import { IParticipantResultTree } from 'graphql/participants/models';
-import { GET_PARTICIPANTS } from 'graphql/participants/queries';
 import { QueryVariable } from 'graphql/queries';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';

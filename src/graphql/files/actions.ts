@@ -1,3 +1,4 @@
+import { DocumentNode } from '@apollo/client';
 import { IQueryOperationsConfig, IQueryVariable } from '@ferlab/ui/core/graphql/types';
 import { computeSearchAfter, hydrateResults } from '@ferlab/ui/core/graphql/utils';
 import { INDEXES } from 'graphql/constants';
@@ -21,13 +22,21 @@ export const useDataFiles = (variables?: IQueryVariable, operations?: IQueryOper
   };
 };
 
-export const useFiles = ({ field, values }: { field: string; values: string[] }) => {
+export const useFiles = ({
+  field,
+  values,
+  query,
+}: {
+  field: string;
+  values: string[];
+  query: DocumentNode;
+}) => {
   const sqon = {
     content: [{ content: { field, value: values, index: INDEXES.FILE }, op: 'in' }],
     op: 'and',
   };
 
-  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(query, {
     variables: { sqon, first: MAX_ITEMS_QUERY },
   });
 
@@ -36,6 +45,7 @@ export const useFiles = ({ field, values }: { field: string; values: string[] })
   return {
     loading,
     data,
+    total: result?.File?.hits?.total || 0,
   };
 };
 

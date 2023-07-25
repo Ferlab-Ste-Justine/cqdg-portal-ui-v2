@@ -9,8 +9,6 @@ import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
-import isEmpty from 'lodash/isEmpty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -40,25 +38,31 @@ const graphModalSettings = {
 
 const LEGEND_ITEM_HEIGHT = 18;
 
-const addToQuery = (field: string, key: string) =>
+const addToQuery = (field: string, key: string, queryId: string) =>
   updateActiveQueryField({
-    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
     index: INDEXES.PARTICIPANT,
   });
 
-const DemographicsGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+const DemographicsGraphCard = ({
+  gridUID,
+  id,
+  queryId,
+  isPlayable = true,
+}: {
+  gridUID: string;
+  id: string;
+  queryId: string;
+  isPlayable?: boolean;
+}) => {
+  const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(DEMOGRAPHIC_QUERY, {
     variables: { sqon },
   });
   const genderData = aggregationToChartData(
     result?.Participant?.aggregations?.gender?.buckets,
-    result?.Participant?.hits?.total,
-  );
-  const raceData = aggregationToChartData(
-    result?.Participant?.aggregations?.race?.buckets,
     result?.Participant?.hits?.total,
   );
   const ethnicityData = aggregationToChartData(
@@ -76,14 +80,14 @@ const DemographicsGraphCard = ({ gridUID, id }: { gridUID: string; id: string })
       loadingType="spinner"
       headerTitle={intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle')}
       tsvSettings={{
-        data: [genderData, raceData, ethnicityData],
+        data: [genderData, ethnicityData],
       }}
       modalContent={
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
             <PieChart
               data={genderData}
-              onClick={(datum) => addToQuery('sex', datum.id as string)}
+              onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
               colors={colors}
               legends={[
                 {
@@ -101,31 +105,15 @@ const DemographicsGraphCard = ({ gridUID, id }: { gridUID: string; id: string })
           <Col sm={12} md={12} lg={8}>
             <PieChart
               data={ethnicityData}
-              onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
+              onClick={(datum) =>
+                isPlayable && addToQuery('ethnicity', datum.id as string, queryId)
+              }
               colors={colors}
               legends={[
                 {
                   anchor: 'bottom',
                   translateX: 0,
                   translateY: (LEGEND_ITEM_HEIGHT * ethnicityData.length - 1) / 2,
-                  direction: 'column',
-                  itemWidth: 100,
-                  itemHeight: LEGEND_ITEM_HEIGHT,
-                },
-              ]}
-              {...graphModalSettings}
-            />
-          </Col>
-          <Col sm={12} md={12} lg={8}>
-            <PieChart
-              data={raceData}
-              colors={colors}
-              onClick={(datum) => addToQuery('race', datum.id as string)}
-              legends={[
-                {
-                  anchor: 'bottom',
-                  translateX: 0,
-                  translateY: (LEGEND_ITEM_HEIGHT * raceData.length - 1) / 2,
                   direction: 'column',
                   itemWidth: 100,
                   itemHeight: LEGEND_ITEM_HEIGHT,
@@ -144,39 +132,28 @@ const DemographicsGraphCard = ({ gridUID, id }: { gridUID: string; id: string })
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
             {!genderData?.length ? (
-              <Empty imageType="grid" />
+              <Empty imageType="grid" description={intl.get('api.noData')} />
             ) : (
               <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.sexTitle')}
+                title={intl.get('screen.dataExploration.tabs.summary.demographic.genderTitle')}
                 data={genderData}
-                onClick={(datum) => addToQuery('gender', datum.id as string)}
+                onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
                 colors={colors}
                 {...graphSetting}
               />
             )}
           </Col>
           <Col sm={12} md={12} lg={8}>
-            {isEmpty(ethnicityData) ? (
-              <Empty imageType="grid" />
+            {!ethnicityData?.length ? (
+              <Empty imageType="grid" description={intl.get('api.noData')} />
             ) : (
               <PieChart
                 title={intl.get('screen.dataExploration.tabs.summary.demographic.ethnicityTitle')}
                 data={ethnicityData}
-                onClick={(datum) => addToQuery('ethnicity', datum.id as string)}
+                onClick={(datum) =>
+                  isPlayable && addToQuery('ethnicity', datum.id as string, queryId)
+                }
                 colors={colors}
-                {...graphSetting}
-              />
-            )}
-          </Col>
-          <Col sm={12} md={12} lg={8}>
-            {isEmpty(raceData) ? (
-              <Empty imageType="grid" />
-            ) : (
-              <PieChart
-                title={intl.get('screen.dataExploration.tabs.summary.demographic.raceTitle')}
-                data={raceData}
-                colors={colors}
-                onClick={(datum) => addToQuery('race', datum.id as string)}
                 {...graphSetting}
               />
             )}

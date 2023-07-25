@@ -8,7 +8,7 @@ import SetSearch from 'components/uiKit/search/SetSearch';
 import { SetType } from 'services/api/savedSet/models';
 
 const FileSetSearch = ({ queryBuilderId }: ICustomSearchProps) => {
-  const { sqon } = useFileResolvedSqon(queryBuilderId);
+  const sqon = useFileResolvedSqon(queryBuilderId);
 
   return (
     <SetSearch

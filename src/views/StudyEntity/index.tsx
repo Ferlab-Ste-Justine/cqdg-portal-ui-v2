@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
 import { ReadOutlined } from '@ant-design/icons';
@@ -9,12 +10,12 @@ import EntityPage, { EntityDescriptions, EntityTitle } from '@ferlab/ui/core/pag
 import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage/index';
 import { Space } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { useFiles } from 'graphql/files/actions';
-import { useParticipantsFromField } from 'graphql/participants/actions';
+import useFileResolvedSqon from 'graphql/files/useFileResolvedSqon';
+import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { useStudy } from 'graphql/studies/actions';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import StatsGraph from 'views/StudyEntity/StatsGraph';
+import { pageId, queryId } from 'views/StudyEntity/utils/constant';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
@@ -23,83 +24,78 @@ import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccess
 import { STATIC_ROUTES } from 'utils/routes';
 
 import getDataAccessDescriptions from './utils/getDataAccessDescriptions';
-import getDesignDescriptions from './utils/getDesignDescriptions';
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
 import FilesTable from './FilesTable';
 import SummaryHeader from './SummaryHeader';
 
 import styles from './index.module.scss';
 
-export const pageId = 'study-entity-page';
-
 const StudyEntity = () => {
   const { study_code } = useParams<{ study_code: string }>();
+  const participantSqon = useParticipantResolvedSqon(queryId);
+  const fileSqon = useFileResolvedSqon(queryId);
 
-  const { data, loading } = useStudy({
+  const { data: study, loading } = useStudy({
     field: 'study_code',
     value: study_code,
-  });
-
-  const { data: participantsData } = useParticipantsFromField({
-    field: 'study_code',
-    value: study_code,
-  });
-
-  const { data: filesData, loading: filesLoading } = useFiles({
-    field: 'study_code',
-    values: [study_code],
   });
 
   enum SectionId {
     SUMMARY = 'summary',
-    STATISTIC = 'statistic',
-    DESIGN = 'design',
     DATA_ACCESS = 'data_access',
-    DATA_SET = 'data_set',
     DATA_FILE = 'data_file',
+    STATISTIC = 'statistic',
   }
 
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
     {
-      href: `#${SectionId.DESIGN}`,
-      title: intl.get('entities.study.design'),
-    },
-    { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
-    {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
-    { href: `#${SectionId.DATA_SET}`, title: intl.get('entities.study.data_set') },
     { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.study.file') },
+    { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
   ];
 
-  const getCurrentSqon = (): any =>
-    generateSelectionSqon(INDEXES.FILE, filesData?.map((f) => f?.file_id) || []);
-  const hasTooManyFiles = filesData.length > MAX_ITEMS_QUERY;
+  const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
+
+  //todo: to change with the futur study.is_restricted field
+  const isRestricted = study_code === 'CAG';
+
+  /** We initialize here a sqon by queryBuilderId to handle graphs and actions */
+  useEffect(() => {
+    if (study_code) {
+      addQuery({
+        queryBuilderId: queryId,
+        query: generateQuery({
+          newFilters: [
+            generateValueFilter({
+              field: 'study_code',
+              value: [study_code],
+              index: INDEXES.STUDY,
+            }),
+          ],
+        }),
+        setAsActive: true,
+      });
+    }
+  }, [study_code]);
 
   return (
-    <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
+    <EntityPage loading={loading} data={study} links={links} pageId={pageId}>
       <EntityTitle
-        text={data?.name}
+        text={study?.name}
         icon={<ReadOutlined className={styles.titleIcon} />}
         loading={loading}
         extra={
           <Space>
-            {data && participantsData && (
-              <DownloadClinicalDataDropdown
-                participantIds={participantsData?.map((p) => p.node.participant_id)}
-              />
+            {!isRestricted && study && <DownloadClinicalDataDropdown sqon={participantSqon} />}
+            {!isRestricted && study && (
+              <DownloadFileManifestModal sqon={fileSqon} hasTooManyFiles={hasTooManyFiles} />
             )}
-            {data && filesData && (
-              <DownloadFileManifestModal
-                sqon={getCurrentSqon()}
-                hasTooManyFiles={hasTooManyFiles}
-              />
-            )}
-            {data && filesData && (
+            {study && (
               <DownloadRequestAccessModal
-                sqon={getCurrentSqon()}
+                sqon={fileSqon}
                 hasTooManyFiles={hasTooManyFiles}
                 type={'primary'}
               />
@@ -110,59 +106,49 @@ const StudyEntity = () => {
       <EntityDescriptions
         id={SectionId.SUMMARY}
         loading={loading}
-        descriptions={getSummaryDescriptions(data)}
+        descriptions={getSummaryDescriptions(study)}
         header={intl.get('global.summary')}
-        subheader={<SummaryHeader study={data} />}
-      />
-      <StatsGraph
-        id={SectionId.STATISTIC}
-        loading={loading}
-        title={intl.get('entities.study.statistic')}
-        header={intl.get('entities.study.statistic')}
-        titleExtra={[
-          <EntityTableRedirectLink
-            key="1"
-            to={STATIC_ROUTES.DATA_EXPLORATION_SUMMARY}
-            icon={<ExternalLinkIcon width="14" />}
-            onClick={() =>
-              addQuery({
-                queryBuilderId: DATA_EXPLORATION_QB_ID,
-                query: generateQuery({
-                  newFilters: [
-                    generateValueFilter({
-                      field: 'study_code',
-                      value: [study_code],
-                      index: INDEXES.STUDY,
-                    }),
-                  ],
-                }),
-                setAsActive: true,
-              })
-            }
-          >
-            {intl.get('global.viewInDataExploration')}
-          </EntityTableRedirectLink>,
-        ]}
-      />
-      <EntityDescriptions
-        id={SectionId.DESIGN}
-        loading={loading}
-        descriptions={getDesignDescriptions(data)}
-        header={intl.get('entities.study.design')}
-        title={intl.get('entities.study.design')}
+        subheader={<SummaryHeader study={study} isRestricted={isRestricted} />}
       />
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
         loading={loading}
-        descriptions={getDataAccessDescriptions(data)}
+        descriptions={getDataAccessDescriptions(study)}
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-      <FilesTable
-        id={SectionId.DATA_FILE}
-        loading={filesLoading}
-        files={filesData}
-        study_code={study_code}
+      <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />
+      <StatsGraph
+        id={SectionId.STATISTIC}
+        loading={loading}
+        title={intl.get('entities.study.statistic')}
+        header={intl.get('entities.study.statistics')}
+        titleExtra={[
+          !isRestricted && (
+            <EntityTableRedirectLink
+              key="1"
+              to={STATIC_ROUTES.DATA_EXPLORATION_SUMMARY}
+              icon={<ExternalLinkIcon width="14" />}
+              onClick={() =>
+                addQuery({
+                  queryBuilderId: DATA_EXPLORATION_QB_ID,
+                  query: generateQuery({
+                    newFilters: [
+                      generateValueFilter({
+                        field: 'study_code',
+                        value: [study_code],
+                        index: INDEXES.STUDY,
+                      }),
+                    ],
+                  }),
+                  setAsActive: true,
+                })
+              }
+            >
+              {intl.get('global.viewInDataExploration')}
+            </EntityTableRedirectLink>
+          ),
+        ]}
       />
     </EntityPage>
   );

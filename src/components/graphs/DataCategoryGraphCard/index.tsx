@@ -8,23 +8,31 @@ import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayo
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATA_CATEGORY_QUERY } from 'graphql/summary/queries';
-import isEmpty from 'lodash/isEmpty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { truncateString } from 'utils/string';
 import { getResizableGridDictionary } from 'utils/translation';
 
-const addToQuery = (field: string, key: string) =>
+const addToQuery = (field: string, key: string, queryId: string) =>
   updateActiveQueryField({
-    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
     index: INDEXES.FILE,
   });
 
-const DataCategoryGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+const DataCategoryGraphCard = ({
+  gridUID,
+  id,
+  queryId,
+  isPlayable = true,
+}: {
+  gridUID: string;
+  id: string;
+  queryId: string;
+  isPlayable?: boolean;
+}) => {
+  const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(DATA_CATEGORY_QUERY, {
     variables: { sqon },
   });
@@ -49,18 +57,20 @@ const DataCategoryGraphCard = ({ gridUID, id }: { gridUID: string; id: string })
         <BarChart
           data={dataCategoryResults}
           axisLeft={{
-            legend: 'Data Category',
+            legend: intl.get('entities.file.data_category'),
             legendPosition: 'middle',
             legendOffset: -110,
             format: (title: string) => truncateString(title, 15),
           }}
           tooltipLabel={(node: any) => node.data.id}
           axisBottom={{
-            legend: '# of participants',
+            legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
             legendPosition: 'middle',
             legendOffset: 35,
           }}
-          onClick={(datum: any) => addToQuery('data_category', datum.indexValue as string)}
+          onClick={(datum: any) =>
+            isPlayable && addToQuery('data_category', datum.indexValue as string, queryId)
+          }
           layout="horizontal"
           margin={{
             bottom: 45,
@@ -74,27 +84,28 @@ const DataCategoryGraphCard = ({ gridUID, id }: { gridUID: string; id: string })
         width: 800,
         height: 300,
       }}
-      // @ts-ignore
       content={
         <>
-          {isEmpty(dataCategoryResults) ? (
-            <Empty imageType="grid" size="large" />
+          {!dataCategoryResults?.length ? (
+            <Empty imageType="grid" size="large" description={intl.get('api.noData')} />
           ) : (
             <BarChart
               data={dataCategoryResults}
               axisLeft={{
-                legend: 'Data Category',
+                legend: intl.get('entities.file.data_category'),
                 legendPosition: 'middle',
                 legendOffset: -110,
                 format: (title: string) => truncateString(title, 15),
               }}
               tooltipLabel={(node: any) => node.data.id}
               axisBottom={{
-                legend: '# of participants',
+                legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
                 legendPosition: 'middle',
                 legendOffset: 35,
               }}
-              onClick={(datum: any) => addToQuery('data_category', datum.indexValue as string)}
+              onClick={(datum: any) =>
+                isPlayable && addToQuery('data_category', datum.indexValue as string, queryId)
+              }
               layout="horizontal"
               margin={{
                 bottom: 45,

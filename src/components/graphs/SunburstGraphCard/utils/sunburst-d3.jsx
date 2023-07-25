@@ -17,23 +17,16 @@ const SunburstD3 = (
   data,
   config,
   getSelectedPhenotype,
-  formatters = {
-    tooltipFormatter: (node) => {},
-    centerTitleFormatter: (node) => {},
-    centerSubtitleFormatter: (node) => {},
-    centerDescriptionFormatter: (node) => {},
-    legendFormatter: (node) => {},
-  },
-  type,
-  previewMode,
-) => {
-  const {
+  {
     tooltipFormatter,
     centerTitleFormatter,
     centerSubtitleFormatter,
     centerDescriptionFormatter,
     legendFormatter,
-  } = formatters;
+  },
+  type,
+  previewMode,
+) => {
   const width = config.width || 300;
   const height = config.height || 300;
   const depth = config.depth;
@@ -128,7 +121,7 @@ const SunburstD3 = (
     .style('max-width', '250px')
     .style('z-index', '1000');
 
-  const mouseoverTooltip = function (d) {
+  const mouseoverTooltip = function () {
     if (previewMode) return;
     Tooltip.style('display', 'block');
     d3.select(this).style('stroke', 'black').style('opacity', 1);
@@ -324,7 +317,7 @@ const SunburstD3 = (
     });
   }
 
-  function wrapLegend(selection, data) {
+  function wrapLegend(selection) {
     // there is no centering of text with svg, need to do it manually
     selection.each(function () {
       let legendText = d3.select(this),

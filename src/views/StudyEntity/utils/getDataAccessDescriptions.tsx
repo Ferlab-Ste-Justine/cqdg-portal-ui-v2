@@ -12,7 +12,7 @@ import styles from '../index.module.scss';
 
 const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.study.access_limitations'),
+    label: intl.get('entities.study.access_limitation'),
     value: study?.data_access_codes?.access_limitations?.length ? (
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
@@ -45,7 +45,7 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
     ),
   },
   {
-    label: intl.get('entities.study.access_requirements'),
+    label: intl.get('entities.study.access_requirement'),
     value: study?.data_access_codes?.access_requirements?.length ? (
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
@@ -54,6 +54,7 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
           'see.less': intl.get('global.seeLess'),
           'see.more': intl.get('global.seeMore'),
         }}
+        className={styles.forceLinkUnderline}
         renderItem={(access_requirement, index) => {
           const requirement = extractDuoTitleAndCode(access_requirement);
           return requirement ? (

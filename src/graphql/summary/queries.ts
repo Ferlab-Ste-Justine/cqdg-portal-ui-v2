@@ -3,6 +3,9 @@ import { gql } from '@apollo/client';
 export const DATATYPE_QUERY = gql`
   query ($sqon: JSON) {
     Participant {
+      hits(filters: $sqon) {
+        total
+      }
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_type {
           buckets {
@@ -18,6 +21,9 @@ export const DATATYPE_QUERY = gql`
 export const DATA_CATEGORY_QUERY = gql`
   query ($sqon: JSON) {
     Participant {
+      hits(filters: $sqon) {
+        total
+      }
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
         files__data_category {
           buckets {

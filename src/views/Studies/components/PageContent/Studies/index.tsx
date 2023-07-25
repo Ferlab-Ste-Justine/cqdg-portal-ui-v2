@@ -259,8 +259,8 @@ const Studies = ({ results, setQueryConfig, queryConfig }: OwnProps) => {
       showSorterTooltip={false}
       onChange={({ current, pageSize }, _, sorter) =>
         setQueryConfig({
-          pageIndex: current!,
-          size: pageSize!,
+          pageIndex: current,
+          size: pageSize,
           sort: formatQuerySortList(sorter),
         } as IQueryConfig)
       }

@@ -8,7 +8,8 @@ import {
 } from '@ant-design/icons';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Button } from 'antd';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
+import { Button, Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IStudyEntity } from 'graphql/studies/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
@@ -19,11 +20,18 @@ import styles from './index.module.scss';
 
 interface ISummaryBarProps {
   study?: IStudyEntity;
+  isRestricted?: boolean;
 }
 
-const SummaryHeader = ({ study }: ISummaryBarProps) => (
-  <div className={styles.buttonGroup}>
-    <Button className={styles.button} size="large" block>
+const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
+  <Popover
+    title={intl.get('entities.study.restrictedTitle')}
+    content={intl.get('entities.study.restrictedContent')}
+    showArrow={false}
+    className={styles.buttonGroup}
+    trigger={isRestricted ? 'hover' : 'none'}
+  >
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -46,40 +54,30 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
       >
         <UserOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{study?.participant_count}</span>
+          <span className={styles.count}>
+            {study?.participant_count ? numberFormat(study.participant_count) : '-'}
+          </span>
           <span className={styles.name}>{intl.get('entities.participant.participants')}</span>
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-        onClick={() =>
-          study &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_code',
-                  value: [study.study_code],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
-      >
+    <Button
+      className={`${styles.button} ${!isRestricted && styles.buttonDisabled}`}
+      size="large"
+      block
+      disabled={isRestricted}
+    >
+      <div className={styles.link}>
         <TeamOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{study?.family_count || '-'}</span>
+          <span className={styles.count}>
+            {study?.family_count ? numberFormat(study.family_count) : '-'}
+          </span>
           <span className={styles.name}>{intl.get('entities.participant.families')}</span>
         </div>
-      </Link>
+      </div>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
@@ -102,12 +100,18 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
       >
         <ExperimentOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{study?.sample_count || '-'}</span>
-          <span className={styles.name}>{intl.get('entities.biospecimen.samples')}</span>
+          <span className={styles.count}>
+            {study?.sample_count ? numberFormat(study.sample_count) : '-'}
+          </span>
+          <span className={styles.name}>
+            {intl.get('entities.biospecimen.biospecimensAuto', {
+              count: study?.sample_count || 0,
+            })}
+          </span>
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
@@ -130,12 +134,14 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
       >
         <FileTextOutlined className={styles.icon} />
         <div className={styles.alignBaseline}>
-          <span className={styles.count}>{study?.file_count}</span>
+          <span className={styles.count}>
+            {study?.file_count ? numberFormat(study.file_count) : '-'}
+          </span>
           <span className={styles.name}>{intl.get('entities.file.files')}</span>
         </div>
       </Link>
     </Button>
-  </div>
+  </Popover>
 );
 
 export default SummaryHeader;

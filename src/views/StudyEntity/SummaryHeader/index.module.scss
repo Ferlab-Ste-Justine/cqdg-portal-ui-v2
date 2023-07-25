@@ -44,4 +44,11 @@
       }
     }
   }
+
+  .buttonDisabled {
+    cursor: initial;
+    &:hover {
+      background-color: initial;
+    }
+  }
 }

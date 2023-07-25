@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { EntityTableMultiple } from '@ferlab/ui/core/pages/EntityPage';
-import { IFileEntity } from 'graphql/files/models';
+import { useFiles } from 'graphql/files/actions';
+import { GET_FILES_TABLE } from 'graphql/files/queries';
 
 import {
   getDataTypeColumns,
@@ -10,13 +11,17 @@ import {
 } from '../utils/getFilesColumns';
 
 interface IFilesTableProps {
-  files: IFileEntity[];
   id: string;
-  loading: boolean;
   study_code: string;
 }
 
-const FilesTable = ({ files, id, loading, study_code }: IFilesTableProps) => {
+const FilesTable = ({ id, study_code }: IFilesTableProps) => {
+  const { data: files = [], loading } = useFiles({
+    field: 'study_code',
+    values: [study_code],
+    query: GET_FILES_TABLE,
+  });
+
   const dataTypeInfoData = getFilesDataTypeInfo(files);
   const experimentalStrategyData = getFilesInfoByKey(files, 'experimental_strategy');
 
@@ -24,7 +29,7 @@ const FilesTable = ({ files, id, loading, study_code }: IFilesTableProps) => {
     <EntityTableMultiple
       id={id}
       loading={loading}
-      title={intl.get('entities.file.datafile')}
+      title={intl.get('entities.file.file')}
       header={intl.get('entities.file.files')}
       total={files.length}
       tables={[

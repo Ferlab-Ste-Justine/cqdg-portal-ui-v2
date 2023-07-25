@@ -399,7 +399,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
         setPageIndex(DEFAULT_PAGE_INDEX);
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
-          size: queryConfig.size!,
+          size: queryConfig.size,
           sort: formatQuerySortList(sorter),
         } as IQueryConfig);
       }}
@@ -414,13 +414,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
-              data_exploration: {
-                tables: {
-                  participants: {
-                    columns: newState,
-                  },
-                },
-              },
+              data_exploration: { tables: { participants: { columns: newState } } },
             }),
           ),
         onTableExportClick: () =>

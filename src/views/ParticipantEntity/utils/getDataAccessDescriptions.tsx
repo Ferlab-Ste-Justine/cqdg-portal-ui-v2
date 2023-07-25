@@ -53,6 +53,7 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
           'see.less': intl.get('global.seeLess'),
           'see.more': intl.get('global.seeMore'),
         }}
+        className={styles.forceLinkUnderline}
         renderItem={(access_requirement, index) => {
           const requirement = extractDuoTitleAndCode(access_requirement);
           return requirement ? (

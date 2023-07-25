@@ -26,10 +26,10 @@
   border-bottom: 1px dotted;
 }
 
-.forceLinkUnderline a {
+.forceLinkUnderline {
   text-decoration: underline !important;
 }
 
-.forceLinkUnderline a:hover {
+.forceLinkUnderline:hover {
   text-decoration: none !important;
 }

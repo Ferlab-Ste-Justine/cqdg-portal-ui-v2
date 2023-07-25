@@ -8,23 +8,31 @@ import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayo
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { DATATYPE_QUERY } from 'graphql/summary/queries';
-import isEmpty from 'lodash/isEmpty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { truncateString } from 'utils/string';
 import { getResizableGridDictionary } from 'utils/translation';
 
-const addToQuery = (field: string, key: string) =>
+const addToQuery = (field: string, key: string, queryId: string) =>
   updateActiveQueryField({
-    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
     index: INDEXES.FILE,
   });
 
-const DataTypeGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+const DataTypeGraphCard = ({
+  gridUID,
+  id,
+  queryId,
+  isPlayable = true,
+}: {
+  gridUID: string;
+  id: string;
+  queryId: string;
+  isPlayable?: boolean;
+}) => {
+  const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(DATATYPE_QUERY, {
     variables: { sqon },
   });
@@ -49,18 +57,20 @@ const DataTypeGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => 
         <BarChart
           data={dataTypeResults}
           axisLeft={{
-            legend: 'Data Types',
+            legend: intl.get('entities.file.data_type'),
             legendPosition: 'middle',
             legendOffset: -128,
             format: (title: string) => truncateString(title, 15),
           }}
           tooltipLabel={(node: any) => node.data.id}
           axisBottom={{
-            legend: '# of participants',
+            legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
             legendPosition: 'middle',
             legendOffset: 35,
           }}
-          onClick={(datum: any) => addToQuery('data_type', datum.indexValue as string)}
+          onClick={(datum: any) =>
+            isPlayable && addToQuery('data_type', datum.indexValue as string, queryId)
+          }
           margin={{
             bottom: 45,
             left: 140,
@@ -74,27 +84,28 @@ const DataTypeGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => 
         width: 800,
         height: 400,
       }}
-      // @ts-ignore
       content={
         <>
-          {isEmpty(dataTypeResults) ? (
-            <Empty imageType="grid" size="large" />
+          {!dataTypeResults?.length ? (
+            <Empty imageType="grid" size="large" description={intl.get('api.noData')} />
           ) : (
             <BarChart
               data={dataTypeResults}
               axisLeft={{
-                legend: 'Data Types',
+                legend: intl.get('entities.file.data_type'),
                 legendPosition: 'middle',
                 legendOffset: -128,
                 format: (title: string) => truncateString(title, 15),
               }}
               tooltipLabel={(node: any) => node.data.id}
               axisBottom={{
-                legend: '# of participants',
+                legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
                 legendPosition: 'middle',
                 legendOffset: 35,
               }}
-              onClick={(datum: any) => addToQuery('data_type', datum.indexValue as string)}
+              onClick={(datum: any) =>
+                isPlayable && addToQuery('data_type', datum.indexValue as string, queryId)
+              }
               margin={{
                 bottom: 45,
                 left: 140,

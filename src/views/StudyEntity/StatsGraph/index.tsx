@@ -1,4 +1,3 @@
-import React from 'react';
 import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse/index';
 import { Card, Space, Typography } from 'antd';
 

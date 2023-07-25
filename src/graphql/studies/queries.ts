@@ -16,6 +16,7 @@ export const GET_STUDIES = gql`
             keyword
             description
             participant_count
+            sample_count
             file_count
             family_count
             contact {

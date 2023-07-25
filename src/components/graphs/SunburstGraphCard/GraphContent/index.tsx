@@ -3,7 +3,6 @@ import intl from 'react-intl-universal';
 import Empty from '@ferlab/ui/core/components/Empty';
 import { Col, Row, Spin } from 'antd';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   extractMondoTitleAndCode,
   extractPhenotypeTitleAndCode,
@@ -29,16 +28,25 @@ interface OwnProps {
   width?: number;
   height?: number;
   previewMode?: boolean;
+  queryId: string;
+  isPlayable?: boolean;
 }
 
-const SunburstGraph = ({ field, previewMode = false, width = 335, height = 335 }: OwnProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+const SunburstGraph = ({
+  field,
+  previewMode = false,
+  width = 335,
+  height = 335,
+  queryId,
+  isPlayable = true,
+}: OwnProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [treeData, setTreeData] = useState<TreeNode[]>();
   const [currentNode, setCurrentNode] = useState<TreeNode>();
   const phenotypeStore = useRef<PhenotypeStore | undefined>(new PhenotypeStore());
   const sunburstRef = useRef<SVGSVGElement>(null);
   const updateSunburst = useRef<(key: any) => void>();
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(queryId);
   const { store } = getStoreConfig();
   const locale = store.getState().global.lang;
 
@@ -54,6 +62,7 @@ const SunburstGraph = ({ field, previewMode = false, width = 335, height = 335 }
       setCurrentNode(targetedRootNode);
       setTreeData(rootNode ? [lightTreeNodeConstructor(rootNode.key!)] : []);
 
+      setIsLoading(false);
       updateSunburst.current = SunburstD3(
         sunburstRef,
         targetedRootNode,
@@ -87,7 +96,6 @@ const SunburstGraph = ({ field, previewMode = false, width = 335, height = 335 }
       );
     });
 
-    setIsLoading(false);
     return () => {
       updateSunburst.current = undefined;
     };
@@ -110,7 +118,7 @@ const SunburstGraph = ({ field, previewMode = false, width = 335, height = 335 }
     );
   }
 
-  if (!treeData || treeData?.length === 0) {
+  if (!treeData?.length) {
     return (
       <Empty
         imageType="grid"
@@ -146,6 +154,7 @@ const SunburstGraph = ({ field, previewMode = false, width = 335, height = 335 }
           getSelectedPhenotype={getSelectedPhenotype}
           updateSunburst={updateSunburst.current!}
           field={field}
+          isPlayable={isPlayable}
         />
       </Col>
     </Row>

@@ -260,7 +260,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         setPageIndex(DEFAULT_PAGE_INDEX);
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
-          size: queryConfig.size!,
+          size: queryConfig.size,
           sort: formatQuerySortList(sorter),
         } as IQueryConfig);
       }}

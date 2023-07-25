@@ -6,9 +6,7 @@ import { mapFilterForFiles } from 'utils/fieldMapper';
 const useFileResolvedSqon = (queryBuilderId: string) => {
   const { queryList, activeQuery } = useQueryBuilderState(queryBuilderId);
 
-  return {
-    sqon: mapFilterForFiles(resolveSyntheticSqon(queryList, activeQuery)),
-  };
+  return mapFilterForFiles(resolveSyntheticSqon(queryList, activeQuery));
 };
 
 export default useFileResolvedSqon;
