@@ -6,6 +6,7 @@ import { Space } from 'antd';
 
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
+import { getResizableGridDictionary } from 'utils/translation';
 
 import getSummaryLayout, { UID } from './getSummaryLayout';
 
@@ -20,6 +21,7 @@ const SummaryTab = () => {
       <ResizableGridLayout
         uid={UID}
         defaultLayouts={getSummaryLayout()}
+        dictionary={getResizableGridDictionary()}
         layouts={userInfo?.config.data_exploration?.summary?.layouts}
         onReset={(layouts: TSerializedResizableGridLayoutConfig[]) => {
           dispatch(updateUserConfig({ data_exploration: { summary: { layouts } } }));

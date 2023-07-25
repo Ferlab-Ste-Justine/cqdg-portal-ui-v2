@@ -114,7 +114,6 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           }}
         />
       }
-      // @ts-ignore
       content={
         <Tabs
           className={cx(styles.setTabs, 'navNoMarginBtm')}

@@ -42,9 +42,6 @@ export type TUserConfig = {
       datafiles?: TUserTableConfig;
     };
     summary?: {
-      cards?: {
-        order?: string[];
-      };
       layouts?: TSerializedResizableGridLayoutConfig[];
     };
   };
@@ -52,6 +49,7 @@ export type TUserConfig = {
     tables?: {
       studies?: TUserTableConfig;
     };
+    layouts?: TSerializedResizableGridLayoutConfig[];
   };
   variants?: {
     tables?: {

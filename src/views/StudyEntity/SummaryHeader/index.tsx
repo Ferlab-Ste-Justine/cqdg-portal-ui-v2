@@ -19,11 +19,12 @@ import styles from './index.module.scss';
 
 interface ISummaryBarProps {
   study?: IStudyEntity;
+  isRestricted?: boolean;
 }
 
-const SummaryHeader = ({ study }: ISummaryBarProps) => (
+const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
   <div className={styles.buttonGroup}>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -51,7 +52,7 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -79,7 +80,7 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
@@ -107,7 +108,7 @@ const SummaryHeader = ({ study }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block>
+    <Button className={styles.button} size="large" block disabled={isRestricted}>
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}

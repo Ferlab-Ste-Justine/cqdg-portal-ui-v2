@@ -8,7 +8,6 @@ import { Col, Row } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { STUDIESPIE_QUERY } from 'graphql/summary/queries';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -18,16 +17,24 @@ import styles from './index.module.scss';
 
 const colors = getCommonColors();
 
-const addToQuery = (field: string, key: string, index: string) =>
+const addToQuery = (field: string, key: string, index: string, queryId: string) =>
   updateActiveQueryField({
-    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === intl.get('api.noData') ? ArrangerValues.missing : key],
     index,
   });
 
-const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+const StudiesGraphCard = ({
+  gridUID,
+  id,
+  queryId,
+}: {
+  gridUID: string;
+  id: string;
+  queryId: string;
+}) => {
+  const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(STUDIESPIE_QUERY, {
     variables: { sqon },
   });
@@ -61,7 +68,7 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
             <PieChart
-              onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY, queryId)}
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.domainTitle')}
               data={domainData}
               colors={colors}
@@ -87,7 +94,9 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.popTitle')}
               data={populationData}
-              onClick={(datum) => addToQuery('population', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) =>
+                addToQuery('population', datum.id as string, INDEXES.STUDY, queryId)
+              }
               colors={colors}
             />
           </Col>
@@ -95,7 +104,9 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.partTitle')}
               data={studyCodeData}
-              onClick={(datum) => addToQuery('study_code', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) =>
+                addToQuery('study_code', datum.id as string, INDEXES.STUDY, queryId)
+              }
               colors={colors}
             />
           </Col>
@@ -107,7 +118,7 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.domainTitle')}
               data={domainData}
-              onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY, queryId)}
               colors={colors}
             />
           </Col>
@@ -115,7 +126,9 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.popTitle')}
               data={populationData}
-              onClick={(datum) => addToQuery('population', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) =>
+                addToQuery('population', datum.id as string, INDEXES.STUDY, queryId)
+              }
               colors={colors}
             />
           </Col>
@@ -123,7 +136,9 @@ const StudiesGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
             <PieChart
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.partTitle')}
               data={studyCodeData}
-              onClick={(datum) => addToQuery('study_code', datum.id as string, INDEXES.STUDY)}
+              onClick={(datum) =>
+                addToQuery('study_code', datum.id as string, INDEXES.STUDY, queryId)
+              }
               colors={colors}
             />
           </Col>

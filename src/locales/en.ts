@@ -19,18 +19,12 @@ const en = {
         access_requirements: 'Access Requirement',
       },
       statistic: 'Statistic',
-      design: 'Design',
       data_access: 'Data Access',
       data_set: 'Data Set',
       name: 'Name',
       file: 'File',
       keywords: 'Keywords',
       description: 'Description',
-      collection_period: 'Collection Period',
-      data_source: 'Data Source',
-      selection_criteria: 'Selection Criteria',
-      follow_up: 'Follow Up',
-      supplementary_information: 'Supplementary Information',
     },
     biospecimen: {
       sample_id: 'Sample ID',
@@ -905,8 +899,13 @@ const en = {
             data: 'Download Data',
             svg: 'Download SVG',
             png: 'Download PNG',
+            removeChart: 'Remove chart',
           },
-          observed_phenotype: {
+          columnSelector: {
+            reset: 'Reset',
+            tooltip: 'Charts',
+          },
+          observed_phenotypes: {
             cardTitle: 'Observed Phenotypes (HPO)',
             phenotypeTree: {
               nbParticipant: '{count} participants (including descendant terms on this path)',
@@ -916,7 +915,7 @@ const en = {
             empty: 'No observed phenotypes reported for these participants',
           },
           mondo: {
-            cardTitle: ' Diagnosis (MONDO)',
+            cardTitle: 'Diagnosis (MONDO)',
             phenotypeTree: {
               nbParticipant: '{count} participants (including descendant terms on this path)',
               addTermToQuery: 'Add term to active query',
@@ -926,7 +925,7 @@ const en = {
           },
           demographic: {
             cardTitle: 'Demographics',
-            sexTitle: 'Gender',
+            genderTitle: 'Gender',
             familyComposition: 'Family Composition',
             ethnicityTitle: 'Ethnicity',
           },
@@ -949,10 +948,6 @@ const en = {
             axis: '# of participants',
             dataCategory: 'Data Category',
             dataType: 'Data Type',
-          },
-          observed_phenotypes: {
-            cardTitle: 'Observed Phenotypes (HPO)',
-            empty: 'No observed phenotypes reported for these participants',
           },
           studiespie: {
             cardTitle: 'Studies',
