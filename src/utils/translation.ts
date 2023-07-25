@@ -408,5 +408,11 @@ export const getResizableGridDictionary = () => ({
     data: intl.get('screen.dataExploration.tabs.summary.download.data'),
     svg: intl.get('screen.dataExploration.tabs.summary.download.svg'),
     png: intl.get('screen.dataExploration.tabs.summary.download.png'),
+    removeChart: intl.get('screen.dataExploration.tabs.summary.download.removeChart'),
+    preview: intl.get('screen.dataExploration.tabs.summary.download.preview'),
+  },
+  columnSelector: {
+    reset: intl.get('screen.dataExploration.tabs.summary.columnSelector.reset'),
+    tooltip: intl.get('screen.dataExploration.tabs.summary.columnSelector.tooltip'),
   },
 });

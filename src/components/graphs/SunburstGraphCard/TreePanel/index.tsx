@@ -33,6 +33,7 @@ interface ITreePanelProps {
   getSelectedPhenotype: (node: TreeNode) => void;
   updateSunburst: (key: string) => void;
   field: string;
+  isPlayable?: boolean;
 }
 
 const TreePanel = ({
@@ -41,6 +42,7 @@ const TreePanel = ({
   getSelectedPhenotype,
   updateSunburst,
   field,
+  isPlayable,
 }: ITreePanelProps) => (
   <Space direction="vertical" className={styles.phenotypeSunburstTree}>
     <Title level={5}>{currentNode?.name}</Title>
@@ -49,22 +51,24 @@ const TreePanel = ({
         count: currentNode?.results,
       })}
     </Text>
-    <Button
-      className={styles.addTermBtn}
-      type="link"
-      size="small"
-      onClick={() => {
-        updateActiveQueryField({
-          queryBuilderId: DATA_EXPLORATION_QB_ID,
-          field: `${field}.name`,
-          value: [currentNode?.title!],
-          index: INDEXES.PARTICIPANT,
-          merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
-        });
-      }}
-    >
-      {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.addTermToQuery`)}
-    </Button>
+    {isPlayable && (
+      <Button
+        className={styles.addTermBtn}
+        type="link"
+        size="small"
+        onClick={() => {
+          updateActiveQueryField({
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            field: `${field}.name`,
+            value: [currentNode?.title!],
+            index: INDEXES.PARTICIPANT,
+            merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
+          });
+        }}
+      >
+        {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.addTermToQuery`)}
+      </Button>
+    )}
     <Space className={styles.treeWrapper} direction="vertical" size={5}>
       <Text type="secondary">
         {intl.get(`screen.dataExploration.tabs.summary.${field}.phenotypeTree.currentPath`)}

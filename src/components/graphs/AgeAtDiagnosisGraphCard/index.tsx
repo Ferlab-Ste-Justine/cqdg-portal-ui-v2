@@ -8,8 +8,6 @@ import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/Resiza
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { AGE_AT_DIAGNOSIS_QUERY } from 'graphql/summary/queries';
-import isEmpty from 'lodash/isEmpty';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { getResizableGridDictionary } from 'utils/translation';
@@ -79,10 +77,10 @@ const buildSqonFromRange = (rangeValue: string) => {
   }
 };
 
-const addToQuery = (field: string, key: string) => {
+const addToQuery = (field: string, key: string, queryId: string) => {
   const sqon = buildSqonFromRange(key);
   return updateActiveQueryField({
-    queryBuilderId: DATA_EXPLORATION_QB_ID,
+    queryBuilderId: queryId,
     field,
     value: sqon.value,
     operator: sqon.op,
@@ -90,8 +88,18 @@ const addToQuery = (field: string, key: string) => {
   });
 };
 
-const AgeAtDiagnosisGraphCard = ({ gridUID, id }: { gridUID: string; id: string }) => {
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+const AgeAtDiagnosisGraphCard = ({
+  gridUID,
+  id,
+  queryId,
+  isPlayable = true,
+}: {
+  gridUID: string;
+  id: string;
+  queryId: string;
+  isPlayable?: boolean;
+}) => {
+  const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(AGE_AT_DIAGNOSIS_QUERY, {
     variables: { sqon },
   });
@@ -124,7 +132,8 @@ const AgeAtDiagnosisGraphCard = ({ gridUID, id }: { gridUID: string; id: string 
             legendOffset: 35,
           }}
           onClick={(datum: any) =>
-            addToQuery('diagnosis.age_at_event_days', datum.data.label as string)
+            isPlayable &&
+            addToQuery('diagnosis.age_at_event_days', datum.data.label as string, queryId)
           }
           margin={{
             top: 12,
@@ -139,10 +148,9 @@ const AgeAtDiagnosisGraphCard = ({ gridUID, id }: { gridUID: string; id: string 
         width: 800,
         height: 300,
       }}
-      // @ts-ignore
       content={
         <>
-          {isEmpty(ageAtDiagnosisresults) ? (
+          {!ageAtDiagnosisresults?.length ? (
             <Empty imageType="grid" size="large" />
           ) : (
             <BarChart
@@ -159,7 +167,8 @@ const AgeAtDiagnosisGraphCard = ({ gridUID, id }: { gridUID: string; id: string 
                 legendOffset: 35,
               }}
               onClick={(datum: any) =>
-                addToQuery('diagnosis.age_at_event_days', datum.data.label as string)
+                isPlayable &&
+                addToQuery('diagnosis.age_at_event_days', datum.data.label as string, queryId)
               }
               margin={{
                 top: 12,

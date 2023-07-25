@@ -23,7 +23,6 @@ import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccess
 import { STATIC_ROUTES } from 'utils/routes';
 
 import getDataAccessDescriptions from './utils/getDataAccessDescriptions';
-import getDesignDescriptions from './utils/getDesignDescriptions';
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
 import FilesTable from './FilesTable';
 import SummaryHeader from './SummaryHeader';
@@ -53,7 +52,6 @@ const StudyEntity = () => {
   enum SectionId {
     SUMMARY = 'summary',
     STATISTIC = 'statistic',
-    DESIGN = 'design',
     DATA_ACCESS = 'data_access',
     DATA_SET = 'data_set',
     DATA_FILE = 'data_file',
@@ -61,22 +59,21 @@ const StudyEntity = () => {
 
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
-    {
-      href: `#${SectionId.DESIGN}`,
-      title: intl.get('entities.study.design'),
-    },
     { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
     {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
-    { href: `#${SectionId.DATA_SET}`, title: intl.get('entities.study.data_set') },
+    // { href: `#${SectionId.DATA_SET}`, title: intl.get('entities.study.data_set') },
     { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.study.file') },
   ];
 
   const getCurrentSqon = (): any =>
     generateSelectionSqon(INDEXES.FILE, filesData?.map((f) => f?.file_id) || []);
   const hasTooManyFiles = filesData.length > MAX_ITEMS_QUERY;
+
+  //todo: to change with the futur study.is_restricted field
+  const isRestricted = study_code === 'CAG';
 
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
@@ -86,12 +83,12 @@ const StudyEntity = () => {
         loading={loading}
         extra={
           <Space>
-            {data && participantsData && (
+            {!isRestricted && data && participantsData && (
               <DownloadClinicalDataDropdown
                 participantIds={participantsData?.map((p) => p.node.participant_id)}
               />
             )}
-            {data && filesData && (
+            {!isRestricted && data && filesData && (
               <DownloadFileManifestModal
                 sqon={getCurrentSqon()}
                 hasTooManyFiles={hasTooManyFiles}
@@ -112,11 +109,12 @@ const StudyEntity = () => {
         loading={loading}
         descriptions={getSummaryDescriptions(data)}
         header={intl.get('global.summary')}
-        subheader={<SummaryHeader study={data} />}
+        subheader={<SummaryHeader study={data} isRestricted={isRestricted} />}
       />
       <StatsGraph
         id={SectionId.STATISTIC}
         loading={loading}
+        study_code={study_code}
         title={intl.get('entities.study.statistic')}
         header={intl.get('entities.study.statistic')}
         titleExtra={[
@@ -143,13 +141,6 @@ const StudyEntity = () => {
             {intl.get('global.viewInDataExploration')}
           </EntityTableRedirectLink>,
         ]}
-      />
-      <EntityDescriptions
-        id={SectionId.DESIGN}
-        loading={loading}
-        descriptions={getDesignDescriptions(data)}
-        header={intl.get('entities.study.design')}
-        title={intl.get('entities.study.design')}
       />
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
