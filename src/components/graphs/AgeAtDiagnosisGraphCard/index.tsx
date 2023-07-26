@@ -122,12 +122,12 @@ const AgeAtDiagnosisGraphCard = ({
           data={ageAtDiagnosisresults}
           tooltipLabel={(node: any) => `Participant${node.data.value > 1 ? 's' : ''}`}
           axisLeft={{
-            legend: '# Participants',
+            legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
             legendPosition: 'middle',
             legendOffset: -45,
           }}
           axisBottom={{
-            legend: 'Age at Diagnosis (years)',
+            legend: intl.get('entities.participant.age_at_diagnosis_tooltip'),
             legendPosition: 'middle',
             legendOffset: 35,
           }}
@@ -157,12 +157,12 @@ const AgeAtDiagnosisGraphCard = ({
               data={ageAtDiagnosisresults}
               tooltipLabel={(node: any) => `Participant${node.data.value > 1 ? 's' : ''}`}
               axisLeft={{
-                legend: '# Participants',
+                legend: intl.get('screen.dataExploration.tabs.summary.availableData.axis'),
                 legendPosition: 'middle',
                 legendOffset: -45,
               }}
               axisBottom={{
-                legend: 'Age at Diagnosis (years)',
+                legend: intl.get('entities.participant.age_at_diagnosis_tooltip'),
                 legendPosition: 'middle',
                 legendOffset: 35,
               }}

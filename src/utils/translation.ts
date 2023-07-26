@@ -260,15 +260,6 @@ export const getFacetsDictionary = () => ({
     source_text: 'Diagnosis (Source Text)',
     source_text_tumor_location: 'Tumor Location (Source Text)',
   },
-  outcomes: {
-    vital_status: intl.get('entities.participant.vital_status'),
-    age_at_event_days: {
-      value: intl.get('entities.participant.age_at_outcome'),
-    },
-  },
-  phenotype: {
-    // age_at_event_days: intl.get('entities.participant.ageAtObservedPhenotype'),
-  },
   observed_phenotypes: {
     name: intl.get('entities.participant.phenotype'),
   },
