@@ -40,7 +40,7 @@ const SunburstGraph = ({
   queryId,
   isPlayable = true,
 }: OwnProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [treeData, setTreeData] = useState<TreeNode[]>();
   const [currentNode, setCurrentNode] = useState<TreeNode>();
   const phenotypeStore = useRef<PhenotypeStore | undefined>(new PhenotypeStore());
@@ -62,6 +62,7 @@ const SunburstGraph = ({
       setCurrentNode(targetedRootNode);
       setTreeData(rootNode ? [lightTreeNodeConstructor(rootNode.key!)] : []);
 
+      setIsLoading(false);
       updateSunburst.current = SunburstD3(
         sunburstRef,
         targetedRootNode,
@@ -95,7 +96,6 @@ const SunburstGraph = ({
       );
     });
 
-    setIsLoading(false);
     return () => {
       updateSunburst.current = undefined;
     };
@@ -118,7 +118,7 @@ const SunburstGraph = ({
     );
   }
 
-  if (!treeData || treeData?.length === 0) {
+  if (!treeData?.length) {
     return (
       <Empty
         imageType="grid"
