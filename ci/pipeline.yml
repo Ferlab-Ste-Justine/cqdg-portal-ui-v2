@@ -35,7 +35,7 @@ resources:
 - name: slack-alert
   type: slack-notification
   source:
-    url: https://hooks.slack.com/services/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
+    url: https://hooks.slack.com/services/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
 
 - name: feature-branches
   type: git-branches
