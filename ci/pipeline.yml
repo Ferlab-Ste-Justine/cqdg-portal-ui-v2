@@ -35,7 +35,7 @@ resources:
 - name: slack-alert
   type: slack-notification
   source:
-    url: https://hooks.slack.com/services/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
+    url: ((slack-webhook.webhook_url))
 
 - name: feature-branches
   type: git-branches
@@ -54,7 +54,7 @@ resources:
 - name: git-portal-ui
   type: git
   icon: github
-  check_every: 30s
+  check_every: 5s
   webhook_token: ((webhook-token))
   source:
     uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
@@ -64,7 +64,7 @@ resources:
 
 - name: open-pull-request
   type: pull-request
-  check_every: 30s
+  check_every: 5s
   webhook_token: ((webhook-token))
   source:
     base_branch: main
@@ -75,7 +75,7 @@ resources:
 
 - name: closed-pull-request
   type: pull-request
-  check_every: 30s
+  check_every: 5s
   webhook_token: ((webhook-token))
   source:
     base_branch: main
