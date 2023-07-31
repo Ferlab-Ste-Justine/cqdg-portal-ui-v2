@@ -114,5 +114,6 @@ build/
 
 # testing
 /coverage
+/cypress/downloads
 /cypress/screenshots
 /cypress/results
