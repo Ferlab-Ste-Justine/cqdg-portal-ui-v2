@@ -3,13 +3,16 @@
 declare namespace Cypress {
   interface Chainable {
     checkValueFacetAndApply(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
-    clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
+    clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
     login(): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
     resetColumns(table_id?: string): cy & CyEventEmitter;
     showColumn(column: string): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
+    validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
+    validateFileHeaders(fixture: string): cy & CyEventEmitter;
+    validateFileName(namePattern: string): cy & CyEventEmitter;
     visitAndIntercept(url: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     visitCommunityPage(): cy & CyEventEmitter;
     visitDashboard(): cy & CyEventEmitter;
@@ -19,7 +22,7 @@ declare namespace Cypress {
     visitProfileSettingsPage(): cy & CyEventEmitter;
     visitStudiesPage(): cy & CyEventEmitter;
     visitVariantEntityPage(locusId: string, nbGraphqlCalls: number): cy & CyEventEmitter;
-    visitVariantsPage(): cy & CyEventEmitter;
+    visitVariantsPage(sharedFilterOption?: string): cy & CyEventEmitter;
 
     loginByGoogleApi(): cy & CyEventEmitter;
   }
