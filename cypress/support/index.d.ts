@@ -7,6 +7,7 @@ declare namespace Cypress {
     closePopup(): cy & CyEventEmitter;
     login(): cy & CyEventEmitter;
     logout(): cy & CyEventEmitter;
+    removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(table_id?: string): cy & CyEventEmitter;
     showColumn(column: string): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
