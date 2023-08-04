@@ -4,7 +4,7 @@ import { getDateTime } from '../../support/utils';
 const { strDate } = getDateTime();
 
 beforeEach(() => {
-  cy.exec('rm cypress/downloads/*', {failOnNonZeroExit: false});
+  cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login();
   
