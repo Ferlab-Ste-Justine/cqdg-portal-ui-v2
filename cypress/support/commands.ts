@@ -34,7 +34,7 @@ Cypress.Commands.add('checkValueFacetAndApply', (facetRank: number, value: strin
 });
 
 Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
-  if (eq == undefined) {
+  if (!eq) {
     eq = 0;
   }
 
