@@ -17,14 +17,14 @@ describe('Page Variants (Participant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'KF-NBL');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('KF-NBL').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4585$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4,585$/).should('exist');
   });
 
   it('Study Code - KF-SCD', () => {
     cy.checkValueFacetAndApply(0, 'KF-SCD');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('KF-SCD').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2403$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2,403$/).should('exist');
   });
 
   it.skip('Study Name - TODO', () => {
@@ -55,7 +55,7 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'SNV');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SNV').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^10167$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^10.2K$/).should('exist');
   });
 
   it('Variant Type - Indel', () => {
@@ -70,7 +70,7 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'Intron Variant');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Consequence').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intron Variant').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^5372$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^5,372$/).should('exist');
   });
 
   it('Consequence - Missense Variant', () => {
@@ -85,7 +85,7 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(2, 'DBSNP');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DBSNP').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6693$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6,693$/).should('exist');
   });
 
   it('External Reference - Clinvar', () => {
@@ -120,14 +120,14 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(5, 'HET');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('HET').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^11727$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^11.7K$/).should('exist');
   });
 
   it('Zygosity - HOM', () => {
     cy.checkValueFacetAndApply(5, 'HOM');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('HOM').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1651$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,651$/).should('exist');
   });
 
   it('Transmission - Autosomal Dominant De Novo', () => {
@@ -158,7 +158,7 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'Protein Coding');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Protein Coding').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4640$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4,640$/).should('exist');
   });
 
   it('Gene Type - Processed Pseudogene', () => {
@@ -173,14 +173,14 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'OMIM');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('OMIM').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1463$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,463$/).should('exist');
   });
 
   it('External Reference - Orphanet', () => {
     cy.checkValueFacetAndApply(1, 'Orphanet');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Orphanet').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1384$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,384$/).should('exist');
   });
 
   it('HPO - Autosomal recessive inheritance (HP:0000007)', () => {
@@ -296,7 +296,7 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'MODIFIER');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('VEP').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('MODIFIER').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^11954$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^12K$/).should('exist');
   });
 
   it('VEP - HIGH', () => {

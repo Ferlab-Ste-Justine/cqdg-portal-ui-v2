@@ -175,7 +175,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
   
   it('Panneau Files [CQDG-261]', () => {
     cy.get('[id="data_file"]').find('[class*="EntityTable_title"]').contains('Data File').should('exist');
-    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Files').should('exist');
+    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Data Files').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(8)').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').find('svg[class="anticon"]').should('exist');
@@ -206,9 +206,8 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
 describe('Page d\'un participant - Valider les liens disponibles', () => {
   it('Lien Study du panneau Summary', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(2).find('[href]').click({force: true});
-    cy.get('[data-cy="Title_Studies"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('NEURODEV').should('exist');
+    cy.get('[id="study-entity-page"]').should('exist');
+    cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
   it('Lien Family du panneau Family [CQDG-266]', () => {

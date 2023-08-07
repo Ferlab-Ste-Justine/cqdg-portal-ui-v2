@@ -151,6 +151,12 @@ describe('Page d\'un fichier - Valider les liens disponibles', () => {
     cy.get('[class*="EntityTitle"]').contains('PT1006895');
   });
 
+  it('Lien Study du panneau Participants-Samples', () => {
+    cy.get('[id="biospecimens"]').find('td[class="ant-table-cell"]').eq(1).find('[href]').click({force: true});
+    cy.get('[id="study-entity-page"]').should('exist');
+    cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
+  });
+
   it('Lien NCIT du Sample Type du panneau Participants-Samples', () => {
     cy.get('[id="biospecimens"]').find('td[class="ant-table-cell"]').eq(3).invoke('removeAttr', 'target').click({force: true});
     cy.get('body').contains('C449').should('exist');

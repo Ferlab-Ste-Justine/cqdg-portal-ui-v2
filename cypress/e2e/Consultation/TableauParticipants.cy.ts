@@ -63,10 +63,8 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
 
   it('Lien Study du tableau', () => {
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(2).find('[href]').click({force: true});
-    cy.get('[data-cy="Title_Studies"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('NEURODEV').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
+    cy.get('[id="study-entity-page"]').should('exist');
+    cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
   it('Lien Mondo de Diagnosis (MONDO) du tableau', () => {

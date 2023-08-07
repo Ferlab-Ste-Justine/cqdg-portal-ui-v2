@@ -21,7 +21,7 @@ describe('Page Studies - Vérifier les informations affichées', () => {
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(2).contains('Rare Diseases').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(3).contains('Pediatric and adult').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(4).contains('382').should('exist');
-    cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(5).contains('-').should('exist');
+    cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(5).contains('130').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(6).find('[data-icon="check"]').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(7).contains('-').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(8).contains('-').should('exist');
@@ -37,6 +37,12 @@ describe('Page Studies - Vérifier les informations affichées', () => {
 });
 
 describe('Page Studies - Valider les liens disponibles', () => {
+  it('Lien Code du tableau', () => {
+    cy.get('tr[data-row-key="NEURODEV"]').find('[class*="ant-table-cell"]').eq(0).find('[href]').click({force: true});
+    cy.get('[id="study-entity-page"]').should('exist');
+    cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
+  });
+
   it('Lien Participants du tableau', () => {
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(4).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');

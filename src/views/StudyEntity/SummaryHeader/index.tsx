@@ -31,7 +31,13 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
     className={styles.buttonGroup}
     trigger={isRestricted ? 'hover' : 'none'}
   >
-    <Button className={styles.button} size="large" block disabled={isRestricted}>
+    <Button
+      className={styles.button}
+      size="large"
+      data-cy="SummaryHeader_Participants_Button"
+      block
+      disabled={isRestricted}
+    >
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -64,6 +70,7 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
     <Button
       className={`${styles.button} ${!isRestricted && styles.buttonDisabled}`}
       size="large"
+      data-cy="SummaryHeader_Families_Button"
       block
       disabled={isRestricted}
     >
@@ -77,7 +84,13 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
         </div>
       </div>
     </Button>
-    <Button className={styles.button} size="large" block disabled={isRestricted}>
+    <Button
+      className={styles.button}
+      size="large"
+      data-cy="SummaryHeader_Biospecimens_Button"
+      block
+      disabled={isRestricted}
+    >
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
@@ -111,7 +124,13 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
         </div>
       </Link>
     </Button>
-    <Button className={styles.button} size="large" block disabled={isRestricted}>
+    <Button
+      className={styles.button}
+      size="large"
+      data-cy="SummaryHeader_Files_Button"
+      block
+      disabled={isRestricted}
+    >
       <Link
         className={styles.link}
         to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}

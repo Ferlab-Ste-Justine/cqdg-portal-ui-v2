@@ -140,7 +140,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(0, 'DNA (NCIT:C449)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DNA (NCIT:C449)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1119$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
   });
 
   it('Tissue - Blood (NCIT:C12434)', () => {
@@ -148,7 +148,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(1, 'Blood (NCIT:C12434)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Tissue').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Blood (NCIT:C12434)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1119$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
   });
 
   // Pas de données
@@ -177,7 +177,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(0, 'Genomics');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Category').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genomics').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8952$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8,952$/).should('exist');
   });
 
   it('Data Type - Aligned Reads [CQDG-261]', () => {
@@ -200,7 +200,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(2, 'WGS');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Experimental Strategy').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8952$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8,952$/).should('exist');
   });
 
   it('Format - gVCF [CQDG-256]', () => {
@@ -215,6 +215,6 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(3, 'TBI');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('TBI').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3357$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3,357$/).should('exist');
   });
 });
