@@ -73,6 +73,7 @@ export interface IFamilyRelationships {
   submitter_family_id: string;
   submitter_participant_id: string;
   is_affected: string;
+  participant_id: string;
 }
 
 export interface IParticipantEntity {

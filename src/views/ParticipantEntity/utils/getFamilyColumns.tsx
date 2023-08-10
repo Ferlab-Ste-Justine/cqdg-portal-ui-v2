@@ -5,19 +5,22 @@ import { pageId } from 'views/FileEntity';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
-const getFamilyColumns = (): ProColumnType<any>[] => [
+const getFamilyColumns = (current_participant_id = ''): ProColumnType<any>[] => [
   {
-    key: 'family_relationships.submitter_participant_id',
-    dataIndex: 'submitter_participant_id',
+    key: 'family_relationships.participant_id',
+    dataIndex: 'participant_id',
     title: intl.get('entities.participant.participant'),
-    render: (participant_id: string) => (
-      <Link
-        to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}
-        onClick={() => document.getElementById(pageId)?.scrollTo(0, 0)}
-      >
-        {participant_id}
-      </Link>
-    ),
+    render: (participant_id: string) =>
+      current_participant_id !== participant_id ? (
+        <Link
+          to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}
+          onClick={() => document.getElementById(pageId)?.scrollTo(0, 0)}
+        >
+          {participant_id}
+        </Link>
+      ) : (
+        participant_id
+      ),
   },
   {
     key: 'family_relationships.relationship_to_proband',

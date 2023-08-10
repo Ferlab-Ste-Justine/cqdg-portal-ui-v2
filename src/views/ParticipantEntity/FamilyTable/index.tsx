@@ -29,11 +29,19 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
 
-  const familyData =
+  const familyRelationships =
     participant?.family_relationships?.hits.edges.map(({ node }) => ({
-      key: node.submitter_participant_id,
+      key: node.participant_id,
       ...node,
     })) || [];
+  const familyWithoutCurrentParticipant =
+    familyRelationships.filter((p) => p.participant_id !== participant?.participant_id) || [];
+  const currentParticipant = familyRelationships.find(
+    (p) => p.participant_id === participant?.participant_id,
+  );
+  const familySorted = currentParticipant
+    ? [currentParticipant, ...familyWithoutCurrentParticipant]
+    : [];
 
   const FamilyLink = () => (
     <Link
@@ -67,8 +75,8 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
       loading={loading}
       title={intl.get('entities.participant.family')}
       header={participant?.family_id ? <FamilyLink /> : intl.get('entities.participant.family')}
-      columns={getFamilyColumns()}
-      data={familyData}
+      columns={getFamilyColumns(participant?.participant_id)}
+      data={familySorted}
       emptyMessage={intl.get('api.noData')}
       initialColumnState={userInfo?.config.participants?.tables?.family?.columns}
       dictionary={getProTableDictionary()}
@@ -87,7 +95,7 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
               index: INDEXES.PARTICIPANT,
               sqon: generateSelectionSqon(
                 INDEXES.PARTICIPANT,
-                familyData.map((p) => p.submitter_participant_id),
+                familySorted.map((p) => p.participant_id),
               ),
               fileName: `cqdg-family-table`,
             }),

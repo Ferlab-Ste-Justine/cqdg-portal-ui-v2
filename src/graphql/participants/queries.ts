@@ -44,6 +44,7 @@ export const GET_PARTICIPANTS = gql`
                 edges {
                   node {
                     focus_participant_id
+                    participant_id
                     family_id
                     family_type
                     focus_participant_id
