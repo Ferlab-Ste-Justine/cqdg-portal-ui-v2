@@ -40,6 +40,9 @@ const StudyEntity = () => {
     value: study_code,
   });
 
+  //todo: to change with the futur study.is_restricted field
+  const isRestricted = study_code === 'CAG';
+
   enum SectionId {
     SUMMARY = 'summary',
     DATA_ACCESS = 'data_access',
@@ -53,14 +56,16 @@ const StudyEntity = () => {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
-    { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.study.file') },
-    { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
   ];
 
-  const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
+  if (!isRestricted) {
+    links.push(
+      { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.study.file') },
+      { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
+    );
+  }
 
-  //todo: to change with the futur study.is_restricted field
-  const isRestricted = study_code === 'CAG';
+  const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
 
   /** We initialize here a sqon by queryBuilderId to handle graphs and actions */
   useEffect(() => {
@@ -117,39 +122,41 @@ const StudyEntity = () => {
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-      <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />
-      <StatsGraph
-        id={SectionId.STATISTIC}
-        loading={loading}
-        title={intl.get('entities.study.statistic')}
-        header={intl.get('entities.study.statistics')}
-        titleExtra={[
-          !isRestricted && (
-            <EntityTableRedirectLink
-              key="1"
-              to={STATIC_ROUTES.DATA_EXPLORATION_SUMMARY}
-              icon={<ExternalLinkIcon width="14" />}
-              onClick={() =>
-                addQuery({
-                  queryBuilderId: DATA_EXPLORATION_QB_ID,
-                  query: generateQuery({
-                    newFilters: [
-                      generateValueFilter({
-                        field: 'study_code',
-                        value: [study_code],
-                        index: INDEXES.STUDY,
-                      }),
-                    ],
-                  }),
-                  setAsActive: true,
-                })
-              }
-            >
-              {intl.get('global.viewInDataExploration')}
-            </EntityTableRedirectLink>
-          ),
-        ]}
-      />
+      {!isRestricted && <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />}
+      {!isRestricted && (
+        <StatsGraph
+          id={SectionId.STATISTIC}
+          loading={loading}
+          title={intl.get('entities.study.statistic')}
+          header={intl.get('entities.study.statistics')}
+          titleExtra={[
+            !isRestricted && (
+              <EntityTableRedirectLink
+                key="1"
+                to={STATIC_ROUTES.DATA_EXPLORATION_SUMMARY}
+                icon={<ExternalLinkIcon width="14" />}
+                onClick={() =>
+                  addQuery({
+                    queryBuilderId: DATA_EXPLORATION_QB_ID,
+                    query: generateQuery({
+                      newFilters: [
+                        generateValueFilter({
+                          field: 'study_code',
+                          value: [study_code],
+                          index: INDEXES.STUDY,
+                        }),
+                      ],
+                    }),
+                    setAsActive: true,
+                  })
+                }
+              >
+                {intl.get('global.viewInDataExploration')}
+              </EntityTableRedirectLink>
+            ),
+          ]}
+        />
+      )}
     </EntityPage>
   );
 };

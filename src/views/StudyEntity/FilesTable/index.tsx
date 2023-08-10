@@ -29,8 +29,8 @@ const FilesTable = ({ id, study_code }: IFilesTableProps) => {
     <EntityTableMultiple
       id={id}
       loading={loading}
-      title={intl.get('entities.file.file')}
-      header={intl.get('entities.file.files')}
+      title={intl.get('entities.file.dataFile')}
+      header={intl.get('entities.file.dataFiles')}
       total={files.length}
       tables={[
         {
