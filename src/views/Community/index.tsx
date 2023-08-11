@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import TableHeader from '@ferlab/ui/core/components/ProTable/Header';
 import useDebounce from '@ferlab/ui/core/hooks/useDebounce';
-import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { List, Space, Typography } from 'antd';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
 import { UserApi } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
+import { getProTableDictionary } from 'utils/translation';
 
 import FiltersBox from './components/Filters/Box';
 import { getSortItems } from './components/Filters/Sorter';
@@ -64,18 +64,7 @@ const CommunityPage = () => {
           pageIndex={currentPage + 1}
           pageSize={DEFAULT_PAGE_SIZE}
           total={count}
-          dictionary={{
-            itemCount: {
-              results: intl.get('screen.community.resultsMember'),
-              noResults: intl.get('screen.community.noMember'),
-              clear: '',
-              of: '',
-              selectAllResults: '',
-              selected: '',
-              selectedPlural: '',
-            },
-            numberFormat: numberFormat,
-          }}
+          dictionary={getProTableDictionary()}
         />
         <List
           grid={{

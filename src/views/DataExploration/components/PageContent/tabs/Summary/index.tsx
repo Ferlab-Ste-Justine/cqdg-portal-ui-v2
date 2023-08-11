@@ -1,16 +1,14 @@
 import { useDispatch } from 'react-redux';
-import SortableGrid from '@ferlab/ui/core/layout/SortableGrid';
-import cx from 'classnames';
+import ResizableGridLayout, {
+  TSerializedResizableGridLayoutConfig,
+} from '@ferlab/ui/core/layout/ResizableGridLayout';
+import { Space } from 'antd';
 
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
-import { orderCardIfNeeded } from 'utils/helper';
+import { getResizableGridDictionary } from 'utils/translation';
 
-import DataCategoryGraphCard from './DataCategoryGraphCard';
-import DataTypeGraphCard from './DataTypeGraphCard';
-import DemographicsGraphCard from './SociodemographicsGraphCard';
-import StudiesPieGraphCard from './StudiesPieGraphCard';
-import SunburstGraphCard from './SunburstGraphCard';
+import getSummaryLayout, { UID } from './getSummaryLayout';
 
 import styles from './index.module.scss';
 
@@ -19,80 +17,20 @@ const SummaryTab = () => {
   const { userInfo } = useUser();
 
   return (
-    <SortableGrid
-      onReorder={(ids) =>
-        dispatch(
-          updateUserConfig({
-            data_exploration: {
-              summary: {
-                cards: {
-                  order: ids,
-                },
-              },
-            },
-          }),
-        )
-      }
-      items={orderCardIfNeeded(
-        [
-          {
-            id: '1',
-            lg: 24,
-            xl: 12,
-            className: styles.summaryGraphCardCol,
-            component: <DemographicsGraphCard id="1" className={styles.summaryGrapCard} />,
-          },
-          {
-            id: '2',
-            lg: 24,
-            xl: 12,
-            className: styles.summaryGraphCardCol,
-            component: (
-              <SunburstGraphCard
-                id="2"
-                className={cx(styles.summaryGrapCard, styles.sunburstGraphCard)}
-                field={'observed_phenotypes'}
-              />
-            ),
-          },
-          {
-            id: '3',
-            lg: 24,
-            xl: 12,
-            className: styles.summaryGraphCardCol,
-            component: (
-              <SunburstGraphCard
-                id="3"
-                className={cx(styles.summaryGrapCard, styles.sunburstGraphCard)}
-                field={'mondo'}
-              />
-            ),
-          },
-          {
-            id: '4',
-            lg: 24,
-            xl: 12,
-            className: styles.summaryGraphCardCol,
-            component: <DataCategoryGraphCard id="4" className={styles.summaryGrapCard} />,
-          },
-          {
-            id: '5',
-            lg: 24,
-            xl: 12,
-            component: <DataTypeGraphCard id="5" className={styles.summaryGrapCard} />,
-          },
-          {
-            id: '6',
-            lg: 24,
-            xl: 12,
-            className: styles.summaryGraphCardCol,
-            component: <StudiesPieGraphCard id="6" className={styles.summaryGrapCard} />,
-          },
-        ],
-        userInfo?.config.data_exploration?.summary?.cards?.order,
-      )}
-      gutter={[24, 24]}
-    />
+    <Space className={styles.wrapper} direction="vertical">
+      <ResizableGridLayout
+        uid={UID}
+        defaultLayouts={getSummaryLayout()}
+        dictionary={getResizableGridDictionary()}
+        layouts={userInfo?.config.data_exploration?.summary?.layouts || getSummaryLayout()}
+        onReset={(layouts: TSerializedResizableGridLayoutConfig[]) => {
+          dispatch(updateUserConfig({ data_exploration: { summary: { layouts } } }));
+        }}
+        onConfigUpdate={(layouts: TSerializedResizableGridLayoutConfig[]) => {
+          dispatch(updateUserConfig({ data_exploration: { summary: { layouts } } }));
+        }}
+      />
+    </Space>
   );
 };
 

@@ -249,6 +249,13 @@ Cypress.Commands.add('visitProfileSettingsPage', () => {
   cy.get('[data-cy="Title_ProfileSettings"]', {timeout: 60 * 1000})
 });
 
+Cypress.Commands.add('visitStudyEntity', (studyId: string) => {
+  cy.visitAndIntercept('/studies/' + studyId,
+                       'POST',
+                       '**/graphql',
+                       6);
+});
+
 Cypress.Commands.add('visitStudiesPage', () => {
   cy.visitAndIntercept('/studies',
                        'POST',

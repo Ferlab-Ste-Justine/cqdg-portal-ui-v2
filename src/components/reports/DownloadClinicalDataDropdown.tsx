@@ -9,13 +9,17 @@ import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
 
-interface OwnProps {
-  participantIds: string[];
+interface IDownloadClinicalDataDropdownProps {
+  participantIds?: string[];
   sqon?: ISqonGroupFilter;
   type?: 'default' | 'primary';
 }
 
-const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }: OwnProps) => {
+const DownloadClinicalDataDropdown = ({
+  participantIds = [],
+  sqon,
+  type = 'default',
+}: IDownloadClinicalDataDropdownProps) => {
   const dispatch = useDispatch();
 
   const getCurrentSqon = (): any =>
@@ -47,7 +51,7 @@ const DownloadClinicalDataDropdown = ({ participantIds, sqon, type = 'default' }
   return (
     <Dropdown
       key="actionDropdown"
-      disabled={participantIds.length === 0}
+      disabled={!sqon && !participantIds.length}
       menu={MenuProps}
       placement="bottomLeft"
     >

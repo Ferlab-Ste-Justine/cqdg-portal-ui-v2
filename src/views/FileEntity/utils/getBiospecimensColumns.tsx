@@ -23,7 +23,11 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
     key: 'participant.study_code',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.study_code'),
-    render: (participant: IParticipantEntity) => participant?.study_code,
+    render: (participant: IParticipantEntity) => (
+      <Link to={`${STATIC_ROUTES.STUDIES}/${participant?.study_code}`}>
+        {participant?.study_code}
+      </Link>
+    ),
   },
   {
     key: 'sample_id',

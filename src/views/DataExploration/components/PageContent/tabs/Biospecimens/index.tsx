@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -32,7 +32,6 @@ import {
   SCROLL_WRAPPER_ID,
 } from 'views/DataExploration/utils/constant';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
@@ -92,19 +91,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'study_code',
     sorter: { multiple: 1 },
     render: (study_code: string) => (
-      <Link
-        to={STATIC_ROUTES.STUDIES}
-        onClick={() =>
-          updateActiveQueryField({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            field: 'study_code',
-            value: [study_code],
-            index: INDEXES.STUDY,
-          })
-        }
-      >
-        {study_code}
-      </Link>
+      <Link to={`${STATIC_ROUTES.STUDIES}/${study_code}`}>{study_code}</Link>
     ),
   },
   {
@@ -273,7 +260,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         setPageIndex(DEFAULT_PAGE_INDEX);
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
-          size: queryConfig.size!,
+          size: queryConfig.size,
           sort: formatQuerySortList(sorter),
         } as IQueryConfig);
       }}

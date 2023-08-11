@@ -10,7 +10,6 @@ import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
-  updateActiveQueryField,
 } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import ExpandableCell from '@ferlab/ui/core/components/tables/ExpandableCell';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
@@ -44,7 +43,6 @@ import {
   extractMondoTitleAndCode,
   extractPhenotypeTitleAndCode,
 } from 'views/DataExploration/utils/helper';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
@@ -75,19 +73,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
     render: (study_code: string) => (
-      <Link
-        to={STATIC_ROUTES.STUDIES}
-        onClick={() =>
-          updateActiveQueryField({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            field: 'study_code',
-            value: [study_code],
-            index: INDEXES.STUDY,
-          })
-        }
-      >
-        {study_code}
-      </Link>
+      <Link to={`${STATIC_ROUTES.STUDIES}/${study_code}`}>{study_code}</Link>
     ),
   },
   {
@@ -413,7 +399,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
         setPageIndex(DEFAULT_PAGE_INDEX);
         setQueryConfig({
           pageIndex: DEFAULT_PAGE_INDEX,
-          size: queryConfig.size!,
+          size: queryConfig.size,
           sort: formatQuerySortList(sorter),
         } as IQueryConfig);
       }}
@@ -428,13 +414,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
-              data_exploration: {
-                tables: {
-                  participants: {
-                    columns: newState,
-                  },
-                },
-              },
+              data_exploration: { tables: { participants: { columns: newState } } },
             }),
           ),
         onTableExportClick: () =>

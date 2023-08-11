@@ -1,12 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import intl from 'react-intl-universal';
 import Empty from '@ferlab/ui/core/components/Empty';
-import GridCard from '@ferlab/ui/core/view/v2/GridCard';
-import { Col, Row } from 'antd';
+import { Col, Row, Spin } from 'antd';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import CardHeader from 'views/Dashboard/components/CardHeader';
-import TreePanel from 'views/DataExploration/components/PageContent/tabs/Summary/SunburstGraphCard/TreePanel';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import {
   extractMondoTitleAndCode,
   extractPhenotypeTitleAndCode,
@@ -22,27 +18,35 @@ import {
 import { getCommonColors } from 'common/charts';
 import getStoreConfig from 'store';
 
-import SunburstD3 from './utils/sunburst-d3';
+import TreePanel from '../TreePanel';
+import SunburstD3 from '../utils/sunburst-d3';
 
 import styles from './index.module.scss';
 
 interface OwnProps {
-  id: string;
-  className?: string;
   field: string;
+  width?: number;
+  height?: number;
+  previewMode?: boolean;
+  queryId: string;
+  isPlayable?: boolean;
 }
 
-const width = 335;
-const height = 335;
-
-const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+const SunburstGraph = ({
+  field,
+  previewMode = false,
+  width = 335,
+  height = 335,
+  queryId,
+  isPlayable = true,
+}: OwnProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [treeData, setTreeData] = useState<TreeNode[]>();
   const [currentNode, setCurrentNode] = useState<TreeNode>();
   const phenotypeStore = useRef<PhenotypeStore | undefined>(new PhenotypeStore());
   const sunburstRef = useRef<SVGSVGElement>(null);
   const updateSunburst = useRef<(key: any) => void>();
-  const sqon = useParticipantResolvedSqon(DATA_EXPLORATION_QB_ID);
+  const sqon = useParticipantResolvedSqon(queryId);
   const { store } = getStoreConfig();
   const locale = store.getState().global.lang;
 
@@ -52,15 +56,13 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
       const rootNode = phenotypeStore.current?.getRootNode();
       const targetRootIndex =
         rootNode?.children.findIndex((e) => e.name === TARGET_ROOT_PHENO) || 0;
-
       const targetedRootNode =
         targetRootIndex >= 0 ? rootNode?.children[targetRootIndex] : rootNode;
 
       setCurrentNode(targetedRootNode);
-
       setTreeData(rootNode ? [lightTreeNodeConstructor(rootNode.key!)] : []);
-      setIsLoading(false);
 
+      setIsLoading(false);
       updateSunburst.current = SunburstD3(
         sunburstRef,
         targetedRootNode,
@@ -84,8 +86,13 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
               ${data.title}<br/><br/>
               Participants: <strong>${data.results}</strong>
             </div>`,
+          legendFormatter: (data: TreeNode) => {
+            const phenotype = (data.key.match(RegexExtractPhenotype) || []).reverse();
+            return phenotype.join('-');
+          },
         },
         field,
+        previewMode,
       );
     });
 
@@ -101,57 +108,57 @@ const SunburstGraphCard = ({ id, className = '', field }: OwnProps) => {
     setTreeData(generateNavTreeFormKey(phenoReversed));
   };
 
+  if (isLoading) {
+    return (
+      <div className={styles.spinnerWrapper}>
+        <div className={styles.spinner}>
+          <Spin />
+        </div>
+      </div>
+    );
+  }
+
+  if (!treeData?.length) {
+    return (
+      <Empty
+        imageType="grid"
+        size="large"
+        description={intl.get(`screen.dataExploration.tabs.summary.${field}.empty`)}
+      />
+    );
+  }
+
+  if (previewMode) {
+    return (
+      <div className={styles.previewMode}>
+        <svg ref={sunburstRef} />
+      </div>
+    );
+  }
+
   return (
-    <GridCard
-      wrapperClassName={className}
-      theme="shade"
-      loadingType="spinner"
-      loading={isLoading}
-      title={
-        <CardHeader
-          id={id}
-          title={intl.get(`screen.dataExploration.tabs.summary.${field}.cardTitle`)}
-          withHandle
+    <Row gutter={[24, 24]} id={`tooltip-wrapper-${field}`} className={styles.sunburstRowWrapper}>
+      <Col lg={12} xl={10}>
+        <svg
+          className={styles.sunburstChart}
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          ref={sunburstRef}
         />
-      }
-      // @ts-ignore
-      content={
-        !isLoading &&
-        (treeData && treeData?.length > 0 ? (
-          <Row
-            gutter={[24, 24]}
-            id={`tooltip-wrapper-${field}`}
-            className={styles.sunburstRowWrapper}
-          >
-            <Col lg={12} xl={10}>
-              <svg
-                className={styles.sunburstChart}
-                width={width}
-                height={height}
-                viewBox={`0 0 ${width} ${height}`}
-                ref={sunburstRef}
-              />
-            </Col>
-            <Col lg={12} xl={14}>
-              <TreePanel
-                currentNode={currentNode!}
-                treeData={treeData!}
-                getSelectedPhenotype={getSelectedPhenotype}
-                updateSunburst={updateSunburst.current!}
-                field={field}
-              />
-            </Col>
-          </Row>
-        ) : (
-          <Empty
-            imageType="grid"
-            size="large"
-            description={intl.get(`screen.dataExploration.tabs.summary.${field}.empty`)}
-          />
-        ))
-      }
-    />
+      </Col>
+      <Col lg={12} xl={14}>
+        <TreePanel
+          currentNode={currentNode!}
+          treeData={treeData!}
+          getSelectedPhenotype={getSelectedPhenotype}
+          updateSunburst={updateSunburst.current!}
+          field={field}
+          isPlayable={isPlayable}
+        />
+      </Col>
+    </Row>
   );
 };
 
-export default SunburstGraphCard;
+export default SunburstGraph;

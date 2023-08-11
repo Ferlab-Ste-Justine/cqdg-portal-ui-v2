@@ -7,6 +7,7 @@ import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage/index'
 import { INDEXES } from 'graphql/constants';
 import { useFiles } from 'graphql/files/actions';
 import { IFileEntity } from 'graphql/files/models';
+import { GET_FILES } from 'graphql/files/queries';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import getAnalysisFilesColumns from 'views/FileEntity/utils/getAnalysisFilesColumns';
 
@@ -20,6 +21,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
   const { data, loading } = useFiles({
     field: 'sequencing_experiment.analysis_id',
     values: [file.sequencing_experiment.analysis_id],
+    query: GET_FILES,
   });
 
   const dataAnalysisFilesTable: IFileEntity[] =

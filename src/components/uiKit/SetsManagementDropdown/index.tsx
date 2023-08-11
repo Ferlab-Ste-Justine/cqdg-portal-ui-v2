@@ -89,20 +89,20 @@ const getLabel = (type: string, count: number): string => {
   switch (type) {
     case INDEXES.FILE:
       return count > 1
-        ? `${count} ${intl.get('screen.dataExploration.filesSelected')}`
-        : `${count} ${intl.get('screen.dataExploration.fileSelected')}`;
+        ? `${numberFormat(count)} ${intl.get('screen.dataExploration.filesSelected')}`
+        : `${numberFormat(count)} ${intl.get('screen.dataExploration.fileSelected')}`;
     case INDEXES.PARTICIPANT:
       return count > 1
-        ? `${count} ${intl.get('screen.dataExploration.participantsSelected')}`
-        : `${count} ${intl.get('screen.dataExploration.participantSelected')}`;
+        ? `${numberFormat(count)} ${intl.get('screen.dataExploration.participantsSelected')}`
+        : `${numberFormat(count)} ${intl.get('screen.dataExploration.participantSelected')}`;
     case INDEXES.BIOSPECIMEN:
       return count > 1
-        ? `${count} ${intl.get('screen.dataExploration.biospecimensSelected')}`
-        : `${count} ${intl.get('screen.dataExploration.biospecimenSelected')}`;
+        ? `${numberFormat(count)} ${intl.get('screen.dataExploration.biospecimensSelected')}`
+        : `${numberFormat(count)} ${intl.get('screen.dataExploration.biospecimenSelected')}`;
     case INDEXES.VARIANT:
       return count > 1
-        ? `${count} ${intl.get('screen.dataExploration.variantsSelected')}`
-        : `${count} ${intl.get('screen.dataExploration.variantSelected')}`;
+        ? `${numberFormat(count)} ${intl.get('screen.dataExploration.variantsSelected')}`
+        : `${numberFormat(count)} ${intl.get('screen.dataExploration.variantSelected')}`;
     default:
       return '';
   }

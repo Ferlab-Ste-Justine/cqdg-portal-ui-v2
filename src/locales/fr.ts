@@ -10,7 +10,9 @@ const fr = {
       studies: 'Études',
       studyAuto: '{count, plural, =0 {Étude} =1 {Étude} other {Études}}',
       access_limitations: 'Restrictions d’accès',
+      access_limitation: "Restriction d'accès",
       access_requirements: 'Conditions d’utilisation',
+      access_requirement: "Exigence d'accès",
       access_authority: "Autorité d'accès",
       domain: 'Domaine',
       population: 'Population',
@@ -18,10 +20,21 @@ const fr = {
         access_limitations: 'Restriction d’accès',
         access_requirements: 'Exigence d’accès',
       },
+      statistic: 'Statistique sommaire',
+      statistics: 'Statistiques sommaires',
+      data_access: 'Accès aux données',
+      data_set: 'Ensemble de données',
+      name: 'Nom',
+      file: 'Fichier',
+      keywords: 'Mots-clés',
+      description: 'Description',
+      restrictedTitle: 'Étude restreinte',
+      restrictedContent: "Les données de cette étude ne sont pas accessibles à l'exploration.",
     },
     biospecimen: {
       sample_id: `ID d'échantillon`,
       sample: 'Échantillon',
+      samples: 'Échantillons',
       samplesAuto: '{count, plural, =0 {Échantillon} =1 {Échantillon} other {Échantillons}}',
       biospecimensAuto: '{count, plural, =0 {Biospécimen} =1 {Biospécimen} other {Biospécimens}}',
       biospecimen: 'Biospécimen',
@@ -45,6 +58,7 @@ const fr = {
       participantSample: 'Participant / Échantillon',
       profile: 'Profil',
       family: 'Famille',
+      families: 'Familles',
       diagnosis: 'Diagnostic',
       diagnoses: 'Diagnostics',
       diagnosis_mondo: 'Diagnostic (MONDO)',
@@ -123,7 +137,8 @@ const fr = {
       numberByExperimentalStrategy: 'Nombre par stratégie expérimentale',
       numberByDataTypes: 'Nombre par type de données',
       'n=2': '(n={count})',
-      nTooltip: 'Nombre total de fichiers associés au participant',
+      nTooltipParticipant: 'Nombre total de fichiers associés au participant',
+      nTooltipFile: "Nombre total de fichiers dans l'étude",
     },
     variant: {
       variant: 'Variant',
@@ -869,11 +884,57 @@ const fr = {
             currentPath: 'Arborescence actuelle',
             centerSubtitleFormatter: 'Participants avec',
           },
-          sociodemographics: {
+          download: {
+            fileNameTemplate: 'cqdg-%name-%type-%date%extension',
+            fileNameDateFormat: 'yyyy-MM-dd',
+            download: 'Télécharger',
+            preview: 'Aperçu du téléchargement - ',
+            data: 'Télécharger les données',
+            svg: 'Télécharger SVG',
+            png: 'Télécharger PNG',
+            removeChart: 'Supprimer le graphique',
+          },
+          columnSelector: {
+            reset: 'Réinitialiser',
+            tooltip: 'Graphiques',
+          },
+          observed_phenotypes: {
+            cardTitle: 'Phénotypes observés (HPO)',
+            empty: 'Aucun phénotype observé signalé pour ces participants',
+            phenotypeTree: {
+              nbParticipant:
+                '{count} participants (y compris les termes descendants sur cette arborescence)',
+              addTermToQuery: 'Ajouter un terme à la requête active',
+              currentPath: 'Arborescence actuelle',
+            },
+          },
+          mondo: {
+            cardTitle: 'Diagnostic (MONDO)',
+            empty: 'Aucun diagnostic signalé pour ces participants',
+            phenotypeTree: {
+              nbParticipant:
+                '{count} participants (y compris les termes descendants sur cette arborescence)',
+              addTermToQuery: 'Ajouter un terme à la requête active',
+              currentPath: 'Arborescence actuelle',
+            },
+          },
+          demographic: {
             cardTitle: 'Profils sociodémographiques',
             genderTitle: 'Genre',
             ethnicityTitle: 'Ethnicité',
             compositionFamilyTitle: 'Composition familiale',
+          },
+          ageAtDiagnosis: {
+            cardTitle: 'Age at Diagnosis',
+            _0to1: 'Newborn',
+            _1to5: '[1, 5]',
+            _5to10: '[5, 10]',
+            _10to15: '[10, 15]',
+            _15to18: '[15, 18]',
+            _18plus: 'Adult',
+          },
+          studies: {
+            cardTitle: 'Studies',
           },
           availableData: {
             dataCategoryTitle: 'Participants par catégorie de données',
@@ -882,14 +943,6 @@ const fr = {
             axis: '# de participants',
             dataCategory: 'Catégorie de données',
             dataType: 'Type de données',
-          },
-          observed_phenotypes: {
-            cardTitle: 'Phénotypes observés (HPO)',
-            empty: 'Aucun phénotype observé signalé pour ces participants',
-          },
-          mondo: {
-            cardTitle: 'Diagnostic (MONDO)',
-            empty: 'Aucun diagnostic signalé pour ces participants',
           },
           studiespie: {
             cardTitle: 'Études',

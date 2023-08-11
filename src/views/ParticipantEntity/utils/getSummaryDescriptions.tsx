@@ -1,12 +1,8 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
 import { Tag, Tooltip } from 'antd';
-import { INDEXES } from 'graphql/constants';
 import { IParticipantEntity } from 'graphql/participants/models';
-import { STUDIES_EXPLORATION_QB_ID } from 'views/Studies/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -32,26 +28,7 @@ const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescri
   {
     label: intl.get('entities.study.study'),
     value: (
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.STUDIES}
-        onClick={() =>
-          participant &&
-          addQuery({
-            queryBuilderId: STUDIES_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_code',
-                  value: [participant.study_code],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
-      >
+      <Link to={`${STATIC_ROUTES.STUDIES}/${participant?.study?.study_code}`}>
         {`${participant?.study?.name} (${participant?.study?.study_code})`}
       </Link>
     ),

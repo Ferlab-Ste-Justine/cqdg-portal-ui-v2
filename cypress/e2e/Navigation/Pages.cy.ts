@@ -130,7 +130,7 @@ describe('Navigation', () => {
 
   it('Onglets de la page Data Exploration', () => {
     cy.visitDataExploration();
-    cy.get('[data-cy="CardHeader_Studies"]').should('exist');
+    cy.get('[aria-label="Studies"]').should('exist');
 
     cy.get('[data-cy="Tab_Participants"]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
@@ -200,6 +200,26 @@ describe('Navigation', () => {
 
     cy.get('button[class*="Header_iconBtnAction"]').click({force: true});
     cy.contains('Save this filter').should('exist');
+    cy.get('button[class="ant-modal-close"]').invoke('click');
+  });
+ 
+  it('Modals de la page d\'une étude', () => {
+    cy.visitStudyEntity('NEURODEV');
+
+    cy.get('[data-cy="FileManifest_Button"]').click({force: true});
+    cy.get('[data-cy="FileManifest_Modal"]').should('exist');
+    cy.get('button[class="ant-modal-close"]').invoke('click');
+
+    cy.get('[data-cy="RequestAccess_Button"]').click({force: true});
+    cy.get('[data-cy="RequestAccess_Modal"]').should('exist');
+    cy.get('button[class="ant-modal-close"]').invoke('click');
+  });
+ 
+  it('Modals de la page d\'un fichier', () => {
+    cy.visitFileEntity('FI0181945');
+
+    cy.get('[data-cy="FileManifest_Button"]').click({force: true});
+    cy.get('[data-cy="FileManifest_Modal"]').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
   });
  

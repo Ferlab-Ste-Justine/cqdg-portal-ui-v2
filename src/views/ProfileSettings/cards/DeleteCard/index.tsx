@@ -37,7 +37,6 @@ const DeleteCard = () => {
           {intl.get('screen.profileSettings.cards.deleteAccount.button')}
         </Button>
       }
-      // @ts-ignore
       content={<Text>{intl.get('screen.profileSettings.cards.deleteAccount.notice')}</Text>}
     />
   );

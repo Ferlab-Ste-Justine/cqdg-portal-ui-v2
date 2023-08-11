@@ -104,7 +104,7 @@ export const getExperimentalStrategyColumns = (files_nb: number): ProColumnType<
     key: 'proportion_of_files',
     dataIndex: 'proportion_of_files',
     title: intl.get('entities.file.n=2', { count: files_nb }),
-    tooltip: intl.get('entities.file.nTooltip'),
+    tooltip: intl.get('entities.file.nTooltipParticipant'),
     render: (percent: number) => (
       <Progress percent={percent} showInfo={false} strokeColor={blue[5]} />
     ),
@@ -154,7 +154,7 @@ export const getDataTypeColumns = (files_nb: number): ProColumnType<any>[] => [
     key: 'proportion_of_files',
     dataIndex: 'proportion_of_files',
     title: intl.get('entities.file.n=2', { count: files_nb }),
-    tooltip: intl.get('entities.file.nTooltip'),
+    tooltip: intl.get('entities.file.nTooltipParticipant'),
     render: (percent: number) => (
       <Progress percent={percent} showInfo={false} strokeColor={blue[5]} />
     ),

@@ -260,7 +260,6 @@ const VariantsTable = ({
 
   return (
     <GridCard
-      // @ts-ignore
       content={
         <ProTable<ITableVariantEntity>
           tableId="variants_table"
@@ -275,7 +274,7 @@ const VariantsTable = ({
             setPageIndex(DEFAULT_PAGE_INDEX);
             setQueryConfig({
               pageIndex: DEFAULT_PAGE_INDEX,
-              size: queryConfig.size!,
+              size: queryConfig.size,
               sort: formatQuerySortList(sorter),
             } as IQueryConfig);
           }}

@@ -63,7 +63,7 @@ const FilesTable = ({ participant, id, loading }: IFilesTableProps) => {
           {intl.get('global.viewInDataExploration')}
         </EntityTableRedirectLink>,
       ]}
-      header={intl.get('entities.file.files')}
+      header={intl.get('entities.file.datafiles')}
       total={files.length}
       tables={[
         {
