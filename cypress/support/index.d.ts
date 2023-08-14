@@ -10,11 +10,14 @@ declare namespace Cypress {
     removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(table_id?: string): cy & CyEventEmitter;
     showColumn(column: string): cy & CyEventEmitter;
+    sortTableAndIntercept(column: string, nbCalls: number): cy & CyEventEmitter;
+    sortTableAndWait(column: string): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
     visitAndIntercept(url: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
+    validateTableFirstRow(expectedValue: string|RegExp, eq: number): cy & CyEventEmitter;
     visitCommunityPage(): cy & CyEventEmitter;
     visitDashboard(): cy & CyEventEmitter;
     visitDataExploration(tab?: string, sharedFilterOption?: string): cy & CyEventEmitter;
@@ -25,6 +28,7 @@ declare namespace Cypress {
     visitStudiesPage(): cy & CyEventEmitter;
     visitVariantEntityPage(locusId: string, nbGraphqlCalls: number): cy & CyEventEmitter;
     visitVariantsPage(sharedFilterOption?: string): cy & CyEventEmitter;
+    waitWhileSpin(ms: number): cy & CyEventEmitter;
 
     loginByGoogleApi(): cy & CyEventEmitter;
   }

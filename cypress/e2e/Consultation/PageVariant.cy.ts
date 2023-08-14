@@ -25,7 +25,7 @@ describe('Page d\'un variant - Valider les redirections', () => {
 });
 
 describe('Page d\'un variant - Vérifier les informations affichées', () => {
-  it('Titre', () => {
+  it('Titre [CQDG-135]', () => {
     cy.get('[class*="EntityTitle"]').contains('chr16:g.3606492C>T');
     cy.get('[class*="EntityTitle"]').contains('Germline');
     cy.get('[class*="EntityTitle"]').find('[class*="variantTag"]').should('exist');
@@ -95,7 +95,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityTable_contentTable"]').find('tr[class*="ant-table-row"]').eq(1).should('not.exist');
   });
   
-  it('Panneau Frequency', () => {
+  it('Panneau Frequency [CQDG-135]', () => {
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Studies').should('exist');
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Participants').should('exist');
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Frequency').should('exist');
@@ -117,7 +117,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(4).contains('0').should('exist');
   });
   
-  it('Panneau Public Cohorts', () => {
+  it('Panneau Public Cohorts [CQDG-135]', () => {
     cy.get('[id="EntityPublicCohortTable"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Cohort').should('exist');
     cy.get('[id="EntityPublicCohortTable"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('ALT Alleles').should('exist');
     cy.get('[id="EntityPublicCohortTable"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Alleles (ALT + REF)').should('exist');
@@ -169,7 +169,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="pathogenicity"]').find('tr[class*="ant-table-row"]').eq(3).find('td[class="ant-table-cell"]').eq(2).contains('germline').should('exist');
   });
   
-  it('Panneau Gene - Phenotype', () => {
+  it('Panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[id="genePhenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Source').should('exist');
     cy.get('[id="genePhenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Gene').should('exist');
     cy.get('[id="genePhenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Condition').should('exist');
@@ -194,42 +194,42 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
 });
 
 describe('Page d\'un variant - Valider les liens disponibles', () => {
-  it('Lien Genes du panneau Summary', () => {
+  it('Lien Genes du panneau Summary [CQDG-135]', () => {
     cy.get('[data-cy="Summary_Gene_ExternalLink"]')
       .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=SLX4');
   });
 
-  it('Lien Omim du panneau Summary', () => {
+  it('Lien Omim du panneau Summary [CQDG-135]', () => {
     cy.get('[data-cy="Summary_OMIM_ExternalLink"]')
     .should('have.attr', 'href', 'https://omim.org/entry/613278');
   });
 
-  it('Lien ClinVar du panneau Summary', () => {
+  it('Lien ClinVar du panneau Summary [CQDG-135]', () => {
     cy.get('[data-cy="Summary_ClinVar_ExternalLink"]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/319184');
   });
 
-  it('Lien dbSNP du panneau Summary', () => {
+  it('Lien dbSNP du panneau Summary [CQDG-135]', () => {
     cy.get('[data-cy="Summary_dbSNP_ExternalLink"]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs148547201');
   });
 
-  it('Lien du gène du panneau Gene Consequences', () => {
+  it('Lien du gène du panneau Gene Consequences [CQDG-135]', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityGeneConsequenceSubtitle_wrapper"]').find('[href]').eq(0)
     .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=SLX4');
   });
 
-  it('Lien Omim du panneau Gene Consequences', () => {
+  it('Lien Omim du panneau Gene Consequences [CQDG-135]', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityGeneConsequenceSubtitle_wrapper"]').find('[href]').eq(1)
     .should('have.attr', 'href', 'https://omim.org/entry/613278');
   });
   
-  it('Lien ENST du panneau Gene Consequences', () => {
+  it('Lien ENST du panneau Gene Consequences [CQDG-135]', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityTable_contentTable"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(7).find('[href]')
     .should('have.attr', 'href', 'https://www.ensembl.org/id/ENST00000294008');
   });
 
-  it('Lien RefSeq du panneau Gene Consequences', () => {
+  it('Lien RefSeq du panneau Gene Consequences [CQDG-135]', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityTable_contentTable"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(8).find('[href]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/nuccore/NM_032444?report=graph');
   });
@@ -241,41 +241,41 @@ describe('Page d\'un variant - Valider les liens disponibles', () => {
     cy.get('[id="consequence"]').find('tr[class*="ant-table-row"]').eq(1).should('not.exist');
   });
 
-  it('Lien TopMed du panneau Public Cohort', () => {
+  it('Lien TopMed du panneau Public Cohort [CQDG-135]', () => {
     cy.get('[data-row-key="topmed"]').find('td[class="ant-table-cell"]').eq(0).find('[href]').should('have.attr', 'href', 'https://bravo.sph.umich.edu/freeze8/hg38/variant/snv/16-3606492-C-T');
   });
 
-  it('Lien gnomAD Genome (v3.1.1) du panneau Public Cohort', () => {
+  it('Lien gnomAD Genome (v3.1.1) du panneau Public Cohort [CQDG-135]', () => {
     cy.get('[data-row-key="gnomadGenomes3_1_1"]').find('td[class="ant-table-cell"]').eq(0).find('[href]')
     .should('have.attr', 'href', 'https://gnomad.broadinstitute.org/variant/16-3606492-C-T?dataset=gnomad_r3');
   });
   
-  it('Lien ClinVar du panneau ClinVar', () => {
+  it('Lien ClinVar du panneau ClinVar [CQDG-135]', () => {
     cy.get('[data-cy="Pathogenicity_ClinVar_319184_ExternalLink"]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/319184');
   });
   
-  it('Lien de la condition Orphanet du panneau Gene - Phenotype', () => {
+  it('Lien de la condition Orphanet du panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[data-row-key="0-s-l-x-4"]').find('td[class="ant-table-cell"]').eq(2).find('[href]')
     .should('have.attr', 'href', 'https://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN&data_id=634');
   });
   
-  it('Lien OMIM du gène du panneau Gene - Phenotype', () => {
+  it('Lien OMIM du gène du panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[data-row-key*="1-s-l-x-4-613278"]').find('td[class="ant-table-cell"]').eq(1).find('[href]')
     .should('have.attr', 'href', 'https://www.omim.org/entry/613278');
   });
   
-  it('Lien OMIM de la condition du panneau Gene - Phenotype', () => {
+  it('Lien OMIM de la condition du panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[data-row-key*="1-s-l-x-4-613278"]').find('td[class="ant-table-cell"]').eq(2).find('[href]').first()
     .should('have.attr', 'href', 'https://www.omim.org/entry/613951');
   });
   
-  it('Lien HPO de la condition du panneau Gene - Phenotype', () => {
+  it('Lien HPO de la condition du panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[data-row-key*="2-s-l-x-4"]').find('td[class="ant-table-cell"]').eq(2).find('[href]').eq(0)
     .should('have.attr', 'href', 'https://hpo.jax.org/app/browse/term/HP:0001770');
   });
 
-  it('Lien \'See more\' de la condition du panneau Gene - Phenotype', () => {
+  it('Lien \'See more\' de la condition du panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[data-row-key="2-s-l-x-4"]').contains('See more').click({force: true});
     cy.get('[data-row-key="2-s-l-x-4"]').contains('Leukopenia').should('exist');
     cy.get('[data-row-key="2-s-l-x-4"]').contains('See less').click({force: true});
@@ -284,7 +284,7 @@ describe('Page d\'un variant - Valider les liens disponibles', () => {
 });
 
 describe('Page d\'un variant - Valider les panneaux masquables', () => {
-  it('Panneau Summary', () => {
+  it('Panneau Summary [CQDG-135]', () => {
     cy.get('[id="summary"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="summary"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="summary"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
@@ -292,7 +292,7 @@ describe('Page d\'un variant - Valider les panneaux masquables', () => {
     cy.get('[id="summary"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
-  it('Panneau Gene Consequences', () => {
+  it('Panneau Gene Consequences [CQDG-135]', () => {
     cy.get('[id="consequence"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="consequence"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="consequence"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
@@ -300,7 +300,7 @@ describe('Page d\'un variant - Valider les panneaux masquables', () => {
     cy.get('[id="consequence"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
-  it('Panneau Frequency', () => {
+  it('Panneau Frequency [CQDG-135]', () => {
     cy.get('[id="frequencies"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="frequencies"]').find('[class*="Collapse_fuiCollapse"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="frequencies"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
@@ -308,7 +308,7 @@ describe('Page d\'un variant - Valider les panneaux masquables', () => {
     cy.get('[id="frequencies"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
-  it('Panneau Public Cohorts', () => {
+  it('Panneau Public Cohorts [CQDG-135]', () => {
     cy.get('[id="EntityPublicCohortTable"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="EntityPublicCohortTable"]').find('[class*="Collapse_fuiCollapse"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="EntityPublicCohortTable"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
@@ -316,7 +316,7 @@ describe('Page d\'un variant - Valider les panneaux masquables', () => {
     cy.get('[id="EntityPublicCohortTable"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
-  it('Panneau ClinVar', () => {
+  it('Panneau ClinVar [CQDG-135]', () => {
     cy.get('[id="pathogenicity"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="pathogenicity"]').find('[class*="Collapse_fuiCollapse"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="pathogenicity"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
@@ -324,7 +324,7 @@ describe('Page d\'un variant - Valider les panneaux masquables', () => {
     cy.get('[id="pathogenicity"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
-  it('Panneau Gene - Phenotype', () => {
+  it('Panneau Gene - Phenotype [CQDG-135]', () => {
     cy.get('[id="genePhenotype"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.get('[id="genePhenotype"]').find('[class*="Collapse_fuiCollapse"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="genePhenotype"]').find('[class*="Collapse_fuiCollapse"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');

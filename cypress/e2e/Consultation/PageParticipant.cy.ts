@@ -65,7 +65,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('Ethnicity').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('-').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(2).contains('Age at Recruitment (days)').should('exist');
-    cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('10622').should('exist');
+    cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('10.6K').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(3).contains('Vital Status').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(3).contains('Alive').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(3).find('[class*="ant-tag-red"]').should('exist');
@@ -81,9 +81,11 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="family"]').should('not.exist');
   });
 
-  it('Panneau Family (avec famille) [CQDG-283]', () => {
+  it('Panneau Family (avec famille)', () => {
     cy.get('[id="family"]').find('[class*="EntityTable_title"]').contains('Family').should('exist');
-    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('Family (1160ST0000044)').should('exist');
+    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('Family ( ').should('exist');
+    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('1160ST0000044').should('exist');
+    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains(' )').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Participant').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Family Position').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Disease Status').should('exist');
@@ -135,7 +137,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="diagnosis"]').find('td[class="ant-table-cell"]').eq(5).contains('639').should('exist');
   });
   
-  it('Panneau Phenotypes [CQDG-240, CQDG-263, CQDG-264]', () => {
+  it('Panneau Phenotypes', () => {
     cy.get('[id="phenotype"]').find('[class*="EntityTable_title"]').contains('Phenotype').should('exist');
     cy.get('[id="phenotype"]').find('[class="ant-collapse-header"]').contains('Phenotypes').should('exist');
     cy.get('[id="phenotype"]').find('[class="ant-collapse-header"]').contains('(4)').should('exist');
@@ -144,9 +146,11 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="phenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Interpretation').should('exist');
     cy.get('[id="phenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(3).contains('Age').should('exist');
     cy.get('[id="phenotype"]').find('thead').find('th[class="ant-table-cell"]').eq(4).contains('HPO Term').should('exist');
-    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(0).contains('Spasticity (HP:0001257)').should('exist');
+    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(0).contains('Spasticity').should('exist');
+    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(0).contains('HP').should('exist');
+    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(0).contains('0001257').should('exist');
     cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(1).contains('Spasticity').should('exist');
-    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(2).contains('-').should('exist');
+    cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(2).contains('Observed').should('exist');
     cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(3).contains('-').should('exist');
     cy.get('[data-row-key="PH0003852"]').find('td[class="ant-table-cell"]').eq(4).contains('14').should('exist');
   });
@@ -217,7 +221,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1160ST0000044').should('exist');
   });
 
-  it('Lien Mother du panneau Family [CQDG-283]', () => {
+  it('Lien Mother du panneau Family', () => {
     cy.get('[data-row-key="PT1007632"]').find('td[class="ant-table-cell"]').eq(0).find('[href]').click({force: true});
     cy.get('[class*="EntityTitle"]').contains('PT1007632');
   });

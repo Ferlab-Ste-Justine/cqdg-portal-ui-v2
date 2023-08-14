@@ -1,0 +1,18 @@
+{
+  "headers": ["File",
+              "Study",
+              "Data Category",
+              "Data Type",
+              "Experimental Strategy",
+              "Format",
+              "Size",
+              "File Name",
+              "Platform"],
+  "content": ["FI0188666",
+              "NEURODEV",
+              "Genomics",
+              "Sequencing Data Supplement",
+              "WGS",
+              "TGZ",
+              "--"]
+}

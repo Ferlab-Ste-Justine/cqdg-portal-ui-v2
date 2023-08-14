@@ -1,0 +1,14 @@
+{
+  "headers": ["File",
+              "Name",
+              "Type",
+              "Format",
+              "Size",
+              "Sample"],
+  "content": ["FI0185330",
+              "S15906.sv.vcf.gz",
+              "Germline Structural Variant",
+              "VCF",
+              "0 B",
+              "SR0462507"]
+}

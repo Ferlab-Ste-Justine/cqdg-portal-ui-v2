@@ -1,0 +1,14 @@
+{
+  "headers": ["Participant",
+              "Study",
+              "Sample",
+              "Sample Type",
+              "Biospecimen",
+              "Tissue"],
+  "content": ["PT1006895",
+              "T-DEE",
+              "SR0462507",
+              "DNA (NCIT:C449)",
+              "SP0564508",
+              "Blood (NCIT:C12434)"]
+}

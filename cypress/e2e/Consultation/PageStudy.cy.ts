@@ -38,7 +38,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
-  it('Panneau Summary', () => {
+  it('Panneau Summary [CQDG-329]', () => {
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains(/^382$/);
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('Participants');
     cy.get('[data-cy="SummaryHeader_Families_Button"]').contains(/^130$/);
