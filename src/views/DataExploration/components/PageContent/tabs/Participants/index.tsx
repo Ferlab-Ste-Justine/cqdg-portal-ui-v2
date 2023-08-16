@@ -159,7 +159,8 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
     tooltip: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip'),
-    render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
+    render: (age_at_recruitment) =>
+      age_at_recruitment ? numberFormat(age_at_recruitment) : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'nb_files',
