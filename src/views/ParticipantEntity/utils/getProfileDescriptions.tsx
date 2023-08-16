@@ -1,5 +1,6 @@
 import intl from 'react-intl-universal';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Tag } from 'antd';
 import { IParticipantEntity } from 'graphql/participants/models';
 import capitalize from 'lodash/capitalize';
@@ -23,7 +24,9 @@ const getProfileDescriptions = (participant?: IParticipantEntity): IEntityDescri
   },
   {
     label: intl.get('entities.participant.age_at_recruitment'),
-    value: participant?.age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
+    value: participant?.age_at_recruitment
+      ? numberFormat(participant.age_at_recruitment)
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.participant.vital_status'),
