@@ -44,29 +44,33 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
     : [];
 
   const FamilyLink = () => (
-    <Link
-      className={styles.link}
-      to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-      data-cy="FamilyLink"
-      onClick={() =>
-        participant &&
-        addQuery({
-          queryBuilderId: DATA_EXPLORATION_QB_ID,
-          query: generateQuery({
-            newFilters: [
-              generateValueFilter({
-                field: 'family_id',
-                value: [participant.family_id],
-                index: INDEXES.PARTICIPANT,
-              }),
-            ],
-          }),
-          setAsActive: true,
-        })
-      }
-    >
-      {`${intl.get('entities.participant.family')} (${participant?.family_id})`}
-    </Link>
+    <>
+      {`${intl.get('entities.participant.family')} ( `}
+      <Link
+        className={styles.link}
+        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+        data-cy="FamilyLink"
+        onClick={() =>
+          participant &&
+          addQuery({
+            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            query: generateQuery({
+              newFilters: [
+                generateValueFilter({
+                  field: 'family_id',
+                  value: [participant.family_id],
+                  index: INDEXES.PARTICIPANT,
+                }),
+              ],
+            }),
+            setAsActive: true,
+          })
+        }
+      >
+        {participant?.family_id}
+      </Link>
+      {` )`}
+    </>
   );
 
   return (
