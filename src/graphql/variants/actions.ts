@@ -4,7 +4,6 @@ import {
   IQueryVariable,
 } from '@ferlab/ui/core/graphql/types';
 import { computeSearchAfter, hydrateResults } from '@ferlab/ui/core/graphql/utils';
-import { IVariantEntity as IVariantEntityFerlab } from '@ferlab/ui/core/pages/EntityPage/type';
 import { INDEXES } from 'graphql/constants';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -35,7 +34,7 @@ interface IUseVariantEntityProps {
 
 interface IUseVariantEntityReturn {
   loading: boolean;
-  data?: IVariantEntityFerlab;
+  data?: IVariantEntity;
 }
 
 export const useVariantEntity = ({

@@ -16,18 +16,20 @@ import {
   IQueryResults,
   TQueryConfigCb,
 } from '@ferlab/ui/core/graphql/types';
-import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { numberFormat, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { Tooltip } from 'antd';
 import cx from 'classnames';
 import { INDEXES } from 'graphql/constants';
+import { hydrateResults } from 'graphql/models';
 import {
   IClinVar,
-  IConsequenceEntity,
   IExternalFrequenciesEntity,
+  IGeneEntity,
   ITableVariantEntity,
   IVariantEntity,
+  IVariantInternalFrequencies,
   IVariantStudyEntity,
 } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID, DEFAULT_PAGE_INDEX } from 'views/DataExploration/utils/constant';
@@ -60,7 +62,7 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (hgvsg: string, entity: IVariantEntity) =>
       hgvsg ? (
         <Tooltip placement="topLeft" title={hgvsg}>
-          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity.locus}`}>{hgvsg}</Link>
+          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity?.locus}`}>{hgvsg}</Link>
         </Tooltip>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
@@ -70,9 +72,8 @@ const getDefaultColumns = (): ProColumnType[] => [
     key: 'variant_class',
     title: intl.get('entities.variant.type'),
     dataIndex: 'variant_class',
-    sorter: {
-      multiple: 1,
-    },
+    sorter: { multiple: 1 },
+    render: (variant_class: string) => variant_class || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'rsnumber',
@@ -94,11 +95,22 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'consequences',
     title: intl.get('entities.variant.consequences.consequences'),
-    dataIndex: 'consequences',
+    dataIndex: 'genes',
     tooltip: intl.get('entities.variant.consequences.tooltip'),
-    render: (consequences: IArrangerResultsTree<IConsequenceEntity>) => (
-      <ConsequencesCell consequences={consequences?.hits?.edges || []} />
-    ),
+    render: (genes: IArrangerResultsTree<IGeneEntity>) => {
+      const geneWithPickedConsequence = genes?.hits?.edges?.find((e) =>
+        (e.node.consequences || [])?.hits?.edges?.some((e) => e.node?.picked),
+      )?.node;
+      if (!geneWithPickedConsequence) {
+        //must never happen or it is a bug
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+
+      const consequences = geneWithPickedConsequence.consequences?.hits?.edges;
+      return (
+        <ConsequencesCell consequences={consequences} symbol={geneWithPickedConsequence.symbol} />
+      );
+    },
   },
   {
     key: 'clinvar',
@@ -122,38 +134,65 @@ const getDefaultColumns = (): ProColumnType[] => [
       ),
   },
   {
-    key: 'gnomad_genomes_3_1_1.af',
+    key: 'gnomad_genomes_3.af',
     title: intl.get('entities.variant.gnomAd'),
     tooltip: intl.get('entities.variant.gnomAdTooltip'),
-    dataIndex: 'frequencies',
-    render: (gnomad: IExternalFrequenciesEntity) =>
-      gnomad.gnomad_genomes_3_1_1.af
-        ? toExponentialNotation(gnomad.gnomad_genomes_3_1_1.af)
+    dataIndex: 'external_frequencies',
+    render: (externalFrequencies: IExternalFrequenciesEntity) =>
+      externalFrequencies?.gnomad_genomes_3?.af
+        ? toExponentialNotation(externalFrequencies?.gnomad_genomes_3.af)
         : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'studies',
     title: intl.get('entities.study.studies'),
     dataIndex: 'studies',
-    render: (studies: IArrangerResultsTree<IVariantStudyEntity>) => studies?.hits?.total || 0,
-  },
-  {
-    key: 'participant_number',
-    title: intl.get('entities.participant.participant'),
-    tooltip: intl.get('entities.variant.participant.tooltip'),
-    sorter: {
-      multiple: 1,
-    },
-    render: (record: IVariantEntity) => {
-      const participantNumber = record.participant_number || 0;
-      if (participantNumber <= 10) {
-        return participantNumber;
+    render: (studies: IArrangerResultsTree<IVariantStudyEntity>) => {
+      const total = studies?.hits?.total ?? 0;
+      if (total === 0) {
+        return total;
       }
 
-      const participantIds = record.studies?.hits?.edges?.flatMap(
-        (study) => study.node.participant_ids,
+      const ids = hydrateResults(studies?.hits?.edges || []).map(
+        (node: IVariantStudyEntity) => node.study_code,
       );
 
+      return (
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          onClick={() => {
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'study_code',
+                    value: ids,
+                    index: INDEXES.PARTICIPANT,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            });
+          }}
+        >
+          {numberFormat(total)}
+        </Link>
+      );
+    },
+  },
+  {
+    title: intl.get('entities.participant.participant'),
+    tooltip: intl.get('entities.variant.participant.tooltip'),
+    key: 'participant_number',
+    render: (variant: IVariantEntity) => {
+      const totalNbOfParticipants = variant.internal_frequencies?.total?.pc || 0;
+      const studies = variant.studies;
+      const participantIds =
+        studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
+      if (!participantIds.length) {
+        return totalNbOfParticipants;
+      }
       return (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
@@ -173,43 +212,35 @@ const getDefaultColumns = (): ProColumnType[] => [
             });
           }}
         >
-          {participantNumber}
+          {numberFormat(totalNbOfParticipants)}
         </Link>
       );
     },
   },
   {
-    key: 'participant_frequency',
+    key: 'internal_frequencies',
     title: intl.get('entities.variant.frequence.title'),
     tooltip: intl.get('entities.variant.frequence.tooltip'),
-    dataIndex: 'participant_frequency',
-    sorter: {
-      multiple: 1,
-    },
-    render: (participantFrequency: number) =>
-      isNumber(participantFrequency)
-        ? toExponentialNotation(participantFrequency)
+    dataIndex: 'internal_frequencies',
+    render: (internalFrequencies: IVariantInternalFrequencies) =>
+      internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af)
+        ? toExponentialNotation(internalFrequencies?.total?.af)
         : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'internal',
     title: intl.get('entities.variant.alt.title'),
     tooltip: intl.get('entities.variant.alt.tooltip'),
-    dataIndex: ['frequencies', 'internal', 'upper_bound_kf', 'ac'],
-    sorter: {
-      multiple: 1,
-    },
-    render: (ac: string) => ac,
+    dataIndex: ['internal_frequencies', 'total', 'ac'],
+    key: 'ac',
+    render: (ac: string) => ac || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'homozygotes',
     title: intl.get('entities.variant.homozygotes.title'),
     tooltip: intl.get('entities.variant.homozygotes.tooltip'),
-    dataIndex: ['frequencies', 'internal', 'upper_bound_kf', 'homozygotes'],
-    sorter: {
-      multiple: 1,
-    },
-    render: (homozygotes: string) => homozygotes,
+    dataIndex: 'internal_frequencies',
+    key: 'homozygotes',
+    render: (internalFrequencies: IVariantInternalFrequencies) =>
+      internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,
   },
 ];
 
@@ -321,10 +352,7 @@ const VariantsTable = ({
                 updateUserConfig({
                   variants: {
                     tables: {
-                      variants: {
-                        ...userInfo?.config.variants?.tables?.variants,
-                        viewPerQuery,
-                      },
+                      variants: { ...userInfo?.config.variants?.tables?.variants, viewPerQuery },
                     },
                   },
                 }),

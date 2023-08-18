@@ -154,6 +154,7 @@ const fr = {
       gnomAd: 'GnomAD',
       gnomAdTooltip: 'gnomAD 3.1.1 Allèle Frequence',
       gnomadGenome311: 'gnomAD Genome (v3.1.1)',
+      gnomadGenome3: 'gnomAD Genome (v3.1.2)',
       genome_build: 'Genome build',
       dbsnp: 'dbSNP',
       chromosome: 'Chromosome',

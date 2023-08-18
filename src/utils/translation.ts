@@ -297,20 +297,6 @@ export const getFacetsDictionary = () => ({
   },
   variant_class: intl.get('entities.variant.variant_class'),
   variant_external_reference: intl.get('entities.variant.variant_external_reference'),
-  consequences: {
-    consequences: intl.get('entities.variant.consequences.consequence'),
-    biotype: intl.get('entities.variant.biotype'),
-    vep_impact: 'VEP',
-    predictions: {
-      sift_pred: 'SIFT',
-      polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
-      fathmm_pred: 'FATHMM',
-      cadd_rankscore: 'CADD',
-      lrt_pred: 'LRT',
-      revel_rankscore: 'REVEL',
-      dann_rankscore: 'DANN',
-    },
-  },
   genes: {
     hpo: {
       hpo_term_label: 'HPO',
@@ -327,6 +313,27 @@ export const getFacetsDictionary = () => ({
     cosmic: {
       tumour_types_germline: 'COSMIC',
     },
+    consequences: {
+      consequences: intl.get('entities.variant.consequences.consequence'),
+      biotype: intl.get('entities.variant.biotype'),
+      vep_impact: 'VEP',
+      predictions: {
+        sift_pred: 'SIFT',
+        polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
+        fathmm_pred: 'FATHMM',
+        cadd_rankscore: 'CADD',
+        lrt_pred: 'LRT',
+        revel_rankscore: 'REVEL',
+        dann_rankscore: 'DANN',
+      },
+    },
+  },
+  external_frequencies: {
+    gnomad_genomes_2_1_1: { af: 'gnomAD Genome 2.1.1' },
+    gnomad_genomes_3: { af: 'gnomAD Genome 3.1.2' },
+    gnomad_exomes_2_1_1: { af: 'gnomAD Exome 2.1.1' },
+    topmed_bravo: { af: 'TopMed' },
+    thousand_genomes: { af: '1000 Genomes' },
   },
   frequencies: {
     internal: {

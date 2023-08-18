@@ -27,7 +27,7 @@ const getValue = (type: SuggestionType, option: Suggestion) =>
 const VariantGeneSearch = ({ queryBuilderId, type }: OwnProps) => {
   const [options, setOptions] = useState<OptionsType[]>([]);
   const { activeQuery } = useQueryBuilderState(VARIANT_REPO_QB_ID);
-  const field = type === SuggestionType.VARIANTS ? 'locus' : 'consequences.symbol';
+  const field = type === SuggestionType.VARIANTS ? 'locus' : 'genes.symbol';
 
   const handleSearch = async (searchText: string) => {
     const { data } = await ArrangerApi.searchSuggestions(type, searchText);

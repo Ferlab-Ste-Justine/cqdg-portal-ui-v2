@@ -1,9 +1,9 @@
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { IVariantEntity } from '@ferlab/ui/core/pages//EntityPage/type';
 import { IEntitySummaryColumns } from '@ferlab/ui/core/pages/EntityPage/EntitySummary';
-import { numberFormat, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { numberWithCommas, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
+import { IVariantEntity } from 'graphql/variants/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
@@ -36,7 +36,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           },
           {
             label: intl.get('entities.variant.referenceGenome'),
-            value: variant?.genome_build || TABLE_EMPTY_PLACE_HOLDER,
+            value: variant?.assembly_version || TABLE_EMPTY_PLACE_HOLDER,
           },
           {
             label: intl.get('entities.variant.genes'),
@@ -80,8 +80,8 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           },
           {
             label: intl.get('entities.participant.participants'),
-            value: variant?.participant_number
-              ? numberFormat(variant.participant_number)
+            value: variant?.internal_frequencies?.total?.pc
+              ? numberWithCommas(variant.internal_frequencies.total.pc)
               : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
@@ -99,9 +99,9 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
         title: intl.get('entities.variant.frequencies.frequencies'),
         data: [
           {
-            label: intl.get('entities.variant.gnomadGenome311'),
+            label: intl.get('entities.variant.gnomadGenome3'),
             value:
-              toExponentialNotation(variant?.frequencies?.gnomad_genomes_3_1_1?.af) ||
+              toExponentialNotation(variant?.external_frequencies?.gnomad_genomes_3?.af) ||
               TABLE_EMPTY_PLACE_HOLDER,
           },
           {
@@ -127,7 +127,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             ),
           },
           {
-            label: intl.get('entities.variant.dbSNP'),
+            label: intl.get('entities.variant.dbsnp'),
             value: variant?.rsnumber ? (
               <ExternalLink
                 href={`https://www.ncbi.nlm.nih.gov/snp/${variant?.rsnumber}`}
