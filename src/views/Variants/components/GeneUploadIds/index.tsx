@@ -6,6 +6,7 @@ import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { hydrateResults } from '@ferlab/ui/core/graphql/utils';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Descriptions } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
@@ -15,11 +16,11 @@ import { ArrangerApi } from 'services/api/arranger';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
+interface IGenesUploadIdsProps {
   queryBuilderId: string;
 }
 
-const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
+const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
   <UploadIds
     dictionary={{
       modalTitle: intl.get('upload.gene.ids.modal.title'),
@@ -33,16 +34,17 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
       modalCancelText: intl.get('upload.gene.ids.modal.cancel.btn'),
       collapseTitle: (matchCount, unMatchCount) =>
         intl.get('upload.gene.ids.modal.collapseTitle', {
-          matchCount,
-          unMatchCount,
+          matchCount: numberFormat(matchCount),
+          unMatchCount: numberFormat(unMatchCount),
         }),
-      matchTabTitle: (matchCount) => intl.get('upload.gene.ids.modal.match', { count: matchCount }),
+      matchTabTitle: (matchCount) =>
+        intl.get('upload.gene.ids.modal.match', { count: numberFormat(matchCount) }),
       unmatchTabTitle: (unmatchcount) =>
-        intl.get('upload.gene.ids.modal.unmatch', { count: unmatchcount }),
+        intl.get('upload.gene.ids.modal.unmatch', { count: numberFormat(unmatchcount) }),
       tablesMessage: (submittedCount, mappedCount) =>
         intl.get('upload.gene.ids.modal.table.message', {
-          submittedCount,
-          mappedCount,
+          submittedCount: numberFormat(submittedCount),
+          mappedCount: numberFormat(mappedCount),
         }),
       inputLabel: intl.get('upload.gene.ids.modal.input.label'),
       matchTable: {
@@ -72,7 +74,7 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
         </Descriptions>
       ),
     }}
-    placeHolder="ex. ENSG00000157764, TP53"
+    placeHolder={intl.get('global.search.genes.placeholder')}
     fetchMatch={async (ids: string[]) => {
       const response = await ArrangerApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
@@ -81,13 +83,15 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
-            newFilters: ['symbol', 'ensembl_gene_id', 'alias'].map((field) =>
-              generateValueFilter({
-                field,
-                value: ids,
-                index: INDEXES.GENE,
-              }),
-            ),
+            newFilters: [
+              {
+                ...generateValueFilter({
+                  field: 'search_text',
+                  value: ids,
+                  index: INDEXES.GENE,
+                }),
+              },
+            ],
           }),
         },
       });
@@ -97,11 +101,11 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
       return genes?.flatMap((gene) => {
         const matchedIds: string[] = ids.filter((id: string) => {
           const lowerCaseId = id.toLocaleLowerCase();
-          const lowerCaseAliases = gene.alias.map((alias) => alias.toLocaleLowerCase());
+          const lowerCaseAliases = (gene.alias || []).map((alias) => alias.toLocaleLowerCase());
 
           return (
-            gene.symbol.toLocaleLowerCase() === lowerCaseId ||
-            gene.ensembl_gene_id.toLocaleLowerCase() === lowerCaseId ||
+            gene.symbol?.toLocaleLowerCase() === lowerCaseId ||
+            gene.ensembl_gene_id?.toLocaleLowerCase() === lowerCaseId ||
             lowerCaseAliases.includes(lowerCaseId)
           );
         });
@@ -122,10 +126,11 @@ const GenesUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return updateActiveQueryField({
         queryBuilderId,
-        field: 'consequences.symbol',
+        field: 'genes.symbol',
         value: uniqueMatches.map((match) => match.mappedTo),
         index: INDEXES.VARIANT,
         merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
+        isUploadedList: true,
       });
     }}
   />

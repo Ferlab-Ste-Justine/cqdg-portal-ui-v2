@@ -3,88 +3,103 @@ import { Link } from 'react-router-dom';
 import { ReadOutlined, UserOutlined } from '@ant-design/icons';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { IVariantEntity as IVariantEntityFerlab } from '@ferlab/ui/core/pages/EntityPage/type';
-import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
+import { numberWithCommas } from '@ferlab/ui/core/utils/numberUtils';
 import { Button } from 'antd';
 import { INDEXES } from 'graphql/constants';
+import { IVariantEntity } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
 
-interface ISummaryBarProps {
-  variant?: IVariantEntityFerlab;
+interface ISummaryHeaderProps {
+  variant?: IVariantEntity;
 }
 
-const SummaryHeader = ({ variant }: ISummaryBarProps) => (
-  <div className={styles.buttonGroup}>
-    <Button className={styles.button} size="large" data-cy="SummaryHeader_Studies_Button" block>
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-        onClick={() =>
-          variant &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_id',
-                  value: variant?.studies?.hits?.edges?.map((e) => e.node.study_id) || [],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
+const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
+  const studyCount = variant?.studies.hits.total || 0;
+  const participantCount = variant?.internal_frequencies?.total?.pc || 0;
+  const studyCodes = variant?.studies.hits.edges.map((e) => e?.node?.study_code) || [];
+
+  const participantsIdsFromAllStudies = variant?.studies.hits.edges.reduce((xs: string[], x) => {
+    if (x.node.participant_ids?.length) {
+      return [...xs, ...x.node.participant_ids];
+    }
+    return xs;
+  }, []);
+  const uniqueParticipantsFromAllStudies = [...new Set(participantsIdsFromAllStudies)];
+
+  return (
+    <div className={styles.buttonGroup}>
+      <Button className={styles.button} size="large" data-cy="SummaryHeader_Studies_Button" block>
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          className={styles.link}
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'study_code',
+                    value: studyCodes,
+                    index: INDEXES.STUDY,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          <ReadOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>{numberWithCommas(studyCount)}</span>
+            <span className={styles.name}>
+              {intl.get('entities.study.studyAuto', { count: studyCount })}
+            </span>
+          </div>
+        </Link>
+      </Button>
+
+      <Button
+        className={styles.button}
+        size="large"
+        data-cy="SummaryHeader_Participants_Button"
+        block
       >
-        <ReadOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>{numberFormat(variant?.studies?.hits?.total || 1)}</span>
-          <span className={styles.name}>{intl.get('entities.study.study')}</span>
-        </div>
-      </Link>
-    </Button>
-    <Button
-      className={styles.button}
-      size="large"
-      data-cy="SummaryHeader_Participants_Button"
-      block
-    >
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-        onClick={() =>
-          variant &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'participant_id',
-                  value: [], //todo: add future participant_id or variant_id/locus field
-                  index: INDEXES.PARTICIPANT,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
-      >
-        <UserOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>{numberFormat(variant?.participant_number || 0)}</span>
-          <span className={styles.name}>
-            {intl.get('entities.participant.participantAuto', {
-              count: variant?.participant_number,
-            })}
-          </span>
-        </div>
-      </Link>
-    </Button>
-  </div>
-);
+        <Link
+          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          className={styles.link}
+          onClick={() =>
+            addQuery({
+              queryBuilderId: DATA_EXPLORATION_QB_ID,
+              query: generateQuery({
+                newFilters: [
+                  generateValueFilter({
+                    field: 'participant_id',
+                    value: uniqueParticipantsFromAllStudies,
+                    index: INDEXES.PARTICIPANT,
+                  }),
+                ],
+              }),
+              setAsActive: true,
+            })
+          }
+        >
+          <UserOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>{numberWithCommas(participantCount)}</span>
+            <span className={styles.name}>
+              {intl.get('entities.participant.participantAuto', {
+                count: participantCount,
+              })}
+            </span>
+          </div>
+        </Link>
+      </Button>
+    </div>
+  );
+};
 
 export default SummaryHeader;

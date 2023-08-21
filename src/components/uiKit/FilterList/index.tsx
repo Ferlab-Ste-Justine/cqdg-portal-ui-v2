@@ -86,6 +86,7 @@ const FilterList = ({
                   defaultOpen={filterInfo.defaultOpenFacets?.includes(facet) ? true : undefined}
                   filterMapper={filterMapper}
                   headerTooltip={group.tooltips?.includes(facet)}
+                  noDataInputOption={!group.noDataOption?.includes(facet)}
                 />
               ) : (
                 <div key={i + ii} className={cx(styles.customFilterWrapper, styles.filter)}>

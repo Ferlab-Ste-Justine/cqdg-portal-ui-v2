@@ -10,8 +10,6 @@ import ModerateBadgeIcon from 'components/Icons/VariantBadgeIcons/ModerateBadgeI
 import ModifierBadgeIcon from 'components/Icons/VariantBadgeIcons/ModifierBadgeIcon';
 import { toKebabCase } from 'utils/helper';
 
-import { generateConsequencesDataLines } from './consequences';
-
 import style from './index.module.scss';
 
 const impactToColorClassName = Object.freeze({
@@ -25,40 +23,37 @@ const pickImpactBadge = (impact: Impact) => impactToColorClassName[impact];
 
 const ConsequencesCell = ({
   consequences,
+  symbol,
 }: {
   consequences: IArrangerEdge<IConsequenceEntity>[];
+  symbol: string;
 }) => {
-  const lines = generateConsequencesDataLines(consequences);
+  const pickedEdge = consequences.find((c) => c.node.picked);
+  if (!pickedEdge) {
+    //must never happen
+    return null;
+  }
+
+  const picked = pickedEdge?.node;
+  if (!picked?.consequence) {
+    return null;
+  }
+
   return (
-    <>
-      {lines.map((consequence, index) => {
-        /* Note: index can be used as key since the list is readonly */
-        const node = consequence.node;
-
-        if (node.consequences) {
-          return (
-            <StackLayout className={style.stackLayout} center key={index}>
-              {pickImpactBadge(node.vep_impact)}
-              <span key={index} className={style.detail}>
-                {removeUnderscoreAndCapitalize(node.consequences[0])}
-              </span>
-              {node.symbol && (
-                <span key={toKebabCase(node.symbol)} className={style.symbol}>
-                  <ExternalLink
-                    href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${node.symbol}`}
-                  >
-                    {node.symbol}
-                  </ExternalLink>
-                </span>
-              )}
-              {node.hgvsp && <span>{node.hgvsp.split(':')[1]}</span>}
-            </StackLayout>
-          );
-        }
-
-        return null;
-      })}
-    </>
+    <StackLayout className={style.stackLayout} center key={'1'}>
+      {pickImpactBadge(picked.vep_impact)}
+      <span key="detail" className={style.detail}>
+        {removeUnderscoreAndCapitalize(picked.consequence[0])}
+      </span>
+      {symbol && (
+        <span key={toKebabCase(symbol)} className={style.symbol}>
+          <ExternalLink href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${symbol}`}>
+            {symbol}
+          </ExternalLink>
+        </span>
+      )}
+      {picked.hgvsp && <span>{picked.hgvsp.split(':')[1]}</span>}
+    </StackLayout>
   );
 };
 

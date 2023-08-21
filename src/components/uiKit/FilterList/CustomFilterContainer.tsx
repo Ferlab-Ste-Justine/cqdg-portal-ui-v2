@@ -23,6 +23,7 @@ interface ICustomFilterContainerProps {
   filtersOpen?: boolean;
   filterMapper?: TCustomFilterMapper;
   headerTooltip?: boolean;
+  noDataInputOption?: boolean;
 }
 
 const CustomFilterContainer = ({
@@ -35,6 +36,7 @@ const CustomFilterContainer = ({
   extendedMappingResults,
   filterMapper,
   headerTooltip,
+  noDataInputOption,
 }: ICustomFilterContainerProps) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -44,7 +46,7 @@ const CustomFilterContainer = ({
   );
 
   useEffect(() => {
-    if (filtersOpen !== undefined && isOpen !== filtersOpen) {
+    if (filtersOpen && isOpen !== filtersOpen) {
       setIsOpen(filtersOpen);
     }
     // eslint-disable-next-line
@@ -67,6 +69,7 @@ const CustomFilterContainer = ({
     filterFooter: true,
     headerTooltip,
     dictionary: getFacetsDictionary(),
+    noDataInputOption,
   });
 
   const filters = results?.aggregations ? getFilters(results?.aggregations, filterKey) : [];

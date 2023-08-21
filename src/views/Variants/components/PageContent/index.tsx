@@ -47,16 +47,16 @@ import VariantsTable from './VariantsTable';
 
 import styles from './index.module.scss';
 
-type OwnProps = {
-  variantMapping: IExtendedMappingResults;
-};
-
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
   tag: SavedFilterTag.VariantsExplorationPage,
 });
 
-const PageContent = ({ variantMapping }: OwnProps) => {
+interface IPageContentProps {
+  variantMapping: IExtendedMappingResults;
+}
+
+const PageContent = ({ variantMapping }: IPageContentProps) => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
   const { savedSets } = useSavedSet();
@@ -66,9 +66,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
     ...DEFAULT_QUERY_CONFIG,
     size: userInfo?.config.variants?.tables?.variants?.viewPerQuery || DEFAULT_PAGE_SIZE,
   });
-  const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement | undefined>(
-    undefined,
-  );
+  const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement>();
   const [pageIndex, setPageIndex] = useState(DEFAULT_PAGE_INDEX);
 
   const variantResolvedSqon = resolveSyntheticSqon(queryList, activeQuery);
@@ -90,7 +88,7 @@ const PageContent = ({ variantMapping }: OwnProps) => {
   );
 
   useEffect(() => {
-    if (queryConfig.firstPageFlag !== undefined || queryConfig.searchAfter === undefined) {
+    if (queryConfig.firstPageFlag || !queryConfig.searchAfter) {
       return;
     }
 
@@ -196,12 +194,9 @@ const PageContent = ({ variantMapping }: OwnProps) => {
         fetchQueryCount={async (sqon) => {
           const { data } = await ArrangerApi.graphqlRequest<{ data: IVariantResultTree }>({
             query: GET_VARIANT_COUNT.loc?.source.body,
-            variables: {
-              sqon: resolveSyntheticSqon(queryList, sqon),
-            },
+            variables: { sqon: resolveSyntheticSqon(queryList, sqon) },
           });
-
-          return data?.data?.Variant.hits.total ?? 0;
+          return data?.data?.Variant?.hits?.total ?? 0;
         }}
       />
       <VariantsTable
