@@ -25,6 +25,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 import getDataAccessDescriptions from './utils/getDataAccessDescriptions';
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
+import Datasets from './Datasets';
 import FilesTable from './FilesTable';
 import SummaryHeader from './SummaryHeader';
 
@@ -40,6 +41,7 @@ const StudyEntity = () => {
     value: study_code,
   });
 
+  const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
   //todo: to change with the futur study.is_restricted field
   const isRestricted = study_code === 'CAG';
 
@@ -47,25 +49,34 @@ const StudyEntity = () => {
     SUMMARY = 'summary',
     DATA_ACCESS = 'data_access',
     DATA_FILE = 'data_file',
+    DATASET = 'dataset',
     STATISTIC = 'statistic',
   }
 
-  const links: IAnchorLink[] = [
+  const defaultLinks: any = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
     {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
+    ...[
+      !isRestricted && {
+        href: `#${SectionId.DATA_FILE}`,
+        title: intl.get('entities.study.file'),
+      },
+    ],
+    {
+      href: `#${SectionId.DATASET}`,
+      title: intl.get('entities.study.dataset'),
+    },
+    ...[
+      !isRestricted && {
+        href: `#${SectionId.STATISTIC}`,
+        title: intl.get('entities.study.statistic'),
+      },
+    ],
   ];
-
-  if (!isRestricted) {
-    links.push(
-      { href: `#${SectionId.DATA_FILE}`, title: intl.get('entities.study.file') },
-      { href: `#${SectionId.STATISTIC}`, title: intl.get('entities.study.statistic') },
-    );
-  }
-
-  const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
+  const links: IAnchorLink[] = defaultLinks.filter((link: IAnchorLink) => link);
 
   /** We initialize here a sqon by queryBuilderId to handle graphs and actions */
   useEffect(() => {
@@ -123,6 +134,12 @@ const StudyEntity = () => {
         title={intl.get('entities.file.data_access')}
       />
       {!isRestricted && <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />}
+      <Datasets
+        id={SectionId.DATASET}
+        loading={loading}
+        title={intl.get('entities.study.dataset')}
+        datasets={study?.datasets}
+      />
       {!isRestricted && (
         <StatsGraph
           id={SectionId.STATISTIC}

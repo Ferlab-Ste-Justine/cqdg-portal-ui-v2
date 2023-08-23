@@ -38,6 +38,21 @@ export const GET_STUDIES = gql`
               access_limitations
               access_requirements
             }
+            datasets {
+              hits {
+                total
+                edges {
+                  node {
+                    data_type
+                    description
+                    experimental_strategy
+                    file_count
+                    name
+                    participant_count
+                  }
+                }
+              }
+            }
           }
         }
       }
