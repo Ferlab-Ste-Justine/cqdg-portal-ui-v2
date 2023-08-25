@@ -65,10 +65,12 @@ const StudyEntity = () => {
         title: intl.get('entities.study.file'),
       },
     ],
-    {
-      href: `#${SectionId.DATASET}`,
-      title: intl.get('entities.study.dataset'),
-    },
+    ...[
+      study?.datasets && {
+        href: `#${SectionId.DATASET}`,
+        title: intl.get('entities.study.dataset'),
+      },
+    ],
     ...[
       !isRestricted && {
         href: `#${SectionId.STATISTIC}`,
@@ -134,12 +136,14 @@ const StudyEntity = () => {
         title={intl.get('entities.file.data_access')}
       />
       {!isRestricted && <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />}
-      <Datasets
-        id={SectionId.DATASET}
-        loading={loading}
-        title={intl.get('entities.study.dataset')}
-        datasets={study?.datasets}
-      />
+      {study?.datasets && (
+        <Datasets
+          id={SectionId.DATASET}
+          loading={loading}
+          title={intl.get('entities.study.dataset')}
+          datasets={study?.datasets}
+        />
+      )}
       {!isRestricted && (
         <StatsGraph
           id={SectionId.STATISTIC}
