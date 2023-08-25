@@ -73,6 +73,7 @@ const fr = {
       phenotype_hpo: 'Phénotype (HPO)',
       family_type: 'Type de famille',
       family_position: 'Position familiale',
+      family_id: 'ID de famille',
       gender: 'Genre',
       ethnicity: 'Éthnicité',
       age_at_recruitment: 'Âge au recrutement (jours)',

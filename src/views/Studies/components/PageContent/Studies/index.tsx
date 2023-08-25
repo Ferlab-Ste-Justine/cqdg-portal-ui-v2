@@ -49,9 +49,10 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   },
   {
     dataIndex: 'name',
-    key: 'study_name',
+    key: 'name',
     title: intl.get('screen.studies.name'),
     sorter: { multiple: 1 },
+    render: (name: string) => name || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     dataIndex: 'domain',
