@@ -3,7 +3,7 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
-  cy.visitStudyEntity('NEURODEV');
+  cy.visitStudyEntity('NEURODEV', 6);
 });
 
 describe('Page d\'une étude - Valider les redirections', () => {
@@ -108,6 +108,30 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 100%"]').should('exist');
   });
 
+  it('Panneau GenoRef-Q [CQDG-261]', () => {
+    cy.visitStudyEntity('CAG', 1);
+    cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Dataset').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-collapse-header"]').contains('GenoRef-Q').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(0).contains('Description').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(0).contains('The goal of the GenoRef-Q Initiative was to sequence the genome of 2000 CARTaGENE (CaG) participants to capture the genetic variation present in the Quebec population including minority groups who are otherwise underrepresented in genetic studies.GenoRef-Q is a multi-ethnic cohort where at least 10% is not of European ancestry. Participants were also selected based on potential linkage to the BALSAC genealogy dataset and presence of other -omic data.').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(1).contains('Data Type').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('SNV').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Aligned Reads').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline Structural Variant').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline CNV').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Sequencing Data Supplement').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).find('[class*="StudyEntity_tag_"]').eq(4).should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(2).contains('Experimental Strategy').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).contains('WGS').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).find('[class*="StudyEntity_tag_"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).find('svg[data-icon="user"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains('2,183').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains('Participants').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).find('svg[data-icon="file-text"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains('13.6K').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains('Files').should('exist');
+  });
+
   it('Panneau Summary Statistics', () => {
     cy.get('[id="statistic"]').find('[class*="EntityDescriptions_title"]').contains('Summary Statistic').should('exist');
     cy.get('[id="statistic"]').find('[class="ant-collapse-header"]').contains('Summary Statistics').should('exist');
@@ -192,6 +216,15 @@ describe('Page d\'une étude - Valider les panneaux masquables', () => {
     cy.get('[id="data_file"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
     cy.get('[id="data_file"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="data_file"]').find('div[class*="ant-collapse-content-active"]').should('exist');
+  });
+
+  it('Panneau GenoRef-Q', () => {
+    cy.visitStudyEntity('CAG', 1);
+    cy.get('[id="dataset"]').eq(1).find('div[class*="ant-collapse-content-active"]').should('exist');
+    cy.get('[id="dataset"]').eq(1).find('span[class*="ant-collapse-arrow"]').click({force: true});
+    cy.get('[id="dataset"]').eq(1).find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
+    cy.get('[id="dataset"]').eq(1).find('span[class*="ant-collapse-arrow"]').click({force: true});
+    cy.get('[id="dataset"]').eq(1).find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 
   it('Panneau Summary Statistics', () => {

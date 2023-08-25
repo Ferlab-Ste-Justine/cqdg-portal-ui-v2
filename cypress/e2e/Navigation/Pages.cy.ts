@@ -204,7 +204,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'une étude', () => {
-    cy.visitStudyEntity('NEURODEV');
+    cy.visitStudyEntity('NEURODEV', 6);
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');
