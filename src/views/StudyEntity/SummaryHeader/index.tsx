@@ -24,143 +24,169 @@ interface ISummaryBarProps {
 }
 
 const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
-  <Popover
-    title={intl.get('entities.study.restrictedTitle')}
-    content={intl.get('entities.study.restrictedContent')}
-    showArrow={false}
-    className={styles.buttonGroup}
-    trigger={isRestricted ? 'hover' : 'none'}
-  >
+  <div className={styles.buttonGroup}>
     <Button
-      className={styles.button}
+      className={`${styles.button} ${isRestricted && styles.buttonDisabled}`}
       size="large"
       data-cy="SummaryHeader_Participants_Button"
       block
-      disabled={isRestricted}
     >
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-        onClick={() =>
-          study &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_code',
-                  value: [study.study_code],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
+      <Popover
+        title={intl.get('entities.study.restrictedTitle')}
+        content={intl.get('entities.study.restrictedContent')}
+        trigger={isRestricted ? 'hover' : 'none'}
       >
-        <UserOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>
-            {study?.participant_count ? numberFormat(study.participant_count) : '-'}
-          </span>
-          <span className={styles.name}>{intl.get('entities.participant.participants')}</span>
-        </div>
-      </Link>
+        <Link
+          className={styles.link}
+          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          onClick={(e) => {
+            if (isRestricted) {
+              e.preventDefault();
+              return;
+            }
+            study &&
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'study_code',
+                      value: [study.study_code],
+                      index: INDEXES.STUDY,
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              });
+          }}
+        >
+          <UserOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>
+              {study?.participant_count ? numberFormat(study.participant_count) : '-'}
+            </span>
+            <span className={styles.name}>{intl.get('entities.participant.participants')}</span>
+          </div>
+        </Link>
+      </Popover>
     </Button>
     <Button
-      className={`${styles.button} ${!isRestricted && styles.buttonDisabled}`}
+      className={`${styles.button} ${isRestricted && styles.buttonDisabled}`}
       size="large"
       data-cy="SummaryHeader_Families_Button"
       block
-      disabled={isRestricted}
     >
-      <div className={styles.link}>
-        <TeamOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>
-            {study?.family_count ? numberFormat(study.family_count) : '-'}
-          </span>
-          <span className={styles.name}>{intl.get('entities.participant.families')}</span>
+      <Popover
+        title={intl.get('entities.study.restrictedTitle')}
+        content={intl.get('entities.study.restrictedContent')}
+        trigger={isRestricted ? 'hover' : 'none'}
+      >
+        <div className={styles.link}>
+          <TeamOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>
+              {study?.family_count ? numberFormat(study.family_count) : '-'}
+            </span>
+            <span className={styles.name}>{intl.get('entities.participant.families')}</span>
+          </div>
         </div>
-      </div>
+      </Popover>
     </Button>
     <Button
-      className={styles.button}
+      className={`${styles.button} ${isRestricted && styles.buttonDisabled}`}
       size="large"
       data-cy="SummaryHeader_Biospecimens_Button"
       block
-      disabled={isRestricted}
     >
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
-        onClick={() =>
-          study &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_code',
-                  value: [study.study_code],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
+      <Popover
+        title={intl.get('entities.study.restrictedTitle')}
+        content={intl.get('entities.study.restrictedContent')}
+        trigger={isRestricted ? 'hover' : 'none'}
       >
-        <ExperimentOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>
-            {study?.sample_count ? numberFormat(study.sample_count) : '-'}
-          </span>
-          <span className={styles.name}>
-            {intl.get('entities.biospecimen.biospecimensAuto', {
-              count: study?.sample_count || 0,
-            })}
-          </span>
-        </div>
-      </Link>
+        <Link
+          className={styles.link}
+          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
+          onClick={(e) => {
+            if (isRestricted) {
+              e.preventDefault();
+              return;
+            }
+            study &&
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'study_code',
+                      value: [study.study_code],
+                      index: INDEXES.STUDY,
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              });
+          }}
+        >
+          <ExperimentOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>
+              {study?.sample_count ? numberFormat(study.sample_count) : '-'}
+            </span>
+            <span className={styles.name}>
+              {intl.get('entities.biospecimen.biospecimensAuto', {
+                count: study?.sample_count || 0,
+              })}
+            </span>
+          </div>
+        </Link>
+      </Popover>
     </Button>
     <Button
-      className={styles.button}
+      className={`${styles.button} ${isRestricted && styles.buttonDisabled}`}
       size="large"
       data-cy="SummaryHeader_Files_Button"
       block
-      disabled={isRestricted}
     >
-      <Link
-        className={styles.link}
-        to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
-        onClick={() =>
-          study &&
-          addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
-            query: generateQuery({
-              newFilters: [
-                generateValueFilter({
-                  field: 'study_code',
-                  value: [study.study_code],
-                  index: INDEXES.STUDY,
-                }),
-              ],
-            }),
-            setAsActive: true,
-          })
-        }
+      <Popover
+        title={intl.get('entities.study.restrictedTitle')}
+        content={intl.get('entities.study.restrictedContent')}
+        trigger={isRestricted ? 'hover' : 'none'}
       >
-        <FileTextOutlined className={styles.icon} />
-        <div className={styles.alignBaseline}>
-          <span className={styles.count}>
-            {study?.file_count ? numberFormat(study.file_count) : '-'}
-          </span>
-          <span className={styles.name}>{intl.get('entities.file.files')}</span>
-        </div>
-      </Link>
+        <Link
+          className={styles.link}
+          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
+          onClick={(e) => {
+            if (isRestricted) {
+              e.preventDefault();
+              return;
+            }
+            study &&
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'study_code',
+                      value: [study.study_code],
+                      index: INDEXES.STUDY,
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              });
+          }}
+        >
+          <FileTextOutlined className={styles.icon} />
+          <div className={styles.alignBaseline}>
+            <span className={styles.count}>
+              {study?.file_count ? numberFormat(study.file_count) : '-'}
+            </span>
+            <span className={styles.name}>{intl.get('entities.file.files')}</span>
+          </div>
+        </Link>
+      </Popover>
     </Button>
-  </Popover>
+  </div>
 );
 
 export default SummaryHeader;

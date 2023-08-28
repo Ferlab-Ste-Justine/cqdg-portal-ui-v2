@@ -145,6 +145,23 @@ Cypress.Commands.add('showColumn', (column: string) => {
   cy.wait('@getPOSTuser', {timeout: 20*1000});
 });
 
+Cypress.Commands.add('sortTableAndIntercept', (column: string, nbCalls: number) => {
+  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+
+  cy.get('thead[class="ant-table-thead"]').contains(column).click({force: true});
+
+  for (let i = 0; i < nbCalls; i++) {
+    cy.wait('@getPOSTgraphql', {timeout: 60*1000});
+  };
+
+  cy.waitWhileSpin(1000);
+});
+
+Cypress.Commands.add('sortTableAndWait', (column: string) => {
+  cy.get('thead[class="ant-table-thead"]').contains(column).click({force: true});
+  cy.wait(1000);
+});
+
 Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {
   cy.intercept(methodHTTP, routeMatcher).as('getRouteMatcher');
 
@@ -194,6 +211,14 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   cy.exec(`ls ${Cypress.config('downloadsFolder')}/`+namePattern).then((result) => {
     const filename = result.stdout.trim();
     cy.readFile(`${filename}`).should('exist');
+  });
+});
+
+Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number) => {
+  cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
+  cy.get('tr[class*="ant-table-row"]').eq(0)
+  .then(($firstRow) => {
+    cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
   });
 });
 
@@ -249,11 +274,11 @@ Cypress.Commands.add('visitProfileSettingsPage', () => {
   cy.get('[data-cy="Title_ProfileSettings"]', {timeout: 60 * 1000})
 });
 
-Cypress.Commands.add('visitStudyEntity', (studyId: string) => {
+Cypress.Commands.add('visitStudyEntity', (studyId: string, nbCalls: number) => {
   cy.visitAndIntercept('/studies/' + studyId,
                        'POST',
                        '**/graphql',
-                       6);
+                       nbCalls);
 });
 
 Cypress.Commands.add('visitStudiesPage', () => {
@@ -278,6 +303,14 @@ Cypress.Commands.add('visitVariantsPage', (sharedFilterOption?: string) => {
                        '**/graphql',
                        3);
   cy.resetColumns();
+});
+
+Cypress.Commands.add('waitWhileSpin', (ms: number) => {
+  cy.get('body').should(($body) => {
+    if ($body.hasClass('ant-spin-container')) {
+      cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: ms});
+    }
+  });
 });
 
 Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));

@@ -46,9 +46,7 @@
   }
 
   .buttonDisabled {
-    cursor: initial;
-    &:hover {
-      background-color: initial;
-    }
+    background-color: $gray-3;
+    color: $gray-7;
   }
 }

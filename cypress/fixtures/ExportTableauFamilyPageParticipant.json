@@ -1,0 +1,8 @@
+{
+  "headers": ["Participant",
+              "Family Position",
+              "Disease Status"],
+  "content": ["PT1007632",
+              "Mother",
+              "No"]
+}

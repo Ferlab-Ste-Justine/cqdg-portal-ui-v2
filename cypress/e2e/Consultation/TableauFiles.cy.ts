@@ -83,69 +83,53 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
   });
 
   it('Valider les fonctionnalités du tableau - Tris [CQDG-261]', () => {
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('NEURODEV').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('T-DEE').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
+    cy.sortTableAndWait('Study');
+    cy.validateTableFirstRow('NEURODEV', 4);
+    cy.sortTableAndWait('Study');
+    cy.validateTableFirstRow('T-DEE', 4);
+    cy.sortTableAndWait('Study');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Data Category').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Genomics').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Category').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Genomics').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Category').click({force: true});
+    cy.sortTableAndWait('Data Category');
+    cy.validateTableFirstRow('Genomics', 5);
+    cy.sortTableAndWait('Data Category');
+    cy.validateTableFirstRow('Genomics', 5);
+    cy.sortTableAndWait('Data Category');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Aligned Reads').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Sequencing Data Supplement').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
+    cy.sortTableAndWait('Data Type');
+    cy.validateTableFirstRow('Aligned Reads', 6);
+    cy.sortTableAndWait('Data Type');
+    cy.validateTableFirstRow('Sequencing Data Supplemen', 6);
+    cy.sortTableAndWait('Data Type');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('WGS').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('WGS').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Data Type').click({force: true});
+    cy.sortTableAndWait('Data Type');
+    cy.validateTableFirstRow('WGS', 7);
+    cy.sortTableAndWait('Data Type');
+    cy.validateTableFirstRow('WGS', 7);
+    cy.sortTableAndWait('Data Type');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Format').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('CRAM').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Format').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('gVCF').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Format').click({force: true});
+    cy.sortTableAndWait('Format');
+    cy.validateTableFirstRow('CRAM', 8);
+    cy.sortTableAndWait('Format');
+    cy.validateTableFirstRow('gVCF', 8);
+    cy.sortTableAndWait('Format');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Size').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('0 B').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Size').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('0 B').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Size').click({force: true});
+    cy.sortTableAndWait('Size');
+    cy.validateTableFirstRow('0 B', 9);
+    cy.sortTableAndWait('Size');
+    cy.validateTableFirstRow('0 B', 9);
+    cy.sortTableAndWait('Size');
 
-    cy.get('thead[class="ant-table-thead"]').contains('Platform').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Illumina HiSeq 2000 PE100').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Platform').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Illumina NovaSeq 6000').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Platform').click({force: true});
+    cy.sortTableAndWait('Platform');
+    cy.validateTableFirstRow('Illumina HiSeq 2000 PE100', 13);
+    cy.sortTableAndWait('Platform');
+    cy.validateTableFirstRow('Illumina NovaSeq 6000', 13);
+    cy.sortTableAndWait('Platform');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.get('thead[class="ant-table-thead"]').contains('Format').click({force: true});
-    cy.wait(1000);
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait(1000);
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('NEURODEV').should('exist');
+    cy.sortTableAndWait('Format');
+    cy.sortTableAndWait('Study');
+    cy.validateTableFirstRow('NEURODEV', 4);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

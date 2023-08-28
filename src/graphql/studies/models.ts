@@ -19,6 +19,16 @@ interface IDataType {
   participant_count: string;
 }
 
+export interface IDataSet {
+  id: string;
+  data_type: string[];
+  description: string;
+  experimental_strategy: string[];
+  file_count: number;
+  name: string;
+  participant_count: number;
+}
+
 export interface IStudyEntity {
   id: string;
   score: number;
@@ -42,4 +52,5 @@ export interface IStudyEntity {
   status: string;
   study_version: string;
   contact: { type: string; value: string };
+  datasets: ArrangerResultsTree<IDataSet>;
 }

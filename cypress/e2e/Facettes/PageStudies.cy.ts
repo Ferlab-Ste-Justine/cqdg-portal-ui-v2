@@ -90,11 +90,11 @@ describe('Page Studies - Filtrer avec les facettes', () => {
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
   });
 
-  it('Access Limitation - No Data [CQDG-278]', () => {
-    cy.checkValueFacetAndApply(2, 'No Data');
+  it('Access Limitation - General research use (DUO:0000042)', () => {
+    cy.checkValueFacetAndApply(2, 'General research use (DUO:0000042)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Limitation').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('No Data').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('General research use (DUO:0000042)').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1 Results$/).should('exist');
   });
 
   it('Access Requirement - Genetic studies only (DUO:0000016)', () => {

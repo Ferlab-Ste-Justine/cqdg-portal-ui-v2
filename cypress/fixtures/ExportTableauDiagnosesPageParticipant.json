@@ -1,0 +1,10 @@
+{
+  "headers": ["Diagnosis (MONDO)",
+              "Diagnosis (ICD-10)",
+              "Diagnosis (Source Text)",
+              "Age"],
+  "content": ["inherited genetic disease (MONDO:0003847)",
+              "Intellectual Disabilities (F70-F79)",
+              "Mendelian disease",
+              "--"]
+}

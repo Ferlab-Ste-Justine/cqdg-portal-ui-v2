@@ -34,7 +34,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[class*="EntityTitle"]').contains('FI0181945');
   });
 
-  it('Panneau Summary [CQDG-300]', () => {
+  it('Panneau Summary [CQDG-330]', () => {
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains(/^1$/);
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains(/^1$/);
@@ -63,7 +63,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="data_type"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline-CNV').should('exist');
   });
 
-  it('Panneau Participants-Samples [CQDG-300]', () => {
+  it('Panneau Participants-Samples', () => {
     cy.get('[id="biospecimens"]').find('[class="ant-collapse-header"]').contains('(1)').should('exist');
     cy.get('[id="biospecimens"]').find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
     cy.get('[id="biospecimens"]').find('[class="ant-collapse-header"]').find('svg[class="anticon"]').should('exist');
@@ -140,7 +140,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
 });
 
 describe('Page d\'un fichier - Valider les liens disponibles', () => {
-  it('Lien URL du panneau Summary', () => {
+  it('Lien URL du panneau Summary [CQDG-330]', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[href]')
     .should('have.attr', 'href', 'https://ferload.qa.cqdg.ferlab.bio/e192c1a9174d4b2bf3dcad7aef1149eb7fb7015b');
   });

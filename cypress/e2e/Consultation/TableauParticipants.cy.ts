@@ -30,10 +30,11 @@ describe('Page Data Exploration (Participants) - Vérifier les informations affi
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(4).contains('inherited genetic disease').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(4).contains('MONDO:').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(4).contains('0003847').should('exist');
-    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('Spasticity').should('exist');
+    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('Generalized hirsutism').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('HP:').should('exist');
-    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('0001257').should('exist');
-    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(6).contains('10622').should('exist');
+    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('0002230').should('exist');
+    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('See more').should('exist');
+    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(6).contains('10.6K').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(7).contains(/^8$/).should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(8).contains(/^1$/).should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(9).contains('-').should('exist');
@@ -74,7 +75,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
 
   it('Lien HP de Phenotype (HPO) du tableau', () => {
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).find('[href]')
-      .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/HP_0001257');
+      .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/HP_0002230');
   });
   
 // Fait planter Cypress
@@ -115,68 +116,42 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
   });
 
   it('Valider les fonctionnalités du tableau - Tris', () => {
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql1');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait('@getPOSTgraphql1', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('NEURODEV').should('exist');
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait('@getPOSTgraphql2', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('T-DEE').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
+    cy.sortTableAndIntercept('Study', 1);
+    cy.validateTableFirstRow('NEURODEV', 2);
+    cy.sortTableAndIntercept('Study', 1);
+    cy.validateTableFirstRow('T-DEE', 2);
+    cy.sortTableAndWait('Study');
 
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql3');
-    cy.get('thead[class="ant-table-thead"]').contains('Gender').click({force: true});
-    cy.wait('@getPOSTgraphql3', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Female').should('exist');
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql4');
-    cy.get('thead[class="ant-table-thead"]').contains('Gender').click({force: true});
-    cy.wait('@getPOSTgraphql4', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Male').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Gender').click({force: true});
+    cy.sortTableAndIntercept('Gender', 1);
+    cy.validateTableFirstRow('Female', 3);
+    cy.sortTableAndIntercept('Gender', 1);
+    cy.validateTableFirstRow('Male', 3);
+    cy.sortTableAndWait('Gender');
 
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql5');
-    cy.get('thead[class="ant-table-thead"]').contains('Age').click({force: true});
-    cy.wait('@getPOSTgraphql5', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('-').should('exist');
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql6');
-    cy.get('thead[class="ant-table-thead"]').contains('Age').click({force: true});
-    cy.wait('@getPOSTgraphql6', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('10622').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Age').click({force: true});
+    cy.sortTableAndIntercept('Age', 1);
+    cy.validateTableFirstRow('-', 6);
+    cy.sortTableAndIntercept('Age', 1);
+    cy.validateTableFirstRow('10.6K', 6);
+    cy.sortTableAndWait('Age');
 
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql7');
-    cy.get('thead[class="ant-table-thead"]').contains('Ethnicity').click({force: true});
-    cy.wait('@getPOSTgraphql7', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('-').should('exist');
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql8');
-    cy.get('thead[class="ant-table-thead"]').contains('Ethnicity').click({force: true});
-    cy.wait('@getPOSTgraphql8', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('-').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Ethnicity').click({force: true});
+    cy.sortTableAndIntercept('Ethnicity', 1);
+    cy.validateTableFirstRow('-', 9);
+    cy.sortTableAndIntercept('Ethnicity', 1);
+    cy.validateTableFirstRow('-', 9);
+    cy.sortTableAndWait('Ethnicity');
 
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql9');
-    cy.get('thead[class="ant-table-thead"]').contains('Vital Status').click({force: true});
-    cy.wait('@getPOSTgraphql9', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Alive').should('exist');
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql10');
-    cy.get('thead[class="ant-table-thead"]').contains('Vital Status').click({force: true});
-    cy.wait('@getPOSTgraphql10', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('Unknown').should('exist');
-    cy.get('thead[class="ant-table-thead"]').contains('Vital Status').click({force: true});
+    cy.sortTableAndIntercept('Vital Status', 1);
+    cy.validateTableFirstRow('Alive', 10);
+    cy.sortTableAndIntercept('Vital Status', 1);
+    cy.validateTableFirstRow('Unknown', 10);
+    cy.sortTableAndWait('Vital Status');
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql1');
-    cy.get('thead[class="ant-table-thead"]').contains('Vital Status').click({force: true});
-    cy.wait('@getPOSTgraphql1', {timeout: 20*1000});
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait('@getPOSTgraphql2', {timeout: 20*1000});
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql3');
-    cy.get('thead[class="ant-table-thead"]').contains('Study').click({force: true});
-    cy.wait('@getPOSTgraphql3', {timeout: 20*1000});
-    cy.get('tr[class*="ant-table-row"]').eq(0).contains('RAPIDOMICS').should('exist');
+    cy.sortTableAndIntercept('Vital Status', 1);
+    cy.sortTableAndIntercept('Study', 1);
+    cy.sortTableAndIntercept('Study', 1);
+    cy.validateTableFirstRow('RAPIDOMICS', 2);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
