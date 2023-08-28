@@ -203,12 +203,12 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^8,952$/).should('exist');
   });
 
-  it('Format - gVCF [CQDG-256]', () => {
+  it('Format - gVCF', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(3).contains('Format').should('exist');
     cy.checkValueFacetAndApply(3, 'gVCF');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('gVCF').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1119$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GVCF').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
   });
 
   it('Format - TBI', () => {
