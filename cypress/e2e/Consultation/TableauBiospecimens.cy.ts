@@ -19,18 +19,18 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
   });
 
   it('Tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(1).contains('SR0463655').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(2).contains('SP0565109').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(3).contains('PT1007374').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(4).contains('NEURODEV').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(5).contains('DNA').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(5).contains('NCIT:').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(5).contains('C449').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(6).contains('Blood').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(6).contains('NCIT:').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(6).contains('C12434').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(7).contains('-').should('exist');
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(8).contains(/^8$/).should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(1).contains('SR0463655').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(2).contains('SP0565109').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(3).contains('PT1007374').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(4).contains('NEURODEV').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('DNA').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('NCIT:').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('C449').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('Blood').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('NCIT:').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('C12434').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(7).contains('-').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).contains(/^8$/).should('exist');
   });
 });
 
@@ -44,29 +44,29 @@ describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles',
   });
 
   it('Lien Participant du tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(3).find('[href]').click({force: true});
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(3).find('[href]').click({force: true});
     cy.get('[id="participant-entity-page"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('PT1007374');
   });
 
   it('Lien Study du tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(4).find('[href]').click({force: true});
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(4).find('[href]').click({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
   it('Lien NCIT de Sample Type du tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(5).find('[href]')
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).find('[href]')
       .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/NCIT_C449');
   });
 
   it('Lien NCIT de Tissue du tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(6).find('[href]')
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).find('[href]')
       .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/NCIT_C12434');
   });
 
   it('Lien Files du tableau', () => {
-    cy.get('tr[data-row-key="hV36BYoBLkZLL8DgiG7h"]').find('[class*="ant-table-cell"]').eq(8).find('[href]').click({force: true});
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0463655').should('exist');

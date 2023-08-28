@@ -77,11 +77,11 @@ describe('Page Studies - Valider les liens disponibles', () => {
 });
 
 describe('Page Studies - Valider les fonctionnalités du tableau', () => {
-  it('Tris [CQDG-277]', () => {
+  it('Tris', () => {
     cy.sortTableAndWait('Code');
-    cy.validateTableFirstRow('NEURODEV', 0);
+    cy.validateTableFirstRow('CAG', 0);
     cy.sortTableAndWait('Code');
-    cy.validateTableFirstRow('NEURODEV', 0);
+    cy.validateTableFirstRow('T-DEE', 0);
     cy.sortTableAndWait('Code');
 
     cy.sortTableAndWait('Name');

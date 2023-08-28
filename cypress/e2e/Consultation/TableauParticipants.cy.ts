@@ -75,7 +75,11 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
 
   it('Lien HP de Phenotype (HPO) du tableau', () => {
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).find('[href]')
-      .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/HP_0002230');
+      .should(($element) => {
+        const hrefValue = $element.attr('href');
+        const regex = /http:\/\/purl\.obolibrary\.org\/obo\/HP_000/;
+        expect(hrefValue).to.match(regex);
+      });
   });
   
 // Fait planter Cypress

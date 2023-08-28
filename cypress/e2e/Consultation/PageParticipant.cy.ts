@@ -214,7 +214,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
-  it('Lien Family du panneau Family [CQDG-266]', () => {
+  it('Lien Family du panneau Family', () => {
     cy.get('[data-cy="FamilyLink"]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Family ID').should('exist');
@@ -245,7 +245,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
 
   it('Lien de l\'Access Authority du panneau Data Access [CQDG-267]', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(2).find('[href]')
-      .should('have.attr', 'href', /^jacques.michaud.med@ssss.gouv.qc.ca$/);
+      .should('have.attr', 'href', 'mailto:jacques.michaud.med@ssss.gouv.qc.ca');
   });
 
   it('Lien Mondo du panneau Diagnoses', () => {
