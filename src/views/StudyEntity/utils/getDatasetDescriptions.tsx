@@ -14,8 +14,8 @@ const getDatasetDescriptions = (dataset?: IDataSet): IEntityDescriptionsItem[] =
   },
   {
     label: intl.get('entities.file.data_type'),
-    value: dataset?.data_type?.length
-      ? dataset?.data_type.map((data_type) => (
+    value: dataset?.data_types?.length
+      ? dataset?.data_types.map((data_type) => (
           <Tag key={data_type} className={styles.tag}>
             {data_type}
           </Tag>
@@ -24,8 +24,8 @@ const getDatasetDescriptions = (dataset?: IDataSet): IEntityDescriptionsItem[] =
   },
   {
     label: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
-    value: dataset?.experimental_strategy?.length
-      ? dataset?.experimental_strategy.map((experimental_strategy) => (
+    value: dataset?.experimental_strategies?.length
+      ? dataset?.experimental_strategies.map((experimental_strategy) => (
           <Tag key={experimental_strategy} className={styles.tag}>
             {experimental_strategy}
           </Tag>

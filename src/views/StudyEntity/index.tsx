@@ -42,8 +42,7 @@ const StudyEntity = () => {
   });
 
   const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
-  //todo: to change with the futur study.is_restricted field
-  const isRestricted = study_code === 'CAG';
+  const isRestricted = study ? study.security === 'R' : true;
 
   enum SectionId {
     SUMMARY = 'summary',
