@@ -38,7 +38,7 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
       >
         <Link
           className={styles.link}
-          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
           onClick={(e) => {
             if (isRestricted) {
               e.preventDefault();
@@ -105,7 +105,7 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
       >
         <Link
           className={styles.link}
-          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
+          to={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
           onClick={(e) => {
             if (isRestricted) {
               e.preventDefault();
@@ -154,7 +154,7 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
       >
         <Link
           className={styles.link}
-          to={isRestricted ? '' : STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
+          to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={(e) => {
             if (isRestricted) {
               e.preventDefault();
