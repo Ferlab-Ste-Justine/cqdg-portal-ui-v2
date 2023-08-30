@@ -19,6 +19,7 @@ export const GET_STUDIES = gql`
             sample_count
             file_count
             family_count
+            security
             contact {
               value
               type
@@ -43,9 +44,9 @@ export const GET_STUDIES = gql`
                 total
                 edges {
                   node {
-                    data_type
+                    data_types
                     description
-                    experimental_strategy
+                    experimental_strategies
                     file_count
                     name
                     participant_count

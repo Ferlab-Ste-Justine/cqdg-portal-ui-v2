@@ -21,12 +21,16 @@ interface IDataType {
 
 export interface IDataSet {
   id: string;
-  data_type: string[];
+  data_types: string[];
   description: string;
-  experimental_strategy: string[];
+  experimental_strategies: string[];
   file_count: number;
   name: string;
   participant_count: number;
+}
+
+enum Security {
+  R = 'R',
 }
 
 export interface IStudyEntity {
@@ -53,4 +57,5 @@ export interface IStudyEntity {
   study_version: string;
   contact: { type: string; value: string };
   datasets: ArrangerResultsTree<IDataSet>;
+  security?: Security;
 }
