@@ -8,12 +8,10 @@ import cx from 'classnames';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
-import { DATA_EXPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
-import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constants';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
-import { TUserSavedFilter } from 'services/api/savedFilter/models';
+import { SavedFilterTag, TUserSavedFilter } from 'services/api/savedFilter/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedFilter } from 'store/savedFilter';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -62,8 +60,12 @@ const getItemList = (
 const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
   const { savedFilters, isLoading, fetchingError } = useSavedFilter();
 
-  const dataExplorationFilters = savedFilters.filter((s) => s.tag === DATA_EXPLORATION_FILTER_TAG);
-  const variantFilters = savedFilters.filter((s) => s.tag === VARIANT_FILTER_TAG);
+  const dataExplorationFilters = savedFilters.filter(
+    (s) => s.tag === SavedFilterTag.DataExplorationPage,
+  );
+  const variantFilters = savedFilters.filter(
+    (s) => s.tag === SavedFilterTag.VariantsExplorationPage,
+  );
 
   const items = [
     {
@@ -74,7 +76,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           {dataExplorationFilters.length})
         </div>
       ),
-      key: 'dataExplorationFilters',
+      key: SavedFilterTag.DataExplorationPage,
       children: getItemList(dataExplorationFilters, fetchingError, isLoading),
     },
     {
@@ -84,7 +86,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
         </div>
       ),
-      key: 'variantFilters',
+      key: SavedFilterTag.VariantsExplorationPage,
       children: getItemList(variantFilters, fetchingError, isLoading),
     },
   ];
@@ -117,7 +119,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
       content={
         <Tabs
           className={cx(styles.setTabs, 'navNoMarginBtm')}
-          defaultActiveKey="dataExplorationFilters"
+          defaultActiveKey={SavedFilterTag.DataExplorationPage}
           data-cy="SavedFilters"
           items={items}
         />

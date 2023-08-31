@@ -16,6 +16,6 @@ export type TUserSavedFilterUpdate = Partial<
 >;
 
 export enum SavedFilterTag {
-  ParticipantsExplorationPage = 'participants-data-exploration-page',
-  VariantsExplorationPage = 'variants-variants-exploration-page',
+  DataExplorationPage = 'data-exploration',
+  VariantsExplorationPage = 'variants',
 }

@@ -2,6 +2,8 @@ import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagi
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig, ISort } from '@ferlab/ui/core/graphql/types';
 
+import { SavedFilterTag } from 'services/api/savedFilter/models';
+
 export const PARTICIPANTS_SAVED_SETS_FIELD = 'participant_id';
 export const DATA_FILES_SAVED_SETS_FIELD = 'file_id';
 export const BIOSPECIMENS_SAVED_SETS_FIELD = 'sample_id';
@@ -10,8 +12,8 @@ export const DEFAULT_OFFSET = 0;
 export const DEFAULT_PAGE_INDEX = 1;
 export const DEFAULT_PAGE_SIZE = PaginationViewPerQuery.OneHundred;
 
-export const DATA_EXPLORATION_QB_ID = 'cqdg-data-exploration-repo-key';
-export const DATA_EXPLORATION_FILTER_TAG = 'data-exploration';
+export const DATA_EXPLORATION_QB_ID = 'data-exploration-repo-key';
+export const DATA_EXPLORATION_FILTER_TAG = SavedFilterTag.DataExplorationPage;
 
 export const DEFAULT_PARTICIPANT_QUERY_SORT = [
   { field: 'participant_id', order: SortDirection.Asc },
