@@ -125,15 +125,20 @@ Cypress.Commands.add('removeFilesFromFolder', (folder: string) => {
 });
 
 Cypress.Commands.add('resetColumns', (table_id?: string) => {
+  let cySettings: Cypress.Chainable;
+
   if (table_id == undefined) {
-    cy.get('svg[data-icon="setting"]').click({force: true});
+    cySettings = cy.get('svg[data-icon="setting"]');
   }
   else {
-    cy.get('[id="' + table_id + '"]').find('svg[data-icon="setting"]').click({force: true});
+    cySettings = cy.get('[id="' + table_id + '"]').find('svg[data-icon="setting"]');
   }
 
+  cySettings.click({force: true});
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').click({force: true});
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').should('be.disabled', {timeout: 20*1000});
+  cySettings.click({force: true});
+  cy.get('[class*="Header_logo"]').click({force: true});
 });
 
 Cypress.Commands.add('showColumn', (column: string) => {
@@ -170,6 +175,11 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
   };
+});
+
+Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
+  const strExist = shouldExist ? 'exist' : 'not.exist';
+  cy.get('[id="query-builder-header-tools"]').contains('Clear all').should(strExist);
 });
 
 Cypress.Commands.add('validateFileContent', (fixture: string, replacements?: Replacement[]) => {
@@ -214,12 +224,38 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   });
 });
 
+Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string) => {
+  cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
+});
+
+Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0) => {
+  if (facetTitle == '') {
+    cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').should('not.exist');
+  }
+  else {
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').eq(eq).contains(facetTitle).should('exist');
+  }
+
+  for (let i = 0; i < values.length; i++) {
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_queryValuesContainer"]').eq(eq).contains(values[i]).should('exist');
+    }
+});
+
 Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number) => {
   cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
   cy.get('tr[class*="ant-table-row"]').eq(0)
   .then(($firstRow) => {
     cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
   });
+});
+
+Cypress.Commands.add('validateTableResultsCount', (expectedCount: string|RegExp, shouldExist: boolean = true) => {
+  const strExist = shouldExist ? 'exist' : 'not.exist';
+  cy.get('div[class*="ProTableHeader"]').contains(expectedCount).should(strExist);
+});
+
+Cypress.Commands.add('validateTotalSelectedQuery', (expectedCount: string|RegExp) => {
+  cy.get('[class*="QueryBar_selected"]').find('[class*="QueryBar_total"]').contains(expectedCount).should('exist');
 });
 
 Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, routeMatcher: string, nbCalls: number) => {

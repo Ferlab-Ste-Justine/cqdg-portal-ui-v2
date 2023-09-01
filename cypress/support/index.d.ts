@@ -13,11 +13,16 @@ declare namespace Cypress {
     sortTableAndIntercept(column: string, nbCalls: number): cy & CyEventEmitter;
     sortTableAndWait(column: string): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
+    validateClearAllButton(shouldExist: boolean): cy & CyEventEmitter;
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
-    visitAndIntercept(url: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
+    validateOperatorSelectedQuery(expectedOperator: string): cy & CyEventEmitter;
+    validatePillSelectedQuery(facetTitle: string|RegExp, values: (string|RegExp)[], eq: number = 0): cy & CyEventEmitter;
     validateTableFirstRow(expectedValue: string|RegExp, eq: number): cy & CyEventEmitter;
+    validateTableResultsCount(expectedCount: string|RegExp, shouldExist: boolean = true): cy & CyEventEmitter;
+    validateTotalSelectedQuery(expectedCount: string|RegExp): cy & CyEventEmitter;
+    visitAndIntercept(url: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     visitCommunityPage(): cy & CyEventEmitter;
     visitDashboard(): cy & CyEventEmitter;
     visitDataExploration(tab?: string, sharedFilterOption?: string): cy & CyEventEmitter;
