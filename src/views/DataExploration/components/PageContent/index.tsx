@@ -28,7 +28,11 @@ import get from 'lodash/get';
 import DataFilesTabs from 'views/DataExploration/components/PageContent/tabs/DataFiles';
 import ParticipantsTab from 'views/DataExploration/components/PageContent/tabs/Participants';
 import SummaryTab from 'views/DataExploration/components/PageContent/tabs/Summary';
-import { DATA_EXPLORATION_QB_ID, TAB_IDS } from 'views/DataExploration/utils/constant';
+import {
+  DATA_EXPLORATION_FILTER_TAG,
+  DATA_EXPLORATION_QB_ID,
+  TAB_IDS,
+} from 'views/DataExploration/utils/constant';
 
 import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
@@ -63,7 +67,7 @@ const { Title } = Typography;
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
-  tag: SavedFilterTag.ParticipantsExplorationPage,
+  tag: DATA_EXPLORATION_FILTER_TAG,
 });
 
 const resolveSqonForParticipants = (queryList: ISyntheticSqon[], activeQuery: ISyntheticSqon) =>
@@ -97,7 +101,7 @@ const PageContent = ({
   const history = useHistory();
   const { savedSets } = useSavedSet();
   const { queryList, activeQuery, selectedSavedFilter, savedFilterList } =
-    useQBStateWithSavedFilters(DATA_EXPLORATION_QB_ID, SavedFilterTag.ParticipantsExplorationPage);
+    useQBStateWithSavedFilters(DATA_EXPLORATION_QB_ID, SavedFilterTag.DataExplorationPage);
 
   const [selectedFilterContent, setSelectedFilterContent] = useState<ReactElement | undefined>(
     undefined,
