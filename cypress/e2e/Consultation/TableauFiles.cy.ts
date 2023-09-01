@@ -7,11 +7,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Data Files) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374'); // CQDG-301
-    cy.get('[data-cy="SummaryHeader_Files_Button"]').find('[href]').click({force: true}); // CQDG-301
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist'); // CQDG-301
-    cy.resetColumns(); // CQDG-301
-//    cy.visitDataExploration('datafiles', '?sharedFilterId=6bd9c618-87bb-49a9-a4ea-d793601f944d');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
     cy.showColumn('File Name');
     cy.showColumn('Platform');
   });
@@ -40,11 +36,7 @@ describe('Page Data Exploration (Data Files) - Vérifier les informations affich
 
 describe('Page Data Exploration (Data Files) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374'); // CQDG-301
-    cy.get('[data-cy="SummaryHeader_Files_Button"]').find('[href]').click({force: true}); // CQDG-301
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist'); // CQDG-301
-    cy.resetColumns(); // CQDG-301
-//    cy.visitDataExploration('datafiles', '?sharedFilterId=6bd9c618-87bb-49a9-a4ea-d793601f944d');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
   });
 
   it('Lien File du tableau', () => {

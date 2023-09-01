@@ -91,7 +91,7 @@ describe('Navigation', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
   });
 
-  it('Liens Saved Filters de la page Dashboard [CQDG-262]', () => {
+  it('Liens Saved Filters de la page Dashboard', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedFilters"]').contains('Cypress Gender Filter').click({force: true});
     cy.get('[data-cy="Title_DataExploration"]').should('exist');

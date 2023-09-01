@@ -110,7 +110,7 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^500$/).should('exist');
   });
 
-  it('Position [CQDG-299]', () => {
+  it('Position', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(4).contains('Position').should('exist');
     // TODO Filtrer
   });

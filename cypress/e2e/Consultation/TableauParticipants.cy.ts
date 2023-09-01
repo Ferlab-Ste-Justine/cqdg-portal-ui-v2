@@ -7,11 +7,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Participants) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitFileEntity('FI0188666'); // CQDG-301
-    cy.get('[data-cy="SummaryHeader_Participants_Button"]').find('[href]').click({force: true}); // CQDG-301
-    cy.get('[data-cy="ProTable_Participants"]').should('exist'); // CQDG-301
-    cy.resetColumns(); // CQDG-301
-//    cy.visitDataExploration('participants', '?sharedFilterId=6bd9c618-87bb-49a9-a4ea-d793601f944d');
+    cy.visitDataExploration('participants', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
     cy.showColumn('Ethnicity');
     cy.showColumn('Diagnosis (ICD)');
     cy.showColumn('Diagnosis (Source Text)');
@@ -48,11 +44,7 @@ describe('Page Data Exploration (Participants) - Vérifier les informations affi
 
 describe('Page Data Exploration (Participants) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitFileEntity('FI0188666'); // CQDG-301
-    cy.get('[data-cy="SummaryHeader_Participants_Button"]').find('[href]').click({force: true}); // CQDG-301
-    cy.get('[data-cy="ProTable_Participants"]').should('exist'); // CQDG-301
-    cy.resetColumns(); // CQDG-301
-//    cy.visitDataExploration('participants', '?sharedFilterId=6bd9c618-87bb-49a9-a4ea-d793601f944d');
+    cy.visitDataExploration('participants', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
     cy.showColumn('Diagnosis (ICD)');
   });
 
