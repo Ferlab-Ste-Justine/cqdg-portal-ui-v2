@@ -213,9 +213,9 @@ export const GET_PARTICIPANTS = gql`
 `;
 
 export const MATCH_PARTICIPANTS = gql`
-  query matchParticipants($sqon: JSON) {
+  query matchParticipants($sqon: JSON, $first: Int, $offset: Int) {
     Participant {
-      hits(filters: $sqon) {
+      hits(filters: $sqon, first: $first, offset: $offset) {
         total
         edges {
           node {
