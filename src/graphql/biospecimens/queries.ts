@@ -47,12 +47,11 @@ export const MATCH_BIOSPECIMENS = gql`
   query matchBiospecimens($sqon: JSON, $first: Int, $offset: Int) {
     Biospecimen {
       hits(filters: $sqon, first: $first, offset: $offset) {
+        total
         edges {
           node {
-            study_code
-            study_id
-            biospecimen_id
             sample_id
+            study_code
           }
         }
       }
