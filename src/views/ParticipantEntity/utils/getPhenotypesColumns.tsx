@@ -47,7 +47,7 @@ const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string 
 
 const getPhenotypesColumns = (): ProColumnType<any>[] => [
   {
-    key: 'phenotypes_tagged.name',
+    key: 'name',
     dataIndex: 'name',
     title: intl.get('entities.participant.phenotype_code'),
     render: (name: string) => {
@@ -66,13 +66,13 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
     },
   },
   {
-    key: 'phenotypes_tagged.source_text',
+    key: 'source_text',
     dataIndex: 'source_text',
     title: intl.get('entities.participant.phenotype_source_text'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'phenotypes_tagged.is_observed',
+    key: 'is_observed',
     dataIndex: 'is_observed',
     title: intl.get('entities.participant.interpretation'),
     render: (is_observed) =>
@@ -81,18 +81,17 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
         : intl.get('entities.participant.not_observed'),
   },
   {
-    key: 'phenotypes_tagged.age_at_event',
+    key: 'age_at_event',
     dataIndex: 'age_at_event',
     title: intl.get('entities.participant.age_at_phenotype'),
     tooltip: intl.get('entities.participant.age_at_phenotype_tooltip'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'participantsCount',
+    key: 'hpo_term',
     dataIndex: 'name',
     title: intl.get('entities.participant.hpo_term'),
     tooltip: intl.get('entities.participant.hpo_term_tooltip'),
-
     render: (name: string) =>
       name ? <ParticipantsPhenotypesCount phenotypeName={name} /> : TABLE_EMPTY_PLACE_HOLDER,
   },

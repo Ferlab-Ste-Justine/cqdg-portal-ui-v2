@@ -7,14 +7,13 @@ import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
-import getAnalysisFilesColumns from 'views/FileEntity/utils/getAnalysisFilesColumns';
 import getFamilyColumns from 'views/ParticipantEntity/utils/getFamilyColumns';
 
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from 'views/FileEntity/index.module.scss';
@@ -42,6 +41,10 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
   const familySorted = currentParticipant
     ? [currentParticipant, ...familyWithoutCurrentParticipant]
     : [];
+
+  const defaultCols = getFamilyColumns(participant?.participant_id);
+  const userCols = userInfo?.config?.participants?.tables?.family?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   const FamilyLink = () => (
     <>
@@ -82,7 +85,7 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
       columns={getFamilyColumns(participant?.participant_id)}
       data={familySorted}
       emptyMessage={intl.get('api.noData')}
-      initialColumnState={userInfo?.config.participants?.tables?.family?.columns}
+      initialColumnState={userColumns}
       dictionary={getProTableDictionary()}
       headerConfig={{
         enableColumnSort: true,
@@ -93,15 +96,12 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
         enableTableExport: true,
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.participants?.tables?.family?.columns,
-              columns: getAnalysisFilesColumns(),
+            generateLocalTsvReport({
+              fileName: 'family',
               index: INDEXES.PARTICIPANT,
-              sqon: generateSelectionSqon(
-                INDEXES.PARTICIPANT,
-                familySorted.map((p) => p.participant_id),
-              ),
-              fileName: `cqdg-family-table`,
+              headers: getFamilyColumns(participant?.participant_id),
+              cols: userColumns,
+              rows: familySorted,
             }),
           ),
       }}

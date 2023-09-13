@@ -54,7 +54,7 @@ const ParticipantsMondoCount = ({
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
-    key: 'diagnoses.diagnosis_mondo_display',
+    key: 'diagnosis_mondo_display',
     dataIndex: 'diagnosis_mondo_display',
     title: intl.get('entities.participant.diagnosis_mondo'),
     render: (diagnosis_mondo_code: string) => {
@@ -69,7 +69,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     },
   },
   {
-    key: 'diagnoses.diagnosis_icd_display',
+    key: 'diagnosis_icd_display',
     dataIndex: 'diagnosis_icd_display',
     title: intl.get('entities.participant.diagnosis_icd'),
     render: (diagnosis_ICD_code: string) => {
@@ -87,26 +87,26 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     },
   },
   {
-    key: 'diagnoses.diagnosis_source_text',
+    key: 'diagnosis_source_text',
     dataIndex: 'diagnosis_source_text',
     title: intl.get('entities.participant.diagnosis_source_text'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'diagnoses.age_at_diagnosis',
+    key: 'age_at_diagnosis',
     dataIndex: 'age_at_diagnosis',
     title: intl.get('entities.participant.age_at_diagnosis'),
     tooltip: intl.get('entities.participant.age_at_diagnosis_tooltip'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'diagnoses.cancer',
+    key: 'cancer',
     dataIndex: 'cancer',
     title: intl.get('entities.participant.cancer'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    key: 'diagnoses.participantsCount',
+    key: 'mondo_term',
     title: intl.get('entities.participant.mondo_term'),
     tooltip: intl.get('entities.participant.mondo_term_tooltip'),
     render: (diagnosis: IDiagnoses) => {

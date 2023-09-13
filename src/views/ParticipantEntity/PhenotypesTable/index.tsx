@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { EntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
 import { IParticipantEntity } from 'graphql/participants/models';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getPhenotypesColumns from 'views/ParticipantEntity/utils/getPhenotypesColumns';
 
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 interface IPhenotypesTableProps {
@@ -27,6 +27,11 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
       ...node,
     })) || [];
 
+  const defaultCols = getPhenotypesColumns();
+  const userCols = userInfo?.config?.participants?.tables?.phenotypes?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
+  const cbExcludeHpoTermKey = (c: { key: string }) => c.key !== 'hpo_term';
+
   return (
     <EntityTable
       id={id}
@@ -36,21 +41,18 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
       columns={getPhenotypesColumns()}
       data={phenotypesData}
       total={phenotypesData.length}
-      initialColumnState={userInfo?.config.participants?.tables?.phenotypes?.columns}
+      initialColumnState={userColumns}
       dictionary={getProTableDictionary()}
       headerConfig={{
         enableTableExport: true,
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.participants?.tables?.phenotypes?.columns,
-              columns: getPhenotypesColumns(),
+            generateLocalTsvReport({
+              fileName: 'phenotypes',
               index: INDEXES.PARTICIPANT,
-              sqon: generateSelectionSqon(
-                INDEXES.PARTICIPANT,
-                phenotypesData.map(() => participant?.participant_id || ''),
-              ),
-              fileName: `cqdg-phenotypes-table`,
+              headers: defaultCols.filter(cbExcludeHpoTermKey),
+              cols: userColumns.filter(cbExcludeHpoTermKey),
+              rows: phenotypesData,
             }),
           ),
         enableColumnSort: true,
