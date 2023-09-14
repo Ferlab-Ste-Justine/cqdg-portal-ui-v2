@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 describe('Page Data Exploration (Data Files) - Exporter les fichiers en TSV', () => {
-  it('Valider le nom du fichier [CQDG-311]', () => {
+  it('Valider le nom du fichier', () => {
     cy.validateFileName('cqdg-file-table-'+`${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`+'.tsv');
   });
 
