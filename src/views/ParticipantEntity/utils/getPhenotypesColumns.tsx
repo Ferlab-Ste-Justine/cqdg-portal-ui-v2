@@ -75,10 +75,7 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
     key: 'is_observed',
     dataIndex: 'is_observed',
     title: intl.get('entities.participant.interpretation'),
-    render: (is_observed) =>
-      is_observed
-        ? intl.get('entities.participant.observed')
-        : intl.get('entities.participant.not_observed'),
+    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'age_at_event',

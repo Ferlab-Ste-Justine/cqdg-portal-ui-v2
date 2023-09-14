@@ -23,8 +23,11 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
 
   const phenotypesData =
     participant?.phenotypes_tagged?.hits?.edges?.map(({ node }) => ({
-      key: node.internal_phenotype_id,
       ...node,
+      key: node.internal_phenotype_id,
+      is_observed: node.is_observed
+        ? intl.get('entities.participant.observed')
+        : intl.get('entities.participant.not_observed'),
     })) || [];
 
   const defaultCols = getPhenotypesColumns();
