@@ -90,11 +90,10 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
     );
 
     try {
-      const d = new Date();
-      const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-      const dateFormatted = `${d.getFullYear()}-${months[d.getMonth()]}-${d.getDate()}`;
-      const filename = args.fileName || `cqdg-${args.index.toLowerCase()}-table`;
-      const formattedFileName = `${filename}-${dateFormatted}.tsv`;
+      const formattedDate = format(new Date(), 'yyyy-MM-dd');
+      const formattedFileName = `cqdg-${
+        args.fileName ?? args.index.toLowerCase()
+      }-table-${formattedDate}.tsv`;
 
       const { data, error } = await ArrangerApi.columnStates({
         query: getColumnStateQuery(args.index),
@@ -153,7 +152,9 @@ const generateLocalTsvReport = createAsyncThunk<
 
   try {
     const formattedDate = format(new Date(), 'yyyy-MM-dd');
-    const formattedFileName = `cqdg-${args.fileName ?? args.index}-table-${formattedDate}.tsv`;
+    const formattedFileName = `cqdg-${
+      args.fileName ?? args.index.toLowerCase()
+    }-table-${formattedDate}.tsv`;
 
     const visibleKeys = (args.cols || []).filter((c) => c.visible).map((c) => c.key);
     const visibleHeaders = args.headers.filter((h) => visibleKeys.includes(h.key));
