@@ -159,6 +159,11 @@ export const getQueryBuilderDictionary = (
         },
       },
     },
+    form: {
+      error: {
+        fieldRequired: intl.get('global.forms.errors.requiredField'),
+      },
+    },
     popupConfirm: {
       delete: {
         title: intl.get('components.querybuilder.header.popupConfirm.delete.title'),
