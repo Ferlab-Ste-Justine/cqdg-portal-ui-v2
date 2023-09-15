@@ -104,7 +104,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
       if (error) {
         showErrorReportNotif(thunkAPI);
         thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
-        return thunkAPI.rejectWithValue('error');
+        return thunkAPI.rejectWithValue(error?.message);
       }
 
       const { downloadData, downloadError } = await fetchTsxReport(args, data!, formattedFileName);
@@ -113,7 +113,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
 
       if (downloadError) {
         showErrorReportNotif(thunkAPI);
-        return thunkAPI.rejectWithValue('error');
+        return thunkAPI.rejectWithValue(downloadError?.message);
       }
 
       thunkAPI.dispatch(
@@ -159,14 +159,14 @@ const generateLocalTsvReport = createAsyncThunk<
     const visibleHeaders = args.headers.filter((h) => visibleKeys.includes(h.key));
     const visibleTitle = visibleHeaders.map((h) => h.title);
     const visibleRows = (args.rows || []).reduce(
-      (rs, r) => [...rs, visibleHeaders.map((h) => r[h.key])],
+      (rs, r) => [...rs, visibleHeaders.map((h) => r[h.key] || '--')],
       [],
     );
 
     const shapeIsOK = visibleRows.every((r: unknown[]) => r.length === visibleTitle.length);
     if (!shapeIsOK) {
       showErrorReportNotif(thunkAPI);
-      return thunkAPI.rejectWithValue('error');
+      return thunkAPI.rejectWithValue('Error while generating report: shape is not OK');
     }
 
     const doc: string = [visibleTitle, ...visibleRows]
