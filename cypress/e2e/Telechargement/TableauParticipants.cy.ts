@@ -19,7 +19,7 @@ beforeEach(() => {
 });
 
 describe('Page Data Exploration (Participants) - Exporter les participants en TSV', () => {
-  it('Valider le nom du fichier [CQDG-311]', () => {
+  it('Valider le nom du fichier', () => {
     cy.validateFileName('cqdg-participant-table-'+`${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`+'.tsv');
   });
 

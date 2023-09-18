@@ -7,7 +7,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 const getFamilyColumns = (current_participant_id = ''): ProColumnType<any>[] => [
   {
-    key: 'family_relationships.participant_id',
+    key: 'participant_id',
     dataIndex: 'participant_id',
     title: intl.get('entities.participant.participant'),
     render: (participant_id: string) =>
@@ -23,12 +23,12 @@ const getFamilyColumns = (current_participant_id = ''): ProColumnType<any>[] => 
       ),
   },
   {
-    key: 'family_relationships.relationship_to_proband',
+    key: 'relationship_to_proband',
     dataIndex: 'relationship_to_proband',
     title: intl.get('entities.participant.family_position'),
   },
   {
-    key: 'family_relationships.is_affected',
+    key: 'is_affected',
     dataIndex: 'is_affected',
     title: intl.get('entities.participant.disease_status'),
   },

@@ -2,6 +2,7 @@ import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import keycloak from 'auth/keycloak-api/keycloak';
+import { format } from 'date-fns';
 import { saveAs } from 'file-saver';
 import { INDEXES } from 'graphql/constants';
 import { getColumnStateQuery } from 'graphql/reports/queries';
@@ -89,11 +90,10 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
     );
 
     try {
-      const d = new Date();
-      const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-      const dateFormatted = `${d.getFullYear()}-${months[d.getMonth()]}-${d.getDate()}`;
-      const filename = args.fileName || `cqdg-${args.index.toLowerCase()}-table`;
-      const formattedFileName = `${filename}-${dateFormatted}.tsv`;
+      const formattedDate = format(new Date(), 'yyyy-MM-dd');
+      const formattedFileName = `cqdg-${
+        args.fileName ?? args.index.toLowerCase()
+      }-table-${formattedDate}.tsv`;
 
       const { data, error } = await ArrangerApi.columnStates({
         query: getColumnStateQuery(args.index),
@@ -103,7 +103,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
       if (error) {
         showErrorReportNotif(thunkAPI);
         thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
-        return thunkAPI.rejectWithValue('error');
+        return thunkAPI.rejectWithValue(error?.message);
       }
 
       const { downloadData, downloadError } = await fetchTsxReport(args, data!, formattedFileName);
@@ -112,7 +112,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
 
       if (downloadError) {
         showErrorReportNotif(thunkAPI);
-        return thunkAPI.rejectWithValue('error');
+        return thunkAPI.rejectWithValue(downloadError?.message);
       }
 
       thunkAPI.dispatch(
@@ -135,6 +135,53 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
     }
   },
 );
+
+const generateLocalTsvReport = createAsyncThunk<
+  void,
+  {
+    index: string;
+    fileName?: string;
+    headers: any[];
+    cols: { key: string; visible: boolean }[];
+    rows: any[];
+  },
+  { rejectValue: string }
+>('report/generate/tsv', async (args, thunkAPI) => {
+  // !! This function assumes that it is called only when the table is not empty. Said otherwise, data is never empty !!
+  const messageKey = 'report_pending';
+
+  try {
+    const formattedDate = format(new Date(), 'yyyy-MM-dd');
+    const formattedFileName = `cqdg-${
+      args.fileName ?? args.index.toLowerCase()
+    }-table-${formattedDate}.tsv`;
+
+    const visibleKeys = (args.cols || []).filter((c) => c.visible).map((c) => c.key);
+    const visibleHeaders = args.headers.filter((h) => visibleKeys.includes(h.key));
+    const visibleTitle = visibleHeaders.map((h) => h.title);
+    const visibleRows = (args.rows || []).reduce(
+      (rs, r) => [...rs, visibleHeaders.map((h) => r[h.key] || '--')],
+      [],
+    );
+
+    const shapeIsOK = visibleRows.every((r: unknown[]) => r.length === visibleTitle.length);
+    if (!shapeIsOK) {
+      showErrorReportNotif(thunkAPI);
+      return thunkAPI.rejectWithValue('Error while generating report: shape is not OK');
+    }
+
+    const doc: string = [visibleTitle, ...visibleRows]
+      .reduce((text, row) => text + '\n' + row.join('\t'), '')
+      .trimStart();
+
+    saveAs(new Blob([doc], { type: 'text/plain;charset=utf-8' }), formattedFileName);
+
+    thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
+  } catch {
+    thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
+    showErrorReportNotif(thunkAPI);
+  }
+});
 
 const idField = (index: string) => {
   switch (index) {
@@ -213,4 +260,4 @@ const getTitleFromColumns = (columns: ProColumnType[], field: string) => {
   return column.title;
 };
 
-export { fetchReport, fetchTsvReport };
+export { fetchReport, fetchTsvReport, generateLocalTsvReport };
