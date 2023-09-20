@@ -327,7 +327,7 @@ const en = {
     },
     proTable: {
       results: 'Results',
-      noResult: 'No Result',
+      noResults: 'No Result',
       of: 'of',
       selected: 'item selected',
       selectedPlural: 'items selected',
