@@ -52,7 +52,7 @@ export const getEntityConsequenceDictionary = () => ({
 export const getProTableDictionary = (): IProTableDictionary => ({
   numberFormat,
   table: {
-    emptyText: intl.get('api.noData'),
+    emptyText: intl.get('global.proTable.noResults'),
   },
   itemCount: {
     results: intl.get('global.proTable.results'),
