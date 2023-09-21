@@ -78,6 +78,7 @@ const FiltersBox = ({
               className={styles.filterMultiSelect}
               mode="multiple"
               allowClear
+              onClear={() => setRoleFilter([])}
               placeholder={intl.get('screen.community.search.selectPlaceholder')}
               maxTagCount={1}
               value={roleFilter}
@@ -106,6 +107,7 @@ const FiltersBox = ({
               className={styles.filterMultiSelect}
               mode="multiple"
               allowClear
+              onClear={() => setResearchDomainFilter([])}
               placeholder={intl.get('screen.community.search.selectPlaceholder')}
               maxTagCount={1}
               value={researchDomainFilter}
