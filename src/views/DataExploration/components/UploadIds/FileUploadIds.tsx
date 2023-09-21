@@ -44,12 +44,18 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       const files: IFileEntity[] = hydrateResults(response.data?.data?.File?.hits?.edges || []);
 
-      return files.map((file) => ({
-        key: file.file_id,
-        submittedId: ids.find((id) => file.file_id.toLowerCase() === id.toLowerCase()) || '',
-        mappedTo: file.study_code,
-        matchTo: file.file_id,
-      }));
+      return files?.flatMap((file) => {
+        const matchedIds: string[] = ids.filter(
+          (id: string) => file.file_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
+        );
+
+        return matchedIds.map((id, index) => ({
+          key: `${file.file_id}:${index}`,
+          submittedId: id,
+          mappedTo: file.study_code,
+          matchTo: file.file_id,
+        }));
+      });
     }}
     onUpload={(match) =>
       updateActiveQueryField({

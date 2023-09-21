@@ -46,13 +46,18 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
         response.data?.data?.Participant?.hits?.edges || [],
       );
 
-      return participants.map((participant) => ({
-        key: participant.participant_id,
-        submittedId:
-          ids.find((id) => participant.participant_id.toLowerCase() === id.toLowerCase()) || '',
-        mappedTo: participant.study_code,
-        matchTo: participant.participant_id,
-      }));
+      return participants?.flatMap((participant) => {
+        const matchedIds: string[] = ids.filter(
+          (id: string) => participant.participant_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
+        );
+
+        return matchedIds.map((id, index) => ({
+          key: `${participant.participant_id}:${index}`,
+          submittedId: id,
+          mappedTo: participant.study_code,
+          matchTo: participant.participant_id,
+        }));
+      });
     }}
     onUpload={(match) =>
       updateActiveQueryField({

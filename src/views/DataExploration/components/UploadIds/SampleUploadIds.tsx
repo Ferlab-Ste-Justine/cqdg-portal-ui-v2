@@ -7,7 +7,6 @@ import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { MATCH_BIOSPECIMENS } from 'graphql/biospecimens/queries';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
-import uniqBy from 'lodash/uniqBy';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
 import { ArrangerApi } from 'services/api/arranger';
@@ -48,13 +47,18 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
         response.data?.data?.Biospecimen?.hits?.edges || [],
       );
 
-      return uniqBy(biospecimens, 'sample_id').map((biospecimen) => ({
-        key: biospecimen.sample_id,
-        submittedId:
-          ids.find((id) => biospecimen.sample_id.toLowerCase() === id.toLowerCase()) || '',
-        mappedTo: biospecimen.study_code,
-        matchTo: biospecimen.sample_id,
-      }));
+      return biospecimens?.flatMap((biospecimen) => {
+        const matchedIds: string[] = ids.filter(
+          (id: string) => biospecimen.sample_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
+        );
+
+        return matchedIds.map((id, index) => ({
+          key: `${biospecimen.sample_id}:${index}`,
+          submittedId: id,
+          mappedTo: biospecimen.study_code,
+          matchTo: biospecimen.sample_id,
+        }));
+      });
     }}
     onUpload={(match) =>
       updateActiveQueryField({
