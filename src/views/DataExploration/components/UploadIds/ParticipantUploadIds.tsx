@@ -59,11 +59,11 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
         }));
       });
     }}
-    onUpload={(match) =>
+    onUpload={(matches) =>
       updateActiveQueryField({
         queryBuilderId,
         field: 'participant_2_id',
-        value: match.map((value) => value.key),
+        value: matches.map((match) => match.matchTo),
         index: INDEXES.PARTICIPANT,
         overrideValuesName: intl.get('components.uploadIds.pillTitle'),
         merge_strategy: MERGE_VALUES_STRATEGIES.OVERRIDE_VALUES,
