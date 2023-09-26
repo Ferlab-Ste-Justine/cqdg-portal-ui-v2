@@ -34,7 +34,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[class*="EntityTitle"]').contains('FI0181945');
   });
 
-  it('Panneau Summary [CQDG-330]', () => {
+  it('Panneau Summary', () => {
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains(/^1$/);
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains(/^1$/);
@@ -140,7 +140,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
 });
 
 describe('Page d\'un fichier - Valider les liens disponibles', () => {
-  it('Lien URL du panneau Summary [CQDG-330]', () => {
+  it('Lien URL du panneau Summary', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[href]')
     .should('have.attr', 'href', 'https://ferload.qa.cqdg.ferlab.bio/e192c1a9174d4b2bf3dcad7aef1149eb7fb7015b');
   });

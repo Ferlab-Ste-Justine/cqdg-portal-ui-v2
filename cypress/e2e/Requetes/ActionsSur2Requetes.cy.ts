@@ -172,8 +172,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-modal-confirm"]').find('button[class*="ant-btn-primary"]').click({force:true});
     cy.get('[class*="ant-modal-confirm"]').should('not.exist');
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,119');
-    cy.validateTableResultsCount('1,119');
+    cy.validateTotalSelectedQuery('1,229');
+    cy.validateTableResultsCount('1,229');
     cy.validateClearAllButton(false);
   });
 });

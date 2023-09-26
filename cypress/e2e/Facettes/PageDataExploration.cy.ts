@@ -13,12 +13,20 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
+  });
+
   it('Study Code - T-DEE', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(0).contains('Study Code').should('exist');
     cy.checkValueFacetAndApply(0, 'T-DEE');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^480$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^590$/).should('exist');
   });
 
   it('Study Code - NEURODEV', () => {
@@ -43,7 +51,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(1, 'Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Diagnosis (ICD-10)').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^159$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^197$/).should('exist');
   });
 
   // Code à valider
@@ -59,14 +67,14 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(2, 'Female');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^527$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^581$/).should('exist');
   });
 
   it('Gender - Male', () => {
     cy.checkValueFacetAndApply(2, /^Male$/);
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains(/^Male$/).should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^592$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^648$/).should('exist');
   });
 
   it('Age at Recruitment (days)', () => {
@@ -102,7 +110,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(6, 'Intractable Seizures');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Phenotype (Source Text)').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intractable Seizures').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^159$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^197$/).should('exist');
   });
 
   it('Phenotype (Source Text) - Microcephaly', () => {
@@ -117,7 +125,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(7, 'Intractable Epilepsy');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Diagnosis (Source Text)').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intractable Epilepsy').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^159$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^197$/).should('exist');
   });
 
   it('Diagnosis (Source Text) - Mendelian disease', () => {
@@ -133,6 +141,15 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.visitDataExploration('biospecimens');
     cy.get('li[data-key="biospecimens"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('Sample Type - DNA (NCIT:C449)', () => {
@@ -140,7 +157,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(0, 'DNA (NCIT:C449)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DNA (NCIT:C449)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,229$/).should('exist');
   });
 
   it('Tissue - Blood (NCIT:C12434)', () => {
@@ -148,7 +165,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(1, 'Blood (NCIT:C12434)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Tissue').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Blood (NCIT:C12434)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,229$/).should('exist');
   });
 
   // Pas de données
@@ -170,6 +187,15 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.visitDataExploration('datafiles');
     cy.get('li[data-key="datafiles"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('Data Category - Genomics', () => {
@@ -177,7 +203,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(0, 'Genomics');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Category').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genomics').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8,952$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,374$/).should('exist');
   });
 
   it('Data Type - Aligned Reads [CQDG-261]', () => {
@@ -200,7 +226,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(2, 'WGS');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Experimental Strategy').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8,952$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,374$/).should('exist');
   });
 
   it('Format - gVCF', () => {
@@ -208,13 +234,13 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(3, 'gVCF');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GVCF').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,119$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2,458$/).should('exist');
   });
 
-  it('Format - TBI', () => {
-    cy.checkValueFacetAndApply(3, 'TBI');
+  it('Format - CRAM', () => {
+    cy.checkValueFacetAndApply(3, 'CRAM');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('TBI').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3,357$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('CRAM').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,229$/).should('exist');
   });
 });

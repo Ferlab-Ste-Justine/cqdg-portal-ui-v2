@@ -31,7 +31,7 @@ describe('Page Data Exploration (Participants) - Vérifier les informations affi
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('0002230').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(5).contains('See more').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(6).contains('10.6K').should('exist');
-    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(7).contains(/^8$/).should('exist');
+    cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(7).contains(/^6$/).should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(8).contains(/^1$/).should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(9).contains('-').should('exist');
     cy.get('tr[data-row-key="PT1007374"]').find('[class*="ant-table-cell"]').eq(10).contains('Intellectual Disabilities').should('exist');
@@ -87,7 +87,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT1007374').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
   });
 
   it('Lien Biospecimens du tableau', () => {

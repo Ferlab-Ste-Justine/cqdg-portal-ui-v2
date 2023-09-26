@@ -10,6 +10,19 @@ describe('Page Studies - Filtrer avec les facettes', () => {
     cy.visitStudiesPage();
   });
 
+  it('Expand all/Collapse all', () => {
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+  });
+
   it('Study Code - CAG', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by study').should('exist');
 
