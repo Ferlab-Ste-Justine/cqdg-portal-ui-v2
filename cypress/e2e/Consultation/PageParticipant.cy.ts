@@ -39,7 +39,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
     cy.get('[data-cy="SummaryHeader_Biospecimens_Button"]').contains(/^1$/);
     cy.get('[data-cy="SummaryHeader_Biospecimens_Button"]').contains(/^Biospecimen$/);
-    cy.get('[data-cy="SummaryHeader_Files_Button"]').contains(/^8$/);
+    cy.get('[data-cy="SummaryHeader_Files_Button"]').contains(/^6$/);
     cy.get('[data-cy="SummaryHeader_Files_Button"]').contains('Files');
     cy.get('[id="summary"]').find('[class="ant-collapse-header"]').contains('Summary').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('ID').should('exist');

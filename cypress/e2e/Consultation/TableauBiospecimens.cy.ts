@@ -26,7 +26,7 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('NCIT:').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('C12434').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(7).contains('-').should('exist');
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).contains(/^8$/).should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).contains(/^6$/).should('exist');
   });
 });
 
@@ -62,7 +62,7 @@ describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles',
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0463655').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
   });
 });
 

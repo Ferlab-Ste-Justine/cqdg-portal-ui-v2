@@ -10,6 +10,15 @@ describe('Page Variants (Participant) - Filtrer avec les facettes', () => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_participant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('Study Code - KF-NBL [CQDG-299]', () => {
@@ -48,6 +57,15 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('Variant Type - SNV [CQDG-299]', () => {
@@ -151,6 +169,15 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_genomic"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('Gene Type - Protein Coding [CQDG-299]', () => {
@@ -274,6 +301,15 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_pathogenicity"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
+  });
+
+  it('Expand all/Collapse all', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+
+    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
   it('ClinVar - Likely Benign [CQDG-299]', () => {

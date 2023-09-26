@@ -38,7 +38,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
   });
 
-  it('Panneau Summary [CQDG-329]', () => {
+  it('Panneau Summary [CQDG-410]', () => {
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains(/^382$/);
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('Participants');
     cy.get('[data-cy="SummaryHeader_Families_Button"]').contains(/^130$/);
@@ -108,9 +108,9 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 100%"]').should('exist');
   });
 
-  it('Panneau GenoRef-Q [CQDG-261, CQDG-347]', () => {
+  it('Panneau GenoRef-Q [CQDG-261]', () => {
     cy.visitStudyEntity('CAG', 1);
-    cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Dataset').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Available Datasets').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-collapse-header"]').contains('GenoRef-Q').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(0).contains('Description').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(0).contains('The goal of the GenoRef-Q Initiative was to sequence the genome of 2000 CARTaGENE (CaG) participants to capture the genetic variation present in the Quebec population including minority groups who are otherwise underrepresented in genetic studies.GenoRef-Q is a multi-ethnic cohort where at least 10% is not of European ancestry. Participants were also selected based on potential linkage to the BALSAC genealogy dataset and presence of other -omic data.').should('exist');
