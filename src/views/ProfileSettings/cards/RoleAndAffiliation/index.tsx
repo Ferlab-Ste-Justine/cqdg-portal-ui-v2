@@ -8,32 +8,21 @@ import cx from 'classnames';
 import { IOption } from 'services/api/user/models';
 import { useUser } from 'store/user';
 import { updateUser } from 'store/user/thunks';
-import { lowerAll } from 'utils/array';
 
 import BaseCard from '../BaseCard';
 import BaseForm from '../BaseForm';
-import { OTHER_KEY, removeOtherKey, sortOptionsLabelsByName } from '../utils';
+import { sortOptionsLabelsByName } from '../utils';
 
 import formStyles from '../form.module.scss';
 
 enum FORM_FIELDS {
   ROLES = 'roles',
-  OTHER_ROLE = 'other_role',
   AFFILIATION = 'affiliation',
   NO_AFFILIATION = 'no_affiliation',
 }
 
-const hasOtherRole = (userRoles: string[], roleOptions: IOption[]) =>
-  userRoles.filter(
-    (userRole) =>
-      !roleOptions.find(
-        (rolesOption) => rolesOption.value.toLowerCase() === userRole.toLowerCase(),
-      ),
-  );
-
 const initialChangedValues = {
   [FORM_FIELDS.ROLES]: false,
-  [FORM_FIELDS.OTHER_ROLE]: false,
   [FORM_FIELDS.AFFILIATION]: false,
   [FORM_FIELDS.NO_AFFILIATION]: false,
 };
@@ -56,10 +45,7 @@ const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }
 
   useEffect(() => {
     initialValues.current = {
-      [FORM_FIELDS.ROLES]: hasOtherRole(lowerAll(userInfo?.roles ?? []), roleOptions).length
-        ? [...lowerAll(userInfo?.roles ?? []), OTHER_KEY]
-        : lowerAll(userInfo?.roles ?? []),
-      [FORM_FIELDS.OTHER_ROLE]: hasOtherRole(userInfo?.roles ?? [], roleOptions)[0],
+      [FORM_FIELDS.ROLES]: userInfo?.roles || [],
       [FORM_FIELDS.AFFILIATION]: userInfo?.affiliation,
       [FORM_FIELDS.NO_AFFILIATION]: !userInfo?.affiliation,
     };
@@ -80,20 +66,11 @@ const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }
         initialValues={initialValues}
         hasChangedInitialValue={hasChanged}
         onFinish={(values: any) => {
-          const otherRole = hasOtherRole(values[FORM_FIELDS.ROLES], roleOptions);
-          dispatch(
-            updateUser({
-              data: {
-                roles: removeOtherKey(
-                  values[FORM_FIELDS.ROLES].filter((val: string) => !otherRole.includes(val)),
-                  values[FORM_FIELDS.OTHER_ROLE],
-                ),
-                affiliation: values[FORM_FIELDS.NO_AFFILIATION]
-                  ? ''
-                  : values[FORM_FIELDS.AFFILIATION],
-              },
-            }),
-          );
+          const roles = values[FORM_FIELDS.ROLES];
+          const affiliation = values[FORM_FIELDS.NO_AFFILIATION]
+            ? ''
+            : values[FORM_FIELDS.AFFILIATION];
+          dispatch(updateUser({ data: { roles, affiliation } }));
         }}
       >
         <Form.Item
@@ -109,7 +86,7 @@ const RoleAndAffiliationCard = ({ roleOptions = [] }: { roleOptions: IOption[] }
             </span>
             <Space direction="vertical">
               {roleOptionsSorted.map((option) => (
-                <Checkbox key={option.value} value={option.value.toLowerCase()}>
+                <Checkbox key={option.value} value={option.value}>
                   {option.label}
                 </Checkbox>
               ))}
