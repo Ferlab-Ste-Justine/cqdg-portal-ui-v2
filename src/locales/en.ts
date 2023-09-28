@@ -23,7 +23,7 @@ const en = {
       statistic: 'Summary Statistic',
       statistics: 'Summary Statistics',
       data_access: 'Data Access',
-      dataset: 'Dataset',
+      dataset: 'Available Datasets',
       name: 'Name',
       file: 'File',
       keywords: 'Keywords',
