@@ -272,7 +272,7 @@ const en = {
         emptyText: 'No study found',
         placeholder: 'e.g. T-DEE, Developmental and Epileptic Encephalopathies',
         title: 'Search by study',
-        tooltip: 'Search by study code or study name',
+        tooltip: 'Search by study code, name or domain',
       },
     },
     filters: {
