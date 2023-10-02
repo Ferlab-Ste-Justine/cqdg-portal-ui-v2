@@ -181,7 +181,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justine-Ops/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"
@@ -255,7 +255,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justinea-Ops/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"
