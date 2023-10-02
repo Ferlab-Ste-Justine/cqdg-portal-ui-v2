@@ -14,7 +14,7 @@ describe('Page Studies - Filtrer avec les facettes', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by study').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
-    cy.get('div[class="ant-tooltip-inner"]').contains('Search by study code or study name').should('exist');
+    cy.get('div[class="ant-tooltip-inner"]').contains('Search by study code, name or domain').should('exist');
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'cag', 'POST', '*/grapgql', 3);
     cy.wait(1000);
