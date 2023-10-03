@@ -46,11 +46,10 @@ const CustomFilterContainer = ({
   );
 
   useEffect(() => {
-    if (filtersOpen && isOpen !== filtersOpen) {
+    if (filtersOpen !== undefined && isOpen !== filtersOpen) {
       setIsOpen(filtersOpen);
     }
-    // eslint-disable-next-line
-  }, [filtersOpen]);
+  }, [filtersOpen, isOpen]);
 
   const onChange = (fg: IFilterGroup, f: IFilter[]) => {
     updateActiveQueryFilters({
