@@ -618,7 +618,7 @@ const fr = {
     },
     dataRelease: {
       title: 'Données disponibles',
-      dataReleaseLink: 'Publication des données v1.0',
+      dataReleaseLink: 'Version 1.0',
       dataExploration: 'Exploration des données',
     },
   },
