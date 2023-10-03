@@ -7,6 +7,7 @@ import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
 import { getSelectedFilters } from '@ferlab/ui/core/data/sqon/utils';
 import { IExtendedMappingResults, IGqlResults } from '@ferlab/ui/core/graphql/types';
 import { getFilters } from 'graphql/utils/Filters';
+import { isBoolean } from 'lodash';
 
 import { getFacetsDictionary, getFiltersDictionary } from 'utils/translation';
 
@@ -46,7 +47,7 @@ const CustomFilterContainer = ({
   );
 
   useEffect(() => {
-    if (filtersOpen !== undefined && isOpen !== filtersOpen) {
+    if (isBoolean(filtersOpen) && isOpen !== filtersOpen) {
       setIsOpen(filtersOpen);
     }
   }, [filtersOpen, isOpen]);
