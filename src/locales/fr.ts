@@ -23,7 +23,7 @@ const fr = {
       statistic: 'Statistique sommaire',
       statistics: 'Statistiques sommaires',
       data_access: 'Accès aux données',
-      dataset: 'Ensemble de données',
+      dataset: 'Jeux de données',
       name: 'Nom',
       file: 'Fichier',
       keywords: 'Mots-clés',
