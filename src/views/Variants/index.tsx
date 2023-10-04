@@ -67,6 +67,9 @@ const filterGroups: {
           'studies__transmission',
         ],
         noDataOption: ['start'],
+        intervalDecimal: {
+          start: 0,
+        },
       },
     ],
   },
