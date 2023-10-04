@@ -114,7 +114,8 @@ const StudyEntity = () => {
               <DownloadRequestAccessModal
                 sqon={fileSqon}
                 hasTooManyFiles={hasTooManyFiles}
-                type={'primary'}
+                buttonType={'primary'}
+                withoutFiles
               />
             )}
           </Space>

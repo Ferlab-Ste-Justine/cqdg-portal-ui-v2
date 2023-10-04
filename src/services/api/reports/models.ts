@@ -4,6 +4,7 @@ export type ReportConfig = {
   sqon: ISyntheticSqon;
   name: string;
   withFamily?: boolean;
+  withoutFiles?: boolean;
 };
 
 export enum ReportType {

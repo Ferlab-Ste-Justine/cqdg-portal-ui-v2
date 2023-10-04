@@ -17,16 +17,18 @@ import styles from './index.module.scss';
 
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
-  type?: 'default' | 'primary';
+  buttonType?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
+  withoutFiles?: boolean;
 }
 
 const DownloadRequestAccessModal = ({
   sqon,
-  type = 'default',
-  isDisabled,
-  hasTooManyFiles,
+  buttonType = 'default',
+  isDisabled = false,
+  hasTooManyFiles = false,
+  withoutFiles = false,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -43,7 +45,7 @@ const DownloadRequestAccessModal = ({
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
-        type={type}
+        type={buttonType}
         disabled={isDisabled}
         data-cy="RequestAccess_Button"
       >
@@ -63,6 +65,7 @@ const DownloadRequestAccessModal = ({
                 name: ReportType.FILE_REQUEST_ACCESS,
                 sqon,
                 withFamily: isFamilyChecked,
+                withoutFiles,
               },
               callback: () => setIsModalVisible(false),
             }),
