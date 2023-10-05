@@ -239,7 +239,6 @@ export const SEARCH_VARIANT_QUERY = gql`
               }
             }
             variant_class
-            variant_id: id
           }
         }
       }
@@ -488,7 +487,6 @@ export const GET_VARIANT_ENTITY = gql`
               }
             }
             variant_class
-            variant_id: id
           }
         }
       }
