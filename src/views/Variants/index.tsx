@@ -12,7 +12,6 @@ import FrequencyIcon from 'components/Icons/FrequencyIcon';
 import GeneIcon from 'components/Icons/GeneIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import FilterList from 'components/uiKit/FilterList';
-import { FilterInfo } from 'components/uiKit/FilterList/types';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 import { SuggestionType } from 'services/api/arranger/models';
 
@@ -37,142 +36,147 @@ enum FilterKeys {
   FREQUENCY = 'frequency',
 }
 
-const filterGroups: {
-  [type: string]: FilterInfo;
-} = {
-  [FilterTypes.Participant]: {
-    groups: [
-      {
-        facets: ['studies__study_code'],
-      },
-    ],
-  },
-  [FilterTypes.Variant]: {
-    customSearches: [
-      <VariantGeneSearch
-        key="variants"
-        type={SuggestionType.VARIANTS}
-        queryBuilderId={VARIANT_REPO_QB_ID}
-      />,
-    ],
-    groups: [
-      {
-        facets: [
-          'variant_class',
-          'genes__consequences__consequence',
-          'variant_external_reference',
-          'chromosome',
-          'start',
-          'studies__zygosity',
-          'studies__transmission',
+const getFilterGroups = (type: FilterTypes) => {
+  switch (type) {
+    case FilterTypes.Participant:
+      return {
+        groups: [
+          {
+            facets: ['studies__study_code'],
+          },
         ],
-        noDataOption: ['start'],
-        intervalDecimal: {
-          start: 0,
-        },
-      },
-    ],
-  },
-  [FilterTypes.Gene]: {
-    customSearches: [
-      <VariantGeneSearch
-        key="genes"
-        type={SuggestionType.GENES}
-        queryBuilderId={VARIANT_REPO_QB_ID}
-      />,
-      <GenesUploadIds key="genes_upload_ids" queryBuilderId={VARIANT_REPO_QB_ID} />,
-    ],
-    groups: [
-      {
-        facets: [
-          'genes__biotype',
-          'gene_external_reference',
-          'genes__gnomad__pli',
-          'genes__gnomad__loeuf',
+      };
+    case FilterTypes.Variant:
+      return {
+        customSearches: [
+          <VariantGeneSearch
+            key="variants"
+            type={SuggestionType.VARIANTS}
+            queryBuilderId={VARIANT_REPO_QB_ID}
+          />,
         ],
-        tooltips: ['genes__gnomad__pli', 'genes__gnomad__loeuf'],
-        noDataOption: ['genes__gnomad__pli', 'genes__gnomad__loeuf'],
-      },
-      {
-        title: intl.get('facets.genePanels'),
-        facets: [
-          'genes__hpo__hpo_term_label',
-          'genes__orphanet__panel',
-          'genes__omim__name',
-          'genes__ddd__disease_name',
-          'genes__cosmic__tumour_types_germline',
+        groups: [
+          {
+            facets: [
+              'variant_class',
+              'genes__consequences__consequence',
+              'variant_external_reference',
+              'chromosome',
+              'start',
+              'studies__zygosity',
+              'studies__transmission',
+            ],
+            noDataOption: ['start'],
+            intervalDecimal: {
+              start: 0,
+            },
+          },
         ],
-        tooltips: [
-          'genes__hpo__hpo_term_label',
-          'genes__omim__name',
-          'genes__ddd__disease_name',
-          'genes__cosmic__tumour_types_germline',
+      };
+    case FilterTypes.Gene:
+      return {
+        customSearches: [
+          <VariantGeneSearch
+            key="genes"
+            type={SuggestionType.GENES}
+            queryBuilderId={VARIANT_REPO_QB_ID}
+          />,
+          <GenesUploadIds key="genes_upload_ids" queryBuilderId={VARIANT_REPO_QB_ID} />,
         ],
-      },
-    ],
-  },
-  [FilterTypes.Pathogenicity]: {
-    groups: [
-      {
-        facets: ['clinvar__clin_sig', 'genes__consequences__vep_impact'],
-        tooltips: ['genes__consequences__vep_impact'],
-      },
-      {
-        title: 'Predictions',
-        facets: [
-          'genes__consequences__predictions__cadd_score',
-          'genes__consequences__predictions__cadd_phred',
-          'genes__consequences__predictions__dann_score',
-          'genes__consequences__predictions__fathmm_pred',
-          'genes__consequences__predictions__lrt_pred',
-          'genes__consequences__predictions__polyphen2_hvar_pred',
-          'genes__consequences__predictions__revel_score',
-          'genes__spliceai__ds',
-          'genes__consequences__predictions__sift_pred',
+        groups: [
+          {
+            facets: [
+              'genes__biotype',
+              'gene_external_reference',
+              'genes__gnomad__pli',
+              'genes__gnomad__loeuf',
+            ],
+            tooltips: ['genes__gnomad__pli', 'genes__gnomad__loeuf'],
+            noDataOption: ['genes__gnomad__pli', 'genes__gnomad__loeuf'],
+          },
+          {
+            title: intl.get('entities.variant.panels'),
+            facets: [
+              'genes__hpo__hpo_term_label',
+              'genes__orphanet__panel',
+              'genes__omim__name',
+              'genes__ddd__disease_name',
+              'genes__cosmic__tumour_types_germline',
+            ],
+            tooltips: [
+              'genes__hpo__hpo_term_label',
+              'genes__omim__name',
+              'genes__ddd__disease_name',
+              'genes__cosmic__tumour_types_germline',
+            ],
+          },
         ],
-        tooltips: [
-          'genes__consequences__predictions__cadd_score',
-          'genes__consequences__predictions__cadd_phred',
-          'genes__consequences__predictions__dann_score',
-          'genes__consequences__predictions__fathmm_pred',
-          'genes__consequences__predictions__lrt_pred',
-          'genes__consequences__predictions__polyphen2_hvar_pred',
-          'genes__consequences__predictions__revel_score',
-          'genes__consequences__predictions__sift_pred',
+      };
+    case FilterTypes.Pathogenicity:
+      return {
+        groups: [
+          {
+            facets: ['clinvar__clin_sig', 'genes__consequences__vep_impact'],
+            tooltips: ['genes__consequences__vep_impact'],
+          },
+          {
+            title: 'Predictions',
+            facets: [
+              'genes__consequences__predictions__cadd_score',
+              'genes__consequences__predictions__cadd_phred',
+              'genes__consequences__predictions__dann_score',
+              'genes__consequences__predictions__fathmm_pred',
+              'genes__consequences__predictions__lrt_pred',
+              'genes__consequences__predictions__polyphen2_hvar_pred',
+              'genes__consequences__predictions__revel_score',
+              'genes__spliceai__ds',
+              'genes__consequences__predictions__sift_pred',
+            ],
+            tooltips: [
+              'genes__consequences__predictions__cadd_score',
+              'genes__consequences__predictions__cadd_phred',
+              'genes__consequences__predictions__dann_score',
+              'genes__consequences__predictions__fathmm_pred',
+              'genes__consequences__predictions__lrt_pred',
+              'genes__consequences__predictions__polyphen2_hvar_pred',
+              'genes__consequences__predictions__revel_score',
+              'genes__consequences__predictions__sift_pred',
+            ],
+            noDataOption: [
+              'genes__consequences__predictions__cadd_score',
+              'genes__consequences__predictions__cadd_phred',
+              'genes__consequences__predictions__dann_score',
+              'genes__consequences__predictions__revel_score',
+              'genes__spliceai__ds',
+              'genes__consequences__predictions__sift_pred',
+            ],
+          },
         ],
-        noDataOption: [
-          'genes__consequences__predictions__cadd_score',
-          'genes__consequences__predictions__cadd_phred',
-          'genes__consequences__predictions__dann_score',
-          'genes__consequences__predictions__revel_score',
-          'genes__spliceai__ds',
-          'genes__consequences__predictions__sift_pred',
+      };
+    case FilterTypes.Frequency:
+      return {
+        groups: [
+          {
+            facets: [
+              'internal_frequencies__total__af',
+              'external_frequencies__gnomad_genomes_2_1_1__af',
+              'external_frequencies__gnomad_genomes_3__af',
+              'external_frequencies__gnomad_exomes_2_1_1__af',
+              'external_frequencies__topmed_bravo__af',
+              'external_frequencies__thousand_genomes__af',
+            ],
+            noDataOption: [
+              'internal_frequencies__total__af',
+              'external_frequencies__gnomad_genomes_2_1_1__af',
+              'external_frequencies__gnomad_genomes_3__af',
+              'external_frequencies__gnomad_exomes_2_1_1__af',
+              'external_frequencies__topmed_bravo__af',
+              'external_frequencies__thousand_genomes__af',
+            ],
+          },
         ],
-      },
-    ],
-  },
-  [FilterTypes.Frequency]: {
-    groups: [
-      {
-        facets: [
-          'internal_frequencies__total__af',
-          'external_frequencies__gnomad_genomes_2_1_1__af',
-          'external_frequencies__gnomad_genomes_3__af',
-          'external_frequencies__gnomad_exomes_2_1_1__af',
-          'external_frequencies__topmed_bravo__af',
-          'external_frequencies__thousand_genomes__af',
-        ],
-        noDataOption: [
-          'internal_frequencies__total__af',
-          'external_frequencies__gnomad_genomes_2_1_1__af',
-          'external_frequencies__gnomad_genomes_3__af',
-          'external_frequencies__gnomad_exomes_2_1_1__af',
-          'external_frequencies__topmed_bravo__af',
-          'external_frequencies__thousand_genomes__af',
-        ],
-      },
-    ],
-  },
+      };
+  }
 };
 
 const Variants = () => {
@@ -188,7 +192,7 @@ const Variants = () => {
           index={INDEXES.VARIANT}
           queryBuilderId={VARIANT_REPO_QB_ID}
           extendedMappingResults={variantMappingResults}
-          filterInfo={filterGroups[FilterTypes.Participant]}
+          filterInfo={getFilterGroups(FilterTypes.Participant)}
         />
       ),
     },
@@ -202,7 +206,7 @@ const Variants = () => {
           index={INDEXES.VARIANT}
           queryBuilderId={VARIANT_REPO_QB_ID}
           extendedMappingResults={variantMappingResults}
-          filterInfo={filterGroups[FilterTypes.Variant]}
+          filterInfo={getFilterGroups(FilterTypes.Variant)}
         />
       ),
     },
@@ -216,7 +220,7 @@ const Variants = () => {
           index={INDEXES.VARIANT}
           queryBuilderId={VARIANT_REPO_QB_ID}
           extendedMappingResults={variantMappingResults}
-          filterInfo={filterGroups[FilterTypes.Gene]}
+          filterInfo={getFilterGroups(FilterTypes.Gene)}
         />
       ),
     },
@@ -230,7 +234,7 @@ const Variants = () => {
           index={INDEXES.VARIANT}
           queryBuilderId={VARIANT_REPO_QB_ID}
           extendedMappingResults={variantMappingResults}
-          filterInfo={filterGroups[FilterTypes.Pathogenicity]}
+          filterInfo={getFilterGroups(FilterTypes.Pathogenicity)}
         />
       ),
     },
@@ -244,7 +248,7 @@ const Variants = () => {
           index={INDEXES.VARIANT}
           queryBuilderId={VARIANT_REPO_QB_ID}
           extendedMappingResults={variantMappingResults}
-          filterInfo={filterGroups[FilterTypes.Frequency]}
+          filterInfo={getFilterGroups(FilterTypes.Frequency)}
         />
       ),
     },
