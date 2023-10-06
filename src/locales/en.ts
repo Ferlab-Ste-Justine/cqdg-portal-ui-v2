@@ -153,8 +153,8 @@ const en = {
       zygosity: 'Zygosity',
       transmission: 'Transmission',
       panels: 'Gene Panels',
-      gnomAd: 'GnomAD',
-      gnomAdTooltip: 'gnomAD 3.1.1 Allele Frequency',
+      gnomAd: 'gnomAD',
+      gnomAdTooltip: 'gnomAD v3.1.2 Allele Frequency',
       gnomadGenome311: 'gnomAD Genome (v3.1.1)',
       gnomadGenome3: 'gnomAD Genome (v3.1.2)',
       genome_build: 'Genome build',
@@ -172,11 +172,11 @@ const en = {
       genePhenotype: 'Gene - Phenotype',
       homozygotes: {
         title: 'Homo.',
-        tooltip: '# of Homozygotes',
+        tooltip: '# of homozygotes',
       },
       alt: {
         title: 'ALT',
-        tooltip: '# of Alternative alleles',
+        tooltip: '# of alternative alleles',
       },
       frequence: {
         title: 'Freq.',
@@ -246,6 +246,10 @@ const en = {
         inheritance: 'Inheritance',
         source: 'Source',
       },
+      mostDeleteriousConsequence: {
+        title: 'Most Deleterious Consequence',
+        tooltip: 'Functional consequences of genetic variations annotated using VEP',
+      },
     },
   },
   global: {
@@ -260,7 +264,7 @@ const en = {
         emptyText: 'No gene found',
         placeholder: 'e.g. BRAF, ENSG00000157764',
         title: 'Search by gene',
-        tooltip: 'Enter a Gene Symbol, Gene Alias or Ensemble ID',
+        tooltip: 'Enter a Gene Symbol, Gene Alias or Ensembl ID',
       },
       variants: {
         emptyText: 'No variant found',
@@ -819,14 +823,14 @@ const en = {
       },
     },
     variants: {
-      title: 'Variants',
+      title: 'Variants Exploration',
       noDataVariant: 'No data available for this variant',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',
         gene: 'Gene',
         frequency: 'Frequency',
-        pathogenicity: 'Pathogenicities',
+        pathogenicity: 'Pathogenicity',
       },
     },
     studies: {

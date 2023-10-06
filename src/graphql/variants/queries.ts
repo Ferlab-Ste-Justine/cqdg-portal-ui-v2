@@ -11,6 +11,7 @@ export const SEARCH_VARIANT_QUERY = gql`
             alternate
             assembly_version
             chromosome
+            variant_class
             clinvar {
               clin_sig
               clinvar_id
@@ -219,7 +220,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                 total
                 edges {
                   node {
-                    score
                     study_code
                     study_id
                     total {
@@ -238,7 +238,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                 }
               }
             }
-            variant_class
           }
         }
       }
@@ -264,6 +263,7 @@ export const GET_VARIANT_ENTITY = gql`
             }
             dna_change
             end
+            variant_class
             external_frequencies {
               topmed_bravo {
                 ac
@@ -467,7 +467,6 @@ export const GET_VARIANT_ENTITY = gql`
                 total
                 edges {
                   node {
-                    score
                     study_code
                     study_id
                     total {
@@ -486,7 +485,6 @@ export const GET_VARIANT_ENTITY = gql`
                 }
               }
             }
-            variant_class
           }
         }
       }

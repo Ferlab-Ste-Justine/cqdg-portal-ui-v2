@@ -62,9 +62,9 @@ const getFilterGroups = (type: FilterTypes) => {
               'genes__consequences__consequence',
               'variant_external_reference',
               'chromosome',
+              'studies__transmission',
               'start',
               'studies__zygosity',
-              'studies__transmission',
             ],
             noDataOption: ['start'],
             intervalDecimal: {
@@ -120,7 +120,7 @@ const getFilterGroups = (type: FilterTypes) => {
             tooltips: ['genes__consequences__vep_impact'],
           },
           {
-            title: 'Predictions',
+            title: intl.get('entities.variant.consequences.predictions.predictions'),
             facets: [
               'genes__consequences__predictions__cadd_score',
               'genes__consequences__predictions__cadd_phred',
