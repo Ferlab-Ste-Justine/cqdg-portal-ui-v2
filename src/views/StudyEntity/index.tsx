@@ -61,7 +61,7 @@ const StudyEntity = () => {
     ...[
       !isRestricted && {
         href: `#${SectionId.DATA_FILE}`,
-        title: intl.get('entities.study.file'),
+        title: intl.get('entities.file.datafile'),
       },
     ],
     ...[

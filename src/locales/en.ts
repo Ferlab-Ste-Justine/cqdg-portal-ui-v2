@@ -25,7 +25,6 @@ const en = {
       data_access: 'Data Access',
       dataset: 'Available Datasets',
       name: 'Name',
-      file: 'File',
       keywords: 'Keywords',
       description: 'Description',
       restrictedTitle: 'Study restricted',

@@ -25,7 +25,6 @@ const fr = {
       data_access: 'Accès aux données',
       dataset: 'Jeux de données',
       name: 'Nom',
-      file: 'Fichier',
       keywords: 'Mots-clés',
       description: 'Description',
       restrictedTitle: 'Étude restreinte',
