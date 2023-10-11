@@ -94,9 +94,9 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'consequences',
-    title: intl.get('entities.variant.consequences.consequences'),
+    title: intl.get('entities.variant.mostDeleteriousConsequence.title'),
     dataIndex: 'genes',
-    tooltip: intl.get('entities.variant.consequences.tooltip'),
+    tooltip: intl.get('entities.variant.mostDeleteriousConsequence.tooltip'),
     render: (genes: IArrangerResultsTree<IGeneEntity>) => {
       const geneWithPickedConsequence = genes?.hits?.edges?.find((e) =>
         (e.node.consequences || [])?.hits?.edges?.some((e) => e.node?.picked),
@@ -182,7 +182,7 @@ const getDefaultColumns = (): ProColumnType[] => [
     },
   },
   {
-    title: intl.get('entities.participant.participant'),
+    title: intl.get('entities.variant.participant.title'),
     tooltip: intl.get('entities.variant.participant.tooltip'),
     key: 'participant_number',
     render: (variant: IVariantEntity) => {
@@ -190,7 +190,7 @@ const getDefaultColumns = (): ProColumnType[] => [
       const studies = variant.studies;
       const participantIds =
         studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
-      if (!participantIds.length) {
+      if (participantIds.length < 10) {
         return totalNbOfParticipants;
       }
       return (
