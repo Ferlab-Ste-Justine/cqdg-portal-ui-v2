@@ -237,6 +237,7 @@ const en = {
         homozygotesTooltip: 'Number of homozygote variants',
         total: 'Total',
         cohort: 'Cohort',
+        internal_frequencies_af: 'CQDG Allele Frequency',
       },
       pathogenicity: {
         pathogenicity: 'Pathogenicity',

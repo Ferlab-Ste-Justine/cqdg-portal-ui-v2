@@ -404,11 +404,14 @@ export const getFacetsDictionary = () => ({
     },
   },
   external_frequencies: {
-    gnomad_genomes_2_1_1: { af: 'gnomAD Genome 2.1.1' },
+    gnomad_genomes_2_1_1: { af: 'gnomAD Genome 2.1' },
     gnomad_genomes_3: { af: 'gnomAD Genome 3.1.2' },
-    gnomad_exomes_2_1_1: { af: 'gnomAD Exome 2.1.1' },
+    gnomad_exomes_2_1_1: { af: 'gnomAD Exome 2.1' },
     topmed_bravo: { af: 'TopMed' },
     thousand_genomes: { af: '1000 Genomes' },
+  },
+  internal_frequencies: {
+    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_af') },
   },
   frequencies: {
     internal: {
