@@ -216,9 +216,7 @@ export const getQueryBuilderDictionary = (
     facetValueMapping: {
       variant_external_reference: {
         DBSNP: intl.get('entities.variant.dbsnp'),
-        dbsnp: intl.get('entities.variant.dbsnp'),
         Clinvar: intl.get('entities.variant.pathogenicity.clinVar'),
-        clinvar: intl.get('entities.variant.pathogenicity.clinVar'),
       },
       'genes.consequences.predictions.sift_pred': {
         T: intl.get('facets.options.genes__consequences__predictions__sift_pred.T'),
