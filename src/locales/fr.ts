@@ -178,7 +178,7 @@ const fr = {
         tooltip: '# d’allèles alternatifs',
       },
       frequence: {
-        title: 'Freq.',
+        title: 'Fréq.',
         tooltip: 'Fréquence du variant à travers les cohortes CQDG',
       },
       participant: {
@@ -264,14 +264,14 @@ const fr = {
         emptyText: 'Aucun gène trouvé',
         placeholder: 'ex : BRAF, ENSG00000157764',
         title: 'Recherche par gène',
-        tooltip: 'Entrer un Symbole de gène, Alias de gène ou un Ensembl ID',
+        tooltip: 'Entrer un Symbole de gène, Alias de gène ou Ensembl ID',
       },
       variants: {
         emptyText: 'Aucun variant trouvé',
         placeholder: 'ex : 10-100063679-T-C, rs341',
         title: 'Recherche par variant',
         tooltip:
-          'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, Clinvar ID, Ensembl ID, refseq ID',
+          'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
       },
       study: {
         emptyText: 'Aucune étude trouvé',
@@ -286,7 +286,7 @@ const fr = {
         none: 'Aucun',
         clear: 'Effacer',
         less: 'Moins',
-        more: 'Plus',
+        more: 'de plus',
         apply: 'Appliquer',
         dictionary: 'Dictionnaire',
         cancel: 'Annuler',
@@ -305,7 +305,7 @@ const fr = {
         is: 'Est',
         from: 'De',
         to: 'A',
-        actualInterval: 'Intervalle actuel : ',
+        actualInterval: 'Intervalle actuel',
       },
       messages: {
         empty: 'Aucune valeur trouvée',
@@ -554,7 +554,8 @@ const fr = {
         },
         myFiltersDropdown: {
           title: 'Mes filtres',
-          manageMyFilter: 'Gérer mes filtres',
+          manageMyFilter: 'Gérer les filtres',
+          okText: 'Fermer',
         },
         duplicateFilterTitleSuffix: 'COPIER',
       },
