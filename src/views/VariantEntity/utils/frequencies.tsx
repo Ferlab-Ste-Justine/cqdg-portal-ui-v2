@@ -49,6 +49,12 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     ),
   },
   {
+    title: intl.get('entities.study.domain'),
+    key: 'domain',
+    render: (study: IVariantStudyEntity) => study?.domain || TABLE_EMPTY_PLACE_HOLDER,
+    width: '14%',
+  },
+  {
     title: intl.get('entities.variant.frequencies.participants'),
     iconTitle: (
       <Space>
@@ -129,6 +135,10 @@ export const getFrequenciesTableSummaryColumns = (
     },
     {
       index: 1,
+      value: '',
+    },
+    {
+      index: 2,
       value: participantIds.length ? (
         <>
           <Button
@@ -165,7 +175,7 @@ export const getFrequenciesTableSummaryColumns = (
       ),
     },
     {
-      index: 2,
+      index: 3,
       value: formatQuotientToExponentialOrElse(
         totalNbOfParticipants,
         v?.internal_frequencies?.total?.pn || NaN,
@@ -173,7 +183,7 @@ export const getFrequenciesTableSummaryColumns = (
       ),
     },
     {
-      index: 3,
+      index: 4,
       value: v?.internal_frequencies?.total?.ac ? numberFormat(v.internal_frequencies.total.ac) : 0,
     },
     {

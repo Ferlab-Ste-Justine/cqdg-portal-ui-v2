@@ -105,7 +105,7 @@ const VariantEntity = () => {
           columns={getFrequenciesItems()}
           data={variantStudies}
           title={intl.get('entities.variant.frequencies.frequency')}
-          header={intl.get('entities.variant.frequencies.frequency')}
+          header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
           summaryColumns={getFrequenciesTableSummaryColumns(data, variantStudies)}
         />

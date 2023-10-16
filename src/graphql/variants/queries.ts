@@ -223,7 +223,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                 edges {
                   node {
                     study_code
-                    study_id
                     total {
                       ac
                       pc
@@ -236,6 +235,8 @@ export const SEARCH_VARIANT_QUERY = gql`
                     transmission
                     participant_ids
                     zygosity
+                    #todo add domain on study
+                    #domain
                   }
                 }
               }
@@ -472,7 +473,6 @@ export const GET_VARIANT_ENTITY = gql`
                 edges {
                   node {
                     study_code
-                    study_id
                     total {
                       ac
                       pc
@@ -483,8 +483,10 @@ export const GET_VARIANT_ENTITY = gql`
                       pf
                     }
                     transmission
-                    zygosity
                     participant_ids
+                    zygosity
+                    #todo add domain on study
+                    #domain
                   }
                 }
               }

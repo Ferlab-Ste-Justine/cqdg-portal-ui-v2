@@ -58,6 +58,10 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: variant?.assembly_version || TABLE_EMPTY_PLACE_HOLDER,
           },
           {
+            label: intl.get('entities.variant.source'),
+            value: variant?.source || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
             label: intl.get('entities.variant.genes'),
             value: variant?.genes?.hits?.edges?.length
               ? variant.genes.hits.edges.map((gene) => {
@@ -80,17 +84,11 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: handleOmimValues(variant),
           },
           {
-            label: intl.get('entities.variant.pathogenicity.clinVar'),
+            label: intl.get('entities.variant.pathogenicity.pathoClinvar'),
             value:
               removeUnderscoreAndCapitalize(
                 variant?.clinvar?.clin_sig.join(', ') || TABLE_EMPTY_PLACE_HOLDER,
               ) || TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.participant.participants'),
-            value: variant?.internal_frequencies?.total?.pc
-              ? numberWithCommas(variant.internal_frequencies.total.pc)
-              : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
       },
@@ -113,13 +111,15 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
               TABLE_EMPTY_PLACE_HOLDER,
           },
           {
-            label: intl.get('entities.study.studies'),
-            value: variant?.studies?.hits?.edges?.length || TABLE_EMPTY_PLACE_HOLDER,
+            label: intl.get('entities.study.CQDGStudies'),
+            value: variant?.internal_frequencies?.total?.pc
+              ? numberWithCommas(variant.internal_frequencies.total.pc)
+              : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
       },
       {
-        title: 'External Reference',
+        title: intl.get('entities.variant.variant_external_reference'),
         data: [
           {
             label: intl.get('entities.variant.pathogenicity.clinVar'),
