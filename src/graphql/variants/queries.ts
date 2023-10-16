@@ -19,6 +19,8 @@ export const SEARCH_VARIANT_QUERY = gql`
               inheritance
               interpretations
             }
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
             external_frequencies {
@@ -261,6 +263,8 @@ export const GET_VARIANT_ENTITY = gql`
               inheritance
               interpretations
             }
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
             variant_class

@@ -264,14 +264,14 @@ const en = {
         emptyText: 'No gene found',
         placeholder: 'e.g. BRAF, ENSG00000157764',
         title: 'Search by gene',
-        tooltip: 'Enter a Gene Symbol, Gene Alias or Ensembl ID',
+        tooltip: 'Enter Gene Symbol, Gene Alias or Ensembl ID',
       },
       variants: {
         emptyText: 'No variant found',
         placeholder: 'e.g. 10-100063679-T-C, rs341',
         title: 'Search by variant',
         tooltip:
-          'Enter Variant Locus, Gene Symbol, Gene Alias, Gene AA Change, dbSNP ID, Clinvar ID, Ensembl ID, refseq ID',
+          'Enter Variant Locus, Gene Symbol, Gene Alias, Gene AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
       },
       study: {
         emptyText: 'No study found',
@@ -305,7 +305,7 @@ const en = {
         is: 'Is',
         from: 'From',
         to: 'To',
-        actualInterval: 'Actual interval: ',
+        actualInterval: 'Actual interval',
       },
       messages: {
         empty: 'No values found',
@@ -573,6 +573,7 @@ const en = {
         myFiltersDropdown: {
           title: 'My filters',
           manageMyFilter: 'Manage my filters',
+          okText: 'Close',
         },
         duplicateFilterTitleSuffix: 'COPY',
       },

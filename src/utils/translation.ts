@@ -193,6 +193,11 @@ export const getQueryBuilderDictionary = (
       title: intl.get('components.querybuilder.header.myFiltersDropdown.title'),
       manageMyFilter: intl.get('components.querybuilder.header.myFiltersDropdown.manageMyFilter'),
     },
+    manageFilters: {
+      modalTitle: intl.get('components.querybuilder.header.myFiltersDropdown.manageMyFilter'),
+      okText: intl.get('components.querybuilder.header.myFiltersDropdown.okText'),
+      lastSavedAt: intl.get('screen.dashboard.cards.savedFilters.lastSaved'),
+    },
     duplicateFilterTitleSuffix: intl.get(
       'components.querybuilder.header.duplicateFilterTitleSuffix',
     ),
@@ -210,8 +215,8 @@ export const getQueryBuilderDictionary = (
     },
     facetValueMapping: {
       variant_external_reference: {
-        DBSNP: intl.get('screen.variants.table.dbsnp'),
-        Clinvar: intl.get('filters.group.clinvar.clin_sig'),
+        DBSNP: intl.get('entities.variant.dbsnp'),
+        Clinvar: intl.get('entities.variant.pathogenicity.clinVar'),
       },
       'genes.consequences.predictions.sift_pred': {
         T: intl.get('facets.options.genes__consequences__predictions__sift_pred.T'),
