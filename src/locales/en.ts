@@ -221,7 +221,6 @@ const en = {
       frequencies: {
         frequency: 'Frequency',
         frequencies: 'Frequencies',
-        subTitle: 'CQDG Studies',
         frequencyTooltip: 'Frequency of the variant across CQDG studies',
         publicCohorts: 'Public Cohorts',
         studies: 'Studies',
