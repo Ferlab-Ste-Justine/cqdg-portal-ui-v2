@@ -31,7 +31,7 @@ describe('Navigation', () => {
     cy.get('body').contains('Prénom').should('exist');
   });
 
-  it('Lien externe de la header - Website', () => {
+  it('Lien externe de la header - Website [CQDG-440]', () => {
     cy.visitDashboard();
     cy.get('[data-cy="HeaderLink_Website"]').invoke('removeAttr', 'target').click({force: true});
     cy.origin('https://cqdg.ca', () => {
@@ -42,13 +42,13 @@ describe('Navigation', () => {
   it('Lien externe de la header - Documentation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
   });
 
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
     cy.get('[data-cy="ExternalLink_DataRelease"]')
-      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
   });
 
   it('Redirections de la page Dashboard', () => {
@@ -115,22 +115,22 @@ describe('Navigation', () => {
 
   it('Modals de la page Dashboard [CQDG-139]', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"]').find('svg[data-icon="edit"]').click({force: true});
+    cy.get('[data-cy="SavedSets"] svg[data-icon="edit"]').eq(0).click({force: true});
     cy.contains('Edit set').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"]').find('svg[data-icon="delete"]').click({force: true});
+    cy.get('[data-cy="SavedSets"] svg[data-icon="delete"]').eq(0).click({force: true});
     cy.contains('Permanently delete this set?').should('exist');
     cy.get('button[type="button"]').contains('Cancel').click({force: true});
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').find('svg[data-icon="edit"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] svg[data-icon="edit"]').eq(0).click({force: true});
     cy.contains('Edit filter').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').find('svg[data-icon="delete"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] svg[data-icon="delete"]').eq(0).click({force: true});
     cy.contains('Permanently delete this filter?').should('exist');
     cy.get('button[type="button"]').contains('Cancel').click({force: true});
   });

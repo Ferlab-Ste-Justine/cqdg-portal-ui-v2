@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=c8dcdf58-8157-4b81-93ec-7d50e67ffa6b');
+    cy.visitDataExploration('participants', '?sharedFilterId=65e435ce-d5f5-491a-ba90-57025070b957');
 
     cy.get('li[data-key="participants"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});

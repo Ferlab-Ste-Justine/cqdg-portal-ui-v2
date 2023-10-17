@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=648a3525-d026-40cf-ab80-8c799c425669');
+    cy.visitDataExploration('participants', '?sharedFilterId=797694ca-496c-46a7-812c-c3ba50d3b32c');
 
     cy.get('li[data-key="participants"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
@@ -58,15 +58,15 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,229');
-    cy.validateTableResultsCount('1,229');
+    cy.validateTotalSelectedQuery('1,235');
+    cy.validateTableResultsCount('1,235');
     cy.validateClearAllButton(false);
 
     cy.checkValueFacetAndApply(2, 'Female');
 
     cy.validatePillSelectedQuery('Gender', ['Female']);
-    cy.validateTotalSelectedQuery('581');
-    cy.validateTableResultsCount('581');
+    cy.validateTotalSelectedQuery('583');
+    cy.validateTableResultsCount('583');
     cy.validateClearAllButton(true);
   });
 

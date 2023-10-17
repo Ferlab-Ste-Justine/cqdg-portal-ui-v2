@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Biospecimens) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitDataExploration('biospecimens', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
+    cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
   });
 
   it('Titre', () => {
@@ -32,7 +32,7 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
 
 describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitDataExploration('biospecimens', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
+    cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
   });
 
   it('Lien Participant du tableau', () => {
@@ -71,19 +71,21 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
     cy.visitDataExploration('biospecimens');
   });
 
-  it('Valider les fonctionnalités du tableau - Tris', () => {
+  it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndWait('Study');
     cy.validateTableFirstRow('NEURODEV', 4);
     cy.sortTableAndWait('Study');
     cy.validateTableFirstRow('T-DEE', 4);
-    cy.sortTableAndWait('Study');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Sample Type', () => {
     cy.sortTableAndWait('Sample Type');
     cy.validateTableFirstRow('C449', 5);
     cy.sortTableAndWait('Sample Type');
     cy.validateTableFirstRow('C449', 5);
-    cy.sortTableAndWait('Sample Type');
+  });
 
+  it('Valider les fonctionnalités du tableau - Tri Tissue [CQDG-426]', () => {
     cy.sortTableAndWait('Tissue');
     cy.validateTableFirstRow('C12434', 6);
     cy.sortTableAndWait('Tissue');

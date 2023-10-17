@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.removeFilesFromFolder(Cypress.config('downloadsFolder'));
 
   cy.login();
-  cy.visitDataExploration('biospecimens', '?sharedFilterId=d9b0e27c-d2d4-4f3e-8a9f-859f6a32faea');
+  cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
 
   cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 1);
 });
