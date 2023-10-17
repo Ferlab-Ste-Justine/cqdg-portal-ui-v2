@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=4507bcae-2cba-4840-b659-931b95abd1de');
+    cy.visitDataExploration('participants', '?sharedFilterId=26975300-a55e-4af9-b342-761374acb4a0');
 
     cy.get('li[data-key="participants"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
@@ -17,8 +17,8 @@ describe('Page Data Exploration - Requêtes', () => {
 
   it('Construire une première requête', () => {
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,229');
-    cy.validateTableResultsCount('1,229');
+    cy.validateTotalSelectedQuery('1,235');
+    cy.validateTableResultsCount('1,235');
 
     cy.checkValueFacetAndApply(0, 'NEURODEV');
 

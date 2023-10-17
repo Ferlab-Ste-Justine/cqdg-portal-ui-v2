@@ -61,7 +61,7 @@ Cypress.Commands.add('login', () => {
     cy.visit('/dashboard');
 
     cy.request({
-      url: `https://auth.qa.cqdg.ferlab.bio/auth/realms/CQDG/protocol/openid-connect/auth`,
+      url: `https://auth.qa.juno.cqdg.ferlab.bio/realms/CQDG/protocol/openid-connect/auth`,
       qs: {
         client_id: 'cqdg-client',
         redirect_uri: Cypress.config('baseUrl'),

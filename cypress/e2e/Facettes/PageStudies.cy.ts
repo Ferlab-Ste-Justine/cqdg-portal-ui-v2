@@ -5,7 +5,7 @@ beforeEach(() => {
   cy.login();
 });
 
-describe('Page Studies - Filtrer avec les facettes', () => {
+describe('Page des études - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitStudiesPage();
   });
@@ -85,7 +85,7 @@ describe('Page Studies - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'Pediatric and adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Population').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Pediatric and adult').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4 Results$/).should('exist');
   });
 
   it('Population - Adult', () => {
@@ -100,7 +100,7 @@ describe('Page Studies - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(2, 'Health or medical or biomedical research (DUO:0000006)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Limitation').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Health or medical or biomedical research (DUO:0000006)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4 Results$/).should('exist');
   });
 
   it('Access Limitation - General research use (DUO:0000042)', () => {

@@ -10,7 +10,7 @@ beforeEach(() => {
   cy.showColumn('Description');
 });
 
-describe('Page Studies - Vérifier les informations affichées', () => {
+describe('Page des études - Vérifier les informations affichées', () => {
   it('Titre', () => {
     cy.get('[data-cy="Title_Studies"]').contains('Studies');
   });
@@ -21,6 +21,7 @@ describe('Page Studies - Vérifier les informations affichées', () => {
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(2).contains('Rare Diseases').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(3).contains('Pediatric and adult').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(4).contains('382').should('exist');
+    cy.get('tr[data-row-key="CAG"]').find('[class="ant-table-cell"]').eq(4).find('[href]').should('not.exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(5).contains('130').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(6).find('[data-icon="check"]').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(7).contains('-').should('exist');
@@ -36,7 +37,7 @@ describe('Page Studies - Vérifier les informations affichées', () => {
   });
 });
 
-describe('Page Studies - Valider les liens disponibles', () => {
+describe('Page des études - Valider les liens disponibles', () => {
   it('Lien Code du tableau', () => {
     cy.get('tr[data-row-key="NEURODEV"]').find('[class*="ant-table-cell"]').eq(0).find('[href]').click({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
@@ -76,31 +77,33 @@ describe('Page Studies - Valider les liens disponibles', () => {
   });
 });
 
-describe('Page Studies - Valider les fonctionnalités du tableau', () => {
-  it('Tris', () => {
+describe('Page des études - Valider les fonctionnalités du tableau', () => {
+  it('Tri Code', () => {
     cy.sortTableAndWait('Code');
     cy.validateTableFirstRow('CAG', 0);
     cy.sortTableAndWait('Code');
     cy.validateTableFirstRow('T-DEE', 0);
-    cy.sortTableAndWait('Code');
+  });
 
+  it('Tri Name', () => {
     cy.sortTableAndWait('Name');
     cy.validateTableFirstRow('CARTaGENE', 1);
     cy.sortTableAndWait('Name');
     cy.validateTableFirstRow('Developmental and epileptic encephalopathies', 1);
-    cy.sortTableAndWait('Name');
+  });
     
+  it('Tri Domain', () => {
     cy.sortTableAndWait('Domain');
     cy.validateTableFirstRow('General health', 2);
     cy.sortTableAndWait('Domain');
     cy.validateTableFirstRow('Rare Diseases', 2);
-    cy.sortTableAndWait('Domain');
+  });
     
+  it('Tri Population', () => {
     cy.sortTableAndWait('Population');
     cy.validateTableFirstRow('Adult', 3);
     cy.sortTableAndWait('Population');
     cy.validateTableFirstRow('Pediatric and adult', 3);
-    cy.sortTableAndWait('Population');
   });
 
   it('Tri multiple', () => {

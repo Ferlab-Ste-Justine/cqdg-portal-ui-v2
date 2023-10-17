@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=9d71d3d5-e6a6-433d-bc04-1885620ca9b0');
+    cy.visitDataExploration('participants', '?sharedFilterId=dfd9fa61-5ef5-4280-8b05-b29435c0fb77');
 
     cy.get('li[data-key="participants"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
@@ -172,8 +172,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-modal-confirm"]').find('button[class*="ant-btn-primary"]').click({force:true});
     cy.get('[class*="ant-modal-confirm"]').should('not.exist');
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,229');
-    cy.validateTableResultsCount('1,229');
+    cy.validateTotalSelectedQuery('1,235');
+    cy.validateTableResultsCount('1,235');
     cy.validateClearAllButton(false);
   });
 });

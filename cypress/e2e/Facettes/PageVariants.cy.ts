@@ -5,7 +5,7 @@ beforeEach(() => {
   cy.login();
 });
 
-describe('Page Variants (Participant) - Filtrer avec les facettes', () => {
+describe('Page des variants (Participant) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_participant"]').click();
@@ -21,15 +21,15 @@ describe('Page Variants (Participant) - Filtrer avec les facettes', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
   });
 
-  it('Study Code - DS360-CHD', () => {
+  it('Study Code - STUDY1', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(0).contains('Study Code').should('exist');
-    cy.checkValueFacetAndApply(0, 'DS360-CHD');
+    cy.checkValueFacetAndApply(0, 'STUDY1');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DS360-CHD').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^68.6K$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');
   });
 
-  it('Study Code - DS-PCGC', () => {
+  it.skip('Study Code - DS-PCGC', () => {
     cy.checkValueFacetAndApply(0, 'DS-PCGC');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DS-PCGC').should('exist');
@@ -52,7 +52,7 @@ describe('Page Variants (Participant) - Filtrer avec les facettes', () => {
   });
 });
 
-describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
+describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_variant"]').click();
@@ -73,14 +73,14 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'SNV');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SNV').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^80.2K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^226$/).should('exist');
   });
 
   it('Variant Type - Indel', () => {
     cy.checkValueFacetAndApply(0, 'Indel');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Indel').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^535$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^41$/).should('exist');
   });
 
   it('Consequence - Intron', () => {
@@ -88,29 +88,29 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'Intron');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Consequence').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intron').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^37.5K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^270$/).should('exist');
   });
 
   it('Consequence - Missense', () => {
     cy.checkValueFacetAndApply(1, 'Missense');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Consequence').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Missense').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^680$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^35$/).should('exist');
   });
 
-  it('External Reference - DBSNP [CQDG-299]', () => {
+  it('External Reference - DBSNP [CQDG-439]', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(2).contains('External Reference').should('exist');
-    cy.checkValueFacetAndApply(2, 'DBSNP');
+    cy.checkValueFacetAndApply(2, 'DbSNP');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DBSNP').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^71.7K$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DbSNP').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^209$/).should('exist');
   });
 
-  it('External Reference - Clinvar [CQDG-299]', () => {
-    cy.checkValueFacetAndApply(2, 'Clinvar');
+  it('External Reference - Clinvar [CQDG-439]', () => {
+    cy.checkValueFacetAndApply(2, 'ClinVar');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Clinvar').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^439$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('ClinVar').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^19$/).should('exist');
   });
 
   it('Chromosome - 1', () => {
@@ -118,7 +118,7 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(3, /^1$/);
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Chromosome').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains(/^1$/).should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^100K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');
   });
 
   it.skip('Chromosome - 20', () => {
@@ -133,10 +133,10 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(4, 'Unknown Parents Genotype');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Transmission').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Unknown Parents Genotype').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^99K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');
   });
 
-  it('Transmission - Autosomal Dominant De Novo', () => {
+  it.skip('Transmission - Autosomal Dominant De Novo', () => {
     cy.checkValueFacetAndApply(4, 'Autosomal Dominant De Novo');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Transmission').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Autosomal Dominant De Novo').should('exist');
@@ -153,18 +153,18 @@ describe('Page Variants (Variant) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(6, 'Heterozygote');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Heterozygote').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^98.6K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^387$/).should('exist');
   });
 
   it('Zygosity - Homozygote', () => {
     cy.checkValueFacetAndApply(6, 'Homozygote');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Homozygote').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^22.1K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^80$/).should('exist');
   });
 });
 
-describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
+describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_genomic"]').click();
@@ -185,14 +185,14 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'Protein Coding');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Protein Coding').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^40.9K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^309$/).should('exist');
   });
 
-  it('Gene Type - SnoRNA', () => {
-    cy.checkValueFacetAndApply(0, 'SnoRNA');
+  it('Gene Type - NcRNA', () => {
+    cy.checkValueFacetAndApply(0, 'NcRNA');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene Type').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SnoRNA').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^60$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('NcRNA').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^52$/).should('exist');
   });
 
   it('External Reference - OMIM', () => {
@@ -200,14 +200,14 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'OMIM');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('OMIM').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^12K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^81$/).should('exist');
   });
 
   it('External Reference - Orphanet', () => {
     cy.checkValueFacetAndApply(1, 'Orphanet');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('External Reference').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Orphanet').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^12.1K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^88$/).should('exist');
   });
 
   it('gnomAD pLI', () => {
@@ -256,7 +256,6 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^24$/).should('exist');
   });
 
-  // Fait planter Cypress
   it('OMIM - 5-fluorouracil toxicity', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(6).contains('OMIM').should('exist');
     /* Fait planter Cypress
@@ -275,19 +274,19 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^16$/).should('exist');
   });
 
-  it('DDD - CEREBELLAR ATAXIA, NONPROGRESSIVE, WITH INTELLECTUAL DEVELOPMENTAL DISORDER', () => {
+  it('DDD - Macrocephaly with intellectual disability', () => {
     cy.get('div[class*="Filters_customFilterContainer"]').eq(7).contains('DDD').should('exist');
-    cy.checkValueFacetAndApply(7, 'CEREBELLAR ATAXIA, NONPROGRESSIVE, WITH INTELLECTUAL DEVELOPMENTAL DISORDER');
+    cy.checkValueFacetAndApply(7, 'Macrocephaly with intellectual disability');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('DDD').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('CEREBELLAR ATAXIA, NONPROGRESSIVE, WITH INTELLECTUAL DEVELOPMENTAL DISORDER').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^371$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Macrocephaly with intellectual disability').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4$/).should('exist');
   });
 
-  it('DDD - UROFACIAL SYNDROME', () => {
-    cy.checkValueFacetAndApply(7, 'UROFACIAL SYNDROME');
+  it('DDD - TMEM240-associated spinocerebellar ataxia and intellectual disability', () => {
+    cy.checkValueFacetAndApply(7, 'TMEM240-associated spinocerebellar ataxia and intellectual disability');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('DDD').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('UROFACIAL SYNDROME').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^29$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('TMEM240-associated spinocerebellar ataxia and intellectual disability').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
   });
 
   it('COSMIC - Paraganglioma', () => {
@@ -295,18 +294,18 @@ describe('Page Variants (Gene) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(8, 'Paraganglioma');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('COSMIC').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Paraganglioma').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^43$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4$/).should('exist');
   });
 
-  it('COSMIC - Leiomyomatosis', () => {
-    cy.checkValueFacetAndApply(8, 'Leiomyomatosis');
+  it('COSMIC - Pheochromocytoma', () => {
+    cy.checkValueFacetAndApply(8, 'Pheochromocytoma');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('COSMIC').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Leiomyomatosis').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^8$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Pheochromocytoma').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4$/).should('exist');
   });
 });
 
-describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
+describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_pathogenicity"]').click();
@@ -327,13 +326,13 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(0, 'Likely Benign');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('ClinVar').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Likely Benign').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^126$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
   });
 
-  it('ClinVar - Drug Response', () => {
-    cy.checkValueFacetAndApply(0, 'Drug Response');
+  it('ClinVar - Likely Pathogenic', () => {
+    cy.checkValueFacetAndApply(0, 'Likely Pathogenic');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('ClinVar').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Drug Response').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Likely Pathogenic').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 
@@ -342,14 +341,14 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(1, 'MODIFIER');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('VEP').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('MODIFIER').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^87.6K$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^305$/).should('exist');
   });
 
   it('VEP - HIGH', () => {
     cy.checkValueFacetAndApply(1, 'HIGH');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('VEP').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('HIGH').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^78$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^24$/).should('exist');
   });
 
   it('CADD (Raw)', () => {
@@ -372,14 +371,14 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(5, 'Tolerated');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('FATHMM').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Tolerated').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^486$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^20$/).should('exist');
   });
 
   it('FATHMM - Damaging', () => {
     cy.checkValueFacetAndApply(5, 'Damaging');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('FATHMM').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Damaging').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^92$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
   });
 
   it('LRT - Neutral', () => {
@@ -387,14 +386,14 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(6, 'Neutral');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('LRT').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Neutral').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^389$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^19$/).should('exist');
   });
 
   it('LRT - Deleterious', () => {
     cy.checkValueFacetAndApply(6, 'Deleterious');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('LRT').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Deleterious').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^114$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
   });
 
   it('PolyPhen-2 HVAR - Benign', () => {
@@ -402,14 +401,14 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(7, 'Benign');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('PolyPhen-2 HVAR').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Benign').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^409$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^21$/).should('exist');
   });
 
   it('PolyPhen-2 HVAR - Possibly Damaging', () => {
     cy.checkValueFacetAndApply(7, 'Possibly Damaging');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('PolyPhen-2 HVAR').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Possibly Damaging').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^81$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^4$/).should('exist');
   });
 
   it('REVEL', () => {
@@ -427,18 +426,18 @@ describe('Page Variants (Pathogenicity) - Filtrer avec les facettes', () => {
     cy.checkValueFacetAndApply(10, 'Tolerated');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('SIFT').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Tolerated').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^415$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^14$/).should('exist');
   });
 
   it('SIFT - Damaging', () => {
     cy.checkValueFacetAndApply(10, 'Damaging');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('SIFT').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Damaging').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^196$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^10$/).should('exist');
   });
 });
 
-describe('Page Variants (Frequency) - Filtrer avec les facettes', () => {
+describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
     cy.get('li[data-key="category_cohort"]').click();
