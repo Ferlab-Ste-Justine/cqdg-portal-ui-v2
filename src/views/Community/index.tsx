@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import TableHeader from '@ferlab/ui/core/components/ProTable/Header';
-import useDebounce from '@ferlab/ui/core/hooks/useDebounce';
 import { List, Space, Typography } from 'antd';
+import debounce from 'lodash/debounce';
 
 import { MAIN_SCROLL_WRAPPER_ID } from 'common/constants';
-import { UserApi } from 'services/api/user';
+import { ISearchParams, UserApi } from 'services/api/user';
 import { TUser } from 'services/api/user/models';
 import { scrollToTop } from 'utils/helper';
 import { getProTableDictionary } from 'utils/translation';
@@ -22,22 +22,27 @@ const DEFAULT_PAGE_SIZE = 25;
 const CommunityPage = () => {
   const [users, setUsers] = useState<TUser[]>([]);
   const [count, setCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [match, setMatch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [researchDomainFilter, setResearchDomainFilter] = useState('');
   const sortItems = getSortItems();
-  const [sort, setSort] = useState(sortItems[0].sort);
-  const debouncedMatchValue = useDebounce(match, 300);
+  const defaultActiveFilter: ISearchParams = {
+    pageIndex: 0,
+    sort: sortItems[0].sort,
+    match: '',
+  };
+  const [activeFilter, setActiveFilter] = useState<ISearchParams>(defaultActiveFilter);
+  const onMatchFilterChange = (match: string) => setActiveFilter({ ...defaultActiveFilter, match });
+  const onSortChange = (sort: string) => setActiveFilter({ ...defaultActiveFilter, sort });
+  const setCurrentPage = (pageIndex: number) => setActiveFilter({ ...activeFilter, pageIndex });
 
   useEffect(() => {
     setIsLoading(true);
     UserApi.search({
-      pageIndex: currentPage,
+      pageIndex: activeFilter.pageIndex,
       pageSize: DEFAULT_PAGE_SIZE,
-      match,
-      sort,
+      match: activeFilter.match,
+      sort: activeFilter.sort,
       roles: roleFilter,
       researchDomains: researchDomainFilter,
     }).then(({ data }) => {
@@ -45,7 +50,7 @@ const CommunityPage = () => {
       setCount(data?.total || 0);
       setIsLoading(false);
     });
-  }, [currentPage, sort, debouncedMatchValue, roleFilter, match, researchDomainFilter]);
+  }, [roleFilter, researchDomainFilter, activeFilter]);
 
   return (
     <Space direction="vertical" size={24} className={styles.communityWrapper}>
@@ -53,15 +58,15 @@ const CommunityPage = () => {
         {intl.get('screen.community.title')}
       </Title>
       <FiltersBox
-        onMatchFilterChange={setMatch}
+        onMatchFilterChange={debounce((match) => onMatchFilterChange(match), 300)}
         onRoleFilterChange={setRoleFilter}
         onResearchDomainFilterChange={setResearchDomainFilter}
-        onSortChange={setSort}
+        onSortChange={onSortChange}
         hasFilters={!!(roleFilter || researchDomainFilter)}
       />
       <Space className={styles.usersListWrapper} size={24} direction="vertical">
         <TableHeader
-          pageIndex={currentPage + 1}
+          pageIndex={activeFilter.pageIndex || 0 + 1}
           pageSize={DEFAULT_PAGE_SIZE}
           total={count}
           dictionary={getProTableDictionary()}
@@ -93,7 +98,7 @@ const CommunityPage = () => {
           locale={{ emptyText: ' ' }}
           renderItem={(item) => (
             <List.Item className={styles.memberListItem}>
-              <MemberCard user={item} match={match} />
+              <MemberCard user={item} match={activeFilter.match || ''} />
             </List.Item>
           )}
         />
