@@ -19,7 +19,8 @@ export const SEARCH_VARIANT_QUERY = gql`
               inheritance
               interpretations
             }
-            variant_external_reference
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
             external_frequencies {
@@ -222,6 +223,7 @@ export const SEARCH_VARIANT_QUERY = gql`
                 edges {
                   node {
                     study_code
+                    study_id
                     total {
                       ac
                       pc
@@ -234,8 +236,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                     transmission
                     participant_ids
                     zygosity
-                    #todo add domain on study
-                    #domain
                   }
                 }
               }
@@ -263,7 +263,8 @@ export const GET_VARIANT_ENTITY = gql`
               inheritance
               interpretations
             }
-            variant_external_reference
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
             variant_class
@@ -471,6 +472,7 @@ export const GET_VARIANT_ENTITY = gql`
                 edges {
                   node {
                     study_code
+                    study_id
                     total {
                       ac
                       pc
@@ -481,10 +483,8 @@ export const GET_VARIANT_ENTITY = gql`
                       pf
                     }
                     transmission
-                    participant_ids
                     zygosity
-                    #todo add domain on study
-                    #domain
+                    participant_ids
                   }
                 }
               }
