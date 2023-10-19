@@ -66,7 +66,7 @@ const CommunityPage = () => {
       />
       <Space className={styles.usersListWrapper} size={24} direction="vertical">
         <TableHeader
-          pageIndex={activeFilter.pageIndex || 0 + 1}
+          pageIndex={(activeFilter.pageIndex || 0) + 1}
           pageSize={DEFAULT_PAGE_SIZE}
           total={count}
           dictionary={getProTableDictionary()}
@@ -85,6 +85,7 @@ const CommunityPage = () => {
           className={styles.membersList}
           pagination={{
             total: count,
+            current: (activeFilter.pageIndex || 0) + 1,
             pageSize: DEFAULT_PAGE_SIZE,
             onChange: (page) => {
               setCurrentPage(page - 1);
