@@ -17,6 +17,16 @@
   background-color: $variant-tag-bg-color;
 }
 
+.clinvarTag {
+  color: $color-tag-pathogenic-color;
+  background-color: $color-tag-pathogenic-bg;
+}
+
+.infoIcon {
+  color: $gray-7;
+  font-size: 12px;
+}
+
 .titleIcon {
   font-size: 24px;
 }
@@ -29,4 +39,8 @@
       color: $body-1;
     }
   }
+}
+
+.frequencyParticipantLink {
+  padding: 0;
 }

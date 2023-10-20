@@ -148,6 +148,7 @@ const en = {
       type: 'Type',
       variant_class: 'Variant Type',
       variant_external_reference: 'External Reference',
+      variant_external_references: 'External References',
       variant_id: 'Variant ID',
       biotype: 'Gene Type',
       zygosity: 'Zygosity',
@@ -214,8 +215,8 @@ const en = {
         transcript: 'Transcript',
         refSeq: 'RefSeq',
         omim: 'OMIM',
-        hidetranscript: 'Show less',
-        showtranscript: '{count} other transcripts',
+        hideTranscript: 'Show less',
+        showTranscript: '{count} other transcripts',
         canonical: 'Canonical transcript',
       },
       frequencies: {

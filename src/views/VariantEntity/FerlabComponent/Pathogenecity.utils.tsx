@@ -92,7 +92,7 @@ export const makeUnGroupedDataRows = (genes: IArrangerEdge<IGeneEntity>[]) => {
   }
 
   return genes.map((gene) => {
-    const rowOrphanet = orphanetFromEdges(gene, gene.node.orphanet.hits.edges || []);
+    const rowOrphanet = orphanetFromEdges(gene, gene.node.orphanet?.hits?.edges || []);
     const rowOmim = omimFromEdges(gene, keepOnlyOmimWithId(gene.node.omim?.hits?.edges || []));
     const rowCosmic = cosmicFromEdges(gene, gene.node.cosmic?.hits?.edges || []);
     const rowHpo = hpoFromEdges(gene, gene.node.hpo?.hits?.edges || []);

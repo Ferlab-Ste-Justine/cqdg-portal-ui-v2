@@ -149,6 +149,7 @@ const fr = {
       variant_class: 'Type de variant',
       variant_external_reference: 'Référence externe',
       variant_id: 'ID de variant',
+      variant_external_references: 'Références externes',
       biotype: 'Type de gène',
       zygosity: 'Zygosité',
       transmission: 'Transmission',
@@ -214,8 +215,8 @@ const fr = {
         transcript: 'Transcrit',
         refSeq: 'RefSeq',
         omim: 'OMIM',
-        hidetranscript: 'Voir moins',
-        showtranscript: '{count} autre(s) transcript(s)',
+        hideTranscript: 'Voir moins',
+        showTranscript: '{count} autre(s) transcript(s)',
         canonical: 'Transcrit canonique',
       },
       frequencies: {

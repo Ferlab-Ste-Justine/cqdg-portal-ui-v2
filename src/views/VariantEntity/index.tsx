@@ -62,7 +62,7 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  const variantStudies = (data?.studies.hits.edges || []).map(
+  const variantStudies = (data?.studies?.hits.edges || []).map(
     (e: ArrangerEdge<IVariantStudyEntity>) => e.node,
   );
 
@@ -97,7 +97,7 @@ const VariantEntity = () => {
           title={intl.get('entities.variant.consequences.consequence')}
           header={intl.get('entities.variant.consequences.geneConsequences')}
           columns={getConsequencesProColumn()}
-          genes={data?.genes.hits.edges}
+          genes={data?.genes?.hits.edges}
         />
 
         <EntityTable
