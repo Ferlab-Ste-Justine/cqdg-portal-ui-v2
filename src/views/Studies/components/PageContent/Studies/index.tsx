@@ -72,8 +72,11 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'participant_count',
     title: intl.get('screen.studies.participants'),
-    render: (study: IStudyEntity) =>
-      study?.participant_count ? (
+    render: (study: IStudyEntity) => {
+      if (!study?.participant_count) return TABLE_EMPTY_PLACE_HOLDER;
+      const isRestricted = study ? study.security === 'R' : true;
+      if (isRestricted) return numberFormat(study.participant_count);
+      return (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
           onClick={() =>
@@ -92,11 +95,10 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
             })
           }
         >
-          {numberFormat(study?.participant_count)}
+          {numberFormat(study.participant_count)}
         </Link>
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+      );
+    },
   },
   {
     key: 'family_count',
