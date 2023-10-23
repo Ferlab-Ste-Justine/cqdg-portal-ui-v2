@@ -215,8 +215,8 @@ const en = {
         transcript: 'Transcript',
         refSeq: 'RefSeq',
         omim: 'OMIM',
-        hideTranscript: 'Show less',
-        showTranscript: '{count} other transcripts',
+        hideTranscript: 'Show less -',
+        showTranscript: '{count} other transcripts +',
         canonical: 'Canonical transcript',
       },
       frequencies: {

@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { IEntitySummaryColumns } from '@ferlab/ui/core/pages/EntityPage/EntitySummary';
-import { numberWithCommas, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import { Tag, Tooltip } from 'antd';
 import { IVariantEntity } from 'graphql/variants/models';
@@ -124,9 +124,9 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
                 </Tooltip>
               </>
             ),
-            value: variant?.internal_frequencies?.total?.pc
-              ? numberWithCommas(variant.internal_frequencies.total.pc)
-              : TABLE_EMPTY_PLACE_HOLDER,
+            value:
+              toExponentialNotation(variant?.internal_frequencies?.total?.af) ||
+              TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
       },

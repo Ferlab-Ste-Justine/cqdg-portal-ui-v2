@@ -1,3 +1,4 @@
+import intl from 'react-intl-universal';
 import { EntityTable, IEntityTable } from '@ferlab/ui/core/pages/EntityPage';
 import { isExternalCohortsTableEmpty } from '@ferlab/ui/core/pages/EntityPage/utils/frequencies';
 import { IExternalFrequenciesEntity } from 'graphql/variants/models';
@@ -34,6 +35,7 @@ export const EntityPublicCohortTable = ({
       header={header}
       id={id}
       loading={loading}
+      emptyMessage={intl.get('api.noData')}
     />
   );
 };
