@@ -819,6 +819,7 @@ const en = {
           files: 'Files',
           participants: 'Participants',
           biospecimens: 'Biospecimens',
+          variants: 'Variants',
           failedFetch: 'Failed to fetch sets saved',
         },
       },

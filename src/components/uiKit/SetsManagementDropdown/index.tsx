@@ -117,7 +117,7 @@ const getTitle = (type: string): string => {
     case INDEXES.BIOSPECIMEN:
       return intl.get('screen.dataExploration.saveBiospecimensSet');
     case INDEXES.VARIANT:
-      return intl.get('screen.dataExploration.saveBiospecimensSet');
+      return intl.get('screen.dataExploration.saveVariantsSet');
     default:
       return '';
   }

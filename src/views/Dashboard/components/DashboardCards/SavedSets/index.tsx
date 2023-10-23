@@ -10,6 +10,7 @@ import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolde
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
 
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
@@ -112,6 +113,23 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         fetchingError,
         isLoading,
         <FileTextOutlined />,
+      ),
+    },
+    {
+      label: (
+        <div data-cy="Tab_Variants">
+          <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
+          {intl.get('screen.dashboard.cards.savedSets.variants')} (
+          {savedSets.filter((s) => s.setType === SetType.VARIANT).length})
+        </div>
+      ),
+      key: 'variants',
+      children: getItemList(
+        SetType.VARIANT,
+        savedSets,
+        fetchingError,
+        isLoading,
+        <LineStyleIcon height={16} width={16} className={styles.iconSvg} />,
       ),
     },
   ];

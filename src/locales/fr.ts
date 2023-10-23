@@ -802,6 +802,7 @@ const fr = {
           files: 'Fichiers',
           participants: 'Participants',
           biospecimens: 'Biospécimens',
+          variants: 'Variants',
           failedFetch: 'Échec de la récupération des ensembles enregistrés',
         },
       },
