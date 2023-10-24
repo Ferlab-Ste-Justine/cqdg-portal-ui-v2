@@ -88,11 +88,27 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           {
             label: intl.get('entities.variant.pathogenicity.pathoClinvar'),
             value: variant?.clinvar?.clin_sig?.length
-              ? variant.clinvar.clin_sig.map((c, index) => (
-                  <Tag className={styles.clinvarTag} key={c + index}>
-                    {removeUnderscoreAndCapitalize(c || TABLE_EMPTY_PLACE_HOLDER)}
-                  </Tag>
-                ))
+              ? variant.clinvar.clin_sig.map((c, index) => {
+                  const value = removeUnderscoreAndCapitalize(c);
+                  const getClinvarClassByValue = (clinvar: string) => {
+                    switch (clinvar) {
+                      case 'Pathogenic':
+                      case 'Likely Pathogenic':
+                        return 'clinvarRedTag';
+                      case 'Benign':
+                      case 'Likely Benign':
+                        return 'clinvarGreenTag';
+                      default:
+                        return '';
+                    }
+                  };
+                  const clinvarClass = getClinvarClassByValue(value);
+                  return (
+                    <Tag className={clinvarClass && styles[clinvarClass]} key={c + index}>
+                      {value || TABLE_EMPTY_PLACE_HOLDER}
+                    </Tag>
+                  );
+                })
               : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],

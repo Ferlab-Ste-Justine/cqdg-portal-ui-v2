@@ -17,9 +17,14 @@
   background-color: $variant-tag-bg-color;
 }
 
-.clinvarTag {
+.clinvarRedTag {
   color: $color-tag-pathogenic-color;
   background-color: $color-tag-pathogenic-bg;
+}
+
+.clinvarGreenTag {
+  color: $color-tag-benign-color;
+  background-color: $color-tag-benign-bg;
 }
 
 .infoIcon {
