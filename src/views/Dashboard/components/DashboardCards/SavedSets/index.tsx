@@ -9,6 +9,8 @@ import cx from 'classnames';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
@@ -20,7 +22,6 @@ import { STATIC_ROUTES } from 'utils/routes';
 import ListItem from './ListItem';
 
 import styles from './index.module.scss';
-
 const { Text } = Typography;
 
 const getItemList = (
@@ -29,6 +30,7 @@ const getItemList = (
   fetchingError: boolean,
   isLoading: boolean,
   icon: ReactElement,
+  queryBuilderId = DATA_EXPLORATION_QB_ID,
 ) => (
   <List<IUserSetOutput>
     className={styles.savedFiltersList}
@@ -56,7 +58,7 @@ const getItemList = (
     }}
     dataSource={fetchingError ? [] : savedSets.filter((s) => s.setType === type)}
     loading={isLoading}
-    renderItem={(item) => <ListItem data={item} icon={icon} />}
+    renderItem={(item) => <ListItem data={item} icon={icon} queryBuilderId={queryBuilderId} />}
   />
 );
 
@@ -68,7 +70,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Participants">
           <UserOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.participants')} (
+          {intl.get('entities.participant.participants')} (
           {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
         </div>
       ),
@@ -85,7 +87,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Biospecimens">
           <ExperimentOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
+          {intl.get('entities.biospecimen.biospecimens')} (
           {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
         </div>
       ),
@@ -102,7 +104,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Files">
           <FileTextOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.files')} (
+          {intl.get('entities.file.files')} (
           {savedSets.filter((s) => s.setType === SetType.FILE).length})
         </div>
       ),
@@ -119,7 +121,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Variants">
           <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
-          {intl.get('screen.dashboard.cards.savedSets.variants')} (
+          {intl.get('entities.variant.variants')} (
           {savedSets.filter((s) => s.setType === SetType.VARIANT).length})
         </div>
       ),
@@ -130,6 +132,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         fetchingError,
         isLoading,
         <LineStyleIcon height={16} width={16} className={styles.iconSvg} />,
+        VARIANT_REPO_QB_ID,
       ),
     },
   ];

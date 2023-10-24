@@ -11,10 +11,8 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
-import {
-  DATA_EXPLORATION_FILTER_TAG,
-  DATA_EXPLORATION_QB_ID,
-} from 'views/DataExploration/utils/constant';
+import { DATA_EXPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
+import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constants';
 
 import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput } from 'services/api/savedSet/models';
@@ -24,6 +22,7 @@ import { getIdFieldByType } from 'utils/fieldMapper';
 import CreateEditModal from '../CreateEditModal';
 
 import styles from './index.module.scss';
+
 const { Text } = Typography;
 
 const redirectToPage = (setType: string) => {
@@ -34,6 +33,8 @@ const redirectToPage = (setType: string) => {
       return `${DATA_EXPLORATION_FILTER_TAG}/participants`;
     case INDEXES.BIOSPECIMEN:
       return `${DATA_EXPLORATION_FILTER_TAG}/biospecimens`;
+    case INDEXES.VARIANT:
+      return `${VARIANT_FILTER_TAG}`;
     default:
       return DATA_EXPLORATION_FILTER_TAG;
   }
@@ -42,9 +43,10 @@ const redirectToPage = (setType: string) => {
 interface IListItemProps {
   data: IUserSetOutput;
   icon: ReactElement;
+  queryBuilderId: string;
 }
 
-const ListItem = ({ data, icon }: IListItemProps) => {
+const ListItem = ({ data, icon, queryBuilderId }: IListItemProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -80,7 +82,7 @@ const ListItem = ({ data, icon }: IListItemProps) => {
           const setValue = `${SET_ID_PREFIX}${data.id}`;
 
           addQuery({
-            queryBuilderId: DATA_EXPLORATION_QB_ID,
+            queryBuilderId: queryBuilderId,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
