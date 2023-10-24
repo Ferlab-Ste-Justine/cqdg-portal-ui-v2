@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const CHECK_GENE_MATCH_QUERY = gql`
   query CheckGenesMatch($sqon: JSON, $first: Int, $offset: Int) {
-    Genes {
+    Gene {
       hits(filters: $sqon, first: $first, offset: $offset) {
         edges {
           node {

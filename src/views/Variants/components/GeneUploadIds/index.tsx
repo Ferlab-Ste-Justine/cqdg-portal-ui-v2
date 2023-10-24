@@ -96,7 +96,7 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
         },
       });
 
-      const genes: IGeneEntity[] = hydrateResults(response.data?.data?.genes?.hits?.edges || []);
+      const genes: IGeneEntity[] = hydrateResults(response.data?.data?.Gene?.hits?.edges || []);
 
       return genes?.flatMap((gene) => {
         const matchedIds: string[] = ids.filter((id: string) => {
@@ -130,7 +130,7 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
         value: uniqueMatches.map((match) => match.mappedTo),
         index: INDEXES.VARIANT,
         merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
-        isUploadedList: true,
+        overrideValuesName: intl.get('components.uploadIds.pillTitle'),
       });
     }}
   />
