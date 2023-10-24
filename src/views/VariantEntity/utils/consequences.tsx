@@ -149,14 +149,17 @@ export const getConsequencesProColumn = (): ProColumnType[] => [
     title: intl.get('entities.variant.consequences.refSeq'),
     dataIndex: 'refseq_mrna_id',
     key: 'consequences',
-    render: (refseq_mrna_id: string) =>
-      refseq_mrna_id ? (
-        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/nuccore/${refseq_mrna_id}?report=graph`}>
-          {refseq_mrna_id}
-        </ExternalLink>
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+    render: (refseq_mrna_id: string[]) =>
+      refseq_mrna_id?.length
+        ? refseq_mrna_id.map((id, index) => (
+            <ExternalLink
+              key={index}
+              href={`https://www.ncbi.nlm.nih.gov/nuccore/${refseq_mrna_id}?report=graph`}
+            >
+              {id}
+            </ExternalLink>
+          ))
+        : TABLE_EMPTY_PLACE_HOLDER,
     width: '10%',
   },
 ];
