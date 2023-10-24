@@ -73,7 +73,8 @@ const getDefaultColumns = (): ProColumnType[] => [
     title: intl.get('entities.variant.type'),
     dataIndex: 'variant_class',
     sorter: { multiple: 1 },
-    render: (variant_class: string) => variant_class || TABLE_EMPTY_PLACE_HOLDER,
+    render: (variant_class: string) =>
+      variant_class ? removeUnderscoreAndCapitalize(variant_class) : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'rsnumber',

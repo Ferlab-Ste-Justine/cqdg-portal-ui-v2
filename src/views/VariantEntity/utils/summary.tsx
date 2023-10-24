@@ -43,7 +43,9 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           },
           {
             label: intl.get('entities.variant.type'),
-            value: variant?.variant_class || TABLE_EMPTY_PLACE_HOLDER,
+            value: variant?.variant_class
+              ? removeUnderscoreAndCapitalize(variant.variant_class)
+              : TABLE_EMPTY_PLACE_HOLDER,
           },
           {
             label: intl.get('entities.variant.cytoband'),
