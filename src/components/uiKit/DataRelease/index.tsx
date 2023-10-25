@@ -30,13 +30,19 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
     dispatch(fetchStats());
   }, [dispatch]);
 
+  const {
+    studies,
+    participants,
+    samples, // fileSize,
+  } = stats || {};
+
   return (
     <Spin spinning={false}>
       <Row className={cx(styles.dataReleaseContainer, className)} gutter={[40, 24]}>
         <Col xs={12} md={6} data-cy="DataRelease_Study">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={numberFormat(stats?.studies!)}
+            label={numberFormat(studies!)}
             Icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
@@ -45,7 +51,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_Participant">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={numberFormat(stats?.participants!)}
+            label={numberFormat(participants! + 2183)}
             Icon={<UserOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.participant.participants')}
@@ -54,7 +60,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_Biospecimen">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={numberFormat(stats?.samples!)}
+            label={numberFormat(samples! + 2183)}
             Icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.biospecimen.biospecimens')}
@@ -63,7 +69,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_File">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={stats?.fileSize || '0TB'}
+            label={'11.3TB'}
             Icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.file.files')}
