@@ -12,6 +12,7 @@ export const useBiospecimens = (
 ) => {
   const { loading, result } = useLazyResultQuery<IBiospecimenResultTree>(GET_BIOSPECIMENS, {
     variables,
+    fetchPolicy: 'network-only',
   });
 
   return {

@@ -12,6 +12,7 @@ import { GET_FILES, GET_FILES_COUNT } from './queries';
 export const useDataFiles = (variables?: IQueryVariable, operations?: IQueryOperationsConfig) => {
   const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
     variables,
+    fetchPolicy: 'network-only',
   });
 
   return {
