@@ -4,6 +4,7 @@ import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { tissue_source } from 'components/tables/columns/biospeciments';
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
@@ -27,21 +28,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  {
-    key: 'biospecimen_tissue_source',
-    dataIndex: 'biospecimen_tissue_source',
-    title: intl.get('entities.biospecimen.biospecimen_tissue_source'),
-    render: (biospecimen_tissue_source: string) => {
-      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
-      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
-      return (
-        <>
-          {title} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
-        </>
-      );
-    },
-  },
+  tissue_source,
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',

@@ -6,6 +6,7 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { tissue_source } from 'components/tables/columns/biospeciments';
 import { STATIC_ROUTES } from 'utils/routes';
 
 const getBiospecimensColumns = (): ProColumnType<any>[] => [
@@ -56,21 +57,7 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
     title: intl.get('entities.biospecimen.biospecimen'),
     render: (biospecimen_id: string) => biospecimen_id,
   },
-  {
-    key: 'biospecimen_tissue_source',
-    dataIndex: 'biospecimen_tissue_source',
-    title: intl.get('entities.biospecimen.biospecimen_tissue_source'),
-    render: (biospecimen_tissue_source: string) => {
-      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
-      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
-      return (
-        <>
-          {title} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
-        </>
-      );
-    },
-  },
+  tissue_source,
 ];
 
 export default getBiospecimensColumns;
