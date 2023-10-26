@@ -3,6 +3,9 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Button, Divider, Space, Typography } from 'antd';
 
 import { REDIRECT_URI_KEY } from 'common/constants';
+import FCI from 'components/assets/FCI.svg';
+import FRQS from 'components/assets/FRQS.svg';
+import genome_qc from 'components/assets/genome_qc.svg';
 import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
 import DataRelease from 'components/uiKit/DataRelease';
 import useQueryParams from 'hooks/useQueryParams';
@@ -53,6 +56,12 @@ const Login = () => {
             </Button>
           </Space>
         </Space>
+      </div>
+
+      <div className={styles.bottomLogoContainer}>
+        <img src={genome_qc} />
+        <img src={FRQS} />
+        <img src={FCI} />
       </div>
     </div>
   );
