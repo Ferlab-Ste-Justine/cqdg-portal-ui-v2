@@ -71,7 +71,7 @@ const DataExplorationLinks = () => {
               href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
               label={numberFormat(studies)}
-              subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
+              subLabel={intl.get('entities.study.studies')}
               icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
