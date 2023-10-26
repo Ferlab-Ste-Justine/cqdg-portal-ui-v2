@@ -38,7 +38,7 @@ const DataExplorationLinks = () => {
     // fileSize = '',
   } = stats || {};
 
-  //todo: Change after CAG implementation, temporally added for CQDG-434
+  //todo: Change after CAG implementation, temporarily added for CQDG-434
   const cagFilesCount = 2183;
   const totalFileSize = '11.3TB';
 
