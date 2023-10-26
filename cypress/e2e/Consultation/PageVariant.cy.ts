@@ -227,7 +227,7 @@ describe('Page d\'un variant - Valider les liens disponibles', () => {
 
   it('Lien RefSeq du panneau Gene Consequences', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityTable_contentTable"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(8).find('[href]')
-    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/nuccore/NM_001377458?report=graph');
+    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/nuccore/NM_001377467.1,NM_001377466.1,NM_001377465.1,NM_001377468.1,NM_001377458.1,NM_001377459.1?report=graph');
   });
 
   it('Lien \'2 other transcripts\' du panneau Gene Consequences [CQDG-135]', () => {
