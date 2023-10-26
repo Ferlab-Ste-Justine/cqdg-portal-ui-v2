@@ -35,6 +35,7 @@ import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helpe
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
+import { tissue_source } from 'components/tables/columns/biospeciments';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
@@ -110,22 +111,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  {
-    key: 'biospecimen_tissue_source',
-    dataIndex: 'biospecimen_tissue_source',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
-    sorter: { multiple: 1 },
-    render: (biospecimen_tissue_source: string) => {
-      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
-      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
-      return (
-        <>
-          {title} (NCIT:{' '}
-          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
-        </>
-      );
-    },
-  },
+  tissue_source,
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',

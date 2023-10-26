@@ -996,6 +996,9 @@ const fr = {
           study_code: 'Étude',
           sample_type: "Type d'échantillon",
           biospecimen_tissue_source: 'Tissue',
+          biospecimen_tissue_source_data: {
+            unknown: 'Inconnu',
+          },
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen (jours)',
           files: 'Fichiers',

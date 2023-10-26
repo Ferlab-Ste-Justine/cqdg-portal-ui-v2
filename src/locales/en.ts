@@ -1007,6 +1007,9 @@ const en = {
           study_code: 'Study',
           sample_type: 'Sample Type',
           biospecimen_tissue_source: 'Tissue',
+          biospecimen_tissue_source_data: {
+            unknown: 'Unknown',
+          },
           age_biospecimen_collection: 'Age',
           age_biospecimen_collectionTooltip: 'Age at Biospecimen Collection (days)',
           files: 'Files',
