@@ -11,11 +11,14 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
-import { DATA_EXPLORATION_FILTER_TAG } from 'views/DataExploration/utils/constant';
-import { VARIANT_FILTER_TAG } from 'views/Variants/utils/constants';
+import {
+  DATA_EXPLORATION_FILTER_TAG,
+  DATA_EXPLORATION_QB_ID,
+} from 'views/DataExploration/utils/constant';
+import { VARIANT_FILTER_TAG, VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
-import { IUserSetOutput } from 'services/api/savedSet/models';
+import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { deleteSavedSet } from 'store/savedSet/thunks';
 import { getIdFieldByType } from 'utils/fieldMapper';
 
@@ -43,10 +46,9 @@ const redirectToPage = (setType: string) => {
 interface IListItemProps {
   data: IUserSetOutput;
   icon: ReactElement;
-  queryBuilderId: string;
 }
 
-const ListItem = ({ data, icon, queryBuilderId }: IListItemProps) => {
+const ListItem = ({ data, icon }: IListItemProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -82,7 +84,8 @@ const ListItem = ({ data, icon, queryBuilderId }: IListItemProps) => {
           const setValue = `${SET_ID_PREFIX}${data.id}`;
 
           addQuery({
-            queryBuilderId: queryBuilderId,
+            queryBuilderId:
+              data.setType === SetType.VARIANT ? VARIANT_REPO_QB_ID : DATA_EXPLORATION_QB_ID,
             query: generateQuery({
               newFilters: [
                 generateValueFilter({

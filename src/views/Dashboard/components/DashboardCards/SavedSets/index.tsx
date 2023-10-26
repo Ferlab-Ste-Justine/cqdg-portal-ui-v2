@@ -9,8 +9,6 @@ import cx from 'classnames';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
@@ -30,7 +28,6 @@ const getItemList = (
   fetchingError: boolean,
   isLoading: boolean,
   icon: ReactElement,
-  queryBuilderId = DATA_EXPLORATION_QB_ID,
 ) => (
   <List<IUserSetOutput>
     className={styles.savedFiltersList}
@@ -58,7 +55,7 @@ const getItemList = (
     }}
     dataSource={fetchingError ? [] : savedSets.filter((s) => s.setType === type)}
     loading={isLoading}
-    renderItem={(item) => <ListItem data={item} icon={icon} queryBuilderId={queryBuilderId} />}
+    renderItem={(item) => <ListItem data={item} icon={icon} />}
   />
 );
 
@@ -132,7 +129,6 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         fetchingError,
         isLoading,
         <LineStyleIcon height={16} width={16} className={styles.iconSvg} />,
-        VARIANT_REPO_QB_ID,
       ),
     },
   ];
