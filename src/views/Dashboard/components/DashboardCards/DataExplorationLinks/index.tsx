@@ -32,10 +32,15 @@ const DataExplorationLinks = () => {
   }, [dispatch]);
 
   const {
-    studies,
-    participants,
-    samples, // fileSize,
+    studies = 0,
+    participants = 0,
+    samples = 0,
+    // fileSize = '',
   } = stats || {};
+
+  //todo: Change after CAG implementation, temporally added for CQDG-434
+  const cagFilesCount = 2183;
+  const totalFileSize = '11.3TB';
 
   return (
     <GridCard
@@ -65,7 +70,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(studies!)}
+              label={numberFormat(studies)}
               subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
               icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             />
@@ -74,7 +79,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(participants! + 2183)}
+              label={numberFormat(participants + cagFilesCount)}
               subLabel={intl.get('entities.participant.participants')}
               icon={<UserOutlined className={styles.dataReleaseIcon} />}
             />
@@ -83,7 +88,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(samples! + 2183)}
+              label={numberFormat(samples + cagFilesCount)}
               subLabel={intl.get('entities.biospecimen.biospecimens')}
               icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
@@ -92,7 +97,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={'11.3TB'}
+              label={totalFileSize}
               subLabel={intl.get('entities.file.datafiles')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />
