@@ -13,7 +13,7 @@ import {
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
-import { Button, Dropdown, PageHeader } from 'antd';
+import { Button, Dropdown, PageHeader, Tag } from 'antd';
 import { Space } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
@@ -70,6 +70,9 @@ const Header = () => {
         title={
           <div className={styles.headerNavList}>
             <CQDGLogoFullPortal className={styles.logo} />
+            {EnvVariables.configFor('IS_BETA') === 'true' && (
+              <Tag className={styles.tagBeta}>Beta</Tag>
+            )}
             <nav className={styles.headerNavList}>
               <HeaderLink
                 to={STATIC_ROUTES.DASHBOARD}

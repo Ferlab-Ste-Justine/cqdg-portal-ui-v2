@@ -6,6 +6,7 @@ export default class EnvironmentVariables {
     CQDG_WEB_SITE: process.env.REACT_APP_CQDG_WEB_SITE,
     CQDG_DOCUMENTATION: process.env.REACT_APP_CQDG_DOCUMENTATION,
     REDUX_LOG: process.env.REACT_APP_REDUX_LOG,
+    IS_BETA: process.env.REACT_APP_IS_BETA,
     // APIS
     ARRANGER_API: process.env.REACT_APP_ARRANGER_API_URL,
     ARRANGER_PROJECT_ID: process.env.REACT_APP_ARRANGER_PROJECT_ID,

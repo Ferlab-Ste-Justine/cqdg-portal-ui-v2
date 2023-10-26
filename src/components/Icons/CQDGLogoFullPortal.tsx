@@ -7,7 +7,6 @@ const CQDGLogoFullPortal = ({ width = 140, height = 40, className = '' }: IconPr
     width={width}
     height={height}
     className={className}
-    viewBox="0 0 140 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
