@@ -90,21 +90,20 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: variant?.clinvar?.clin_sig?.length
               ? variant.clinvar.clin_sig.map((c, index) => {
                   const value = removeUnderscoreAndCapitalize(c);
-                  const getClinvarClassByValue = (clinvar: string) => {
+                  const getTagColor = (clinvar: string) => {
                     switch (clinvar) {
                       case 'Pathogenic':
                       case 'Likely Pathogenic':
-                        return 'clinvarRedTag';
+                        return 'red';
                       case 'Benign':
                       case 'Likely Benign':
-                        return 'clinvarGreenTag';
+                        return 'green';
                       default:
                         return '';
                     }
                   };
-                  const clinvarClass = getClinvarClassByValue(value);
                   return (
-                    <Tag className={clinvarClass && styles[clinvarClass]} key={c + index}>
+                    <Tag color={getTagColor(value)} key={c + index}>
                       {value || TABLE_EMPTY_PLACE_HOLDER}
                     </Tag>
                   );
