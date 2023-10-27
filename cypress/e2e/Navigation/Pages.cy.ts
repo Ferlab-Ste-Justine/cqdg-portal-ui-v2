@@ -89,6 +89,13 @@ describe('Navigation', () => {
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
+
+    cy.visitDashboard();
+    cy.get('[data-cy="SavedSets"] [data-cy="Tab_Variants"]').click({force: true});
+    cy.get('[data-cy="SavedSets"]').contains('Cypress Variants').click({force: true});
+    cy.get('[data-cy="Title_Variants"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Variants').should('exist');
   });
 
   it('Liens Saved Filters de la page Dashboard', () => {
@@ -99,7 +106,7 @@ describe('Navigation', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="Tab_Variants"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] [data-cy="Tab_Variants"]').click({force: true});
     cy.get('[data-cy="SavedFilters"]').contains('Cypress Variant Type Filter').click({force: true});
     cy.get('[data-cy="Title_Variants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
