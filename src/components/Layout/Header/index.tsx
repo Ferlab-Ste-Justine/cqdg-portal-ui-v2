@@ -71,7 +71,9 @@ const Header = () => {
           <div className={styles.headerNavList}>
             <CQDGLogoFullPortal className={styles.logo} />
             {EnvVariables.configFor('IS_BETA') === 'true' && (
-              <Tag className={styles.tagBeta}>Beta</Tag>
+              <Tag color="blue" className={styles.tagBeta}>
+                Beta
+              </Tag>
             )}
             <nav className={styles.headerNavList}>
               <HeaderLink
