@@ -31,6 +31,17 @@ const DataExplorationLinks = () => {
     dispatch(fetchStats());
   }, [dispatch]);
 
+  const {
+    studies = 0,
+    participants = 0,
+    samples = 0,
+    // fileSize = '',
+  } = stats || {};
+
+  //todo: Change after CAG implementation, temporarily added for CQDG-434
+  const cagFilesCount = 2183;
+  const totalFileSize = '11.3TB';
+
   return (
     <GridCard
       wrapperClassName={styles.dataExplorationLinksWrapper}
@@ -59,8 +70,8 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.STUDIES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(stats?.studies!)}
-              subLabel={intl.get('entities.study.studyAuto', { count: stats?.studies || 0 })}
+              label={numberFormat(studies)}
+              subLabel={intl.get('entities.study.studies')}
               icon={<ReadOutlined className={styles.dataReleaseIcon} />}
             />
           </Col>
@@ -68,7 +79,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(stats?.participants!)}
+              label={numberFormat(participants + cagFilesCount)}
               subLabel={intl.get('entities.participant.participants')}
               icon={<UserOutlined className={styles.dataReleaseIcon} />}
             />
@@ -77,7 +88,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(stats?.samples!)}
+              label={numberFormat(samples + cagFilesCount)}
               subLabel={intl.get('entities.biospecimen.biospecimens')}
               icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
@@ -86,7 +97,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={stats?.fileSize || '0TB'}
+              label={totalFileSize}
               subLabel={intl.get('entities.file.datafiles')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />

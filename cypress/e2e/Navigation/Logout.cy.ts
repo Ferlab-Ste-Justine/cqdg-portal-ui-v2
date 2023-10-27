@@ -18,7 +18,7 @@ describe('Page Logout', () => {
     cy.get('[data-cy="DataRelease_Participant"]').contains('Participants').should('exist');
     cy.get('[data-cy="DataRelease_Biospecimen"]').contains(/\d{1}/).should('exist');
     cy.get('[data-cy="DataRelease_Biospecimen"]').contains('Biospecimens').should('exist');
-    cy.get('[data-cy="DataRelease_File"]').contains(/\d{1}B/).should('exist');
+    cy.get('[data-cy="DataRelease_File"]').contains(/\.\d{1}TB/).should('exist');
     cy.get('[data-cy="DataRelease_File"]').contains('Files').should('exist');
 
     cy.contains('Data Portal').should('exist');
