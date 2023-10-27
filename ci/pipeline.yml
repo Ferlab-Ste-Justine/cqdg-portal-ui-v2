@@ -158,7 +158,7 @@ jobs:
           [
             {
               "title": "New Portal UI Release : Ticket: $pullRequestTitleWithoutPrefix",
-              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.cqdg.ferlab.bio",
+              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.juno.cqdg.ferlab.bio",
               "color": "good"
             }
           ]
