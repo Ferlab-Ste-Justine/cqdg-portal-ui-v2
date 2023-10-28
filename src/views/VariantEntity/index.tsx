@@ -62,7 +62,7 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  const variantStudies = (data?.studies.hits.edges || []).map(
+  const variantStudies = (data?.studies?.hits.edges || []).map(
     (e: ArrangerEdge<IVariantStudyEntity>) => e.node,
   );
 
@@ -97,7 +97,7 @@ const VariantEntity = () => {
           title={intl.get('entities.variant.consequences.consequence')}
           header={intl.get('entities.variant.consequences.geneConsequences')}
           columns={getConsequencesProColumn()}
-          genes={data?.genes.hits.edges}
+          genes={data?.genes?.hits.edges}
         />
 
         <EntityTable
@@ -105,9 +105,10 @@ const VariantEntity = () => {
           columns={getFrequenciesItems()}
           data={variantStudies}
           title={intl.get('entities.variant.frequencies.frequency')}
-          header={intl.get('entities.variant.frequencies.frequency')}
+          header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
           summaryColumns={getFrequenciesTableSummaryColumns(data, variantStudies)}
+          emptyMessage={intl.get('api.noData')}
         />
 
         <EntityPublicCohortTable
@@ -141,6 +142,7 @@ const VariantEntity = () => {
           }
           data={makeClinvarRows(data?.clinvar)}
           columns={getClinvarColumns()}
+          emptyMessage={intl.get('api.noData')}
         />
 
         <EntityTable
@@ -149,6 +151,7 @@ const VariantEntity = () => {
           header={intl.get('entities.variant.genePhenotype')}
           data={makeGenesOrderedRow(data?.genes)}
           columns={getGenePhenotypeColumns()}
+          emptyMessage={intl.get('api.noData')}
         />
       </>
     </EntityPageWrapper>

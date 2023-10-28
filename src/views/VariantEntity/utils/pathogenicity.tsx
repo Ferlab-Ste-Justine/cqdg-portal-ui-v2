@@ -82,7 +82,15 @@ export const getGenePhenotypeColumns = (): ProColumnType[] => [
         case ClinicalGenesTableSource.orphanet:
           return <OrphanetConditionCell conditions={record.conditions as OrphanetConditions} />;
         case ClinicalGenesTableSource.hpo:
-          return <HpoConditionCell conditions={record.conditions as HpoConditions} />;
+          return (
+            <HpoConditionCell
+              conditions={record.conditions as HpoConditions}
+              dictionary={{
+                'see.less': intl.get('global.seeLess'),
+                'see.more': intl.get('global.seeMore'),
+              }}
+            />
+          );
         case ClinicalGenesTableSource.ddd:
           return <DddConditionCell conditions={record.conditions as DddConditions} />;
         default:

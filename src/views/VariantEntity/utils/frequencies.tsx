@@ -1,6 +1,5 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { ProColumnType, TProTableSummary } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -49,6 +48,12 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     ),
   },
   {
+    title: intl.get('entities.study.domain'),
+    key: 'domain',
+    render: (study: IVariantStudyEntity) => study?.domain || TABLE_EMPTY_PLACE_HOLDER,
+    width: '14%',
+  },
+  {
     title: intl.get('entities.variant.frequencies.participants'),
     iconTitle: (
       <Space>
@@ -57,9 +62,6 @@ export const getFrequenciesItems = (): ProColumnType[] => [
           title={intl.get('entities.variant.frequencies.participantsTooltip')}
         >
           {intl.get('entities.variant.frequencies.participants')}
-        </Tooltip>
-        <Tooltip title={intl.get('entities.variant.frequencies.participantsInfoIconTooltip')}>
-          <InfoCircleOutlined />
         </Tooltip>
       </Space>
     ),
@@ -70,6 +72,7 @@ export const getFrequenciesItems = (): ProColumnType[] => [
           <Button
             type="link"
             href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            className={styles.frequencyParticipantLink}
             onClick={() =>
               addQuery({
                 queryBuilderId: DATA_EXPLORATION_QB_ID,
@@ -129,11 +132,16 @@ export const getFrequenciesTableSummaryColumns = (
     },
     {
       index: 1,
+      value: '',
+    },
+    {
+      index: 2,
       value: participantIds.length ? (
         <>
           <Button
             type="link"
             href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            className={styles.frequencyParticipantLink}
             onClick={() =>
               addQuery({
                 queryBuilderId: DATA_EXPLORATION_QB_ID,
@@ -165,7 +173,7 @@ export const getFrequenciesTableSummaryColumns = (
       ),
     },
     {
-      index: 2,
+      index: 3,
       value: formatQuotientToExponentialOrElse(
         totalNbOfParticipants,
         v?.internal_frequencies?.total?.pn || NaN,
@@ -173,7 +181,7 @@ export const getFrequenciesTableSummaryColumns = (
       ),
     },
     {
-      index: 3,
+      index: 4,
       value: v?.internal_frequencies?.total?.ac ? numberFormat(v.internal_frequencies.total.ac) : 0,
     },
     {

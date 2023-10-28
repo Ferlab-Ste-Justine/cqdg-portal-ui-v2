@@ -1,8 +1,10 @@
 import intl from 'react-intl-universal';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { IEntitySummaryColumns } from '@ferlab/ui/core/pages/EntityPage/EntitySummary';
-import { numberWithCommas, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
+import { Tag, Tooltip } from 'antd';
 import { IVariantEntity } from 'graphql/variants/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -58,6 +60,10 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: variant?.assembly_version || TABLE_EMPTY_PLACE_HOLDER,
           },
           {
+            label: intl.get('entities.variant.source'),
+            value: variant?.source || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
             label: intl.get('entities.variant.genes'),
             value: variant?.genes?.hits?.edges?.length
               ? variant.genes.hits.edges.map((gene) => {
@@ -80,16 +86,28 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: handleOmimValues(variant),
           },
           {
-            label: intl.get('entities.variant.pathogenicity.clinVar'),
-            value:
-              removeUnderscoreAndCapitalize(
-                variant?.clinvar?.clin_sig.join(', ') || TABLE_EMPTY_PLACE_HOLDER,
-              ) || TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.participant.participants'),
-            value: variant?.internal_frequencies?.total?.pc
-              ? numberWithCommas(variant.internal_frequencies.total.pc)
+            label: intl.get('entities.variant.pathogenicity.pathoClinvar'),
+            value: variant?.clinvar?.clin_sig?.length
+              ? variant.clinvar.clin_sig.map((c, index) => {
+                  const value = removeUnderscoreAndCapitalize(c);
+                  const getTagColor = (clinvar: string) => {
+                    switch (clinvar) {
+                      case 'Pathogenic':
+                      case 'Likely Pathogenic':
+                        return 'red';
+                      case 'Benign':
+                      case 'Likely Benign':
+                        return 'green';
+                      default:
+                        return '';
+                    }
+                  };
+                  return (
+                    <Tag color={getTagColor(value)} key={c + index}>
+                      {value || TABLE_EMPTY_PLACE_HOLDER}
+                    </Tag>
+                  );
+                })
               : TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
@@ -113,13 +131,22 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
               TABLE_EMPTY_PLACE_HOLDER,
           },
           {
-            label: intl.get('entities.study.studies'),
-            value: variant?.studies?.hits?.edges?.length || TABLE_EMPTY_PLACE_HOLDER,
+            label: (
+              <>
+                {intl.get('entities.study.CQDGStudies')}{' '}
+                <Tooltip title={intl.get('entities.variant.frequencies.frequencyTooltip')}>
+                  <InfoCircleOutlined className={styles.infoIcon} />
+                </Tooltip>
+              </>
+            ),
+            value:
+              toExponentialNotation(variant?.internal_frequencies?.total?.af) ||
+              TABLE_EMPTY_PLACE_HOLDER,
           },
         ],
       },
       {
-        title: 'External Reference',
+        title: intl.get('entities.variant.variant_external_references'),
         data: [
           {
             label: intl.get('entities.variant.pathogenicity.clinVar'),

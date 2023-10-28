@@ -35,7 +35,6 @@ enum Security {
 
 export interface IStudyEntity {
   id: string;
-  score: number;
   keyword: string[];
   study_id: string;
   study_code: string;

@@ -181,6 +181,7 @@ export interface IVariantEntity {
   score: number;
   alternate: string;
   assembly_version: string;
+  source: string;
   chromosome: string;
   dna_change: string;
   end: number;
@@ -210,6 +211,7 @@ export interface IVariantStudyEntity {
   transmissions: string[];
   zygosity: string[];
   total: IBoundType;
+  domain: string;
 }
 
 export type ITableVariantEntity = IVariantEntity & {
