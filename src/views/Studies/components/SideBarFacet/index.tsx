@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { TFilterGroupConfig } from '@ferlab/ui/core/components/filters/types';
 import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
 import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
@@ -22,6 +23,9 @@ interface ISideBarFacetProps {
 
 const SideBarFacet = ({ className, extendedMappingResults, filterInfo }: ISideBarFacetProps) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
+  const filterGroupConfig: TFilterGroupConfig = {
+    withFooter: false,
+  };
 
   return (
     <StackLayout
@@ -46,6 +50,7 @@ const SideBarFacet = ({ className, extendedMappingResults, filterInfo }: ISideBa
               queryBuilderId={STUDIES_EXPLORATION_QB_ID}
               extendedMappingResults={extendedMappingResults}
               filterInfo={filterInfo}
+              filterGroupConfig={filterGroupConfig}
             />
           </div>
         )}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
+import { TFilterGroupConfig } from '@ferlab/ui/core/components/filters/types';
 import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { IExtendedMappingResults } from '@ferlab/ui/core/graphql/types';
 import { Button, Layout, Space, Spin, Typography } from 'antd';
@@ -34,6 +35,7 @@ interface IFilterListProps {
   extendedMappingResults: IExtendedMappingResults;
   filterInfo: FilterInfo;
   filterMapper?: TCustomFilterMapper;
+  filterGroupConfig?: TFilterGroupConfig;
 }
 
 const FilterList = ({
@@ -42,6 +44,7 @@ const FilterList = ({
   extendedMappingResults,
   filterInfo,
   filterMapper,
+  filterGroupConfig,
 }: IFilterListProps) => {
   const [filtersOpen, setFiltersOpen] = useState<boolean | undefined>(isAllFacetOpen(filterInfo));
 
@@ -81,6 +84,7 @@ const FilterList = ({
                   queryBuilderId={queryBuilderId}
                   classname={cx(styles.customFilterContainer, styles.filter)}
                   filterKey={facet}
+                  filterGroupConfig={filterGroupConfig}
                   extendedMappingResults={extendedMappingResults}
                   filtersOpen={filtersOpen}
                   defaultOpen={filterInfo.defaultOpenFacets?.includes(facet) ? true : undefined}
