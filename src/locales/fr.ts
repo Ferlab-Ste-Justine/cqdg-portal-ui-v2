@@ -233,7 +233,7 @@ const fr = {
         participants: 'Participants',
         participantsTooltip: '# de participants atteints dans les études du CQDG',
         participantsInfoIconTooltip:
-          'En raison de la confidentialité des participants, les liens peuvent renvoyer un nombre inférieur à celui affiché',
+          'En raison de la confidentialité des participants, les liens peuvent renvoyer un nombre plus petit que ce qui est affiché',
         altAlleles: '# Allèles ALT',
         altAllelesTooltip: 'Nombre d’allèles alternatifs',
         altRef: '# Allèles (ALT + REF)',
