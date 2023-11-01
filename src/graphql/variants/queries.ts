@@ -201,15 +201,15 @@ export const SEARCH_VARIANT_QUERY = gql`
             hash
             hgvsg
             id
-            internal_frequencies {
+            internal_frequencies_wgs {
               total {
                 ac
-                pc
-                hom
-                pn
-                an
                 af
+                an
+                hom
+                pc
                 pf
+                pn
               }
             }
             locus
@@ -234,7 +234,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                       pf
                     }
                     transmission
-                    participant_ids
                     zygosity
                   }
                 }
@@ -450,7 +449,7 @@ export const GET_VARIANT_ENTITY = gql`
             hash
             hgvsg
             id
-            internal_frequencies {
+            internal_frequencies_wgs {
               total {
                 ac
                 pc
@@ -484,7 +483,6 @@ export const GET_VARIANT_ENTITY = gql`
                     }
                     transmission
                     zygosity
-                    participant_ids
                   }
                 }
               }

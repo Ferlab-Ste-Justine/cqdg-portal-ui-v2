@@ -9,7 +9,7 @@ import {
   numberFormat,
   toExponentialNotation,
 } from '@ferlab/ui/core/utils/numberUtils';
-import { Button, Space, Tooltip } from 'antd';
+import { Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IVariantEntity, IVariantStudyEntity } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
@@ -67,35 +67,7 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     ),
     key: 'participants',
     render: (row: IVariantStudyEntity) =>
-      row?.participant_ids?.length ? (
-        <>
-          <Button
-            type="link"
-            href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-            className={styles.frequencyParticipantLink}
-            onClick={() =>
-              addQuery({
-                queryBuilderId: DATA_EXPLORATION_QB_ID,
-                query: generateQuery({
-                  newFilters: [
-                    generateValueFilter({
-                      field: 'participant_id',
-                      index: INDEXES.PARTICIPANT,
-                      value: row.participant_ids || [],
-                    }),
-                  ],
-                }),
-                setAsActive: true,
-              })
-            }
-          >
-            {numberFormat(row.total?.pc || 0)}
-          </Button>
-          {row.total?.pc && row.total?.pn ? ` / ${numberFormat(row.total?.pn)}` : ''}
-        </>
-      ) : (
-        formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER)
-      ),
+      formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     title: intl.get('entities.variant.frequencies.frequency'),
@@ -119,12 +91,8 @@ export const getFrequenciesItems = (): ProColumnType[] => [
   },
 ];
 
-export const getFrequenciesTableSummaryColumns = (
-  v?: IVariantEntity,
-  studies?: IVariantStudyEntity[],
-): TProTableSummary[] => {
-  const totalNbOfParticipants = v?.internal_frequencies?.total?.pc || 0;
-  const participantIds = studies?.map((study) => study.participant_ids || [])?.flat() || [];
+export const getFrequenciesTableSummaryColumns = (v?: IVariantEntity): TProTableSummary[] => {
+  const totalNbOfParticipants = v?.internal_frequencies_wgs?.total?.pc || 0;
   return [
     {
       index: 0,
@@ -136,58 +104,30 @@ export const getFrequenciesTableSummaryColumns = (
     },
     {
       index: 2,
-      value: participantIds.length ? (
-        <>
-          <Button
-            type="link"
-            href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-            className={styles.frequencyParticipantLink}
-            onClick={() =>
-              addQuery({
-                queryBuilderId: DATA_EXPLORATION_QB_ID,
-                query: generateQuery({
-                  newFilters: [
-                    generateValueFilter({
-                      field: 'participant_id',
-                      index: INDEXES.PARTICIPANT,
-                      value: participantIds || [],
-                    }),
-                  ],
-                }),
-                setAsActive: true,
-              })
-            }
-          >
-            {numberFormat(totalNbOfParticipants)}
-          </Button>
-          {v?.internal_frequencies?.total?.pn
-            ? ` / ${numberFormat(v.internal_frequencies?.total?.pn)}`
-            : ''}
-        </>
-      ) : (
-        formatQuotientOrElse(
-          totalNbOfParticipants,
-          v?.internal_frequencies?.total?.pn || NaN,
-          TABLE_EMPTY_PLACE_HOLDER,
-        )
+      value: formatQuotientOrElse(
+        totalNbOfParticipants,
+        v?.internal_frequencies_wgs?.total?.pn || NaN,
+        TABLE_EMPTY_PLACE_HOLDER,
       ),
     },
     {
       index: 3,
       value: formatQuotientToExponentialOrElse(
         totalNbOfParticipants,
-        v?.internal_frequencies?.total?.pn || NaN,
+        v?.internal_frequencies_wgs?.total?.pn || NaN,
         TABLE_EMPTY_PLACE_HOLDER,
       ),
     },
     {
       index: 4,
-      value: v?.internal_frequencies?.total?.ac ? numberFormat(v.internal_frequencies.total.ac) : 0,
+      value: v?.internal_frequencies_wgs?.total?.ac
+        ? numberFormat(v.internal_frequencies_wgs.total.ac)
+        : 0,
     },
     {
       index: 4,
-      value: v?.internal_frequencies?.total?.hom
-        ? numberFormat(v.internal_frequencies.total.hom)
+      value: v?.internal_frequencies_wgs?.total?.hom
+        ? numberFormat(v.internal_frequencies_wgs.total.hom)
         : 0,
     },
   ];
