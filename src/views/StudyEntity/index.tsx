@@ -18,7 +18,7 @@ import StatsGraph from 'views/StudyEntity/StatsGraph';
 import { pageId, queryId } from 'views/StudyEntity/utils/constant';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
+import DownloadClinicalDataButton from 'components/reports/DownloadClinicalDataButton';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -106,7 +106,7 @@ const StudyEntity = () => {
         loading={loading}
         extra={
           <Space>
-            {!isRestricted && study && <DownloadClinicalDataDropdown sqon={participantSqon} />}
+            {!isRestricted && study && <DownloadClinicalDataButton sqon={participantSqon} />}
             {!isRestricted && study && (
               <DownloadFileManifestModal sqon={fileSqon} hasTooManyFiles={hasTooManyFiles} />
             )}
