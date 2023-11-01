@@ -213,6 +213,13 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,
   },
+  {
+    key: 'sources',
+    title: intl.get('entities.variant.sources'),
+    dataIndex: 'sources',
+    sorter: { multiple: 1 },
+    render: (sources: string[]) => sources.join(', '),
+  },
 ];
 
 interface IVariantsTableProps {

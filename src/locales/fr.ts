@@ -170,7 +170,7 @@ const fr = {
       alternativeAllele: 'Allèle alternatif',
       referenceAllele: 'Allèle de référence',
       referenceGenome: 'Génome de référence',
-      source: 'Source',
+      sources: 'Sources',
       genes: 'Gènes',
       gene: 'Gène',
       genePhenotype: 'Gène - Phénotype',

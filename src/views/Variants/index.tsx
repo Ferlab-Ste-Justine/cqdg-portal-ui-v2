@@ -65,6 +65,7 @@ const getFilterGroups = (type: FilterTypes) => {
               'studies__transmission',
               'start',
               'studies__zygosity',
+              'sources',
             ],
             noDataOption: ['start'],
             intervalDecimal: {

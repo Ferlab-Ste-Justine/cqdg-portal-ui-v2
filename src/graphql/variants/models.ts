@@ -181,7 +181,7 @@ export interface IVariantEntity {
   score: number;
   alternate: string;
   assembly_version: string;
-  source: string;
+  sources: string[];
   chromosome: string;
   dna_change: string;
   end: number;

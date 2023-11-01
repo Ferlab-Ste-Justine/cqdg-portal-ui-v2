@@ -12,6 +12,7 @@ export const SEARCH_VARIANT_QUERY = gql`
             assembly_version
             chromosome
             variant_class
+            sources
             clinvar {
               clin_sig
               clinvar_id
@@ -255,6 +256,7 @@ export const GET_VARIANT_ENTITY = gql`
             alternate
             assembly_version
             chromosome
+            sources
             clinvar {
               clin_sig
               clinvar_id
