@@ -3,6 +3,7 @@
 declare namespace Cypress {
   interface Chainable {
     checkValueFacetAndApply(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
+    checkValueFacet(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
     login(): cy & CyEventEmitter;
