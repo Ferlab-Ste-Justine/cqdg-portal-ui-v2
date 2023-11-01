@@ -20,8 +20,8 @@ import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 import { LANG } from 'common/constants';
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { AlterTypes } from 'common/types';
+import CQDGLogo from 'components/assets/cqdg-logo.svg';
 import NotificationBanner from 'components/featureToggle/NotificationBanner';
-import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
@@ -69,7 +69,7 @@ const Header = () => {
         className={styles.mainHeader}
         title={
           <div className={styles.headerNavList}>
-            <CQDGLogoFullPortal className={styles.logo} />
+            <img src={CQDGLogo} className={styles.logo} />
             {EnvVariables.configFor('IS_BETA') === 'true' && (
               <Tag color="blue" className={styles.tagBeta}>
                 Beta
