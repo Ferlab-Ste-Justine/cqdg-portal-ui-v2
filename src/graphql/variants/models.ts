@@ -198,14 +198,13 @@ export interface IVariantEntity {
   clinvar: IClinVar;
   external_frequencies: IExternalFrequenciesEntity;
   genes: IArrangerResultsTree<IGeneEntity>;
-  internal_frequencies: IVariantInternalFrequencies;
+  internal_frequencies_wgs: IVariantInternalFrequencies;
   studies: IArrangerResultsTree<IVariantStudyEntity>;
 }
 
 export interface IVariantStudyEntity {
   id: string;
   score: number | null;
-  participant_ids: string[];
   study_code: string;
   study_id: string;
   transmissions: string[];

@@ -140,7 +140,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
               </>
             ),
             value:
-              toExponentialNotation(variant?.internal_frequencies?.total?.af) ||
+              toExponentialNotation(variant?.internal_frequencies_wgs?.total?.af) ||
               TABLE_EMPTY_PLACE_HOLDER,
           },
         ],

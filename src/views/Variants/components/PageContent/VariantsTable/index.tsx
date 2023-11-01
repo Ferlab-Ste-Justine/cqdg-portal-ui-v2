@@ -186,43 +186,13 @@ const getDefaultColumns = (): ProColumnType[] => [
     title: intl.get('entities.variant.participant.title'),
     tooltip: intl.get('entities.variant.participant.tooltip'),
     key: 'participant_number',
-    render: (variant: IVariantEntity) => {
-      const totalNbOfParticipants = variant.internal_frequencies?.total?.pc || 0;
-      const studies = variant.studies;
-      const participantIds =
-        studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
-      if (participantIds.length < 10) {
-        return totalNbOfParticipants;
-      }
-      return (
-        <Link
-          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-          onClick={() => {
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'participant_id',
-                    value: participantIds,
-                    index: INDEXES.PARTICIPANT,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            });
-          }}
-        >
-          {numberFormat(totalNbOfParticipants)}
-        </Link>
-      );
-    },
+    render: (variant: IVariantEntity) => variant.internal_frequencies_wgs?.total?.pc || 0,
   },
   {
-    key: 'internal_frequencies',
+    key: 'internal_frequencies_wgs',
     title: intl.get('entities.variant.frequence.title'),
     tooltip: intl.get('entities.variant.frequence.tooltip'),
-    dataIndex: 'internal_frequencies',
+    dataIndex: 'internal_frequencies_wgs',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af)
         ? toExponentialNotation(internalFrequencies?.total?.af)
@@ -231,14 +201,14 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     title: intl.get('entities.variant.alt.title'),
     tooltip: intl.get('entities.variant.alt.tooltip'),
-    dataIndex: ['internal_frequencies', 'total', 'ac'],
+    dataIndex: ['internal_frequencies_wgs', 'total', 'ac'],
     key: 'ac',
     render: (ac: string) => ac || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: intl.get('entities.variant.homozygotes.title'),
     tooltip: intl.get('entities.variant.homozygotes.tooltip'),
-    dataIndex: 'internal_frequencies',
+    dataIndex: 'internal_frequencies_wgs',
     key: 'homozygotes',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,

@@ -157,7 +157,7 @@ const getFilterGroups = (type: FilterTypes) => {
         groups: [
           {
             facets: [
-              'internal_frequencies__total__af',
+              'internal_frequencies_wgs__total__af',
               'external_frequencies__gnomad_genomes_2_1_1__af',
               'external_frequencies__gnomad_genomes_3__af',
               'external_frequencies__gnomad_exomes_2_1_1__af',
@@ -165,7 +165,7 @@ const getFilterGroups = (type: FilterTypes) => {
               'external_frequencies__thousand_genomes__af',
             ],
             noDataOption: [
-              'internal_frequencies__total__af',
+              'internal_frequencies_wgs__total__af',
               'external_frequencies__gnomad_genomes_2_1_1__af',
               'external_frequencies__gnomad_genomes_3__af',
               'external_frequencies__gnomad_exomes_2_1_1__af',

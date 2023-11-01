@@ -19,16 +19,8 @@ interface ISummaryHeaderProps {
 
 const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
   const studyCount = variant?.studies.hits.total || 0;
-  const participantCount = variant?.internal_frequencies?.total?.pc || 0;
+  const participantCount = variant?.internal_frequencies_wgs?.total?.pc || 0;
   const studyCodes = variant?.studies.hits.edges.map((e) => e?.node?.study_code) || [];
-
-  const participantsIdsFromAllStudies = variant?.studies.hits.edges.reduce((xs: string[], x) => {
-    if (x.node.participant_ids?.length) {
-      return [...xs, ...x.node.participant_ids];
-    }
-    return xs;
-  }, []);
-  const uniqueParticipantsFromAllStudies = [...new Set(participantsIdsFromAllStudies)];
 
   return (
     <div className={styles.buttonGroup}>
@@ -65,6 +57,7 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
       <Button
         className={styles.button}
         size="large"
+        disabled
         data-cy="SummaryHeader_Participants_Button"
         block
       >
@@ -78,7 +71,7 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
                 newFilters: [
                   generateValueFilter({
                     field: 'participant_id',
-                    value: uniqueParticipantsFromAllStudies,
+                    value: [],
                     index: INDEXES.PARTICIPANT,
                   }),
                 ],

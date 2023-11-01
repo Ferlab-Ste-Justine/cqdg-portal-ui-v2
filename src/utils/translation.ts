@@ -416,8 +416,8 @@ export const getFacetsDictionary = () => ({
     topmed_bravo: { af: 'TopMed' },
     thousand_genomes: { af: '1000 Genomes' },
   },
-  internal_frequencies: {
-    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_af') },
+  internal_frequencies_wgs: {
+    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af') },
   },
   frequencies: {
     internal: {
