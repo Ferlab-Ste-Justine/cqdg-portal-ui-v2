@@ -2,6 +2,9 @@
 
 .loginPageContent {
   padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .loginContainer {
     display: flex;
@@ -60,6 +63,14 @@
       justify-content: space-between;
       margin-top: 12px;
     }
+  }
+
+  .bottomLogoContainer {
+    border-top: 1px solid $gray-4;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
 }
 
