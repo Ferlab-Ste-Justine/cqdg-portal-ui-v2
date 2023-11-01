@@ -31,7 +31,7 @@ describe('Navigation', () => {
     cy.get('body').contains('Prénom').should('exist');
   });
 
-  it('Lien externe de la header - Website [CQDG-440]', () => {
+  it('Lien externe de la header - Website', () => {
     cy.visitDashboard();
     cy.get('[data-cy="HeaderLink_Website"]').invoke('removeAttr', 'target').click({force: true});
     cy.origin('https://cqdg.ca', () => {
@@ -223,7 +223,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'un fichier', () => {
-    cy.visitFileEntity('FI0181945');
+    cy.visitFileEntity('FI0000981');
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');
