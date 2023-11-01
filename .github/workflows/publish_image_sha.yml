@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set the QA-Juno configuration file
-        run: mv env-qa-juno .env
+        run: mv env-qa .env
       - name: Push the image on the docker registry
         uses: Ferlab-Ste-Justine/action-push-image@v2
         with:
