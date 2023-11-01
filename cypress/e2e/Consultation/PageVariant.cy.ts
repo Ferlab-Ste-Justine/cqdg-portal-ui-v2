@@ -25,7 +25,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
   it('Panneau Summary', () => {
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('1');
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
-    cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('0');
+    cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('3');
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('Participant');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Variant').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(0).contains('chr1:g.161629781T>C').should('exist');
@@ -103,14 +103,15 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(0).contains('STUDY1').should('exist');
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(1).contains('Rare disease').should('exist');
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(2).contains('3 / 3').should('exist');
+    cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(2).find('[href]').should('not.exist');
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(3).contains('6.67e-1').should('exist');
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(4).contains('4').should('exist');
     cy.get('[id="frequencies"]').find('tr[class*="ant-table-row"]').eq(0).find('td[class="ant-table-cell"]').eq(5).contains('1').should('exist');
     cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(1).contains(/^$/).should('exist');
-    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(2).contains('-').should('exist');
-    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(3).contains('-').should('exist');
-    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(4).contains('0').should('exist');
-    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(5).contains('0').should('exist');
+    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(2).contains('3 / 3').should('exist');
+    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(3).contains('1.00e+0').should('exist');
+    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(4).contains('4').should('exist');
+    cy.get('[id="frequencies"]').find('tfoot[class="ant-table-summary"]').find('td[class*="ant-table-cell"]').eq(5).contains('1').should('exist');
   });
   
   it('Panneau Public Cohorts', () => {

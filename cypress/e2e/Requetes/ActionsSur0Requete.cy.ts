@@ -17,8 +17,8 @@ describe('Page Data Exploration - Requêtes', () => {
 
   it('Construire une première requête', () => {
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,235');
-    cy.validateTableResultsCount('1,235');
+    cy.validateTotalSelectedQuery('1,233');
+    cy.validateTableResultsCount('1,233');
 
     cy.checkValueFacetAndApply(0, 'NEURODEV');
 

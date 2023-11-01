@@ -7,7 +7,7 @@ beforeEach(() => {
 
 describe('Page d\'un fichier - Colonnes du tableau Participants-Samples', () => {
   beforeEach(() => {
-    cy.visitFileEntity('FI0181945');
+    cy.visitFileEntity('FI0000981');
     cy.resetColumns('biospecimens');
   });
 

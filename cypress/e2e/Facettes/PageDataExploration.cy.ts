@@ -26,7 +26,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(0, 'T-DEE');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^590$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^588$/).should('exist');
   });
 
   it('Study Code - NEURODEV', () => {
@@ -67,14 +67,14 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(2, 'Female');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^583$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^582$/).should('exist');
   });
 
   it('Gender - Male', () => {
     cy.checkValueFacetAndApply(2, /^Male$/);
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains(/^Male$/).should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^652$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^651$/).should('exist');
   });
 
   it('Age at Recruitment (days)', () => {
@@ -157,7 +157,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(0, 'DNA (NCIT:C449)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DNA (NCIT:C449)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,235$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,233$/).should('exist');
   });
 
   it('Tissue - Blood (NCIT:C12434)', () => {
@@ -165,7 +165,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.checkValueFacetAndApply(1, 'Blood (NCIT:C12434)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Tissue').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Blood (NCIT:C12434)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,229$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,227$/).should('exist');
   });
 
   // Pas de données
@@ -203,7 +203,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(0, 'Genomics');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Category').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genomics').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,398$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6,798$/).should('exist');
   });
 
   it('Data Type - Aligned Reads [CQDG-261]', () => {
@@ -211,14 +211,14 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(1, 'Aligned Reads');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Aligned Reads').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,398$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,233$/).should('exist');
   });
 
   it('Data Type - Germline CNV [CQDG-261]', () => {
     cy.checkValueFacetAndApply(1, 'Germline CNV');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Type').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Germline CNV').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,398$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,227$/).should('exist');
   });
 
   it('Experimental Strategy - WGS', () => {
@@ -226,7 +226,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(2, 'WGS');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Experimental Strategy').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,398$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6,798$/).should('exist');
   });
 
   it('Format - gVCF', () => {
@@ -234,13 +234,13 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.checkValueFacetAndApply(3, 'gVCF');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GVCF').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2,464$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,872$/).should('exist');
   });
 
   it('Format - CRAM', () => {
     cy.checkValueFacetAndApply(3, 'CRAM');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('CRAM').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,235$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1,233$/).should('exist');
   });
 });

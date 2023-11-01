@@ -58,15 +58,15 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,235');
-    cy.validateTableResultsCount('1,235');
+    cy.validateTotalSelectedQuery('1,233');
+    cy.validateTableResultsCount('1,233');
     cy.validateClearAllButton(false);
 
     cy.checkValueFacetAndApply(2, 'Female');
 
     cy.validatePillSelectedQuery('Gender', ['Female']);
-    cy.validateTotalSelectedQuery('583');
-    cy.validateTableResultsCount('583');
+    cy.validateTotalSelectedQuery('582');
+    cy.validateTableResultsCount('582');
     cy.validateClearAllButton(true);
   });
 
