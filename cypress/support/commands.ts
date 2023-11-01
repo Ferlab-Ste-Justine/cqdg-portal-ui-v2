@@ -33,6 +33,30 @@ Cypress.Commands.add('checkValueFacetAndApply', (facetRank: number, value: strin
   cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 });
 
+Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {
+  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+    .find('[aria-expanded="true"]').should('exist');
+  cy.waitWhileSpin(1000);
+  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+    .find('button').then(($button) => {
+      if ($button.hasClass('ant-btn-link')) {
+        cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+          .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
+        cy.waitWhileSpin(1000);
+      };
+  });
+
+  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
+
+  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+    .find('div[class*="CheckboxFilter_checkboxFilterItem"]').contains(value)
+    .find('[type="checkbox"]').check({force: true});
+
+  for (let i = 0; i < 9; i++) {
+    cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+  };
+});
+
 Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
   if (!eq) {
     eq = 0;
