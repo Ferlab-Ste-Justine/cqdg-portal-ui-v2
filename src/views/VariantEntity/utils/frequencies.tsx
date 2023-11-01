@@ -11,6 +11,7 @@ import {
 } from '@ferlab/ui/core/utils/numberUtils';
 import { Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
+import { useStudy } from 'graphql/studies/actions';
 import { IVariantEntity, IVariantStudyEntity } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
@@ -18,6 +19,14 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
+
+const StudyDomain = ({ study_code }: { study_code: string }) => {
+  const { data: study } = useStudy({
+    field: 'study_code',
+    value: study_code,
+  });
+  return <>{study?.domain || TABLE_EMPTY_PLACE_HOLDER}</>;
+};
 
 export const getFrequenciesItems = (): ProColumnType[] => [
   {
@@ -50,8 +59,8 @@ export const getFrequenciesItems = (): ProColumnType[] => [
   {
     title: intl.get('entities.study.domain'),
     key: 'domain',
-    render: (study: IVariantStudyEntity) => study?.domain || TABLE_EMPTY_PLACE_HOLDER,
     width: '14%',
+    render: (study: IVariantStudyEntity) => study && <StudyDomain study_code={study.study_code} />,
   },
   {
     title: intl.get('entities.variant.frequencies.participants'),
@@ -125,7 +134,7 @@ export const getFrequenciesTableSummaryColumns = (v?: IVariantEntity): TProTable
         : 0,
     },
     {
-      index: 4,
+      index: 5,
       value: v?.internal_frequencies_wgs?.total?.hom
         ? numberFormat(v.internal_frequencies_wgs.total.hom)
         : 0,
