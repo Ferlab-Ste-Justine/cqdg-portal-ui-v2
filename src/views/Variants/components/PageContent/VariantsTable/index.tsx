@@ -85,19 +85,19 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (sources: string[]) =>
       sources ? (
         <div>
-          {['WGS'].map((s) => {
+          {sources.map((s) => {
             switch (s) {
               case Sources.WGS:
                 return (
-                  <Tooltip title={Sources.WGS}>
-                    <Tag color="green">G</Tag>
-                  </Tooltip>
+                  <Tag key={Sources.WGS} color="purple">
+                    {s}
+                  </Tag>
                 );
               case Sources.WXS:
                 return (
-                  <Tooltip title={Sources.WXS}>
-                    <Tag color="geekblue">E</Tag>
-                  </Tooltip>
+                  <Tag key={Sources.WXS} color="orange">
+                    {s}
+                  </Tag>
                 );
               default:
                 return <Tag key={s}>{TABLE_EMPTY_PLACE_HOLDER}</Tag>;
