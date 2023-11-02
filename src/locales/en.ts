@@ -27,8 +27,12 @@ const en = {
       name: 'Name',
       keywords: 'Keywords',
       description: 'Description',
-      restrictedTitle: 'Study restricted',
+      restrictedTitle: 'Restricted Study',
       restrictedContent: 'The data of this study is not accessible for exploration.',
+      restrictedContact:
+        'The access request documents cannot be downloaded for this study. To proceed with your request for access please contact directly the Access Authority.',
+      restrictedContact2:
+        'You can find the contact information for the Access Authority in the Data Access table in the Studies page.',
       CQDGStudies: 'CQDG Studies',
     },
     biospecimen: {

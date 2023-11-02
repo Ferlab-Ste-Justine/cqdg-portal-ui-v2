@@ -29,6 +29,10 @@ const fr = {
       description: 'Description',
       restrictedTitle: 'Étude restreinte',
       restrictedContent: "Les données de cette étude ne sont pas accessibles à l'exploration.",
+      restrictedContact:
+        "Les documents de demande d'accès ne peuvent pas être téléchargés pour cette étude. Pour poursuivre votre demande d'accès, veuillez contacter directement l'Autorité d'accès.",
+      restrictedContact2:
+        "Vous pouvez trouver les coordonnées de l'Autorité d'accès dans le tableau d'accès aux données sur la page des études.",
       CQDGStudies: 'Études du CQDG',
     },
     biospecimen: {

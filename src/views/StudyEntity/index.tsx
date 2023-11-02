@@ -116,6 +116,7 @@ const StudyEntity = () => {
                 hasTooManyFiles={hasTooManyFiles}
                 buttonType={'primary'}
                 withoutFiles
+                isRestricted={isRestricted}
               />
             )}
           </Space>
