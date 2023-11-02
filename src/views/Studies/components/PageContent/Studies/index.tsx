@@ -143,8 +143,11 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
   {
     key: 'file_count',
     title: intl.get('screen.studies.files'),
-    render: (study: IStudyEntity) =>
-      study?.file_count ? (
+    render: (study: IStudyEntity) => {
+      if (!study?.file_count) return TABLE_EMPTY_PLACE_HOLDER;
+      const isRestricted = study ? study.security === 'R' : true;
+      if (isRestricted) return numberFormat(study.file_count);
+      return (
         <Link
           to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
           onClick={() =>
@@ -165,9 +168,8 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
         >
           {numberFormat(study.file_count)}
         </Link>
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+      );
+    },
   },
   {
     key: 'access_limitations',

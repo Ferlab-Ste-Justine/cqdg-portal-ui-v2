@@ -27,6 +27,7 @@ describe('Page des études - Vérifier les informations affichées', () => {
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(7).contains('-').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(8).contains('-').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(9).contains('1,910').should('exist');
+    cy.get('tr[data-row-key="CAG"]').find('[class="ant-table-cell"]').eq(9).find('[href]').should('not.exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(10).contains('health or medical or biomedical research').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(10).contains('DUO:').should('exist');
     cy.get('tr[data-row-key="NEURODEV"]').find('[class="ant-table-cell"]').eq(10).contains('0000006').should('exist');
