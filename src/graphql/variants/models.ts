@@ -216,3 +216,8 @@ export interface IVariantStudyEntity {
 export type ITableVariantEntity = IVariantEntity & {
   key: string;
 };
+
+export enum Sources {
+  WGS = 'WGS',
+  WXS = 'WXS',
+}

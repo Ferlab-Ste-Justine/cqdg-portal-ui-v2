@@ -19,7 +19,7 @@ import {
 import { numberFormat, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
-import { Tooltip } from 'antd';
+import { Tag, Tooltip } from 'antd';
 import cx from 'classnames';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
@@ -31,6 +31,7 @@ import {
   IVariantEntity,
   IVariantInternalFrequencies,
   IVariantStudyEntity,
+  Sources,
 } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID, DEFAULT_PAGE_INDEX } from 'views/DataExploration/utils/constant';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
@@ -75,6 +76,37 @@ const getDefaultColumns = (): ProColumnType[] => [
     sorter: { multiple: 1 },
     render: (variant_class: string) =>
       variant_class ? removeUnderscoreAndCapitalize(variant_class) : TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'sources',
+    title: intl.get('entities.variant.sources'),
+    dataIndex: 'sources',
+    align: 'center',
+    render: (sources: string[]) =>
+      sources ? (
+        <div>
+          {['WGS'].map((s) => {
+            switch (s) {
+              case Sources.WGS:
+                return (
+                  <Tooltip title={Sources.WGS}>
+                    <Tag color="green">G</Tag>
+                  </Tooltip>
+                );
+              case Sources.WXS:
+                return (
+                  <Tooltip title={Sources.WXS}>
+                    <Tag color="geekblue">E</Tag>
+                  </Tooltip>
+                );
+              default:
+                return <Tag key={s}>{TABLE_EMPTY_PLACE_HOLDER}</Tag>;
+            }
+          })}
+        </div>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
     key: 'rsnumber',
@@ -212,13 +244,6 @@ const getDefaultColumns = (): ProColumnType[] => [
     key: 'homozygotes',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,
-  },
-  {
-    key: 'sources',
-    title: intl.get('entities.variant.sources'),
-    dataIndex: 'sources',
-    sorter: { multiple: 1 },
-    render: (sources: string[]) => sources?.join(', ') || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
