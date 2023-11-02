@@ -285,7 +285,6 @@ export const getFacetsDictionary = () => ({
   biospecimen_id: intl.get('entities.biospecimen.biospecimen_id'),
   file_id: intl.get('entities.file.file_id'),
   file_2_id: intl.get('entities.file.file_id'),
-  locus: intl.get('entities.variant.variant_id'),
   participant_id: intl.get('entities.participant.participant_id'),
   participant_2_id: intl.get('entities.participant.participant_id'),
   sample_id: intl.get('entities.biospecimen.sample_id'),
