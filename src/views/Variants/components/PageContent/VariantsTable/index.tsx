@@ -218,7 +218,7 @@ const getDefaultColumns = (): ProColumnType[] => [
     title: intl.get('entities.variant.sources'),
     dataIndex: 'sources',
     sorter: { multiple: 1 },
-    render: (sources: string[]) => sources.join(', '),
+    render: (sources: string[]) => sources?.join(', ') || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 

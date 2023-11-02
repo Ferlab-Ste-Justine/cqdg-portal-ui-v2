@@ -61,7 +61,7 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           },
           {
             label: intl.get('entities.variant.sources'),
-            value: variant?.sources ? variant.sources.join(', ') : TABLE_EMPTY_PLACE_HOLDER,
+            value: variant?.sources?.join(', ') || TABLE_EMPTY_PLACE_HOLDER,
           },
           {
             label: intl.get('entities.variant.genes'),
