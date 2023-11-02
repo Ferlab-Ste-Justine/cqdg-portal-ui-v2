@@ -352,7 +352,7 @@ export const getFacetsDictionary = () => ({
   },
   variant_class: intl.get('entities.variant.variant_class'),
   variant_external_reference: intl.get('entities.variant.variant_external_reference'),
-  locus: intl.get('entities.variant.variant'),
+  locus: intl.get('entities.variant.variant_id'),
   consequences: {
     consequence: intl.get('entities.variant.consequences.consequence'),
     consequences: intl.get('entities.variant.consequences.consequences'),
