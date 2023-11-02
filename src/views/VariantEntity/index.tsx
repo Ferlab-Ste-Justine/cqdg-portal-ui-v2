@@ -9,9 +9,7 @@ import EntityPageWrapper, {
 } from '@ferlab/ui/core/pages/EntityPage';
 import { makeClinvarRows } from '@ferlab/ui/core/pages/EntityPage/utils/pathogenicity';
 import { Space, Tag } from 'antd';
-import { ArrangerEdge } from 'graphql/models';
 import { useVariantEntity } from 'graphql/variants/actions';
-import { IVariantStudyEntity } from 'graphql/variants/models';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { getEntityExpandableTableMultiple } from 'utils/translation';
@@ -62,9 +60,10 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  const variantStudies = (data?.studies?.hits.edges || []).map(
-    (e: ArrangerEdge<IVariantStudyEntity>) => e.node,
-  );
+  const variantStudies = (data?.studies?.hits.edges || []).map((e) => ({
+    ...e.node,
+    key: e.node.study_code,
+  }));
 
   return (
     <EntityPageWrapper
