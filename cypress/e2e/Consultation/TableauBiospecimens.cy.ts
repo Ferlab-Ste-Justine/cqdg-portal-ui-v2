@@ -85,11 +85,11 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
     cy.validateTableFirstRow('C449', 5);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Tissue [CQDG-426]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Tissue', () => {
     cy.sortTableAndWait('Tissue');
     cy.validateTableFirstRow('C12434', 6);
     cy.sortTableAndWait('Tissue');
-    cy.validateTableFirstRow('C12434', 6);
+    cy.validateTableFirstRow('Unknown', 6);
     cy.sortTableAndWait('Tissue');
   });
 
