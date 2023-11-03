@@ -51,6 +51,16 @@ import styles from './index.module.scss';
 
 const isNumber = (n: number) => n && !Number.isNaN(n);
 
+export const getSourceTagColor = (value: string) => {
+  switch (value) {
+    case Sources.WGS:
+      return 'purple';
+    case Sources.WXS:
+      return 'orange';
+    default:
+      return '';
+  }
+};
 const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'hgvsg',
@@ -85,23 +95,11 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (sources: string[]) =>
       sources ? (
         <>
-          {sources.map((value) => {
-            const getTagColor = (value: string) => {
-              switch (value) {
-                case Sources.WGS:
-                  return 'purple';
-                case Sources.WXS:
-                  return 'orange';
-                default:
-                  return '';
-              }
-            };
-            return (
-              <Tag color={getTagColor(value)} key={value}>
-                {value || TABLE_EMPTY_PLACE_HOLDER}
-              </Tag>
-            );
-          })}
+          {sources.map((value) => (
+            <Tag color={getSourceTagColor(value)} key={value}>
+              {value || TABLE_EMPTY_PLACE_HOLDER}
+            </Tag>
+          ))}
         </>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
