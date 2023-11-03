@@ -84,26 +84,25 @@ const getDefaultColumns = (): ProColumnType[] => [
     align: 'center',
     render: (sources: string[]) =>
       sources ? (
-        <div>
-          {sources.map((s) => {
-            switch (s) {
-              case Sources.WGS:
-                return (
-                  <Tag key={Sources.WGS} color="purple">
-                    {s}
-                  </Tag>
-                );
-              case Sources.WXS:
-                return (
-                  <Tag key={Sources.WXS} color="orange">
-                    {s}
-                  </Tag>
-                );
-              default:
-                return <Tag key={s}>{TABLE_EMPTY_PLACE_HOLDER}</Tag>;
-            }
+        <>
+          {sources.map((value) => {
+            const getTagColor = (value: string) => {
+              switch (value) {
+                case Sources.WGS:
+                  return 'purple';
+                case Sources.WXS:
+                  return 'orange';
+                default:
+                  return '';
+              }
+            };
+            return (
+              <Tag color={getTagColor(value)} key={value}>
+                {value || TABLE_EMPTY_PLACE_HOLDER}
+              </Tag>
+            );
           })}
-        </div>
+        </>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
