@@ -8,8 +8,8 @@ const TooMuchFilesAlert = () => (
   <Alert
     type="error"
     showIcon
-    icon={<CloseCircleOutlined className={styles.tooMuchFilesIcon} />}
-    className={styles.tooMuchFiles}
+    icon={<CloseCircleOutlined className={styles.customAlertIcon} />}
+    className={styles.customAlert}
     message={intl.get('api.report.error.tooMuchFilesTitle')}
     description={intl.get('api.report.error.tooMuchFiles')}
   />

@@ -13,16 +13,15 @@
   margin-top: 30px;
 }
 
-.tooMuchFilesIcon {
+.customAlertIcon {
   font-size: 21px !important;
   margin-top: 2px;
 }
 
-.tooMuchFiles {
+.customAlert {
   *[class$="-alert-message"] {
     font-weight: 600;
   }
-
   margin-top: 30px;
   color: $red-8;
 }
