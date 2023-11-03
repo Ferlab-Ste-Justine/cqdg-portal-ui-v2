@@ -214,11 +214,12 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     title: intl.get('entities.variant.participant.title'),
     tooltip: intl.get('entities.variant.participant.tooltip'),
-    key: 'participant_number',
+    key: 'internal_frequencies_wgs.total.pc',
+    dataIndex: 'internal_frequencies_wgs',
     render: (variant: IVariantEntity) => variant.internal_frequencies_wgs?.total?.pc || 0,
   },
   {
-    key: 'internal_frequencies_wgs',
+    key: 'internal_frequencies_wgs.total.af',
     title: intl.get('entities.variant.frequence.title'),
     tooltip: intl.get('entities.variant.frequence.tooltip'),
     dataIndex: 'internal_frequencies_wgs',
