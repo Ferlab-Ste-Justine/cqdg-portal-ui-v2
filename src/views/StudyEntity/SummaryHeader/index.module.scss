@@ -50,4 +50,11 @@
     background-color: $gray-3;
     color: $gray-7;
   }
+
+  .disableHover {
+    cursor: inherit;
+    &:hover {
+      background-color: inherit;
+    }
+  }
 }

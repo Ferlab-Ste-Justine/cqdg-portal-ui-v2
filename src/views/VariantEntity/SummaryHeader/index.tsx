@@ -34,9 +34,9 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study_code',
+                    field: 'study.study_code',
                     value: studyCodes,
-                    index: INDEXES.STUDY,
+                    index: INDEXES.PARTICIPANT,
                   }),
                 ],
               }),
