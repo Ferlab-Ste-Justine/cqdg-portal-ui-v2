@@ -55,16 +55,15 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
       </Button>
 
       <Button
-        className={styles.button}
+        className={`${styles.button} ${styles.disableHover}`}
         size="large"
-        disabled
         data-cy="SummaryHeader_Participants_Button"
         block
       >
         <div className={styles.link}>
-          <UserOutlined className={styles.iconDisable} />
+          <UserOutlined className={styles.icon} />
           <div className={styles.alignBaseline}>
-            <span className={styles.countDisable}>{numberWithCommas(participantCount)}</span>
+            <span className={styles.count}>{numberWithCommas(participantCount)}</span>
             <span className={styles.name}>
               {intl.get('entities.participant.participantAuto', {
                 count: participantCount,

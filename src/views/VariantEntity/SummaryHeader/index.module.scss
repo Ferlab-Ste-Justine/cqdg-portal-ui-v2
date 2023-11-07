@@ -29,11 +29,6 @@
         color: $gray-9;
       }
 
-      .iconDisable {
-        font-size: 21px;
-        color: $gray-7;
-      }
-
       .count {
         font-weight: 600;
         font-size: 24px;
@@ -42,20 +37,19 @@
         color: $gray-9;
       }
 
-      .countDisable {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 32px;
-        padding-left: 4px;
-        color: $gray-7;
-      }
-
       .name {
         font-weight: 400;
         font-size: 14px;
         line-height: 22px;
         color: $gray-7;
       }
+    }
+  }
+
+  .disableHover {
+    cursor: inherit;
+    &:hover {
+      background-color: inherit;
     }
   }
 }
