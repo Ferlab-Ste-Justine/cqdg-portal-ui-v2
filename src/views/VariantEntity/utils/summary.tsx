@@ -6,6 +6,7 @@ import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import { Tag, Tooltip } from 'antd';
 import { IVariantEntity } from 'graphql/variants/models';
+import { getSourceTagColor } from 'views/Variants/components/PageContent/VariantsTable';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
@@ -60,8 +61,14 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
             value: variant?.assembly_version || TABLE_EMPTY_PLACE_HOLDER,
           },
           {
-            label: intl.get('entities.variant.source'),
-            value: variant?.source || TABLE_EMPTY_PLACE_HOLDER,
+            label: intl.get('entities.variant.sources'),
+            value: variant?.sources?.length
+              ? variant?.sources?.map((value) => (
+                  <Tag color={getSourceTagColor(value)} key={value}>
+                    {value || TABLE_EMPTY_PLACE_HOLDER}
+                  </Tag>
+                ))
+              : TABLE_EMPTY_PLACE_HOLDER,
           },
           {
             label: intl.get('entities.variant.genes'),

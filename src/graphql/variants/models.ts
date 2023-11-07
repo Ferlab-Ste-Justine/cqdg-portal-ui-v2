@@ -181,7 +181,7 @@ export interface IVariantEntity {
   score: number;
   alternate: string;
   assembly_version: string;
-  source: string;
+  sources: string[];
   chromosome: string;
   dna_change: string;
   end: number;
@@ -216,3 +216,8 @@ export interface IVariantStudyEntity {
 export type ITableVariantEntity = IVariantEntity & {
   key: string;
 };
+
+export enum Sources {
+  WGS = 'WGS',
+  WXS = 'WXS',
+}

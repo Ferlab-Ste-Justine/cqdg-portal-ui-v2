@@ -170,7 +170,7 @@ const en = {
       alternativeAllele: 'Alternative allele',
       referenceAllele: 'Reference allele',
       referenceGenome: 'Reference Genome',
-      source: 'Source',
+      sources: 'Sources',
       genes: 'Genes',
       gene: 'Gene',
       genePhenotype: 'Gene - Phenotype',

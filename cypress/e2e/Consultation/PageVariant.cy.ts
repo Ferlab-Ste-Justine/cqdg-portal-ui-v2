@@ -43,8 +43,9 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('1q23.3').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(3).contains('Reference Genome').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(3).contains('GRCh38').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Source').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('-').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Sources').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('WGS').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[class*="ant-tag-purple"]').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Genes').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('FCGR3B').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(6).contains('OMIM').should('exist');

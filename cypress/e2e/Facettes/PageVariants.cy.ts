@@ -162,6 +162,14 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Homozygote').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^80$/).should('exist');
   });
+
+  it('Sources - WGS', () => {
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(7).contains('Sources').should('exist');
+    cy.checkValueFacetAndApply(7, 'WGS');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sources').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');
+  });
 });
 
 describe('Page des variants (Gene) - Filtrer avec les facettes', () => {

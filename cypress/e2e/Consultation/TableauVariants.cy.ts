@@ -13,18 +13,21 @@ describe('Page des variants - Consultation du tableau', () => {
   it('Vérifier les informations affichées', () => {
     cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(1).contains('chr1:g.161629781T>C').should('exist');
     cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(2).contains('SNV').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(3).contains('rs2290834').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).find('[class*="moderateImpact"]').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).contains('Missense').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).contains('FCGR3B').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).contains('p.Ile106Val').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('Benign').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(6).contains('1.65e-2').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(7).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(8).contains(/^0$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(9).contains('-').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(10).contains(/^-$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(11).contains(/^0$/).should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(3).contains('WGS').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(3).find('[class*="ant-tag-purple"]').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).contains('rs2290834').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).find('[class*="moderateImpact"]').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('Missense').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('FCGR3B').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('p.Ile106Val').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(6).contains('Benign').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(7).contains('1.65e-2').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(8).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(9).contains(/^3$/).should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(9).find('[href]').should('not.exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(10).contains('6.67e-1').should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(11).contains(/^4$/).should('exist');
+    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(12).contains(/^1$/).should('exist');
   });
  
   it('Valider les liens disponibles Lien Variant', () => {
@@ -33,22 +36,22 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien dbSNP', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(3).find('a[href]')
+    cy.get('tr[data-row-key]').eq(0).find('td').eq(4).find('a[href]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs2290834');
   });
  
   it('Valider les liens disponibles Lien Gène', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(4).find('a[href]')
+    cy.get('tr[data-row-key]').eq(0).find('td').eq(5).find('a[href]')
     .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=FCGR3B');
   });
  
   it('Valider les liens disponibles Lien ClinVar', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(5).find('a[href]')
+    cy.get('tr[data-row-key]').eq(0).find('td').eq(6).find('a[href]')
     .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/402858');
   });
  
   it('Valider les liens disponibles Lien Studies', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(7).find('a[href]').click({force: true});
+    cy.get('tr[data-row-key]').eq(0).find('td').eq(8).find('a[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
@@ -56,7 +59,7 @@ describe('Page des variants - Consultation du tableau', () => {
  
 // Pas de donnée
   it.skip('Valider les liens disponibles Lien Part.', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(8).find('a[href]').click({force: true});
+    cy.get('tr[data-row-key]').eq(0).find('td').eq(9).find('a[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT').should('exist');
@@ -90,9 +93,9 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('dbSNP', 1);
-    cy.validateTableFirstRow('-', 3);
+    cy.validateTableFirstRow('-', 4);
     cy.sortTableAndIntercept('dbSNP', 1);
-    cy.validateTableFirstRow('rs986294053', 3);
+    cy.validateTableFirstRow('rs986294053', 4);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
