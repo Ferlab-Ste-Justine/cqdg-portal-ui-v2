@@ -8,6 +8,7 @@ import { useForm } from 'antd/lib/form/Form';
 import { capitalize } from 'lodash';
 
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
+import { TUser } from 'services/api/user/models';
 import { useUser } from 'store/user';
 import { updateUser } from 'store/user/thunks';
 
@@ -42,6 +43,13 @@ const IdentificationCard = () => {
   const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
 
   const isValueChanged = () => Object.values(hasChanged).some((val) => val);
+
+  const replaceEmptyEmailAndLinkedin = (user: TUser): TUser => {
+    const userEmailNotEmpty = !user.public_email ? { ...user, public_email: null } : user;
+    return !userEmailNotEmpty.linkedin?.length
+      ? { ...userEmailNotEmpty, linkedin: null }
+      : userEmailNotEmpty;
+  };
 
   const onDiscardChanges = () => {
     setHasChanged(initialChangedValues);
@@ -82,13 +90,14 @@ const IdentificationCard = () => {
               initialValues={initialValues}
               hasChangedInitialValue={hasChanged}
               onHasChanged={setHasChanged}
-              onFinish={(values: any) =>
-                dispatch(
+              onFinish={(values: any) => {
+                const valuesNonEmpty = replaceEmptyEmailAndLinkedin(values);
+                return dispatch(
                   updateUser({
-                    data: values,
+                    data: valuesNonEmpty,
                   }),
-                )
-              }
+                );
+              }}
             >
               <Form.Item
                 name={FORM_FIELDS.FIRST_NAME}
