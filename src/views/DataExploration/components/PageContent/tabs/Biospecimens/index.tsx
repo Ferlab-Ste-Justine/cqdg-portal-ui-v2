@@ -35,7 +35,7 @@ import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helpe
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
-import { tissue_source } from 'components/tables/columns/biospeciments';
+import { tissueSource } from 'components/tables/columns/biospeciments';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
@@ -111,7 +111,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  tissue_source,
+  tissueSource({ sorter: { multiple: 1 } }),
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
