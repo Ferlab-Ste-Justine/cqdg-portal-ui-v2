@@ -62,7 +62,6 @@ const getFilterGroups = (type: FilterTypes) => {
               'genes__consequences__consequence',
               'variant_external_reference',
               'chromosome',
-              'studies__transmission',
               'start',
               'studies__zygosity',
               'sources',

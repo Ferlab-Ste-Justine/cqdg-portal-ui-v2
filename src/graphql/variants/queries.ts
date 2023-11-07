@@ -234,7 +234,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                       af
                       pf
                     }
-                    transmission
                     zygosity
                   }
                 }
@@ -483,7 +482,6 @@ export const GET_VARIANT_ENTITY = gql`
                       af
                       pf
                     }
-                    transmission
                     zygosity
                   }
                 }
