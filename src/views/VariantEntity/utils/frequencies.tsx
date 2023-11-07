@@ -1,6 +1,5 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
-import { InfoCircleOutlined } from '@ant-design/icons';
 import { ProColumnType, TProTableSummary } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
@@ -72,9 +71,6 @@ export const getFrequenciesItems = (): ProColumnType[] => [
           title={intl.get('entities.variant.frequencies.participantsTooltip')}
         >
           {intl.get('entities.variant.frequencies.participants')}
-        </Tooltip>
-        <Tooltip title={intl.get('entities.variant.frequencies.participantsInfoIconTooltip')}>
-          <InfoCircleOutlined />
         </Tooltip>
       </Space>
     ),
