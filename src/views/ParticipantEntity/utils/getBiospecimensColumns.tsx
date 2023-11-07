@@ -4,7 +4,7 @@ import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { tissue_source } from 'components/tables/columns/biospeciments';
+import { tissueSource } from 'components/tables/columns/biospeciments';
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
@@ -28,7 +28,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  tissue_source,
+  tissueSource({}),
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',

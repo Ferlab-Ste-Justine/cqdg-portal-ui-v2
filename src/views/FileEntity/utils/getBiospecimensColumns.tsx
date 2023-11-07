@@ -6,7 +6,7 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { tissue_source } from 'components/tables/columns/biospeciments';
+import { tissueSource } from 'components/tables/columns/biospeciments';
 import { STATIC_ROUTES } from 'utils/routes';
 
 const getBiospecimensColumns = (): ProColumnType<any>[] => [
@@ -57,7 +57,7 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
     title: intl.get('entities.biospecimen.biospecimen'),
     render: (biospecimen_id: string) => biospecimen_id,
   },
-  tissue_source,
+  tissueSource({}),
 ];
 
 export default getBiospecimensColumns;
