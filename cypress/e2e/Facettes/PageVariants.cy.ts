@@ -128,44 +128,29 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^500$/).should('exist');
   });
 
-  it('Transmission - Unknown Parents Genotype', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(4).contains('Transmission').should('exist');
-    cy.checkValueFacetAndApply(4, 'Unknown Parents Genotype');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Transmission').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Unknown Parents Genotype').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');
-  });
-
-  it.skip('Transmission - Autosomal Dominant De Novo', () => {
-    cy.checkValueFacetAndApply(4, 'Autosomal Dominant De Novo');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Transmission').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Autosomal Dominant De Novo').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^7,632$/).should('exist');
-  });
-
   it('Position', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(5).contains('Position').should('exist');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(4).contains('Position').should('exist');
     // TODO Filtrer
   });
 
   it('Zygosity - Heterozygote', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(6).contains('Zygosity').should('exist');
-    cy.checkValueFacetAndApply(6, 'Heterozygote');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(5).contains('Zygosity').should('exist');
+    cy.checkValueFacetAndApply(5, 'Heterozygote');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Heterozygote').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^387$/).should('exist');
   });
 
   it('Zygosity - Homozygote', () => {
-    cy.checkValueFacetAndApply(6, 'Homozygote');
+    cy.checkValueFacetAndApply(5, 'Homozygote');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Zygosity').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Homozygote').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^80$/).should('exist');
   });
 
   it('Sources - WGS', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(7).contains('Sources').should('exist');
-    cy.checkValueFacetAndApply(7, 'WGS');
+    cy.get('div[class*="Filters_customFilterContainer"]').eq(6).contains('Sources').should('exist');
+    cy.checkValueFacetAndApply(6, 'WGS');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sources').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^442$/).should('exist');

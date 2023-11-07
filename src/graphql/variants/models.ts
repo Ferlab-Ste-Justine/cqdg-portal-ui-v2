@@ -207,7 +207,6 @@ export interface IVariantStudyEntity {
   score: number | null;
   study_code: string;
   study_id: string;
-  transmissions: string[];
   zygosity: string[];
   total: IBoundType;
   domain: string;
