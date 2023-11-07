@@ -29,7 +29,7 @@ const SummaryHeader = ({ participant }: ISummaryBarProps) => (
             query: generateQuery({
               newFilters: [
                 generateValueFilter({
-                  field: 'study_code',
+                  field: 'study.study_code',
                   value: [participant.study_code],
                   index: INDEXES.PARTICIPANT,
                 }),
