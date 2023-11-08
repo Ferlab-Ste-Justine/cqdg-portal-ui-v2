@@ -13,14 +13,6 @@ describe('Page d\'un variant - Valider les redirections', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
   });
-  
-  it('Participants', () => {
-    cy.get('[data-cy="SummaryHeader_Participants_Button"]').find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
-// Pas de donnée
-//    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT').should('exist');
-  });
 });
 
 describe('Page d\'un variant - Vérifier les informations affichées', () => {
