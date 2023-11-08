@@ -55,31 +55,12 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
       </Button>
 
       <Button
-        className={styles.button}
+        className={`${styles.button} ${styles.disableHover}`}
         size="large"
-        disabled
         data-cy="SummaryHeader_Participants_Button"
         block
       >
-        <Link
-          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-          className={styles.link}
-          onClick={() =>
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'participant_id',
-                    value: [],
-                    index: INDEXES.PARTICIPANT,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            })
-          }
-        >
+        <div className={styles.link}>
           <UserOutlined className={styles.icon} />
           <div className={styles.alignBaseline}>
             <span className={styles.count}>{numberWithCommas(participantCount)}</span>
@@ -89,7 +70,7 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
               })}
             </span>
           </div>
-        </Link>
+        </div>
       </Button>
     </div>
   );

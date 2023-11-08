@@ -45,4 +45,11 @@
       }
     }
   }
+
+  .disableHover {
+    cursor: inherit;
+    &:hover {
+      background-color: inherit;
+    }
+  }
 }
