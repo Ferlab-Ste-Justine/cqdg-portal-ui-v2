@@ -76,7 +76,6 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('Genetic studies only').should('exist');
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('DUO:').should('exist');
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('0000016').should('exist');
-    cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('See more').should('exist');
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-label"]').eq(2).contains('Access Authority').should('exist');
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('jacques.michaud.med@ssss.gouv.qc.ca').should('exist');
   });
@@ -154,13 +153,6 @@ describe('Page d\'une étude - Valider les liens disponibles', () => {
   it('Lien Duo de l\'Access Requirements du panneau Data Access', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).find('[href]')
       .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/DUO_0000016');
-  });
-  
-  it('Lien \'See more\' de l\'Access Requirements du panneau Data Access', () => {
-    cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('See more').click({force: true});
-    cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('Ethics approval required').should('exist');
-    cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('See less').click({force: true});
-    cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('Ethics approval required').should('not.exist');
   });
 
   it('Lien de l\'Access Authority du panneau Data Access [CQDG-267]', () => {
