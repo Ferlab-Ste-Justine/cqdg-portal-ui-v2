@@ -8,12 +8,12 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=TODO');
+    cy.visitVariantsPage('?sharedFilterId=fbfdb5e3-231b-47f1-9021-1b3af84425ff');
   });
 
   it('Validation Facette numérique ou No Data', () => {
-    cy.validateTotalSelectedQuery('1,143');
-    cy.validateTableResultsCount('1,143');
+    cy.validateTotalSelectedQuery('204');
+    cy.validateTableResultsCount('204');
   });
 
   it('Validation Facette numérique OU Facette standard', () => {
@@ -21,8 +21,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTotalSelectedQuery('455');
-    cy.validateTableResultsCount('455');
+    cy.validateTotalSelectedQuery('307');
+    cy.validateTableResultsCount('307');
   });
 
   it('Validation Facette numérique ou No Data ET Facette standard', () => {
@@ -30,8 +30,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(2).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTotalSelectedQuery('307');
-    cy.validateTableResultsCount('307');
+    cy.validateTotalSelectedQuery('123');
+    cy.validateTableResultsCount('123');
   });
 
   it('Validation Facette standard (Any of)', () => {
@@ -39,8 +39,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(3).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTotalSelectedQuery('639');
-    cy.validateTableResultsCount('639');
+    cy.validateTotalSelectedQuery('274');
+    cy.validateTableResultsCount('274');
   });
 
   it('Validation Facette standard (All of)', () => {
@@ -57,8 +57,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(5).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTotalSelectedQuery('594');
-    cy.validateTableResultsCount('594');
+    cy.validateTotalSelectedQuery('168');
+    cy.validateTableResultsCount('168');
   });
 
   it('Validation Facette standard (None of) ET Facette numérique', () => {
@@ -66,7 +66,7 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(6).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTotalSelectedQuery('53');
-    cy.validateTableResultsCount('53');
+    cy.validateTotalSelectedQuery('81');
+    cy.validateTableResultsCount('81');
   });
 });
