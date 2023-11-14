@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=fbfdb5e3-231b-47f1-9021-1b3af84425ff');
+    cy.visitVariantsPage('?sharedFilterId=23870b3f-b2f5-442d-96cf-d9f1a718d37c');
 
     cy.get('li[data-key="category_variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
