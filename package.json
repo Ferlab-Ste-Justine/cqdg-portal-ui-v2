@@ -49,8 +49,9 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run lint"
-    ]
+      "npm run lint:fix"
+    ],
+    "!src/cypress/**/*.{ts,tsx}": "echo Ignoring Cypress files"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

@@ -3,8 +3,8 @@
               "Phenotype (Source Text)",
               "Interpretation",
               "Age"],
-  "content": ["Spasticity (HP:0001257)",
-              "Spasticity",
+  "content": ["Seizure (HP:0001250)",
+              "Intractable Seizures",
               "Observed",
-              "--"]
+              "Neonatal (< 28 days)"]
 }

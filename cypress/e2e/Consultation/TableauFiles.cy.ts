@@ -17,20 +17,20 @@ describe('Page Data Exploration (Data Files) - Vérifier les informations affich
   });
 
   it('Tableau [CQDG-261]', () => {
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(1).find('svg[data-icon="lock"]').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(2).contains('C').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(2).find('[class*="ant-tag-geekblue"]').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(3).contains('FI0188666').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(4).contains('NEURODEV').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(5).contains('Genomics').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(6).contains('Sequencing Data Supplement').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(7).contains('WGS').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(8).contains('TGZ').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(9).contains('0 B').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(10).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(11).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(12).contains('mpsMetrics_15684.tar.gz').should('exist');
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(13).contains('Illumina NovaSeq 6000').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(1).find('svg[data-icon="lock"]').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(2).contains('C').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(2).find('[class*="ant-tag-geekblue"]').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(3).contains('FI0000572').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(4).contains('T-DEE').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(5).contains('Genomics').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(6).contains('Sequencing Data Supplement').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(7).contains('WGS').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(8).contains('TGZ').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(9).contains('0 B').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(10).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(11).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(12).contains('S03510.extra.tgz').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(13).contains('Illumina HiSeq 2500 PE125').should('exist');
   });
 });
 
@@ -40,30 +40,30 @@ describe('Page Data Exploration (Data Files) - Valider les liens disponibles', (
   });
 
   it('Lien File du tableau', () => {
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(3).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(3).find('[href]').click({force: true});
     cy.get('[id="file-entity-page"]').should('exist');
-    cy.get('[class*="EntityTitle"]').contains('FI0188666');
+    cy.get('[class*="EntityTitle"]').contains('FI0000572');
   });
 
   it('Lien Study du tableau', () => {
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(4).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(4).find('[href]').click({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
-    cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
+    cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
   });
 
   it('Lien Participants du tableau', () => {
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0188666').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0000572').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 
   it('Lien Biospecimens du tableau', () => {
-    cy.get('tr[data-row-key="FI01886660"]').find('[class*="ant-table-cell"]').eq(11).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(11).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0188666').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0000572').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 });
@@ -77,7 +77,7 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
 
   it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('NEURODEV', 4);
+    cy.validateTableFirstRow('STUDY1', 4);
     cy.sortTableAndWait('Study');
     cy.validateTableFirstRow('T-DEE', 4);
   });
@@ -127,7 +127,8 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndWait('Format');
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('NEURODEV', 4);
+    cy.sortTableAndWait('Study');
+    cy.validateTableFirstRow('T-DEE', 4);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

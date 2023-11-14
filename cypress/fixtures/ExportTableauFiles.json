@@ -8,11 +8,13 @@
               "Size",
               "File Name",
               "Platform"],
-  "content": ["FI0188666",
-              "NEURODEV",
+  "content": ["FI0000572",
+              "T-DEE",
               "Genomics",
               "Sequencing Data Supplement",
               "WGS",
               "TGZ",
-              "--"]
+              "--",
+              "S03510.extra.tgz",
+              "Illumina HiSeq 2500 PE125"]
 }

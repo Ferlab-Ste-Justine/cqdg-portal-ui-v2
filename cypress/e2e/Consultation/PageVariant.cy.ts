@@ -48,7 +48,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(8).contains('gnomAD Genome (v3.1.2)').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(8).contains('1.65e-2').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(9).contains('CQDG Studies').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(9).contains('-').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(9).contains('6.67e-1').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(10).contains('ClinVar').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(10).contains('402858').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(11).contains('dbSNP').should('exist');
@@ -93,7 +93,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('[id="consequence"]').find('div[class*="EntityTable_contentTable"]').find('tr[class*="ant-table-row"]').eq(1).should('not.exist');
   });
   
-  it('Panneau Frequency', () => {
+  it('Panneau Frequency [CQDG-472]', () => {
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Studies').should('exist');
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Domain').should('exist');
     cy.get('[id="frequencies"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Participants').should('exist');
