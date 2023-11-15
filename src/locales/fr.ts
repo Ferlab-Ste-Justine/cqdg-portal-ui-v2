@@ -960,9 +960,9 @@ const fr = {
           },
           studiespie: {
             cardTitle: 'Études',
-            domainTitle: 'Études par domaine',
-            popTitle: 'Études par type population',
-            partTitle: 'Participants par étude',
+            domainTitle: 'Domaine',
+            popTitle: 'Population',
+            partTitle: 'Participants',
           },
         },
         participants: {

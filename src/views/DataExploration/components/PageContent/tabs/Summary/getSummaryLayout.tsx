@@ -2,9 +2,9 @@ import intl from 'react-intl-universal';
 import { IResizableGridLayoutConfig } from '@ferlab/ui/core/layout/ResizableGridLayout';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
-import DataCategoryGraphCard from 'components/graphs/DataCategoryGraphCard';
 import DataTypeGraphCard from 'components/graphs/DataTypeGraphCard';
 import DemographicsGraphCard from 'components/graphs/DemographicGraphCard';
+import ExperimentalStrategyGraphCard from 'components/graphs/ExperimentalStrategyGraphCard';
 import StudiesGraphCard from 'components/graphs/StudiesGraphCard';
 import SunburstGraphCard from 'components/graphs/SunburstGraphCard';
 
@@ -12,9 +12,9 @@ export const UID = 'summaryLayout';
 const OBSERVED_PHENOTYPE_ID = 'observed_phenotype';
 const MONDO_ID = 'mondo';
 const DEMOGRAPHICS_GRAPH_CARD_ID = 'demographics-graph-card';
-const DATA_CATEGORY_GRAPH_CARD_ID = 'data-category-graph-card';
 const STUDIES_GRAPH_CARD_ID = 'studies-graph-card';
 const DATA_TYPE_GRAPH_CARD_ID = 'data-type-graph-card';
+const EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID = 'experimental-strategy-graph-card';
 
 const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
   {
@@ -61,11 +61,11 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
-    base: { h: 2, w: 3, x: 0, y: 4, minH: 2, minW: 3, isResizable: true },
-    md: { h: 2, w: 3, x: 0, y: 4 },
-    sm: { h: 2, w: 3, x: 0, y: 4 },
-    xs: { h: 3, w: 4, x: 0, y: 8 },
-    xss: { h: 3, w: 4, x: 0, y: 8 },
+    base: { h: 2, w: 4, x: 0, y: 4, minH: 2, minW: 4, isResizable: true },
+    md: { h: 2, w: 4, x: 0, y: 4 },
+    sm: { h: 2, w: 4, x: 0, y: 4 },
+    xs: { h: 2, w: 4, x: 0, y: 4 },
+    xss: { h: 2, w: 4, x: 0, y: 4 },
   },
   {
     title: intl.get('screen.dataExploration.tabs.summary.studies.cardTitle'),
@@ -73,11 +73,11 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     component: (
       <StudiesGraphCard id={STUDIES_GRAPH_CARD_ID} gridUID={UID} queryId={DATA_EXPLORATION_QB_ID} />
     ),
-    base: { h: 2, w: 3, x: 3, y: 4, minH: 2, minW: 3, isResizable: true },
-    md: { h: 2, w: 3, x: 3, y: 4 },
-    sm: { h: 2, w: 3, x: 3, y: 4 },
-    xs: { h: 3, w: 4, x: 0, y: 11 },
-    xss: { h: 3, w: 4, x: 0, y: 11 },
+    base: { h: 2, w: 8, x: 4, y: 4, minH: 2, minW: 8, isResizable: true },
+    md: { h: 2, w: 8, x: 4, y: 4 },
+    sm: { h: 2, w: 8, x: 4, y: 4 },
+    xs: { h: 2, w: 8, x: 4, y: 4 },
+    xss: { h: 2, w: 8, x: 4, y: 4 },
   },
   {
     title: intl.get('screen.dataExploration.tabs.summary.availableData.dataTypeTitle'),
@@ -89,27 +89,27 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
-    base: { h: 2, w: 3, x: 6, y: 4, minH: 2, minW: 3, isResizable: true },
-    md: { h: 2, w: 3, x: 6, y: 4 },
-    sm: { h: 2, w: 3, x: 0, y: 7 },
-    xs: { h: 3, w: 4, x: 0, y: 14 },
-    xss: { h: 3, w: 4, x: 0, y: 14 },
+    base: { h: 3, w: 6, x: 0, y: 8, minH: 3, minW: 6, isResizable: true },
+    md: { h: 3, w: 6, x: 0, y: 8 },
+    sm: { h: 3, w: 6, x: 0, y: 8 },
+    xs: { h: 3, w: 6, x: 0, y: 0 },
+    xss: { h: 3, w: 6, x: 0, y: 8 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.availableData.dataCategoryTitle'),
-    id: DATA_CATEGORY_GRAPH_CARD_ID,
+    title: intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle'),
+    id: EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID,
     component: (
-      <DataCategoryGraphCard
-        id={DATA_CATEGORY_GRAPH_CARD_ID}
+      <ExperimentalStrategyGraphCard
         gridUID={UID}
+        id={DEMOGRAPHICS_GRAPH_CARD_ID}
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
-    base: { h: 2, w: 3, x: 9, y: 4, minH: 2, minW: 3, isResizable: true },
-    md: { h: 2, w: 3, x: 9, y: 4 },
-    sm: { h: 2, w: 3, x: 3, y: 7 },
-    xs: { h: 3, w: 4, x: 0, y: 14 },
-    xss: { h: 3, w: 4, x: 0, y: 14 },
+    base: { h: 3, w: 3, x: 6, y: 8, minH: 3, minW: 3, isResizable: true },
+    md: { h: 3, w: 3, x: 6, y: 8 },
+    sm: { h: 3, w: 3, x: 6, y: 8 },
+    xs: { h: 3, w: 3, x: 6, y: 8 },
+    xss: { h: 3, w: 3, x: 6, y: 8 },
   },
 ];
 
