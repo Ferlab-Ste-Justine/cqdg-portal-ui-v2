@@ -86,6 +86,7 @@ const DemographicsGraphCard = ({
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>
             <PieChart
+              title={intl.get('screen.dataExploration.tabs.summary.demographic.genderTitle')}
               data={genderData}
               onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
               colors={colors}
@@ -93,7 +94,7 @@ const DemographicsGraphCard = ({
                 {
                   anchor: 'bottom',
                   translateX: 0,
-                  translateY: (LEGEND_ITEM_HEIGHT * genderData.length - 1) / 2,
+                  translateY: 0,
                   direction: 'column',
                   itemWidth: 100,
                   itemHeight: LEGEND_ITEM_HEIGHT,
@@ -104,6 +105,7 @@ const DemographicsGraphCard = ({
           </Col>
           <Col sm={12} md={12} lg={8}>
             <PieChart
+              title={intl.get('screen.dataExploration.tabs.summary.demographic.ethnicityTitle')}
               data={ethnicityData}
               onClick={(datum) =>
                 isPlayable && addToQuery('ethnicity', datum.id as string, queryId)
@@ -113,7 +115,7 @@ const DemographicsGraphCard = ({
                 {
                   anchor: 'bottom',
                   translateX: 0,
-                  translateY: (LEGEND_ITEM_HEIGHT * ethnicityData.length - 1) / 2,
+                  translateY: 0,
                   direction: 'column',
                   itemWidth: 100,
                   itemHeight: LEGEND_ITEM_HEIGHT,
@@ -124,10 +126,6 @@ const DemographicsGraphCard = ({
           </Col>
         </Row>
       }
-      modalSettings={{
-        width: 1000,
-        height: 600,
-      }}
       content={
         <Row gutter={[12, 24]} className={styles.graphRowWrapper}>
           <Col sm={12} md={12} lg={8}>

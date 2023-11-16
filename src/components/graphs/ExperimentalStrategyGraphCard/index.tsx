@@ -88,7 +88,7 @@ const ExperimentalStrategyGraphCard = ({
             {
               anchor: 'bottom',
               translateX: 0,
-              translateY: (LEGEND_ITEM_HEIGHT * data.length - 1) / 2,
+              translateY: 100,
               direction: 'column',
               itemWidth: 100,
               itemHeight: LEGEND_ITEM_HEIGHT,

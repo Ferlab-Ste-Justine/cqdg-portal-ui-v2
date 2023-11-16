@@ -96,12 +96,12 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xss: { h: 3, w: 6, x: 0, y: 8 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle'),
+    title: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
     id: EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID,
     component: (
       <ExperimentalStrategyGraphCard
         gridUID={UID}
-        id={DEMOGRAPHICS_GRAPH_CARD_ID}
+        id={EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID}
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
