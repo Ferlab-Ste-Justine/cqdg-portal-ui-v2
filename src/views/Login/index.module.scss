@@ -6,6 +6,12 @@
   flex-direction: column;
   height: 100%;
 
+  .switchLang {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+  }
+
   .loginContainer {
     display: flex;
     flex-direction: column;

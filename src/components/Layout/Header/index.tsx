@@ -37,7 +37,7 @@ const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
 const BANNER_TYPE_KEY = FT_FLAG_KEY + '_TYPE';
 const BANNER_MSG_KEY = FT_FLAG_KEY + '_MSG';
 
-const getTargetLang = (lang: LANG) => (lang === LANG.FR ? LANG.EN : LANG.FR);
+export const getTargetLang = (lang: LANG) => (lang === LANG.FR ? LANG.EN : LANG.FR);
 
 const Header = () => {
   const lang = useLang();
