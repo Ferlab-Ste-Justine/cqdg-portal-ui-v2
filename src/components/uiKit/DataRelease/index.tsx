@@ -77,7 +77,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
             label={totalFileSize}
             Icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
-            subLabel={intl.get('entities.file.files')}
+            subLabel={intl.get('entities.file.datafiles')}
           />
         </Col>
       </Row>
