@@ -681,7 +681,7 @@ const fr = {
       noMember: 'Aucun membre',
       search: {
         filters: 'Filtres',
-        inputPlaceholder: 'ex : Watson, Linda Children’s Hospital of Philadelphia',
+        inputPlaceholder: 'ex : Bergeron, Sainte-Justine',
         selectPlaceholder: 'Sélectionner',
         role: 'Rôle',
         dataUse: 'Utilisation des données',

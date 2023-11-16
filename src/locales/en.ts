@@ -699,7 +699,7 @@ const en = {
       noMember: 'No member',
       search: {
         filters: 'Filters',
-        inputPlaceholder: 'e.g. Watson, Linda Children’s Hospital of Philadelphia',
+        inputPlaceholder: 'e.g. Bergeron, Sainte-Justine',
         selectPlaceholder: 'Select',
         role: 'Role',
         dataUse: 'Data use',
