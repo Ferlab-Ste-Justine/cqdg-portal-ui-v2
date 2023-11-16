@@ -139,8 +139,8 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="statistic"]').find('[aria-label="Observed Phenotypes (HPO)"]').should('exist');
     cy.get('[id="statistic"]').find('[aria-label="Diagnosis (MONDO)"]').should('exist');
     cy.get('[id="statistic"]').find('[aria-label="Participants by Data Type"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Participants by Data Category"]').should('exist');
     cy.get('[id="statistic"]').find('[aria-label="Demographics"]').should('exist');
+    cy.get('[id="statistic"]').find('[aria-label="Experimental Strategy"]').should('exist');
   });
 });
 

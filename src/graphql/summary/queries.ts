@@ -165,3 +165,21 @@ export const AGE_AT_DIAGNOSIS_QUERY = gql`
     }
   }
 `;
+
+export const EXPERIMENTAL_STRATEGY_QUERY = gql`
+  query AggregationDemographicInfo($sqon: JSON) {
+    Participant {
+      hits(filters: $sqon) {
+        total
+      }
+      aggregations(filters: $sqon, aggregations_filter_themselves: true) {
+        files__sequencing_experiment__experimental_strategy {
+          buckets {
+            key
+            doc_count
+          }
+        }
+      }
+    }
+  }
+`;
