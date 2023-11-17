@@ -82,7 +82,8 @@ const globalSlice = createSlice({
       state.isFetchingStats = false;
     });
     builder.addCase(fetchUser.fulfilled, (state) => {
-      const { locale } = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
+      const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
+      const locale = tokenParsed.locale || state.lang;
       setLocalConfig(locale);
       return {
         ...state,
