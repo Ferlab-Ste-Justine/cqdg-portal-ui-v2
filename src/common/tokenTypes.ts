@@ -33,4 +33,5 @@ export interface IncludeKeycloakTokenParsed extends KeycloakTokenParsed {
   email: string;
   identity_provider: string;
   identity_provider_identity: string;
+  locale: string;
 }
