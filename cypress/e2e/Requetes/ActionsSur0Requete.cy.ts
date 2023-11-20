@@ -8,23 +8,23 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=26975300-a55e-4af9-b342-761374acb4a0');
+    cy.visitVariantsPage('?sharedFilterId=fbfdb5e3-231b-47f1-9021-1b3af84425ff');
 
-    cy.get('li[data-key="participants"]').click();
+    cy.get('li[data-key="category_variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
   it('Construire une première requête', () => {
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,233');
-    cy.validateTableResultsCount('1,233');
+    cy.validateTotalSelectedQuery('442');
+    cy.validateTableResultsCount('442');
 
-    cy.checkValueFacetAndApply(0, 'NEURODEV');
+    cy.checkValueFacetAndApply(0, 'SNV');
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV']);
-    cy.validateTotalSelectedQuery('382');
-    cy.validateTableResultsCount('382');
+    cy.validatePillSelectedQuery('Variant Type', ['SNV']);
+    cy.validateTotalSelectedQuery('226');
+    cy.validateTableResultsCount('226');
     cy.validateClearAllButton(false);
   });
 });

@@ -8,9 +8,9 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=65e435ce-d5f5-491a-ba90-57025070b957');
+    cy.visitVariantsPage('?sharedFilterId=a4cb8de6-d56d-4b37-9877-c89c004709ac');
 
-    cy.get('li[data-key="participants"]').click();
+    cy.get('li[data-key="category_variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -23,9 +23,9 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.wait('@getPOSTgraphql1', {timeout: 20*1000});
 
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 2);
-    cy.validatePillSelectedQuery('Age at Recruitment (days)', ['100000']);
-    cy.validateTotalSelectedQuery('216');
-    cy.validateTableResultsCount('216');
+    cy.validatePillSelectedQuery('Position', ['10000000']);
+    cy.validateTotalSelectedQuery('43');
+    cy.validateTableResultsCount('43');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).find('[class*="QueryValues_queryValuesContainer"]').contains('Q1').should('exist');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).find('[class*="QueryValues_queryValuesContainer"]').contains('Q2').should('not.exist');
     cy.validateClearAllButton(true);

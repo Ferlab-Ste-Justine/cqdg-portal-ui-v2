@@ -8,9 +8,9 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=1e2eed68-e5c7-4814-abc5-dd151842a4a4');
+    cy.visitVariantsPage('?sharedFilterId=51590cb8-6c31-471c-bb34-129dcb018adc');
 
-    cy.get('li[data-key="participants"]').click();
+    cy.get('li[data-key="category_variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -22,11 +22,11 @@ describe('Page Data Exploration - Requêtes', () => {
       cy.wait('@getPOSTgraphql1', {timeout: 20*1000});
     };
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV']);
-    cy.validatePillSelectedQuery('Age at Recruitment (days)', ['100000'], 1);
+    cy.validatePillSelectedQuery('Variant Type', ['SNV']);
+    cy.validatePillSelectedQuery('Position', ['10000000'], 1);
     cy.validateOperatorSelectedQuery('or');
-    cy.validateTotalSelectedQuery('470');
-    cy.validateTableResultsCount('470');
+    cy.validateTotalSelectedQuery('242');
+    cy.validateTableResultsCount('242');
     cy.validateClearAllButton(false);
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
@@ -35,11 +35,11 @@ describe('Page Data Exploration - Requêtes', () => {
       cy.wait('@getPOSTgraphql2', {timeout: 20*1000});
     };
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV']);
-    cy.validatePillSelectedQuery('Age at Recruitment (days)', ['100000'], 1);
+    cy.validatePillSelectedQuery('Variant Type', ['SNV']);
+    cy.validatePillSelectedQuery('Position', ['10000000'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('128');
-    cy.validateTableResultsCount('128');
+    cy.validateTotalSelectedQuery('27');
+    cy.validateTableResultsCount('27');
     cy.validateClearAllButton(false);
   });
 
@@ -50,9 +50,9 @@ describe('Page Data Exploration - Requêtes', () => {
       cy.wait('@getPOSTgraphql', {timeout: 20*1000});
     };
 
-    cy.validatePillSelectedQuery('Age at Recruitment (days)', ['100000']);
-    cy.validateTotalSelectedQuery('216');
-    cy.validateTableResultsCount('216');
+    cy.validatePillSelectedQuery('Position', ['10000000']);
+    cy.validateTotalSelectedQuery('43');
+    cy.validateTableResultsCount('43');
     cy.validateClearAllButton(false);
   });
 });

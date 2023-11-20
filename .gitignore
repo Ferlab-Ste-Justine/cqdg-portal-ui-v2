@@ -119,3 +119,4 @@ build/
 /cypress/downloads
 /cypress/screenshots
 /cypress/results
+.testquality

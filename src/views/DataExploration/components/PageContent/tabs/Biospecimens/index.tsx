@@ -117,10 +117,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'age_biospecimen_collection',
     title: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection'),
     tooltip: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip'),
-    render: (age_biospecimen_collection) =>
-      age_biospecimen_collection
-        ? numberFormat(age_biospecimen_collection)
-        : TABLE_EMPTY_PLACE_HOLDER,
+    render: (age_biospecimen_collection) => age_biospecimen_collection || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'files',

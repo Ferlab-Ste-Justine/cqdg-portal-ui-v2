@@ -10,9 +10,10 @@ beforeEach(() => {
 
 describe('Page d\'un participant - Exporter le tableau Family en TSV', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374');
+    cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('family');
-    cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 1);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(1).click({force: true});
+    cy.wait(2000);
   });
   
   it('Valider le nom du fichier', () => {
@@ -30,9 +31,10 @@ describe('Page d\'un participant - Exporter le tableau Family en TSV', () => {
 
 describe('Page d\'un participant - Exporter le tableau Diagnoses en TSV', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374');
+    cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('diagnosis');
-    cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 2);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(2).click({force: true});
+    cy.wait(2000);
   });
   
   it('Valider le nom du fichier', () => {
@@ -50,9 +52,10 @@ describe('Page d\'un participant - Exporter le tableau Diagnoses en TSV', () => 
 
 describe('Page d\'un participant - Exporter le tableau Phenotypes en TSV', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374');
+    cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('phenotype');
-    cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 3);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(3).click({force: true});
+    cy.wait(2000);
   });
   
   it('Valider le nom du fichier', () => {
@@ -70,7 +73,7 @@ describe('Page d\'un participant - Exporter le tableau Phenotypes en TSV', () =>
 
 describe('Page d\'un participant - Exporter le tableau Biospecimens en TSV', () => {
   beforeEach(() => {
-    cy.visitParticipantEntity('PT1007374');
+    cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('biospecimen');
     cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 5);
   });

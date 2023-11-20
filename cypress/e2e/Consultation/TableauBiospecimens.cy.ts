@@ -15,10 +15,10 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
   });
 
   it('Tableau', () => {
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(1).contains('SR0463655').should('exist');
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(2).contains('SP0565109').should('exist');
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(3).contains('PT1007374').should('exist');
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(4).contains('NEURODEV').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(1).contains('SR0000214').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(2).contains('SP0000179').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(3).contains('PT0000010').should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(4).contains('T-DEE').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('DNA').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('NCIT:').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(5).contains('C449').should('exist');
@@ -26,7 +26,7 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('NCIT:').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(6).contains('C12434').should('exist');
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(7).contains('-').should('exist');
-    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).contains(/^6$/).should('exist');
+    cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).contains(/^5$/).should('exist');
   });
 });
 
@@ -38,13 +38,13 @@ describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles',
   it('Lien Participant du tableau', () => {
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(3).find('[href]').click({force: true});
     cy.get('[id="participant-entity-page"]').should('exist');
-    cy.get('[class*="EntityTitle"]').contains('PT1007374');
+    cy.get('[class*="EntityTitle"]').contains('PT0000010');
   });
 
   it('Lien Study du tableau', () => {
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(4).find('[href]').click({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
-    cy.get('[class*="EntityTitle"]').contains('CHUSJ-NeuroDev');
+    cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
   });
 
   it('Lien NCIT de Sample Type du tableau', () => {
@@ -61,8 +61,8 @@ describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles',
     cy.get('tr[class*="ant-table-row"]').find('[class*="ant-table-cell"]').eq(8).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0463655').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0000214').should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^5$/).should('exist');
   });
 });
 
@@ -73,7 +73,7 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
 
   it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('NEURODEV', 4);
+    cy.validateTableFirstRow('STUDY1', 4);
     cy.sortTableAndWait('Study');
     cy.validateTableFirstRow('T-DEE', 4);
   });
@@ -96,7 +96,7 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Sample Type', 1);
     cy.sortTableAndIntercept('Study', 1);
-    cy.validateTableFirstRow('NEURODEV', 4);
+    cy.validateTableFirstRow('STUDY1', 4);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

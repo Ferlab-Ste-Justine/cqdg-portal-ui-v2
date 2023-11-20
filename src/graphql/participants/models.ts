@@ -9,7 +9,7 @@ export interface IParticipantResultTree {
 
 export interface IPhenotype {
   id: any;
-  age_at_event: number;
+  age_at_event: string;
   internal_phenotype_id?: number;
   is_leaf: boolean;
   is_tagged: boolean;
@@ -22,7 +22,7 @@ export interface IPhenotype {
 
 export interface IMondo {
   id: string;
-  age_at_event: number;
+  age_at_event: string;
   score: string;
   is_leaf: boolean;
   is_tagged: boolean;
@@ -32,7 +32,7 @@ export interface IMondo {
 
 export interface IMondoTagged {
   id: string;
-  age_at_event: number;
+  age_at_event: string;
   score: string;
   is_leaf: boolean;
   is_tagged: boolean;
@@ -45,7 +45,7 @@ export interface IMondoTagged {
 export interface IIcd {
   id: string;
   score: number;
-  age_at_event: number;
+  age_at_event: string;
   internal_phenotype_id: string;
   is_leaf: boolean;
   is_tagged: boolean;
@@ -82,8 +82,8 @@ export interface IParticipantEntity {
   submitter_participant_id: string;
   internal_participant_id: string;
   score: number;
-  age_at_recruitment: number;
-  age_of_death: number;
+  age_at_recruitment: string;
+  age_of_death: string;
   cause_of_death: string;
   ethnicity: string;
   gender: string;
