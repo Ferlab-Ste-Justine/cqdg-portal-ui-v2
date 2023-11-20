@@ -64,12 +64,12 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('Ethnicity').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('-').should('exist');
-    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(2).contains('Age at Recruitment (days)').should('exist');
+    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(2).contains('Age at Recruitment').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('-').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(3).contains('Vital Status').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(3).contains('Unknown').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(3).find('[class*="ant-tag-red"]').should('exist');
-    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Age at Death (days)').should('exist');
+    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Age at Death').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('-').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Cause of Death').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('-').should('exist');
