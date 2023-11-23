@@ -5,6 +5,7 @@ import { IProTableDictionary } from '@ferlab/ui/core/components/ProTable/types';
 import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
+import { ageCategories } from 'graphql/participants/models';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
@@ -214,9 +215,13 @@ export const getQueryBuilderDictionary = (
       return set ? set.tag : setId;
     },
     facetValueMapping: {
+      age_at_recruitment: Object.assign(
+        {},
+        ...ageCategories.map((elem) => ({ [elem.key]: elem.label })),
+      ),
       variant_external_reference: {
-        DBSNP: intl.get('entities.variant.dbsnp'),
-        Clinvar: intl.get('entities.variant.pathogenicity.clinVar'),
+        DBSNP: intl.get('facets.options.variant_external_reference.DBSNP'),
+        Clinvar: intl.get('facets.options.variant_external_reference.Clinvar'),
       },
       'genes.consequences.predictions.sift_pred': {
         T: intl.get('facets.options.genes__consequences__predictions__sift_pred.T'),
@@ -236,25 +241,11 @@ export const getQueryBuilderDictionary = (
         D: intl.get('facets.options.genes__consequences__predictions__lrt_pred.D'),
         U: intl.get('facets.options.genes__consequences__predictions__lrt_pred.U'),
       },
-      down_syndrome_status: {
-        D21: intl.get('facets.options.D21'),
-        T21: intl.get('facets.options.T21'),
-      },
       'studies.zygosity': {
         HET: intl.get('facets.options.studies__zygosity.HET'),
         WT: intl.get('facets.options.studies__zygosity.WT'),
         HOM: intl.get('facets.options.studies__zygosity.HOM'),
         UNK: intl.get('facets.options.studies__zygosity.UNK'),
-      },
-      domain: {
-        CANCER: intl.get('facets.options.domain.CANCER'),
-        BIRTHDEFECT: intl.get('facets.options.domain.BIRTHDEFECT'),
-        CANCERANDBIRTHDEFECT: intl.get('facets.options.domain.CANCERANDBIRTHDEFECT'),
-      },
-      'study.domain': {
-        CANCER: intl.get('facets.options.study__domain.CANCER'),
-        BIRTHDEFECT: intl.get('facets.options.study__domain.BIRTHDEFECT'),
-        CANCERANDBIRTHDEFECT: intl.get('facets.options.study__domain.CANCERANDBIRTHDEFECT'),
       },
     },
   },

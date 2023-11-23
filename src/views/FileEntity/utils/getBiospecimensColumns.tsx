@@ -1,3 +1,4 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
@@ -6,7 +7,6 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { tissueSource } from 'components/tables/columns/biospeciments';
 import { STATIC_ROUTES } from 'utils/routes';
 
 const getBiospecimensColumns = (): ProColumnType<any>[] => [
@@ -57,7 +57,22 @@ const getBiospecimensColumns = (): ProColumnType<any>[] => [
     title: intl.get('entities.biospecimen.biospecimen'),
     render: (biospecimen_id: string) => biospecimen_id,
   },
-  tissueSource({}),
+  {
+    key: 'biospecimen_tissue_source',
+    dataIndex: 'biospecimen_tissue_source',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
+    render: (biospecimen_tissue_source: string) => {
+      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
+      if (biospecimen_tissue_source === 'Unknown') return intl.get('global.unknown');
+      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
+      return (
+        <>
+          {title} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
+  },
 ];
 
 export default getBiospecimensColumns;

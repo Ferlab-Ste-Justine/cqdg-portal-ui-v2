@@ -21,6 +21,7 @@ import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { useParticipants } from 'graphql/participants/actions';
 import {
+  ageCategories,
   IIcd,
   IMondoTagged,
   IParticipantEntity,
@@ -158,8 +159,25 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
-    tooltip: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip'),
-    render: (age_at_recruitment) => age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
+    tooltip: (
+      <>
+        <b>{intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip')}</b>
+        <br />
+        <br />
+        {ageCategories.map((category) => (
+          <>
+            <b>{category.label}</b>
+            {` ${category.tooltip}`}
+            <br />
+          </>
+        ))}
+      </>
+    ),
+    render: (age_at_recruitment) => {
+      const category = ageCategories.find((cat) => cat.key === age_at_recruitment);
+      if (!category) return TABLE_EMPTY_PLACE_HOLDER;
+      return category.label;
+    },
   },
   {
     key: 'nb_files',

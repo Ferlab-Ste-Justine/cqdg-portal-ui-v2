@@ -57,7 +57,7 @@ interface IPageContentProps {
 }
 
 const PageContent = ({ variantMapping }: IPageContentProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const { userInfo } = useUser();
   const { savedSets } = useSavedSet();
   const { queryList, activeQuery, selectedSavedFilter, savedFilterList } =

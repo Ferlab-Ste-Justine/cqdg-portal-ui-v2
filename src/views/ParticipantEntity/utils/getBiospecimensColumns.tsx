@@ -1,10 +1,14 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
+import { Tooltip } from 'antd';
+import { ageCategories } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { tissueSource } from 'components/tables/columns/biospeciments';
+
+import styles from '../index.module.scss';
 
 const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
@@ -28,7 +32,22 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  tissueSource({}),
+  {
+    key: 'biospecimen_tissue_source',
+    dataIndex: 'biospecimen_tissue_source',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
+    render: (biospecimen_tissue_source: string) => {
+      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
+      if (biospecimen_tissue_source === 'Unknown') return intl.get('global.unknown');
+      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
+      return (
+        <>
+          {title} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
+  },
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',
@@ -40,7 +59,17 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
     dataIndex: 'age_biospecimen_collection',
     title: intl.get('entities.biospecimen.age_biospecimen_collection'),
     tooltip: intl.get('entities.biospecimen.age_biospecimen_collection_tooltip'),
-    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+    render: (age_biospecimen_collection: string) => {
+      const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
+      if (!category) return TABLE_EMPTY_PLACE_HOLDER;
+      return category.tooltip ? (
+        <Tooltip title={category.tooltip} className={styles.tooltip}>
+          {category.label}
+        </Tooltip>
+      ) : (
+        category.label
+      );
+    },
   },
 ];
 

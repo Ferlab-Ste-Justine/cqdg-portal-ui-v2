@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import { ageCategoriesObject } from 'graphql/participants/models';
+
 import translations from './fr.json';
 
 const fr = {
@@ -96,6 +98,17 @@ const fr = {
       hpo_term_tooltip: '# de participants avec le terme HPO exact',
       observed: 'Observé',
       not_observed: 'Non observé',
+      ageCategories: [
+        { key: 'A-antenatal', label: 'Antenatal', tooltip: '' },
+        { key: 'B-congenital', label: 'Congenital', tooltip: '' },
+        { key: 'C-neonatal', label: 'Neonatal', tooltip: '< 28 days' },
+        { key: 'D-infantile', label: 'Infantile', tooltip: '>= 28 days and < 1 year' },
+        { key: 'E-childhood', label: 'Childhood', tooltip: '>= 1 year and < 5 years)' },
+        { key: 'F-juvenile', label: 'Juvenile', tooltip: '>= 5 years and < 16 years' },
+        { key: 'G-youngadult', label: 'Young Adult', tooltip: '>= 16 years and < 40 years' },
+        { key: 'H-middleage', label: 'Middle Age', tooltip: '>= 40 years and < 60 years' },
+        { key: 'I-senior', label: 'Senior', tooltip: '>= 60 years' },
+      ],
     },
     file: {
       file: 'Fichier',
@@ -265,6 +278,7 @@ const fr = {
     no: 'Non',
     other: 'Autre',
     delete: 'Supprimer',
+    unknown: 'Inconnu',
     summary: 'Résumé',
     viewInDataExploration: 'Voir sur la page Exploration',
     search: {
@@ -996,9 +1010,6 @@ const fr = {
           study_code: 'Étude',
           sample_type: "Type d'échantillon",
           biospecimen_tissue_source: 'Tissue',
-          biospecimen_tissue_source_data: {
-            unknown: 'Inconnu',
-          },
           age_biospecimen_collection: 'Âge',
           age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
@@ -1053,6 +1064,43 @@ const fr = {
       removeTypeSet: "Retirer de l'ensemble de {type}",
       set: 'Ensemble',
       chooseSet: 'Choisissez un ensemble',
+    },
+  },
+  // this facets object is also used by Ferlab-ui to override the values in the facets
+  // ex: variant genes sift_pred: T -> Tolerated
+  facets: {
+    options: {
+      genes__consequences__predictions__sift_pred: {
+        T: 'Tolerated',
+        D: 'Damaging',
+      },
+      genes__consequences__predictions__polyphen2_hvar_pred: {
+        B: 'Benign',
+        D: 'Damaging',
+        P: 'Possibly Damaging',
+      },
+      genes__consequences__predictions__fathmm_pred: {
+        T: 'Tolerated',
+        D: 'Damaging',
+      },
+      genes__consequences__predictions__lrt_pred: {
+        N: 'Neutral',
+        D: 'Deleterious',
+        U: 'Unknown',
+      },
+      studies__zygosity: {
+        HET: 'Heterozygote',
+        WT: 'Wild Type',
+        HOM: 'Homozygote',
+        UNK: 'Unknown',
+      },
+      variant_external_reference: {
+        DBSNP: 'dbSNP',
+        Clinvar: 'ClinVar',
+      },
+      age_at_recruitment: ageCategoriesObject,
+      mondo_tagged__age_at_event: ageCategoriesObject,
+      age_biospecimen_collection: ageCategoriesObject,
     },
   },
 };

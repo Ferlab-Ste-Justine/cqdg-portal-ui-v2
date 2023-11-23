@@ -16,27 +16,5 @@
   "upload.gene.ids.modal.upload.file.btn": "Télécharger un fichier",
   "upload.gene.ids.modal.clear.btn": "Supprimer",
   "upload.gene.ids.modal.cancel.btn": "Annuler",
-  "upload.gene.ids.modal.empty.table": "Aucune donnée",
-
-  "facets.options.genes__consequences__predictions__sift_pred.T": "Tolerated",
-  "facets.options.genes__consequences__predictions__sift_pred.D": "Damaging",
-  "facets.options.genes__consequences__predictions__polyphen2_hvar_pred.B": "Benign",
-  "facets.options.genes__consequences__predictions__polyphen2_hvar_pred.D": "Damaging",
-  "facets.options.genes__consequences__predictions__polyphen2_hvar_pred.P": "Possibly Damaging",
-  "facets.options.genes__consequences__predictions__fathmm_pred.T": "Tolerated",
-  "facets.options.genes__consequences__predictions__fathmm_pred.D": "Damaging",
-  "facets.options.genes__consequences__predictions__lrt_pred.N": "Neutral",
-  "facets.options.genes__consequences__predictions__lrt_pred.D": "Deleterious",
-  "facets.options.genes__consequences__predictions__lrt_pred.U": "Unknown",
-  "facets.options.studies__zygosity.HET": "Heterozygote",
-  "facets.options.studies__zygosity.WT": "Wild Type",
-  "facets.options.studies__zygosity.HOM": "Homozygote",
-  "facets.options.studies__zygosity.UNK": "Unknown",
-  "facets.observed_phenotype.name": "Observed Phenotype (HPO)",
-  "facets.options.domain.CANCERANDBIRTHDEFECT": "Cancer and Birth Defect",
-  "facets.options.domain.CANCER": "Cancer",
-  "facets.options.domain.BIRTHDEFECT": "Birth Defect",
-  "facets.options.study__domain.CANCERANDBIRTHDEFECT": "Cancer and Birth Defect",
-  "facets.options.study__domain.CANCER": "Cancer",
-  "facets.options.study__domain.BIRTHDEFECT": "Birth Defect"
+  "upload.gene.ids.modal.empty.table": "Aucune donnée"
 }
