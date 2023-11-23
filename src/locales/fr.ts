@@ -98,17 +98,6 @@ const fr = {
       hpo_term_tooltip: '# de participants avec le terme HPO exact',
       observed: 'Observé',
       not_observed: 'Non observé',
-      ageCategories: [
-        { key: 'A-antenatal', label: 'Antenatal', tooltip: '' },
-        { key: 'B-congenital', label: 'Congenital', tooltip: '' },
-        { key: 'C-neonatal', label: 'Neonatal', tooltip: '< 28 days' },
-        { key: 'D-infantile', label: 'Infantile', tooltip: '>= 28 days and < 1 year' },
-        { key: 'E-childhood', label: 'Childhood', tooltip: '>= 1 year and < 5 years)' },
-        { key: 'F-juvenile', label: 'Juvenile', tooltip: '>= 5 years and < 16 years' },
-        { key: 'G-youngadult', label: 'Young Adult', tooltip: '>= 16 years and < 40 years' },
-        { key: 'H-middleage', label: 'Middle Age', tooltip: '>= 40 years and < 60 years' },
-        { key: 'I-senior', label: 'Senior', tooltip: '>= 60 years' },
-      ],
     },
     file: {
       file: 'Fichier',
