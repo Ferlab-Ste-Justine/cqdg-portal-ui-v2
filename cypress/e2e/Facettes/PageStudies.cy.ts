@@ -93,13 +93,13 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.checkValueFacet(3, 'Genetic studies only (DUO:0000016)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Requirement').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genetic studies only (DUO:0000016)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2 Results$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
   });
 
   it('Access Requirement - User specific restriction (DUO:0000026)', () => {
     cy.checkValueFacet(3, 'User specific restriction (DUO:0000026)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Requirement').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('User specific restriction (DUO:0000026)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2 Results$/).should('exist');
+    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3 Results$/).should('exist');
   });
 });

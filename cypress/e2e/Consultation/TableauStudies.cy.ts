@@ -15,7 +15,7 @@ describe('Page des études - Vérifier les informations affichées', () => {
     cy.get('[data-cy="Title_Studies"]').contains('Studies');
   });
 
-  it('Tableau', () => {
+  it('Tableau [CQDG-493]', () => {
     cy.get('tr[data-row-key="T-DEE"]').find('[class="ant-table-cell"]').eq(0).contains('T-DEE').should('exist');
     cy.get('tr[data-row-key="T-DEE"]').find('[class="ant-table-cell"]').eq(1).contains('Developmental and epileptic encephalopathies').should('exist');
     cy.get('tr[data-row-key="T-DEE"]').find('[class="ant-table-cell"]').eq(2).contains('Neurodevelopmental Conditions').should('exist');

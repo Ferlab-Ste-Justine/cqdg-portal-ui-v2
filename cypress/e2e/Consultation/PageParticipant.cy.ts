@@ -139,7 +139,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="diagnosis"]').find('td[class="ant-table-cell"]').eq(5).contains('205').should('exist');
   });
   
-  it('Panneau Phenotypes', () => {
+  it('Panneau Phenotypes [CQDG-490]', () => {
     cy.resetColumns('phenotype');
     cy.get('[id="phenotype"]').find('[class*="EntityTable_title"]').contains('Phenotype').should('exist');
     cy.get('[id="phenotype"]').find('[class="ant-collapse-header"]').contains('Phenotypes').should('exist');

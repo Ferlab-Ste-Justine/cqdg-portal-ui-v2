@@ -38,7 +38,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
   });
 
-  it('Panneau Summary [CQDG-410]', () => {
+  it('Panneau Summary [CQDG-493]', () => {
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains(/^588$/);
     cy.get('[data-cy="SummaryHeader_Participants_Button"]').contains('Participants');
     cy.get('[data-cy="SummaryHeader_Families_Button"]').contains(/^196$/);
