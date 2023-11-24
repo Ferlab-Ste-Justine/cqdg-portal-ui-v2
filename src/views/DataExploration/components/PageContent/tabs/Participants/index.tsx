@@ -17,6 +17,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
+import { Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { useParticipants } from 'graphql/participants/actions';
@@ -156,27 +157,39 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   },
   {
     key: 'age_at_recruitment',
-    title: intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment'),
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
-    tooltip: (
-      <>
-        <b>{intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip')}</b>
-        <br />
-        <br />
-        {ageCategories.map((category) => (
+    title: (
+      <Tooltip
+        className={styles.tooltip}
+        title={
           <>
-            <b>{category.label}</b>
-            {` ${category.tooltip}`}
+            <b>{intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip')}</b>
             <br />
+            <br />
+            {ageCategories.map((category) => (
+              <>
+                <b>{category.label}</b>
+                {` ${category.tooltip}`}
+                <br />
+              </>
+            ))}
           </>
-        ))}
-      </>
+        }
+      >
+        {intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment')}
+      </Tooltip>
     ),
     render: (age_at_recruitment) => {
       const category = ageCategories.find((cat) => cat.key === age_at_recruitment);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
-      return category.label;
+      return category.tooltip ? (
+        <Tooltip className={styles.tooltip} title={category.tooltip}>
+          {category.label}
+        </Tooltip>
+      ) : (
+        category.label
+      );
     },
   },
   {

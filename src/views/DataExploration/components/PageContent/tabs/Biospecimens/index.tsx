@@ -16,7 +16,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Typography } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
@@ -131,27 +131,41 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
     sorter: { multiple: 1 },
-    title: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection'),
-    tooltip: (
-      <>
-        <b>
-          {intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip')}
-        </b>
-        <br />
-        <br />
-        {ageCategories.map((category) => (
+    title: (
+      <Tooltip
+        className={styles.tooltip}
+        title={
           <>
-            <b>{category.label}</b>
-            {` ${category.tooltip}`}
+            <b>
+              {intl.get(
+                'screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip',
+              )}
+            </b>
             <br />
+            <br />
+            {ageCategories.map((category) => (
+              <>
+                <b>{category.label}</b>
+                {` ${category.tooltip}`}
+                <br />
+              </>
+            ))}
           </>
-        ))}
-      </>
+        }
+      >
+        {intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection')}
+      </Tooltip>
     ),
     render: (age_biospecimen_collection) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
-      return category.label;
+      return category.tooltip ? (
+        <Tooltip className={styles.tooltip} title={category.tooltip}>
+          {category.label}
+        </Tooltip>
+      ) : (
+        category.label
+      );
     },
   },
   {
