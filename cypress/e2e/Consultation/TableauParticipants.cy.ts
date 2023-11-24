@@ -116,7 +116,7 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
     cy.validateTableFirstRow('Male', 3);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Age', () => {
+  it('Valider les fonctionnalités du tableau - Tri Age [CQDG-490]', () => {
     cy.sortTableAndIntercept('Age', 1);
     cy.validateTableFirstRow('-', 6);
     cy.sortTableAndIntercept('Age', 1);
