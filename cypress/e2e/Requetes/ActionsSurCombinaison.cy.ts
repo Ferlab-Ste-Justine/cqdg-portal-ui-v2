@@ -10,7 +10,7 @@ describe('Page Data Exploration - Requêtes', () => {
   beforeEach(() => {
     cy.visitVariantsPage('?sharedFilterId=a4cb8de6-d56d-4b37-9877-c89c004709ac');
 
-    cy.get('li[data-key="category_variant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });

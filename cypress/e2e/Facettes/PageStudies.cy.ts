@@ -12,15 +12,18 @@ describe('Page des études - Filtrer avec les facettes', () => {
 
   it('Expand all/Collapse all', () => {
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="false"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
 
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).find('[aria-expanded="true"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
+    cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
   });
 
   it('Study Code - STUDY1', () => {
@@ -59,7 +62,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
   });
 
   it('Domain - Rare Diseases [CQDG-472]', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(0).contains('Rare Diseases').should('exist');
+    cy.get('[data-cy="FilterContainer_Domain"]').should('exist');
     cy.checkValueFacet(0, 'Rare Diseases');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Domain').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Rare Diseases').should('exist');
@@ -74,6 +77,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
   });
 
   it('Population - Pediatric and adult', () => {
+    cy.get('[data-cy="FilterContainer_Population"]').should('exist');
     cy.checkValueFacet(1, 'Pediatric and adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Population').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Pediatric and adult').should('exist');
@@ -81,7 +85,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
   });
 
   it('Access Limitation - Health or medical or biomedical research (DUO:0000006)', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(2).contains('Access Limitation').should('exist');
+    cy.get('[data-cy="FilterContainer_Access Limitation"]').should('exist');
     cy.checkValueFacet(2, 'Health or medical or biomedical research (DUO:0000006)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Limitation').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Health or medical or biomedical research (DUO:0000006)').should('exist');
@@ -89,7 +93,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
   });
 
   it('Access Requirement - Genetic studies only (DUO:0000016)', () => {
-    cy.get('div[class*="Filters_customFilterContainer"]').eq(3).contains('Access Requirement').should('exist');
+    cy.get('[data-cy="FilterContainer_Access Requirement"]').should('exist');
     cy.checkValueFacet(3, 'Genetic studies only (DUO:0000016)');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Access Requirement').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genetic studies only (DUO:0000016)').should('exist');

@@ -10,7 +10,7 @@ describe('Page Data Exploration - Requêtes', () => {
   beforeEach(() => {
     cy.visitVariantsPage('?sharedFilterId=23870b3f-b2f5-442d-96cf-d9f1a718d37c');
 
-    cy.get('li[data-key="category_variant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -20,7 +20,7 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validateTotalSelectedQuery('442');
     cy.validateTableResultsCount('442');
 
-    cy.checkValueFacetAndApply(0, 'SNV');
+    cy.checkValueFacetAndApply('Variant Type', 'SNV');
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validateTotalSelectedQuery('226');
