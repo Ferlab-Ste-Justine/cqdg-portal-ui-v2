@@ -16,7 +16,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Tooltip, Typography } from 'antd';
+import { Popover, Tooltip, Typography } from 'antd';
 import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
@@ -132,7 +132,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'age_biospecimen_collection',
     sorter: { multiple: 1 },
     title: (
-      <Tooltip
+      <Popover
         className={styles.tooltip}
         title={
           <>
@@ -141,20 +141,18 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
                 'screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip',
               )}
             </b>
-            <br />
-            <br />
-            {ageCategories.map((category) => (
-              <>
-                <b>{category.label}</b>
-                {` ${category.tooltip}`}
-                <br />
-              </>
-            ))}
           </>
         }
+        content={ageCategories.map((category) => (
+          <div key={category.key}>
+            <b>{category.label}:</b>
+            {` ${category.tooltip}`}
+            <br />
+          </div>
+        ))}
       >
         {intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection')}
-      </Tooltip>
+      </Popover>
     ),
     render: (age_biospecimen_collection) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);

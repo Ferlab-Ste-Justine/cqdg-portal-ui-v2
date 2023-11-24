@@ -17,7 +17,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { useParticipants } from 'graphql/participants/actions';
@@ -160,25 +160,23 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
     title: (
-      <Tooltip
+      <Popover
         className={styles.tooltip}
         title={
           <>
             <b>{intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip')}</b>
-            <br />
-            <br />
-            {ageCategories.map((category) => (
-              <>
-                <b>{category.label}</b>
-                {` ${category.tooltip}`}
-                <br />
-              </>
-            ))}
           </>
         }
+        content={ageCategories.map((category) => (
+          <div key={category.key}>
+            <b>{category.label}:</b>
+            {` ${category.tooltip}`}
+            <br />
+          </div>
+        ))}
       >
         {intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment')}
-      </Tooltip>
+      </Popover>
     ),
     render: (age_at_recruitment) => {
       const category = ageCategories.find((cat) => cat.key === age_at_recruitment);
