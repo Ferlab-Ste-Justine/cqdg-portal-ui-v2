@@ -10,13 +10,13 @@ describe('Page Data Exploration - Requêtes', () => {
   beforeEach(() => {
     cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
 
-    cy.get('li[data-key="category_variant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
   it('Éditer une pilule via la facette', () => {
-    cy.checkValueFacetAndApply(0, 'Deletion');
+    cy.checkValueFacetAndApply('Variant Type', 'deletion');
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
     cy.validateTotalSelectedQuery('274');
@@ -27,11 +27,7 @@ describe('Page Data Exploration - Requêtes', () => {
   it('Éditer une pilule via son popup', () => {
     cy.get('[class*="QueryValues_queryValuesContainer"]').contains('SNV').click({force:true});
     cy.get('input[id="input-deletion"]').check({force: true});
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-    cy.get('span[data-key="apply"]', {timeout: 20*1000}).click({force: true, multiple:true});
-    for (let i = 0; i < 7; i++) {
-      cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-    };
+    cy.clickAndIntercept('[data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
     cy.validateTotalSelectedQuery('274');
@@ -40,7 +36,7 @@ describe('Page Data Exploration - Requêtes', () => {
   });
 
   it('Ajouter une pilule à une requête', () => {
-    cy.checkValueFacetAndApply(1, 'Intron');
+    cy.checkValueFacetAndApply('Consequence', 'intron');
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validatePillSelectedQuery('Consequence', ['Intron'], 1);
@@ -62,7 +58,7 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validateTableResultsCount('442');
     cy.validateClearAllButton(false);
 
-    cy.checkValueFacetAndApply(1, 'Intron');
+    cy.checkValueFacetAndApply('Consequence', 'intron');
 
     cy.validatePillSelectedQuery('Consequence', ['Intron']);
     cy.validateTotalSelectedQuery('270');

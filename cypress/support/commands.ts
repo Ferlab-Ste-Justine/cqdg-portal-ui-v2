@@ -7,30 +7,20 @@ export interface Replacement {
   value: string;
 }
 
-Cypress.Commands.add('checkValueFacetAndApply', (facetRank: number, value: string|RegExp) => {
-  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
-    .find('[aria-expanded="true"]').should('exist');
+Cypress.Commands.add('checkValueFacetAndApply', (facetTitle: string, value: string) => {
+  cy.get('[aria-expanded="true"] [data-cy="FilterContainer_' + facetTitle + '"]').should('exist');
   cy.wait(1000);
-  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+  cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
     .find('button').then(($button) => {
     if ($button.hasClass('ant-btn-link')) {
-      cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
+      cy.get('[data-cy="FilterContainer_' + facetTitle + '"]').parentsUntil('.FilterContainer_filterContainer__O6v-O')
         .find('button[class*="CheckboxFilter_filtersTypesFooter"]').click({force: true});
       cy.wait(1000);
     };
   });
-
-  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
-    .find('div[class*="CheckboxFilter_checkboxFilterItem"]').contains(value)
-    .find('[type="checkbox"]').check({force: true});
-
-  
-  cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-  cy.get('div[class*="Filter_facetCollapse"], div[class*="Filters_customFilterContainer"]').eq(facetRank)
-    .find('span[data-key="apply"]', {timeout: 20*1000}).click({force: true});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-  cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+ 
+  cy.get('[data-cy="Checkbox_' + facetTitle + '_' + value + '"]').check({force: true});
+  cy.clickAndIntercept('[data-cy="Apply_' + facetTitle + '"]', 'POST', '**/graphql', 3);
 });
 
 Cypress.Commands.add('checkValueFacet', (facetRank: number, value: string|RegExp) => {

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 declare namespace Cypress {
   interface Chainable {
-    checkValueFacetAndApply(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
+    checkValueFacetAndApply(facetTitle: string, value: string): cy & CyEventEmitter;
     checkValueFacet(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
