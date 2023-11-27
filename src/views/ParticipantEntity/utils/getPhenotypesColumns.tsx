@@ -5,7 +5,7 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
-import { Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { useParticipantsFromField } from 'graphql/participants/actions';
 import { ageCategories } from 'graphql/participants/models';
@@ -84,8 +84,21 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
   {
     key: 'age_at_event',
     dataIndex: 'age_at_event',
-    title: intl.get('entities.participant.age_at_phenotype'),
-    tooltip: intl.get('entities.participant.age_at_phenotype_tooltip'),
+    title: (
+      <Popover
+        className={styles.tooltip}
+        title={<b>{intl.get('entities.participant.age_at_phenotype_tooltip')}</b>}
+        content={ageCategories.map((category) => (
+          <div key={category.key}>
+            <b>{category.label}:</b>
+            {` ${category.tooltip}`}
+            <br />
+          </div>
+        ))}
+      >
+        {intl.get('entities.participant.age_at_phenotype')}
+      </Popover>
+    ),
     render: (age_at_event: string) => {
       const category = ageCategories.find((cat) => cat.key === age_at_event);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;

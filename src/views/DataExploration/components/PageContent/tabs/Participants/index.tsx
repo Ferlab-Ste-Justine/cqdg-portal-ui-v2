@@ -162,11 +162,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: (
       <Popover
         className={styles.tooltip}
-        title={
-          <>
-            <b>{intl.get('screen.dataExploration.tabs.participants.ageAtRecruitmentTooltip')}</b>
-          </>
-        }
+        title={<b>{intl.get('entities.participant.age_at_recruitment')}</b>}
         content={ageCategories.map((category) => (
           <div key={category.key}>
             <b>{category.label}:</b>
@@ -175,7 +171,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
           </div>
         ))}
       >
-        {intl.get('screen.dataExploration.tabs.participants.ageAtRecruitment')}
+        {intl.get('entities.participant.age')}
       </Popover>
     ),
     render: (age_at_recruitment) => {

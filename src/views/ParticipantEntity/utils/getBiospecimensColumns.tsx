@@ -2,7 +2,7 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
-import { Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import { ageCategories } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
@@ -57,8 +57,21 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
-    title: intl.get('entities.biospecimen.age_biospecimen_collection'),
-    tooltip: intl.get('entities.biospecimen.age_biospecimen_collection_tooltip'),
+    title: (
+      <Popover
+        className={styles.tooltip}
+        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection_tooltip')}</b>}
+        content={ageCategories.map((category) => (
+          <div key={category.key}>
+            <b>{category.label}:</b>
+            {` ${category.tooltip}`}
+            <br />
+          </div>
+        ))}
+      >
+        {intl.get('entities.biospecimen.age_biospecimen_collection')}
+      </Popover>
+    ),
     render: (age_biospecimen_collection: string) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
