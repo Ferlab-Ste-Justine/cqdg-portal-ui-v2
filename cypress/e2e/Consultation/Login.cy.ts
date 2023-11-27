@@ -12,7 +12,7 @@ describe('Page Login', () => {
     cy.get('[data-cy="DataRelease_Participant"]').contains('Participants').should('exist');
     cy.get('[data-cy="DataRelease_Biospecimen"]').contains(/\d{1}/).should('exist');
     cy.get('[data-cy="DataRelease_Biospecimen"]').contains(/Biosp(é|e)cimens/).should('exist');
-    cy.get('[data-cy="DataRelease_File"]').contains(/\.\d{1}TB/).should('exist');
+    cy.get('[data-cy="DataRelease_File"]').contains(/\.\d{1,2}(T|G)B/).should('exist');
     cy.get('[data-cy="DataRelease_File"]').contains(/(Fichiers|Data Files)/).should('exist');
 
     cy.contains(/(Portail de données|Data Portal)/).should('exist');

@@ -23,19 +23,30 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
+  it('Search by participant ID - PT0000010', () => {
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by participant ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'PT0000010', 'POST', '*/grapgql', 1);
+    cy.wait(1000);
+    cy.get('[data-cy="Search_Dropdown"]').contains('PT0000010').should('exist');
+    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_PT0000010"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
+    cy.validateTableResultsCount(/^1 Results$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_PT0000010"]').should('not.exist');
+  });
+
   it('Study Code - T-DEE', () => {
-    cy.get('[data-cy="FilterContainer_Study Code"]').should('exist');
-    cy.checkValueFacetAndApply('Study Code', 'T-DEE');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^588$/).should('exist');
+    cy.validateFacetFilter('Study Code', 'T-DEE', 'T-DEE', /^588$/);
+    cy.validateFacetRank(0, 'Study Code');
   });
 
   it('Study Code - STUDY1', () => {
-    cy.checkValueFacetAndApply('Study Code', 'STUDY1');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
+    cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^6$/);
   });
 
   it('Phenotype (HPO)', () => {
@@ -49,82 +60,53 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Diagnosis (ICD-10) - Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)', () => {
-    cy.get('[data-cy="FilterContainer_Diagnosis (ICD-10)"]').should('exist');
-    cy.checkValueFacetAndApply('Diagnosis (ICD-10)', 'Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Diagnosis (ICD-10)').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^205$/).should('exist');
+    cy.validateFacetFilter('Diagnosis (ICD-10)', 'Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)', 'Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)', /^205$/);
+    cy.validateFacetRank(1, 'Diagnosis (ICD-10)');
   });
 
   it('Gender - Female', () => {
-    cy.get('[data-cy="FilterContainer_Gender"]').should('exist');
-    cy.checkValueFacetAndApply('Gender', 'female');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^283$/).should('exist');
+    cy.validateFacetFilter('Gender', 'Female', 'female', /^283$/);
+    cy.validateFacetRank(2, 'Gender');
   });
 
   it('Gender - Male', () => {
-    cy.checkValueFacetAndApply('Gender', 'male');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains(/^Male$/).should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^315$/).should('exist');
+    cy.validateFacetFilter('Gender', 'Male', 'male', /^315$/);
   });
 
   it('Age at Recruitment - Congenital', () => {
-    cy.get('[data-cy="FilterContainer_Age at Recruitment"]').should('exist');
-    cy.checkValueFacetAndApply('Age at Recruitment', 'B-congenital');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Recruitment').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Congenital').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
+    cy.validateFacetFilter('Age at Recruitment', 'Congenital', 'B-congenital', /^2$/);
+    cy.validateFacetRank(3, 'Age at Recruitment');
   });
 
   it('Age at Recruitment - Young Adult', () => {
-    cy.checkValueFacetAndApply('Age at Recruitment', 'G-young adult');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Recruitment').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
+    cy.validateFacetFilter('Age at Recruitment', 'Young Adult', 'G-young adult', /^1$/);
   });
 
   it('Age at Diagnosis - Congenital', () => {
-    cy.get('[data-cy="FilterContainer_Age at Diagnosis"]').should('exist');
-    cy.checkValueFacetAndApply('Age at Diagnosis', 'B-congenital');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Diagnosis').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Congenital').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
+    cy.validateFacetFilter('Age at Diagnosis', 'Congenital', 'B-congenital', /^3$/);
+    cy.validateFacetRank(4, 'Age at Diagnosis');
   });
 
   it('Age at Diagnosis - Young Adult', () => {
-    cy.checkValueFacetAndApply('Age at Diagnosis', 'G-young adult');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Diagnosis').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
+    cy.validateFacetFilter('Age at Diagnosis', 'Young Adult', 'G-young adult', /^1$/);
   });
 
   it('Ethnicity - French Canadian', () => {
     cy.get('[data-cy="FilterContainer_Ethnicity"]').should('exist');
+    cy.validateFacetRank(5, 'Ethnicity');
     /* Pas de données
-    cy.checkValueFacetAndApply('Ethnicity', 'French Canadian');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Ethnicity').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('French Canadian').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1750$/).should('exist');
+    cy.validateFacetFilter('Ethnicity', 'French Canadian', 'French Canadian', /^1750$/);
     */
   });
 
   it('Phenotype (Source Text) - Intractable Seizures', () => {
-    cy.get('[data-cy="FilterContainer_Phenotype (Source Text)"]').should('exist');
-    cy.checkValueFacetAndApply('Phenotype (Source Text)', 'Intractable Seizures');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Phenotype (Source Text)').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intractable Seizures').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^202$/).should('exist');
+    cy.validateFacetFilter('Phenotype (Source Text)', 'Intractable Seizures', 'Intractable Seizures', /^202$/);
+    cy.validateFacetRank(6, 'Phenotype (Source Text)');
   });
 
   it('Diagnosis (Source Text) - Intractable Epilepsy', () => {
-    cy.get('[data-cy="FilterContainer_Diagnosis (Source Text)"]').should('exist');
-    cy.checkValueFacetAndApply('Diagnosis (Source Text)', 'Intractable Epilepsy');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Diagnosis (Source Text)').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Intractable Epilepsy').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^205$/).should('exist');
+    cy.validateFacetFilter('Diagnosis (Source Text)', 'Intractable Epilepsy', 'Intractable Epilepsy', /^205$/);
+    cy.validateFacetRank(7, 'Diagnosis (Source Text)');
   });
 });
 
@@ -146,42 +128,44 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
+  it('Search by sample ID - SR0000214', () => {
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by sample ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'SR0000214', 'POST', '*/grapgql', 1);
+    cy.wait(1000);
+    cy.get('[data-cy="Search_Dropdown"]').contains('SR0000214').should('exist');
+    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_SR0000214"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0000214').should('exist');
+    cy.validateTableResultsCount(/^1 Results$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_SR0000214"]').should('not.exist');
+  });
+
   it('Sample Type - DNA (NCIT:C449)', () => {
-    cy.get('[data-cy="FilterContainer_Sample Type"]').should('exist');
-    cy.checkValueFacetAndApply('Sample Type', 'DNA (NCIT:C449)');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample Type').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('DNA (NCIT:C449)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^598$/).should('exist');
+    cy.validateFacetFilter('Sample Type', 'DNA (NCIT:C449)', 'DNA (NCIT:C449)', /^598$/);
+    cy.validateFacetRank(0, 'Sample Type');
   });
 
   it('Tissue - Blood (NCIT:C12434)', () => {
-    cy.get('[data-cy="FilterContainer_Tissue"]').should('exist');
-    cy.checkValueFacetAndApply('Tissue', 'Blood (NCIT:C12434)');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Tissue').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Blood (NCIT:C12434)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^592$/).should('exist');
+    cy.validateFacetFilter('Tissue', 'Blood (NCIT:C12434)', 'Blood (NCIT:C12434)', /^592$/);
+    cy.validateFacetRank(1, 'Tissue');
   });
 
   it('Tissue - Unknown', () => {
-    cy.checkValueFacetAndApply('Tissue', 'Unknown');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Tissue').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Unknown').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
+    cy.validateFacetFilter('Tissue', 'Unknown', 'Unknown', /^6$/);
   });
 
   it('Age at Biospecimen Collection - Congenital', () => {
-    cy.get('[data-cy="FilterContainer_Age at Biospecimen Collection"]').should('exist');
-    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'B-congenital');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Congenital').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
+    cy.validateFacetFilter('Age at Biospecimen Collection', 'Congenital', 'B-congenital', /^2$/);
+    cy.validateFacetRank(2, 'Age at Biospecimen Collection');
   });
 
   it('Age at Biospecimen Collection - Young Adult', () => {
-    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'G-young adult');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
+    cy.validateFacetFilter('Age at Biospecimen Collection', 'Young Adult', 'G-young adult', /^1$/);
   });
 });
 
@@ -203,49 +187,48 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
+  it('Search by file ID - FI0000572', () => {
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by file ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FI0000572', 'POST', '*/grapgql', 1);
+    cy.wait(1000);
+    cy.get('[data-cy="Search_Dropdown"]').contains('FI0000572').should('exist');
+    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_FI0000572"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0000572').should('exist');
+    cy.validateTableResultsCount(/^1 Results$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_FI0000572"]').should('not.exist');
+  });
+
   it('Data Category - Genomics', () => {
-    cy.get('[data-cy="FilterContainer_Data Category"]').should('exist');
-    cy.checkValueFacetAndApply('Data Category', 'Genomics');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Category').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Genomics').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2,984$/).should('exist');
+    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^2,984$/);
+    cy.validateFacetRank(0, 'Data Category');
   });
 
   it('Data Type - Aligned Reads [CQDG-261]', () => {
-    cy.get('[data-cy="FilterContainer_Data Type"]').should('exist');
-    cy.checkValueFacetAndApply('Data Type', 'Aligned Reads');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Type').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Aligned Reads').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^598$/).should('exist');
+    cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^598$/);
+    cy.validateFacetRank(1, 'Data Type');
   });
 
   it('Data Type - Germline CNV [CQDG-261]', () => {
-    cy.checkValueFacetAndApply('Data Type', 'Germline CNV');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Data Type').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Germline CNV').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^592$/).should('exist');
+    cy.validateFacetFilter('Data Type', 'Germline CNV', 'Germline CNV', /^592$/);
   });
 
   it('Experimental Strategy - WGS', () => {
-    cy.get('[data-cy="FilterContainer_Experimental Strategy"]').should('exist');
-    cy.checkValueFacetAndApply('Experimental Strategy', 'WGS');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Experimental Strategy').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^2,984$/).should('exist');
+    cy.validateFacetFilter('Experimental Strategy', 'WGS', 'WGS', /^2,984$/);
+    cy.validateFacetRank(2, 'Experimental Strategy');
   });
 
-  it('Format - gVCF', () => {
-    cy.get('[data-cy="FilterContainer_Format"]').should('exist');
-    cy.checkValueFacetAndApply('Format', 'gVCF');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('GVCF').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^598$/).should('exist');
+  it('Format - gVCF [CQDG-512]', () => {
+    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^598$/);
+    cy.validateFacetRank(3, 'Format');
   });
 
   it('Format - CRAM', () => {
-    cy.checkValueFacetAndApply('Format', 'CRAM');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Format').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('CRAM').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^598$/).should('exist');
+    cy.validateFacetFilter('Format', 'CRAM', 'CRAM', /^598$/);
   });
 });

@@ -27,7 +27,7 @@ describe('Page Data Exploration (Participants) - Exporter les participants en TS
     cy.validateFileHeaders('ExportTableauParticipants.json');
   });
 
-  it('Valider le contenu du fichier', () => {
+  it('Valider le contenu du fichier [CQDG-500]', () => {
     cy.validateFileContent('ExportTableauParticipants.json');
   });
 });

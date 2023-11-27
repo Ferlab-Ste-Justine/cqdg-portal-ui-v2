@@ -52,7 +52,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(3).contains('Case-parent trio').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(3).find('[class*="ant-tag-cyan"]').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Family Position').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('Is the proband').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('Proband').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[class*="ant-tag-purple"]').should('exist');
   });
 
@@ -85,13 +85,13 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.resetColumns('family');
     cy.get('[id="family"]').find('[class*="EntityTable_title"]').contains('Family').should('exist');
     cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('Family ( ').should('exist');
-    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('FM0000170').should('exist');
+    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('FM0000307').should('exist');
     cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains(' )').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Participant').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Family Position').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(2).contains('Disease Status').should('exist');
     cy.get('[data-row-key="PT0000010"]').find('td[class="ant-table-cell"]').eq(0).contains('PT0000010').should('exist');
-    cy.get('[data-row-key="PT0000010"]').find('td[class="ant-table-cell"]').eq(1).contains('Is the proband').should('exist');
+    cy.get('[data-row-key="PT0000010"]').find('td[class="ant-table-cell"]').eq(1).contains('Proband').should('exist');
     cy.get('[data-row-key="PT0000010"]').find('td[class="ant-table-cell"]').eq(2).contains('Yes').should('exist');
     cy.get('[data-row-key="PT0000483"]').find('td[class="ant-table-cell"]').eq(0).contains('PT0000483').should('exist');
     cy.get('[data-row-key="PT0000483"]').find('td[class="ant-table-cell"]').eq(1).contains('Father').should('exist');
@@ -222,7 +222,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[data-cy="FamilyLink"]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Family ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FM0000170').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FM0000307').should('exist');
   });
 
   it('Lien Mother du panneau Family', () => {
@@ -267,7 +267,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Diagnosis (MONDO)').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Epilepsy (MONDO:0005027)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^205$/).should('exist');
+    cy.validateTableResultsCount(/^205$/);
   });
 
   it('Lien HPO du panneau Phenotypes', () => {
@@ -280,7 +280,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Phenotype').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Seizure (HP:0001250)').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^202$/).should('exist');
+    cy.validateTableResultsCount(/^202$/);
   });
 
   it('Lien DataExploration du panneau Biospecimens', () => {

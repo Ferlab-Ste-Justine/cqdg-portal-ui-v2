@@ -66,7 +66,7 @@ describe('Page d\'un participant - Exporter le tableau Phenotypes en TSV', () =>
     cy.validateFileHeaders('ExportTableauPhenotypesPageParticipant.json');
   });
 
-  it('Valider le contenu du fichier [CQDG-490]', () => {
+  it('Valider le contenu du fichier', () => {
     cy.validateFileContent('ExportTableauPhenotypesPageParticipant.json');
   });
 });
@@ -75,7 +75,8 @@ describe('Page d\'un participant - Exporter le tableau Biospecimens en TSV', () 
   beforeEach(() => {
     cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('biospecimen');
-    cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 5);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(5).click({force: true});
+    cy.wait(2000);
   });
   
   it('Valider le nom du fichier', () => {

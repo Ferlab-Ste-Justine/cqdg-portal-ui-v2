@@ -3,7 +3,7 @@
 declare namespace Cypress {
   interface Chainable {
     checkValueFacetAndApply(facetTitle: string, value: string): cy & CyEventEmitter;
-    checkValueFacet(facetRank: number, value: string|RegExp): cy & CyEventEmitter;
+    checkValueFacet(facetTitle: string, value: string): cy & CyEventEmitter;
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
     login(): cy & CyEventEmitter;
@@ -15,6 +15,9 @@ declare namespace Cypress {
     sortTableAndWait(column: string): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateClearAllButton(shouldExist: boolean): cy & CyEventEmitter;
+    validateFacetFilter(facetTitle: string, valueFront: string, valueBack: string, expectedCount: string|RegExp, applyButton: boolean = false): cy & CyEventEmitter;
+    validateFacetNumFilter(facetTitle: string, value: string, expectedCount: string|RegExp): cy & CyEventEmitter;
+    validateFacetRank(facetRank: number, facetTitle: string): cy & CyEventEmitter;
     validateFileContent(fixture: string, replacements?: Replacement[]): cy & CyEventEmitter;
     validateFileHeaders(fixture: string): cy & CyEventEmitter;
     validateFileName(namePattern: string): cy & CyEventEmitter;
