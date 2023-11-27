@@ -78,7 +78,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^5$/).should('exist');
+    cy.validateTableResultsCount(/^5$/);
   });
 
   it('Lien Biospecimens du tableau', () => {
@@ -86,7 +86,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
     cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
-    cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
+    cy.validateTableResultsCount(/^1$/);
   });
 
   it('Lien ICD de Diagnosis (ICD) du tableau', () => {
