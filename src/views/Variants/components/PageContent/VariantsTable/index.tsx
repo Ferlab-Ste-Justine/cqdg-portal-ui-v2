@@ -19,7 +19,7 @@ import {
 import { numberFormat, toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
-import { Tooltip } from 'antd';
+import { Tag, Tooltip } from 'antd';
 import cx from 'classnames';
 import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
@@ -31,6 +31,7 @@ import {
   IVariantEntity,
   IVariantInternalFrequencies,
   IVariantStudyEntity,
+  Sources,
 } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID, DEFAULT_PAGE_INDEX } from 'views/DataExploration/utils/constant';
 import ConsequencesCell from 'views/Variants/components/ConsequencesCell';
@@ -50,6 +51,16 @@ import styles from './index.module.scss';
 
 const isNumber = (n: number) => n && !Number.isNaN(n);
 
+export const getSourceTagColor = (value: string) => {
+  switch (value) {
+    case Sources.WGS:
+      return 'purple';
+    case Sources.WXS:
+      return 'orange';
+    default:
+      return '';
+  }
+};
 const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'hgvsg',
@@ -73,7 +84,26 @@ const getDefaultColumns = (): ProColumnType[] => [
     title: intl.get('entities.variant.type'),
     dataIndex: 'variant_class',
     sorter: { multiple: 1 },
-    render: (variant_class: string) => variant_class || TABLE_EMPTY_PLACE_HOLDER,
+    render: (variant_class: string) =>
+      variant_class ? removeUnderscoreAndCapitalize(variant_class) : TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    key: 'sources',
+    title: intl.get('entities.variant.sources'),
+    dataIndex: 'sources',
+    align: 'center',
+    render: (sources: string[]) =>
+      sources ? (
+        <>
+          {sources.map((value) => (
+            <Tag color={getSourceTagColor(value)} key={value}>
+              {value || TABLE_EMPTY_PLACE_HOLDER}
+            </Tag>
+          ))}
+        </>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
   },
   {
     key: 'rsnumber',
@@ -94,9 +124,9 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'consequences',
-    title: intl.get('entities.variant.consequences.consequences'),
+    title: intl.get('entities.variant.mostDeleteriousConsequence.title'),
     dataIndex: 'genes',
-    tooltip: intl.get('entities.variant.consequences.tooltip'),
+    tooltip: intl.get('entities.variant.mostDeleteriousConsequence.tooltip'),
     render: (genes: IArrangerResultsTree<IGeneEntity>) => {
       const geneWithPickedConsequence = genes?.hits?.edges?.find((e) =>
         (e.node.consequences || [])?.hits?.edges?.some((e) => e.node?.picked),
@@ -182,46 +212,18 @@ const getDefaultColumns = (): ProColumnType[] => [
     },
   },
   {
-    title: intl.get('entities.participant.participant'),
+    key: 'internal_frequencies_wgs.total.pc',
+    title: intl.get('entities.variant.participant.title'),
     tooltip: intl.get('entities.variant.participant.tooltip'),
-    key: 'participant_number',
-    render: (variant: IVariantEntity) => {
-      const totalNbOfParticipants = variant.internal_frequencies?.total?.pc || 0;
-      const studies = variant.studies;
-      const participantIds =
-        studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
-      if (!participantIds.length) {
-        return totalNbOfParticipants;
-      }
-      return (
-        <Link
-          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-          onClick={() => {
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'participant_id',
-                    value: participantIds,
-                    index: INDEXES.PARTICIPANT,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            });
-          }}
-        >
-          {numberFormat(totalNbOfParticipants)}
-        </Link>
-      );
-    },
+    dataIndex: 'internal_frequencies_wgs',
+    render: (internalFrequencies: IVariantInternalFrequencies) =>
+      internalFrequencies?.total?.pc || 0,
   },
   {
-    key: 'internal_frequencies',
+    key: 'internal_frequencies_wgs.total.af',
     title: intl.get('entities.variant.frequence.title'),
     tooltip: intl.get('entities.variant.frequence.tooltip'),
-    dataIndex: 'internal_frequencies',
+    dataIndex: 'internal_frequencies_wgs',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af)
         ? toExponentialNotation(internalFrequencies?.total?.af)
@@ -230,14 +232,14 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     title: intl.get('entities.variant.alt.title'),
     tooltip: intl.get('entities.variant.alt.tooltip'),
-    dataIndex: ['internal_frequencies', 'total', 'ac'],
+    dataIndex: ['internal_frequencies_wgs', 'total', 'ac'],
     key: 'ac',
     render: (ac: string) => ac || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: intl.get('entities.variant.homozygotes.title'),
     tooltip: intl.get('entities.variant.homozygotes.tooltip'),
-    dataIndex: 'internal_frequencies',
+    dataIndex: 'internal_frequencies_wgs',
     key: 'homozygotes',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,

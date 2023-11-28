@@ -10,6 +10,7 @@ import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolde
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
 
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import PopoverContentLink from 'components/uiKit/PopoverContentLink';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
@@ -19,7 +20,6 @@ import { STATIC_ROUTES } from 'utils/routes';
 import ListItem from './ListItem';
 
 import styles from './index.module.scss';
-
 const { Text } = Typography;
 
 const getItemList = (
@@ -67,7 +67,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Participants">
           <UserOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.participants')} (
+          {intl.get('entities.participant.participants')} (
           {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
         </div>
       ),
@@ -84,7 +84,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Biospecimens">
           <ExperimentOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.biospecimens')} (
+          {intl.get('entities.biospecimen.biospecimens')} (
           {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
         </div>
       ),
@@ -101,7 +101,7 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Files">
           <FileTextOutlined />
-          {intl.get('screen.dashboard.cards.savedSets.files')} (
+          {intl.get('entities.file.files')} (
           {savedSets.filter((s) => s.setType === SetType.FILE).length})
         </div>
       ),
@@ -112,6 +112,23 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         fetchingError,
         isLoading,
         <FileTextOutlined />,
+      ),
+    },
+    {
+      label: (
+        <div data-cy="Tab_Variants">
+          <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
+          {intl.get('entities.variant.variants')} (
+          {savedSets.filter((s) => s.setType === SetType.VARIANT).length})
+        </div>
+      ),
+      key: 'variants',
+      children: getItemList(
+        SetType.VARIANT,
+        savedSets,
+        fetchingError,
+        isLoading,
+        <LineStyleIcon height={16} width={16} className={styles.iconSvg} />,
       ),
     },
   ];

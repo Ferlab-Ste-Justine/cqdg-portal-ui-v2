@@ -193,6 +193,11 @@ export const getQueryBuilderDictionary = (
       title: intl.get('components.querybuilder.header.myFiltersDropdown.title'),
       manageMyFilter: intl.get('components.querybuilder.header.myFiltersDropdown.manageMyFilter'),
     },
+    manageFilters: {
+      modalTitle: intl.get('components.querybuilder.header.myFiltersDropdown.manageMyFilter'),
+      okText: intl.get('components.querybuilder.header.myFiltersDropdown.okText'),
+      lastSavedAt: intl.get('screen.dashboard.cards.savedFilters.lastSaved'),
+    },
     duplicateFilterTitleSuffix: intl.get(
       'components.querybuilder.header.duplicateFilterTitleSuffix',
     ),
@@ -204,14 +209,53 @@ export const getQueryBuilderDictionary = (
     },
     noQuery: intl.get('components.querybuilder.query.noQuery'),
     facet: facetResolver,
-    facetValueMapping: {
-      chromosome: {
-        true: '1',
-      },
-    },
     setNameResolver: (setId: string) => {
       const set = savedSets?.find((set) => set.id === setId.replace(SET_ID_PREFIX, ''));
       return set ? set.tag : setId;
+    },
+    facetValueMapping: {
+      variant_external_reference: {
+        DBSNP: intl.get('entities.variant.dbsnp'),
+        Clinvar: intl.get('entities.variant.pathogenicity.clinVar'),
+      },
+      'genes.consequences.predictions.sift_pred': {
+        T: intl.get('facets.options.genes__consequences__predictions__sift_pred.T'),
+        D: intl.get('facets.options.genes__consequences__predictions__sift_pred.D'),
+      },
+      'genes.consequences.predictions.polyphen2_hvar_pred': {
+        B: intl.get('facets.options.genes__consequences__predictions__polyphen2_hvar_pred.B'),
+        D: intl.get('facets.options.genes__consequences__predictions__polyphen2_hvar_pred.D'),
+        P: intl.get('facets.options.genes__consequences__predictions__polyphen2_hvar_pred.P'),
+      },
+      'genes.consequences.predictions.fathmm_pred': {
+        T: intl.get('facets.options.genes__consequences__predictions__fathmm_pred.T'),
+        D: intl.get('facets.options.genes__consequences__predictions__fathmm_pred.D'),
+      },
+      'genes.consequences.predictions.lrt_pred': {
+        N: intl.get('facets.options.genes__consequences__predictions__lrt_pred.N'),
+        D: intl.get('facets.options.genes__consequences__predictions__lrt_pred.D'),
+        U: intl.get('facets.options.genes__consequences__predictions__lrt_pred.U'),
+      },
+      down_syndrome_status: {
+        D21: intl.get('facets.options.D21'),
+        T21: intl.get('facets.options.T21'),
+      },
+      'studies.zygosity': {
+        HET: intl.get('facets.options.studies__zygosity.HET'),
+        WT: intl.get('facets.options.studies__zygosity.WT'),
+        HOM: intl.get('facets.options.studies__zygosity.HOM'),
+        UNK: intl.get('facets.options.studies__zygosity.UNK'),
+      },
+      domain: {
+        CANCER: intl.get('facets.options.domain.CANCER'),
+        BIRTHDEFECT: intl.get('facets.options.domain.BIRTHDEFECT'),
+        CANCERANDBIRTHDEFECT: intl.get('facets.options.domain.CANCERANDBIRTHDEFECT'),
+      },
+      'study.domain': {
+        CANCER: intl.get('facets.options.study__domain.CANCER'),
+        BIRTHDEFECT: intl.get('facets.options.study__domain.BIRTHDEFECT'),
+        CANCERANDBIRTHDEFECT: intl.get('facets.options.study__domain.CANCERANDBIRTHDEFECT'),
+      },
     },
   },
   actions: {
@@ -241,6 +285,8 @@ export const getFacetsDictionary = () => ({
   biospecimen_id: intl.get('entities.biospecimen.biospecimen_id'),
   file_id: intl.get('entities.file.file_id'),
   file_2_id: intl.get('entities.file.file_id'),
+  locus: intl.get('entities.variant.variant_id'),
+  sources: intl.get('entities.variant.sources'),
   participant_id: intl.get('entities.participant.participant_id'),
   participant_2_id: intl.get('entities.participant.participant_id'),
   sample_id: intl.get('entities.biospecimen.sample_id'),
@@ -251,10 +297,13 @@ export const getFacetsDictionary = () => ({
   },
   study: {
     study_code: intl.get('entities.study.study_code'),
+    name: intl.get('entities.study.name'),
     external_id: 'dbGaP Accession Number',
   },
   studies: {
     study_code: intl.get('entities.study.study_code'),
+    zygosity: intl.get('entities.variant.zygosity'),
+    transmission: intl.get('entities.variant.transmission'),
   },
   start: 'Position',
   acl: 'ACL',
@@ -305,7 +354,47 @@ export const getFacetsDictionary = () => ({
   },
   variant_class: intl.get('entities.variant.variant_class'),
   variant_external_reference: intl.get('entities.variant.variant_external_reference'),
+  consequences: {
+    consequence: intl.get('entities.variant.consequences.consequence'),
+    consequences: intl.get('entities.variant.consequences.consequences'),
+    biotype: intl.get('entities.variant.biotype'),
+    vep_impact: 'VEP',
+    predictions: {
+      sift_pred: 'SIFT',
+      polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
+      fathmm_pred: 'FATHMM',
+      cadd_rankscore: 'CADD',
+      lrt_pred: 'LRT',
+      revel_rankscore: 'REVEL',
+      dann_rankscore: 'DANN',
+    },
+  },
   genes: {
+    symbol: intl.get('entities.variant.gene'),
+    consequences: {
+      consequence: intl.get('entities.variant.consequences.consequence'),
+      consequences: intl.get('entities.variant.consequences.consequences'),
+      biotype: intl.get('entities.variant.biotype'),
+      vep_impact: 'VEP',
+      predictions: {
+        cadd_score: 'CADD (Raw)',
+        cadd_phred: 'CADD (Phred)',
+        dann_score: 'DANN',
+        fathmm_pred: 'FATHMM',
+        lrt_pred: 'LRT',
+        polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
+        revel_score: 'REVEL',
+        sift_pred: 'SIFT',
+      },
+    },
+    biotype: intl.get('entities.variant.biotype'),
+    gnomad: {
+      pli: 'gnomAD pLI',
+      loeuf: 'gnomAD LOEUF',
+    },
+    spliceai: {
+      ds: 'SpliceAI',
+    },
     hpo: {
       hpo_term_label: 'HPO',
     },
@@ -321,27 +410,16 @@ export const getFacetsDictionary = () => ({
     cosmic: {
       tumour_types_germline: 'COSMIC',
     },
-    consequences: {
-      consequences: intl.get('entities.variant.consequences.consequence'),
-      biotype: intl.get('entities.variant.biotype'),
-      vep_impact: 'VEP',
-      predictions: {
-        sift_pred: 'SIFT',
-        polyphen2_hvar_pred: 'PolyPhen-2 HVAR',
-        fathmm_pred: 'FATHMM',
-        cadd_rankscore: 'CADD',
-        lrt_pred: 'LRT',
-        revel_rankscore: 'REVEL',
-        dann_rankscore: 'DANN',
-      },
-    },
   },
   external_frequencies: {
-    gnomad_genomes_2_1_1: { af: 'gnomAD Genome 2.1.1' },
+    gnomad_genomes_2_1_1: { af: 'gnomAD Genome 2.1' },
     gnomad_genomes_3: { af: 'gnomAD Genome 3.1.2' },
-    gnomad_exomes_2_1_1: { af: 'gnomAD Exome 2.1.1' },
+    gnomad_exomes_2_1_1: { af: 'gnomAD Exome 2.1' },
     topmed_bravo: { af: 'TopMed' },
     thousand_genomes: { af: '1000 Genomes' },
+  },
+  internal_frequencies_wgs: {
+    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af') },
   },
   frequencies: {
     internal: {
@@ -369,18 +447,6 @@ export const getFacetsDictionary = () => ({
     },
   },
   tooltips: {
-    consequences: {
-      vep_impact: 'Ensembl Variant Effect Predictor',
-      predictions: {
-        cadd_rankscore: 'Combined Annotation Dependent Depletion',
-        dann_rankscore: 'Deleterious Annotation of genetic variants using Neural Networks',
-        fathmm_pred: 'Functional Analysis Through Hidden Markov Models',
-        lrt_pred: 'Likelihood Ratio Test',
-        polyphen2_hvar_pred: 'Polymorphism Phenotyping v2 HumVar',
-        revel_rankscore: 'Rare Exome Variant Ensemble Learner',
-        sift_pred: 'Sorting Intolerant From Tolerant',
-      },
-    },
     genes: {
       hpo: {
         hpo_term_label: 'Human Phenotype Ontology',
@@ -396,6 +462,19 @@ export const getFacetsDictionary = () => ({
       },
       cosmic: {
         tumour_types_germline: 'Catalogue Of Somatic Mutations In Cancer',
+      },
+      consequences: {
+        vep_impact: 'Ensembl Variant Effect Predictor',
+        predictions: {
+          cadd_score: 'Combined Annotation Dependent Depletion',
+          cadd_phred: 'Combined Annotation Dependent Depletion PHRED',
+          dann_score: 'Deleterious Annotation of genetic variants using Neural Networks',
+          fathmm_pred: 'Functional Analysis Through Hidden Markov Models',
+          lrt_pred: 'Likelihood Ratio Test',
+          polyphen2_hvar_pred: 'Polymorphism Phenotyping v2 HumVar',
+          revel_score: 'Rare Exome Variant Ensemble Learner',
+          sift_pred: 'Sorting Intolerant From Tolerant',
+        },
       },
     },
   },

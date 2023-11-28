@@ -2,10 +2,13 @@ import intl from 'react-intl-universal';
 import { setLocale } from '@ferlab/ui/core/utils/localeUtils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ArgsProps as NotificationArgsProps } from 'antd/lib/notification';
+import keycloak from 'auth/keycloak-api/keycloak';
 import locales from 'locales';
 
 import { LANG } from 'common/constants';
+import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { initialState, MessageArgsPropsCustom } from 'store/global/types';
+import { fetchUser } from 'store/user/thunks';
 
 import { fetchStats } from './thunks';
 
@@ -26,17 +29,20 @@ export const GlobalState: initialState = {
   isFetchingStats: false,
 };
 
+const setLocalConfig = (locale: string) => {
+  intl.init({
+    currentLocale: locale,
+    locales,
+  });
+  setLocale(locale);
+};
+
 const globalSlice = createSlice({
   name: 'global',
   initialState: GlobalState,
   reducers: {
     changeLang: (state, action: PayloadAction<LANG>) => {
-      intl.init({
-        currentLocale: action.payload,
-        locales,
-      });
-      setLocale(action.payload);
-
+      setLocalConfig(action.payload);
       return {
         ...state,
         lang: action.payload,
@@ -74,6 +80,15 @@ const globalSlice = createSlice({
     });
     builder.addCase(fetchStats.rejected, (state) => {
       state.isFetchingStats = false;
+    });
+    builder.addCase(fetchUser.fulfilled, (state) => {
+      const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
+      const locale = tokenParsed.locale || state.lang;
+      setLocalConfig(locale);
+      return {
+        ...state,
+        lang: locale,
+      };
     });
   },
 });

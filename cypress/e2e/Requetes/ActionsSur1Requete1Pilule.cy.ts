@@ -8,45 +8,41 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=648a3525-d026-40cf-ab80-8c799c425669');
+    cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
 
-    cy.get('li[data-key="participants"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click();
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
   it('Éditer une pilule via la facette', () => {
-    cy.checkValueFacetAndApply(0, 'RAPIDOMICS');
+    cy.checkValueFacetAndApply('Variant Type', 'deletion');
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV','RAPIDOMICS']);
-    cy.validateTotalSelectedQuery('639');
-    cy.validateTableResultsCount('639');
+    cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
+    cy.validateTotalSelectedQuery('274');
+    cy.validateTableResultsCount('274');
     cy.validateClearAllButton(false);
   });
 
   it('Éditer une pilule via son popup', () => {
-    cy.get('[class*="QueryValues_queryValuesContainer"]').contains('NEURODEV').click({force:true});
-    cy.get('input[id="input-RAPIDOMICS"]').check({force: true});
-    cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
-    cy.get('span[data-key="apply"]', {timeout: 20*1000}).click({force: true, multiple:true});
-    for (let i = 0; i < 7; i++) {
-      cy.wait('@getPOSTgraphql', {timeout: 20*1000});
-    };
+    cy.get('[class*="QueryValues_queryValuesContainer"]').contains('SNV').click({force:true});
+    cy.get('input[id="input-deletion"]').check({force: true});
+    cy.clickAndIntercept('[data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV','RAPIDOMICS']);
-    cy.validateTotalSelectedQuery('639');
-    cy.validateTableResultsCount('639');
+    cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
+    cy.validateTotalSelectedQuery('274');
+    cy.validateTableResultsCount('274');
     cy.validateClearAllButton(false);
   });
 
   it('Ajouter une pilule à une requête', () => {
-    cy.checkValueFacetAndApply(2, 'Female');
+    cy.checkValueFacetAndApply('Consequence', 'intron');
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV']);
-    cy.validatePillSelectedQuery('Gender', ['Female'], 1);
+    cy.validatePillSelectedQuery('Variant Type', ['SNV']);
+    cy.validatePillSelectedQuery('Consequence', ['Intron'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('184');
-    cy.validateTableResultsCount('184');
+    cy.validateTotalSelectedQuery('155');
+    cy.validateTableResultsCount('155');
     cy.validateClearAllButton(false);
   });
 
@@ -58,15 +54,15 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('1,119');
-    cy.validateTableResultsCount('1,119');
+    cy.validateTotalSelectedQuery('442');
+    cy.validateTableResultsCount('442');
     cy.validateClearAllButton(false);
 
-    cy.checkValueFacetAndApply(2, 'Female');
+    cy.checkValueFacetAndApply('Consequence', 'intron');
 
-    cy.validatePillSelectedQuery('Gender', ['Female']);
-    cy.validateTotalSelectedQuery('527');
-    cy.validateTableResultsCount('527');
+    cy.validatePillSelectedQuery('Consequence', ['Intron']);
+    cy.validateTotalSelectedQuery('270');
+    cy.validateTableResultsCount('270');
     cy.validateClearAllButton(true);
   });
 
@@ -75,9 +71,9 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[data-icon="copy"]').click({force: true});
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validatePillSelectedQuery('Study Code', ['NEURODEV']);
-    cy.validateTotalSelectedQuery('382');
-    cy.validateTableResultsCount('382');
+    cy.validatePillSelectedQuery('Variant Type', ['SNV']);
+    cy.validateTotalSelectedQuery('226');
+    cy.validateTableResultsCount('226');
     cy.validateClearAllButton(true);
   });
 });

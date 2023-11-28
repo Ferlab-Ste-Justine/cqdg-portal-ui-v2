@@ -13,7 +13,7 @@ export interface IBiospecimenEntity {
   score: number;
   study_id: string;
   study_code: string;
-  age_biospecimen_collection: number;
+  age_biospecimen_collection: string;
   biospecimen_id: string;
   biospecimen_tissue_source: string;
   release_id: string;

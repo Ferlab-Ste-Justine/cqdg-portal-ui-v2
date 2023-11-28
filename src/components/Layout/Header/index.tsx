@@ -13,15 +13,15 @@ import {
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
-import { Button, Dropdown, PageHeader } from 'antd';
+import { Button, Dropdown, PageHeader, Tag } from 'antd';
 import { Space } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
 import { LANG } from 'common/constants';
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { AlterTypes } from 'common/types';
+import CQDGLogo from 'components/assets/cqdg-logo.svg';
 import NotificationBanner from 'components/featureToggle/NotificationBanner';
-import CQDGLogoFullPortal from 'components/Icons/CQDGLogoFullPortal';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
@@ -37,7 +37,7 @@ const FT_FLAG_KEY = 'SITE_WIDE_BANNER';
 const BANNER_TYPE_KEY = FT_FLAG_KEY + '_TYPE';
 const BANNER_MSG_KEY = FT_FLAG_KEY + '_MSG';
 
-const getTargetLang = (lang: LANG) => (lang === LANG.FR ? LANG.EN : LANG.FR);
+export const getTargetLang = (lang: LANG) => (lang === LANG.FR ? LANG.EN : LANG.FR);
 
 const Header = () => {
   const lang = useLang();
@@ -69,7 +69,12 @@ const Header = () => {
         className={styles.mainHeader}
         title={
           <div className={styles.headerNavList}>
-            <CQDGLogoFullPortal className={styles.logo} />
+            <img src={CQDGLogo} className={styles.logo} />
+            {EnvVariables.configFor('IS_BETA') === 'true' && (
+              <Tag color="blue" className={styles.tagBeta}>
+                Beta
+              </Tag>
+            )}
             <nav className={styles.headerNavList}>
               <HeaderLink
                 to={STATIC_ROUTES.DASHBOARD}

@@ -57,6 +57,7 @@ const generateReport = (config: ReportConfig) => {
       projectId: ARRANGER_PROJECT_ID,
       filename: fileNameFormatted,
       withFamily: config.withFamily,
+      withoutFiles: config.withoutFiles,
     },
     headers: headers(),
   });

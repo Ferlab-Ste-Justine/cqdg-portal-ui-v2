@@ -49,23 +49,23 @@ const EntityGeneConsequenceSubtitle = ({
     )}
     <span className={styles.bold}>
       <span className={styles.separator}>|</span>
-      {removeUnderscoreAndCapitalize(gene?.node?.biotype)}
+      {removeUnderscoreAndCapitalize(gene?.node?.biotype || '')}
     </span>
-    {gene?.node?.spliceai?.ds && (
+    {!!gene?.node?.spliceai?.ds && (
       <span>
         <span className={styles.separator}>|</span>
         <span className={styles.bold}>{dictionary.spliceai}:</span>
         <span>{gene.node.spliceai.ds}</span>
       </span>
     )}
-    {gene?.node?.gnomad?.pli && (
+    {!!gene?.node?.gnomad?.pli && (
       <span>
         <span className={styles.separator}>|</span>
         <span className={styles.bold}>{dictionary.gnomad_pli}:</span>
         <span>{gene.node.gnomad.pli}</span>
       </span>
     )}
-    {gene?.node?.gnomad?.loeuf && (
+    {!!gene?.node?.gnomad?.loeuf && (
       <span>
         <span className={styles.separator}>|</span>
         <span className={styles.bold}>{dictionary.gnomad_loeuf}:</span>

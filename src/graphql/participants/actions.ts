@@ -13,6 +13,7 @@ export const useParticipants = (
 ) => {
   const { loading, result } = useLazyResultQuery<IParticipantResultTree>(GET_PARTICIPANTS, {
     variables,
+    fetchPolicy: 'network-only',
   });
 
   return {

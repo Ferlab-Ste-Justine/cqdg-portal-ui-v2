@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
-import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { generateQuery, generateWildCardValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { DocumentNode } from 'graphql';
 import { INDEXES } from 'graphql/constants';
 import get from 'lodash/get';
@@ -47,16 +47,17 @@ const Search = <T,>({
         setOptions(setCurrentOptions(results.suggestions, search));
       }
     } else {
-      const searchFilter = generateQuery({
+      const payload = {
         operator: BooleanOperators.or,
         newFilters: searchKey.map((key) =>
-          generateValueFilter({
-            field: key,
-            value: [`${search}*`],
+          generateWildCardValueFilter({
+            fields: [key],
+            value: [`*${search}*`],
             index,
           }),
         ),
-      });
+      };
+      const searchFilter = generateQuery(payload);
 
       const { data } = await ArrangerApi.graphqlRequest<any>({
         query: query.loc?.source.body,

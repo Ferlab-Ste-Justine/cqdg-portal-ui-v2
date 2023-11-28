@@ -7,6 +7,7 @@ import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal } from 'antd';
 import EnvVariables from 'helpers/EnvVariables';
 
+import RestrictedStudyAlert from 'components/reports/RestrictedStudyAlert';
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
@@ -17,16 +18,20 @@ import styles from './index.module.scss';
 
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
-  type?: 'default' | 'primary';
+  buttonType?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
+  withoutFiles?: boolean;
+  isRestricted?: boolean;
 }
 
 const DownloadRequestAccessModal = ({
   sqon,
-  type = 'default',
-  isDisabled,
-  hasTooManyFiles,
+  buttonType = 'default',
+  isDisabled = false,
+  hasTooManyFiles = false,
+  withoutFiles = false,
+  isRestricted = false,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -43,7 +48,7 @@ const DownloadRequestAccessModal = ({
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
-        type={type}
+        type={buttonType}
         disabled={isDisabled}
         data-cy="RequestAccess_Button"
       >
@@ -53,7 +58,7 @@ const DownloadRequestAccessModal = ({
         open={isModalVisible}
         title={intl.get('api.report.requestAccess.title')}
         okText={intl.get('api.report.requestAccess.okText')}
-        okButtonProps={{ disabled: hasTooManyFiles }}
+        okButtonProps={{ disabled: hasTooManyFiles || isRestricted }}
         cancelText={intl.get('api.report.requestAccess.cancel')}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => {
@@ -63,6 +68,7 @@ const DownloadRequestAccessModal = ({
                 name: ReportType.FILE_REQUEST_ACCESS,
                 sqon,
                 withFamily: isFamilyChecked,
+                withoutFiles,
               },
               callback: () => setIsModalVisible(false),
             }),
@@ -78,12 +84,20 @@ const DownloadRequestAccessModal = ({
           </ExternalLink>
           .
         </div>
-        <br />
-        <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
-          {intl.get('api.report.requestAccess.textCheckbox')}
-        </Checkbox>
-        {hasTooManyFiles && <TooMuchFilesAlert />}
+        {!withoutFiles && (
+          <>
+            <br />
+            <Checkbox
+              checked={isFamilyChecked}
+              onChange={() => setIsFamilyChecked(!isFamilyChecked)}
+            >
+              {intl.get('api.report.requestAccess.textCheckbox')}
+            </Checkbox>
+          </>
+        )}
         {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
+        {!withoutFiles && hasTooManyFiles && <TooMuchFilesAlert />}
+        {isRestricted && <RestrictedStudyAlert />}
       </Modal>
     </>
   );

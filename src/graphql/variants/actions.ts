@@ -17,6 +17,7 @@ export const useVariant = (
 ): IQueryResults<IVariantEntity[]> => {
   const { loading, result } = useLazyResultQuery<IVariantResultTree>(SEARCH_VARIANT_QUERY, {
     variables,
+    fetchPolicy: 'network-only',
   });
 
   return {

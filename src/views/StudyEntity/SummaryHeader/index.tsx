@@ -50,9 +50,9 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
                 query: generateQuery({
                   newFilters: [
                     generateValueFilter({
-                      field: 'study_code',
+                      field: 'study.study_code',
                       value: [study.study_code],
-                      index: INDEXES.STUDY,
+                      index: INDEXES.PARTICIPANT,
                     }),
                   ],
                 }),
@@ -71,7 +71,7 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
       </Popover>
     </Button>
     <Button
-      className={`${styles.button} ${isRestricted && styles.buttonDisabled}`}
+      className={`${styles.button} ${styles.disableHover} ${isRestricted && styles.buttonDisabled}`}
       size="large"
       data-cy="SummaryHeader_Families_Button"
       block
@@ -117,9 +117,9 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
                 query: generateQuery({
                   newFilters: [
                     generateValueFilter({
-                      field: 'study_code',
+                      field: 'study.study_code',
                       value: [study.study_code],
-                      index: INDEXES.STUDY,
+                      index: INDEXES.PARTICIPANT,
                     }),
                   ],
                 }),
@@ -166,9 +166,9 @@ const SummaryHeader = ({ study, isRestricted }: ISummaryBarProps) => (
                 query: generateQuery({
                   newFilters: [
                     generateValueFilter({
-                      field: 'study_code',
+                      field: 'study.study_code',
                       value: [study.study_code],
-                      index: INDEXES.STUDY,
+                      index: INDEXES.PARTICIPANT,
                     }),
                   ],
                 }),

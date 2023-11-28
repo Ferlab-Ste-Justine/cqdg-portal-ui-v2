@@ -42,13 +42,13 @@ describe('Navigation', () => {
   it('Lien externe de la header - Documentation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
   });
 
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
     cy.get('[data-cy="ExternalLink_DataRelease"]')
-      .should('have.attr', 'href', 'https://docs.qa.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
   });
 
   it('Redirections de la page Dashboard', () => {
@@ -89,6 +89,13 @@ describe('Navigation', () => {
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
+
+    cy.visitDashboard();
+    cy.get('[data-cy="SavedSets"] [data-cy="Tab_Variants"]').click({force: true});
+    cy.get('[data-cy="SavedSets"]').contains('Cypress Variants').click({force: true});
+    cy.get('[data-cy="Title_Variants"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Variants').should('exist');
   });
 
   it('Liens Saved Filters de la page Dashboard', () => {
@@ -99,7 +106,7 @@ describe('Navigation', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="Tab_Variants"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] [data-cy="Tab_Variants"]').click({force: true});
     cy.get('[data-cy="SavedFilters"]').contains('Cypress Variant Type Filter').click({force: true});
     cy.get('[data-cy="Title_Variants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
@@ -108,22 +115,22 @@ describe('Navigation', () => {
 
   it('Modals de la page Dashboard [CQDG-139]', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"]').find('svg[data-icon="edit"]').click({force: true});
+    cy.get('[data-cy="SavedSets"] svg[data-icon="edit"]').eq(0).click({force: true});
     cy.contains('Edit set').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"]').find('svg[data-icon="delete"]').click({force: true});
+    cy.get('[data-cy="SavedSets"] svg[data-icon="delete"]').eq(0).click({force: true});
     cy.contains('Permanently delete this set?').should('exist');
     cy.get('button[type="button"]').contains('Cancel').click({force: true});
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').find('svg[data-icon="edit"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] svg[data-icon="edit"]').eq(0).click({force: true});
     cy.contains('Edit filter').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').find('svg[data-icon="delete"]').click({force: true});
+    cy.get('[data-cy="SavedFilters"] svg[data-icon="delete"]').eq(0).click({force: true});
     cy.contains('Permanently delete this filter?').should('exist');
     cy.get('button[type="button"]').contains('Cancel').click({force: true});
   });
@@ -146,7 +153,7 @@ describe('Navigation', () => {
     cy.visitDataExploration();
 
     // Facettes
-    cy.get('li[data-key="participants"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').click();
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('participant').should('exist');
@@ -160,13 +167,13 @@ describe('Navigation', () => {
     cy.get('[data-cy="TreeFacet_Modal_mondoTree"]').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('li[data-key="biospecimens"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Biospecimen"]').click();
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('sample').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('li[data-key="datafiles"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Data File"]').click();
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('file').should('exist');
@@ -192,7 +199,7 @@ describe('Navigation', () => {
  
   it('Modals de la page des variants', () => {
     cy.visitVariantsPage();
-    cy.get('li[data-key="category_genomic"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Gene"]').click();
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('gene').should('exist');
@@ -204,7 +211,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'une étude', () => {
-    cy.visitStudyEntity('NEURODEV', 6);
+    cy.visitStudyEntity('T-DEE', 6);
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');
@@ -216,7 +223,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'un fichier', () => {
-    cy.visitFileEntity('FI0181945');
+    cy.visitFileEntity('FI0000981');
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');

@@ -20,3 +20,17 @@ jobs:
           password: ${{ secrets.FERLAB_DOCKER_HUB_TOKEN }}
           image: ferlabcrsj/cqdg-portal-ui
           tag_format: "qa-{sha}-{timestamp}"
+  publish_qa_juno:
+    name: Publish QA-Juno Image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set the QA-Juno configuration file
+        run: mv env-qa .env
+      - name: Push the image on the docker registry
+        uses: Ferlab-Ste-Justine/action-push-image@v2
+        with:
+          username: ${{ secrets.FERLAB_DOCKER_HUB_USER }}
+          password: ${{ secrets.FERLAB_DOCKER_HUB_TOKEN }}
+          image: ferlabcrsj/cqdg-portal-ui
+          tag_format: "qa-juno-{sha}-{timestamp}"

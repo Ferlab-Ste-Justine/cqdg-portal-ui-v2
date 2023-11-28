@@ -15,7 +15,7 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
     label: intl.get('entities.study.access_limitation'),
     value: study?.data_access_codes?.access_limitations?.length ? (
       <ExpandableCell
-        nOfElementsWhenCollapsed={1}
+        nOfElementsWhenCollapsed={10}
         dataSource={study.data_access_codes.access_limitations}
         dictionnary={{
           'see.less': intl.get('global.seeLess'),
@@ -48,7 +48,7 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
     label: intl.get('entities.study.access_requirement'),
     value: study?.data_access_codes?.access_requirements?.length ? (
       <ExpandableCell
-        nOfElementsWhenCollapsed={1}
+        nOfElementsWhenCollapsed={10}
         dataSource={study.data_access_codes.access_requirements}
         dictionnary={{
           'see.less': intl.get('global.seeLess'),

@@ -31,7 +31,7 @@ export const makeRowFromFrequencies = (
       alt: gnomadGenomes3.ac || null,
       altRef: gnomadGenomes3.an || null,
       cohort: {
-        cohortName: 'gnomAD Genomes (v3.1.2)',
+        cohortName: 'gnomAD Genome (v3.1.2)',
         link: `https://gnomad.broadinstitute.org/variant/${locus}?dataset=gnomad_r3`,
       },
       frequency: toExponentialNotation(gnomadGenomes3.af),
@@ -42,7 +42,7 @@ export const makeRowFromFrequencies = (
       alt: gnomadGenomes2_1_1.ac || null,
       altRef: gnomadGenomes2_1_1.an || null,
       cohort: {
-        cohortName: 'gnomAD Genomes (v2.1)',
+        cohortName: 'gnomAD Genome (v2.1)',
       },
       frequency: toExponentialNotation(gnomadGenomes2_1_1.af),
       homozygotes: gnomadGenomes2_1_1.hom || null,
@@ -52,7 +52,7 @@ export const makeRowFromFrequencies = (
       alt: gnomadExomes2_1_1.ac || null,
       altRef: gnomadExomes2_1_1.an || null,
       cohort: {
-        cohortName: 'gnomAD Exomes (v2.1)',
+        cohortName: 'gnomAD Exome (v2.1)',
       },
       frequency: toExponentialNotation(gnomadExomes2_1_1.af),
       homozygotes: gnomadExomes2_1_1.hom || null,

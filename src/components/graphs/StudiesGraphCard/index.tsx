@@ -17,6 +17,8 @@ import styles from './index.module.scss';
 
 const colors = getCommonColors();
 
+const LEGEND_ITEM_HEIGHT = 18;
+
 const addToQuery = (field: string, key: string, index: string, queryId: string) =>
   updateActiveQueryField({
     queryBuilderId: queryId,
@@ -72,20 +74,14 @@ const StudiesGraphCard = ({
               title={intl.get('screen.dataExploration.tabs.summary.studiespie.domainTitle')}
               data={domainData}
               colors={colors}
-              margin={{
-                top: 12,
-                bottom: 96,
-                left: 12,
-                right: 12,
-              }}
               legends={[
                 {
                   anchor: 'bottom',
-                  translateX: 0,
-                  translateY: 92,
+                  translateX: -0,
+                  translateY: -50,
                   direction: 'column',
                   itemWidth: 100,
-                  itemHeight: 18,
+                  itemHeight: LEGEND_ITEM_HEIGHT,
                 },
               ]}
             />
@@ -98,6 +94,16 @@ const StudiesGraphCard = ({
                 addToQuery('population', datum.id as string, INDEXES.STUDY, queryId)
               }
               colors={colors}
+              legends={[
+                {
+                  anchor: 'bottom',
+                  translateX: 0,
+                  translateY: -50,
+                  direction: 'column',
+                  itemWidth: 100,
+                  itemHeight: LEGEND_ITEM_HEIGHT,
+                },
+              ]}
             />
           </Col>
           <Col sm={12} md={12} lg={8}>
@@ -108,6 +114,16 @@ const StudiesGraphCard = ({
                 addToQuery('study_code', datum.id as string, INDEXES.STUDY, queryId)
               }
               colors={colors}
+              legends={[
+                {
+                  anchor: 'bottom',
+                  translateX: 0,
+                  translateY: -50,
+                  direction: 'column',
+                  itemWidth: 100,
+                  itemHeight: LEGEND_ITEM_HEIGHT,
+                },
+              ]}
             />
           </Col>
         </Row>

@@ -181,6 +181,7 @@ export interface IVariantEntity {
   score: number;
   alternate: string;
   assembly_version: string;
+  sources: string[];
   chromosome: string;
   dna_change: string;
   end: number;
@@ -197,21 +198,25 @@ export interface IVariantEntity {
   clinvar: IClinVar;
   external_frequencies: IExternalFrequenciesEntity;
   genes: IArrangerResultsTree<IGeneEntity>;
-  internal_frequencies: IVariantInternalFrequencies;
+  internal_frequencies_wgs: IVariantInternalFrequencies;
   studies: IArrangerResultsTree<IVariantStudyEntity>;
 }
 
 export interface IVariantStudyEntity {
   id: string;
   score: number | null;
-  participant_ids: string[];
   study_code: string;
   study_id: string;
-  transmissions: string[];
   zygosity: string[];
   total: IBoundType;
+  domain: string;
 }
 
 export type ITableVariantEntity = IVariantEntity & {
   key: string;
 };
+
+export enum Sources {
+  WGS = 'WGS',
+  WXS = 'WXS',
+}

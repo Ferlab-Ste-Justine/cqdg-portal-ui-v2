@@ -9,9 +9,7 @@ import EntityPageWrapper, {
 } from '@ferlab/ui/core/pages/EntityPage';
 import { makeClinvarRows } from '@ferlab/ui/core/pages/EntityPage/utils/pathogenicity';
 import { Space, Tag } from 'antd';
-import { ArrangerEdge } from 'graphql/models';
 import { useVariantEntity } from 'graphql/variants/actions';
-import { IVariantStudyEntity } from 'graphql/variants/models';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { getEntityExpandableTableMultiple } from 'utils/translation';
@@ -62,9 +60,10 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  const variantStudies = (data?.studies.hits.edges || []).map(
-    (e: ArrangerEdge<IVariantStudyEntity>) => e.node,
-  );
+  const variantStudies = (data?.studies?.hits.edges || []).map((e) => ({
+    ...e.node,
+    key: e.node.study_code,
+  }));
 
   return (
     <EntityPageWrapper
@@ -97,7 +96,7 @@ const VariantEntity = () => {
           title={intl.get('entities.variant.consequences.consequence')}
           header={intl.get('entities.variant.consequences.geneConsequences')}
           columns={getConsequencesProColumn()}
-          genes={data?.genes.hits.edges}
+          genes={data?.genes?.hits.edges}
         />
 
         <EntityTable
@@ -105,9 +104,10 @@ const VariantEntity = () => {
           columns={getFrequenciesItems()}
           data={variantStudies}
           title={intl.get('entities.variant.frequencies.frequency')}
-          header={intl.get('entities.variant.frequencies.frequency')}
+          header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
-          summaryColumns={getFrequenciesTableSummaryColumns(data, variantStudies)}
+          summaryColumns={getFrequenciesTableSummaryColumns(data)}
+          emptyMessage={intl.get('api.noData')}
         />
 
         <EntityPublicCohortTable
@@ -141,6 +141,7 @@ const VariantEntity = () => {
           }
           data={makeClinvarRows(data?.clinvar)}
           columns={getClinvarColumns()}
+          emptyMessage={intl.get('api.noData')}
         />
 
         <EntityTable
@@ -149,6 +150,7 @@ const VariantEntity = () => {
           header={intl.get('entities.variant.genePhenotype')}
           data={makeGenesOrderedRow(data?.genes)}
           columns={getGenePhenotypeColumns()}
+          emptyMessage={intl.get('api.noData')}
         />
       </>
     </EntityPageWrapper>

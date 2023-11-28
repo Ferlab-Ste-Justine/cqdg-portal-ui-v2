@@ -36,6 +36,15 @@ const create = (body?: Omit<TUserInsert, 'keycloak_id'>) => {
   });
 };
 
+export interface ISearchParams {
+  pageIndex?: number;
+  pageSize?: number;
+  match?: string;
+  sort?: string;
+  roles?: string;
+  researchDomains?: string;
+}
+
 const search = ({
   pageIndex = 0,
   pageSize = 15,
@@ -43,14 +52,7 @@ const search = ({
   sort,
   roles,
   researchDomains,
-}: {
-  pageIndex?: number;
-  pageSize?: number;
-  match?: string;
-  sort?: string;
-  roles?: string;
-  researchDomains?: string;
-}) =>
+}: ISearchParams) =>
   sendRequest<{
     users: TUser[];
     total: number;

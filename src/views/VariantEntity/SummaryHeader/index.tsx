@@ -19,16 +19,8 @@ interface ISummaryHeaderProps {
 
 const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
   const studyCount = variant?.studies.hits.total || 0;
-  const participantCount = variant?.internal_frequencies?.total?.pc || 0;
+  const participantCount = variant?.internal_frequencies_wgs?.total?.pc || 0;
   const studyCodes = variant?.studies.hits.edges.map((e) => e?.node?.study_code) || [];
-
-  const participantsIdsFromAllStudies = variant?.studies.hits.edges.reduce((xs: string[], x) => {
-    if (x.node.participant_ids?.length) {
-      return [...xs, ...x.node.participant_ids];
-    }
-    return xs;
-  }, []);
-  const uniqueParticipantsFromAllStudies = [...new Set(participantsIdsFromAllStudies)];
 
   return (
     <div className={styles.buttonGroup}>
@@ -42,9 +34,9 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
               query: generateQuery({
                 newFilters: [
                   generateValueFilter({
-                    field: 'study_code',
+                    field: 'study.study_code',
                     value: studyCodes,
-                    index: INDEXES.STUDY,
+                    index: INDEXES.PARTICIPANT,
                   }),
                 ],
               }),
@@ -63,30 +55,12 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
       </Button>
 
       <Button
-        className={styles.button}
+        className={`${styles.button} ${styles.disableHover}`}
         size="large"
         data-cy="SummaryHeader_Participants_Button"
         block
       >
-        <Link
-          to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-          className={styles.link}
-          onClick={() =>
-            addQuery({
-              queryBuilderId: DATA_EXPLORATION_QB_ID,
-              query: generateQuery({
-                newFilters: [
-                  generateValueFilter({
-                    field: 'participant_id',
-                    value: uniqueParticipantsFromAllStudies,
-                    index: INDEXES.PARTICIPANT,
-                  }),
-                ],
-              }),
-              setAsActive: true,
-            })
-          }
-        >
+        <div className={styles.link}>
           <UserOutlined className={styles.icon} />
           <div className={styles.alignBaseline}>
             <span className={styles.count}>{numberWithCommas(participantCount)}</span>
@@ -96,7 +70,7 @@ const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
               })}
             </span>
           </div>
-        </Link>
+        </div>
       </Button>
     </div>
   );

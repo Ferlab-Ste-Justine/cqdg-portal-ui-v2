@@ -182,7 +182,12 @@ const PageContent = ({ variantMapping }: IPageContentProps) => {
             );
           },
           selectedFilterContent: selectedFilterContent,
-          blacklistedFacets: ['consequences.symbol', 'consequences.symbol_id_1', 'locus'],
+          blacklistedFacets: [
+            'consequences.symbol',
+            'consequences.symbol_id_1',
+            'locus',
+            'genes.symbol',
+          ],
         }}
         enableCombine
         enableShowHideLabels

@@ -11,6 +11,8 @@ export const SEARCH_VARIANT_QUERY = gql`
             alternate
             assembly_version
             chromosome
+            variant_class
+            sources
             clinvar {
               clin_sig
               clinvar_id
@@ -18,6 +20,8 @@ export const SEARCH_VARIANT_QUERY = gql`
               inheritance
               interpretations
             }
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
             external_frequencies {
@@ -198,15 +202,15 @@ export const SEARCH_VARIANT_QUERY = gql`
             hash
             hgvsg
             id
-            internal_frequencies {
+            internal_frequencies_wgs {
               total {
                 ac
-                pc
-                hom
-                pn
-                an
                 af
+                an
+                hom
+                pc
                 pf
+                pn
               }
             }
             locus
@@ -219,7 +223,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                 total
                 edges {
                   node {
-                    score
                     study_code
                     study_id
                     total {
@@ -231,15 +234,11 @@ export const SEARCH_VARIANT_QUERY = gql`
                       af
                       pf
                     }
-                    transmission
-                    participant_ids
                     zygosity
                   }
                 }
               }
             }
-            variant_class
-            variant_id: id
           }
         }
       }
@@ -256,6 +255,7 @@ export const GET_VARIANT_ENTITY = gql`
             alternate
             assembly_version
             chromosome
+            sources
             clinvar {
               clin_sig
               clinvar_id
@@ -263,8 +263,11 @@ export const GET_VARIANT_ENTITY = gql`
               inheritance
               interpretations
             }
+            #todo: add it with new index in juno
+            #            variant_external_reference
             dna_change
             end
+            variant_class
             external_frequencies {
               topmed_bravo {
                 ac
@@ -447,7 +450,7 @@ export const GET_VARIANT_ENTITY = gql`
             hash
             hgvsg
             id
-            internal_frequencies {
+            internal_frequencies_wgs {
               total {
                 ac
                 pc
@@ -468,7 +471,6 @@ export const GET_VARIANT_ENTITY = gql`
                 total
                 edges {
                   node {
-                    score
                     study_code
                     study_id
                     total {
@@ -480,15 +482,11 @@ export const GET_VARIANT_ENTITY = gql`
                       af
                       pf
                     }
-                    transmission
                     zygosity
-                    participant_ids
                   }
                 }
               }
             }
-            variant_class
-            variant_id: id
           }
         }
       }

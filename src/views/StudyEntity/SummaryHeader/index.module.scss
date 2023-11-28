@@ -26,6 +26,7 @@
 
       .icon {
         font-size: 21px;
+        color: $gray-9;
       }
 
       .count {
@@ -48,5 +49,12 @@
   .buttonDisabled {
     background-color: $gray-3;
     color: $gray-7;
+  }
+
+  .disableHover {
+    cursor: inherit;
+    &:hover {
+      background-color: inherit;
+    }
   }
 }

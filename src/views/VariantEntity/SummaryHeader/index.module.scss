@@ -26,6 +26,7 @@
 
       .icon {
         font-size: 21px;
+        color: $gray-9;
       }
 
       .count {
@@ -42,6 +43,13 @@
         line-height: 22px;
         color: $gray-7;
       }
+    }
+  }
+
+  .disableHover {
+    cursor: inherit;
+    &:hover {
+      background-color: inherit;
     }
   }
 }

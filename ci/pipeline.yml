@@ -158,7 +158,7 @@ jobs:
           [
             {
               "title": "New Portal UI Release : Ticket: $pullRequestTitleWithoutPrefix",
-              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.cqdg.ferlab.bio",
+              "text": " You can find the new release for portal UI at https://portal-ui-$releaseName.qa.juno.cqdg.ferlab.bio",
               "color": "good"
             }
           ]
@@ -181,7 +181,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justine-Ops/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"
@@ -255,7 +255,7 @@ jobs:
             service: portal-ui
             release: $releaseName
             environment: "qa"
-            repo: "git@github.com:Ferlab-Ste-Justine/cqdg-pre-prod-kubernetes-environments.git"
+            repo: "git@github.com:Ferlab-Ste-Justine-Ops/cqdg-pre-prod-kubernetes-environments.git"
             ref: main
             git_auth:
               ssh_key: "id_rsa"

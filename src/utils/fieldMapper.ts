@@ -127,7 +127,7 @@ export const getIdFieldByType = (type: string): string => {
     case INDEXES.FILE:
       return 'file_id';
     case INDEXES.VARIANT:
-      return 'id';
+      return 'locus';
     case INDEXES.STUDY:
       return 'study_code';
     default:

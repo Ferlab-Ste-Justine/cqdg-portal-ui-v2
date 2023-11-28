@@ -4,8 +4,8 @@
               "Diagnosis (Source Text)",
               "Age",
               "Cancer"],
-  "content": ["inherited genetic disease (MONDO:0003847)",
-              "Intellectual Disabilities (F70-F79)",
-              "Mendelian disease",
+  "content": ["epilepsy (MONDO:0005027)",
+              "Generalized idiopathic epilepsy and epileptic syndromes, intractable (G40.31)",
+              "Intractable Epilepsy",
               "--"]
 }

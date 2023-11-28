@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
-import { IFilter, IFilterGroup, TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
+import {
+  IFilter,
+  IFilterGroup,
+  TExtendedMapping,
+  TFilterGroupConfig,
+} from '@ferlab/ui/core/components/filters/types';
 import { updateActiveQueryFilters } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { underscoreToDot } from '@ferlab/ui/core/data/arranger/formatting';
 import { getFilterGroup } from '@ferlab/ui/core/data/filters/utils';
@@ -18,12 +23,14 @@ interface ICustomFilterContainerProps {
   index: string;
   queryBuilderId: string;
   filterKey: string;
+  filterGroupConfig?: TFilterGroupConfig;
   defaultOpen?: boolean;
   extendedMappingResults: IExtendedMappingResults;
   filtersOpen?: boolean;
   filterMapper?: TCustomFilterMapper;
   headerTooltip?: boolean;
   noDataInputOption?: boolean;
+  intervalDecimal?: number;
 }
 
 const CustomFilterContainer = ({
@@ -32,11 +39,13 @@ const CustomFilterContainer = ({
   queryBuilderId,
   filterKey,
   filtersOpen,
+  filterGroupConfig,
   defaultOpen,
   extendedMappingResults,
   filterMapper,
   headerTooltip,
   noDataInputOption,
+  intervalDecimal,
 }: ICustomFilterContainerProps) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -46,11 +55,10 @@ const CustomFilterContainer = ({
   );
 
   useEffect(() => {
-    if (filtersOpen && isOpen !== filtersOpen) {
+    if (typeof filtersOpen === 'boolean' && isOpen !== filtersOpen) {
       setIsOpen(filtersOpen);
     }
-    // eslint-disable-next-line
-  }, [filtersOpen]);
+  }, [filtersOpen, isOpen]);
 
   const onChange = (fg: IFilterGroup, f: IFilter[]) => {
     updateActiveQueryFilters({
@@ -70,7 +78,12 @@ const CustomFilterContainer = ({
     headerTooltip,
     dictionary: getFacetsDictionary(),
     noDataInputOption,
+    intervalDecimal,
   });
+
+  if (filterGroupConfig) {
+    filterGroup.config = { ...filterGroup.config, ...filterGroupConfig };
+  }
 
   const filters = results?.aggregations ? getFilters(results?.aggregations, filterKey) : [];
   const selectedFilters = results?.data
