@@ -92,9 +92,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
       const mondoNames = mondo_tagged?.hits?.edges.map((m) => m.node.name);
-      if (!mondoNames || mondoNames.length === 0) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
+      if (!mondoNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={3}
@@ -126,9 +124,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     className: styles.phenotypeCell,
     render: (observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>) => {
       const phenotypeNames = observed_phenotype_tagged?.hits?.edges.map((p) => p.node.name);
-      if (!phenotypeNames || phenotypeNames.length === 0) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
+      if (!phenotypeNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={3}
@@ -264,9 +260,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     className: styles.diagnosisCell,
     render: (icd_tagged: ArrangerResultsTree<IIcd>) => {
       const icdNames = icd_tagged?.hits?.edges.map((m) => m.node.name).filter((n) => n);
-      if (!icdNames?.length) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
+      if (!icdNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={3}
@@ -299,9 +293,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
       const sourceTexts = mondo_tagged?.hits?.edges.map((m) => m.node.source_text);
-      if (!sourceTexts?.length) {
-        return TABLE_EMPTY_PLACE_HOLDER;
-      }
+      if (!sourceTexts?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
           nOfElementsWhenCollapsed={3}
@@ -500,4 +492,5 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
     />
   );
 };
+
 export default ParticipantsTab;

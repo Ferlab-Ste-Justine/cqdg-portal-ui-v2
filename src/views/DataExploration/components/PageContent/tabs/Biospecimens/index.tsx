@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
@@ -34,6 +33,7 @@ import {
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnTypeV2 } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
@@ -46,7 +46,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): ProColumnType<any>[] => [
+const getDefaultColumns = (): IProColumnTypeV2[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
@@ -131,18 +131,11 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
     sorter: { multiple: 1 },
+    exportTitle: intl.get('entities.biospecimen.age_biospecimen_collection'),
     title: (
       <Popover
         className={styles.tooltip}
-        title={
-          <>
-            <b>
-              {intl.get(
-                'screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip',
-              )}
-            </b>
-          </>
-        }
+        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>}
         content={ageCategories.map((category) => (
           <div key={category.key}>
             <b>{category.label}:</b>
@@ -151,7 +144,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
           </div>
         ))}
       >
-        {intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection')}
+        {intl.get('entities.biospecimen.age')}
       </Popover>
     ),
     render: (age_biospecimen_collection) => {

@@ -325,14 +325,14 @@ export const getFacetsDictionary = () => ({
   mondo_tagged: {
     name: intl.get('entities.participant.diagnosis_mondo'),
     source_text: intl.get('entities.participant.diagnosis_source_text'),
-    age_at_event: intl.get('entities.participant.age_at_diagnosis_tooltip'),
+    age_at_event: intl.get('entities.participant.age_at_diagnosis'),
   },
   mondo: {
     name: intl.get('entities.participant.diagnosis_mondo'),
   },
   sample_type: intl.get('entities.biospecimen.sample_type'),
   biospecimen_tissue_source: intl.get('entities.biospecimen.biospecimen_tissue_source'),
-  age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection_tooltip'),
+  age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection'),
   clinvar: {
     clin_sig: 'ClinVar',
   },

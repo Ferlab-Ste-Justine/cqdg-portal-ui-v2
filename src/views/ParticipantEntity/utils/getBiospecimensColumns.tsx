@@ -1,16 +1,16 @@
 import React from 'react';
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { Popover, Tooltip } from 'antd';
 import { ageCategories } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnTypeV2 } from 'common/types';
 
 import styles from '../index.module.scss';
 
-const getDiagnosesColumns = (): ProColumnType<any>[] => [
+const getDiagnosesColumns = (): IProColumnTypeV2[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
@@ -57,10 +57,11 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
+    exportTitle: intl.get('entities.biospecimen.age_biospecimen_collection'),
     title: (
       <Popover
         className={styles.tooltip}
-        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection_tooltip')}</b>}
+        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>}
         content={ageCategories.map((category) => (
           <div key={category.key}>
             <b>{category.label}:</b>
@@ -69,7 +70,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
           </div>
         ))}
       >
-        {intl.get('entities.biospecimen.age_biospecimen_collection')}
+        {intl.get('entities.biospecimen.age')}
       </Popover>
     ),
     render: (age_biospecimen_collection: string) => {

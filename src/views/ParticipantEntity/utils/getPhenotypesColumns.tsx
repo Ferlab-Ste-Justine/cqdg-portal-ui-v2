@@ -2,7 +2,6 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Popover, Tooltip } from 'antd';
@@ -13,6 +12,7 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { extractPhenotypeTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnTypeV2 } from 'common/types';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
@@ -49,7 +49,7 @@ const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string 
   );
 };
 
-const getPhenotypesColumns = (): ProColumnType<any>[] => [
+const getPhenotypesColumns = (): IProColumnTypeV2[] => [
   {
     key: 'name',
     dataIndex: 'name',
@@ -84,10 +84,11 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
   {
     key: 'age_at_event',
     dataIndex: 'age_at_event',
+    exportTitle: intl.get('entities.participant.age_at_phenotype'),
     title: (
       <Popover
         className={styles.tooltip}
-        title={<b>{intl.get('entities.participant.age_at_phenotype_tooltip')}</b>}
+        title={<b>{intl.get('entities.participant.age_at_phenotype')}</b>}
         content={ageCategories.map((category) => (
           <div key={category.key}>
             <b>{category.label}:</b>
@@ -96,7 +97,7 @@ const getPhenotypesColumns = (): ProColumnType<any>[] => [
           </div>
         ))}
       >
-        {intl.get('entities.participant.age_at_phenotype')}
+        {intl.get('entities.participant.age')}
       </Popover>
     ),
     render: (age_at_event: string) => {

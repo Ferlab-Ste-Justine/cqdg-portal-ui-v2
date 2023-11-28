@@ -2,7 +2,6 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Popover, Tooltip } from 'antd';
@@ -16,6 +15,7 @@ import {
 } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnTypeV2 } from 'common/types';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
@@ -56,7 +56,7 @@ const ParticipantsMondoCount = ({
   );
 };
 
-const getDiagnosesColumns = (): ProColumnType<any>[] => [
+const getDiagnosesColumns = (): IProColumnTypeV2[] => [
   {
     key: 'diagnosis_mondo_display',
     dataIndex: 'diagnosis_mondo_display',
@@ -99,10 +99,11 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
   {
     key: 'age_at_diagnosis',
     dataIndex: 'age_at_diagnosis',
+    exportTitle: intl.get('entities.participant.age'),
     title: (
       <Popover
         className={styles.tooltip}
-        title={<b>{intl.get('entities.participant.age_at_diagnosis_tooltip')}</b>}
+        title={<b>{intl.get('entities.participant.age_at_diagnosis')}</b>}
         content={ageCategories.map((category) => (
           <div key={category.key}>
             <b>{category.label}:</b>
@@ -111,7 +112,7 @@ const getDiagnosesColumns = (): ProColumnType<any>[] => [
           </div>
         ))}
       >
-        {intl.get('entities.participant.age_at_diagnosis')}
+        {intl.get('entities.participant.age')}
       </Popover>
     ),
     render: (age_at_diagnosis: string) => {
