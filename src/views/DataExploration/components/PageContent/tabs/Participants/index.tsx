@@ -6,7 +6,6 @@ import ColorTag, { ColorTagType } from '@ferlab/ui/core/components/ColorTag';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
@@ -17,7 +16,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Popover, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { useParticipants } from 'graphql/participants/actions';
@@ -47,19 +46,21 @@ import {
 } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnTypeV2 } from 'common/types';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): ProColumnType<any>[] => [
+const getDefaultColumns = (): IProColumnTypeV2[] => [
   {
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participant'),
@@ -90,6 +91,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: intl.get('screen.dataExploration.tabs.participants.diagnosis'),
     dataIndex: 'mondo_tagged',
     className: styles.diagnosisCell,
+    exportValue: (participant: IParticipantEntity) => {
+      const names = participant?.mondo_tagged?.hits?.edges.map((p) => p.node.name);
+      return names?.join(', ') || '--';
+    },
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
       const mondoNames = mondo_tagged?.hits?.edges.map((m) => m.node.name);
       if (!mondoNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
@@ -121,6 +126,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'observed_phenotype_tagged',
     title: intl.get('screen.dataExploration.tabs.participants.phenotype'),
     dataIndex: 'observed_phenotype_tagged',
+    exportValue: (participant: IParticipantEntity) => {
+      const names = participant?.observed_phenotype_tagged?.hits?.edges.map((p) => p.node.name);
+      return names?.join(', ') || '--';
+    },
     className: styles.phenotypeCell,
     render: (observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>) => {
       const phenotypeNames = observed_phenotype_tagged?.hits?.edges.map((p) => p.node.name);
@@ -155,21 +164,22 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'age_at_recruitment',
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
-    title: (
-      <Popover
-        className={styles.tooltip}
-        title={<b>{intl.get('entities.participant.age_at_recruitment')}</b>}
-        content={ageCategories.map((category) => (
-          <div key={category.key}>
-            <b>{category.label}:</b>
-            {` ${category.tooltip}`}
-            <br />
-          </div>
-        ))}
-      >
-        {intl.get('entities.participant.age')}
-      </Popover>
-    ),
+    title: intl.get('entities.participant.age'),
+    popoverProps: {
+      className: styles.tooltip,
+      title: <b>{intl.get('entities.participant.age_at_recruitment')}</b>,
+      content: ageCategories.map((category) => (
+        <div key={category.key}>
+          <b>{category.label}:</b>
+          {` ${category.tooltip}`}
+          <br />
+        </div>
+      )),
+    },
+    exportValue: (participant: IParticipantEntity) => {
+      const category = ageCategories.find((cat) => cat.key === participant?.age_at_recruitment);
+      return category ? `${category.label}: ${category.tooltip}` : participant?.age_at_recruitment;
+    },
     render: (age_at_recruitment) => {
       const category = ageCategories.find((cat) => cat.key === age_at_recruitment);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
@@ -185,6 +195,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_files',
     title: intl.get('screen.dataExploration.tabs.participants.files'),
+    exportValue: (participant: IParticipantEntity) => {
+      const fileCount = participant?.files?.hits.total || 0;
+      return `${fileCount}` || '--';
+    },
     render: (participant: ITableParticipantEntity) => {
       const fileCount = participant?.files?.hits.total || 0;
       return fileCount ? (
@@ -216,6 +230,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_biospecimen',
     title: intl.get('screen.dataExploration.tabs.participants.biospecimen'),
+    exportValue: (participant: IParticipantEntity) => {
+      const nb_biospecimens = participant?.biospecimens?.hits.total || 0;
+      return `${nb_biospecimens}` || '--';
+    },
     render: (participant: ITableParticipantEntity) => {
       const nb_biospecimens = participant?.biospecimens?.hits.total || 0;
       return nb_biospecimens ? (
@@ -258,6 +276,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'icd_tagged',
     defaultHidden: true,
     className: styles.diagnosisCell,
+    exportValue: (participant: IParticipantEntity) => {
+      const names = participant?.icd_tagged?.hits?.edges.map((p) => p.node.name);
+      return names?.join(', ') || '--';
+    },
     render: (icd_tagged: ArrangerResultsTree<IIcd>) => {
       const icdNames = icd_tagged?.hits?.edges.map((m) => m.node.name).filter((n) => n);
       if (!icdNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
@@ -291,6 +313,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'mondo_tagged',
     defaultHidden: true,
     className: styles.diagnosisCell,
+    exportValue: (participant: IParticipantEntity) => {
+      const sourceTexts = participant?.mondo_tagged?.hits?.edges.map((m) => m.node.source_text);
+      return sourceTexts?.join(', ') || '--';
+    },
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
       const sourceTexts = mondo_tagged?.hits?.edges.map((m) => m.node.source_text);
       if (!sourceTexts?.length) return TABLE_EMPTY_PLACE_HOLDER;
@@ -357,6 +383,10 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
     },
     queryConfig.operations,
   );
+
+  const defaultCols = getDefaultColumns();
+  const userCols = userInfo?.config.data_exploration?.tables?.participants?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
@@ -436,11 +466,11 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
           ),
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.participants?.columns,
-              columns: getDefaultColumns(),
+            generateLocalTsvReport({
               index: INDEXES.PARTICIPANT,
-              sqon: getCurrentSqon(),
+              headers: defaultCols,
+              cols: userColumns,
+              rows: results?.data,
             }),
           ),
         onSelectAllResultsChange: setSelectedAllResults,

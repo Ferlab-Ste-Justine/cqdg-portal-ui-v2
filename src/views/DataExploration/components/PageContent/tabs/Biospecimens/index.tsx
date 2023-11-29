@@ -15,7 +15,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Popover, Tooltip, Typography } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
@@ -37,11 +37,12 @@ import { IProColumnTypeV2 } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
@@ -128,26 +129,26 @@ const getDefaultColumns = (): IProColumnTypeV2[] => [
     },
   },
   {
-    key: 'age_biospecimen_collection',
+    key: 'age_biospecimen_collection2',
     dataIndex: 'age_biospecimen_collection',
     sorter: { multiple: 1 },
-    exportTitle: intl.get('entities.biospecimen.age_biospecimen_collection'),
-    title: (
-      <Popover
-        className={styles.tooltip}
-        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>}
-        content={ageCategories.map((category) => (
-          <div key={category.key}>
-            <b>{category.label}:</b>
-            {` ${category.tooltip}`}
-            <br />
-          </div>
-        ))}
-      >
-        {intl.get('entities.biospecimen.age')}
-      </Popover>
-    ),
-    render: (age_biospecimen_collection) => {
+    title: intl.get('entities.biospecimen.age'),
+    popoverProps: {
+      className: styles.tooltip,
+      title: <b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>,
+      content: ageCategories.map((category) => (
+        <div key={category.key}>
+          <b>{category.label}:</b>
+          {` ${category.tooltip}`}
+          <br />
+        </div>
+      )),
+    },
+    exportValue: (b: IBiospecimenEntity) => {
+      const category = ageCategories.find((cat) => cat.key === b?.age_biospecimen_collection);
+      return category ? `${category.label}: ${category.tooltip}` : b?.age_biospecimen_collection;
+    },
+    render: (age_biospecimen_collection: string) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
       return category.tooltip ? (
@@ -225,6 +226,10 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
     },
     queryConfig.operations,
   );
+
+  const defaultCols = getDefaultColumns();
+  const userCols = userInfo?.config.data_exploration?.tables?.biospecimens?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
@@ -306,22 +311,16 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
-              data_exploration: {
-                tables: {
-                  biospecimens: {
-                    columns: newState,
-                  },
-                },
-              },
+              data_exploration: { tables: { biospecimens: { columns: newState } } },
             }),
           ),
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
-              columns: getDefaultColumns(),
+            generateLocalTsvReport({
               index: INDEXES.BIOSPECIMEN,
-              sqon: getCurrentSqon(),
+              headers: defaultCols,
+              cols: userColumns,
+              rows: results?.data,
             }),
           ),
         extra: [

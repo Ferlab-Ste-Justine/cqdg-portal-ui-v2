@@ -1,7 +1,7 @@
 import React from 'react';
 import intl from 'react-intl-universal';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { Popover, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { ageCategories } from 'graphql/participants/models';
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
@@ -57,22 +57,22 @@ const getDiagnosesColumns = (): IProColumnTypeV2[] => [
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
-    exportTitle: intl.get('entities.biospecimen.age_biospecimen_collection'),
-    title: (
-      <Popover
-        className={styles.tooltip}
-        title={<b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>}
-        content={ageCategories.map((category) => (
-          <div key={category.key}>
-            <b>{category.label}:</b>
-            {` ${category.tooltip}`}
-            <br />
-          </div>
-        ))}
-      >
-        {intl.get('entities.biospecimen.age')}
-      </Popover>
-    ),
+    title: intl.get('entities.biospecimen.age'),
+    popoverProps: {
+      className: styles.tooltip,
+      title: <b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>,
+      content: ageCategories.map((category) => (
+        <div key={category.key}>
+          <b>{category.label}:</b>
+          {` ${category.tooltip}`}
+          <br />
+        </div>
+      )),
+    },
+    exportValue: (row) => {
+      const category = ageCategories.find((cat) => cat.key === row?.age_at_event);
+      return category ? `${category.label}: ${category.tooltip}` : row?.age_at_event;
+    },
     render: (age_biospecimen_collection: string) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
