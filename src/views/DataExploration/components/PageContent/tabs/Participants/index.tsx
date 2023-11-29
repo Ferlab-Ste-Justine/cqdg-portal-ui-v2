@@ -46,7 +46,7 @@ import {
 } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IProColumnTypeV2 } from 'common/types';
+import { IProColumnExport } from 'common/types';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
@@ -60,7 +60,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): IProColumnTypeV2[] => [
+const getDefaultColumns = (): IProColumnExport[] => [
   {
     key: 'participant_id',
     title: intl.get('screen.dataExploration.tabs.participants.participant'),
@@ -470,7 +470,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
               index: INDEXES.PARTICIPANT,
               headers: defaultCols,
               cols: userColumns,
-              rows: results?.data,
+              rows: selectedRows,
             }),
           ),
         onSelectAllResultsChange: setSelectedAllResults,

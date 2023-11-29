@@ -5,7 +5,7 @@ import ProLabel from '@ferlab/ui/core/components/ProLabel';
 import { useKeycloak } from '@react-keycloak/web';
 import { Alert, Col, Form, Input, Row, Space } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 
 import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { useUser } from 'store/user';

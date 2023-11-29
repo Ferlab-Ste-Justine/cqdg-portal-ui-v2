@@ -33,7 +33,7 @@ import {
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IProColumnTypeV2 } from 'common/types';
+import { IProColumnExport } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
@@ -47,7 +47,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): IProColumnTypeV2[] => [
+const getDefaultColumns = (): IProColumnExport[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
@@ -80,6 +80,7 @@ const getDefaultColumns = (): IProColumnTypeV2[] => [
     key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
+    exportValue: (biospecimen: IBiospecimenEntity) => biospecimen?.participant?.participant_id,
     render: (participant: IParticipantEntity) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant.participant_id}`}>
         {participant.participant_id}
@@ -129,7 +130,7 @@ const getDefaultColumns = (): IProColumnTypeV2[] => [
     },
   },
   {
-    key: 'age_biospecimen_collection2',
+    key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
     sorter: { multiple: 1 },
     title: intl.get('entities.biospecimen.age'),
@@ -163,6 +164,10 @@ const getDefaultColumns = (): IProColumnTypeV2[] => [
   {
     key: 'files',
     title: intl.get('screen.dataExploration.tabs.biospecimens.files'),
+    exportValue: (biospecimen: IBiospecimenEntity) => {
+      const fileCount = biospecimen?.files?.hits?.total || 0;
+      return `${fileCount}`;
+    },
     render: (biospecimen: IBiospecimenEntity) => {
       const fileCount = biospecimen?.files?.hits?.total || 0;
       return fileCount ? (
@@ -320,7 +325,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
               index: INDEXES.BIOSPECIMEN,
               headers: defaultCols,
               cols: userColumns,
-              rows: results?.data,
+              rows: selectedRows,
             }),
           ),
         extra: [
@@ -362,7 +367,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         },
         defaultViewPerQuery: queryConfig.size,
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.sample_id }))}
       dictionary={getProTableDictionary()}
     />
   );

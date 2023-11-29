@@ -15,7 +15,7 @@ import {
 } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IProColumnTypeV2 } from 'common/types';
+import { IProColumnExport } from 'common/types';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
@@ -56,7 +56,7 @@ const ParticipantsMondoCount = ({
   );
 };
 
-const getDiagnosesColumns = (): IProColumnTypeV2[] => [
+const getDiagnosesColumns = (): IProColumnExport[] => [
   {
     key: 'diagnosis_mondo_display',
     dataIndex: 'diagnosis_mondo_display',
