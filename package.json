@@ -139,6 +139,7 @@
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",
     "typescript": "^4.4.4",
-    "web-vitals": "^2.1.2"
+    "web-vitals": "^2.1.2",
+    "@babel/plugin-proposal-private-property-in-object": "^7.14.5"
   }
 }
