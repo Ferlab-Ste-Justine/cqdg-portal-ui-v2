@@ -22,7 +22,7 @@ window._env_ = {
 EOF
 
 # Dynamically update the index.html to reference the new unique config.js filename
-sed -i "s|/config.js|$UNIQUE_CONFIG_FILENAME|" /usr/share/nginx/html/index.html
+sed -i "s|config.js|$UNIQUE_CONFIG_FILENAME|" /usr/share/nginx/html/index.html
 
 # Start Nginx
 nginx -g "daemon off;"
