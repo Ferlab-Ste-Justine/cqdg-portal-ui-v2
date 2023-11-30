@@ -100,8 +100,8 @@ const getDiagnosesColumns = (): IProColumnExport[] => [
     key: 'age_at_diagnosis',
     dataIndex: 'age_at_diagnosis',
     exportValue: (row) => {
-      const category = ageCategories.find((cat) => cat.key === row?.age_at_event);
-      return category ? `${category.label}: ${category.tooltip}` : row?.age_at_event;
+      const category = ageCategories.find((cat) => cat.key === row?.age_at_diagnosis);
+      return category ? `${category.label}: ${category.tooltip}` : row?.age_at_diagnosis;
     },
     title: intl.get('entities.participant.age'),
     popoverProps: {

@@ -28,7 +28,6 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
   const defaultCols = getDiagnosesColumns();
   const userCols = userInfo?.config?.participants?.tables?.diagnoses?.columns || [];
   const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
-  const cbExcludeHpoTermKey = (c: { key: string }) => c.key !== 'mondo_term';
 
   return (
     <EntityTable
@@ -48,8 +47,8 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
             generateLocalTsvReport({
               fileName: 'diagnoses',
               index: INDEXES.PARTICIPANT,
-              headers: defaultCols.filter(cbExcludeHpoTermKey),
-              cols: userColumns.filter(cbExcludeHpoTermKey),
+              headers: defaultCols,
+              cols: userColumns,
               rows: diagnosesData,
             }),
           ),

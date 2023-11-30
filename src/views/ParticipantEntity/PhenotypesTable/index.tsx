@@ -33,7 +33,6 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
   const defaultCols = getPhenotypesColumns();
   const userCols = userInfo?.config?.participants?.tables?.phenotypes?.columns || [];
   const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
-  const cbExcludeHpoTermKey = (c: { key: string }) => c.key !== 'hpo_term';
 
   return (
     <EntityTable
@@ -53,8 +52,8 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
             generateLocalTsvReport({
               fileName: 'phenotypes',
               index: INDEXES.PARTICIPANT,
-              headers: defaultCols.filter(cbExcludeHpoTermKey),
-              cols: userColumns.filter(cbExcludeHpoTermKey),
+              headers: defaultCols,
+              cols: userColumns,
               rows: phenotypesData,
             }),
           ),

@@ -69,8 +69,8 @@ const getDiagnosesColumns = (): IProColumnExport[] => [
       )),
     },
     exportValue: (row) => {
-      const category = ageCategories.find((cat) => cat.key === row?.age_at_event);
-      return category ? `${category.label}: ${category.tooltip}` : row?.age_at_event;
+      const category = ageCategories.find((cat) => cat.key === row?.age_biospecimen_collection);
+      return category ? `${category.label}: ${category.tooltip}` : row?.age_biospecimen_collection;
     },
     render: (age_biospecimen_collection: string) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);

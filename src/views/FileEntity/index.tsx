@@ -26,10 +26,11 @@ import getExperimentalProcedureDescriptions from 'views/FileEntity/utils/getExpe
 import getSummaryDescriptions from 'views/FileEntity/utils/getSummaryDescriptions';
 
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from 'views/ParticipantEntity/index.module.scss';
@@ -73,6 +74,10 @@ const FileEntity = () => {
     data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
 
   const getCurrentSqon = (): any => generateSelectionSqon(INDEXES.FILE, [file_id]);
+
+  const defaultCols = getBiospecimensColumns();
+  const userCols = userInfo?.config.files?.tables?.biospecimens?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
@@ -134,18 +139,13 @@ const FileEntity = () => {
         headerConfig={{
           enableTableExport: true,
           onTableExportClick: () =>
-            dispatch(
-              fetchTsvReport({
-                columnStates: userInfo?.config.files?.tables?.biospecimens?.columns,
-                columns: getBiospecimensColumns(),
-                index: INDEXES.BIOSPECIMEN,
-                sqon: generateSelectionSqon(
-                  INDEXES.BIOSPECIMEN,
-                  dataBiospecimensTable.map((biospecimen) => biospecimen.sample_id),
-                ),
-                fileName: 'participants',
-              }),
-            ),
+            generateLocalTsvReport({
+              fileName: 'participants',
+              index: INDEXES.BIOSPECIMEN,
+              headers: defaultCols,
+              cols: userColumns,
+              rows: dataBiospecimensTable,
+            }),
           enableColumnSort: true,
           onColumnSortChange: (newState) =>
             dispatch(

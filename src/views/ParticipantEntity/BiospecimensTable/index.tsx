@@ -8,14 +8,14 @@ import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage';
 import { INDEXES } from 'graphql/constants';
 import { IParticipantEntity } from 'graphql/participants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import getBiospecimensColumns from 'views/ParticipantEntity/utils/getBiospecimensColumns';
 
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 interface IBiospecimensTableProps {
@@ -34,6 +34,10 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
         key: node.biospecimen_id,
       }))
     : [];
+
+  const defaultCols = getBiospecimensColumns();
+  const userCols = userInfo?.config.participants?.tables?.biospecimens?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   return (
     <EntityTable
@@ -75,15 +79,12 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
         enableTableExport: true,
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.participants?.tables?.biospecimens?.columns,
-              columns: getBiospecimensColumns(),
-              index: INDEXES.BIOSPECIMEN,
-              sqon: generateSelectionSqon(
-                INDEXES.BIOSPECIMEN,
-                biospecimensData.map((b) => b.sample_id),
-              ),
+            generateLocalTsvReport({
               fileName: 'biospecimens',
+              index: INDEXES.BIOSPECIMEN,
+              headers: defaultCols,
+              cols: userColumns,
+              rows: biospecimensData,
             }),
           ),
         enableColumnSort: true,
