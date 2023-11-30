@@ -1,10 +1,7 @@
 /* eslint-disable max-len */
 import { ageCategoriesObject } from 'graphql/participants/models';
 
-import translations from './en.json';
-
 const en = {
-  ...translations,
   entities: {
     study: {
       study_code: 'Study Code',

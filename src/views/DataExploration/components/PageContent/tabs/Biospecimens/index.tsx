@@ -135,7 +135,6 @@ const getDefaultColumns = (): IProColumnExport[] => [
     sorter: { multiple: 1 },
     title: intl.get('entities.biospecimen.age'),
     popoverProps: {
-      className: styles.tooltip,
       title: <b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>,
       content: ageCategories.map((category) => (
         <div key={category.key}>

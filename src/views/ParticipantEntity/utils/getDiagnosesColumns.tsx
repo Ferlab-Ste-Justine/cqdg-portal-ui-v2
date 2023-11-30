@@ -105,7 +105,6 @@ const getDiagnosesColumns = (): IProColumnExport[] => [
     },
     title: intl.get('entities.participant.age'),
     popoverProps: {
-      className: styles.tooltip,
       title: <b>{intl.get('entities.participant.age_at_diagnosis')}</b>,
       content: ageCategories.map((category) => (
         <div key={category.key}>
