@@ -71,7 +71,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^315$/).should('exist');
   });
 
-  it('Age at Recruitment - Congenital [CQDG-490]', () => {
+  it('Age at Recruitment - Congenital', () => {
     cy.get('[data-cy="FilterContainer_Age at Recruitment"]').should('exist');
     cy.checkValueFacetAndApply('Age at Recruitment', 'B-congenital');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Recruitment').should('exist');
@@ -79,10 +79,10 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
   });
 
-  it('Age at Recruitment - Young Adult (>= 16 years and < 40 years) [CQDG-490]', () => {
+  it('Age at Recruitment - Young Adult', () => {
     cy.checkValueFacetAndApply('Age at Recruitment', 'G-young adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Recruitment').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult (>= 16 years and < 40 years)').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 
@@ -94,10 +94,10 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
   });
 
-  it('Age at Diagnosis - Young Adult (>= 16 years and < 40 years) [CQDG-490]', () => {
+  it('Age at Diagnosis - Young Adult [CQDG-490]', () => {
     cy.checkValueFacetAndApply('Age at Diagnosis', 'G-young adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Diagnosis').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult (>= 16 years and < 40 years)').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 
@@ -171,16 +171,16 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
 
   it('Age at Biospecimen Collection - Congenital [CQDG-490]', () => {
     cy.get('[data-cy="FilterContainer_Age at Biospecimen Collection"]').should('exist');
-    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'Congenital');
+    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'B-congenital');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Congenital').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
   });
 
-  it('Age at Biospecimen Collection - Young Adult (>= 16 years and < 40 years) [CQDG-490]', () => {
-    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'Young Adult (>= 16 years and < 40 years)');
+  it('Age at Biospecimen Collection - Young Adult [CQDG-490]', () => {
+    cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'G-young adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult (>= 16 years and < 40 years)').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 });

@@ -139,7 +139,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="diagnosis"]').find('td[class="ant-table-cell"]').eq(5).contains('205').should('exist');
   });
   
-  it('Panneau Phenotypes [CQDG-490]', () => {
+  it('Panneau Phenotypes', () => {
     cy.resetColumns('phenotype');
     cy.get('[id="phenotype"]').find('[class*="EntityTable_title"]').contains('Phenotype').should('exist');
     cy.get('[id="phenotype"]').find('[class="ant-collapse-header"]').contains('Phenotypes').should('exist');
@@ -154,7 +154,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(0).contains('0001250').should('exist');
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(1).contains('Intractable Seizures').should('exist');
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(2).contains('Observed').should('exist');
-    cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(3).contains('Neonatal (< 28 days)').should('exist');
+    cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(3).contains('Neonatal').should('exist');
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(4).contains('202').should('exist');
   });
   
