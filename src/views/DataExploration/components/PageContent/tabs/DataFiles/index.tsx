@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { LockOutlined, SafetyOutlined, UnlockFilled } from '@ant-design/icons';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
@@ -31,28 +30,34 @@ import {
 } from 'views/DataExploration/utils/constant';
 
 import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnExport } from 'common/types';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { userHasAccessToFile } from 'utils/dataFiles';
 import formatFileSize from 'utils/formatFileSize';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): ProColumnType<any>[] => [
+const getDefaultColumns = (): IProColumnExport[] => [
   {
     key: 'lock',
     title: intl.get('screen.dataExploration.tabs.datafiles.fileAuthorization'),
     iconTitle: <LockOutlined />,
     tooltip: intl.get('screen.dataExploration.tabs.datafiles.fileAuthorization'),
     align: 'center',
+    exportValue: (file: IFileEntity) => {
+      const hasAccess = userHasAccessToFile(file);
+      return hasAccess ? 'Authorized' : 'Controlled';
+    },
     render: (file: IFileEntity) => {
       const hasAccess = userHasAccessToFile(file);
       return hasAccess ? (
@@ -74,6 +79,8 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'data_access',
     sorter: { multiple: 1 },
     align: 'center',
+    exportValue: (file: IFileEntity) =>
+      file?.data_access === FileAccessType.REGISTERED ? 'Registered' : 'Controlled',
     render: (data_access: string) =>
       data_access === FileAccessType.REGISTERED ? (
         <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.registered')}>
@@ -119,6 +126,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     title: intl.get('screen.dataExploration.tabs.datafiles.experimentalStrategy'),
     dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
+    exportValue: (row) => row?.sequencing_experiment?.experimental_strategy || '--',
     render: (sequencing_experiment) =>
       sequencing_experiment?.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER,
   },
@@ -138,6 +146,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_participants',
     title: intl.get('screen.dataExploration.tabs.datafiles.participants'),
+    exportValue: (file: IFileEntity) => {
+      const participantIds = file?.participants?.hits.edges.map((p) => p.node.participant_id) || [];
+      return `${numberFormat(participantIds.length)}`;
+    },
     render: (file: IFileEntity) => {
       const participantIds = file?.participants?.hits.edges.map((p) => p.node.participant_id) || [];
       return participantIds?.length ? (
@@ -169,6 +181,10 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
   {
     key: 'nb_biospecimens',
     title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
+    exportValue: (file: IFileEntity) => {
+      const nb_biospecimens = file?.biospecimens?.hits.total || 0;
+      return `${numberFormat(nb_biospecimens)}`;
+    },
     render: (file: IFileEntity) => {
       const nb_biospecimens = file?.biospecimens?.hits.total || 0;
       return nb_biospecimens ? (
@@ -210,6 +226,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
     defaultHidden: true,
+    exportValue: (file: IFileEntity) => file?.sequencing_experiment?.platform,
     render: (sequencing_experiment) => sequencing_experiment?.platform || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
@@ -263,6 +280,10 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
             }),
           ],
         });
+
+  const defaultCols = getDefaultColumns();
+  const userCols = userInfo?.config.data_exploration?.tables?.datafiles?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   useEffect(() => {
     if (selectedKeys.length) {
@@ -330,11 +351,11 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
           },
           onTableExportClick: () =>
             dispatch(
-              fetchTsvReport({
-                columnStates: userInfo?.config.data_exploration?.tables?.datafiles?.columns,
-                columns: getDefaultColumns(),
+              generateLocalTsvReport({
                 index: INDEXES.FILE,
-                sqon: getCurrentSqon(),
+                headers: defaultCols,
+                cols: userColumns,
+                rows: selectedRows,
               }),
             ),
           onColumnSortChange: (newState) =>

@@ -23,53 +23,49 @@ interface IGenesUploadIdsProps {
 const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
   <UploadIds
     dictionary={{
-      modalTitle: intl.get('upload.gene.ids.modal.title'),
-      submittedColTitle: intl.get('upload.gene.ids.modal.submittedColTitle'),
-      uploadBtnText: intl.get('upload.gene.ids.modal.uploadBtnText'),
-      modalUploadBtnText: intl.get('upload.gene.ids.modal.upload.file.btn'),
-      mappedTo: intl.get('upload.gene.ids.modal.mappedTo'),
-      clear: intl.get('upload.gene.ids.modal.clear.btn'),
-      emptyTableDescription: intl.get('upload.gene.ids.modal.empty.table'),
-      modalOkText: intl.get('upload.gene.ids.modal.upload.btn'),
-      modalCancelText: intl.get('upload.gene.ids.modal.cancel.btn'),
+      modalTitle: intl.get('components.gene.title'),
+      submittedColTitle: intl.get('components.gene.submittedColTitle'),
+      uploadBtnText: intl.get('components.gene.uploadBtnText'),
+      modalUploadBtnText: intl.get('components.gene.upload.file.btn'),
+      mappedTo: intl.get('components.gene.mappedTo'),
+      clear: intl.get('components.gene.clear.btn'),
+      emptyTableDescription: intl.get('components.gene.empty.table'),
+      modalOkText: intl.get('components.gene.upload.btn'),
+      modalCancelText: intl.get('components.gene.cancel.btn'),
       collapseTitle: (matchCount, unMatchCount) =>
-        intl.get('upload.gene.ids.modal.collapseTitle', {
+        intl.get('components.gene.collapseTitle', {
           matchCount: numberFormat(matchCount),
           unMatchCount: numberFormat(unMatchCount),
         }),
       matchTabTitle: (matchCount) =>
-        intl.get('upload.gene.ids.modal.match', { count: numberFormat(matchCount) }),
+        intl.get('components.gene.match', { count: numberFormat(matchCount) }),
       unmatchTabTitle: (unmatchcount) =>
-        intl.get('upload.gene.ids.modal.unmatch', { count: numberFormat(unmatchcount) }),
+        intl.get('components.gene.unmatch', { count: numberFormat(unmatchcount) }),
       tablesMessage: (submittedCount, mappedCount) =>
-        intl.get('upload.gene.ids.modal.table.message', {
+        intl.get('components.gene.table.message', {
           submittedCount: numberFormat(submittedCount),
           mappedCount: numberFormat(mappedCount),
         }),
-      inputLabel: intl.get('upload.gene.ids.modal.input.label'),
+      inputLabel: intl.get('components.gene.input.label'),
       matchTable: {
-        idColTitle: intl.get('upload.gene.ids.modal.match.table.idcol.title'),
-        matchToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.matchcol.title'),
-        mappedToFieldColTitle: intl.get('upload.gene.ids.modal.match.table.mappedcol.title'),
+        idColTitle: intl.get('components.gene.match.table.idcol.title'),
+        matchToFieldColTitle: intl.get('components.gene.match.table.matchcol.title'),
+        mappedToFieldColTitle: intl.get('components.gene.match.table.mappedcol.title'),
       },
     }}
     popoverProps={{
-      title: intl.get('components.uploadIds.modal.popover.title'),
+      title: intl.get('components.uploadIds.popover.title'),
       overlayClassName: styles.geneUploadIdsPopover,
       content: (
         <Descriptions column={1}>
-          <Descriptions.Item label={intl.get('components.uploadIds.modal.popover.identifiers')}>
-            {intl.get('upload.gene.ids.modal.identifiers')}
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.identifiers')}>
+            {intl.get('components.gene.identifiers')}
           </Descriptions.Item>
-          <Descriptions.Item
-            label={intl.get('components.uploadIds.modal.popover.separatedBy.title')}
-          >
-            {intl.get('components.uploadIds.modal.popover.separatedBy.values')}
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.separatedBy.title')}>
+            {intl.get('components.uploadIds.popover.separatedBy.values')}
           </Descriptions.Item>
-          <Descriptions.Item
-            label={intl.get('components.uploadIds.modal.popover.uploadFileFormats')}
-          >
-            {intl.get('components.uploadIds.modal.popover.fileFormats')}
+          <Descriptions.Item label={intl.get('components.uploadIds.popover.uploadFileFormats')}>
+            {intl.get('components.uploadIds.popover.fileFormats')}
           </Descriptions.Item>
         </Descriptions>
       ),

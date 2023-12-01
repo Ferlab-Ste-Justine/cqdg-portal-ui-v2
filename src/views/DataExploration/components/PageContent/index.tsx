@@ -97,7 +97,7 @@ const PageContent = ({
   studyMapping,
   tabId = TAB_IDS.SUMMARY,
 }: IPageContentProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const history = useHistory();
   const { savedSets } = useSavedSet();
   const { queryList, activeQuery, selectedSavedFilter, savedFilterList } =

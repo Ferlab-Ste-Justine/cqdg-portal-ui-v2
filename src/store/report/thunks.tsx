@@ -160,7 +160,10 @@ const generateLocalTsvReport = createAsyncThunk<
     const visibleHeaders = args.headers.filter((h) => visibleKeys.includes(h.key));
     const visibleTitle = visibleHeaders.map((h) => h.title);
     const visibleRows = (args.rows || []).reduce(
-      (rs, r) => [...rs, visibleHeaders.map((h) => r[h.key] || '--')],
+      (rs, r) => [
+        ...rs,
+        visibleHeaders.map((h) => (h.exportValue ? h.exportValue(r) : '') || r[h.key] || '--'),
+      ],
       [],
     );
 

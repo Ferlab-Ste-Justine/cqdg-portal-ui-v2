@@ -32,7 +32,6 @@ const getStudyEntityLayout = (): IResizableGridLayoutConfig[] => [
     md: { h: 4, w: 6, x: 0, y: 0 },
     sm: { h: 4, w: 6, x: 0, y: 0 },
     xs: { h: 4, w: 6, x: 0, y: 0 },
-    xss: { h: 4, w: 6, x: 0, y: 0 },
   },
   {
     title: intl.get('screen.dataExploration.tabs.summary.mondo.cardTitle'),
@@ -50,7 +49,6 @@ const getStudyEntityLayout = (): IResizableGridLayoutConfig[] => [
     md: { h: 4, w: 6, x: 6, y: 0 },
     sm: { h: 4, w: 6, x: 0, y: 4 },
     xs: { h: 4, w: 6, x: 0, y: 4 },
-    xss: { h: 4, w: 6, x: 0, y: 4 },
   },
   {
     title: intl.get('screen.dataExploration.tabs.summary.demographic.cardTitle'),
@@ -66,7 +64,6 @@ const getStudyEntityLayout = (): IResizableGridLayoutConfig[] => [
     md: { h: 2, w: 4, x: 0, y: 4 },
     sm: { h: 2, w: 4, x: 0, y: 4 },
     xs: { h: 2, w: 4, x: 0, y: 4 },
-    xss: { h: 2, w: 4, x: 0, y: 4 },
   },
 
   {
@@ -83,7 +80,6 @@ const getStudyEntityLayout = (): IResizableGridLayoutConfig[] => [
     md: { h: 3, w: 6, x: 0, y: 8 },
     sm: { h: 3, w: 6, x: 0, y: 8 },
     xs: { h: 3, w: 6, x: 0, y: 0 },
-    xss: { h: 3, w: 6, x: 0, y: 8 },
   },
   {
     title: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
@@ -99,7 +95,6 @@ const getStudyEntityLayout = (): IResizableGridLayoutConfig[] => [
     md: { h: 3, w: 3, x: 6, y: 8 },
     sm: { h: 3, w: 3, x: 6, y: 8 },
     xs: { h: 3, w: 3, x: 6, y: 8 },
-    xss: { h: 3, w: 3, x: 6, y: 8 },
   },
 ];
 

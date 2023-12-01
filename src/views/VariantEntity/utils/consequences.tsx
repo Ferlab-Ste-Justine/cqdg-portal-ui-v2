@@ -14,7 +14,7 @@ import {
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
 import { Space, Tooltip, Typography } from 'antd';
 import { IConsequenceEntity, Impact } from 'graphql/variants/models';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { getEntityConsequenceDictionary } from 'utils/translation';

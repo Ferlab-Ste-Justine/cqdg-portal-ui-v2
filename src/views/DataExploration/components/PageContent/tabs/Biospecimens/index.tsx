@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
-import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
@@ -16,11 +15,11 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import { SortDirection } from '@ferlab/ui/core/graphql/constants';
 import { IQueryConfig } from '@ferlab/ui/core/graphql/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Typography } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { useBiospecimens } from 'graphql/biospecimens/actions';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
-import { IParticipantEntity } from 'graphql/participants/models';
+import { ageCategories, IParticipantEntity } from 'graphql/participants/models';
 import {
   BIOSPECIMENS_SAVED_SETS_FIELD,
   DATA_EXPLORATION_QB_ID,
@@ -34,20 +33,21 @@ import {
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { IProColumnExport } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
-import { tissueSource } from 'components/tables/columns/biospeciments';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { fetchTsvReport } from 'store/report/thunks';
+import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
+import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): ProColumnType<any>[] => [
+const getDefaultColumns = (): IProColumnExport[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
@@ -80,6 +80,7 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
     key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
+    exportValue: (biospecimen: IBiospecimenEntity) => biospecimen?.participant?.participant_id,
     render: (participant: IParticipantEntity) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant.participant_id}`}>
         {participant.participant_id}
@@ -111,17 +112,61 @@ const getDefaultColumns = (): ProColumnType<any>[] => [
       );
     },
   },
-  tissueSource({ sorter: { multiple: 1 } }),
+  {
+    key: 'biospecimen_tissue_source',
+    dataIndex: 'biospecimen_tissue_source',
+    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
+    sorter: { multiple: 1 },
+    render: (biospecimen_tissue_source: string) => {
+      if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
+      if (biospecimen_tissue_source === 'Unknown') return intl.get('global.unknown');
+      const { code, title } = extractNcitTissueTitleAndCode(biospecimen_tissue_source);
+      return (
+        <>
+          {title} (NCIT:{' '}
+          <ExternalLink href={`http://purl.obolibrary.org/obo/NCIT_${code}`}>{code}</ExternalLink>)
+        </>
+      );
+    },
+  },
   {
     key: 'age_biospecimen_collection',
     dataIndex: 'age_biospecimen_collection',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collection'),
-    tooltip: intl.get('screen.dataExploration.tabs.biospecimens.age_biospecimen_collectionTooltip'),
-    render: (age_biospecimen_collection) => age_biospecimen_collection || TABLE_EMPTY_PLACE_HOLDER,
+    sorter: { multiple: 1 },
+    title: intl.get('entities.biospecimen.age'),
+    popoverProps: {
+      title: <b>{intl.get('entities.biospecimen.age_biospecimen_collection')}</b>,
+      content: ageCategories.map((category) => (
+        <div key={category.key}>
+          <b>{category.label}:</b>
+          {` ${category.tooltip}`}
+          <br />
+        </div>
+      )),
+    },
+    exportValue: (b: IBiospecimenEntity) => {
+      const category = ageCategories.find((cat) => cat.key === b?.age_biospecimen_collection);
+      return category ? `${category.label}: ${category.tooltip}` : b?.age_biospecimen_collection;
+    },
+    render: (age_biospecimen_collection: string) => {
+      const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
+      if (!category) return TABLE_EMPTY_PLACE_HOLDER;
+      return category.tooltip ? (
+        <Tooltip className={styles.tooltip} title={category.tooltip}>
+          {category.label}
+        </Tooltip>
+      ) : (
+        category.label
+      );
+    },
   },
   {
     key: 'files',
     title: intl.get('screen.dataExploration.tabs.biospecimens.files'),
+    exportValue: (biospecimen: IBiospecimenEntity) => {
+      const fileCount = biospecimen?.files?.hits?.total || 0;
+      return `${fileCount}`;
+    },
     render: (biospecimen: IBiospecimenEntity) => {
       const fileCount = biospecimen?.files?.hits?.total || 0;
       return fileCount ? (
@@ -185,6 +230,10 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
     },
     queryConfig.operations,
   );
+
+  const defaultCols = getDefaultColumns();
+  const userCols = userInfo?.config.data_exploration?.tables?.biospecimens?.columns || [];
+  const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
 
   const getCurrentSqon = (): any =>
     selectedAllResults || !selectedKeys.length
@@ -266,22 +315,16 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         onColumnSortChange: (newState) =>
           dispatch(
             updateUserConfig({
-              data_exploration: {
-                tables: {
-                  biospecimens: {
-                    columns: newState,
-                  },
-                },
-              },
+              data_exploration: { tables: { biospecimens: { columns: newState } } },
             }),
           ),
         onTableExportClick: () =>
           dispatch(
-            fetchTsvReport({
-              columnStates: userInfo?.config.data_exploration?.tables?.biospecimens?.columns,
-              columns: getDefaultColumns(),
+            generateLocalTsvReport({
               index: INDEXES.BIOSPECIMEN,
-              sqon: getCurrentSqon(),
+              headers: defaultCols,
+              cols: userColumns,
+              rows: selectedRows,
             }),
           ),
         extra: [
@@ -323,7 +366,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
         },
         defaultViewPerQuery: queryConfig.size,
       }}
-      dataSource={results.data.map((i) => ({ ...i, key: i.id }))}
+      dataSource={results.data.map((i) => ({ ...i, key: i.sample_id }))}
       dictionary={getProTableDictionary()}
     />
   );

@@ -93,6 +93,13 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
     cy.sortTableAndWait('Tissue');
   });
 
+  it('Valider les fonctionnalités du tableau - Tri Age', () => {
+    cy.sortTableAndIntercept('Age', 1);
+    cy.validateTableFirstRow('-', 7);
+    cy.sortTableAndIntercept('Age', 1);
+    cy.validateTableFirstRow('Young Adult', 7);
+  });
+
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Sample Type', 1);
     cy.sortTableAndIntercept('Study', 1);

@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-import translations from './en.json';
+import { ageCategoriesObject } from 'graphql/participants/models';
 
 const en = {
-  ...translations,
   entities: {
     study: {
       study_code: 'Study Code',
@@ -46,8 +45,8 @@ const en = {
       biospecimen: 'Biospecimen',
       biospecimen_tissue_source: 'Tissue',
       biospecimen_id: 'Biospecimen ID',
-      age_biospecimen_collection: 'Age',
-      age_biospecimen_collection_tooltip: 'Age at Biospecimen Collection',
+      age: 'Age',
+      age_biospecimen_collection: 'Age at Biospecimen Collection',
     },
     participant: {
       participant_id: 'Participant ID',
@@ -68,10 +67,8 @@ const en = {
       diagnosis_mondo: 'Diagnosis (MONDO)',
       diagnosis_icd: 'Diagnosis (ICD-10)',
       diagnosis_source_text: 'Diagnosis (Source Text)',
-      age_at_diagnosis: 'Age',
-      age_at_diagnosis_tooltip: 'Age at Diagnosis',
-      age_at_phenotype: 'Age',
-      age_at_phenotype_tooltip: 'Age at Phenotype',
+      age_at_diagnosis: 'Age at Diagnosis',
+      age_at_phenotype: 'Age at Phenotype',
       phenotype: 'Phenotype',
       phenotypes: 'Phenotypes',
       phenotype_hpo: 'Phenotype (HPO)',
@@ -80,6 +77,7 @@ const en = {
       family_id: 'Family ID',
       gender: 'Gender',
       ethnicity: 'Ethnicity',
+      age: 'Age',
       age_at_recruitment: 'Age at Recruitment',
       vital_status: 'Vital Status',
       age_of_death: 'Age at Death',
@@ -264,6 +262,7 @@ const en = {
     no: 'No',
     other: 'Other',
     delete: 'Delete',
+    unknown: 'Unknown',
     summary: 'Summary',
     viewInDataExploration: 'View in Data Exploration',
     search: {
@@ -982,8 +981,6 @@ const en = {
           proband: 'Proband',
           gender: 'Gender',
           familyHistory: 'Family History',
-          ageAtRecruitment: 'Age',
-          ageAtRecruitmentTooltip: 'Age at Recruitment',
           ageAtDiagnosis: 'Age at Diagnosis',
           ageAtObservedPhenotype: 'Age at Observed Phenotype',
           diagnosis: 'Diagnosis (MONDO)',
@@ -1006,11 +1003,6 @@ const en = {
           study_code: 'Study',
           sample_type: 'Sample Type',
           biospecimen_tissue_source: 'Tissue',
-          biospecimen_tissue_source_data: {
-            unknown: 'Unknown',
-          },
-          age_biospecimen_collection: 'Age',
-          age_biospecimen_collectionTooltip: 'Age at Biospecimen Collection',
           files: 'Files',
         },
         datafiles: {
@@ -1058,6 +1050,43 @@ const en = {
       removeTypeSet: 'Remove from a {type} set',
       set: 'Set',
       chooseSet: 'Choose a set',
+    },
+  },
+  // this facets object is also used by Ferlab-ui to override the values in the facets
+  // ex: variant genes sift_pred: T -> Tolerated
+  facets: {
+    options: {
+      genes__consequences__predictions__sift_pred: {
+        T: 'Tolerated',
+        D: 'Damaging',
+      },
+      genes__consequences__predictions__polyphen2_hvar_pred: {
+        B: 'Benign',
+        D: 'Damaging',
+        P: 'Possibly Damaging',
+      },
+      genes__consequences__predictions__fathmm_pred: {
+        T: 'Tolerated',
+        D: 'Damaging',
+      },
+      genes__consequences__predictions__lrt_pred: {
+        N: 'Neutral',
+        D: 'Deleterious',
+        U: 'Unknown',
+      },
+      studies__zygosity: {
+        HET: 'Heterozygote',
+        WT: 'Wild Type',
+        HOM: 'Homozygote',
+        UNK: 'Unknown',
+      },
+      variant_external_reference: {
+        DBSNP: 'dbSNP',
+        Clinvar: 'ClinVar',
+      },
+      age_at_recruitment: ageCategoriesObject,
+      mondo_tagged__age_at_event: ageCategoriesObject,
+      age_biospecimen_collection: ageCategoriesObject,
     },
   },
 };

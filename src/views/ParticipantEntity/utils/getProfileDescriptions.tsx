@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
 import { Tag } from 'antd';
-import { IParticipantEntity } from 'graphql/participants/models';
+import { ageCategories, IParticipantEntity } from 'graphql/participants/models';
 import capitalize from 'lodash/capitalize';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -23,7 +23,11 @@ const getProfileDescriptions = (participant?: IParticipantEntity): IEntityDescri
   },
   {
     label: intl.get('entities.participant.age_at_recruitment'),
-    value: participant?.age_at_recruitment || TABLE_EMPTY_PLACE_HOLDER,
+    value: (() => {
+      const category = ageCategories.find((cat) => cat.key === participant?.age_at_recruitment);
+      if (!category) return TABLE_EMPTY_PLACE_HOLDER;
+      return `${category.label} (${category.tooltip})`;
+    })(),
   },
   {
     label: intl.get('entities.participant.vital_status'),
@@ -35,7 +39,11 @@ const getProfileDescriptions = (participant?: IParticipantEntity): IEntityDescri
   },
   {
     label: intl.get('entities.participant.age_of_death'),
-    value: participant?.age_of_death || TABLE_EMPTY_PLACE_HOLDER,
+    value: (() => {
+      const category = ageCategories.find((cat) => cat.key === participant?.age_of_death);
+      if (!category) return TABLE_EMPTY_PLACE_HOLDER;
+      return `${category.label} (${category.tooltip})`;
+    })(),
   },
   {
     label: intl.get('entities.participant.cause_of_death'),

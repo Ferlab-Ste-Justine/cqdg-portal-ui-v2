@@ -127,7 +127,7 @@ const AgeAtDiagnosisGraphCard = ({
             legendOffset: -45,
           }}
           axisBottom={{
-            legend: intl.get('entities.participant.age_at_diagnosis_tooltip'),
+            legend: intl.get('entities.participant.age_at_diagnosis'),
             legendPosition: 'middle',
             legendOffset: 35,
           }}
@@ -162,7 +162,7 @@ const AgeAtDiagnosisGraphCard = ({
                 legendOffset: -45,
               }}
               axisBottom={{
-                legend: intl.get('entities.participant.age_at_diagnosis_tooltip'),
+                legend: intl.get('entities.participant.age_at_diagnosis'),
                 legendPosition: 'middle',
                 legendOffset: 35,
               }}
