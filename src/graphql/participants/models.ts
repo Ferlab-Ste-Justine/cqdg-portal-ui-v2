@@ -16,9 +16,15 @@ export const ageCategories = [
 ];
 
 //transform `A-antenatal` to `Antenatal (Before birth)` and return an object
-export const ageCategoriesObject = Object.assign(
+export const ageCategoriesKeyLabelTooltip = Object.assign(
   {},
   ...ageCategories.map((elem) => ({ [elem.key]: `${elem.label} (${elem.tooltip})` })),
+);
+
+//transform `A-antenatal` to `Antenatal` and return an object
+export const ageCategoriesKeyLabel = Object.assign(
+  {},
+  ...ageCategories.map((elem) => ({ [elem.key]: elem.label })),
 );
 
 export interface IParticipantResultTree {

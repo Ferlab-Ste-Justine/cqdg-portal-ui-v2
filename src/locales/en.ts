@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { ageCategoriesObject } from 'graphql/participants/models';
+import { ageCategoriesKeyLabelTooltip } from 'graphql/participants/models';
 
 const en = {
   entities: {
@@ -1084,9 +1084,9 @@ const en = {
         DBSNP: 'dbSNP',
         Clinvar: 'ClinVar',
       },
-      age_at_recruitment: ageCategoriesObject,
-      mondo_tagged__age_at_event: ageCategoriesObject,
-      age_biospecimen_collection: ageCategoriesObject,
+      age_at_recruitment: ageCategoriesKeyLabelTooltip,
+      mondo_tagged__age_at_event: ageCategoriesKeyLabelTooltip,
+      age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
     },
   },
 };

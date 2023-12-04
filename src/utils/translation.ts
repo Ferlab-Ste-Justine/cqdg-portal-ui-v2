@@ -5,7 +5,7 @@ import { IProTableDictionary } from '@ferlab/ui/core/components/ProTable/types';
 import { IDictionary as QueryBuilderDict } from '@ferlab/ui/core/components/QueryBuilder/types';
 import { SET_ID_PREFIX } from '@ferlab/ui/core/data/sqon/types';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { ageCategories } from 'graphql/participants/models';
+import { ageCategoriesKeyLabel } from 'graphql/participants/models';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
@@ -215,10 +215,9 @@ export const getQueryBuilderDictionary = (
       return set ? set.tag : setId;
     },
     facetValueMapping: {
-      age_at_recruitment: Object.assign(
-        {},
-        ...ageCategories.map((elem) => ({ [elem.key]: elem.label })),
-      ),
+      age_at_recruitment: ageCategoriesKeyLabel,
+      'mondo_tagged.age_at_event': ageCategoriesKeyLabel,
+      age_biospecimen_collection: ageCategoriesKeyLabel,
       variant_external_reference: {
         DBSNP: intl.get('facets.options.variant_external_reference.DBSNP'),
         Clinvar: intl.get('facets.options.variant_external_reference.Clinvar'),
