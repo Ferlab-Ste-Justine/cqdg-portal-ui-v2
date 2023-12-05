@@ -86,7 +86,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^1$/).should('exist');
   });
 
-  it('Age at Diagnosis - Congenital [CQDG-490]', () => {
+  it('Age at Diagnosis - Congenital', () => {
     cy.get('[data-cy="FilterContainer_Age at Diagnosis"]').should('exist');
     cy.checkValueFacetAndApply('Age at Diagnosis', 'B-congenital');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Diagnosis').should('exist');
@@ -94,7 +94,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^3$/).should('exist');
   });
 
-  it('Age at Diagnosis - Young Adult [CQDG-490]', () => {
+  it('Age at Diagnosis - Young Adult', () => {
     cy.checkValueFacetAndApply('Age at Diagnosis', 'G-young adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Diagnosis').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
@@ -169,7 +169,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^6$/).should('exist');
   });
 
-  it('Age at Biospecimen Collection - Congenital [CQDG-490]', () => {
+  it('Age at Biospecimen Collection - Congenital', () => {
     cy.get('[data-cy="FilterContainer_Age at Biospecimen Collection"]').should('exist');
     cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'B-congenital');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
@@ -177,7 +177,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.get('div[class*="Header_ProTableHeader"]').contains(/^2$/).should('exist');
   });
 
-  it('Age at Biospecimen Collection - Young Adult [CQDG-490]', () => {
+  it('Age at Biospecimen Collection - Young Adult', () => {
     cy.checkValueFacetAndApply('Age at Biospecimen Collection', 'G-young adult');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Age at Biospecimen Collection').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Young Adult').should('exist');
