@@ -35,7 +35,7 @@ resources:
 - name: slack-alert
   type: slack-notification
   source:
-    url: ((slack-webhook.webhook_url))
+    url: ((slack.webhook-url))
 
 - name: feature-branches
   type: git-branches
@@ -55,7 +55,7 @@ resources:
   type: git
   icon: github
   check_every: 5s
-  webhook_token: ((webhook-token))
+  webhook_token: ((slack.webhook-url))
   source:
     uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
     branch: {{branch}}
@@ -208,7 +208,7 @@ jobs:
         - name: output
       params:
         SSH_KEY: ((git.ssh-key))
-        KNOWN_HOST: ((git.known-hosts))
+        KNOWN_HOST: ((git.known-host))
       run:
         path: bash
         # dir: pull-request
@@ -280,7 +280,7 @@ jobs:
       - name: ferlease
       params:
         SSH_KEY: ((git.ssh-key))
-        KNOWN_HOST: ((git.known-hosts))
+        KNOWN_HOST: ((git.known-host))
       run:
         path: bash
         # dir: pull-request
