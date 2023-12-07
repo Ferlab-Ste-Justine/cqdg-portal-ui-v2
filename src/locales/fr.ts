@@ -423,7 +423,7 @@ const fr = {
         okText: 'Télécharger',
         cancel: 'Annuler',
         text: `Télécharger les documents requis par les études pour votre demande d'accès aux données. Ces documents fournissent des informations sur les conditions d'utilisation des données autorisées ainsi qu'une liste complète par étude des fichiers sélectionnés. Pour en savoir davantage, consulter la page `,
-        textLink: `Demande d'accès aux données`,
+        textLink: `demande d'accès aux données`,
         textCheckbox: `Inclure tous les fichiers de même type sur les membres des familles représentées dans cette sélection.`,
       },
     },
