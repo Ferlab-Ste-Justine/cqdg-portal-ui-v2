@@ -221,6 +221,7 @@ export const getQueryBuilderDictionary = (
       variant_external_reference: {
         DBSNP: intl.get('facets.options.variant_external_reference.DBSNP'),
         Clinvar: intl.get('facets.options.variant_external_reference.Clinvar'),
+        Cosmic: intl.get('facets.options.variant_external_reference.Cosmic'),
       },
       'genes.consequences.predictions.sift_pred': {
         T: intl.get('facets.options.genes__consequences__predictions__sift_pred.T'),

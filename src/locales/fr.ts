@@ -1080,6 +1080,7 @@ const fr = {
       variant_external_reference: {
         DBSNP: 'dbSNP',
         Clinvar: 'ClinVar',
+        Cosmic: 'COSMIC',
       },
       age_at_recruitment: ageCategoriesKeyLabelTooltip,
       mondo_tagged__age_at_event: ageCategoriesKeyLabelTooltip,
