@@ -31,16 +31,7 @@ const DataExplorationLinks = () => {
     dispatch(fetchStats());
   }, [dispatch]);
 
-  const {
-    studies = 0,
-    participants = 0,
-    samples = 0,
-    // fileSize = '',
-  } = stats || {};
-
-  //todo: Change after CAG implementation, temporarily added for CQDG-434
-  const cagFilesCount = 2183;
-  const totalFileSize = '11.3TB';
+  const { studies = 0, participants = 0, samples = 0, fileSize = '' } = stats || {};
 
   return (
     <GridCard
@@ -79,7 +70,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(participants + cagFilesCount)}
+              label={numberFormat(participants)}
               subLabel={intl.get('entities.participant.participants')}
               icon={<UserOutlined className={styles.dataReleaseIcon} />}
             />
@@ -88,7 +79,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={numberFormat(samples + cagFilesCount)}
+              label={numberFormat(samples)}
               subLabel={intl.get('entities.biospecimen.biospecimens')}
               icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             />
@@ -97,7 +88,7 @@ const DataExplorationLinks = () => {
             <LinkBox
               href={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
               multiLabelClassName={styles.dataReleaseStatsLabel}
-              label={totalFileSize}
+              label={fileSize}
               subLabel={intl.get('entities.file.datafiles')}
               icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             />

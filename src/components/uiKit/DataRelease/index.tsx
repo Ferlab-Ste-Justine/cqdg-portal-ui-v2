@@ -30,16 +30,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
     dispatch(fetchStats());
   }, [dispatch]);
 
-  const {
-    studies = 0,
-    participants = 0,
-    samples = 0,
-    // fileSize = '',
-  } = stats || {};
-
-  //todo: Change after CAG implementation, temporarily added for CQDG-434
-  const cagFilesCount = 2183;
-  const totalFileSize = '11.3TB';
+  const { studies = 0, participants = 0, samples = 0, fileSize = '' } = stats || {};
 
   return (
     <Spin spinning={false}>
@@ -56,7 +47,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_Participant">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={numberFormat(participants + cagFilesCount)}
+            label={numberFormat(participants)}
             Icon={<UserOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.participant.participants')}
@@ -65,7 +56,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_Biospecimen">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={numberFormat(samples + cagFilesCount)}
+            label={numberFormat(samples)}
             Icon={<ExperimentOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.biospecimen.biospecimens')}
@@ -74,7 +65,7 @@ const DataRelease = ({ className = '' }: IDataReleaseProps) => {
         <Col xs={12} md={6} data-cy="DataRelease_File">
           <MultiLabel
             iconPosition={MultiLabelIconPositionEnum.Top}
-            label={totalFileSize}
+            label={fileSize}
             Icon={<FileTextOutlined className={styles.dataReleaseIcon} />}
             className={styles.dataReleaseStatsLabel}
             subLabel={intl.get('entities.file.datafiles')}
