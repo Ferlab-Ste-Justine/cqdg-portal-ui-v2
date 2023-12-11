@@ -6,7 +6,7 @@ import { IExternalFrequenciesEntity } from 'graphql/variants/models';
 import { makeRowFromFrequencies } from './EntityPublicCohortTable.utils';
 
 interface IEntityPublicCohortTable extends Omit<IEntityTable, 'data'> {
-  emptyMessage: string;
+  emptyMessage?: string;
   frequencies?: IExternalFrequenciesEntity;
   locus?: string;
 }
@@ -29,13 +29,13 @@ export const EntityPublicCohortTable = ({
 
   return (
     <EntityTable
+      emptyMessage={intl.get('api.noData')}
       {...tableProps}
       columns={columns}
       data={externalCohortsRows}
       header={header}
       id={id}
       loading={loading}
-      emptyMessage={intl.get('api.noData')}
     />
   );
 };

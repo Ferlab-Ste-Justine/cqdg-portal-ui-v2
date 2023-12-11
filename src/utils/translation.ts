@@ -15,7 +15,7 @@ export const getEntityExpandableTableMultiple = () => ({
     intl.get('entities.variant.consequences.showTranscript', { count }),
   seeLess: intl.get('see.less'),
   seeMore: intl.get('see.more'),
-  noDataAvailable: intl.get('no.data.available'),
+  noDataAvailable: intl.get('api.noData'),
 });
 
 export const getEntityConsequenceDictionary = () => ({

@@ -71,7 +71,7 @@ const VariantEntity = () => {
       links={links}
       data={data}
       loading={loading}
-      emptyText={intl.get('no.data.available')}
+      emptyText={intl.get('api.noData')}
     >
       <>
         <EntityTitle
@@ -96,7 +96,7 @@ const VariantEntity = () => {
           title={intl.get('entities.variant.consequences.consequence')}
           header={intl.get('entities.variant.consequences.geneConsequences')}
           columns={getConsequencesProColumn()}
-          genes={data?.genes?.hits.edges}
+          genes={data?.genes?.hits?.edges}
         />
 
         <EntityTable
@@ -117,7 +117,6 @@ const VariantEntity = () => {
           locus={data?.locus}
           header={intl.get('entities.variant.frequencies.publicCohorts')}
           loading={loading}
-          emptyMessage={intl.get('entities.variant.frequencies.noDataAvailable')}
         />
 
         <EntityTable
