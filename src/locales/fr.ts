@@ -459,6 +459,9 @@ const fr = {
       file: 'fichier',
       fileID: 'ID de fichier',
       filePlaceholder: 'ex : FI0080837',
+      gene: 'gene',
+      geneID: 'Gene Symbol, Gene Alias, Ensembl ID',
+      genePlaceholder: 'e.g. FI0080837',
       title: 'Téléverser une liste de {entity}s',
       submittedColTitle: 'Identifiants {entity} soumis',
       uploadBtnText: 'Téléverser une liste de {entity}s',
@@ -483,6 +486,10 @@ const fr = {
         biospecimen: {
           matchcol: "ID de l'échantillon",
           mappedcol: "Code de l'étude",
+        },
+        gene: {
+          matchcol: 'Ensembl ID',
+          mappedcol: 'Symbol',
         },
       },
       pillTitle: 'Liste téléchargée',
