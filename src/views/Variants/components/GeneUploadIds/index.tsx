@@ -78,7 +78,6 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
         value: uniqueMatches.map((match) => match.mappedTo),
         index: INDEXES.VARIANT,
         merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
-        // overrideValuesName: intl.get('components.uploadIds.pillTitle'),
         isUploadedList: true,
       });
     }}
