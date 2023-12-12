@@ -69,6 +69,7 @@ const getFilterGroups = (type: FilterTypes) => {
                 title={intl.get('entities.participant.diagnosis_mondo')}
               />,
               'icd_tagged__name',
+              'relationship_to_proband',
               'gender',
               'age_at_recruitment',
               'mondo_tagged__age_at_event',

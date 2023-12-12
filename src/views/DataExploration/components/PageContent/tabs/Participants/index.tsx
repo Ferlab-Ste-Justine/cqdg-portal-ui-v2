@@ -161,6 +161,13 @@ const getDefaultColumns = (): IProColumnExport[] => [
     },
   },
   {
+    key: 'relationship_to_proband',
+    title: intl.get('entities.participant.family_position'),
+    dataIndex: 'relationship_to_proband',
+    sorter: { multiple: 1 },
+    render: (relationship_to_proband) => relationship_to_proband || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
     key: 'age_at_recruitment',
     dataIndex: 'age_at_recruitment',
     sorter: { multiple: 1 },
