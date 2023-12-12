@@ -1,81 +1,33 @@
 import intl from 'react-intl-universal';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
-import UploadIds from '@ferlab/ui/core/components/UploadIds';
 import { MatchTableItem } from '@ferlab/ui/core/components/UploadIds/types';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { MERGE_VALUES_STRATEGIES } from '@ferlab/ui/core/data/sqon/types';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { hydrateResults } from '@ferlab/ui/core/graphql/utils';
-import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Descriptions } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { CHECK_GENE_MATCH_QUERY } from 'graphql/genes/queries';
 import { IGeneEntity } from 'graphql/variants/models';
+import EntityUploadIds from 'views/DataExploration/components/UploadIds/EntityUploadIds';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import { ArrangerApi } from 'services/api/arranger';
-
-import styles from './index.module.scss';
 
 interface IGenesUploadIdsProps {
   queryBuilderId: string;
 }
 
 const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
-  <UploadIds
-    dictionary={{
-      modalTitle: intl.get('components.gene.title'),
-      submittedColTitle: intl.get('components.gene.submittedColTitle'),
-      uploadBtnText: intl.get('components.gene.uploadBtnText'),
-      modalUploadBtnText: intl.get('components.gene.upload.file.btn'),
-      mappedTo: intl.get('components.gene.mappedTo'),
-      clear: intl.get('components.gene.clear.btn'),
-      emptyTableDescription: intl.get('components.gene.empty.table'),
-      modalOkText: intl.get('components.gene.upload.btn'),
-      modalCancelText: intl.get('components.gene.cancel.btn'),
-      collapseTitle: (matchCount, unMatchCount) =>
-        intl.get('components.gene.collapseTitle', {
-          matchCount: numberFormat(matchCount),
-          unMatchCount: numberFormat(unMatchCount),
-        }),
-      matchTabTitle: (matchCount) =>
-        intl.get('components.gene.match', { count: numberFormat(matchCount) }),
-      unmatchTabTitle: (unmatchcount) =>
-        intl.get('components.gene.unmatch', { count: numberFormat(unmatchcount) }),
-      tablesMessage: (submittedCount, mappedCount) =>
-        intl.get('components.gene.table.message', {
-          submittedCount: numberFormat(submittedCount),
-          mappedCount: numberFormat(mappedCount),
-        }),
-      inputLabel: intl.get('components.gene.input.label'),
-      matchTable: {
-        idColTitle: intl.get('components.gene.match.table.idcol.title'),
-        matchToFieldColTitle: intl.get('components.gene.match.table.matchcol.title'),
-        mappedToFieldColTitle: intl.get('components.gene.match.table.mappedcol.title'),
-      },
-    }}
-    popoverProps={{
-      title: intl.get('components.uploadIds.popover.title'),
-      overlayClassName: styles.geneUploadIdsPopover,
-      content: (
-        <Descriptions column={1}>
-          <Descriptions.Item label={intl.get('components.uploadIds.popover.identifiers')}>
-            {intl.get('components.gene.identifiers')}
-          </Descriptions.Item>
-          <Descriptions.Item label={intl.get('components.uploadIds.popover.separatedBy.title')}>
-            {intl.get('components.uploadIds.popover.separatedBy.values')}
-          </Descriptions.Item>
-          <Descriptions.Item label={intl.get('components.uploadIds.popover.uploadFileFormats')}>
-            {intl.get('components.uploadIds.popover.fileFormats')}
-          </Descriptions.Item>
-        </Descriptions>
-      ),
-    }}
-    placeHolder={intl.get('global.search.genes.placeholder')}
+  <EntityUploadIds
+    entityId="gene"
+    entityIdTrans={intl.get('components.uploadIds.gene')}
+    entityIdentifiers={intl.get('components.uploadIds.geneID')}
+    placeHolder={intl.get('global.search.gene.placeholder')}
     fetchMatch={async (ids: string[]) => {
       const response = await ArrangerApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
         variables: {
-          first: 1000,
+          first: MAX_ITEMS_QUERY,
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
@@ -126,7 +78,7 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
         value: uniqueMatches.map((match) => match.mappedTo),
         index: INDEXES.VARIANT,
         merge_strategy: MERGE_VALUES_STRATEGIES.APPEND_VALUES,
-        overrideValuesName: intl.get('components.uploadIds.pillTitle'),
+        isUploadedList: true,
       });
     }}
   />
