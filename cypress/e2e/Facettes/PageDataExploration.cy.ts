@@ -64,9 +64,18 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.validateFacetRank(1, 'Diagnosis (ICD-10)');
   });
 
+  it('Family Position - Proband', () => {
+    cy.validateFacetFilter('Family Position', 'Proband', 'Proband', /^200$/);
+    cy.validateFacetRank(2, 'Family Position');
+  });
+
+  it('Family Position - Brother', () => {
+    cy.validateFacetFilter('Family Position', 'Brother', 'Brother', /^1$/);
+  });
+
   it('Gender - Female', () => {
     cy.validateFacetFilter('Gender', 'Female', 'female', /^283$/);
-    cy.validateFacetRank(2, 'Gender');
+    cy.validateFacetRank(3, 'Gender');
   });
 
   it('Gender - Male', () => {
@@ -75,7 +84,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 
   it('Age at Recruitment - Congenital', () => {
     cy.validateFacetFilter('Age at Recruitment', 'Congenital', 'B-congenital', /^2$/);
-    cy.validateFacetRank(3, 'Age at Recruitment');
+    cy.validateFacetRank(4, 'Age at Recruitment');
   });
 
   it('Age at Recruitment - Young Adult', () => {
@@ -84,7 +93,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 
   it('Age at Diagnosis - Congenital', () => {
     cy.validateFacetFilter('Age at Diagnosis', 'Congenital', 'B-congenital', /^3$/);
-    cy.validateFacetRank(4, 'Age at Diagnosis');
+    cy.validateFacetRank(5, 'Age at Diagnosis');
   });
 
   it('Age at Diagnosis - Young Adult', () => {
@@ -93,7 +102,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 
   it('Ethnicity - French Canadian', () => {
     cy.get('[data-cy="FilterContainer_Ethnicity"]').should('exist');
-    cy.validateFacetRank(5, 'Ethnicity');
+    cy.validateFacetRank(6, 'Ethnicity');
     /* Pas de données
     cy.validateFacetFilter('Ethnicity', 'French Canadian', 'French Canadian', /^1750$/);
     */
@@ -101,12 +110,12 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 
   it('Phenotype (Source Text) - Intractable Seizures', () => {
     cy.validateFacetFilter('Phenotype (Source Text)', 'Intractable Seizures', 'Intractable Seizures', /^202$/);
-    cy.validateFacetRank(6, 'Phenotype (Source Text)');
+    cy.validateFacetRank(7, 'Phenotype (Source Text)');
   });
 
   it('Diagnosis (Source Text) - Intractable Epilepsy', () => {
     cy.validateFacetFilter('Diagnosis (Source Text)', 'Intractable Epilepsy', 'Intractable Epilepsy', /^205$/);
-    cy.validateFacetRank(7, 'Diagnosis (Source Text)');
+    cy.validateFacetRank(8, 'Diagnosis (Source Text)');
   });
 });
 

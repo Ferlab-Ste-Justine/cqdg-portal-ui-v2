@@ -477,6 +477,7 @@ export const getFacetsDictionary = () => ({
   },
   population: intl.get('entities.study.population'),
   family_id: intl.get('entities.participant.family_id'),
+  relationship_to_proband: intl.get('entities.participant.family_position'),
 });
 
 export const getResizableGridDictionary = () => ({
