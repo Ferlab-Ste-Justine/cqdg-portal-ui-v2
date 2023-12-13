@@ -18,9 +18,9 @@ interface ISummaryHeaderProps {
 }
 
 const SummaryHeader = ({ variant }: ISummaryHeaderProps) => {
-  const studyCount = variant?.studies.hits.total || 0;
+  const studyCount = variant?.studies?.hits?.total || 0;
   const participantCount = variant?.internal_frequencies_wgs?.total?.pc || 0;
-  const studyCodes = variant?.studies.hits.edges.map((e) => e?.node?.study_code) || [];
+  const studyCodes = variant?.studies?.hits?.edges?.map((e) => e?.node?.study_code) || [];
 
   return (
     <div className={styles.buttonGroup}>
