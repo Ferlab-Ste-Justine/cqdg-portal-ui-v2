@@ -60,7 +60,7 @@ const VariantEntity = () => {
     values: [locus],
   });
 
-  const variantStudies = (data?.studies?.hits.edges || []).map((e) => ({
+  const variantStudies = (data?.studies?.hits?.edges || []).map((e) => ({
     ...e.node,
     key: e.node.study_code,
   }));
