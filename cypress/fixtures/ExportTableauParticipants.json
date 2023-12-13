@@ -2,6 +2,7 @@
   "headers": ["Participant",
               "Study",
               "Gender",
+              "Family Position",
               "Age",
               "Ethnicity",
               "External Participant",
@@ -9,6 +10,7 @@
   "content": ["PT0000010",
               "T-DEE",
               "male",
+              "Proband",
               "--",
               "HSJ-1005-389",
               "Unknown"]
