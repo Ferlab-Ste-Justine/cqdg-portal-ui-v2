@@ -278,7 +278,7 @@ const fr = {
         placeholder: 'ex : 10-100063679-T-C, rs341',
         title: 'Recherche par variant',
         tooltip:
-          'Entrer un Locus de Variant, Symbol de gène, Alias de gène, Gène AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
+          'Entrer un Locus de Variant, Symbole de gène, Alias de gène, Gène AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
       },
       study: {
         emptyText: 'Aucune étude trouvé',
@@ -460,7 +460,7 @@ const fr = {
       fileID: 'ID de fichier',
       filePlaceholder: 'ex : FI0080837',
       gene: 'gene',
-      geneID: 'Gene Symbol, Gene Alias, Ensembl ID',
+      geneID: 'Gene Symbole, Gene Alias, Ensembl ID',
       genePlaceholder: 'ex. ENSG00000157764, TP53',
       title: 'Téléverser une liste de {entity}s',
       submittedColTitle: 'Identifiants {entity} soumis',
