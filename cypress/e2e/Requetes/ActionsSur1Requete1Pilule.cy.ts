@@ -19,8 +19,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.checkValueFacetAndApply('Variant Type', 'deletion');
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
-    cy.validateTotalSelectedQuery('274');
-    cy.validateTableResultsCount('274');
+    cy.validateTotalSelectedQuery('16K');
+    cy.validateTableResultsCount('16K');
     cy.validateClearAllButton(false);
   });
 
@@ -30,8 +30,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.clickAndIntercept('[data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
-    cy.validateTotalSelectedQuery('274');
-    cy.validateTableResultsCount('274');
+    cy.validateTotalSelectedQuery('16K');
+    cy.validateTableResultsCount('16K');
     cy.validateClearAllButton(false);
   });
 
@@ -41,8 +41,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validatePillSelectedQuery('Consequence', ['Intron'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('155');
-    cy.validateTableResultsCount('155');
+    cy.validateTotalSelectedQuery('12K');
+    cy.validateTableResultsCount('12K');
     cy.validateClearAllButton(false);
   });
 
@@ -54,15 +54,15 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('442');
-    cy.validateTableResultsCount('442');
+    cy.validateTotalSelectedQuery('19.5K');
+    cy.validateTableResultsCount('19.5K');
     cy.validateClearAllButton(false);
 
     cy.checkValueFacetAndApply('Consequence', 'intron');
 
     cy.validatePillSelectedQuery('Consequence', ['Intron']);
-    cy.validateTotalSelectedQuery('270');
-    cy.validateTableResultsCount('270');
+    cy.validateTotalSelectedQuery('14K');
+    cy.validateTableResultsCount('14K');
     cy.validateClearAllButton(true);
   });
 
@@ -72,8 +72,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.validateClearAllButton(true);
   });
 });

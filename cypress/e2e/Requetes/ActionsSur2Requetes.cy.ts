@@ -16,36 +16,36 @@ describe('Page Data Exploration - Requêtes', () => {
   });
 
   it('Sélectionner une requête', () => {
-    cy.validateTableResultsCount('226');
+    cy.validateTableResultsCount('15.2K');
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
-    cy.validateTableResultsCount('43');
+    cy.validateTableResultsCount('1,428');
   });
 
   it('Afficher/Masquer les champs', () => {
     cy.get('button[role="switch"]').click({force: true});
 
     cy.validatePillSelectedQuery('', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(1).click();
     cy.validatePillSelectedQuery('Position', ['10000000']);
-    cy.validateTotalSelectedQuery('43');
-    cy.validateTableResultsCount('43');
+    cy.validateTotalSelectedQuery('1,428');
+    cy.validateTableResultsCount('1,428');
     cy.validateClearAllButton(true);
 
     cy.get('button[role="switch"]').click({force: true});
 
     cy.validatePillSelectedQuery('Position', ['10000000']);
-    cy.validateTotalSelectedQuery('43');
-    cy.validateTableResultsCount('43');
+    cy.validateTotalSelectedQuery('1,428');
+    cy.validateTableResultsCount('1,428');
     cy.get('[class*="QueryBar_queryBarWrapper"]').eq(0).click();
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.validateClearAllButton(true);
   });
 
@@ -53,14 +53,14 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[id="query-builder-header-tools"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
 
     cy.get('[id="query-builder-header-tools"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
-    cy.validateTableResultsCount('226');
+    cy.validateTableResultsCount('15.2K');
 
     cy.get('[id="query-builder-header-tools"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
 
     cy.get('[id="query-builder-header-tools"]').find('div[class*="ant-collapse-content-active"]').should('exist');
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.validateClearAllButton(true);
   });
 
@@ -76,8 +76,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('', ['Q1']);
     cy.validatePillSelectedQuery('', ['Q2'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('27');
-    cy.validateTableResultsCount('27');
+    cy.validateTotalSelectedQuery('1,162');
+    cy.validateTableResultsCount('1,162');
     cy.validateClearAllButton(true);
   });
 
@@ -93,8 +93,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('', ['Q1']);
     cy.validatePillSelectedQuery('', ['Q2'], 1);
     cy.validateOperatorSelectedQuery('or');
-    cy.validateTotalSelectedQuery('242');
-    cy.validateTableResultsCount('242');
+    cy.validateTotalSelectedQuery('15.4K');
+    cy.validateTableResultsCount('15.4K');
     cy.validateClearAllButton(true);
   });
 
@@ -109,8 +109,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('', ['Q1']);
     cy.validatePillSelectedQuery('', ['Q2'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('27');
-    cy.validateTableResultsCount('27');
+    cy.validateTotalSelectedQuery('1,162');
+    cy.validateTableResultsCount('1,162');
     cy.validateClearAllButton(true);
   });
 
@@ -122,8 +122,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-popconfirm"]').should('have.class', 'ant-popover-hidden', {timeout: 5000});
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 2);
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.validateClearAllButton(true);
   });
 
@@ -135,8 +135,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-popconfirm"]').should('not.exist');
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 1);
     cy.validatePillSelectedQuery('Position', ['10000000']);
-    cy.validateTotalSelectedQuery('43');
-    cy.validateTableResultsCount('43');
+    cy.validateTotalSelectedQuery('1,428');
+    cy.validateTableResultsCount('1,428');
     cy.validateClearAllButton(false);
   });
 
@@ -147,8 +147,8 @@ describe('Page Data Exploration - Requêtes', () => {
 
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 1);
     cy.validatePillSelectedQuery('Position', ['10000000']);
-    cy.validateTotalSelectedQuery('43');
-    cy.validateTableResultsCount('43');
+    cy.validateTotalSelectedQuery('1,428');
+    cy.validateTableResultsCount('1,428');
     cy.validateClearAllButton(false);
   });
 
@@ -160,8 +160,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-modal-confirm"]').should('not.exist');
     cy.get('[class*="QueryBar_queryBarWrapper"]').its('length').should('eq', 2);
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('226');
-    cy.validateTableResultsCount('226');
+    cy.validateTotalSelectedQuery('15.2K');
+    cy.validateTableResultsCount('15.2K');
     cy.validateClearAllButton(true);
   });
 
@@ -172,8 +172,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.get('[class*="ant-modal-confirm"]').find('button[class*="ant-btn-primary"]').click({force:true});
     cy.get('[class*="ant-modal-confirm"]').should('not.exist');
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('442');
-    cy.validateTableResultsCount('442');
+    cy.validateTotalSelectedQuery('19.5K');
+    cy.validateTableResultsCount('19.5K');
     cy.validateClearAllButton(false);
   });
 });

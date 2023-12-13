@@ -181,7 +181,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="biospecimen"]').find('td[class="ant-table-cell"]').eq(4).contains('-').should('exist');
   });
   
-  it('Panneau Files [CQDG-261]', () => {
+  it('Panneau Files', () => {
     cy.get('[id="data_file"]').find('[class*="EntityTable_title"]').contains('Data File').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Data Files').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(5)').should('exist');
@@ -193,11 +193,11 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(0).find('thead').find('th[class="ant-table-cell"]').eq(2).contains('(n=5)').should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Germline CNV"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Germline CNV"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="SNV"]').find('td[class="ant-table-cell"]').eq(1).contains(/^2$/).should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="SNV"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="SNV"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="Sequencing Data Supplement"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="Sequencing Data Supplement"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="Germline Structural Variant"]').find('td[class="ant-table-cell"]').eq(1).contains(/^2$/).should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="Supplement"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="Supplement"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="Germline Structural Variant"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Germline Structural Variant"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(1).contains(/^1$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
@@ -206,7 +206,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Strategy').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Files').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(2).contains('(n=5)').should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(1).contains(/^8$/).should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(1).contains(/^5$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 100%"]').should('exist');
   });
 });
@@ -307,7 +307,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
   });
 
-  it('Lien Files de Germline CNV du panneau Files [CQDG-261]', () => {
+  it('Lien Files de Germline CNV du panneau Files', () => {
     cy.get('[id="data_file"]').find('[data-row-key="Germline CNV"]').find('td[class="ant-table-cell"]').eq(1).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');

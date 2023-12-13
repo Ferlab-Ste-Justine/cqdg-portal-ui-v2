@@ -52,7 +52,7 @@ describe('Page Data Exploration (Files) - Colonnes du tableau', () => {
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(7)
       .should('have.class', 'ant-table-column-has-sorters')
-      .contains('Experimental Strategy').should('exist');
+      .contains('Strategy').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(8)

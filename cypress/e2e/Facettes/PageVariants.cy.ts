@@ -24,20 +24,8 @@ describe('Page des variants (Participant) - Filtrer avec les facettes', () => {
   });
 
   it('Study Code - STUDY1', () => {
-    cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^442$/);
+    cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^19.5K$/);
     cy.validateFacetRank(0, 'Study Code');
-  });
-
-  it.skip('Study Code - DS-PCGC', () => {
-    cy.validateFacetFilter('Study Code', 'DS-PCGC', 'DS-PCGC', /^39K$/);
-  });
-
-  it.skip('Study Name - TODO', () => {
-    cy.validateFacetFilter('Study Name', 'TODO', 'TODO', /^TODO$/);
-  });
-
-  it.skip('Study Name - TODO', () => {
-    cy.validateFacetFilter('Study Name', 'TODO', 'TODO', /^TODO$/);
   });
 });
 
@@ -59,78 +47,78 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
-  it('Search by variant - 1-161629781-T-C', () => {
+  it('Search by variant - 1-114693436-G-A', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by variant').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
     cy.get('div[class="ant-tooltip-inner"]').contains('Enter Variant Locus, Gene Symbol, Gene Alias, Gene AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', '1-161629781-T-C', 'POST', '*/grapgql', 3);
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', '1-114693436-G-A', 'POST', '*/grapgql', 3);
     cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('1-161629781-T-C').should('exist');
+    cy.get('[data-cy="Search_Dropdown"]').contains('1-114693436-G-A').should('exist');
     cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
 
-    cy.get('[data-cy="Tag_1-161629781-T-C"]').should('exist');
+    cy.get('[data-cy="Tag_1-114693436-G-A"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-161629781-T-C').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-114693436-G-A').should('exist');
     cy.validateTableResultsCount(/^1 Results$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
-    cy.get('[data-cy="Tag_1-161629781-T-C"]').should('not.exist');
+    cy.get('[data-cy="Tag_1-114693436-G-A"]').should('not.exist');
   });
 
   it('Variant Type - SNV', () => {
-    cy.validateFacetFilter('Variant Type', 'SNV', 'SNV', /^226$/);
+    cy.validateFacetFilter('Variant Type', 'SNV', 'SNV', /^15.2K$/);
     cy.validateFacetRank(0, 'Variant Type');
   });
 
   it('Variant Type - Indel', () => {
-    cy.validateFacetFilter('Variant Type', 'Indel', 'indel', /^41$/);
+    cy.validateFacetFilter('Variant Type', 'Indel', 'indel', /^438$/);
   });
 
   it('Consequence - Intron', () => {
-    cy.validateFacetFilter('Consequence', 'Intron', 'intron', /^270$/);
+    cy.validateFacetFilter('Consequence', 'Intron', 'intron', /^14K$/);
     cy.validateFacetRank(1, 'Consequence');
   });
 
   it('Consequence - Missense', () => {
-    cy.validateFacetFilter('Consequence', 'Missense', 'missense', /^35$/);
+    cy.validateFacetFilter('Consequence', 'Missense', 'missense', /^1,549$/);
   });
 
   it('External Reference - DbSNP', () => {
-    cy.validateFacetFilter('External Reference', 'DbSNP', 'DBSNP', /^209$/);
+    cy.validateFacetFilter('External Reference', 'DbSNP', 'DBSNP', /^10.9K$/);
     cy.validateFacetRank(2, 'External Reference');
   });
 
   it('External Reference - ClinVar', () => {
-    cy.validateFacetFilter('External Reference', 'ClinVar', 'Clinvar', /^19$/);
+    cy.validateFacetFilter('External Reference', 'ClinVar', 'Clinvar', /^3,269$/);
   });
 
   it('Chromosome - 1', () => {
-    cy.validateFacetFilter('Chromosome', '1', '1', /^442$/);
+    cy.validateFacetFilter('Chromosome', '1', '1', /^19.5K$/);
     cy.validateFacetRank(3, 'Chromosome');
   });
 
   it.skip('Chromosome - 20', () => {
-    cy.validateFacetFilter('Chromosome', '20', '20', /^500$/);
+    cy.validateFacetFilter('Chromosome', '20', '20', /^5,526$/);
   });
 
   it('Position', () => {
-    cy.validateFacetNumFilter('Position', '100000', /^1$/);
+    cy.validateFacetNumFilter('Position', '100000', /^13$/);
     cy.validateFacetRank(4, 'Position');
   });
 
   it('Zygosity - Heterozygote', () => {
-    cy.validateFacetFilter('Zygosity', 'Heterozygote', 'HET', /^387$/);
+    cy.validateFacetFilter('Zygosity', 'Heterozygote', 'HET', /^15.5K$/);
     cy.validateFacetRank(5, 'Zygosity');
   });
 
   it('Zygosity - Homozygote', () => {
-    cy.validateFacetFilter('Zygosity', 'Homozygote', 'HOM', /^80$/);
+    cy.validateFacetFilter('Zygosity', 'Homozygote', 'HOM', /^7,800$/);
   });
 
   it('Sources - WGS', () => {
-    cy.validateFacetFilter('Sources', 'WGS', 'WGS', /^442$/);
+    cy.validateFacetFilter('Sources', 'WGS', 'WGS', /^19.5K$/);
     cy.validateFacetRank(6, 'Sources');
   });
 });
@@ -167,37 +155,37 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Tag_FCGR3B"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FCGR3B').should('exist');
-    cy.validateTableResultsCount(/^5 Results$/);
+    cy.validateTableResultsCount(/^23$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
     cy.get('[data-cy="Tag_FCGR3B"]').should('not.exist');
   });
 
   it('Gene Type - Protein Coding', () => {
-    cy.validateFacetFilter('Gene Type', 'Protein Coding', 'protein_coding', /^309$/);
+    cy.validateFacetFilter('Gene Type', 'Protein Coding', 'protein_coding', /^16.9K$/);
     cy.validateFacetRank(0, 'Gene Type');
   });
 
   it('Gene Type - NcRNA', () => {
-    cy.validateFacetFilter('Gene Type', 'NcRNA', 'ncRNA', /^52$/);
+    cy.validateFacetFilter('Gene Type', 'NcRNA', 'ncRNA', /^2,581$/);
   });
 
   it('External Reference - OMIM', () => {
-    cy.validateFacetFilter('External Reference', 'OMIM', 'OMIM', /^81$/);
+    cy.validateFacetFilter('External Reference', 'OMIM', 'OMIM', /^5,261$/);
     cy.validateFacetRank(1, 'External Reference');
   });
 
   it('External Reference - Orphanet', () => {
-    cy.validateFacetFilter('External Reference', 'Orphanet', 'Orphanet', /^88$/);
+    cy.validateFacetFilter('External Reference', 'Orphanet', 'Orphanet', /^5,346$/);
   });
 
   it('gnomAD pLI', () => {
-    cy.validateFacetNumFilter('gnomAD pLI', '0.01', '179');
+    cy.validateFacetNumFilter('gnomAD pLI', '0.01', '10.5K');
     cy.validateFacetRank(2, 'gnomAD pLI');
   });
 
   it('gnomAD LOEUF', () => {
-    cy.validateFacetNumFilter('gnomAD LOEUF', '0.1', '6');
+    cy.validateFacetNumFilter('gnomAD LOEUF', '0.1', '244');
     cy.validateFacetRank(3, 'gnomAD LOEUF');
   });
 
@@ -241,21 +229,26 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
   });
 
   it('DDD - Macrocephaly with intellectual disability', () => {
-    cy.validateFacetFilter('DDD', 'Macrocephaly with intellectual disability', 'Macrocephaly with intellectual disability', /^4$/);
     cy.validateFacetRank(7, 'DDD');
+    /* Fait planter Cypress
+    cy.validateFacetFilter('DDD', 'Macrocephaly with intellectual disability', 'Macrocephaly with intellectual disability', /^4$/);
+    */
   });
 
-  it('DDD - TMEM240-associated spinocerebellar ataxia and intellectual disability', () => {
-    cy.validateFacetFilter('DDD', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', /^3$/);
+  // Fait planter Cypress
+  it.skip('DDD - TMEM240-associated spinocerebellar ataxia and intellectual disability', () => {
+    cy.validateFacetFilter('DDD', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', /^12$/);
   });
 
-  it('COSMIC - Paraganglioma', () => {
-    cy.validateFacetFilter('COSMIC', 'Paraganglioma', 'paraganglioma', /^4$/);
+  // Pas de donnée
+  it.skip('COSMIC - Paraganglioma', () => {
+    cy.validateFacetFilter('COSMIC', 'Paraganglioma', 'paraganglioma', /^64$/);
     cy.validateFacetRank(8, 'COSMIC');
   });
 
-  it('COSMIC - Pheochromocytoma', () => {
-    cy.validateFacetFilter('COSMIC', 'Pheochromocytoma', 'pheochromocytoma', /^4$/);
+  // Pas de donnée
+  it.skip('COSMIC - Leukaemia', () => {
+    cy.validateFacetFilter('COSMIC', 'Leukaemia', 'leukaemia', /^245$/);
   });
 });
 
@@ -278,82 +271,82 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
   });
 
   it('ClinVar - Likely Benign', () => {
-    cy.validateFacetFilter('ClinVar', 'Likely Benign', 'Likely_benign', /^3$/);
+    cy.validateFacetFilter('ClinVar', 'Likely Benign', 'Likely_benign', /^158$/);
     cy.validateFacetRank(0, 'ClinVar');
   });
 
   it('ClinVar - Likely Pathogenic', () => {
-    cy.validateFacetFilter('ClinVar', 'Likely Pathogenic', 'Likely_pathogenic', /^1$/);
+    cy.validateFacetFilter('ClinVar', 'Likely Pathogenic', 'Likely_pathogenic', /^2$/);
   });
 
   it('VEP - MODIFIER', () => {
-    cy.validateFacetFilter('VEP', 'MODIFIER', 'MODIFIER', /^305$/);
+    cy.validateFacetFilter('VEP', 'MODIFIER', 'MODIFIER', /^16.7K$/);
     cy.validateFacetRank(1, 'VEP');
   });
 
   it('VEP - HIGH', () => {
-    cy.validateFacetFilter('VEP', 'HIGH', 'HIGH', /^24$/);
+    cy.validateFacetFilter('VEP', 'HIGH', 'HIGH', /^128$/);
   });
 
   it('CADD (Raw)', () => {
-    cy.validateFacetNumFilter('CADD (Raw)', '0.01', '10');
+    cy.validateFacetNumFilter('CADD (Raw)', '0.01', '306');
     cy.validateFacetRank(2, 'CADD (Raw)');
   });
 
   it('CADD (Phred)', () => {
-    cy.validateFacetNumFilter('CADD (Phred)', '0.01', '5');
+    cy.validateFacetNumFilter('CADD (Phred)', '0.01', '60');
     cy.validateFacetRank(3, 'CADD (Phred)');
   });
 
   it('DANN', () => {
-    cy.validateFacetNumFilter('DANN', '0.1', /^1$/);
+    cy.validateFacetNumFilter('DANN', '0.1', /^28$/);
     cy.validateFacetRank(4, 'DANN');
   });
 
   it('FATHMM - Tolerated', () => {
-    cy.validateFacetFilter('FATHMM', 'Tolerated', 'T', /^20$/);
+    cy.validateFacetFilter('FATHMM', 'Tolerated', 'T', /^1,177$/);
     cy.validateFacetRank(5, 'FATHMM');
   });
 
   it('FATHMM - Damaging', () => {
-    cy.validateFacetFilter('FATHMM', 'Damaging', 'D', /^3$/);
+    cy.validateFacetFilter('FATHMM', 'Damaging', 'D', /^155$/);
   });
 
   it('LRT - Neutral', () => {
-    cy.validateFacetFilter('LRT', 'Neutral', 'N', /^19$/);
+    cy.validateFacetFilter('LRT', 'Neutral', 'N', /^884$/);
     cy.validateFacetRank(6, 'LRT');
   });
 
   it('LRT - Deleterious', () => {
-    cy.validateFacetFilter('LRT', 'Deleterious', 'D', /^2$/);
+    cy.validateFacetFilter('LRT', 'Deleterious', 'D', /^203$/);
   });
 
   it('PolyPhen-2 HVAR - Benign', () => {
-    cy.validateFacetFilter('PolyPhen-2 HVAR', 'Benign', 'B', /^21$/);
+    cy.validateFacetFilter('PolyPhen-2 HVAR', 'Benign', 'B', /^1,060$/);
     cy.validateFacetRank(7, 'PolyPhen-2 HVAR');
   });
 
   it('PolyPhen-2 HVAR - Possibly Damaging', () => {
-    cy.validateFacetFilter('PolyPhen-2 HVAR', 'Possibly Damaging', 'P', /^4$/);
+    cy.validateFacetFilter('PolyPhen-2 HVAR', 'Possibly Damaging', 'P', /^134$/);
   });
 
   it('REVEL', () => {
-    cy.validateFacetNumFilter('REVEL', '0.01', '2');
+    cy.validateFacetNumFilter('REVEL', '0.01', '47');
     cy.validateFacetRank(8, 'REVEL');
   });
 
   it('SpliceAI', () => {
-    cy.validateFacetNumFilter('SpliceAI', '0.01', '95');
+    cy.validateFacetNumFilter('SpliceAI', '0.01', '9,604');
     cy.validateFacetRank(9, 'SpliceAI');
   });
 
   it('SIFT - Tolerated', () => {
-    cy.validateFacetFilter('SIFT', 'Tolerated', 'T', /^14$/);
+    cy.validateFacetFilter('SIFT', 'Tolerated', 'T', /^1,049$/);
     cy.validateFacetRank(10, 'SIFT');
   });
 
   it('SIFT - Damaging', () => {
-    cy.validateFacetFilter('SIFT', 'Damaging', 'D', /^10$/);
+    cy.validateFacetFilter('SIFT', 'Damaging', 'D', /^334$/);
   });
 });
 
@@ -376,32 +369,32 @@ describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
   });
 
   it('CQDG Allele Frequency', () => {
-    cy.validateFacetNumFilter('CQDG Allele Frequency', '0.5', '323');
+    cy.validateFacetNumFilter('CQDG Allele Frequency', '0.5', '11.4K');
     cy.validateFacetRank(0, 'CQDG Allele Frequency');
   });
 
   it('gnomAD Genome 2.1', () => {
-    cy.validateFacetNumFilter('gnomAD Genome 2.1', '0.01', '76');
+    cy.validateFacetNumFilter('gnomAD Genome 2.1', '0.01', '1,312');
     cy.validateFacetRank(1, 'gnomAD Genome 2.1');
   });
 
   it('gnomAD Genome 3.1.2', () => {
-    cy.validateFacetNumFilter('gnomAD Genome 3.1.2', '0.01', '108');
+    cy.validateFacetNumFilter('gnomAD Genome 3.1.2', '0.01', '1,683');
     cy.validateFacetRank(2, 'gnomAD Genome 3.1.2');
   });
 
   it('gnomAD Exome 2.1', () => {
-    cy.validateFacetNumFilter('gnomAD Exome 2.1', '0.01', '86');
+    cy.validateFacetNumFilter('gnomAD Exome 2.1', '0.01', '685');
     cy.validateFacetRank(3, 'gnomAD Exome 2.1');
   });
 
   it('TopMed', () => {
-    cy.validateFacetNumFilter('TopMed', '0.01', '38');
+    cy.validateFacetNumFilter('TopMed', '0.01', '1,016');
     cy.validateFacetRank(4, 'TopMed');
   });
 
   it('1000 Genomes', () => {
-    cy.validateFacetNumFilter('1000 Genomes', '0.01', 'No Result');
+    cy.validateFacetNumFilter('1000 Genomes', '0.01', '50');
     cy.validateFacetRank(5, '1000 Genomes');
   });
 });

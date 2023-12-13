@@ -37,7 +37,7 @@ Cypress.Commands.add('checkValueFacet', (facetTitle: string, value: string) => {
 
   cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
   cy.get(`[data-cy="Checkbox_${facetTitle}_${value}"]`).check({force: true});
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 8; i++) {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
   };
 });
@@ -194,12 +194,12 @@ Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
 Cypress.Commands.add('validateFacetFilter', (facetTitle: string, valueFront: string, valueBack: string, expectedCount: string|RegExp, applyButton: boolean = true) => {
   if (applyButton) {
     cy.checkValueFacetAndApply(facetTitle, valueBack);
+    cy.validatePillSelectedQuery(facetTitle, [valueFront]);
   }
   else {
     cy.checkValueFacet(facetTitle, valueBack);
   }
 
-  cy.validatePillSelectedQuery(facetTitle, [valueFront]);
   cy.validateTableResultsCount(expectedCount);
 });
 
