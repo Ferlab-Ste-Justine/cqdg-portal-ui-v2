@@ -468,8 +468,8 @@ const fr = {
       mappedTo: 'Correspond à',
       collapseTitle: 'Résumé ({matchCount} reconnus, {unMatchCount} inconnus)',
       inputLabel: 'Copier-coller une liste d’identifiants ou téléverser un fichier',
-      match: '({count}) correspondances',
-      unmatch: '({count}) sans correspondance',
+      match: '({count}) Reconnus',
+      unmatch: '({count}) Inconnus',
       tableMessage:
         '{submittedCount} identifiants soumis correspondant à {mappedCount} identifiants système uniques',
       matchTable: {
