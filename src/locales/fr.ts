@@ -461,18 +461,17 @@ const fr = {
       filePlaceholder: 'ex : FI0080837',
       gene: 'gene',
       geneID: 'Gene Symbol, Gene Alias, Ensembl ID',
-      genePlaceholder: 'e.g. FI0080837',
+      genePlaceholder: 'ex. ENSG00000157764, TP53',
       title: 'Téléverser une liste de {entity}s',
       submittedColTitle: 'Identifiants {entity} soumis',
       uploadBtnText: 'Téléverser une liste de {entity}s',
-      mappedTo: 'Orienté vers',
-      collapseTitle:
-        'Tableau récapitulatif ({matchCount} correspondant, {unMatchCount} non correspondant)',
-      inputLabel: "Copier-coller une liste d'identifiants ou télécharger un fichier",
+      mappedTo: 'Correspond à',
+      collapseTitle: 'Résumé ({matchCount} reconnus, {unMatchCount} inconnus)',
+      inputLabel: 'Copier-coller une liste d’identifiants ou téléverser un fichier',
       match: '({count}) correspondances',
       unmatch: '({count}) sans correspondance',
       tableMessage:
-        '{submittedCount} identifiants soumis mappés sur {mappedCount} identifiants système uniques',
+        '{submittedCount} identifiants soumis correspondant à {mappedCount} identifiants système uniques',
       matchTable: {
         idcol: 'ID {entity}',
         participant: {
@@ -489,15 +488,15 @@ const fr = {
         },
         gene: {
           matchcol: 'Ensembl ID',
-          mappedcol: 'Symbol',
+          mappedcol: 'Symbole',
         },
       },
       pillTitle: 'Liste téléchargée',
       upload: {
-        fileBtn: 'Télécharger un fichier',
-        btn: 'Télécharger',
+        fileBtn: 'Téléverser un fichier',
+        btn: 'Téléverser',
       },
-      clearBtn: 'Effacer',
+      clearBtn: 'Supprimer',
       cancelBtn: 'Annuler',
       emptyTable: 'Aucune donnée',
       popover: {

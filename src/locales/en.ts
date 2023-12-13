@@ -461,7 +461,7 @@ const en = {
       filePlaceholder: 'e.g. FI0080837',
       gene: 'gene',
       geneID: 'Gene Symbol, Gene Alias, Ensembl ID',
-      genePlaceholder: 'e.g. FI0080837',
+      genePlaceholder: 'e.g. ENSG00000157764, TP53',
       title: 'Upload a {entity} list',
       submittedColTitle: 'Submitted {entity} identifiers',
       uploadBtnText: 'Upload a {entity} list',
