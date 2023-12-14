@@ -4,7 +4,7 @@
 UNIQUE_CONFIG_FILENAME="config-$(date +%s).js"
 
 # Generate config.js with a unique filename
-cat <<EOF > "/usr/share/nginx/html/$UNIQUE_CONFIG_FILENAME"
+cat <<EOF > "/usr/share/nginx/html/static/js/$UNIQUE_CONFIG_FILENAME"
 window._env_ = {
   REACT_APP_ARRANGER_API_URL: "$REACT_APP_ARRANGER_API_URL",
   REACT_APP_ARRANGER_PROJECT_ID: "$REACT_APP_ARRANGER_PROJECT_ID",
