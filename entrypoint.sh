@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Generate a unique filename for config.js based on the current timestamp
-UNIQUE_CONFIG_FILENAME="config-$(date +%s).js"
+#UNIQUE_CONFIG_FILENAME="config-$(date +%s).js"
+UNIQUE_CONFIG_FILENAME="config.js"
 
 # Generate config.js with a unique filename
 cat <<EOF > "/usr/share/nginx/html/static/js/$UNIQUE_CONFIG_FILENAME"
@@ -22,7 +23,7 @@ window._env_ = {
 EOF
 
 # Dynamically update the index.html to reference the new unique config.js filename
-sed -i "s|config.js|$UNIQUE_CONFIG_FILENAME|" /usr/share/nginx/html/index.html
+#sed -i "s|config.js|$UNIQUE_CONFIG_FILENAME|" /usr/share/nginx/html/index.html
 
 # Start Nginx
 nginx -g "daemon off;"
