@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Generate a unique filename for config.js based on the current timestamp
+# Generate a unique filename for config.js based on the current timestamp to prevent cache issue
+# its disable for now: we dont see any cache issue yet
 #UNIQUE_CONFIG_FILENAME="config-$(date +%s).js"
 UNIQUE_CONFIG_FILENAME="config.js"
 
@@ -19,6 +20,7 @@ window._env_ = {
   REACT_APP_CQDG_DOCUMENTATION: "$REACT_APP_CQDG_DOCUMENTATION",
   REACT_APP_USER_SNAP_API_KEY: "$REACT_APP_USER_SNAP_API_KEY",
   REACT_APP_REPORTS_API_URL: "$REACT_APP_REPORTS_API_URL"
+  REACT_APP_IS_BETA: "$REACT_APP_IS_BETA"
 };
 EOF
 
