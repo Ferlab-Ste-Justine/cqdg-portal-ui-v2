@@ -35,6 +35,28 @@ export const GET_STUDIES = gql`
                 }
               }
             }
+            data_types {
+              hits {
+                total
+                edges {
+                  node {
+                    participant_count
+                    data_type
+                  }
+                }
+              }
+            }
+            experimental_strategies {
+              hits {
+                total
+                edges {
+                  node {
+                    file_count
+                    experimental_strategy
+                  }
+                }
+              }
+            }
             data_access_codes {
               access_limitations
               access_requirements

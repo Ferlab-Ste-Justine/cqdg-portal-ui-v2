@@ -16,7 +16,7 @@ export interface IStudyDataAccessCodes {
 interface IDataType {
   id: string;
   data_type: string;
-  participant_count: string;
+  participant_count: number;
 }
 
 export interface IDataSet {
@@ -31,6 +31,12 @@ export interface IDataSet {
 
 enum Security {
   R = 'R',
+}
+
+interface IExperimentalStrategy {
+  id: string;
+  experimental_strategy: string;
+  file_count: number;
 }
 
 export interface IStudyEntity {
@@ -48,7 +54,7 @@ export interface IStudyEntity {
   data_types: ArrangerResultsTree<IDataType>;
   data_categories: ArrangerResultsTree<IDataType>;
   data_access_codes: IStudyDataAccessCodes;
-  experimental_strategies: string[];
+  experimental_strategies: ArrangerResultsTree<IExperimentalStrategy>;
   family_count: number;
   family_data: boolean;
   release_id: string;
