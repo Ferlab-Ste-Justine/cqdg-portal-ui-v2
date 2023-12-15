@@ -37,7 +37,7 @@ const Studies = () => {
     <div className={styles.studiesExplorationLayout}>
       <SideBarFacet extendedMappingResults={studyMappingResults} filterInfo={filterInfo} />
       <ScrollContent id={SCROLL_WRAPPER_ID} className={styles.scrollContent}>
-        <PageContent studiesMapping={studyMappingResults} />
+        <PageContent />
       </ScrollContent>
     </div>
   );
