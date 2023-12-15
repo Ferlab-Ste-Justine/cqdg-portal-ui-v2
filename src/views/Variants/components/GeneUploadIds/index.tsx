@@ -22,7 +22,7 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
     entityId="gene"
     entityIdTrans={intl.get('components.uploadIds.gene')}
     entityIdentifiers={intl.get('components.uploadIds.geneID')}
-    placeHolder={intl.get('global.search.gene.placeholder')}
+    placeHolder={intl.get('components.uploadIds.genePlaceholder')}
     fetchMatch={async (ids: string[]) => {
       const response = await ArrangerApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
