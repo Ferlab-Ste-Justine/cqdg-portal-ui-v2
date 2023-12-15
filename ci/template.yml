@@ -73,3 +73,4 @@ jobs:
     params:
       build: git-portal-ui
       additional_tags: output/version
+      

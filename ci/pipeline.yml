@@ -58,7 +58,7 @@ resources:
   webhook_token: ((slack.webhook-url))
   source:
     uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
-    branch: {{branch}}
+    branch: main
     private_key: ((git.ssh-key))
     # ignore_paths: [ci/]
 
@@ -293,3 +293,4 @@ jobs:
           echo "$SSH_KEY" > id_rsa
           echo "$KNOWN_HOST" > known_host
           ./ferlease/rootfs/bin/ferlease teardown -c output/config.yml
+          
