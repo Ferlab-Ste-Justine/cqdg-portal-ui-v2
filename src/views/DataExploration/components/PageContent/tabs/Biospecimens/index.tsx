@@ -324,7 +324,7 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
               index: INDEXES.BIOSPECIMEN,
               headers: defaultCols,
               cols: userColumns,
-              rows: selectedRows,
+              rows: selectedRows?.length ? selectedRows : results.data,
             }),
           ),
         extra: [
