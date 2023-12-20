@@ -29,6 +29,8 @@ export const getCurrentUrl = () =>
   window.location.protocol + '//' + window.location.host + window.location.pathname;
 
 const KEBAB_REGEX = /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g;
+export const EMAIL_REGEX = new RegExp(/^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/);
+
 export const toKebabCase = (str: string) => {
   const match: string[] = (str && str.match(KEBAB_REGEX)) || [];
   return match.map((x: string) => x.toLowerCase()).join('-');
