@@ -125,7 +125,6 @@ export interface IParticipantEntity {
   mondo_tagged: ArrangerResultsTree<IMondoTagged>;
   observed_phenotypes: ArrangerResultsTree<IPhenotype>;
   observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
-  non_observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>;
   phenotypes_tagged: ArrangerResultsTree<IPhenotype>;
   icd_tagged: ArrangerResultsTree<IIcd>;
   biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
