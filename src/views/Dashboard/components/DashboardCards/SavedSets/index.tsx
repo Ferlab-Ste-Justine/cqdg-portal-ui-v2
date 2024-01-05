@@ -11,7 +11,6 @@ import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
-import PopoverContentLink from 'components/uiKit/PopoverContentLink';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedSet } from 'store/savedSet';
@@ -20,6 +19,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 import ListItem from './ListItem';
 
 import styles from './index.module.scss';
+
 const { Text } = Typography;
 
 const getItemList = (
@@ -49,7 +49,10 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.get('screen.dashboard.cards.savedSets.noSaved')}
+          description={intl.getHTML('screen.dashboard.cards.savedSets.noSaved', {
+            dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
+            variantsHref: STATIC_ROUTES.VARIANTS,
+          })}
         />
       ),
     }}
@@ -147,12 +150,10 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
             title: intl.get('screen.dashboard.cards.savedSets.popoverTitle'),
             content: (
               <Text>
-                {intl.get('screen.dashboard.cards.savedSets.popoverContent')}
-                <PopoverContentLink
-                  to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-                  title={intl.get('screen.dashboard.cards.savedSets.popoverContentLink')}
-                />
-                .
+                {intl.getHTML('screen.dashboard.cards.savedSets.popoverContent', {
+                  dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
+                  variantsHref: STATIC_ROUTES.VARIANTS,
+                })}
               </Text>
             ),
           }}

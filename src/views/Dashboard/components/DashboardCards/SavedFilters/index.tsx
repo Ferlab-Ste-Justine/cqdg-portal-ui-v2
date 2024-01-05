@@ -10,7 +10,6 @@ import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
-import PopoverContentLink from 'components/uiKit/PopoverContentLink';
 import { SavedFilterTag, TUserSavedFilter } from 'services/api/savedFilter/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedFilter } from 'store/savedFilter';
@@ -47,7 +46,10 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.get('screen.dashboard.cards.savedFilters.noSaved')}
+          description={intl.getHTML('screen.dashboard.cards.savedFilters.noSaved', {
+            dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
+            variantsHref: STATIC_ROUTES.VARIANTS,
+          })}
         />
       ),
     }}
@@ -105,12 +107,10 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
             title: intl.get('screen.dashboard.cards.savedFilters.popoverTitle'),
             content: (
               <Text>
-                {intl.get('screen.dashboard.cards.savedFilters.popoverContent')}
-                <PopoverContentLink
-                  to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
-                  title={intl.get('screen.dashboard.cards.savedFilters.popoverContentLink')}
-                />
-                .
+                {intl.getHTML('screen.dashboard.cards.savedFilters.popoverContent', {
+                  dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
+                  variantsHref: STATIC_ROUTES.VARIANTS,
+                })}
               </Text>
             ),
           }}
