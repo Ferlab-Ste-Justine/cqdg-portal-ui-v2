@@ -211,7 +211,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'une étude', () => {
-    cy.visitStudyEntity('T-DEE', 6);
+    cy.visitStudyEntity('T-DEE', 5);
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');

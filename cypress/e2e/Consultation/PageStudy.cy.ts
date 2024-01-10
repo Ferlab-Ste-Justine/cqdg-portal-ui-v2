@@ -3,7 +3,7 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
-  cy.visitStudyEntity('T-DEE', 6);
+  cy.visitStudyEntity('T-DEE', 5);
 });
 
 describe('Page d\'une étude - Valider les redirections', () => {
