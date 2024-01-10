@@ -29,7 +29,7 @@ const HeaderLink = ({
       className={cx(
         styles.headerBtn,
         className,
-        isActive(currentPathName, to) ? styles.active : '',
+        isActive(currentPathName, to) ? styles.headerBtnActive : '',
       )}
       icon={icon}
       data-cy={`HeaderLink_${title}`}
