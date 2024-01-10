@@ -173,22 +173,6 @@ export const GET_PARTICIPANTS = gql`
                 }
               }
             }
-            non_observed_phenotype_tagged {
-              hits {
-                total
-                edges {
-                  node {
-                    age_at_event
-                    internal_phenotype_id
-                    is_leaf
-                    is_tagged
-                    name
-                    parents
-                    source_text
-                  }
-                }
-              }
-            }
             diagnoses {
               hits {
                 total

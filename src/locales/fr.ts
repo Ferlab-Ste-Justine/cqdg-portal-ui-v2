@@ -281,7 +281,7 @@ const fr = {
           'Entrer un Locus de Variant, Symbole de gène, Alias de gène, Gène AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
       },
       study: {
-        emptyText: 'Aucune étude trouvé',
+        emptyText: 'Aucune étude trouvée',
         placeholder: 'ex : T-DEE, Developmental and Epileptic Encephalopathies',
         title: 'Recherche par étude',
         tooltip: 'Recherche par code, nom ou domaine de l’étude',
