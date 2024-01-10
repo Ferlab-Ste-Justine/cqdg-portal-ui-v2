@@ -58,12 +58,10 @@ const StudyEntity = () => {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
-    ...[
-      !isRestricted && {
-        href: `#${SectionId.DATA_FILE}`,
-        title: intl.get('entities.file.datafile'),
-      },
-    ],
+    {
+      href: `#${SectionId.DATA_FILE}`,
+      title: intl.get('entities.file.datafile'),
+    },
     ...[
       study?.datasets && {
         href: `#${SectionId.DATASET}`,
@@ -136,7 +134,7 @@ const StudyEntity = () => {
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-      {!isRestricted && <FilesTable id={SectionId.DATA_FILE} study_code={study_code} />}
+      <FilesTable id={SectionId.DATA_FILE} study={study} loading={loading} />
       {study?.datasets && (
         <Datasets
           id={SectionId.DATASET}

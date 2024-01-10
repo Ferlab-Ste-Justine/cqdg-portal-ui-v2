@@ -6,7 +6,6 @@ import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQuery
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { Progress } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { IFileEntity } from 'graphql/files/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -18,45 +17,6 @@ interface IFileInfoByType {
   nb_files: number;
   proportion_of_files: number;
 }
-
-/** Join files by data_type */
-export const getFilesDataTypeInfo = (files: IFileEntity[]) => {
-  const filesInfosData: IFileInfoByType[] = [];
-  for (const file of files) {
-    const filesFound = files.filter(({ data_type }) => data_type === file.data_type);
-    if (!filesInfosData.find((f) => f.value === file.data_type)) {
-      filesInfosData.push({
-        key: file.data_type,
-        value: file.data_type,
-        nb_files: filesFound.length,
-        proportion_of_files: (filesFound.length / files.length) * 100,
-      });
-    }
-  }
-  return filesInfosData;
-};
-
-/** Join files by sequencing_experiment key (ex: experimental_strategy) */
-export const getFilesInfoByKey = (files: IFileEntity[], key: string) => {
-  const filesInfosData: IFileInfoByType[] = [];
-  for (const file of files) {
-    // @ts-ignore
-    const valueOfKey: string = file.sequencing_experiment[key];
-    const filesFound = files.filter(
-      // @ts-ignore
-      ({ sequencing_experiment }) => sequencing_experiment[key] === valueOfKey,
-    );
-    if (!filesInfosData.find((file) => file.value === valueOfKey)) {
-      filesInfosData.push({
-        key: valueOfKey,
-        value: valueOfKey,
-        nb_files: filesFound.length,
-        proportion_of_files: (filesFound.length / files.length) * 100,
-      });
-    }
-  }
-  return filesInfosData;
-};
 
 export const getExperimentalStrategyColumns = (
   files_nb: number,
