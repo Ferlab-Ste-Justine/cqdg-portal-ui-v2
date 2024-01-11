@@ -284,6 +284,18 @@ const SunburstD3 = (
             .style('font-weight', '400');
         }
 
+        if (words.length === 0 && line.length >= 1) {
+          const newTSpan = centerText.append('tspan');
+          newTSpan
+            .attr('x', 0)
+            .attr('y', y)
+            .attr('dy', ++lineNumber * lineHeight + dy + 'em')
+            .style('font-size', '14px')
+            .style('font-weight', '600')
+            .text(line.join(' '))
+            .attr('fill', '#2b388f');
+        }
+
         //** - 20 ** with compensation for font size
         if (tspan.node().getComputedTextLength() > width - WITH_FONT_COMPENSATION) {
           line.pop();
@@ -301,17 +313,6 @@ const SunburstD3 = (
           line = [word];
         }
 
-        if (words.length === 0 && line.length >= 1) {
-          const newTSpan = centerText.append('tspan');
-          newTSpan
-            .attr('x', 0)
-            .attr('y', y)
-            .attr('dy', ++lineNumber * lineHeight + dy + 'em')
-            .style('font-size', '14px')
-            .style('font-weight', '600')
-            .text(line.join(' '))
-            .attr('fill', '#2b388f');
-        }
         tspan.text(''); // cleanup remaining parent text before quiting
       }
     });
