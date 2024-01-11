@@ -247,7 +247,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('ethics approval required').should('not.exist');
   });
 
-  it('Lien de l\'Access Authority du panneau Data Access [CQDG-267]', () => {
+  it('Lien de l\'Access Authority du panneau Data Access', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(2).find('[href]')
       .should('have.attr', 'href', 'mailto:jacques.michaud.med@ssss.gouv.qc.ca');
   });

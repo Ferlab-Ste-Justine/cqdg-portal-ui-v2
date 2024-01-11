@@ -162,7 +162,7 @@ describe('Page d\'une étude - Valider les liens disponibles', () => {
       .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/DUO_0000016');
   });
 
-  it('Lien de l\'Access Authority du panneau Data Access [CQDG-267]', () => {
+  it('Lien de l\'Access Authority du panneau Data Access', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(2).find('[href]')
       .should('have.attr', 'href', 'mailto:jacques.michaud.med@ssss.gouv.qc.ca');
   });

@@ -7,6 +7,7 @@ import capitalize from 'lodash/capitalize';
 import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { EMAIL_REGEX } from 'utils/helper';
 
 import styles from '../index.module.scss';
 
@@ -80,7 +81,14 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
   {
     label: intl.get('entities.study.access_authority'),
     value: study?.contact?.value ? (
-      <ExternalLink href={study.contact.value} className={styles.link}>
+      <ExternalLink
+        href={
+          EMAIL_REGEX.test(study.contact.value)
+            ? `mailto:${study.contact.value}`
+            : study.contact.value
+        }
+        className={styles.link}
+      >
         {study.contact.value}
       </ExternalLink>
     ) : (
