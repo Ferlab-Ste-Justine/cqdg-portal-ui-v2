@@ -7,6 +7,8 @@ import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
+import { EMAIL_REGEX } from '../../../utils/helper';
+
 import styles from '../index.module.scss';
 
 const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
@@ -79,7 +81,14 @@ const getDataAccessDescriptions = (participant?: IParticipantEntity): IEntityDes
   {
     label: intl.get('entities.study.access_authority'),
     value: participant?.study?.contact?.value ? (
-      <ExternalLink href={participant.study.contact.value} className={styles.link}>
+      <ExternalLink
+        href={
+          EMAIL_REGEX.test(participant.study.contact.value)
+            ? `mailto:${participant.study.contact.value}`
+            : participant.study.contact.value
+        }
+        className={styles.link}
+      >
         {participant.study.contact.value}
       </ExternalLink>
     ) : (
