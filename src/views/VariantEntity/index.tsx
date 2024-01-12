@@ -65,6 +65,15 @@ const VariantEntity = () => {
     key: e.node.study_code,
   }));
 
+  const variantStudyFrequencies = (data?.study_frequencies_wgs?.hits?.edges || []).map(
+    (e) => e.node,
+  );
+
+  const variantStudyWithFrequencies = variantStudies.map((vs) => ({
+    ...vs,
+    total: variantStudyFrequencies.find((vf) => vf.study_code === vs.study_code)?.total || {},
+  }));
+
   return (
     <EntityPageWrapper
       pageId="variant-entity-page"
@@ -102,7 +111,7 @@ const VariantEntity = () => {
         <EntityTable
           id={SectionId.FREQUENCIES}
           columns={getFrequenciesItems()}
-          data={variantStudies}
+          data={variantStudyWithFrequencies}
           title={intl.get('entities.variant.frequencies.frequency')}
           header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
