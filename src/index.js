@@ -1,7 +1,7 @@
 // Import css before everything to make sure it is applied correctly
 import React from 'react';
-import ReactDOM from 'react-dom';
 
+// import ReactDOM from 'react-dom';
 import { initUserSnap } from 'services/initUsersnap';
 
 import App from './App';
@@ -13,12 +13,18 @@ import './index.css';
 
 initUserSnap();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+// eslint-disable-next-line react/no-deprecated
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root'),
+// );
+
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
