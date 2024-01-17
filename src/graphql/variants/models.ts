@@ -200,6 +200,7 @@ export interface IVariantEntity {
   genes: IArrangerResultsTree<IGeneEntity>;
   internal_frequencies_wgs: IVariantInternalFrequencies;
   studies: IArrangerResultsTree<IVariantStudyEntity>;
+  study_frequencies_wgs: IArrangerResultsTree<IVariantStudyFrequencies>;
 }
 
 export interface IVariantStudyEntity {
@@ -208,8 +209,11 @@ export interface IVariantStudyEntity {
   study_code: string;
   study_id: string;
   zygosity: string[];
-  total: IBoundType;
   domain: string;
+}
+
+export interface IVariantStudyFrequencies extends IVariantStudyEntity {
+  total: IBoundType;
 }
 
 export type ITableVariantEntity = IVariantEntity & {

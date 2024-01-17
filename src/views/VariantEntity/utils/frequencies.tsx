@@ -12,7 +12,7 @@ import {
 import { Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { useStudy } from 'graphql/studies/actions';
-import { IVariantEntity, IVariantStudyEntity } from 'graphql/variants/models';
+import { IVariantEntity, IVariantStudyFrequencies } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -60,7 +60,8 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     title: intl.get('entities.study.domain'),
     key: 'domain',
     width: '14%',
-    render: (study: IVariantStudyEntity) => study && <StudyDomain study_code={study.study_code} />,
+    render: (study: IVariantStudyFrequencies) =>
+      study && <StudyDomain study_code={study.study_code} />,
   },
   {
     title: intl.get('entities.variant.frequencies.participants'),
@@ -75,27 +76,27 @@ export const getFrequenciesItems = (): ProColumnType[] => [
       </Space>
     ),
     key: 'participants',
-    render: (row: IVariantStudyEntity) =>
+    render: (row: IVariantStudyFrequencies) =>
       formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     title: intl.get('entities.variant.frequencies.frequency'),
     tooltip: intl.get('entities.variant.frequencies.frequencyTooltip'),
     key: 'frequency',
-    render: (row: IVariantStudyEntity) => toExponentialNotation(row.total.af),
+    render: (row: IVariantStudyFrequencies) => toExponentialNotation(row.total.af),
   },
   {
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
     key: 'alt',
-    render: (row: IVariantStudyEntity) => (row.total?.ac ? numberFormat(row.total.ac) : 0),
+    render: (row: IVariantStudyFrequencies) => (row.total?.ac ? numberFormat(row.total.ac) : 0),
     width: '14%',
   },
   {
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),
     key: 'hom',
-    render: (row: IVariantStudyEntity) => (row.total?.hom ? numberFormat(row.total?.hom) : 0),
+    render: (row: IVariantStudyFrequencies) => (row.total?.hom ? numberFormat(row.total?.hom) : 0),
     width: '14%',
   },
 ];

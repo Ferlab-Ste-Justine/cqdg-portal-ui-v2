@@ -225,15 +225,6 @@ export const SEARCH_VARIANT_QUERY = gql`
                   node {
                     study_code
                     study_id
-                    total {
-                      ac
-                      pc
-                      hom
-                      pn
-                      an
-                      af
-                      pf
-                    }
                     zygosity
                   }
                 }
@@ -473,6 +464,18 @@ export const GET_VARIANT_ENTITY = gql`
                   node {
                     study_code
                     study_id
+                    zygosity
+                  }
+                }
+              }
+            }
+            study_frequencies_wgs {
+              hits {
+                total
+                edges {
+                  node {
+                    study_code
+                    study_id
                     total {
                       ac
                       pc
@@ -482,7 +485,6 @@ export const GET_VARIANT_ENTITY = gql`
                       af
                       pf
                     }
-                    zygosity
                   }
                 }
               }
