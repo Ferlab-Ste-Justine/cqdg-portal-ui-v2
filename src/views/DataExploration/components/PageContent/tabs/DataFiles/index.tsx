@@ -123,7 +123,7 @@ const getDefaultColumns = (): IProColumnExport[] => [
   },
   {
     key: 'sequencing_experiment.experimental_strategy',
-    title: intl.get('screen.dataExploration.tabs.datafiles.experimentalStrategy'),
+    title: intl.get('screen.dataExploration.tabs.datafiles.strategy'),
     dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
     exportValue: (row) => row?.sequencing_experiment?.experimental_strategy || '--',

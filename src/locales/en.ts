@@ -1001,6 +1001,7 @@ const en = {
           study_code: 'Study',
           dataCategory: 'Data Category',
           dataType: 'Data Type',
+          strategy: 'Strategy',
           experimentalStrategy: 'Experimental Strategy',
           accessUrl: 'Access Url',
           format: 'Format',

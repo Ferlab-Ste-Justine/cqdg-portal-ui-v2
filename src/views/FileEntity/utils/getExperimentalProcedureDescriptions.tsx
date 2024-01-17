@@ -10,7 +10,7 @@ import styles from 'views/FileEntity/index.module.scss';
 
 const getExperimentalProcedureDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
+    label: intl.get('screen.dataExploration.tabs.datafiles.strategy'),
     value: (
       <Tag className={styles.tag}>
         {file?.sequencing_experiment?.experimental_strategy || TABLE_EMPTY_PLACE_HOLDER}
