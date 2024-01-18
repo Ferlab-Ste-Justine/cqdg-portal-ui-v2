@@ -34,7 +34,6 @@
   text-decoration: none !important;
 }
 
-.whiteSpace {
-  white-space: pre;
-  text-wrap: inherit !important;
+.whiteSpace:not(:last-child) {
+   padding-bottom: 10px;
 }

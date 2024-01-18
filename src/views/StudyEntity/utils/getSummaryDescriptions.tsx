@@ -49,8 +49,11 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   {
     label: intl.get('entities.study.description'),
     value:
-      <div className={styles.whiteSpace}>{study?.description?.replaceAll('|', '\n\n')}</div> ||
-      TABLE_EMPTY_PLACE_HOLDER,
+      study?.description.split('|').map((desc, index) => (
+        <div key={index} className={styles.whiteSpace}>
+          {desc}
+        </div>
+      )) || TABLE_EMPTY_PLACE_HOLDER,
   },
 ];
 
