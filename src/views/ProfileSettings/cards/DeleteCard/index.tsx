@@ -37,7 +37,11 @@ const DeleteCard = () => {
           {intl.get('screen.profileSettings.cards.deleteAccount.button')}
         </Button>
       }
-      content={<Text>{intl.get('screen.profileSettings.cards.deleteAccount.notice')}</Text>}
+      content={
+        <Text>
+          {intl.get('screen.profileSettings.cards.deleteAccount.notice', { project: 'CQDG' })}
+        </Text>
+      }
     />
   );
 };

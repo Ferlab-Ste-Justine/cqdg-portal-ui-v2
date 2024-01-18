@@ -113,7 +113,7 @@ const VariantEntity = () => {
           columns={getFrequenciesItems()}
           data={variantStudyWithFrequencies}
           title={intl.get('entities.variant.frequencies.frequency')}
-          header={intl.get('entities.study.CQDGStudies')}
+          header={intl.get('entities.study.projectStudies', { project: 'CQDG' })}
           loading={loading}
           summaryColumns={getFrequenciesTableSummaryColumns(data)}
           emptyMessage={intl.get('api.noData')}

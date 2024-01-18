@@ -64,7 +64,7 @@ const DownloadFileManifestModal = ({
         className={styles.modal}
         data-cy="FileManifest_Modal"
       >
-        <p>{intl.get('api.report.fileManifest.text')}</p>
+        <p>{intl.get('api.report.fileManifest.text', { project: 'CQDG' })}</p>
         <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
         <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
           {intl.get('api.report.fileManifest.textCheckbox')}

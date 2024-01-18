@@ -140,8 +140,12 @@ export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns
           {
             label: (
               <>
-                {intl.get('entities.study.CQDGStudies')}{' '}
-                <Tooltip title={intl.get('entities.variant.frequencies.frequencyTooltip')}>
+                {`CQDG ${intl.get('entities.study.studies')} `}
+                <Tooltip
+                  title={intl.get('entities.variant.frequencies.frequencyTooltip', {
+                    project: 'CQDG',
+                  })}
+                >
                   <InfoCircleOutlined className={styles.infoIcon} />
                 </Tooltip>
               </>

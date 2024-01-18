@@ -55,7 +55,7 @@ const CommunityPage = () => {
   return (
     <Space direction="vertical" size={24} className={styles.communityWrapper}>
       <Title className={styles.title} level={4} data-cy="Title_Community">
-        {intl.get('screen.community.title')}
+        {`CQDG ${intl.get('screen.community.title')}`}
       </Title>
       <FiltersBox
         onMatchFilterChange={debounce((match) => onMatchFilterChange(match), 300)}

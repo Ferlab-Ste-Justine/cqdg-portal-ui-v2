@@ -214,7 +214,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'internal_frequencies_wgs.total.pc',
     title: intl.get('entities.variant.participant.title'),
-    tooltip: intl.get('entities.variant.participant.tooltip'),
+    tooltip: intl.get('entities.variant.participant.tooltip', { project: 'CQDG' }),
     dataIndex: 'internal_frequencies_wgs',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.pc || 0,
@@ -222,7 +222,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'internal_frequencies_wgs.total.af',
     title: intl.get('entities.variant.frequence.title'),
-    tooltip: intl.get('entities.variant.frequence.tooltip'),
+    tooltip: intl.get('entities.variant.frequence.tooltip', { project: 'CQDG' }),
     dataIndex: 'internal_frequencies_wgs',
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af)

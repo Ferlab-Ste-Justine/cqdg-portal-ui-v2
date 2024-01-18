@@ -410,7 +410,9 @@ export const getFacetsDictionary = () => ({
     thousand_genomes: { af: '1000 Genomes' },
   },
   internal_frequencies_wgs: {
-    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af') },
+    total: {
+      af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af', { project: 'CQDG' }),
+    },
   },
   frequencies: {
     internal: {
@@ -482,7 +484,9 @@ export const getFacetsDictionary = () => ({
 
 export const getResizableGridDictionary = () => ({
   download: {
-    fileNameTemplate: intl.get('screen.dataExploration.tabs.summary.download.fileNameTemplate'),
+    fileNameTemplate: intl.get('screen.dataExploration.tabs.summary.download.fileNameTemplate', {
+      project: 'CQDG',
+    }),
     fileNameDateFormat: intl.get('screen.dataExploration.tabs.summary.download.fileNameDateFormat'),
     download: intl.get('screen.dataExploration.tabs.summary.download.download'),
     data: intl.get('screen.dataExploration.tabs.summary.download.data'),

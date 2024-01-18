@@ -69,7 +69,7 @@ export const getFrequenciesItems = (): ProColumnType[] => [
       <Space>
         <Tooltip
           className={styles.dotted}
-          title={intl.get('entities.variant.frequencies.participantsTooltip')}
+          title={intl.get('entities.variant.frequencies.participantsTooltip', { project: 'CQDG' })}
         >
           {intl.get('entities.variant.frequencies.participants')}
         </Tooltip>
@@ -81,7 +81,7 @@ export const getFrequenciesItems = (): ProColumnType[] => [
   },
   {
     title: intl.get('entities.variant.frequencies.frequency'),
-    tooltip: intl.get('entities.variant.frequencies.frequencyTooltip'),
+    tooltip: intl.get('entities.variant.frequencies.frequencyTooltip', { project: 'CQDG' }),
     key: 'frequency',
     render: (row: IVariantStudyFrequencies) => toExponentialNotation(row.total.af),
   },
