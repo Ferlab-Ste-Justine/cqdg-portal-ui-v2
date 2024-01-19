@@ -22,7 +22,7 @@ const SummaryTab = () => {
         uid={UID}
         defaultLayouts={getSummaryLayout()}
         dictionary={getResizableGridDictionary()}
-        layouts={userInfo?.config.data_exploration?.summary?.layouts}
+        layouts={userInfo?.config.data_exploration?.summary?.layouts || getSummaryLayout()}
         onReset={(layouts: TSerializedResizableGridLayoutConfig[]) => {
           dispatch(updateUserConfig({ data_exploration: { summary: { layouts } } }));
         }}
