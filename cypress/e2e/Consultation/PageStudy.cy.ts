@@ -107,8 +107,8 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(1).contains(/^588$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
 
-    cy.get('[id="data_file"]').find('[class*="EntityTable_subTitle"]').eq(1).contains('File counts by Experimental Strategy').should('exist');
-    cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Experimental Strategy').should('exist');
+    cy.get('[id="data_file"]').find('[class*="EntityTable_subTitle"]').eq(1).contains('File counts by Strategy').should('exist');
+    cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Strategy').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Files').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(1).find('thead').find('th[class="ant-table-cell"]').eq(2).contains('(n=2940)').should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(1).contains(/^2940$/).should('exist');
@@ -127,7 +127,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline Structural Variant').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Sequencing Data Supplement').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).find('[class*="StudyEntity_tag_"]').eq(4).should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(2).contains('Experimental Strategy').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(2).contains('Strategy').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).contains('WGS').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).find('[class*="StudyEntity_tag_"]').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).find('svg[data-icon="user"]').should('exist');
@@ -147,7 +147,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="statistic"]').find('[aria-label="Diagnosis (MONDO)"]').should('exist');
     cy.get('[id="statistic"]').find('[aria-label="Participants by Data Type"]').should('exist');
     cy.get('[id="statistic"]').find('[aria-label="Demographics"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Experimental Strategy"]').should('exist');
+    cy.get('[id="statistic"]').find('[aria-label="Strategy"]').should('exist');
   });
 });
 
@@ -180,7 +180,7 @@ describe('Page d\'une étude - Valider les liens disponibles', () => {
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(1).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Experimental Strategy').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Strategy').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
   });

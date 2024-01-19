@@ -96,10 +96,10 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
     cy.validateTableFirstRow('Sequencing Data Supplemen', 6);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Experimental Strategy', () => {
-    cy.sortTableAndWait('Experimental Strategy');
+  it('Valider les fonctionnalités du tableau - Tri Strategy', () => {
+    cy.sortTableAndWait('Strategy');
     cy.validateTableFirstRow('WGS', 7);
-    cy.sortTableAndWait('Experimental Strategy');
+    cy.sortTableAndWait('Strategy');
     cy.validateTableFirstRow('WGS', 7);
   });
 

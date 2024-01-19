@@ -87,7 +87,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
   });
 
   it('Panneau Experimental Procedure', () => {
-    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Experimental Strategy').should('exist');
+    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Strategy').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(0).contains('WGS').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(0).find('[class*="FileEntity_tag"]').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('Sequencing Type').should('exist');
