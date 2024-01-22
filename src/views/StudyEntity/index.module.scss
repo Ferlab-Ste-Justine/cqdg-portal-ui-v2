@@ -33,3 +33,7 @@
 .forceLinkUnderline:hover {
   text-decoration: none !important;
 }
+
+.whiteSpace:not(:last-child) {
+   padding-bottom: 22px;
+}

@@ -65,6 +65,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[class*="StudyEntity_tag_"]').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Description').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('Case-parent trio study on developmental and epileptic encephalopaties (DEE)').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('Description en francais, Case-parent trio study on developmental and epileptic encephalopaties (DEE)').should('exist');
   });
 
   it('Panneau Data Access', () => {
