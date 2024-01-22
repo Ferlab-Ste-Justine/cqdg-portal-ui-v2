@@ -137,7 +137,7 @@ const fr = {
         identifiant: 'Identifiant',
       },
       analysisFiles: "Fichiers générés par l'analyse",
-      numberByExperimentalStrategy: 'Nombre par stratégie expérimentale',
+      numberByExperimentalStrategy: 'Nombre par stratégie',
       numberByDataTypes: 'Nombre par type de données',
       'n=2': '(n={count})',
       nTooltipParticipant: 'Nombre total de fichiers associés au participant',
