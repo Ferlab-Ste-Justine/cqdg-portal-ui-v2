@@ -77,12 +77,6 @@ const Header = () => {
             )}
             <nav className={styles.headerNavList}>
               <HeaderLink
-                to={STATIC_ROUTES.DASHBOARD}
-                icon={<HomeOutlined />}
-                title={intl.get('layout.main.menu.dashboard')}
-                currentPathName={currentPathName}
-              />
-              <HeaderLink
                 to={STATIC_ROUTES.STUDIES}
                 icon={<ReadOutlined />}
                 title={intl.get('layout.main.menu.studies')}
@@ -98,6 +92,12 @@ const Header = () => {
                 to={[STATIC_ROUTES.VARIANTS]}
                 icon={<LineStyleIcon height={16} width={16} className={styles.iconSvg} />}
                 title={intl.get('layout.main.menu.variants')}
+                currentPathName={currentPathName}
+              />
+              <HeaderLink
+                to={STATIC_ROUTES.DASHBOARD}
+                icon={<HomeOutlined />}
+                title={intl.get('layout.main.menu.dashboard')}
                 currentPathName={currentPathName}
               />
             </nav>
