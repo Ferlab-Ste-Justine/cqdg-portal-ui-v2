@@ -27,7 +27,7 @@ const Login = () => {
   const handleSignin = async () => {
     const url = keycloak.createLoginUrl({
       redirectUri: `${window.location.origin}/${
-        query.get(REDIRECT_URI_KEY) || STATIC_ROUTES.DASHBOARD
+        query.get(REDIRECT_URI_KEY) || STATIC_ROUTES.STUDIES
       }`,
       locale: intl.getInitOptions().currentLocale,
     });

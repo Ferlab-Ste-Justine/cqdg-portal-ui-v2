@@ -112,7 +112,7 @@ const App = () => {
                   <ProtectedRoute exact path={STATIC_ROUTES.SETTINGS} layout={PageLayout}>
                     <Settings />
                   </ProtectedRoute>
-                  <Redirect from="*" to={STATIC_ROUTES.DASHBOARD} />
+                  <Redirect from="*" to={STATIC_ROUTES.STUDIES} />
                 </Switch>
                 <NotificationContextHolder />
               </Router>
