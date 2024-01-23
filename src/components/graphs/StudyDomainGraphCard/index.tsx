@@ -6,7 +6,7 @@ import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/Resiza
 import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { EXPERIMENTAL_STRATEGY_QUERY } from 'graphql/summary/queries';
+import { STUDIESPIE_QUERY } from 'graphql/summary/queries';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -16,32 +16,30 @@ import { graphModalSettings, graphSetting } from '../common';
 
 const colors = getCommonColors();
 
-const addToQuery = (field: string, key: string, queryId: string) =>
+const addToQuery = (field: string, key: string, index: string, queryId: string) =>
   updateActiveQueryField({
     queryBuilderId: queryId,
     field,
-    value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
-    index: INDEXES.FILE,
+    value: [key.toLowerCase() === intl.get('api.noData') ? ArrangerValues.missing : key],
+    index,
   });
 
-const ExperimentalStrategyGraphCard = ({
+const StudyDomainGraphCard = ({
   gridUID,
   id,
   queryId,
-  isPlayable = true,
 }: {
   gridUID: string;
   id: string;
   queryId: string;
-  isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
-  const { loading, result } = useLazyResultQuery(EXPERIMENTAL_STRATEGY_QUERY, {
+  const { loading, result } = useLazyResultQuery(STUDIESPIE_QUERY, {
     variables: { sqon },
   });
 
-  const data = aggregationToChartData(
-    result?.Participant?.aggregations?.files__sequencing_experiment__experimental_strategy.buckets,
+  const domainData = aggregationToChartData(
+    result?.Participant?.aggregations?.study__domain.buckets,
     result?.Participant?.hits?.total,
   );
 
@@ -53,26 +51,20 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.file.strategy')}
-      tsvSettings={{ data: [data] }}
+      headerTitle={`${intl.get('entities.study.study')} - ${intl.get('entities.study.domain')}`}
+      tsvSettings={{ data: [domainData] }}
       modalContent={
         <PieChart
-          data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY, queryId)}
+          data={domainData}
           colors={colors}
           {...graphModalSettings}
         />
       }
       content={
         <PieChart
-          data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          data={domainData}
+          onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY, queryId)}
           colors={colors}
           {...graphSetting}
         />
@@ -81,4 +73,4 @@ const ExperimentalStrategyGraphCard = ({
   );
 };
 
-export default ExperimentalStrategyGraphCard;
+export default StudyDomainGraphCard;

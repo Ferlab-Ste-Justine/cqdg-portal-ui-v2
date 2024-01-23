@@ -76,6 +76,8 @@ const fr = {
       family_position: 'Position familiale',
       family_id: 'ID de famille',
       gender: 'Genre',
+      demographic: 'Démographie',
+      population: 'Population',
       ethnicity: 'Éthnicité',
       age: 'Âge',
       age_at_recruitment: 'Âge au recrutement',
@@ -119,6 +121,7 @@ const fr = {
       data_access: 'Accès aux données',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
+      strategy: 'Stratégie',
       sequencing_experiment: {
         experimental_strategy: 'Stratégie expérimentale',
         type_of_sequencing: 'Type de séquençage',

@@ -6,7 +6,7 @@ import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/Resiza
 import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { EXPERIMENTAL_STRATEGY_QUERY } from 'graphql/summary/queries';
+import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -21,10 +21,10 @@ const addToQuery = (field: string, key: string, queryId: string) =>
     queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
-    index: INDEXES.FILE,
+    index: INDEXES.PARTICIPANT,
   });
 
-const ExperimentalStrategyGraphCard = ({
+const GenderGraphCard = ({
   gridUID,
   id,
   queryId,
@@ -36,12 +36,12 @@ const ExperimentalStrategyGraphCard = ({
   isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
-  const { loading, result } = useLazyResultQuery(EXPERIMENTAL_STRATEGY_QUERY, {
+  const { loading, result } = useLazyResultQuery(DEMOGRAPHIC_QUERY, {
     variables: { sqon },
   });
 
   const data = aggregationToChartData(
-    result?.Participant?.aggregations?.files__sequencing_experiment__experimental_strategy.buckets,
+    result?.Participant?.aggregations?.gender?.buckets,
     result?.Participant?.hits?.total,
   );
 
@@ -53,15 +53,14 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.file.strategy')}
+      headerTitle={`${intl.get('entities.participant.demographic')} - ${intl.get(
+        'entities.participant.gender',
+      )}`}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
           data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
           colors={colors}
           {...graphModalSettings}
         />
@@ -69,10 +68,7 @@ const ExperimentalStrategyGraphCard = ({
       content={
         <PieChart
           data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
           colors={colors}
           {...graphSetting}
         />
@@ -81,4 +77,4 @@ const ExperimentalStrategyGraphCard = ({
   );
 };
 
-export default ExperimentalStrategyGraphCard;
+export default GenderGraphCard;
