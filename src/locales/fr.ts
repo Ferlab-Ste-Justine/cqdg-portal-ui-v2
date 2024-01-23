@@ -1016,7 +1016,6 @@ const fr = {
           study_code: 'Étude',
           dataCategory: 'Catégorie de données',
           dataType: 'Type de données',
-          strategy: 'Stratégie',
           experimentalStrategy: 'Stratégie expérimentale',
           accessUrl: 'Accès Url',
           format: 'Format',

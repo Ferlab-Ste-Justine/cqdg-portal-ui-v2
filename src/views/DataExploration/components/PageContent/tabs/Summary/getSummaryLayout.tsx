@@ -127,7 +127,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 8, y: 4 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.datafiles.strategy'),
+    title: intl.get('entities.file.strategy'),
     id: EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID,
     component: (
       <ExperimentalStrategyGraphCard
