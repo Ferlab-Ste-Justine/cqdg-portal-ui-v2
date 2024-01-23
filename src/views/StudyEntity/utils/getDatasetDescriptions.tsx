@@ -23,7 +23,7 @@ const getDatasetDescriptions = (dataset?: IDataSet): IEntityDescriptionsItem[] =
       : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    label: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
+    label: intl.get('screen.dataExploration.tabs.datafiles.strategy'),
     value: dataset?.experimental_strategies?.length
       ? dataset?.experimental_strategies.map((experimental_strategy) => (
           <Tag key={experimental_strategy} className={styles.tag}>

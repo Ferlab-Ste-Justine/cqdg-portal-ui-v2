@@ -72,7 +72,7 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.file.sequencing_experiment.experimental_strategy')}
+      headerTitle={intl.get('screen.dataExploration.tabs.datafiles.strategy')}
       tsvSettings={{
         data: [data],
       }}

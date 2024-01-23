@@ -227,9 +227,9 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.validateFacetFilter('Data Type', 'Germline CNV', 'Germline CNV', /^592$/);
   });
 
-  it('Experimental Strategy - WGS', () => {
-    cy.validateFacetFilter('Experimental Strategy', 'WGS', 'WGS', /^2,984$/);
-    cy.validateFacetRank(2, 'Experimental Strategy');
+  it('Strategy - WGS', () => {
+    cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,984$/);
+    cy.validateFacetRank(2, 'Strategy');
   });
 
   it('Format - gVCF [CQDG-512]', () => {

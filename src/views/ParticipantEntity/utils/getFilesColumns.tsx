@@ -65,7 +65,7 @@ export const getExperimentalStrategyColumns = (files_nb: number): ProColumnType<
   {
     key: 'value',
     dataIndex: 'value',
-    title: intl.get('entities.file.sequencing_experiment.experimental_strategy'),
+    title: intl.get('screen.dataExploration.tabs.datafiles.strategy'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
