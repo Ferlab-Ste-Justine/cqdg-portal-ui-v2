@@ -56,7 +56,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 4, w: 6, x: 0, y: 4 },
   },
   {
-    title: intl.get('entities.participant.gender'),
+    title: `${intl.get('entities.participant.demographic')} - ${intl.get(
+      'entities.participant.gender',
+    )}`,
     id: GENDER_GRAPH_CARD_ID,
     component: (
       <GenderGraphCard gridUID={UID} id={GENDER_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />
@@ -67,7 +69,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 0, y: 4 },
   },
   {
-    title: intl.get('entities.participant.ethnicity'),
+    title: `${intl.get('entities.participant.demographic')} - ${intl.get(
+      'entities.participant.ethnicity',
+    )}`,
     id: ETHNICITY_GRAPH_CARD_ID,
     component: (
       <EthnicityGraphCard
@@ -82,7 +86,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 2, y: 4 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.studies.cardTitle'),
+    title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.participants')}`,
     id: STUDY_PARTICIPANTS_GRAPH_CARD_ID,
     component: (
       <StudyParticipantsGraphCard
@@ -97,7 +101,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 4, y: 4 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.studies.cardTitle'),
+    title: `${intl.get('entities.study.study')} - ${intl.get('entities.study.domain')}`,
     id: STUDY_DOMAIN_GRAPH_CARD_ID,
     component: (
       <StudyDomainGraphCard
@@ -112,7 +116,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 6, y: 4 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.studies.cardTitle'),
+    title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.population')}`,
     id: STUDY_POPULATION_GRAPH_CARD_ID,
     component: (
       <StudyPopulationGraphCard

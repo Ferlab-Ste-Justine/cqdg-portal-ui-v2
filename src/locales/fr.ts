@@ -78,7 +78,7 @@ const fr = {
       gender: 'Genre',
       demographic: 'Démographie',
       population: 'Population',
-      ethnicity: 'Éthnicité',
+      ethnicity: 'Ethnicité',
       age: 'Âge',
       age_at_recruitment: 'Âge au recrutement',
       vital_status: 'Statut vital',
