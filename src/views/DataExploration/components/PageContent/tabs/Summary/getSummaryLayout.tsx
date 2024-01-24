@@ -64,9 +64,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       <GenderGraphCard gridUID={UID} id={GENDER_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />
     ),
     base: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 0, y: 4 },
-    sm: { h: 2, w: 2, x: 0, y: 4 },
-    xs: { h: 2, w: 2, x: 0, y: 4 },
+    md: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2 },
   },
   {
     title: `${intl.get('entities.participant.demographic')} - ${intl.get(
@@ -81,9 +81,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 2, w: 2, x: 2, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 2, y: 4 },
-    sm: { h: 2, w: 2, x: 2, y: 4 },
-    xs: { h: 2, w: 2, x: 2, y: 4 },
+    md: { h: 2, w: 2, x: 2, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 2, y: 4, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 2, y: 4, minH: 2, minW: 2 },
   },
   {
     title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.participants')}`,
@@ -96,9 +96,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 4, y: 4 },
-    sm: { h: 2, w: 2, x: 4, y: 4 },
-    xs: { h: 2, w: 2, x: 4, y: 4 },
+    md: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2 },
   },
   {
     title: `${intl.get('entities.study.study')} - ${intl.get('entities.study.domain')}`,
@@ -111,9 +111,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 2, w: 2, x: 6, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 6, y: 4 },
-    sm: { h: 2, w: 2, x: 6, y: 4 },
-    xs: { h: 2, w: 2, x: 6, y: 4 },
+    md: { h: 2, w: 2, x: 6, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 0, y: 6, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 0, y: 6, minH: 2, minW: 2 },
   },
   {
     title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.population')}`,
@@ -126,9 +126,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 2, w: 2, x: 8, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 8, y: 4 },
-    sm: { h: 2, w: 2, x: 8, y: 4 },
-    xs: { h: 2, w: 2, x: 8, y: 4 },
+    md: { h: 2, w: 2, x: 8, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 2, y: 6, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 2, y: 6, minH: 2, minW: 2 },
   },
   {
     title: intl.get('entities.file.strategy'),
@@ -141,9 +141,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 2, w: 2, x: 10, y: 4, minH: 2, minW: 2, isResizable: true },
-    md: { h: 2, w: 2, x: 10, y: 4 },
-    sm: { h: 2, w: 2, x: 10, y: 4 },
-    xs: { h: 2, w: 2, x: 10, y: 4 },
+    md: { h: 2, w: 2, x: 10, y: 4, minH: 2, minW: 2 },
+    sm: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2 },
+    xs: { h: 2, w: 2, x: 4, y: 6, minH: 2, minW: 2 },
   },
   {
     title: intl.get('screen.dataExploration.tabs.summary.availableData.dataTypeTitle'),
@@ -156,9 +156,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
       />
     ),
     base: { h: 3, w: 6, x: 0, y: 6, minH: 3, minW: 6, isResizable: true },
-    md: { h: 3, w: 6, x: 0, y: 6 },
-    sm: { h: 3, w: 6, x: 0, y: 6 },
-    xs: { h: 3, w: 6, x: 0, y: 6 },
+    md: { h: 3, w: 6, x: 0, y: 10 },
+    sm: { h: 3, w: 6, x: 0, y: 10 },
+    xs: { h: 3, w: 6, x: 0, y: 10 },
   },
 ];
 
