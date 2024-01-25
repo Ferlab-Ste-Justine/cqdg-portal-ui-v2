@@ -83,7 +83,11 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     title: intl.get('entities.variant.frequencies.frequency'),
     tooltip: intl.get('entities.variant.frequencies.frequencyTooltip'),
     key: 'frequency',
-    render: (row: IVariantStudyFrequencies) => toExponentialNotation(row.total.af),
+    render: (row: IVariantStudyFrequencies) => {
+      if (!row.total.af) return TABLE_EMPTY_PLACE_HOLDER;
+
+      return toExponentialNotation(row.total.af);
+    },
   },
   {
     title: intl.get('entities.variant.frequencies.altAlleles'),
