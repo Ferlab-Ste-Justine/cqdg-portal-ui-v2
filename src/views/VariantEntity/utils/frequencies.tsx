@@ -85,7 +85,6 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     key: 'frequency',
     render: (row: IVariantStudyFrequencies) => {
       if (!row.total.af) return TABLE_EMPTY_PLACE_HOLDER;
-
       return toExponentialNotation(row.total.af);
     },
   },
