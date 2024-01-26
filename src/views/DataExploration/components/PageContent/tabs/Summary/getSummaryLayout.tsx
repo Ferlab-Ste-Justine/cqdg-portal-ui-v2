@@ -56,9 +56,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 4, w: 6, x: 0, y: 4 },
   },
   {
-    title: `${intl.get('entities.participant.demographic')} - ${intl.get(
-      'entities.participant.gender',
-    )}`,
+    title: intl.get('entities.participant.participantsByGender'),
     id: GENDER_GRAPH_CARD_ID,
     component: (
       <GenderGraphCard gridUID={UID} id={GENDER_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />
@@ -69,9 +67,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2 },
   },
   {
-    title: `${intl.get('entities.participant.demographic')} - ${intl.get(
-      'entities.participant.ethnicity',
-    )}`,
+    title: intl.get('entities.participant.participantsByEthnicity'),
     id: ETHNICITY_GRAPH_CARD_ID,
     component: (
       <EthnicityGraphCard
@@ -86,7 +82,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 2, y: 4, minH: 2, minW: 2 },
   },
   {
-    title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.participants')}`,
+    title: intl.get('entities.participant.participantsByStudy'),
     id: STUDY_PARTICIPANTS_GRAPH_CARD_ID,
     component: (
       <StudyParticipantsGraphCard
@@ -101,7 +97,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 4, y: 4, minH: 2, minW: 2 },
   },
   {
-    title: `${intl.get('entities.study.study')} - ${intl.get('entities.study.domain')}`,
+    title: intl.get('entities.participant.participantsByDomain'),
     id: STUDY_DOMAIN_GRAPH_CARD_ID,
     component: (
       <StudyDomainGraphCard
@@ -116,7 +112,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 0, y: 6, minH: 2, minW: 2 },
   },
   {
-    title: `${intl.get('entities.study.study')} - ${intl.get('entities.participant.population')}`,
+    title: intl.get('entities.participant.participantsByPopulation'),
     id: STUDY_POPULATION_GRAPH_CARD_ID,
     component: (
       <StudyPopulationGraphCard
@@ -131,7 +127,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 2, y: 6, minH: 2, minW: 2 },
   },
   {
-    title: intl.get('entities.file.strategy'),
+    title: intl.get('entities.participant.participantsByStrategy'),
     id: EXPERIMENTAL_STRATEGY_GRAPH_CARD_ID,
     component: (
       <ExperimentalStrategyGraphCard
@@ -146,7 +142,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 2, w: 2, x: 4, y: 6, minH: 2, minW: 2 },
   },
   {
-    title: intl.get('screen.dataExploration.tabs.summary.availableData.dataTypeTitle'),
+    title: intl.get('entities.participant.participantsByDataType'),
     id: DATA_TYPE_GRAPH_CARD_ID,
     component: (
       <DataTypeGraphCard

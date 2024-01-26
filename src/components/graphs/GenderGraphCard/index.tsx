@@ -1,12 +1,13 @@
 import intl from 'react-intl-universal';
 import PieChart from '@ferlab/ui/core/components/Charts/Pie';
+import Empty from '@ferlab/ui/core/components/Empty';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/ResizableGridCard';
 import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { DEMOGRAPHIC_QUERY } from 'graphql/summary/queries';
+import { PARTICIPANT_AGG_QUERY } from 'graphql/summary/queries';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -36,7 +37,7 @@ const GenderGraphCard = ({
   isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
-  const { loading, result } = useLazyResultQuery(DEMOGRAPHIC_QUERY, {
+  const { loading, result } = useLazyResultQuery(PARTICIPANT_AGG_QUERY, {
     variables: { sqon },
   });
 
@@ -53,9 +54,7 @@ const GenderGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={`${intl.get('entities.participant.demographic')} - ${intl.get(
-        'entities.participant.gender',
-      )}`}
+      headerTitle={intl.get('entities.participant.participantsByGender')}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
@@ -66,12 +65,16 @@ const GenderGraphCard = ({
         />
       }
       content={
-        <PieChart
-          data={data}
-          onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
-          colors={colors}
-          {...graphSetting}
-        />
+        !data?.length ? (
+          <Empty description={intl.get('api.noData')} />
+        ) : (
+          <PieChart
+            data={data}
+            onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
+            colors={colors}
+            {...graphSetting}
+          />
+        )
       }
     />
   );

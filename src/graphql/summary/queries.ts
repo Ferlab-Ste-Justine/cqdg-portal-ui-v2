@@ -1,48 +1,9 @@
 import { gql } from '@apollo/client';
 
-export const DATATYPE_QUERY = gql`
-  query ($sqon: JSON) {
+export const PARTICIPANT_AGG_QUERY = gql`
+  query participantAggQuery($sqon: JSON) {
     Participant {
-      hits(filters: $sqon) {
-        total
-      }
-      aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
-        files__data_type {
-          buckets {
-            key
-            doc_count
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const DATA_CATEGORY_QUERY = gql`
-  query ($sqon: JSON) {
-    Participant {
-      hits(filters: $sqon) {
-        total
-      }
-      aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: false) {
-        files__data_category {
-          buckets {
-            key
-            doc_count
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const STUDIESPIE_QUERY = gql`
-  query AggregationStudiesPie($sqon: JSON) {
-    Participant {
-      hits(filters: $sqon) {
-        total
-      }
-      aggregations(filters: $sqon, aggregations_filter_themselves: true) {
+      aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: true) {
         study__study_code {
           buckets {
             key
@@ -61,18 +22,6 @@ export const STUDIESPIE_QUERY = gql`
             doc_count
           }
         }
-      }
-    }
-  }
-`;
-
-export const DEMOGRAPHIC_QUERY = gql`
-  query AggregationDemographicInfo($sqon: JSON) {
-    Participant {
-      hits(filters: $sqon) {
-        total
-      }
-      aggregations(filters: $sqon, aggregations_filter_themselves: true) {
         gender {
           buckets {
             key
@@ -80,6 +29,18 @@ export const DEMOGRAPHIC_QUERY = gql`
           }
         }
         ethnicity {
+          buckets {
+            key
+            doc_count
+          }
+        }
+        files__data_type {
+          buckets {
+            key
+            doc_count
+          }
+        }
+        files__sequencing_experiment__experimental_strategy {
           buckets {
             key
             doc_count
@@ -161,24 +122,6 @@ export const AGE_AT_DIAGNOSIS_QUERY = gql`
         }
       ) {
         total
-      }
-    }
-  }
-`;
-
-export const EXPERIMENTAL_STRATEGY_QUERY = gql`
-  query AggregationDemographicInfo($sqon: JSON) {
-    Participant {
-      hits(filters: $sqon) {
-        total
-      }
-      aggregations(filters: $sqon, aggregations_filter_themselves: true) {
-        files__sequencing_experiment__experimental_strategy {
-          buckets {
-            key
-            doc_count
-          }
-        }
       }
     }
   }

@@ -95,6 +95,13 @@ const en = {
       hpo_term_tooltip: '# of participants with the exact HPO term',
       observed: 'Observed',
       not_observed: 'Not Observed',
+      participantsByGender: '# Participants by Gender',
+      participantsByEthnicity: '# Participants by Ethnicity',
+      participantsByStudy: '# Participants by Study',
+      participantsByDataType: '# Participants by Data Type',
+      participantsByStrategy: '# Participants by Strategy',
+      participantsByPopulation: '# Participants by Population',
+      participantsByDomain: '# Participants by Domain',
     },
     file: {
       file: 'File',

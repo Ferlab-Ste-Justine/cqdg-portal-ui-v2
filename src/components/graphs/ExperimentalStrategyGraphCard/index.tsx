@@ -1,12 +1,13 @@
 import intl from 'react-intl-universal';
 import PieChart from '@ferlab/ui/core/components/Charts/Pie';
+import Empty from '@ferlab/ui/core/components/Empty';
 import { updateActiveQueryField } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/ResizableGridCard';
 import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { EXPERIMENTAL_STRATEGY_QUERY } from 'graphql/summary/queries';
+import { PARTICIPANT_AGG_QUERY } from 'graphql/summary/queries';
 
 import { getCommonColors } from 'common/charts';
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
@@ -36,7 +37,7 @@ const ExperimentalStrategyGraphCard = ({
   isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
-  const { loading, result } = useLazyResultQuery(EXPERIMENTAL_STRATEGY_QUERY, {
+  const { loading, result } = useLazyResultQuery(PARTICIPANT_AGG_QUERY, {
     variables: { sqon },
   });
 
@@ -53,7 +54,7 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.file.strategy')}
+      headerTitle={intl.get('entities.participant.participantsByStrategy')}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
@@ -67,15 +68,19 @@ const ExperimentalStrategyGraphCard = ({
         />
       }
       content={
-        <PieChart
-          data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
-          colors={colors}
-          {...graphSetting}
-        />
+        !data?.length ? (
+          <Empty description={intl.get('api.noData')} />
+        ) : (
+          <PieChart
+            data={data}
+            onClick={(datum) =>
+              isPlayable &&
+              addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
+            }
+            colors={colors}
+            {...graphSetting}
+          />
+        )
       }
     />
   );
