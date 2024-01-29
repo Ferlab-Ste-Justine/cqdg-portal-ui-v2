@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ProTable from '@ferlab/ui/core/components/ProTable';
 import { PaginationViewPerQuery } from '@ferlab/ui/core/components/ProTable/Pagination/constants';
+import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import useQueryBuilderState, {
   addQuery,
@@ -33,7 +34,6 @@ import {
 import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helper';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import { IProColumnExport } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
@@ -47,7 +47,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import styles from './index.module.scss';
 
-const getDefaultColumns = (): IProColumnExport[] => [
+const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
@@ -80,7 +80,6 @@ const getDefaultColumns = (): IProColumnExport[] => [
     key: 'participant.participant_id',
     dataIndex: 'participant',
     title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
-    exportValue: (biospecimen: IBiospecimenEntity) => biospecimen?.participant?.participant_id,
     render: (participant: IParticipantEntity) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant.participant_id}`}>
         {participant.participant_id}
@@ -144,10 +143,6 @@ const getDefaultColumns = (): IProColumnExport[] => [
         </div>
       )),
     },
-    exportValue: (b: IBiospecimenEntity) => {
-      const category = ageCategories.find((cat) => cat.key === b?.age_biospecimen_collection);
-      return category ? `${category.label}: ${category.tooltip}` : b?.age_biospecimen_collection;
-    },
     render: (age_biospecimen_collection: string) => {
       const category = ageCategories.find((cat) => cat.key === age_biospecimen_collection);
       if (!category) return TABLE_EMPTY_PLACE_HOLDER;
@@ -163,10 +158,6 @@ const getDefaultColumns = (): IProColumnExport[] => [
   {
     key: 'files',
     title: intl.get('screen.dataExploration.tabs.biospecimens.files'),
-    exportValue: (biospecimen: IBiospecimenEntity) => {
-      const fileCount = biospecimen?.files?.hits?.total || 0;
-      return `${fileCount}`;
-    },
     render: (biospecimen: IBiospecimenEntity) => {
       const fileCount = biospecimen?.files?.hits?.total || 0;
       return fileCount ? (
