@@ -12,6 +12,7 @@ import { getTargetLang } from 'components/Layout/Header';
 import DataRelease from 'components/uiKit/DataRelease';
 import useQueryParams from 'hooks/useQueryParams';
 import { globalActions, useLang } from 'store/global';
+import { updateUser } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
@@ -34,13 +35,22 @@ const Login = () => {
     window.location.assign(url);
   };
 
+  const handleChangeLang = () => {
+    const targetLang = getTargetLang(lang);
+
+    dispatch(
+      updateUser({
+        data: {
+          locale: targetLang,
+        },
+      }),
+    );
+    dispatch(globalActions.changeLang(targetLang));
+  };
+
   return (
     <div className={styles.loginPageContent}>
-      <Button
-        type="primary"
-        className={styles.switchLang}
-        onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
-      >
+      <Button type="primary" className={styles.switchLang} onClick={handleChangeLang}>
         {getTargetLang(lang).toUpperCase()}
       </Button>
 
