@@ -25,8 +25,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validatePillSelectedQuery('Position', ['10000000'], 1);
     cy.validateOperatorSelectedQuery('or');
-    cy.validateTotalSelectedQuery('242');
-    cy.validateTableResultsCount('242');
+    cy.validateTotalSelectedQuery('15.4K');
+    cy.validateTableResultsCount('15.4K');
     cy.validateClearAllButton(false);
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
@@ -38,8 +38,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validatePillSelectedQuery('Position', ['10000000'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('27');
-    cy.validateTableResultsCount('27');
+    cy.validateTotalSelectedQuery('1,162');
+    cy.validateTableResultsCount('1,162');
     cy.validateClearAllButton(false);
   });
 
@@ -51,8 +51,8 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.validatePillSelectedQuery('Position', ['10000000']);
-    cy.validateTotalSelectedQuery('43');
-    cy.validateTableResultsCount('43');
+    cy.validateTotalSelectedQuery('1,428');
+    cy.validateTableResultsCount('1,428');
     cy.validateClearAllButton(false);
   });
 });

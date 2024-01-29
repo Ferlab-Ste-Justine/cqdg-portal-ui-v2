@@ -218,12 +218,12 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.validateFacetRank(0, 'Data Category');
   });
 
-  it('Data Type - Aligned Reads [CQDG-261]', () => {
+  it('Data Type - Aligned Reads', () => {
     cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^598$/);
     cy.validateFacetRank(1, 'Data Type');
   });
 
-  it('Data Type - Germline CNV [CQDG-261]', () => {
+  it('Data Type - Germline CNV', () => {
     cy.validateFacetFilter('Data Type', 'Germline CNV', 'Germline CNV', /^592$/);
   });
 
@@ -232,8 +232,8 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.validateFacetRank(2, 'Strategy');
   });
 
-  it('Format - gVCF [CQDG-512]', () => {
-    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^598$/);
+  it('Format - gVCF', () => {
+    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^588$/);
     cy.validateFacetRank(3, 'Format');
   });
 

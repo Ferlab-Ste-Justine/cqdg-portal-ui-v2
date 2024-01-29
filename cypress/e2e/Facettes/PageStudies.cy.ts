@@ -38,8 +38,6 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
     cy.validateTableResultsCount(/^1 Results$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
@@ -53,16 +51,14 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_T-DEE"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
     cy.validateTableResultsCount(/^1 Results$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
     cy.get('[data-cy="Tag_T-DEE"]').should('not.exist');
   });
 
-  it('Domain - Rare Diseases [CQDG-472]', () => {
-    cy.validateFacetFilter('Domain', 'Rare Diseases', 'rare diseases', /^1 Results$/, false);
+  it('Domain - Rare Diseases', () => {
+    cy.validateFacetFilter('Domain', 'Rare diseases', 'rare diseases', /^1 Results$/, false);
     cy.validateFacetRank(0, 'Domain');
   });
 

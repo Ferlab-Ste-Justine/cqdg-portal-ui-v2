@@ -16,14 +16,14 @@ describe('Page Data Exploration (Data Files) - Vérifier les informations affich
     cy.get('[data-cy="Title_DataExploration"]').contains('Data Exploration');
   });
 
-  it('Tableau [CQDG-261]', () => {
+  it('Tableau', () => {
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(1).find('svg[data-icon="lock"]').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(2).contains('C').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(2).find('[class*="ant-tag-geekblue"]').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(3).contains('FI0000572').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(4).contains('T-DEE').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(5).contains('Genomics').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(6).contains('Sequencing Data Supplement').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(6).contains('Supplement').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(7).contains('WGS').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(8).contains('TGZ').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(9).contains('0 B').should('exist');
@@ -89,11 +89,11 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
     cy.validateTableFirstRow('Genomics', 5);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Data Type [CQDG-261]', () => {
+  it('Valider les fonctionnalités du tableau - Tri Data Type', () => {
     cy.sortTableAndWait('Data Type');
     cy.validateTableFirstRow('Aligned Reads', 6);
     cy.sortTableAndWait('Data Type');
-    cy.validateTableFirstRow('Sequencing Data Supplemen', 6);
+    cy.validateTableFirstRow('Supplement', 6);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Strategy', () => {

@@ -47,6 +47,10 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
     cy.visitDataExploration('participants', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
     cy.showColumn('Diagnosis (ICD)');
   });
+ 
+  it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
+    cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-save"]').should('not.exist');
+  });
 
   it('Lien Participant du tableau', () => {
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(1).find('[href]').click({force: true});

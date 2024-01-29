@@ -7,51 +7,56 @@ beforeEach(() => {
 
 describe('Page des variants - Consultation du tableau', () => {
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=5270be61-b464-4566-8e93-9a4c8abfd86a');
+    cy.visitVariantsPage();
   });
 
   it('Vérifier les informations affichées', () => {
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(1).contains('chr1:g.161629781T>C').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(2).contains('SNV').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(3).contains('WGS').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(3).find('[class*="ant-tag-purple"]').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(4).contains('rs2290834').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).find('[class*="moderateImpact"]').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('Missense').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('FCGR3B').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(5).contains('p.Ile106Val').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(6).contains('Benign').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(7).contains('1.65e-2').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(8).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(9).contains(/^3$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(9).find('[href]').should('not.exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(10).contains('6.67e-1').should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(11).contains(/^4$/).should('exist');
-    cy.get('tr[data-row-key]').eq(0).find('[class*="ant-table-cell"]').eq(12).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(1).contains('chr1:g.114693436G>A').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(2).contains('SNV').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(3).contains('WGS').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(3).find('[class*="ant-tag-purple"]').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(4).contains('rs17602729').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(5).find('[class*="highImpact"]').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(5).contains('Stop gained').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(5).contains('AMPD1').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(5).contains('p.Gln12Ter').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(6).contains('Conflicting Interpretations').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(7).contains('8.50e-2').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(8).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(9).contains(/^2$/).should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(9).find('[href]').should('not.exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(10).contains('3.33e-1').should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(11).contains(/^2$/).should('exist');
+    cy.get('tr[data-row-key]').eq(7).find('[class*="ant-table-cell"]').eq(12).contains(/^0$/).should('exist');
+  });
+ 
+  it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
+    cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-save"]').should('not.exist');
   });
  
   it('Valider les liens disponibles Lien Variant', () => {
-    cy.get('tr[data-row-key]').eq(0).contains('chr1:g.161629781T>C').click({force: true});
-    cy.get('[class*="EntityTitle"]').contains('chr1:g.161629781T>C');
+    cy.get('tr[data-row-key]').eq(7).contains('chr1:g.114693436G>A').click({force: true});
+    cy.get('[class*="EntityTitle"]').contains('chr1:g.114693436G>A');
   });
  
   it('Valider les liens disponibles Lien dbSNP', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(4).find('a[href]')
-    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs2290834');
+    cy.get('tr[data-row-key]').eq(7).find('td').eq(4).find('a[href]')
+    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/snp/rs17602729');
   });
  
   it('Valider les liens disponibles Lien Gène', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(5).find('a[href]')
-    .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=FCGR3B');
+    cy.get('tr[data-row-key]').eq(7).find('td').eq(5).find('a[href]')
+    .should('have.attr', 'href', 'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=AMPD1');
   });
  
   it('Valider les liens disponibles Lien ClinVar', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(6).find('a[href]')
-    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/402858');
+    cy.get('tr[data-row-key]').eq(7).find('td').eq(6).find('a[href]')
+    .should('have.attr', 'href', 'https://www.ncbi.nlm.nih.gov/clinvar/variation/18271');
   });
  
   it('Valider les liens disponibles Lien Studies', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(8).find('a[href]').click({force: true});
+    cy.get('tr[data-row-key]').eq(7).find('td').eq(8).find('a[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
@@ -59,7 +64,7 @@ describe('Page des variants - Consultation du tableau', () => {
  
 // Pas de donnée
   it.skip('Valider les liens disponibles Lien Part.', () => {
-    cy.get('tr[data-row-key]').eq(0).find('td').eq(9).find('a[href]').click({force: true});
+    cy.get('tr[data-row-key]').eq(7).find('td').eq(9).find('a[href]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT').should('exist');
@@ -77,7 +82,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndWait('Variant');
     cy.validateTableFirstRow('-', 1);
     cy.sortTableAndWait('Variant');
-    cy.validateTableFirstRow('chr1:g.98922071_98922072insAAAA', 1);
+    cy.validateTableFirstRow('chr1:g.99999082C>T', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Type', () => {
@@ -95,7 +100,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndIntercept('dbSNP', 1);
     cy.validateTableFirstRow('-', 4);
     cy.sortTableAndIntercept('dbSNP', 1);
-    cy.validateTableFirstRow('rs986294053', 4);
+    cy.validateTableFirstRow('rs999765', 4);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
@@ -105,7 +110,7 @@ describe('Page des variants - Consultation du tableau', () => {
     cy.sortTableAndWait('Type');
     cy.sortTableAndWait('Variant');
     cy.sortTableAndWait('Variant');
-    cy.validateTableFirstRow('chr1:g.93226316_93226317insTTTTTTT', 1);
+    cy.validateTableFirstRow('chr1:g.976747del', 1);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

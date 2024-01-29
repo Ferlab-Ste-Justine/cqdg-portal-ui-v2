@@ -89,7 +89,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_access"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('jacques.michaud.med@ssss.gouv.qc.ca').should('exist');
   });
 
-  it('Panneau Files [CQDG-261]', () => {
+  it('Panneau Files', () => {
     cy.get('[id="data_file"]').find('[class*="EntityTable_title"]').contains('Data File').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Data Files').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(2940)').should('exist');
@@ -103,8 +103,8 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_file"]').find('[data-row-key="Germline CNV"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="SNV"]').find('td[class="ant-table-cell"]').eq(1).contains(/^588$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="SNV"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="Sequencing Data Supplement"]').find('td[class="ant-table-cell"]').eq(1).contains(/^588$/).should('exist');
-    cy.get('[id="data_file"]').find('[data-row-key="Sequencing Data Supplement"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="Supplement"]').find('td[class="ant-table-cell"]').eq(1).contains(/^588$/).should('exist');
+    cy.get('[id="data_file"]').find('[data-row-key="Supplement"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(1).contains(/^588$/).should('exist');
     cy.get('[id="data_file"]').find('[data-row-key="Aligned Reads"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 20%"]').should('exist');
 
@@ -116,27 +116,27 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="data_file"]').find('[data-row-key="WGS"]').find('td[class="ant-table-cell"]').eq(2).find('[style*="width: 100%"]').should('exist');
   });
 
-  it('Panneau data1 [CQDG-261]', () => {
+  it('Panneau data1', () => {
     cy.visitStudyEntity('STUDY1', 1);
     cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Available Datasets').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-collapse-header"]').contains('GenoRef-Q').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(0).contains('Description').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(0).contains('Congenital malformations description').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(1).contains('Data Type').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('SNV').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Aligned Reads').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline Structural Variant').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).contains('Sequencing Data Supplement').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(1).find('[class*="StudyEntity_tag_"]').eq(4).should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-label"]').eq(2).contains('Strategy').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).contains('WGS').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class="ant-descriptions-item-content"]').eq(2).find('[class*="StudyEntity_tag_"]').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).find('svg[data-icon="user"]').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains(/^3$/).should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains('Participants').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).find('svg[data-icon="file-text"]').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains(/^12$/).should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(1).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains('Files').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-collapse-header"]').contains('data1').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-label"]').eq(0).contains('Description').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(0).contains('Congenital malformations description').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-label"]').eq(1).contains('Data Type').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(1).contains('SNV').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(1).contains('Aligned Reads').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(1).contains('Germline Structural Variant').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(1).contains('Supplement').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(1).find('[class*="StudyEntity_tag_"]').eq(3).should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-label"]').eq(2).contains('Strategy').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(2).contains('WGS').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(2).find('[class*="StudyEntity_tag_"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(0).find('svg[data-icon="user"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains(/^3$/).should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(0).contains('Participants').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(1).find('svg[data-icon="file-text"]').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains(/^12$/).should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains('Files').should('exist');
   });
 
   it('Panneau Summary Statistics', () => {
@@ -168,7 +168,7 @@ describe('Page d\'une étude - Valider les liens disponibles', () => {
       .should('have.attr', 'href', 'mailto:jacques.michaud.med@ssss.gouv.qc.ca');
   });
 
-  it('Lien Files de Germline CNV du panneau Files [CQDG-261]', () => {
+  it('Lien Files de Germline CNV du panneau Files', () => {
     cy.get('[id="data_file"]').find('[data-row-key="Germline CNV"]').find('td[class="ant-table-cell"]').eq(1).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');

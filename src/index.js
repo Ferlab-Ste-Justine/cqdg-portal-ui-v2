@@ -13,6 +13,9 @@ import './index.css';
 
 initUserSnap();
 
+//On Summary tab ResizableGridLayout fails with new createRoot(container) from React 18
+//so we need to keep ReactDOM.render for now until we solve this issue
+//eslint-disable-next-line react/no-deprecated
 ReactDOM.render(
   <React.StrictMode>
     <App />

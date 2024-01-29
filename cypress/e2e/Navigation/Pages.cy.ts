@@ -20,6 +20,9 @@ describe('Navigation', () => {
     cy.get('[data-cy="HeaderLink_Variants"]').click();
     cy.get('[data-cy="Title_Variants"]').should('exist');
 
+    cy.get('[data-cy="HeaderLink_Dashboard"]').click();
+    cy.get('[data-cy="Title_Dashboard"]').should('exist');
+
     cy.get('[data-cy="HeaderLink_Community"]').click();
     cy.get('[data-cy="Title_Community"]').should('exist');
 
