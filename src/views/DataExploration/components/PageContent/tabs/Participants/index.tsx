@@ -50,7 +50,7 @@ import { IProColumnExport } from 'common/types';
 import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDataDropdown';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { generateLocalTsvReport } from 'store/report/thunks';
+import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
@@ -472,11 +472,11 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
           ),
         onTableExportClick: () =>
           dispatch(
-            generateLocalTsvReport({
+            fetchTsvReport({
+              columnStates: userColumns,
+              columns: defaultCols,
               index: INDEXES.PARTICIPANT,
-              headers: defaultCols,
-              cols: userColumns,
-              rows: selectedRows?.length ? selectedRows : results.data,
+              sqon: getCurrentSqon(),
             }),
           ),
         onSelectAllResultsChange: setSelectedAllResults,

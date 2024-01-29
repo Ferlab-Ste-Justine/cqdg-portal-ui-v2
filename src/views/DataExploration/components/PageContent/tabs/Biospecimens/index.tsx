@@ -37,7 +37,7 @@ import { IProColumnExport } from 'common/types';
 import DownloadSampleDataButton from 'components/reports/DownloadSamplelDataButton';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { generateLocalTsvReport } from 'store/report/thunks';
+import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
@@ -320,11 +320,11 @@ const BiospecimenTab = ({ sqon }: IBiospecimenTabProps) => {
           ),
         onTableExportClick: () =>
           dispatch(
-            generateLocalTsvReport({
+            fetchTsvReport({
+              columnStates: userColumns,
+              columns: defaultCols,
               index: INDEXES.BIOSPECIMEN,
-              headers: defaultCols,
-              cols: userColumns,
-              rows: selectedRows?.length ? selectedRows : results.data,
+              sqon: getCurrentSqon(),
             }),
           ),
         extra: [

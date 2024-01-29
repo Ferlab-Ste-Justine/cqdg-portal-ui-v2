@@ -35,7 +35,7 @@ import DownloadFileManifestModal from 'components/reports/DownloadFileManifestMo
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
 import { SetType } from 'services/api/savedSet/models';
-import { generateLocalTsvReport } from 'store/report/thunks';
+import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
 import { userHasAccessToFile } from 'utils/dataFiles';
@@ -351,11 +351,11 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
           },
           onTableExportClick: () =>
             dispatch(
-              generateLocalTsvReport({
+              fetchTsvReport({
+                columnStates: userColumns,
+                columns: defaultCols,
                 index: INDEXES.FILE,
-                headers: defaultCols,
-                cols: userColumns,
-                rows: selectedRows?.length ? selectedRows : results.data,
+                sqon: getCurrentSqon(),
               }),
             ),
           onColumnSortChange: (newState) =>
