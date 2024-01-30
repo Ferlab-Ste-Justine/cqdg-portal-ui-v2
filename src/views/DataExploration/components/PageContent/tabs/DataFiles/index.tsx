@@ -355,19 +355,13 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
                 index: INDEXES.FILE,
                 headers: defaultCols,
                 cols: userColumns,
-                rows: selectedRows,
+                rows: selectedRows?.length ? selectedRows : results.data,
               }),
             ),
           onColumnSortChange: (newState) =>
             dispatch(
               updateUserConfig({
-                data_exploration: {
-                  tables: {
-                    datafiles: {
-                      columns: newState,
-                    },
-                  },
-                },
+                data_exploration: { tables: { datafiles: { columns: newState } } },
               }),
             ),
           extra: [

@@ -476,7 +476,7 @@ const ParticipantsTab = ({ sqon }: IParticipantsTabProps) => {
               index: INDEXES.PARTICIPANT,
               headers: defaultCols,
               cols: userColumns,
-              rows: selectedRows,
+              rows: selectedRows?.length ? selectedRows : results.data,
             }),
           ),
         onSelectAllResultsChange: setSelectedAllResults,

@@ -139,13 +139,15 @@ const FileEntity = () => {
         headerConfig={{
           enableTableExport: true,
           onTableExportClick: () =>
-            generateLocalTsvReport({
-              fileName: 'participants',
-              index: INDEXES.BIOSPECIMEN,
-              headers: defaultCols,
-              cols: userColumns,
-              rows: dataBiospecimensTable,
-            }),
+            dispatch(
+              generateLocalTsvReport({
+                fileName: 'participants',
+                index: INDEXES.BIOSPECIMEN,
+                headers: defaultCols,
+                cols: userColumns,
+                rows: dataBiospecimensTable,
+              }),
+            ),
           enableColumnSort: true,
           onColumnSortChange: (newState) =>
             dispatch(
