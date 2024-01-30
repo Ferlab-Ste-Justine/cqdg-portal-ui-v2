@@ -27,6 +27,7 @@ export type TUser = {
   config: TUserConfig;
   linkedin?: string;
   profile_image_key?: string | null;
+  locale?: string;
 };
 
 export type TUserTableConfig = {

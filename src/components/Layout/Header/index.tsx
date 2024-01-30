@@ -28,6 +28,7 @@ import HeaderLink from 'components/Layout/Header/HeaderLink';
 import { globalActions, useLang } from 'store/global';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
+import { updateUser } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
@@ -54,6 +55,19 @@ const Header = () => {
     STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS,
     STATIC_ROUTES.DATA_EXPLORATION_DATAFILES,
   ];
+
+  const handleChangeLang = () => {
+    const targetLang = getTargetLang(lang);
+
+    dispatch(
+      updateUser({
+        data: {
+          locale: targetLang,
+        },
+      }),
+    );
+    dispatch(globalActions.changeLang(targetLang));
+  };
 
   return (
     <>
@@ -186,7 +200,7 @@ const Header = () => {
             key="change-lang-button"
             shape="circle"
             className={styles.langButton}
-            onClick={() => dispatch(globalActions.changeLang(getTargetLang(lang)))}
+            onClick={handleChangeLang}
             data-cy={`LangButton_${getTargetLang(lang).toUpperCase()}`}
           >
             {getTargetLang(lang).toUpperCase()}

@@ -2,11 +2,9 @@ import intl from 'react-intl-universal';
 import { setLocale } from '@ferlab/ui/core/utils/localeUtils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ArgsProps as NotificationArgsProps } from 'antd/lib/notification';
-import keycloak from 'auth/keycloak-api/keycloak';
 import locales from 'locales';
 
 import { LANG } from 'common/constants';
-import { IncludeKeycloakTokenParsed } from 'common/tokenTypes';
 import { initialState, MessageArgsPropsCustom } from 'store/global/types';
 import { fetchUser } from 'store/user/thunks';
 
@@ -81,9 +79,8 @@ const globalSlice = createSlice({
     builder.addCase(fetchStats.rejected, (state) => {
       state.isFetchingStats = false;
     });
-    builder.addCase(fetchUser.fulfilled, (state) => {
-      const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
-      const locale = tokenParsed.locale || state.lang;
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      const locale = action.payload.locale || state.lang;
       setLocalConfig(locale);
       return {
         ...state,
