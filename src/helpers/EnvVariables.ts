@@ -7,6 +7,8 @@ export default class EnvironmentVariables {
     CQDG_WEB_SITE: window._env_?.REACT_APP_CQDG_WEB_SITE || process.env.REACT_APP_CQDG_WEB_SITE,
     CQDG_DOCUMENTATION:
       window._env_?.REACT_APP_CQDG_DOCUMENTATION || process.env.REACT_APP_CQDG_DOCUMENTATION,
+    CQDG_DICTIONARY:
+      window._env_?.REACT_APP_CQDG_DICTIONARY || process.env.REACT_APP_CQDG_DICTIONARY,
     REDUX_LOG: window._env_?.REACT_APP_REDUX_LOG || process.env.REACT_APP_REDUX_LOG,
     IS_BETA: window._env_?.REACT_APP_IS_BETA || process.env.REACT_APP_IS_BETA,
     // APIS

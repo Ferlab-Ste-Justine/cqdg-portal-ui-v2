@@ -145,6 +145,16 @@ const Header = () => {
               <ExternalLinkIcon className={styles.icon} {...iconSize} />
             </Button>
           </ExternalLink>,
+          <ExternalLink
+            key="dictionary"
+            href={EnvVariables.configFor('CQDG_DICTIONARY')}
+            data-cy="HeaderLink_Dictionary"
+          >
+            <Button key="external-help" className={styles.headerBtn}>
+              {intl.get('layout.main.menu.dictionary')}
+              <ExternalLinkIcon className={styles.icon} {...iconSize} />
+            </Button>
+          </ExternalLink>,
           <Dropdown
             key="user-menu"
             trigger={['click']}

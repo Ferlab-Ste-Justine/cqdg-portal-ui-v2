@@ -38,10 +38,9 @@ const DownloadRequestAccessModal = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
 
-  const locale = intl.getInitOptions().currentLocale;
-  const docHref = `${EnvVariables.configFor('CQDG_DOCUMENTATION')}${
-    locale === 'fr' ? '/' : '/en/'
-  }acces-donnees/demande-acces-donnees`;
+  const docHref = `${EnvVariables.configFor(
+    'CQDG_DOCUMENTATION',
+  )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
 
   return (
     <>
