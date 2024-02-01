@@ -650,7 +650,7 @@ const fr = {
         variants: 'Variants',
         website: 'Site web',
         documentation: 'Documentation',
-        dictionary: 'Dictionaire',
+        dictionary: 'Dictionnaire',
         community: 'Communauté',
       },
     },
