@@ -26,8 +26,8 @@ describe('Page Data Exploration - Requêtes', () => {
 
   it('Éditer une pilule via son popup', () => {
     cy.get('[class*="QueryValues_queryValuesContainer"]').contains('SNV').click({force:true});
-    cy.get('input[id="input-deletion"]').check({force: true});
-    cy.clickAndIntercept('[data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
+    cy.get('[class*="filtersDropdown"] input[id="input-deletion"]').check({force: true});
+    cy.clickAndIntercept('[class*="filtersDropdown"] [data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
     cy.validateTotalSelectedQuery('16K');

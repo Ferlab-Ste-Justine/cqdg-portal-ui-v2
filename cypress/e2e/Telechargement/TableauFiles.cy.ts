@@ -24,7 +24,7 @@ describe('Page Data Exploration (Data Files) - Exporter les fichiers en TSV', ()
     cy.validateFileHeaders('ExportTableauFiles.json');
   });
 
-  it('Valider le contenu du fichier [CQDG-500]', () => {
+  it('Valider le contenu du fichier', () => {
     cy.validateFileContent('ExportTableauFiles.json');
   });
 });
