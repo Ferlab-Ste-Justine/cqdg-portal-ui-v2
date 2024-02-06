@@ -388,7 +388,7 @@ const fr = {
         support: 'contactez le support',
         tooMuchFilesTitle: 'Nombre maximal dépassé',
         tooMuchFiles:
-          'Un maximum de 10 000 fichiers peuvent être inclus à la fois. Veuillez restreindre votre sélection et réessayer.',
+          'Un maximum de {limit} fichiers peuvent être inclus à la fois. Veuillez restreindre votre sélection et réessayer.',
       },
       inProgress: {
         title: 'Traitement',
