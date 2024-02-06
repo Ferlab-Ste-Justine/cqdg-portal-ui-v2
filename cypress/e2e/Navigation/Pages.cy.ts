@@ -48,6 +48,12 @@ describe('Navigation', () => {
       .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
   });
 
+  it('Lien externe de la header - Dictionary', () => {
+    cy.visitDashboard();
+    cy.get('[data-cy="HeaderLink_Dictionary"]')
+      .should('have.attr', 'href', 'https://dict.qa.juno.cqdg.ferlab.bio');
+  });
+
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
     cy.get('[data-cy="ExternalLink_DataRelease"]')

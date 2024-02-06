@@ -647,6 +647,7 @@ const en = {
         variants: 'Variants',
         website: 'Website',
         documentation: 'Documentation',
+        dictionary: 'Dictionary',
         community: 'Community',
       },
     },
