@@ -3,6 +3,10 @@ import { gql } from '@apollo/client';
 export const PARTICIPANT_AGG_QUERY = gql`
   query participantAggQuery($sqon: JSON) {
     Participant {
+      hits(filters: $sqon) {
+        # total needed to calc frequency of each tsv graph export
+        total
+      }
       aggregations(filters: $sqon, aggregations_filter_themselves: true, include_missing: true) {
         study__study_code {
           buckets {
