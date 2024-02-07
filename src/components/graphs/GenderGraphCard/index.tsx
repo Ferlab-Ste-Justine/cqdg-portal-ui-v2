@@ -22,10 +22,10 @@ const addToQuery = (field: string, key: string, queryId: string) =>
     queryBuilderId: queryId,
     field,
     value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
-    index: INDEXES.FILE,
+    index: INDEXES.PARTICIPANT,
   });
 
-const ExperimentalStrategyGraphCard = ({
+const GenderGraphCard = ({
   gridUID,
   id,
   queryId,
@@ -42,7 +42,7 @@ const ExperimentalStrategyGraphCard = ({
   });
 
   const data = aggregationToChartData(
-    result?.Participant?.aggregations?.files__sequencing_experiment__experimental_strategy.buckets,
+    result?.Participant?.aggregations?.gender?.buckets,
     result?.Participant?.hits?.total,
   );
 
@@ -54,15 +54,12 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.participant.participantsByStrategy')}
+      headerTitle={intl.get('entities.participant.participantsByGender')}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
           data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
           colors={colors}
           {...graphModalSettings}
         />
@@ -73,10 +70,7 @@ const ExperimentalStrategyGraphCard = ({
         ) : (
           <PieChart
             data={data}
-            onClick={(datum) =>
-              isPlayable &&
-              addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-            }
+            onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
             colors={colors}
             {...graphSetting}
           />
@@ -86,4 +80,4 @@ const ExperimentalStrategyGraphCard = ({
   );
 };
 
-export default ExperimentalStrategyGraphCard;
+export default GenderGraphCard;

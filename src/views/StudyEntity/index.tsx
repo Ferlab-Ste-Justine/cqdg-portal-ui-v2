@@ -3,25 +3,20 @@ import intl from 'react-intl-universal';
 import { useParams } from 'react-router-dom';
 import { ReadOutlined } from '@ant-design/icons';
 import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
-import ExternalLinkIcon from '@ferlab/ui/core/components/ExternalLink/ExternalLinkIcon';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import EntityPage, { EntityDescriptions, EntityTitle } from '@ferlab/ui/core/pages/EntityPage';
-import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage/index';
 import { Space } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import useFileResolvedSqon from 'graphql/files/useFileResolvedSqon';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
 import { useStudy } from 'graphql/studies/actions';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import StatsGraph from 'views/StudyEntity/StatsGraph';
 import { pageId, queryId } from 'views/StudyEntity/utils/constant';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
 import DownloadClinicalDataButton from 'components/reports/DownloadClinicalDataButton';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
-import { STATIC_ROUTES } from 'utils/routes';
 
 import getDataAccessDescriptions from './utils/getDataAccessDescriptions';
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
@@ -49,7 +44,6 @@ const StudyEntity = () => {
     DATA_ACCESS = 'data_access',
     DATA_FILE = 'data_file',
     DATASET = 'dataset',
-    STATISTIC = 'statistic',
   }
 
   const defaultLinks: any = [
@@ -66,12 +60,6 @@ const StudyEntity = () => {
       study?.datasets && {
         href: `#${SectionId.DATASET}`,
         title: intl.get('entities.study.dataset'),
-      },
-    ],
-    ...[
-      !isRestricted && {
-        href: `#${SectionId.STATISTIC}`,
-        title: intl.get('entities.study.statistic'),
       },
     ],
   ];
@@ -141,40 +129,6 @@ const StudyEntity = () => {
           loading={loading}
           title={intl.get('entities.study.dataset')}
           datasets={study?.datasets}
-        />
-      )}
-      {!isRestricted && (
-        <StatsGraph
-          id={SectionId.STATISTIC}
-          loading={loading}
-          title={intl.get('entities.study.statistic')}
-          header={intl.get('entities.study.statistics')}
-          titleExtra={[
-            !isRestricted && (
-              <EntityTableRedirectLink
-                key="1"
-                to={STATIC_ROUTES.DATA_EXPLORATION_SUMMARY}
-                icon={<ExternalLinkIcon width="14" />}
-                onClick={() =>
-                  addQuery({
-                    queryBuilderId: DATA_EXPLORATION_QB_ID,
-                    query: generateQuery({
-                      newFilters: [
-                        generateValueFilter({
-                          field: 'study_code',
-                          value: [study_code],
-                          index: INDEXES.STUDY,
-                        }),
-                      ],
-                    }),
-                    setAsActive: true,
-                  })
-                }
-              >
-                {intl.get('global.viewInDataExploration')}
-              </EntityTableRedirectLink>
-            ),
-          ]}
         />
       )}
     </EntityPage>

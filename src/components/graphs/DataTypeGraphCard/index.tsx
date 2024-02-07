@@ -7,7 +7,7 @@ import ResizableGridCard from '@ferlab/ui/core/layout/ResizableGridLayout/Resiza
 import { aggregationToChartData } from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { INDEXES } from 'graphql/constants';
 import useParticipantResolvedSqon from 'graphql/participants/useParticipantResolvedSqon';
-import { DATATYPE_QUERY } from 'graphql/summary/queries';
+import { PARTICIPANT_AGG_QUERY } from 'graphql/summary/queries';
 
 import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { truncateString } from 'utils/string';
@@ -33,10 +33,10 @@ const DataTypeGraphCard = ({
   isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
-  const { loading, result } = useLazyResultQuery(DATATYPE_QUERY, {
+  const { loading, result } = useLazyResultQuery(PARTICIPANT_AGG_QUERY, {
     variables: { sqon },
   });
-  const dataTypeResults = aggregationToChartData(
+  const data = aggregationToChartData(
     result?.Participant?.aggregations?.files__data_type.buckets,
     result?.Participant?.hits?.total,
   );
@@ -49,13 +49,13 @@ const DataTypeGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('screen.dataExploration.tabs.summary.availableData.dataTypeTitle')}
+      headerTitle={intl.get('entities.participant.participantsByDataType')}
       tsvSettings={{
-        data: [dataTypeResults],
+        data: [data],
       }}
       modalContent={
         <BarChart
-          data={dataTypeResults}
+          data={data}
           axisLeft={{
             legend: intl.get('entities.file.data_type'),
             legendPosition: 'middle',
@@ -86,11 +86,11 @@ const DataTypeGraphCard = ({
       }}
       content={
         <>
-          {!dataTypeResults?.length ? (
+          {!data?.length ? (
             <Empty imageType="grid" size="large" description={intl.get('api.noData')} />
           ) : (
             <BarChart
-              data={dataTypeResults}
+              data={data}
               axisLeft={{
                 legend: intl.get('entities.file.data_type'),
                 legendPosition: 'middle',

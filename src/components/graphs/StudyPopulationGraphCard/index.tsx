@@ -17,24 +17,22 @@ import { graphModalSettings, graphSetting } from '../common';
 
 const colors = getCommonColors();
 
-const addToQuery = (field: string, key: string, queryId: string) =>
+const addToQuery = (field: string, key: string, index: string, queryId: string) =>
   updateActiveQueryField({
     queryBuilderId: queryId,
     field,
-    value: [key.toLowerCase() === 'no data' ? ArrangerValues.missing : key],
-    index: INDEXES.FILE,
+    value: [key.toLowerCase() === intl.get('api.noData') ? ArrangerValues.missing : key],
+    index,
   });
 
-const ExperimentalStrategyGraphCard = ({
+const StudyPopulationGraphCard = ({
   gridUID,
   id,
   queryId,
-  isPlayable = true,
 }: {
   gridUID: string;
   id: string;
   queryId: string;
-  isPlayable?: boolean;
 }) => {
   const sqon = useParticipantResolvedSqon(queryId);
   const { loading, result } = useLazyResultQuery(PARTICIPANT_AGG_QUERY, {
@@ -42,7 +40,7 @@ const ExperimentalStrategyGraphCard = ({
   });
 
   const data = aggregationToChartData(
-    result?.Participant?.aggregations?.files__sequencing_experiment__experimental_strategy.buckets,
+    result?.Participant?.aggregations?.study__population.buckets,
     result?.Participant?.hits?.total,
   );
 
@@ -54,15 +52,12 @@ const ExperimentalStrategyGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.participant.participantsByStrategy')}
+      headerTitle={intl.get('entities.participant.participantsByPopulation')}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
           data={data}
-          onClick={(datum) =>
-            isPlayable &&
-            addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
-          }
+          onClick={(datum) => addToQuery('population', datum.id as string, INDEXES.STUDY, queryId)}
           colors={colors}
           {...graphModalSettings}
         />
@@ -74,8 +69,7 @@ const ExperimentalStrategyGraphCard = ({
           <PieChart
             data={data}
             onClick={(datum) =>
-              isPlayable &&
-              addToQuery('sequencing_experiment.experimental_strategy', datum.id as string, queryId)
+              addToQuery('population', datum.id as string, INDEXES.STUDY, queryId)
             }
             colors={colors}
             {...graphSetting}
@@ -86,4 +80,4 @@ const ExperimentalStrategyGraphCard = ({
   );
 };
 
-export default ExperimentalStrategyGraphCard;
+export default StudyPopulationGraphCard;
