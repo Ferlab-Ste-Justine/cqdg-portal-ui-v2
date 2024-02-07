@@ -140,7 +140,7 @@ describe('Navigation', () => {
 
   it('Onglets de la page Data Exploration', () => {
     cy.visitDataExploration();
-    cy.get('[aria-label="Studies"]').should('exist');
+    cy.get('[aria-label="Participants by Study"]').should('exist');
 
     cy.get('[data-cy="Tab_Participants"]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
@@ -214,7 +214,7 @@ describe('Navigation', () => {
   });
  
   it('Modals de la page d\'une étude', () => {
-    cy.visitStudyEntity('T-DEE', 5);
+    cy.visitStudyEntity('T-DEE', 1);
 
     cy.get('[data-cy="FileManifest_Button"]').click({force: true});
     cy.get('[data-cy="FileManifest_Modal"]').should('exist');

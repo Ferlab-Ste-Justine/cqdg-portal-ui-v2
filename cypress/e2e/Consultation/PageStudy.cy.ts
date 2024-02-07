@@ -3,7 +3,7 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
-  cy.visitStudyEntity('T-DEE', 5);
+  cy.visitStudyEntity('T-DEE', 1);
 });
 
 describe('Page d\'une étude - Valider les redirections', () => {
@@ -138,18 +138,6 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains(/^12$/).should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class*="EntityDataset_rowCountCard"]').eq(1).contains('Files').should('exist');
   });
-
-  it('Panneau Summary Statistics', () => {
-    cy.get('[id="statistic"]').find('[class*="EntityDescriptions_title"]').contains('Summary Statistic').should('exist');
-    cy.get('[id="statistic"]').find('[class="ant-collapse-header"]').contains('Summary Statistics').should('exist');
-    cy.get('[id="statistic"]').find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
-    cy.get('[id="statistic"]').find('[class="ant-collapse-header"]').find('svg[class="anticon"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Observed Phenotypes (HPO)"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Diagnosis (MONDO)"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Participants by Data Type"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Demographics"]').should('exist');
-    cy.get('[id="statistic"]').find('[aria-label="Strategy"]').should('exist');
-  });
 });
 
 describe('Page d\'une étude - Valider les liens disponibles', () => {
@@ -185,12 +173,6 @@ describe('Page d\'une étude - Valider les liens disponibles', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('WGS').should('exist');
   });
-
-  it('Lien DataExploration du panneau Summary Statistics', () => {
-    cy.get('a[class*="EntityTableRedirectLink"]').click({force: true});
-    cy.get('[data-cy="Title_DataExploration"]').contains('Data Exploration');
-    cy.get('div[aria-selected="true"]').find('[data-cy="Tab_Summary"]').should('exist');
-  });
 });
 
 describe('Page d\'une étude - Valider les panneaux masquables', () => {
@@ -225,13 +207,5 @@ describe('Page d\'une étude - Valider les panneaux masquables', () => {
     cy.get('[id="dataset"]').eq(1).find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
     cy.get('[id="dataset"]').eq(1).find('span[class*="ant-collapse-arrow"]').click({force: true});
     cy.get('[id="dataset"]').eq(1).find('div[class*="ant-collapse-content-active"]').should('exist');
-  });
-
-  it('Panneau Summary Statistics', () => {
-    cy.get('[id="statistic"]').find('div[class*="ant-collapse-content-active"]').should('exist');
-    cy.get('[id="statistic"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
-    cy.get('[id="statistic"]').find('div[class*="ant-collapse-content-inactive ant-collapse-content-hidden"]').should('exist');
-    cy.get('[id="statistic"]').find('span[class*="ant-collapse-arrow"]').click({force: true});
-    cy.get('[id="statistic"]').find('div[class*="ant-collapse-content-active"]').should('exist');
   });
 });
