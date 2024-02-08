@@ -99,7 +99,6 @@ const StudyEntity = () => {
             {study && (
               <DownloadRequestAccessModal
                 sqon={fileSqon}
-                hasTooManyFiles={hasTooManyFiles}
                 buttonType={'primary'}
                 withoutFiles
                 isRestricted={isRestricted}

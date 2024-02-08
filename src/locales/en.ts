@@ -396,7 +396,7 @@ const en = {
         support: 'contact support',
         tooMuchFilesTitle: 'Maximum number exceeded',
         tooMuchFiles:
-          'A maximum of 10,000 files can be inlcuded at a time. Please narrow your selection and try again.',
+          'A maximum of {limit} files can be included at a time. Please narrow your selection and try again.',
       },
       inProgress: {
         title: 'Processing',
