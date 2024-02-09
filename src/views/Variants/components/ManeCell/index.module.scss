@@ -1,13 +1,5 @@
 @import 'src/style/themes/cqdg/colors';
 
-.maneIcons {
-  :global(.ant-space-item) {
-    div {
-      line-height: 16px;
-    }
-  }
-}
-
 .canonicalIcon {
   fill: $blue-8;
 }

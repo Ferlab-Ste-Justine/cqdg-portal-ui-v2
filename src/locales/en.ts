@@ -184,6 +184,9 @@ const en = {
       gene: 'Gene',
       genePhenotype: 'Gene - Phenotype',
       mane: 'MANE',
+      manePlus: 'MANE Plus',
+      maneSelect: 'MANE Select',
+      canonical: 'Ensembl Canonical',
       typeAbrv: {
         insertion: 'Ins',
         deletion: 'Del',
@@ -191,7 +194,7 @@ const en = {
         null: 'ND',
         indel: 'Ind',
         substitution: 'Sub',
-        sequence_alteration: ' SeqAlt',
+        sequence_alteration: 'SeqAlt',
       },
       typeAbrvTooltip: {
         insertion: 'Insertion',
