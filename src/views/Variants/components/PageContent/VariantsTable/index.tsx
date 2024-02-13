@@ -98,6 +98,7 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
           title={intl
             .get(`entities.variant.typeAbrvTooltip.${variant_class.toLowerCase()}`)
             .defaultMessage(capitalize(variant_class))}
+          className={styles.tooltip}
         >
           {intl
             .get(`entities.variant.typeAbrv.${variant_class.toLowerCase()}`)
