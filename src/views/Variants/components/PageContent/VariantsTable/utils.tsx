@@ -51,11 +51,11 @@ export const renderOmim = (
   const omims = pickedOmim.node.omim?.hits?.edges || [];
   const inheritance = omims
     .reduce<string[]>((prev, curr) => [...prev, ...(curr.node.inheritance_code || [])], [])
-    .filter((item, pos, self) => self.indexOf(item) == pos);
+    .filter((item, pos, self) => self.indexOf(item) === pos);
 
   if (!inheritance.length) {
     return (
-      <Tooltip title={intl.get(`screen.variants.table.inheritant.code.NRT`)}>
+      <Tooltip title={intl.get(`entities.variant.inheritant.code.NRT`)}>
         <ExternalLink href={omimLink}>NRT</ExternalLink>
       </Tooltip>
     );
@@ -65,7 +65,7 @@ export const renderOmim = (
     <StackLayout horizontal>
       <Space size={4} className={styles.variantSnvOmimCellItem}>
         {inheritance.map((code) => (
-          <Tooltip key={code} title={intl.get(`screen.variants.table.inheritant.code.${code}`)}>
+          <Tooltip key={code} title={intl.get(`entities.variant.inheritant.code.${code}`)}>
             <Tag color="blue">
               <ExternalLink href={omimLink}>{code}</ExternalLink>
             </Tag>
@@ -96,11 +96,11 @@ export const renderClinvar = (clinVar: IClinVar) => {
   ));
 };
 
-interface GnomadCircleProps {
+interface IGnomadCircleProps {
   underOnePercent: boolean;
 }
 
-export const GnomadCircle = ({ underOnePercent }: GnomadCircleProps) => (
+export const GnomadCircle = ({ underOnePercent }: IGnomadCircleProps) => (
   <div
     className={cx(
       underOnePercent ? styles.gnomadIndicatorRed : styles.gnomadIndicatorDefault,

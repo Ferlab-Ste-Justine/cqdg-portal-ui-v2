@@ -205,11 +205,10 @@ const en = {
         substitution: 'Substitution',
         sequence_alteration: 'Sequence Alteration',
       },
-      // studiesTooltip: '# d\'études avec des participants affectés',
       studiesTooltip: '# of studies with affected participants',
       homozygotes: {
         title: 'Homo.',
-        tooltip: '# of homozygotes',
+        tooltip: '# of homozygotes for alternative alleles',
       },
       alt: {
         title: 'ALT',
@@ -312,6 +311,24 @@ const en = {
       mostDeleteriousConsequence: {
         title: 'Most Deleterious Consequence',
         tooltip: 'Functional consequences of genetic variations annotated using VEP',
+      },
+      inheritant: {
+        code: {
+          AD: 'Autosomal Dominant',
+          AR: 'Autosomal Recessive',
+          DD: 'Digenic Dominant',
+          DR: 'Digenic Recessive',
+          IC: 'Isolated Cases',
+          Mi: 'Mitochondrial',
+          Mu: 'Multifactorial',
+          NRT: 'No Reported Transmission',
+          SMo: 'Somatic Mosaicism',
+          Smu: 'Somatic Mutation',
+          XL: 'X-Linked',
+          XLD: 'X-Linked Dominant',
+          XLR: 'X-Linked Recessive',
+          YL: 'Y-Linked',
+        },
       },
     },
   },
