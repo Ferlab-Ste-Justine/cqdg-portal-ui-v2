@@ -238,7 +238,7 @@ const en = {
           polyphen2: 'Polyphen2',
           fathmm: 'Fathmm',
           cadd: 'Cadd',
-          caddTooltip: 'CADD (Phred) score',
+          caddTooltip: 'CADD (Phred score)',
           dann: 'Dann',
           lrt: 'Lrt',
           revel: 'Revel',
