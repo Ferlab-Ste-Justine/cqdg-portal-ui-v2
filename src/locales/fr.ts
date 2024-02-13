@@ -167,7 +167,7 @@ const fr = {
       transmission: 'Transmission',
       panels: 'Panels de gènes',
       gnomAd: 'gnomAD',
-      gnomAdTooltip: 'Fréquence allélique gnomAD v3.1.2',
+      gnomAdTooltip: 'gnomAD Genome 3.1.2 (fréquence allélique)',
       gnomADAlt: 'gnomAD ALT',
       gnomADAltTooltip: "gnomAD Genome 3.1.2 (# d'allèles alternatifs)",
       gnomadGenome311: 'gnomAD Genome (v3.1.1)',
