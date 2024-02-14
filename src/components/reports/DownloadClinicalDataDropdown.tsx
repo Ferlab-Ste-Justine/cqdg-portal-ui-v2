@@ -51,7 +51,7 @@ const DownloadClinicalDataDropdown = ({
   return (
     <Dropdown
       key="actionDropdown"
-      disabled={!sqon && !participantIds.length}
+      disabled={!sqon?.content?.length && !participantIds.length}
       menu={MenuProps}
       placement="bottomLeft"
     >
