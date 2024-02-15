@@ -868,12 +868,10 @@ const en = {
           title: 'Saved Filters',
           popoverTitle: 'Managing Saved Filters',
           popoverContent:
-            'A saved filter is a virtual query created by applying one or more filters to a data set. They can be saved and revisited for later use. You can create and manage saved filters from the query builder at the top of the <a href="{dataExploHref}" style="text-decoration: underline;">Data Exploration</a> and <a href="{variantsHref}" style="text-decoration: underline;">Variants Exploration</a> pages.',
-          popoverContentLink: 'Data Exploration page',
+            'A saved filter is a virtual query created by applying one or more filters to a data set. They can be saved and revisited for later use. You can create and manage saved filters from the query builder at the top of the ',
           noSaved:
-            'A saved filter is a virtual query created by applying one or more filters to a data set. Save your first filter from the query builder at the top of the <a href="{dataExploHref}" style="text-decoration: underline;">Data Exploration</a> and <a href="{variantsHref}" style="text-decoration: underline;">Variants Exploration</a> pages.',
+            'A saved filter is a virtual query created by applying one or more filters to a data set. Save your first filter from the query builder at the top of the ',
           lastSaved: 'Last saved: {date} ago',
-          dataExploration: 'Data Exploration',
           variants: 'Variants',
           failedFetch: 'Failed to fetch filters saved',
         },
@@ -881,13 +879,14 @@ const en = {
           title: 'Saved Sets',
           popoverTitle: 'Managing Saved Sets',
           popoverContent:
-            'A saved set is a set of one or more entity IDs that can be saved and revisited for later use without having to manually reselect entity IDs. You can create Participant, Biospecimen, and File saved sets at the top of the table of results in the <a href="{dataExploHref}" style="text-decoration: underline;">Data Exploration</a> and <a href="{variantsHref}" style="text-decoration: underline;">Variants Exploration</a> pages.',
-          popoverContentLink: 'Data Exploration page',
+            'A saved set is a set of one or more entity IDs that can be saved and revisited for later use without having to manually reselect entity IDs. You can create Participant, Biospecimen, and File saved sets at the top of the table of results in the ',
           noSaved:
-            'A saved set is a collection of one or more entity IDs which can be saved and revisited for later use. Save your first set at the top of the table of results in the <a href="{dataExploHref}" style="text-decoration: underline;">Data Exploration</a> and <a href="{variantsHref}" style="text-decoration: underline;">Variants Exploration</a> pages.',
+            'A saved set is a collection of one or more entity IDs which can be saved and revisited for later use. Save your first set at the top of the table of results in the ',
           lastSaved: 'Last saved: {date} ago',
           failedFetch: 'Failed to fetch sets saved',
         },
+        and: ' and ',
+        pages: ' pages.',
       },
     },
     variants: {
@@ -920,6 +919,7 @@ const en = {
     },
     dataExploration: {
       title: 'Data Exploration',
+      dataExploration: 'Data Exploration',
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospecimen',
