@@ -352,18 +352,19 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     title: intl.get('entities.variant.alt.title'),
     tooltip: intl.get('entities.variant.alt.tooltip'),
-    dataIndex: ['internal_frequencies_wgs', 'total', 'ac'],
-    key: 'ac',
+    dataIndex: 'internal_frequencies_wgs',
+    key: 'internal_frequencies_wgs.total.ac',
     defaultHidden: true,
     sorter: { multiple: 1 },
     width: 75,
-    render: (ac: string) => ac || TABLE_EMPTY_PLACE_HOLDER,
+    render: (internalFrequencies: IVariantInternalFrequencies) =>
+      internalFrequencies?.total?.ac || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     title: intl.get('entities.variant.homozygotes.title'),
     tooltip: intl.get('entities.variant.homozygotes.tooltip'),
     dataIndex: 'internal_frequencies_wgs',
-    key: 'homozygotes',
+    key: 'internal_frequencies_wgs.total.hom',
     defaultHidden: true,
     sorter: { multiple: 1 },
     width: 75,
