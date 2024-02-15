@@ -13,39 +13,19 @@
 }
 
 .fixedVariantTableCellElipsis {
-  min-width: 150px;
   max-width: 150px;
-  width: 150px;
-  div {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    overflow-wrap: unset;
-    white-space: nowrap;
-  }
-
-  div::after {
-    content: '';
-    display: block;
-  }
-}
-
-.fixedVariantTableCellNoData {
-  left: 0 !important;
-}
-
-.variantTableCellElipsis {
-  max-width: 200px;
-  width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   overflow-wrap: unset;
   white-space: nowrap;
+  background-color: initial;
 }
 
 // prevent safari double tooltip
-.variantTableCellElipsis::after {
+.fixedVariantTableCellElipsis::after {
   content: '';
   display: block;
+  position: inherit;
 }
 
 .csqCell {

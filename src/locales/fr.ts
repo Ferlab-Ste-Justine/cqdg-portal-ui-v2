@@ -221,7 +221,7 @@ const fr = {
       },
       participant: {
         title: 'Part.',
-        tooltip: '# de participants affectés à travers les cohortes CQDG',
+        tooltip: '# de participants affectés et fréquence à travers les cohortes CQDG',
       },
       consequences: {
         consequence: 'Conséquence',
@@ -238,11 +238,11 @@ const fr = {
           sift: 'Sift',
           polyphen2: 'Polyphen2',
           fathmm: 'Fathmm',
-          cadd: 'Cadd',
+          cadd: 'CADD',
           caddTooltip: 'CADD (score Phred)',
           dann: 'Dann',
           lrt: 'Lrt',
-          revel: 'Revel',
+          revel: 'REVEL',
         },
         aaColumn: 'AA',
         aaColumnTooltip: 'Substitution acide aminé',

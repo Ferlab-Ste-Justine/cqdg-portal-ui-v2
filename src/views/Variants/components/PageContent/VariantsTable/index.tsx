@@ -66,7 +66,7 @@ export const getSourceTagColor = (value: string) => {
   }
 };
 
-const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
+const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'hgvsg',
     title: intl.get('entities.variant.variant'),
@@ -74,14 +74,14 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     sorter: { multiple: 1 },
     fixed: 'left',
     width: 150,
-    className: noData
-      ? `${styles.fixedVariantTableCellNoData} ${styles.fixedVariantTableCellElipsis}`
-      : styles.fixedVariantTableCellElipsis,
     render: (hgvsg: string, entity: IVariantEntity) =>
       hgvsg ? (
-        <Tooltip placement="topLeft" title={hgvsg}>
-          <Link to={`${STATIC_ROUTES.VARIANTS}/${entity?.locus}`}>{hgvsg}</Link>
-        </Tooltip>
+        /** need a div there to keep the shadow effect when fixed */
+        <div className={styles.fixedVariantTableCellElipsis}>
+          <Tooltip placement="topLeft" title={hgvsg}>
+            <Link to={`${STATIC_ROUTES.VARIANTS}/${entity?.locus}`}>{hgvsg}</Link>
+          </Tooltip>
+        </div>
       ) : (
         TABLE_EMPTY_PLACE_HOLDER
       ),
@@ -92,28 +92,25 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     dataIndex: 'variant_class',
     sorter: { multiple: 1 },
     width: 65,
-    render: (variant_class: string) =>
-      variant_class ? (
-        <Tooltip
-          title={intl
-            .get(`entities.variant.typeAbrvTooltip.${variant_class.toLowerCase()}`)
-            .defaultMessage(capitalize(variant_class))}
-          className={styles.tooltip}
-        >
-          {intl
-            .get(`entities.variant.typeAbrv.${variant_class.toLowerCase()}`)
-            .defaultMessage(capitalize(variant_class))}
-        </Tooltip>
-      ) : (
-        TABLE_EMPTY_PLACE_HOLDER
-      ),
+    render: (variant_class: string) => (
+      <Tooltip
+        className={styles.tooltip}
+        title={
+          intl.get(`entities.variant.typeAbrvTooltip.${variant_class}`) ||
+          capitalize(variant_class || undefined)
+        }
+      >
+        {intl.get(`entities.variant.typeAbrv.${variant_class}`) ||
+          capitalize(variant_class || undefined)}
+      </Tooltip>
+    ),
   },
   {
     key: 'sources',
     title: intl.get('entities.variant.sources'),
     dataIndex: 'sources',
     align: 'center',
-    width: 65,
+    width: 80,
     render: (sources: string[]) =>
       sources ? (
         <>
@@ -230,7 +227,7 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     render: (clinVar: IClinVar) => renderClinvar(clinVar),
   },
   {
-    key: 'gnomad_genomes_3.af',
+    key: 'external_frequencies.gnomad_genomes_3.af',
     title: intl.get('entities.variant.gnomAd'),
     tooltip: intl.get('entities.variant.gnomAdTooltip'),
     dataIndex: 'external_frequencies',
@@ -264,6 +261,7 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     title: intl.get('entities.variant.participant.title'),
     tooltip: intl.get('entities.variant.participant.tooltip'),
     dataIndex: 'internal_frequencies_wgs',
+    sorter: { multiple: 1 },
     width: 60,
     render: (internalFrequencies: IVariantInternalFrequencies) => (
       <>
@@ -281,7 +279,6 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     title: intl.get('entities.study.studies'),
     tooltip: intl.get('entities.variant.studiesTooltip'),
     dataIndex: 'studies',
-    sorter: { multiple: 1 },
     width: 80,
     render: (studies: IArrangerResultsTree<IVariantStudyEntity>) => {
       const total = studies?.hits?.total ?? 0;
@@ -358,6 +355,7 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     dataIndex: ['internal_frequencies_wgs', 'total', 'ac'],
     key: 'ac',
     defaultHidden: true,
+    sorter: { multiple: 1 },
     width: 75,
     render: (ac: string) => ac || TABLE_EMPTY_PLACE_HOLDER,
   },
@@ -367,6 +365,7 @@ const getDefaultColumns = ({ noData = false }): ProColumnType[] => [
     dataIndex: 'internal_frequencies_wgs',
     key: 'homozygotes',
     defaultHidden: true,
+    sorter: { multiple: 1 },
     width: 75,
     render: (internalFrequencies: IVariantInternalFrequencies) =>
       internalFrequencies?.total?.hom ? numberFormat(internalFrequencies.total.hom) : 0,
@@ -426,7 +425,7 @@ const VariantsTable = ({
           fixedProTable={(dimension) => (
             <ProTable<ITableVariantEntity>
               tableId="variants_table"
-              columns={getDefaultColumns({ noData: results?.data?.length === 0 })}
+              columns={getDefaultColumns()}
               enableRowSelection
               initialColumnState={userInfo?.config.variants?.tables?.variants?.columns}
               wrapperClassName={styles.variantTabWrapper}
