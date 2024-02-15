@@ -36,7 +36,7 @@ const getItemList = (
     locale={{
       emptyText: fetchingError ? (
         <CardErrorPlaceholder
-          title={intl.get('screen.dashboard.cards.savedSets.failedFetch')}
+          title={intl.get('screen.dashboard.cards.error.failedFetch')}
           subTitle={
             <Text>
               {intl.get('screen.dashboard.cards.pleaseRefresh')}

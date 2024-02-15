@@ -867,6 +867,7 @@ const fr = {
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
           contactSupport: 'contactez le support',
           pleaseRefresh: 'Veuillez actualiser et réessayer ou ',
+          failedFetch: 'Échec de la récupération des filtres enregistrés',
         },
         savedFilters: {
           title: 'Filtres enregistrés',
@@ -875,9 +876,6 @@ const fr = {
             "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans les pages ",
           noSaved:
             'Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à un ensemble de données. Enregistrez votre premier filtre depuis la barre de requêtes en haut des pages ',
-          lastSaved: 'Dernier enregistrement : il y a {date}',
-          variants: 'Variants',
-          failedFetch: 'Échec de la récupération des filtres enregistrés',
         },
         savedSets: {
           title: 'Ensembles enregistrés',
@@ -886,9 +884,8 @@ const fr = {
             "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans les pages ",
           noSaved:
             "Un ensemble enregistré est un ensemble d'entités qui peuvent être enregistrées et utilisées ultérieurement. Enregistrez votre premier ensemble en haut du tableau des résultats dans les pages ",
-          lastSaved: 'Dernier enregistrement : il y a {date}',
-          failedFetch: 'Échec de la récupération des ensembles enregistrés',
         },
+        lastSaved: 'Dernier enregistrement : il y a {date}',
         and: ' et ',
         pages: '.',
       },

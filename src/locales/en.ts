@@ -863,6 +863,7 @@ const en = {
             'We are currently unable to connect to this service. Please refresh the page and try again. If the problem persists, please',
           contactSupport: 'contact support',
           pleaseRefresh: 'Please refresh and try again or ',
+          failedFetch: 'Failed to fetch filters saved',
         },
         savedFilters: {
           title: 'Saved Filters',
@@ -871,9 +872,6 @@ const en = {
             'A saved filter is a virtual query created by applying one or more filters to a data set. They can be saved and revisited for later use. You can create and manage saved filters from the query builder at the top of the ',
           noSaved:
             'A saved filter is a virtual query created by applying one or more filters to a data set. Save your first filter from the query builder at the top of the ',
-          lastSaved: 'Last saved: {date} ago',
-          variants: 'Variants',
-          failedFetch: 'Failed to fetch filters saved',
         },
         savedSets: {
           title: 'Saved Sets',
@@ -882,9 +880,8 @@ const en = {
             'A saved set is a set of one or more entity IDs that can be saved and revisited for later use without having to manually reselect entity IDs. You can create Participant, Biospecimen, and File saved sets at the top of the table of results in the ',
           noSaved:
             'A saved set is a collection of one or more entity IDs which can be saved and revisited for later use. Save your first set at the top of the table of results in the ',
-          lastSaved: 'Last saved: {date} ago',
-          failedFetch: 'Failed to fetch sets saved',
         },
+        lastSaved: 'Last saved: {date} ago',
         and: ' and ',
         pages: ' pages.',
       },

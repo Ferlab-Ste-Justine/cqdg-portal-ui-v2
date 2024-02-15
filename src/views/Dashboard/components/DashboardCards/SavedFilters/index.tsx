@@ -34,7 +34,7 @@ const getItemList = (
     locale={{
       emptyText: fetchingError ? (
         <CardErrorPlaceholder
-          title={intl.get('screen.dashboard.cards.savedFilters.failedFetch')}
+          title={intl.get('screen.dashboard.cards.error.failedFetch')}
           subTitle={
             <Text>
               {intl.get('screen.dashboard.cards.pleaseRefresh')}
@@ -94,7 +94,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Variants">
           <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
-          {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
+          {intl.get('entities.variant.variants')} ({variantFilters.length})
         </div>
       ),
       key: SavedFilterTag.VariantsExplorationPage,
