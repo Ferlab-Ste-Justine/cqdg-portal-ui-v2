@@ -22,7 +22,6 @@ import styles from './index.module.scss';
 
 const { Text } = Typography;
 
-// @ts-ignore
 const getItemList = (
   savedFilters: TUserSavedFilter[],
   fetchingError: boolean,
@@ -56,7 +55,9 @@ const getItemList = (
                 {intl.get('screen.dataExploration.dataExploration')}
               </Link>
               {intl.get('screen.dashboard.cards.and')}
-              <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
+              <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                {intl.get('screen.variants.variantsExploration')}
+              </Link>
               {intl.get('screen.dashboard.cards.pages')}
             </>
           }
@@ -121,7 +122,9 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
                   {intl.get('screen.dataExploration.dataExploration')}
                 </Link>
                 {intl.get('screen.dashboard.cards.and')}
-                <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
+                <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                  {intl.get('screen.variants.variantsExploration')}
+                </Link>
                 {intl.get('screen.dashboard.cards.pages')}
               </Text>
             ),

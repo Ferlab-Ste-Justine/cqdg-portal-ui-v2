@@ -58,7 +58,9 @@ const getItemList = (
                 {intl.get('screen.dataExploration.dataExploration')}
               </Link>
               {intl.get('screen.dashboard.cards.and')}
-              <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
+              <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                {intl.get('screen.variants.variantsExploration')}
+              </Link>
               {intl.get('screen.dashboard.cards.pages')}
             </>
           }
@@ -163,7 +165,9 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
                   {intl.get('screen.dataExploration.dataExploration')}
                 </Link>
                 {intl.get('screen.dashboard.cards.and')}
-                <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
+                <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                  {intl.get('screen.variants.variantsExploration')}
+                </Link>
                 {intl.get('screen.dashboard.cards.pages')}
               </Text>
             ),
