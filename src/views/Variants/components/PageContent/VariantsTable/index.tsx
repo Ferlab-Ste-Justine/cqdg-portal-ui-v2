@@ -92,18 +92,17 @@ const getDefaultColumns = (): ProColumnType[] => [
     dataIndex: 'variant_class',
     sorter: { multiple: 1 },
     width: 65,
-    render: (variant_class: string) => (
-      <Tooltip
-        className={styles.tooltip}
-        title={
-          intl.get(`entities.variant.typeAbrvTooltip.${variant_class}`) ||
-          capitalize(variant_class || undefined)
-        }
-      >
-        {intl.get(`entities.variant.typeAbrv.${variant_class}`) ||
-          capitalize(variant_class || undefined)}
-      </Tooltip>
-    ),
+    render: (variant_class: string) => {
+      const type = variant_class?.toLowerCase();
+      return (
+        <Tooltip
+          className={styles.tooltip}
+          title={intl.get(`entities.variant.typeAbrvTooltip.${type}`) || capitalize(type)}
+        >
+          {intl.get(`entities.variant.typeAbrv.${type}`) || capitalize(type)}
+        </Tooltip>
+      );
+    },
   },
   {
     key: 'sources',
