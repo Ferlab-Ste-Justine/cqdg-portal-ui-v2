@@ -891,7 +891,6 @@ const fr = {
       },
     },
     variants: {
-      title: 'Exploration de variants',
       variantsExploration: 'Exploration des variants',
       noDataVariant: 'Aucune donnée disponible pour ce variant',
       sidemenu: {

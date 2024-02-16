@@ -887,7 +887,6 @@ const en = {
       },
     },
     variants: {
-      title: 'Variants Exploration',
       variantsExploration: 'Variants Exploration',
       noDataVariant: 'No data available for this variant',
       sidemenu: {

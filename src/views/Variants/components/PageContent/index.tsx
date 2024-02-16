@@ -139,7 +139,7 @@ const PageContent = ({ variantMapping }: IPageContentProps) => {
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
       <div className={styles.pageHeader}>
         <Typography.Title className={styles.pageHeaderTitle} level={1} data-cy="Title_Variants">
-          {intl.get('screen.variants.title')}
+          {intl.get('screen.variants.variantsExploration')}
         </Typography.Title>
       </div>
 
