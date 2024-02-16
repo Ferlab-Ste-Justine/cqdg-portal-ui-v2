@@ -93,13 +93,15 @@ const getDefaultColumns = (): ProColumnType[] => [
     sorter: { multiple: 1 },
     width: 65,
     render: (variant_class: string) => {
-      const type = variant_class?.toLowerCase();
+      const type = variant_class?.toLowerCase() || null;
       return (
         <Tooltip
           className={styles.tooltip}
-          title={intl.get(`entities.variant.typeAbrvTooltip.${type}`) || capitalize(type)}
+          title={
+            intl.get(`entities.variant.typeAbrvTooltip.${type}`) || capitalize(type || undefined)
+          }
         >
-          {intl.get(`entities.variant.typeAbrv.${type}`) || capitalize(type)}
+          {intl.get(`entities.variant.typeAbrv.${type}`) || capitalize(type || undefined)}
         </Tooltip>
       );
     },
