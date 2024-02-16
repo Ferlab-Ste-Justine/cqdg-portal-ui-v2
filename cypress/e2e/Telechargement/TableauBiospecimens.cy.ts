@@ -21,7 +21,7 @@ describe('Page Data Exploration (Biospecimens) - Exporter les biospecimens en TS
     cy.validateFileHeaders('ExportTableauBiospecimens.json');
   });
 
-  it('Valider le contenu du fichier [CQDG-500]', () => {
+  it('Valider le contenu du fichier', () => {
     cy.validateFileContent('ExportTableauBiospecimens.json');
   });
 });

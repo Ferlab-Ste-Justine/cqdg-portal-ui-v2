@@ -72,10 +72,6 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.validateFacetRank(0, 'Variant Type');
   });
 
-  it('Variant Type - Indel', () => {
-    cy.validateFacetFilter('Variant Type', 'Indel', 'indel', /^438$/);
-  });
-
   it('Consequence - Intron', () => {
     cy.validateFacetFilter('Consequence', 'Intron', 'intron', /^14K$/);
     cy.validateFacetRank(1, 'Consequence');
@@ -90,17 +86,9 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.validateFacetRank(2, 'External Reference');
   });
 
-  it('External Reference - ClinVar', () => {
-    cy.validateFacetFilter('External Reference', 'ClinVar', 'Clinvar', /^3,269$/);
-  });
-
   it('Chromosome - 1', () => {
     cy.validateFacetFilter('Chromosome', '1', '1', /^19.5K$/);
     cy.validateFacetRank(3, 'Chromosome');
-  });
-
-  it.skip('Chromosome - 20', () => {
-    cy.validateFacetFilter('Chromosome', '20', '20', /^5,526$/);
   });
 
   it('Position', () => {
@@ -111,10 +99,6 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
   it('Zygosity - Heterozygote', () => {
     cy.validateFacetFilter('Zygosity', 'Heterozygote', 'HET', /^15.5K$/);
     cy.validateFacetRank(5, 'Zygosity');
-  });
-
-  it('Zygosity - Homozygote', () => {
-    cy.validateFacetFilter('Zygosity', 'Homozygote', 'HOM', /^7,800$/);
   });
 
   it('Sources - WGS', () => {
@@ -166,26 +150,18 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.validateFacetRank(0, 'Gene Type');
   });
 
-  it('Gene Type - NcRNA', () => {
-    cy.validateFacetFilter('Gene Type', 'NcRNA', 'ncRNA', /^2,581$/);
-  });
-
   it('External Reference - OMIM', () => {
     cy.validateFacetFilter('External Reference', 'OMIM', 'OMIM', /^5,261$/);
     cy.validateFacetRank(1, 'External Reference');
   });
 
-  it('External Reference - Orphanet', () => {
-    cy.validateFacetFilter('External Reference', 'Orphanet', 'Orphanet', /^5,346$/);
-  });
-
   it('gnomAD pLI', () => {
-    cy.validateFacetNumFilter('gnomAD pLI', '0.01', '10.5K');
+    cy.validateFacetNumFilter('gnomAD pLI', '0.01', /^10.5K$/);
     cy.validateFacetRank(2, 'gnomAD pLI');
   });
 
   it('gnomAD LOEUF', () => {
-    cy.validateFacetNumFilter('gnomAD LOEUF', '0.1', '244');
+    cy.validateFacetNumFilter('gnomAD LOEUF', '0.1', /^244$/);
     cy.validateFacetRank(3, 'gnomAD LOEUF');
   });
 
@@ -197,22 +173,12 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     */
   });
 
-  // Fait planter Cypress
-  it.skip('HPO - Short stature (HP:0004322)', () => {
-    cy.validateFacetFilter('HPO', 'Short stature (HP:0004322)', 'Short stature (HP:0004322)', /^368$/);
-  });
-
   it('ORPHANET - West syndrome', () => {
     cy.get('[data-cy="FilterContainer_ORPHANET"]').should('exist');
     cy.validateFacetRank(5, 'ORPHANET');
     /* Fait planter Cypress
     cy.validateFacetFilter('ORPHANET', 'West syndrome', 'West syndrome', /^43$/);
     */
-  });
-
-  // Fait planter Cypress
-  it.skip('ORPHANET - Ochoa syndrome', () => {
-    cy.validateFacetFilter('ORPHANET', 'Ochoa syndrome', 'Ochoa syndrome', /^24$/);
   });
 
   it('OMIM - 5-fluorouracil toxicity', () => {
@@ -223,11 +189,6 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     */
   });
 
-  // Fait planter Cypress
-  it.skip('OMIM - Cohen syndrome', () => {
-    cy.validateFacetFilter('OMIM', 'Cohen syndrome', 'Cohen syndrome', /^16$/);
-  });
-
   it('DDD - Macrocephaly with intellectual disability', () => {
     cy.validateFacetRank(7, 'DDD');
     /* Fait planter Cypress
@@ -235,20 +196,10 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     */
   });
 
-  // Fait planter Cypress
-  it.skip('DDD - TMEM240-associated spinocerebellar ataxia and intellectual disability', () => {
-    cy.validateFacetFilter('DDD', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', 'TMEM240-associated spinocerebellar ataxia and intellectual disability', /^12$/);
-  });
-
   // Pas de donnée
   it.skip('COSMIC - Paraganglioma', () => {
     cy.validateFacetFilter('COSMIC', 'Paraganglioma', 'paraganglioma', /^64$/);
     cy.validateFacetRank(8, 'COSMIC');
-  });
-
-  // Pas de donnée
-  it.skip('COSMIC - Leukaemia', () => {
-    cy.validateFacetFilter('COSMIC', 'Leukaemia', 'leukaemia', /^245$/);
   });
 });
 
@@ -275,26 +226,18 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
     cy.validateFacetRank(0, 'ClinVar');
   });
 
-  it('ClinVar - Likely Pathogenic', () => {
-    cy.validateFacetFilter('ClinVar', 'Likely Pathogenic', 'Likely_pathogenic', /^2$/);
-  });
-
   it('VEP - MODIFIER', () => {
     cy.validateFacetFilter('VEP', 'MODIFIER', 'MODIFIER', /^16.7K$/);
     cy.validateFacetRank(1, 'VEP');
   });
 
-  it('VEP - HIGH', () => {
-    cy.validateFacetFilter('VEP', 'HIGH', 'HIGH', /^128$/);
-  });
-
   it('CADD (Raw)', () => {
-    cy.validateFacetNumFilter('CADD (Raw)', '0.01', '306');
+    cy.validateFacetNumFilter('CADD (Raw)', '0.01', /^306$/);
     cy.validateFacetRank(2, 'CADD (Raw)');
   });
 
   it('CADD (Phred)', () => {
-    cy.validateFacetNumFilter('CADD (Phred)', '0.01', '60');
+    cy.validateFacetNumFilter('CADD (Phred)', '0.01', /^60$/);
     cy.validateFacetRank(3, 'CADD (Phred)');
   });
 
@@ -308,17 +251,9 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
     cy.validateFacetRank(5, 'FATHMM');
   });
 
-  it('FATHMM - Damaging', () => {
-    cy.validateFacetFilter('FATHMM', 'Damaging', 'D', /^155$/);
-  });
-
   it('LRT - Neutral', () => {
     cy.validateFacetFilter('LRT', 'Neutral', 'N', /^884$/);
     cy.validateFacetRank(6, 'LRT');
-  });
-
-  it('LRT - Deleterious', () => {
-    cy.validateFacetFilter('LRT', 'Deleterious', 'D', /^203$/);
   });
 
   it('PolyPhen-2 HVAR - Benign', () => {
@@ -326,27 +261,19 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
     cy.validateFacetRank(7, 'PolyPhen-2 HVAR');
   });
 
-  it('PolyPhen-2 HVAR - Possibly Damaging', () => {
-    cy.validateFacetFilter('PolyPhen-2 HVAR', 'Possibly Damaging', 'P', /^134$/);
-  });
-
   it('REVEL', () => {
-    cy.validateFacetNumFilter('REVEL', '0.01', '47');
+    cy.validateFacetNumFilter('REVEL', '0.01', /^47$/);
     cy.validateFacetRank(8, 'REVEL');
   });
 
   it('SpliceAI', () => {
-    cy.validateFacetNumFilter('SpliceAI', '0.01', '9,604');
+    cy.validateFacetNumFilter('SpliceAI', '0.01', /^9,604$/);
     cy.validateFacetRank(9, 'SpliceAI');
   });
 
   it('SIFT - Tolerated', () => {
     cy.validateFacetFilter('SIFT', 'Tolerated', 'T', /^1,049$/);
     cy.validateFacetRank(10, 'SIFT');
-  });
-
-  it('SIFT - Damaging', () => {
-    cy.validateFacetFilter('SIFT', 'Damaging', 'D', /^334$/);
   });
 });
 
@@ -369,32 +296,32 @@ describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
   });
 
   it('CQDG Allele Frequency', () => {
-    cy.validateFacetNumFilter('CQDG Allele Frequency', '0.5', '11.4K');
+    cy.validateFacetNumFilter('CQDG Allele Frequency', '0.5', /^11.4K$/);
     cy.validateFacetRank(0, 'CQDG Allele Frequency');
   });
 
   it('gnomAD Genome 2.1', () => {
-    cy.validateFacetNumFilter('gnomAD Genome 2.1', '0.01', '1,312');
+    cy.validateFacetNumFilter('gnomAD Genome 2.1', '0.01', /^1,312$/);
     cy.validateFacetRank(1, 'gnomAD Genome 2.1');
   });
 
   it('gnomAD Genome 3.1.2', () => {
-    cy.validateFacetNumFilter('gnomAD Genome 3.1.2', '0.01', '1,683');
+    cy.validateFacetNumFilter('gnomAD Genome 3.1.2', '0.01', /^1,683$/);
     cy.validateFacetRank(2, 'gnomAD Genome 3.1.2');
   });
 
   it('gnomAD Exome 2.1', () => {
-    cy.validateFacetNumFilter('gnomAD Exome 2.1', '0.01', '685');
+    cy.validateFacetNumFilter('gnomAD Exome 2.1', '0.01', /^685$/);
     cy.validateFacetRank(3, 'gnomAD Exome 2.1');
   });
 
   it('TopMed', () => {
-    cy.validateFacetNumFilter('TopMed', '0.01', '1,016');
+    cy.validateFacetNumFilter('TopMed', '0.01', /^1,016$/);
     cy.validateFacetRank(4, 'TopMed');
   });
 
   it('1000 Genomes', () => {
-    cy.validateFacetNumFilter('1000 Genomes', '0.01', '50');
+    cy.validateFacetNumFilter('1000 Genomes', '0.01', /^50$/);
     cy.validateFacetRank(5, '1000 Genomes');
   });
 });

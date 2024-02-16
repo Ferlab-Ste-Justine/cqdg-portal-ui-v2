@@ -102,15 +102,16 @@ Cypress.Commands.add('login', () => {
         },
       });
     });
-
     cy.wait(2000);
-    cy.visit('/dashboard');
+ });
+ cy.visit('/dashboard');
 
-    cy.get('[data-cy*="LangButton"]').invoke('text').then((invokeText) => {
-      if (invokeText.includes("EN")) {
-        cy.get('[data-cy*="LangButton"]').click();
-      };
-    });
+ cy.get('[data-cy*="LangButton"]').invoke('text').then((invokeText) => {
+   if (invokeText.includes("EN")) {
+//     cy.intercept('PUT', '**/user').as('getPOSTuser');
+     cy.get('[data-cy*="LangButton"]').click();
+//     cy.wait('@getPOSTuser', {timeout: 20*1000});
+   };
  });
 });
 
@@ -150,7 +151,7 @@ Cypress.Commands.add('resetColumns', (table_id?: string) => {
   cy.get('[class*="Header_logo"]').click({force: true});
 });
 
-Cypress.Commands.add('showColumn', (column: string) => {
+Cypress.Commands.add('showColumn', (column: string|RegExp) => {
   cy.intercept('PUT', '**/user').as('getPOSTuser');
 
   cy.get('div[class="ant-popover-inner"]')
@@ -159,7 +160,7 @@ Cypress.Commands.add('showColumn', (column: string) => {
   cy.wait('@getPOSTuser', {timeout: 20*1000});
 });
 
-Cypress.Commands.add('sortTableAndIntercept', (column: string, nbCalls: number) => {
+Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: number) => {
   cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
 
   cy.get('thead[class="ant-table-thead"]').contains(column).click({force: true});

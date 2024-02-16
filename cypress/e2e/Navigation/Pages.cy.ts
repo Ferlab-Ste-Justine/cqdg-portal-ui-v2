@@ -45,7 +45,7 @@ describe('Navigation', () => {
   it('Lien externe de la header - Documentation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca');
   });
 
   it('Lien externe de la header - Dictionary', () => {
@@ -57,7 +57,7 @@ describe('Navigation', () => {
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
     cy.get('[data-cy="ExternalLink_DataRelease"]')
-      .should('have.attr', 'href', 'https://docs.qa.juno.cqdg.ferlab.bio');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca');
   });
 
   it('Redirections de la page Dashboard', () => {

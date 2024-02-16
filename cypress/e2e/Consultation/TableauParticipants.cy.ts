@@ -50,6 +50,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
  
   it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-save"]').should('not.exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-copy"]').should('exist');
   });
 
   it('Lien Participant du tableau', () => {

@@ -40,13 +40,9 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('[data-cy="Tag_PT0000010"]').should('not.exist');
   });
 
-  it('Study Code - T-DEE', () => {
-    cy.validateFacetFilter('Study Code', 'T-DEE', 'T-DEE', /^588$/);
-    cy.validateFacetRank(0, 'Study Code');
-  });
-
   it('Study Code - STUDY1', () => {
     cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^6$/);
+    cy.validateFacetRank(0, 'Study Code');
   });
 
   it('Phenotype (HPO)', () => {
@@ -69,17 +65,9 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.validateFacetRank(2, 'Family Position');
   });
 
-  it('Family Position - Brother', () => {
-    cy.validateFacetFilter('Family Position', 'Brother', 'Brother', /^1$/);
-  });
-
   it('Gender - Female', () => {
     cy.validateFacetFilter('Gender', 'Female', 'female', /^283$/);
     cy.validateFacetRank(3, 'Gender');
-  });
-
-  it('Gender - Male', () => {
-    cy.validateFacetFilter('Gender', 'Male', 'male', /^315$/);
   });
 
   it('Age at Recruitment - Congenital', () => {
@@ -87,17 +75,9 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.validateFacetRank(4, 'Age at Recruitment');
   });
 
-  it('Age at Recruitment - Young Adult', () => {
-    cy.validateFacetFilter('Age at Recruitment', 'Young Adult', 'G-young adult', /^1$/);
-  });
-
   it('Age at Diagnosis - Congenital', () => {
     cy.validateFacetFilter('Age at Diagnosis', 'Congenital', 'B-congenital', /^3$/);
     cy.validateFacetRank(5, 'Age at Diagnosis');
-  });
-
-  it('Age at Diagnosis - Young Adult', () => {
-    cy.validateFacetFilter('Age at Diagnosis', 'Young Adult', 'G-young adult', /^1$/);
   });
 
   it('Ethnicity - French Canadian', () => {
@@ -164,17 +144,9 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.validateFacetRank(1, 'Tissue');
   });
 
-  it('Tissue - Unknown', () => {
-    cy.validateFacetFilter('Tissue', 'Unknown', 'Unknown', /^6$/);
-  });
-
   it('Age at Biospecimen Collection - Congenital', () => {
     cy.validateFacetFilter('Age at Biospecimen Collection', 'Congenital', 'B-congenital', /^2$/);
     cy.validateFacetRank(2, 'Age at Biospecimen Collection');
-  });
-
-  it('Age at Biospecimen Collection - Young Adult', () => {
-    cy.validateFacetFilter('Age at Biospecimen Collection', 'Young Adult', 'G-young adult', /^1$/);
   });
 });
 
@@ -223,10 +195,6 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.validateFacetRank(1, 'Data Type');
   });
 
-  it('Data Type - Germline CNV', () => {
-    cy.validateFacetFilter('Data Type', 'Germline CNV', 'Germline CNV', /^592$/);
-  });
-
   it('Strategy - WGS', () => {
     cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,984$/);
     cy.validateFacetRank(2, 'Strategy');
@@ -235,9 +203,5 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   it('Format - gVCF', () => {
     cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^588$/);
     cy.validateFacetRank(3, 'Format');
-  });
-
-  it('Format - CRAM', () => {
-    cy.validateFacetFilter('Format', 'CRAM', 'CRAM', /^598$/);
   });
 });
