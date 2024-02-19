@@ -78,6 +78,7 @@ const FileEntity = () => {
   const defaultCols = getBiospecimensColumns();
   const userCols = userInfo?.config.files?.tables?.biospecimens?.columns || [];
   const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
+  const hasFamily = data?.participants?.hits?.edges?.some((e) => e.node.family_id);
 
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
@@ -85,7 +86,15 @@ const FileEntity = () => {
         text={data?.file_id}
         icon={<FileTextOutlined className={styles.titleIcon} />}
         loading={loading}
-        extra={data && <DownloadFileManifestModal sqon={getCurrentSqon()} type="primary" />}
+        extra={
+          data && (
+            <DownloadFileManifestModal
+              sqon={getCurrentSqon()}
+              type="primary"
+              hasFamily={hasFamily}
+            />
+          )
+        }
       />
       <EntityDescriptions
         id={SectionId.SUMMARY}

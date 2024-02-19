@@ -21,6 +21,7 @@ export const GET_FILES = gql`
                 edges {
                   node {
                     participant_id
+                    family_id
                   }
                 }
               }
