@@ -25,6 +25,19 @@ const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] =
     label: intl.get('entities.file.file_size'),
     value: formatFileSize(file?.file_size, { output: 'string' }) || TABLE_EMPTY_PLACE_HOLDER,
   },
+  // tmp hidden by CQDG-619 before ferload is ready for production
+  // {
+  //   label: intl.get('entities.file.ferload_url'),
+  //   value: (
+  //     <ExternalLink href={file?.ferload_url} className={styles.link}>
+  //       {file?.ferload_url ? truncateString(file.ferload_url, 50) : TABLE_EMPTY_PLACE_HOLDER}
+  //     </ExternalLink>
+  //   ),
+  // },
+  // {
+  //   label: intl.get('entities.file.file_hash'),
+  //   value: file?.file_hash || TABLE_EMPTY_PLACE_HOLDER,
+  // },
 ];
 
 export default getSummaryDescriptions;
