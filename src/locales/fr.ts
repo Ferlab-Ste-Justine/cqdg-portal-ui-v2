@@ -358,8 +358,8 @@ const fr = {
       study: {
         emptyText: 'Aucune étude trouvée',
         placeholder: 'ex : DEE, Developmental and Epileptic Encephalopathies',
-        title: 'Recherche par étude',
-        tooltip: 'Recherche par code, nom ou domaine de l’étude',
+        title: 'Rechercher une étude',
+        tooltip: 'Recherche par code, nom ou domaine de l’étude, mot-clé',
       },
     },
     filters: {
