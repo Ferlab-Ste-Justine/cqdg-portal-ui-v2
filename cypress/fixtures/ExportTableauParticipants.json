@@ -3,6 +3,7 @@
               "Study",
               "Gender",
               "Family Position",
+              "Family Type",
               "Age",
               "Ethnicity",
               "External Participant",
@@ -11,6 +12,7 @@
               "T-DEE",
               "male",
               "Proband",
+              "Case-parent trio",
               "--",
               "HSJ-1005-389",
               "Unknown"]

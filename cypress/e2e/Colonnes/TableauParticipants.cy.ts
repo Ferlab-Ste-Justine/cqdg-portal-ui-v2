@@ -44,46 +44,51 @@ describe('Page Data Exploration (Participants) - Colonnes du tableau', () => {
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(7)
       .should('have.class', 'ant-table-column-has-sorters')
-      .contains('Age').should('exist');
+      .contains('Family Type').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(8)
+      .should('have.class', 'ant-table-column-has-sorters')
+      .contains('Age').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .find('th[class*="ant-table-cell"]').eq(9)
       .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Files').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
-      .find('th[class*="ant-table-cell"]').eq(9)
+      .find('th[class*="ant-table-cell"]').eq(10)
       .should('not.have.class', 'ant-table-column-has-sorters')
       .contains('Biospecimen').should('exist');
     
     cy.get('thead[class="ant-table-thead"]')
       .contains('Ethnicity').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(10)
+      .find('div[class="ant-space-item"]').eq(11)
       .contains('Ethnicity').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
       .contains('Diagnosis (ICD)').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(11)
+      .find('div[class="ant-space-item"]').eq(12)
       .contains('Diagnosis (ICD)').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
       .contains('Diagnosis (Source Text)').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(12)
+      .find('div[class="ant-space-item"]').eq(13)
       .contains('Diagnosis (Source Text)').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
       .contains('External Participant').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(13)
+      .find('div[class="ant-space-item"]').eq(14)
       .contains('External Participant').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
       .contains('Vital Status').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(14)
+      .find('div[class="ant-space-item"]').eq(15)
       .contains('Vital Status').should('exist');
   });
 
