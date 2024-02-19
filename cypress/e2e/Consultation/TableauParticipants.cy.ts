@@ -30,15 +30,16 @@ describe('Page Data Exploration (Participants) - Vérifier les informations affi
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(5).contains('HP:').should('exist');
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(5).contains('0001250').should('exist');
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(6).contains('Proband').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(7).contains('-').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(8).contains(/^5$/).should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).contains('-').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(11).contains('Generalized idiopathic epilepsy and epileptic syndromes, intractable').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(11).contains('G40.31').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(12).contains('Intractable Epilepsy').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(13).contains('HSJ-1005-389').should('exist');
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(14).contains('Unknown').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(7).contains('Case-parent trio').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(8).contains('-').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).contains(/^5$/).should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(11).contains('-').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(12).contains('Generalized idiopathic epilepsy and epileptic syndromes, intractable').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(12).contains('G40.31').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(13).contains('Intractable Epilepsy').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(14).contains('HSJ-1005-389').should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(15).contains('Unknown').should('exist');
   });
 });
 
@@ -80,7 +81,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
   });
 
   it('Lien Files du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(8).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
@@ -88,7 +89,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
   });
 
   it('Lien Biospecimens du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').click({force: true});
     cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
@@ -96,7 +97,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
   });
 
   it('Lien ICD de Diagnosis (ICD) du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).find('[href]')
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(11).find('[href]')
       .should('have.attr', 'href', 'http://purl.bioontology.org/ontology/ICD10CM/G40.31');
   });
 });
@@ -129,25 +130,32 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
     cy.validateTableFirstRow('Proband', 6);
   });
 
+  it('Valider les fonctionnalités du tableau - Tri Family Type', () => {
+    cy.sortTableAndIntercept('Family Type', 1);
+    cy.validateTableFirstRow('Case-parent trio', 7);
+    cy.sortTableAndIntercept('Family Type', 1);
+    cy.validateTableFirstRow('Other', 7);
+  });
+
   it('Valider les fonctionnalités du tableau - Tri Age', () => {
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('-', 7);
+    cy.validateTableFirstRow('-', 8);
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('Senior', 7);
+    cy.validateTableFirstRow('Senior', 8);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Ethnicity', () => {
     cy.sortTableAndIntercept('Ethnicity', 1);
-    cy.validateTableFirstRow('-', 10);
+    cy.validateTableFirstRow('-', 11);
     cy.sortTableAndIntercept('Ethnicity', 1);
-    cy.validateTableFirstRow('-', 10);
+    cy.validateTableFirstRow('-', 11);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Vital Status', () => {
     cy.sortTableAndIntercept('Vital Status', 1);
-    cy.validateTableFirstRow('Alive', 11);
+    cy.validateTableFirstRow('Alive', 12);
     cy.sortTableAndIntercept('Vital Status', 1);
-    cy.validateTableFirstRow('Unknown', 11);
+    cy.validateTableFirstRow('Unknown', 12);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

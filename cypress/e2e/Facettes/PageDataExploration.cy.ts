@@ -65,24 +65,29 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.validateFacetRank(2, 'Family Position');
   });
 
+  it('Family Type - Case-parent trio', () => {
+    cy.validateFacetFilter('Family Type', 'Case-parent trio', 'Case-parent trio', /^591$/);
+    cy.validateFacetRank(3, 'Family Type');
+  });
+
   it('Gender - Female', () => {
     cy.validateFacetFilter('Gender', 'Female', 'female', /^283$/);
-    cy.validateFacetRank(3, 'Gender');
+    cy.validateFacetRank(4, 'Gender');
   });
 
   it('Age at Recruitment - Congenital', () => {
     cy.validateFacetFilter('Age at Recruitment', 'Congenital', 'B-congenital', /^2$/);
-    cy.validateFacetRank(4, 'Age at Recruitment');
+    cy.validateFacetRank(5, 'Age at Recruitment');
   });
 
   it('Age at Diagnosis - Congenital', () => {
     cy.validateFacetFilter('Age at Diagnosis', 'Congenital', 'B-congenital', /^3$/);
-    cy.validateFacetRank(5, 'Age at Diagnosis');
+    cy.validateFacetRank(6, 'Age at Diagnosis');
   });
 
   it('Ethnicity - French Canadian', () => {
     cy.get('[data-cy="FilterContainer_Ethnicity"]').should('exist');
-    cy.validateFacetRank(6, 'Ethnicity');
+    cy.validateFacetRank(7, 'Ethnicity');
     /* Pas de données
     cy.validateFacetFilter('Ethnicity', 'French Canadian', 'French Canadian', /^1750$/);
     */
@@ -90,12 +95,12 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 
   it('Phenotype (Source Text) - Intractable Seizures', () => {
     cy.validateFacetFilter('Phenotype (Source Text)', 'Intractable Seizures', 'Intractable Seizures', /^202$/);
-    cy.validateFacetRank(7, 'Phenotype (Source Text)');
+    cy.validateFacetRank(8, 'Phenotype (Source Text)');
   });
 
   it('Diagnosis (Source Text) - Intractable Epilepsy', () => {
     cy.validateFacetFilter('Diagnosis (Source Text)', 'Intractable Epilepsy', 'Intractable Epilepsy', /^205$/);
-    cy.validateFacetRank(8, 'Diagnosis (Source Text)');
+    cy.validateFacetRank(9, 'Diagnosis (Source Text)');
   });
 });
 
