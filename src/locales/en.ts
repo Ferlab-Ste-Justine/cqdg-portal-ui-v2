@@ -358,7 +358,7 @@ const en = {
         emptyText: 'No study found',
         placeholder: 'e.g. DEE, Developmental and Epileptic Encephalopathies',
         title: 'Search study',
-        tooltip: 'Search by study code, name or domain, keyword',
+        tooltip: 'Search by study code, name, domain or keyword',
       },
     },
     filters: {
