@@ -104,6 +104,7 @@ const getFilterGroups = (type: FilterTypes) => {
         groups: [
           {
             facets: [
+              'dataset',
               'data_category',
               'data_type',
               'sequencing_experiment__experimental_strategy',

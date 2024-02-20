@@ -19,6 +19,7 @@ import { Tag, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { useDataFiles } from 'graphql/files/actions';
 import { FileAccessType, IFileEntity, ITableFileEntity } from 'graphql/files/models';
+import capitalize from 'lodash/capitalize';
 import {
   DATA_EXPLORATION_QB_ID,
   DATA_FILES_SAVED_SETS_FIELD,
@@ -101,6 +102,14 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (study_code: string) => (
       <Link to={`${STATIC_ROUTES.STUDIES}/${study_code}`}>{study_code}</Link>
     ),
+  },
+  {
+    key: 'dataset',
+    title: intl.get('entities.file.dataset'),
+    dataIndex: 'dataset',
+    defaultHidden: true,
+    sorter: { multiple: 1 },
+    render: (dataset) => (dataset ? capitalize(dataset) : TABLE_EMPTY_PLACE_HOLDER),
   },
   {
     key: 'data_category',
