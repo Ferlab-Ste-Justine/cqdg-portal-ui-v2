@@ -867,35 +867,31 @@ const fr = {
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
           contactSupport: 'contactez le support',
           pleaseRefresh: 'Veuillez actualiser et réessayer ou ',
+          failedFetch: 'Échec de la récupération des filtres enregistrés',
         },
         savedFilters: {
           title: 'Filtres enregistrés',
           popoverTitle: 'Gestion des filtres enregistrés',
           popoverContent:
-            'Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l\'aide de l\'outil de gestion des requêtes au-dessus du tableau des résultats dans les pages <a href="{dataExploHref}" style="text-decoration: underline;">Exploration des données</a> et <a href="{variantsHref}" style="text-decoration: underline;">Exploration des variants</a>.',
-          popoverContentLink: 'page Exploration des données',
+            "Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à une requête de recherche. Ils peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les filtres dans la barre latérale. Vous pouvez créer des filtres enregistrés à l'aide de l'outil de gestion des requêtes au-dessus du tableau des résultats dans les pages ",
           noSaved:
-            'Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à un ensemble de données. Enregistrez votre premier filtre depuis la barre de requêtes en haut des pages <a href="{dataExploHref}" style="text-decoration: underline;">Exploration des données</a> et <a href="{variantsHref}" style="text-decoration: underline;">Exploration des variants</a>.',
-          lastSaved: 'Dernier enregistrement : il y a {date}',
-          dataExploration: 'Exploration des données',
-          variants: 'Variants',
-          failedFetch: 'Échec de la récupération des filtres enregistrés',
+            'Un filtre enregistré est une requête virtuelle créée en appliquant un ou plusieurs filtres à un ensemble de données. Enregistrez votre premier filtre depuis la barre de requêtes en haut des pages ',
         },
         savedSets: {
           title: 'Ensembles enregistrés',
           popoverTitle: 'Gestion des ensembles enregistrés',
           popoverContent:
-            'Un ensemble enregistré est un ensemble d\'un ou plusieurs ID d\'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d\'entité. Vous pouvez créer des ensembles enregistrés de participants, d\'échantillons biologiques et de fichiers en haut du tableau des résultats dans les pages <a href="{dataExploHref}" style="text-decoration: underline;">Exploration des données</a> et <a href="{variantsHref}" style="text-decoration: underline;">Exploration des variants</a>.',
-          popoverContentLink: 'page Exploration des données',
+            "Un ensemble enregistré est un ensemble d'un ou plusieurs ID d'entité qui peuvent être enregistrés et revisités pour une utilisation ultérieure sans avoir à resélectionner manuellement les ID d'entité. Vous pouvez créer des ensembles enregistrés de participants, d'échantillons biologiques et de fichiers en haut du tableau des résultats dans les pages ",
           noSaved:
-            'Un ensemble enregistré est un ensemble d\'entités qui peuvent être enregistrées et utilisées ultérieurement. Enregistrez votre premier ensemble en haut du tableau des résultats dans les pages <a href="{dataExploHref}" style="text-decoration: underline;">Exploration des données</a> et <a href="{variantsHref}" style="text-decoration: underline;">Exploration des variants</a>.',
-          lastSaved: 'Dernier enregistrement : il y a {date}',
-          failedFetch: 'Échec de la récupération des ensembles enregistrés',
+            "Un ensemble enregistré est un ensemble d'entités qui peuvent être enregistrées et utilisées ultérieurement. Enregistrez votre premier ensemble en haut du tableau des résultats dans les pages ",
         },
+        lastSaved: 'Dernier enregistrement : il y a {date}',
+        and: ' et ',
+        pages: '.',
       },
     },
     variants: {
-      title: 'Exploration de variants',
+      variantsExploration: 'Exploration des variants',
       noDataVariant: 'Aucune donnée disponible pour ce variant',
       sidemenu: {
         participant: 'Participant',
@@ -924,6 +920,7 @@ const fr = {
     },
     dataExploration: {
       title: 'Exploration',
+      dataExploration: 'Exploration des données',
       sidemenu: {
         participant: 'Participant',
         biospecimen: 'Biospécimen',

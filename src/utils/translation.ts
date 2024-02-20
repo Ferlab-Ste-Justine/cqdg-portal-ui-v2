@@ -197,7 +197,7 @@ export const getQueryBuilderDictionary = (
     manageFilters: {
       modalTitle: intl.get('components.querybuilder.header.myFiltersDropdown.manageMyFilter'),
       okText: intl.get('components.querybuilder.header.myFiltersDropdown.okText'),
-      lastSavedAt: intl.get('screen.dashboard.cards.savedFilters.lastSaved'),
+      lastSavedAt: intl.get('screen.dashboard.cards.lastSaved'),
     },
     duplicateFilterTitleSuffix: intl.get(
       'components.querybuilder.header.duplicateFilterTitleSuffix',

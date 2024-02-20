@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import { ExperimentOutlined, FileTextOutlined, UserOutlined } from '@ant-design/icons';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
@@ -30,12 +31,12 @@ const getItemList = (
   icon: ReactElement,
 ) => (
   <List<IUserSetOutput>
-    className={styles.savedFiltersList}
+    className={styles.savedSetsList}
     bordered
     locale={{
       emptyText: fetchingError ? (
         <CardErrorPlaceholder
-          title={intl.get('screen.dashboard.cards.savedSets.failedFetch')}
+          title={intl.get('screen.dashboard.cards.error.failedFetch')}
           subTitle={
             <Text>
               {intl.get('screen.dashboard.cards.pleaseRefresh')}
@@ -49,10 +50,20 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.getHTML('screen.dashboard.cards.savedSets.noSaved', {
-            dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
-            variantsHref: STATIC_ROUTES.VARIANTS,
-          })}
+          // @ts-ignore cuz the type description is a string
+          description={
+            <>
+              {intl.get('screen.dashboard.cards.savedSets.noSaved')}
+              <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
+                {intl.get('screen.dataExploration.dataExploration')}
+              </Link>
+              {intl.get('screen.dashboard.cards.and')}
+              <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                {intl.get('screen.variants.variantsExploration')}
+              </Link>
+              {intl.get('screen.dashboard.cards.pages')}
+            </>
+          }
         />
       ),
     }}
@@ -61,7 +72,6 @@ const getItemList = (
     renderItem={(item) => <ListItem data={item} icon={icon} />}
   />
 );
-
 const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
   const { savedSets, isLoading, fetchingError } = useSavedSet();
 
@@ -150,10 +160,15 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
             title: intl.get('screen.dashboard.cards.savedSets.popoverTitle'),
             content: (
               <Text>
-                {intl.getHTML('screen.dashboard.cards.savedSets.popoverContent', {
-                  dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
-                  variantsHref: STATIC_ROUTES.VARIANTS,
-                })}
+                {intl.get('screen.dashboard.cards.savedSets.popoverContent')}
+                <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
+                  {intl.get('screen.dataExploration.dataExploration')}
+                </Link>
+                {intl.get('screen.dashboard.cards.and')}
+                <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                  {intl.get('screen.variants.variantsExploration')}
+                </Link>
+                {intl.get('screen.dashboard.cards.pages')}
               </Text>
             ),
           }}

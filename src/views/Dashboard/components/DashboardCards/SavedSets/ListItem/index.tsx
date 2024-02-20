@@ -101,7 +101,7 @@ const ListItem = ({ data, icon }: IListItemProps) => {
           history.push(redirectToPage(data.setType));
         }}
         title={data.tag}
-        description={intl.get('screen.dashboard.cards.savedFilters.lastSaved', {
+        description={intl.get('screen.dashboard.cards.lastSaved', {
           date: formatDistance(new Date(), new Date(data.updated_date)),
         })}
       />

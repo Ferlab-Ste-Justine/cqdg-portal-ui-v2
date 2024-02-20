@@ -1,4 +1,5 @@
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import { FileSearchOutlined } from '@ant-design/icons';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
@@ -32,7 +33,7 @@ const getItemList = (
     locale={{
       emptyText: fetchingError ? (
         <CardErrorPlaceholder
-          title={intl.get('screen.dashboard.cards.savedFilters.failedFetch')}
+          title={intl.get('screen.dashboard.cards.error.failedFetch')}
           subTitle={
             <Text>
               {intl.get('screen.dashboard.cards.pleaseRefresh')}
@@ -46,10 +47,20 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
-          description={intl.getHTML('screen.dashboard.cards.savedFilters.noSaved', {
-            dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
-            variantsHref: STATIC_ROUTES.VARIANTS,
-          })}
+          // @ts-ignore cuz the type description is a string
+          description={
+            <>
+              {intl.get('screen.dashboard.cards.savedFilters.noSaved')}
+              <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
+                {intl.get('screen.dataExploration.dataExploration')}
+              </Link>
+              {intl.get('screen.dashboard.cards.and')}
+              <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                {intl.get('screen.variants.variantsExploration')}
+              </Link>
+              {intl.get('screen.dashboard.cards.pages')}
+            </>
+          }
         />
       ),
     }}
@@ -74,8 +85,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_DataExploration">
           <FileSearchOutlined />
-          {intl.get('screen.dashboard.cards.savedFilters.dataExploration')} (
-          {dataExplorationFilters.length})
+          {intl.get('screen.dataExploration.dataExploration')} ({dataExplorationFilters.length})
         </div>
       ),
       key: SavedFilterTag.DataExplorationPage,
@@ -85,7 +95,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_Variants">
           <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
-          {intl.get('screen.dashboard.cards.savedFilters.variants')} ({variantFilters.length})
+          {intl.get('entities.variant.variants')} ({variantFilters.length})
         </div>
       ),
       key: SavedFilterTag.VariantsExplorationPage,
@@ -107,10 +117,15 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
             title: intl.get('screen.dashboard.cards.savedFilters.popoverTitle'),
             content: (
               <Text>
-                {intl.getHTML('screen.dashboard.cards.savedFilters.popoverContent', {
-                  dataExploHref: STATIC_ROUTES.DATA_EXPLORATION,
-                  variantsHref: STATIC_ROUTES.VARIANTS,
-                })}
+                {intl.get('screen.dashboard.cards.savedFilters.popoverContent')}
+                <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
+                  {intl.get('screen.dataExploration.dataExploration')}
+                </Link>
+                {intl.get('screen.dashboard.cards.and')}
+                <Link to={`${STATIC_ROUTES.VARIANTS}`}>
+                  {intl.get('screen.variants.variantsExploration')}
+                </Link>
+                {intl.get('screen.dashboard.cards.pages')}
               </Text>
             ),
           }}
