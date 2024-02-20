@@ -50,10 +50,10 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(2).find('[class*="FileEntity_tag"]').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(3).contains('Size').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(3).contains('0 B').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('URL').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('https://ferload.qa.cqdg.ferlab.bio/').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Hash').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('-').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').contains('URL').should('not.exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').contains('https://ferload.qa.cqdg.ferlab.bio/').should('not.exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').contains('Hash').should('not.exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').contains(/^-$/).should('not.exist');
   });
 
   it('Panneau Data Type', () => {
@@ -141,7 +141,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
 });
 
 describe('Page d\'un fichier - Valider les liens disponibles', () => {
-  it('Lien URL du panneau Summary', () => {
+  it.skip('Lien URL du panneau Summary', () => {
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(4).find('[href]')
     .should('have.attr', 'href', 'https://ferload.qa.cqdg.ferlab.bio/386624e38c2371a2cf8e6daddc5fa4a2a03b1d33');
   });
