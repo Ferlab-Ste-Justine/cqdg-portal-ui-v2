@@ -26,11 +26,11 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
   });
 
-  it('Search by study - STUDY1', () => {
-    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by study').should('exist');
+  it('Search study - STUDY1', () => {
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search study').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
-    cy.get('div[class="ant-tooltip-inner"]').contains('Search by study code, name or domain').should('exist');
+    cy.get('div[class="ant-tooltip-inner"]').contains('Search by study code, name, domain or keyword').should('exist');
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'STUDY1', 'POST', '*/grapgql', 3);
     cy.wait(1000);
@@ -44,7 +44,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
   });
 
-  it('Search by study - T-DEE', () => {
+  it('Search study - T-DEE', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'T-DEE', 'POST', '*/grapgql', 5);
     cy.wait(1000);
     cy.get('[data-cy="Search_Dropdown"]').contains('T-DEE').should('exist');
