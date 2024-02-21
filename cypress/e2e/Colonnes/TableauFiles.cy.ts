@@ -40,6 +40,12 @@ describe('Page Data Exploration (Files) - Colonnes du tableau', () => {
       .contains('Study').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
+      .contains('Dataset').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(5)
+      .contains('Dataset').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(5)
       .should('have.class', 'ant-table-column-has-sorters')
       .contains('Data Category').should('exist');
@@ -77,13 +83,13 @@ describe('Page Data Exploration (Files) - Colonnes du tableau', () => {
     cy.get('thead[class="ant-table-thead"]')
       .contains('File Name').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(12)
+      .find('div[class="ant-space-item"]').eq(13)
       .contains('File Name').should('exist');
   
     cy.get('thead[class="ant-table-thead"]')
       .contains('Platform').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
-      .find('div[class="ant-space-item"]').eq(13)
+      .find('div[class="ant-space-item"]').eq(14)
       .contains('Platform').should('exist');
   });
 

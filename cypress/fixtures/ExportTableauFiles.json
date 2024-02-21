@@ -1,6 +1,7 @@
 {
   "headers": ["File",
               "Study",
+              "Dataset",
               "Data Category",
               "Data Type",
               "Strategy",
