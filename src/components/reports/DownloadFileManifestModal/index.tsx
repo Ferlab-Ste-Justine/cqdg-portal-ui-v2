@@ -26,7 +26,7 @@ const DownloadFileManifestModal = ({
   type = 'default',
   isDisabled,
   hasTooManyFiles,
-  hasFamily,
+  hasFamily = true,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
