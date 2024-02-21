@@ -190,23 +190,28 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
     cy.get('[data-cy="Tag_FI0000572"]').should('not.exist');
   });
 
+  it('Dataset - Data1', () => {
+    cy.validateFacetFilter('Dataset', 'Data1', 'data1', /^12$/);
+    cy.validateFacetRank(0, 'Dataset');
+  });
+
   it('Data Category - Genomics', () => {
     cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^2,984$/);
-    cy.validateFacetRank(0, 'Data Category');
+    cy.validateFacetRank(1, 'Data Category');
   });
 
   it('Data Type - Aligned Reads', () => {
     cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^598$/);
-    cy.validateFacetRank(1, 'Data Type');
+    cy.validateFacetRank(2, 'Data Type');
   });
 
   it('Strategy - WGS', () => {
     cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,984$/);
-    cy.validateFacetRank(2, 'Strategy');
+    cy.validateFacetRank(3, 'Strategy');
   });
 
   it('Format - gVCF', () => {
     cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^588$/);
-    cy.validateFacetRank(3, 'Format');
+    cy.validateFacetRank(4, 'Format');
   });
 });

@@ -8,6 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration (Data Files) - Vérifier les informations affichées', () => {
   beforeEach(() => {
     cy.visitDataExploration('datafiles', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.showColumn('Dataset');
     cy.showColumn('File Name');
     cy.showColumn('Platform');
   });
@@ -22,15 +23,16 @@ describe('Page Data Exploration (Data Files) - Vérifier les informations affich
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(2).find('[class*="ant-tag-geekblue"]').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(3).contains('FI0000572').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(4).contains('T-DEE').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(5).contains('Genomics').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(6).contains('Supplement').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(7).contains('WGS').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(8).contains('TGZ').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(9).contains('0 B').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(10).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(5).contains('-').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(6).contains('Genomics').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(7).contains('Supplement').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(8).contains('WGS').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(9).contains('TGZ').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(10).contains('0 B').should('exist');
     cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(11).contains(/^1$/).should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(12).contains('S03510.extra.tgz').should('exist');
-    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(13).contains('Illumina HiSeq 2500 PE125').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(12).contains(/^1$/).should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(13).contains('S03510.extra.tgz').should('exist');
+    cy.get('tr[data-row-key="FI00005720"]').find('[class*="ant-table-cell"]').eq(14).contains('Illumina HiSeq 2500 PE125').should('exist');
   });
 });
 
@@ -71,6 +73,7 @@ describe('Page Data Exploration (Data Files) - Valider les liens disponibles', (
 describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du tableau', () => {
   beforeEach(() => {
     cy.visitDataExploration('datafiles');
+    cy.showColumn('Dataset');
     cy.showColumn('File Name');
     cy.showColumn('Platform');
   });
@@ -82,46 +85,53 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
     cy.validateTableFirstRow('T-DEE', 4);
   });
 
+  it('Valider les fonctionnalités du tableau - Tri Dataset', () => {
+    cy.sortTableAndWait('Dataset');
+    cy.validateTableFirstRow('-', 5);
+    cy.sortTableAndWait('Dataset');
+    cy.validateTableFirstRow('Data2', 5);
+  });
+
   it('Valider les fonctionnalités du tableau - Tri Data Category', () => {
     cy.sortTableAndWait('Data Category');
-    cy.validateTableFirstRow('Genomics', 5);
+    cy.validateTableFirstRow('Genomics', 6);
     cy.sortTableAndWait('Data Category');
-    cy.validateTableFirstRow('Genomics', 5);
+    cy.validateTableFirstRow('Genomics', 6);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Data Type', () => {
     cy.sortTableAndWait('Data Type');
-    cy.validateTableFirstRow('Aligned Reads', 6);
+    cy.validateTableFirstRow('Aligned Reads', 7);
     cy.sortTableAndWait('Data Type');
-    cy.validateTableFirstRow('Supplement', 6);
+    cy.validateTableFirstRow('Supplement', 7);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Strategy', () => {
     cy.sortTableAndWait('Strategy');
-    cy.validateTableFirstRow('WGS', 7);
+    cy.validateTableFirstRow('WGS', 8);
     cy.sortTableAndWait('Strategy');
-    cy.validateTableFirstRow('WGS', 7);
+    cy.validateTableFirstRow('WGS', 8);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Format', () => {
     cy.sortTableAndWait('Format');
-    cy.validateTableFirstRow('CRAM', 8);
+    cy.validateTableFirstRow('CRAM', 9);
     cy.sortTableAndWait('Format');
-    cy.validateTableFirstRow('gVCF', 8);
+    cy.validateTableFirstRow('gVCF', 9);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Size', () => {
     cy.sortTableAndWait('Size');
-    cy.validateTableFirstRow('0 B', 9);
+    cy.validateTableFirstRow('0 B', 10);
     cy.sortTableAndWait('Size');
-    cy.validateTableFirstRow('10.7 GB', 9);
+    cy.validateTableFirstRow('10.7 GB', 10);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Platform', () => {
     cy.sortTableAndWait('Platform');
-    cy.validateTableFirstRow('Illumina HiSeq 2000 PE100', 13);
+    cy.validateTableFirstRow('Illumina HiSeq 2000 PE100', 14);
     cy.sortTableAndWait('Platform');
-    cy.validateTableFirstRow('NovaSeq S4 PE150', 13);
+    cy.validateTableFirstRow('NovaSeq S4 PE150', 14);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {

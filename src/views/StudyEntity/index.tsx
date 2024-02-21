@@ -59,7 +59,7 @@ const StudyEntity = () => {
     ...[
       study?.datasets && {
         href: `#${SectionId.DATASET}`,
-        title: intl.get('entities.study.dataset'),
+        title: intl.get('entities.file.available_datasets'),
       },
     ],
   ];
@@ -126,7 +126,7 @@ const StudyEntity = () => {
         <Datasets
           id={SectionId.DATASET}
           loading={loading}
-          title={intl.get('entities.study.dataset')}
+          title={intl.get('entities.file.available_datasets')}
           datasets={study?.datasets}
         />
       )}

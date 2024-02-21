@@ -339,6 +339,7 @@ export const getFacetsDictionary = () => ({
   data_category: intl.get('entities.file.data_category'),
   data_type: intl.get('entities.file.data_type'),
   file_format: intl.get('entities.file.file_format'),
+  dataset: intl.get('entities.file.dataset'),
   sequencing_experiment: {
     experimental_strategy: intl.get('entities.file.strategy'),
     analysis_id: intl.get('entities.file.sequencing_experiment.analysis_id'),
