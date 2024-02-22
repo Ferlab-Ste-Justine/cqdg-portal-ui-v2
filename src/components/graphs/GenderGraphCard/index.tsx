@@ -42,7 +42,7 @@ const GenderGraphCard = ({
   });
 
   const data = aggregationToChartData(
-    result?.Participant?.aggregations?.gender?.buckets,
+    result?.Participant?.aggregations?.sex?.buckets,
     result?.Participant?.hits?.total,
   );
 
@@ -54,12 +54,12 @@ const GenderGraphCard = ({
       theme="shade"
       loading={loading}
       loadingType="spinner"
-      headerTitle={intl.get('entities.participant.participantsByGender')}
+      headerTitle={intl.get('entities.participant.participantsBySex')}
       tsvSettings={{ data: [data] }}
       modalContent={
         <PieChart
           data={data}
-          onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
+          onClick={(datum) => isPlayable && addToQuery('sex', datum.id as string, queryId)}
           colors={colors}
           {...graphModalSettings}
         />
@@ -70,7 +70,7 @@ const GenderGraphCard = ({
         ) : (
           <PieChart
             data={data}
-            onClick={(datum) => isPlayable && addToQuery('gender', datum.id as string, queryId)}
+            onClick={(datum) => isPlayable && addToQuery('sex', datum.id as string, queryId)}
             colors={colors}
             {...graphSetting}
           />

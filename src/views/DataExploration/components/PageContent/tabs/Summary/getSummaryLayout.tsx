@@ -14,7 +14,7 @@ import SunburstGraphCard from 'components/graphs/SunburstGraphCard';
 export const UID = 'summaryLayout';
 const OBSERVED_PHENOTYPE_ID = 'observed_phenotype';
 const MONDO_ID = 'mondo';
-const GENDER_GRAPH_CARD_ID = 'gender-graph-card';
+const GENDER_GRAPH_CARD_ID = 'sex-graph-card';
 const ETHNICITY_GRAPH_CARD_ID = 'ethnicity-graph-card';
 const STUDY_DOMAIN_GRAPH_CARD_ID = 'study-domain-graph-card';
 const STUDY_POPULATION_GRAPH_CARD_ID = 'study-population-graph-card';
@@ -56,7 +56,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
     xs: { h: 4, w: 6, x: 0, y: 4 },
   },
   {
-    title: intl.get('entities.participant.participantsByGender'),
+    title: intl.get('entities.participant.participantsBySex'),
     id: GENDER_GRAPH_CARD_ID,
     component: (
       <GenderGraphCard gridUID={UID} id={GENDER_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />

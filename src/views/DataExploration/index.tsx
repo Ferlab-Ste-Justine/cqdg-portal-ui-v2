@@ -71,7 +71,7 @@ const getFilterGroups = (type: FilterTypes) => {
               'icd_tagged__name',
               'relationship_to_proband',
               'family_type',
-              'gender',
+              'sex',
               'age_at_recruitment',
               'mondo_tagged__age_at_event',
               'ethnicity',

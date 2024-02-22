@@ -319,7 +319,7 @@ export const getFacetsDictionary = () => ({
   icd_tagged: {
     name: intl.get('entities.participant.diagnosis_icd'),
   },
-  gender: intl.get('entities.participant.gender'),
+  sex: intl.get('entities.participant.sex'),
   age_at_recruitment: intl.get('entities.participant.age_at_recruitment'),
   ethnicity: intl.get('entities.participant.ethnicity'),
   mondo_tagged: {
