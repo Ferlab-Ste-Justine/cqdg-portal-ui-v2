@@ -5,7 +5,7 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import DataTypeGraphCard from 'components/graphs/DataTypeGraphCard';
 import EthnicityGraphCard from 'components/graphs/EthnicityGraphCard';
 import ExperimentalStrategyGraphCard from 'components/graphs/ExperimentalStrategyGraphCard';
-import GenderGraphCard from 'components/graphs/GenderGraphCard';
+import SexGraphCard from 'components/graphs/SexGraphCard';
 import StudyDomainGraphCard from 'components/graphs/StudyDomainGraphCard';
 import StudyParticipantsGraphCard from 'components/graphs/StudyParticipantsGraphCard';
 import StudyPopulationGraphCard from 'components/graphs/StudyPopulationGraphCard';
@@ -14,7 +14,7 @@ import SunburstGraphCard from 'components/graphs/SunburstGraphCard';
 export const UID = 'summaryLayout';
 const OBSERVED_PHENOTYPE_ID = 'observed_phenotype';
 const MONDO_ID = 'mondo';
-const GENDER_GRAPH_CARD_ID = 'sex-graph-card';
+const SEX_GRAPH_CARD_ID = 'sex-graph-card';
 const ETHNICITY_GRAPH_CARD_ID = 'ethnicity-graph-card';
 const STUDY_DOMAIN_GRAPH_CARD_ID = 'study-domain-graph-card';
 const STUDY_POPULATION_GRAPH_CARD_ID = 'study-population-graph-card';
@@ -57,9 +57,9 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
   },
   {
     title: intl.get('entities.participant.participantsBySex'),
-    id: GENDER_GRAPH_CARD_ID,
+    id: SEX_GRAPH_CARD_ID,
     component: (
-      <GenderGraphCard gridUID={UID} id={GENDER_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />
+      <SexGraphCard gridUID={UID} id={SEX_GRAPH_CARD_ID} queryId={DATA_EXPLORATION_QB_ID} />
     ),
     base: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2, isResizable: true },
     md: { h: 2, w: 2, x: 0, y: 4, minH: 2, minW: 2 },

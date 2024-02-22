@@ -25,7 +25,7 @@ const addToQuery = (field: string, key: string, queryId: string) =>
     index: INDEXES.PARTICIPANT,
   });
 
-const GenderGraphCard = ({
+const SexGraphCard = ({
   gridUID,
   id,
   queryId,
@@ -80,4 +80,4 @@ const GenderGraphCard = ({
   );
 };
 
-export default GenderGraphCard;
+export default SexGraphCard;
