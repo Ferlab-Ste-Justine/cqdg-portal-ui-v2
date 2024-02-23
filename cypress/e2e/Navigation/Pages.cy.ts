@@ -120,9 +120,9 @@ describe('Navigation', () => {
 
   it('Liens Saved Filters de la page Dashboard', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').contains('Cypress Gender Filter').click({force: true});
+    cy.get('[data-cy="SavedFilters"]').contains('Cypress Sex Filter').click({force: true});
     cy.get('[data-cy="Title_DataExploration"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gender').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sex').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
 
     cy.visitDashboard();

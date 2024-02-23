@@ -146,6 +146,13 @@ describe('Page d\'un fichier - Valider les liens disponibles', () => {
     .should('have.attr', 'href', 'https://ferload.qa.cqdg.ferlab.bio/386624e38c2371a2cf8e6daddc5fa4a2a03b1d33');
   });
 
+  it('Lien DataExploration du panneau Participants-Samples', () => {
+    cy.get('[id="biospecimens"] a[class*="EntityTableRedirectLink"]').click({force: true});
+    cy.get('[data-cy="ProTable_Participants"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FI0000981').should('exist');
+  });
+
   it('Lien Participant du panneau Participants-Samples', () => {
     cy.get('[id="biospecimens"]').find('td[class="ant-table-cell"]').eq(0).find('[href]').click({force: true});
     cy.get('[id="participant-entity-page"]').should('exist');

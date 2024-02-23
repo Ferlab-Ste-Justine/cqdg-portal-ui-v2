@@ -116,23 +116,23 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
     cy.validateTableFirstRow('T-DEE', 2);
   });
 
-  it('Valider les fonctionnalités du tableau - Tri Gender', () => {
-    cy.sortTableAndIntercept('Gender', 1);
+  it('Valider les fonctionnalités du tableau - Tri Sex', () => {
+    cy.sortTableAndIntercept('Sex', 1);
     cy.validateTableFirstRow('Female', 3);
-    cy.sortTableAndIntercept('Gender', 1);
+    cy.sortTableAndIntercept('Sex', 1);
     cy.validateTableFirstRow('Male', 3);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Family Position', () => {
     cy.sortTableAndIntercept('Family Position', 1);
-    cy.validateTableFirstRow('Brother', 6);
+    cy.validateTableFirstRow('-', 6);
     cy.sortTableAndIntercept('Family Position', 1);
     cy.validateTableFirstRow('Proband', 6);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Family Type', () => {
     cy.sortTableAndIntercept('Family Type', 1);
-    cy.validateTableFirstRow('Case-parent trio', 7);
+    cy.validateTableFirstRow('-', 7);
     cy.sortTableAndIntercept('Family Type', 1);
     cy.validateTableFirstRow('Other', 7);
   });
