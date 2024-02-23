@@ -59,7 +59,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
   it('Panneau Profile', () => {
     cy.get('[id="profile"]').find('[class*="EntityDescriptions_title"]').contains('Profile').should('exist');
     cy.get('[id="profile"]').find('[class="ant-collapse-header"]').contains('Profile').should('exist');
-    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Gender').should('exist');
+    cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Sex').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(0).contains('Male').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').should('exist');
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('Ethnicity').should('exist');
@@ -75,9 +75,8 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="profile"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('-').should('exist');
   });
   
-  // Pas de données d'un participant sans famille
-  it.skip('Panneau Family (sans famille)', () => {
-    cy.visitParticipantEntity('TODO');
+  it('Panneau Family (sans famille)', () => {
+    cy.visitParticipantEntity('PT0000603');
     cy.get('[id="family"]').should('not.exist');
   });
 

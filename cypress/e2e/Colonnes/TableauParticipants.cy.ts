@@ -24,7 +24,7 @@ describe('Page Data Exploration (Participants) - Colonnes du tableau', () => {
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(3)
       .should('have.class', 'ant-table-column-has-sorters')
-      .contains('Gender').should('exist');
+      .contains('Sex').should('exist');
 
     cy.get('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(4)

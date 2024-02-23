@@ -1,7 +1,7 @@
 {
   "headers": ["Participant",
               "Study",
-              "Gender",
+              "Sex",
               "Family Position",
               "Family Type",
               "Age",

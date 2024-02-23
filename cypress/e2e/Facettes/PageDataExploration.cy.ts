@@ -70,9 +70,9 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.validateFacetRank(3, 'Family Type');
   });
 
-  it('Gender - Female', () => {
-    cy.validateFacetFilter('Gender', 'Female', 'female', /^283$/);
-    cy.validateFacetRank(4, 'Gender');
+  it('Sex - Female', () => {
+    cy.validateFacetFilter('Sex', 'Female', 'female', /^284$/);
+    cy.validateFacetRank(4, 'Sex');
   });
 
   it('Age at Recruitment - Congenital', () => {
@@ -94,7 +94,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Phenotype (Source Text) - Intractable Seizures', () => {
-    cy.validateFacetFilter('Phenotype (Source Text)', 'Intractable Seizures', 'Intractable Seizures', /^202$/);
+    cy.validateFacetFilter('Phenotype (Source Text)', 'Intractable Seizures', 'Intractable Seizures', /^203$/);
     cy.validateFacetRank(8, 'Phenotype (Source Text)');
   });
 
@@ -140,12 +140,12 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
   });
 
   it('Sample Type - DNA (NCIT:C449)', () => {
-    cy.validateFacetFilter('Sample Type', 'DNA (NCIT:C449)', 'DNA (NCIT:C449)', /^598$/);
+    cy.validateFacetFilter('Sample Type', 'DNA (NCIT:C449)', 'DNA (NCIT:C449)', /^599$/);
     cy.validateFacetRank(0, 'Sample Type');
   });
 
   it('Tissue - Blood (NCIT:C12434)', () => {
-    cy.validateFacetFilter('Tissue', 'Blood (NCIT:C12434)', 'Blood (NCIT:C12434)', /^592$/);
+    cy.validateFacetFilter('Tissue', 'Blood (NCIT:C12434)', 'Blood (NCIT:C12434)', /^593$/);
     cy.validateFacetRank(1, 'Tissue');
   });
 
@@ -196,17 +196,17 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   });
 
   it('Data Category - Genomics', () => {
-    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^2,984$/);
+    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^2,989$/);
     cy.validateFacetRank(1, 'Data Category');
   });
 
   it('Data Type - Aligned Reads', () => {
-    cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^598$/);
+    cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^599$/);
     cy.validateFacetRank(2, 'Data Type');
   });
 
   it('Strategy - WGS', () => {
-    cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,984$/);
+    cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,989$/);
     cy.validateFacetRank(3, 'Strategy');
   });
 
