@@ -10,10 +10,10 @@ import styles from 'views/FileEntity/index.module.scss';
 
 const getProfileDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
   {
-    label: intl.get('entities.participant.gender'),
+    label: intl.get('entities.participant.sex'),
     value: (
       <Tag color="blue" className={styles.tag}>
-        {capitalize(participant?.gender) || TABLE_EMPTY_PLACE_HOLDER}
+        {capitalize(participant?.sex) || TABLE_EMPTY_PLACE_HOLDER}
       </Tag>
     ),
   },

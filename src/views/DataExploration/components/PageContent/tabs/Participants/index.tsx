@@ -80,9 +80,9 @@ const getDefaultColumns = (): ProColumnType[] => [
     ),
   },
   {
-    key: 'gender',
-    title: intl.get('screen.dataExploration.tabs.participants.gender'),
-    dataIndex: 'gender',
+    key: 'sex',
+    title: intl.get('entities.participant.sex'),
+    dataIndex: 'sex',
     sorter: { multiple: 1 },
     render: (sex: string) => <ColorTag type={ColorTagType.Gender} value={capitalize(sex)} />,
   },

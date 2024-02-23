@@ -5,12 +5,6 @@ export enum LANG {
   FR = 'fr',
 }
 
-export enum GENDER {
-  FEMALE = 'female',
-  MALE = 'male',
-  UNKNOWN = 'unknown',
-}
-
 export const REDIRECT_URI_KEY = 'redirect_path';
 
 export const TABLE_EMPTY_PLACE_HOLDER = '-';
