@@ -1090,7 +1090,7 @@ const en = {
       participantsSelected: 'participants selected',
       participantSelected: 'participant selected',
       saveParticipantsSet: 'Save participant set',
-      participantCount: 'items at a time. The first 10,000 will be processed.',
+      maxLimit: 'Max. {limit} items at a time. The first {limit} will be processed.',
       filesSelected: 'files selected',
       fileSelected: 'file selected',
       saveFilesSet: 'Save file set',

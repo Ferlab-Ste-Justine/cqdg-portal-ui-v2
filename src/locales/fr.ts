@@ -1102,7 +1102,7 @@ const fr = {
       participantsSelected: 'participants séléctionnés',
       participantSelected: 'participant séléctionné',
       saveParticipantsSet: "Enregistrer l'ensemble de participants",
-      participantCount: 'éléments à la fois. Les 10 000 premiers seront traités.',
+      participantCount: 'Max. {limit} éléments à la fois. Les {limit} premiers seront traités.',
       filesSelected: 'fichiers séléctionnés',
       fileSelected: 'fichier séléctionné',
       saveFilesSet: "Enregistrer l'ensemble de fichiers",
