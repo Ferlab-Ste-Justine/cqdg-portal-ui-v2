@@ -1073,8 +1073,6 @@ const fr = {
           study_code: 'Étude',
           sample_type: "Type d'échantillon",
           biospecimen_tissue_source: 'Tissue',
-          age_biospecimen_collection: 'Âge',
-          age_biospecimen_collectionTooltip: 'Âge au prélèvement du biospécimen',
           files: 'Fichiers',
         },
         datafiles: {
@@ -1102,7 +1100,7 @@ const fr = {
       participantsSelected: 'participants séléctionnés',
       participantSelected: 'participant séléctionné',
       saveParticipantsSet: "Enregistrer l'ensemble de participants",
-      participantCount: 'Max. {limit} éléments à la fois. Les {limit} premiers seront traités.',
+      maxLimit: 'Max. {limit} éléments à la fois. Les {limit} premiers seront traités.',
       filesSelected: 'fichiers séléctionnés',
       fileSelected: 'fichier séléctionné',
       saveFilesSet: "Enregistrer l'ensemble de fichiers",
