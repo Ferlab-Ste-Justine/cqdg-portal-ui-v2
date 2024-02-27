@@ -67,7 +67,9 @@ export const renderOmim = (
         {inheritance.map((code) => (
           <Tooltip key={code} title={intl.get(`entities.variant.inheritant.code.${code}`)}>
             <Tag color="blue">
-              <ExternalLink href={omimLink}>{code}</ExternalLink>
+              <ExternalLink className={styles.externalLinkInTag} href={omimLink}>
+                {code}
+              </ExternalLink>
             </Tag>
           </Tooltip>
         ))}
@@ -88,7 +90,10 @@ export const renderClinvar = (clinVar: IClinVar) => {
   return clinVarSigKey.map((clinvarKey) => (
     <Tooltip key={clinvarKey} placement="topLeft" title={removeUnderscoreAndCapitalize(clinvarKey)}>
       <Tag color={ClinvarColorMap[clinvarKey]}>
-        <ExternalLink href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinVar.clinvar_id}`}>
+        <ExternalLink
+          className={styles.externalLinkInTag}
+          href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinVar.clinvar_id}`}
+        >
           {intl.get(`entities.variant.pathogenicity.clinvarAbrv.${clinvarKey}`)}
         </ExternalLink>
       </Tag>
