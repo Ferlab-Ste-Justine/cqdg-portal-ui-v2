@@ -38,6 +38,7 @@ const StudyEntity = () => {
 
   const hasTooManyFiles = (study?.file_count || 0) > MAX_ITEMS_QUERY;
   const isRestricted = study ? study.security === 'R' : true;
+  const hasFamily = !!study?.family_count;
 
   enum SectionId {
     SUMMARY = 'summary',
@@ -94,7 +95,11 @@ const StudyEntity = () => {
           <Space>
             {!isRestricted && study && <DownloadClinicalDataButton sqon={participantSqon} />}
             {!isRestricted && study && (
-              <DownloadFileManifestModal sqon={fileSqon} hasTooManyFiles={hasTooManyFiles} />
+              <DownloadFileManifestModal
+                sqon={fileSqon}
+                hasTooManyFiles={hasTooManyFiles}
+                hasFamily={hasFamily}
+              />
             )}
             {study && (
               <DownloadRequestAccessModal

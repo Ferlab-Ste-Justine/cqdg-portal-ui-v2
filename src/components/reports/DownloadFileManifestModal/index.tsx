@@ -18,6 +18,7 @@ interface IDownloadFileManifestProps {
   type?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
+  hasFamily?: boolean;
 }
 
 const DownloadFileManifestModal = ({
@@ -25,6 +26,7 @@ const DownloadFileManifestModal = ({
   type = 'default',
   isDisabled,
   hasTooManyFiles,
+  hasFamily = true,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -66,9 +68,11 @@ const DownloadFileManifestModal = ({
       >
         <p>{intl.get('api.report.fileManifest.text')}</p>
         <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
-        <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
-          {intl.get('api.report.fileManifest.textCheckbox')}
-        </Checkbox>
+        {hasFamily && (
+          <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
+            {intl.get('api.report.fileManifest.textCheckbox')}
+          </Checkbox>
+        )}
         {hasTooManyFiles && <TooMuchFilesAlert />}
         {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
