@@ -24,8 +24,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
     query: GET_FILES,
   });
 
-  const dataAnalysisFilesTable: IFileEntity[] =
-    data?.filter((f) => f.file_id !== file.file_id) || [];
+  const filesSorted: IFileEntity[] = data?.sort((a, b) => (a.file_id > b.file_id ? 1 : -1)) || [];
 
   return (
     <EntityTable
@@ -33,8 +32,8 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
       loading={loading}
       header={intl.get('entities.file.analysisFiles')}
       columns={getAnalysisFilesColumns()}
-      data={dataAnalysisFilesTable}
-      total={dataAnalysisFilesTable.length}
+      data={filesSorted}
+      total={filesSorted.length}
       initialColumnState={userInfo?.config.files?.tables?.files?.columns}
       dictionary={getProTableDictionary()}
       titleExtra={[
