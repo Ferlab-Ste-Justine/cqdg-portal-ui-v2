@@ -26,6 +26,7 @@ import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
 import { globalActions, useLang } from 'store/global';
+import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
 import { updateUser } from 'store/user/thunks';
@@ -75,10 +76,8 @@ const Header = () => {
         key: 'dictionary',
         label: (
           <ExternalLink
-            key="dictionary"
             href={EnvVariables.configFor('CQDG_DICTIONARY')}
             data-cy="HeaderLink_Dictionary"
-            className={styles.headerDropdownExLink}
           >
             <Space>
               <ExternalLinkIcon {...iconSize} />
@@ -91,10 +90,8 @@ const Header = () => {
         key: 'documentation',
         label: (
           <ExternalLink
-            key="documentation"
             href={EnvVariables.configFor('CQDG_DOCUMENTATION')}
             data-cy="HeaderLink_Documentation"
-            className={styles.headerDropdownExLink}
           >
             <Space>
               <ExternalLinkIcon {...iconSize} />
@@ -106,12 +103,7 @@ const Header = () => {
       {
         key: 'cqdg-website',
         label: (
-          <ExternalLink
-            key="cqdg-website"
-            href={EnvVariables.configFor('CQDG_WEB_SITE')}
-            data-cy="HeaderLink_Website"
-            className={styles.headerDropdownExLink}
-          >
+          <ExternalLink href={EnvVariables.configFor('CQDG_WEB_SITE')} data-cy="HeaderLink_Website">
             <Space>
               <ExternalLinkIcon {...iconSize} />
               {intl.get('layout.main.menu.website')}
@@ -125,12 +117,7 @@ const Header = () => {
       {
         key: 'contact',
         label: (
-          <ExternalLink
-            key="contact"
-            href={EnvVariables.configFor('CQDG_DICTIONARY')}
-            data-cy="HeaderLink_Dictionary"
-            className={styles.headerDropdownExLink}
-          >
+          <ExternalLink href={`mailto:${SUPPORT_EMAIL}`} data-cy="HeaderLink_Contact">
             <Space>
               <MailOutlined {...iconSize} />
               {intl.get('layout.main.menu.contact')}
