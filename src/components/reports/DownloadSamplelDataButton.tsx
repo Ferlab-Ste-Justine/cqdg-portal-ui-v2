@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
@@ -19,26 +19,26 @@ const DownloadSampleDataButton = ({ sampleIds, sqon, type = 'default' }: OwnProp
   const dispatch = useDispatch();
 
   const getCurrentSqon = (): any => sqon || generateSelectionSqon(INDEXES.BIOSPECIMEN, sampleIds);
+  const isDisabled = !sampleIds.length;
 
   return (
-    <Button
-      key={1}
-      icon={<DownloadOutlined />}
-      onClick={() =>
-        dispatch(
-          fetchReport({
-            data: {
-              sqon: getCurrentSqon(),
-              name: ReportType.BIOSPECIMEN_DATA,
-            },
-          }),
-        )
-      }
-      disabled={!sampleIds.length}
-      type={type}
+    <Tooltip
+      title={intl.get('screen.dataExploration.youMustSelect')}
+      trigger={isDisabled ? 'hover' : 'none'}
     >
-      {intl.get('api.report.sampleData.download')}
-    </Button>
+      <Button
+        disabled={isDisabled}
+        type={type}
+        icon={<DownloadOutlined />}
+        onClick={() =>
+          dispatch(
+            fetchReport({ data: { sqon: getCurrentSqon(), name: ReportType.BIOSPECIMEN_DATA } }),
+          )
+        }
+      >
+        {intl.get('api.report.sampleData.download')}
+      </Button>
+    </Tooltip>
   );
 };
 

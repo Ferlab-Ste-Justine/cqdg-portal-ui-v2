@@ -1110,6 +1110,7 @@ const en = {
       removeTypeSet: 'Remove from a {type} set',
       set: 'Set',
       chooseSet: 'Choose a set',
+      youMustSelect: 'You must select at least 1 item',
     },
   },
   // this facets object is also used by Ferlab-ui to override the values in the facets

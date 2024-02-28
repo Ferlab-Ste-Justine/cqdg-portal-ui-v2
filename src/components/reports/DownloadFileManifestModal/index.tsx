@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal } from 'antd';
+import { Button, Checkbox, Modal, Tooltip } from 'antd';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
@@ -34,7 +34,10 @@ const DownloadFileManifestModal = ({
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
 
   return (
-    <>
+    <Tooltip
+      title={intl.get('screen.dataExploration.youMustSelect')}
+      trigger={isDisabled ? 'hover' : 'none'}
+    >
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
@@ -76,7 +79,7 @@ const DownloadFileManifestModal = ({
         {hasTooManyFiles && <TooMuchFilesAlert />}
         {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
-    </>
+    </Tooltip>
   );
 };
 
