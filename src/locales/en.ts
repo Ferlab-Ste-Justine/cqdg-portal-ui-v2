@@ -725,6 +725,8 @@ const en = {
         documentation: 'Documentation',
         dictionary: 'Dictionary',
         community: 'Community',
+        resources: 'Resources',
+        contact: 'Contact',
       },
     },
     user: {

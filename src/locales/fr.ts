@@ -728,6 +728,8 @@ const fr = {
         documentation: 'Documentation',
         dictionary: 'Dictionnaire',
         community: 'Communauté',
+        resources: 'Ressources',
+        contact: 'Contact',
       },
     },
     user: {
