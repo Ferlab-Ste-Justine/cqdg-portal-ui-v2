@@ -35,6 +35,7 @@ const fr = {
     },
     biospecimen: {
       sample_id: `ID d'échantillon`,
+      submitter_sample_id: `ID d'échantillon soumis par l'étude`,
       sample: 'Échantillon',
       samples: 'Échantillons',
       samplesAuto: '{count, plural, =0 {Échantillon} =1 {Échantillon} other {Échantillons}}',
@@ -50,8 +51,7 @@ const fr = {
     participant: {
       participant_id: 'ID de participant',
       participant_2_id: 'ID de participant',
-      submitter_participant_id: 'Identifiant participant ext.',
-      submitter_participant_id_tooltip: "Identifiant du participant soumis par l'étude",
+      submitter_participant_id: "ID de participant soumis par l'étude",
       participant: 'Participant',
       participants: 'Participants',
       id: 'Identifiant',
@@ -509,11 +509,13 @@ const fr = {
     search: {
       selectSavedSet: 'Sélectionner un ensemble',
       searchByParticipantId: 'Recherche par ID de participant',
+      searchByParticipantIdTooltip: "Recherche par ID de participant ou par ID soumis par l'étude",
       savedParticipantSets: 'Ensemble de participants',
       noParticipantFound: 'Aucun participant trouvé',
       noParticipantSetFound: 'Aucun ensemble de participants trouvé',
       participantPlaceholder: 'ex : PT0483333',
       searchBySampleId: 'Recherche par ID d’échantillon',
+      searchBySampleIdTooltip: "Recherche par ID d’échantillon ou par ID soumis par l'étude",
       savedSampleSets: 'Ensemble d’échantillons',
       noSampleFound: 'Aucun sample trouvé',
       noSampleSetFound: 'Aucun ensemble d’échantillons trouvé',

@@ -20,8 +20,8 @@ interface OwnProps {
 const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="file"
-    entityIdTrans={intl.get('components.uploadIds.file')}
-    entityIdentifiers={intl.get('components.uploadIds.fileID')}
+    entityIdTrans={intl.get('entities.file.file')}
+    entityIdentifiers={intl.get('entities.file.file_id')}
     placeHolder={intl.get('components.uploadIds.filePlaceholder')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({

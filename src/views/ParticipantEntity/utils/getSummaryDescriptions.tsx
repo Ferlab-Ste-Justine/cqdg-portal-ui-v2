@@ -1,7 +1,7 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
-import { Tag, Tooltip } from 'antd';
+import { Tag } from 'antd';
 import { IParticipantEntity } from 'graphql/participants/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -15,14 +15,7 @@ const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescri
     value: participant?.participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    label: (
-      <Tooltip
-        title={intl.get('entities.participant.submitter_participant_id_tooltip')}
-        className={styles.tooltip}
-      >
-        {intl.get('entities.participant.submitter_participant_id')}
-      </Tooltip>
-    ),
+    label: intl.get('entities.participant.submitter_participant_id'),
     value: participant?.submitter_participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

@@ -52,6 +52,7 @@ export const MATCH_BIOSPECIMENS = gql`
           node {
             sample_id
             study_code
+            submitter_sample_id
           }
         }
       }

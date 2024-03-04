@@ -20,8 +20,10 @@ interface OwnProps {
 const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="participant"
-    entityIdTrans={intl.get('components.uploadIds.participant')}
-    entityIdentifiers={intl.get('components.uploadIds.participantID')}
+    entityIdTrans={intl.get('entities.participant.participant')}
+    entityIdentifiers={`${intl.get('entities.participant.participant_id')}, ${intl.get(
+      'entities.participant.submitter_participant_id',
+    )}`}
     placeHolder={intl.get('components.uploadIds.participantPlaceholder')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
@@ -31,7 +33,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
-            newFilters: ['participant_id'].map((field) =>
+            newFilters: ['participant_id', 'submitter_participant_id'].map((field) =>
               generateValueFilter({
                 field,
                 value: ids,
@@ -48,7 +50,9 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return participants?.flatMap((participant) => {
         const matchedIds: string[] = ids.filter(
-          (id: string) => participant.participant_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
+          (id: string) =>
+            participant.participant_id.toLocaleLowerCase() === id.toLocaleLowerCase() ||
+            participant.submitter_participant_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
         );
 
         return matchedIds.map((id, index) => ({
