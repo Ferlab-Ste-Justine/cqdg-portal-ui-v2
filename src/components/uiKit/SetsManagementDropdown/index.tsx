@@ -154,9 +154,9 @@ const getMenuProps = ({
           <Tooltip
             arrowPointAtCenter
             placement="topRight"
-            title={`Max. ${numberFormat(MAX_ITEMS_QUERY)} ${intl.get(
-              'screen.dataExploration.participantCount',
-            )}`}
+            title={intl.get('screen.dataExploration.maxLimit', {
+              limit: numberFormat(MAX_ITEMS_QUERY),
+            })}
           >
             <InfoCircleOutlined className={styles.infoCircle} />
           </Tooltip>
