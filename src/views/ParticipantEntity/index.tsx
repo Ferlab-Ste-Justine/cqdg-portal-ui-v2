@@ -41,6 +41,7 @@ const ParticipantEntity = () => {
   }
 
   const totalFamilyMembers = data?.family_relationships?.hits?.total || 0;
+  const hasFamily = data?.family_id && totalFamilyMembers > 1;
 
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
@@ -48,7 +49,7 @@ const ParticipantEntity = () => {
     {
       href: `#${SectionId.FAMILY}`,
       title: intl.get('entities.participant.family'),
-      hidden: !data?.family_id || totalFamilyMembers <= 1,
+      hidden: !hasFamily,
     },
     {
       href: `#${SectionId.DATA_ACCESS}`,
@@ -86,7 +87,7 @@ const ParticipantEntity = () => {
         header={intl.get('entities.participant.profile')}
         title={intl.get('entities.participant.profile')}
       />
-      <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />
+      {hasFamily && <FamilyTable participant={data} loading={loading} id={SectionId.FAMILY} />}
       <EntityDescriptions
         id={SectionId.DATA_ACCESS}
         loading={loading}
