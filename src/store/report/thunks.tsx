@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { saveAs } from 'file-saver';
 import { INDEXES } from 'graphql/constants';
 import { getColumnStateQuery } from 'graphql/reports/queries';
+import EnvironmentVariables from 'helpers/EnvVariables';
 import startCase from 'lodash/startCase';
 import { v4 } from 'uuid';
 
@@ -18,7 +19,7 @@ import { globalActions } from 'store/global';
 
 import { TFetchTSVArgs } from './types';
 
-export const SUPPORT_EMAIL = 'support@includedcc.org';
+export const SUPPORT_EMAIL = EnvironmentVariables.configFor('SUPPORT_EMAIL') || 'support@cqdg.ca';
 
 const showErrorReportNotif = (thunkApi: any) =>
   thunkApi.dispatch(
