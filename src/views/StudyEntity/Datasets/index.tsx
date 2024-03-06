@@ -15,14 +15,14 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
 
-interface IStatsGraphProps {
+interface IDatasetsProps {
   id: string;
   loading: boolean;
   title: string;
   datasets?: ArrangerResultsTree<IDataSet>;
 }
 
-const Datasets = ({ id, loading, title, datasets }: IStatsGraphProps) => (
+const Datasets = ({ id, loading, title, datasets }: IDatasetsProps) => (
   <div className={styles.container} id={id}>
     <Typography.Title className={styles.title} level={4}>
       {title}
