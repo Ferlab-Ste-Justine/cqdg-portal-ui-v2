@@ -31,6 +31,7 @@ const StudySearch = ({ queryBuilderId }: ICustomSearchProps) => {
               icon={<ReadOutlined />}
               title={highlightSearchMatch(option.study_code, matchRegex, search)}
               caption={highlightSearchMatch(option.name, matchRegex, search)}
+              isTooltip
             />
           ),
           value: option.study_code,
