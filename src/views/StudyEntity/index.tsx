@@ -43,8 +43,8 @@ const StudyEntity = () => {
   enum SectionId {
     SUMMARY = 'summary',
     DATA_ACCESS = 'data_access',
-    DATA_FILE = 'data_file',
     DATASET = 'dataset',
+    DATA_FILE = 'data_file',
   }
 
   const defaultLinks: any = [
@@ -53,16 +53,16 @@ const StudyEntity = () => {
       href: `#${SectionId.DATA_ACCESS}`,
       title: intl.get('entities.study.data_access'),
     },
-    {
-      href: `#${SectionId.DATA_FILE}`,
-      title: intl.get('entities.file.datafile'),
-    },
     ...[
       study?.datasets && {
         href: `#${SectionId.DATASET}`,
         title: intl.get('entities.file.available_datasets'),
       },
     ],
+    {
+      href: `#${SectionId.DATA_FILE}`,
+      title: intl.get('entities.file.datafile'),
+    },
   ];
   const links: IAnchorLink[] = defaultLinks.filter((link: IAnchorLink) => link);
 
@@ -126,7 +126,6 @@ const StudyEntity = () => {
         header={intl.get('entities.file.data_access')}
         title={intl.get('entities.file.data_access')}
       />
-      <FilesTable id={SectionId.DATA_FILE} study={study} loading={loading} />
       {study?.datasets && (
         <Datasets
           id={SectionId.DATASET}
@@ -135,6 +134,7 @@ const StudyEntity = () => {
           datasets={study?.datasets}
         />
       )}
+      <FilesTable id={SectionId.DATA_FILE} study={study} loading={loading} />
     </EntityPage>
   );
 };
