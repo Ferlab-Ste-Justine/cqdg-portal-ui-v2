@@ -214,6 +214,7 @@ const SetsManagementDropdown = ({
   const [isEditDisabled, setIsEditDisabled] = useState(true);
   const [modal, setModal] = useState<ModalState>(modals.hideAll);
   const { savedSets, isLoading, fetchingError } = useSavedSet();
+  const isDisabled = !selectedKeys?.length;
 
   useEffect(() => {
     if (savedSets && !isLoading && !fetchingError && sqon) {
@@ -251,25 +252,32 @@ const SetsManagementDropdown = ({
           type={type}
         />
       )}
-      <Dropdown
-        disabled={!selectedKeys?.length}
-        menu={getMenuProps({
-          participantCount: getSetCount(selectedKeys || [], results.total, selectedAllResults),
-          onClick: onClick,
-          isEditDisabled: isEditDisabled,
-          type,
-        })}
-        placement="bottomLeft"
-        trigger={['click']}
-        getPopupContainer={() =>
-          document.getElementById(`${type}-set-dropdown-container`) as HTMLElement
-        }
+      <Tooltip
+        title={intl.get('screen.dataExploration.youMustSelect')}
+        trigger={isDisabled ? 'hover' : 'none'}
       >
-        <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
-          {getTitle(type)}
-          <DownOutlined />
-        </Button>
-      </Dropdown>
+        {/** need a empty div below to show tooltip when Dropdown is disabled */}
+        <div />
+        <Dropdown
+          disabled={isDisabled}
+          menu={getMenuProps({
+            participantCount: getSetCount(selectedKeys || [], results.total, selectedAllResults),
+            onClick: onClick,
+            isEditDisabled: isEditDisabled,
+            type,
+          })}
+          placement="bottomLeft"
+          trigger={['click']}
+          getPopupContainer={() =>
+            document.getElementById(`${type}-set-dropdown-container`) as HTMLElement
+          }
+        >
+          <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
+            {getTitle(type)}
+            <DownOutlined />
+          </Button>
+        </Dropdown>
+      </Tooltip>
     </div>
   );
 };

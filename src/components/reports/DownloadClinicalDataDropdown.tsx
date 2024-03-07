@@ -2,7 +2,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Dropdown } from 'antd';
+import { Button, Dropdown, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
@@ -24,6 +24,7 @@ const DownloadClinicalDataDropdown = ({
 
   const getCurrentSqon = (): any =>
     sqon || generateSelectionSqon(INDEXES.PARTICIPANT, participantIds);
+  const isDisabled = !sqon?.content?.length && !participantIds.length;
 
   const MenuProps = {
     onClick: (e: { key: string }) =>
@@ -49,16 +50,18 @@ const DownloadClinicalDataDropdown = ({
   };
 
   return (
-    <Dropdown
-      key="actionDropdown"
-      disabled={!sqon?.content?.length && !participantIds.length}
-      menu={MenuProps}
-      placement="bottomLeft"
+    <Tooltip
+      title={intl.get('screen.dataExploration.youMustSelect')}
+      trigger={isDisabled ? 'hover' : 'none'}
     >
-      <Button type={type} icon={<DownloadOutlined />}>
-        {intl.get('api.report.clinicalData.download')}
-      </Button>
-    </Dropdown>
+      {/** need a empty div below to show tooltip when Dropdown is disabled */}
+      <div />
+      <Dropdown disabled={isDisabled} key="actionDropdown" menu={MenuProps} placement="bottomLeft">
+        <Button type={type} icon={<DownloadOutlined />}>
+          {intl.get('api.report.clinicalData.download')}
+        </Button>
+      </Dropdown>
+    </Tooltip>
   );
 };
 

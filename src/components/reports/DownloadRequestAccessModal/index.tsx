@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal } from 'antd';
+import { Button, Checkbox, Modal, Tooltip } from 'antd';
 import EnvVariables from 'helpers/EnvVariables';
 
 import RestrictedStudyAlert from 'components/reports/RestrictedStudyAlert';
@@ -43,7 +43,10 @@ const DownloadRequestAccessModal = ({
   )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
 
   return (
-    <>
+    <Tooltip
+      title={intl.get('screen.dataExploration.youMustSelect')}
+      trigger={isDisabled ? 'hover' : 'none'}
+    >
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
@@ -98,7 +101,7 @@ const DownloadRequestAccessModal = ({
         {!withoutFiles && hasTooManyFiles && <TooMuchFilesAlert />}
         {isRestricted && <RestrictedStudyAlert />}
       </Modal>
-    </>
+    </Tooltip>
   );
 };
 
