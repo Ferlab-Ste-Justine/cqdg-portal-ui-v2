@@ -34,28 +34,39 @@ describe('Navigation', () => {
     cy.get('body').contains('Prénom').should('exist');
   });
 
+  it('Lien externe de la header - Dictionary', () => {
+    cy.visitDashboard();
+    cy.get('[data-cy="Resources"]').click({force: true});
+    cy.get('[data-cy="HeaderLink_Dictionary"]')
+      .should('have.attr', 'href', 'https://dict.qa.juno.cqdg.ferlab.bio');
+  });
+
+  it('Lien externe de la header - Documentation', () => {
+    cy.visitDashboard();
+    cy.get('[data-cy="Resources"]').click({force: true});
+    cy.get('[data-cy="HeaderLink_Documentation"]')
+      .should('have.attr', 'href', 'https://docs.cqdg.ca');
+  });
+
   it('Lien externe de la header - Website', () => {
     cy.visitDashboard();
+    cy.get('[data-cy="Resources"]').click({force: true});
     cy.get('[data-cy="HeaderLink_Website"]').invoke('removeAttr', 'target').click({force: true});
     cy.origin('https://cqdg.ca', () => {
       cy.get('body').contains(/^The Quebec Genomic Data Center|Centre quebécois de données génomiques$/).should('exist');
     });
   });
 
-  it('Lien externe de la header - Documentation', () => {
+  it('Lien externe de la header - Contact', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.cqdg.ca');
-  });
-
-  it('Lien externe de la header - Dictionary', () => {
-    cy.visitDashboard();
-    cy.get('[data-cy="HeaderLink_Dictionary"]')
-      .should('have.attr', 'href', 'https://dict.qa.juno.cqdg.ferlab.bio');
+    cy.get('[data-cy="Resources"]').click({force: true});
+    cy.get('[data-cy="HeaderLink_Contact"]')
+      .should('have.attr', 'href', 'mailto:support@cqdg.ca');
   });
 
   it('Lien externe du Dashboard - Data Release', () => {
     cy.visitDashboard();
+    cy.get('[data-cy="Resources"]').click({force: true});
     cy.get('[data-cy="ExternalLink_DataRelease"]')
       .should('have.attr', 'href', 'https://docs.cqdg.ca');
   });

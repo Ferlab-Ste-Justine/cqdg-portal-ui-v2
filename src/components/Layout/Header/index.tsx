@@ -6,6 +6,7 @@ import {
   FileSearchOutlined,
   HomeOutlined,
   LogoutOutlined,
+  MailOutlined,
   ReadOutlined,
   TeamOutlined,
   UserOutlined,
@@ -13,8 +14,7 @@ import {
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import UserAvatar from '@ferlab/ui/core/components/UserAvatar';
 import { useKeycloak } from '@react-keycloak/web';
-import { Button, Dropdown, PageHeader, Tag } from 'antd';
-import { Space } from 'antd';
+import { Button, Dropdown, MenuProps, PageHeader, Space, Tag } from 'antd';
 import EnvVariables, { getFTEnvVarByKey } from 'helpers/EnvVariables';
 
 import { LANG } from 'common/constants';
@@ -26,6 +26,7 @@ import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
 import { globalActions, useLang } from 'store/global';
+import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
 import { updateUser } from 'store/user/thunks';
@@ -67,6 +68,99 @@ const Header = () => {
       }),
     );
     dispatch(globalActions.changeLang(targetLang));
+  };
+
+  const resourcesMenu: MenuProps = {
+    items: [
+      {
+        key: 'dictionary',
+        label: (
+          <ExternalLink
+            href={EnvVariables.configFor('CQDG_DICTIONARY')}
+            data-cy="HeaderLink_Dictionary"
+          >
+            <Space>
+              <ExternalLinkIcon {...iconSize} />
+              {intl.get('layout.main.menu.dictionary')}
+            </Space>
+          </ExternalLink>
+        ),
+      },
+      {
+        key: 'documentation',
+        label: (
+          <ExternalLink
+            href={EnvVariables.configFor('CQDG_DOCUMENTATION')}
+            data-cy="HeaderLink_Documentation"
+          >
+            <Space>
+              <ExternalLinkIcon {...iconSize} />
+              {intl.get('layout.main.menu.documentation')}
+            </Space>
+          </ExternalLink>
+        ),
+      },
+      {
+        key: 'cqdg-website',
+        label: (
+          <ExternalLink href={EnvVariables.configFor('CQDG_WEB_SITE')} data-cy="HeaderLink_Website">
+            <Space>
+              <ExternalLinkIcon {...iconSize} />
+              {intl.get('layout.main.menu.website')}
+            </Space>
+          </ExternalLink>
+        ),
+      },
+      {
+        type: 'divider',
+      },
+      {
+        key: 'contact',
+        label: (
+          <ExternalLink href={`mailto:${SUPPORT_EMAIL}`} data-cy="HeaderLink_Contact">
+            <Space>
+              <MailOutlined {...iconSize} />
+              {intl.get('layout.main.menu.contact')}
+            </Space>
+          </ExternalLink>
+        ),
+      },
+    ],
+  };
+
+  const userMenu: MenuProps = {
+    items: [
+      {
+        key: 'title',
+        type: 'group',
+        label: (
+          <span className={styles.titleUserDropdown}>
+            {intl.get('layout.user.menu.signedWith') + ' '}
+            <b>{tokenParsed.email || tokenParsed.identity_provider_identity}</b>
+          </span>
+        ),
+      },
+      {
+        type: 'divider',
+      },
+      {
+        key: 'profile_settings',
+        label: (
+          <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
+            <Space>
+              <UserOutlined />
+              {intl.get('layout.user.menu.settings')}
+            </Space>
+          </Link>
+        ),
+      },
+      {
+        key: 'logout',
+        label: intl.get('layout.user.menu.logout'),
+        onClick: () => dispatch(userActions.cleanLogout()),
+        icon: <LogoutOutlined />,
+      },
+    ],
   };
 
   return (
@@ -117,105 +211,46 @@ const Header = () => {
             </nav>
           </div>
         }
-        extra={[
-          <HeaderLink
-            key="community"
-            currentPathName={currentPathName}
-            to={STATIC_ROUTES.COMMUNITY}
-            icon={<TeamOutlined />}
-            title={intl.get('layout.main.menu.community')}
-          />,
-          <ExternalLink
-            key="cqdg-website"
-            href={EnvVariables.configFor('CQDG_WEB_SITE')}
-            data-cy="HeaderLink_Website"
-          >
-            <Button key="external-website" className={styles.headerBtn}>
-              {intl.get('layout.main.menu.website')}{' '}
-              <ExternalLinkIcon className={styles.icon} {...iconSize} />
+        extra={
+          <Space size={16}>
+            <HeaderLink
+              currentPathName={currentPathName}
+              to={STATIC_ROUTES.COMMUNITY}
+              icon={<TeamOutlined />}
+              title={intl.get('layout.main.menu.community')}
+            />
+            <Dropdown trigger={['click']} menu={resourcesMenu}>
+              <div className={styles.menuTrigger}>
+                <span className={styles.userName} data-cy="Resources">
+                  {intl.get('layout.main.menu.resources')}
+                </span>
+                <DownOutlined />
+              </div>
+            </Dropdown>
+            <Dropdown trigger={['click']} menu={userMenu}>
+              <div className={styles.menuTrigger}>
+                <UserAvatar
+                  src={userInfo?.profile_image_key}
+                  userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
+                  size={24}
+                  className={styles.userAvatar}
+                />
+                <span className={styles.userName} data-cy="UserName">
+                  {userInfo?.first_name}
+                </span>
+                <DownOutlined />
+              </div>
+            </Dropdown>
+            <Button
+              shape="circle"
+              className={styles.langButton}
+              onClick={handleChangeLang}
+              data-cy={`LangButton_${getTargetLang(lang).toUpperCase()}`}
+            >
+              {getTargetLang(lang).toUpperCase()}
             </Button>
-          </ExternalLink>,
-          <ExternalLink
-            key="documentation"
-            href={EnvVariables.configFor('CQDG_DOCUMENTATION')}
-            data-cy="HeaderLink_Documentation"
-          >
-            <Button key="external-help" className={styles.headerBtn}>
-              {intl.get('layout.main.menu.documentation')}
-              <ExternalLinkIcon className={styles.icon} {...iconSize} />
-            </Button>
-          </ExternalLink>,
-          <ExternalLink
-            key="dictionary"
-            href={EnvVariables.configFor('CQDG_DICTIONARY')}
-            data-cy="HeaderLink_Dictionary"
-          >
-            <Button key="external-help" className={styles.headerBtn}>
-              {intl.get('layout.main.menu.dictionary')}
-              <ExternalLinkIcon className={styles.icon} {...iconSize} />
-            </Button>
-          </ExternalLink>,
-          <Dropdown
-            key="user-menu"
-            trigger={['click']}
-            menu={{
-              items: [
-                {
-                  label: (
-                    <span className={styles.titleUserDropdown}>
-                      {intl.get('layout.user.menu.signedWith') + ' '}
-                      <b>{tokenParsed.email || tokenParsed.identity_provider_identity}</b>
-                    </span>
-                  ),
-                  key: 'title',
-                  type: 'group',
-                },
-                {
-                  type: 'divider',
-                },
-                {
-                  key: 'profile_settings',
-                  label: (
-                    <Link to={STATIC_ROUTES.PROFILE_SETTINGS}>
-                      <Space>
-                        <UserOutlined />
-                        {intl.get('layout.user.menu.settings')}
-                      </Space>
-                    </Link>
-                  ),
-                },
-                {
-                  key: 'logout',
-                  label: intl.get('layout.user.menu.logout'),
-                  onClick: () => dispatch(userActions.cleanLogout()),
-                  icon: <LogoutOutlined />,
-                },
-              ],
-            }}
-          >
-            <a className={styles.userMenuTrigger} onClick={(e) => e.preventDefault()} href="">
-              <UserAvatar
-                src={userInfo?.profile_image_key}
-                userName={`${userInfo?.first_name} ${userInfo?.last_name}`}
-                size={24}
-                className={styles.userAvatar}
-              />
-              <span className={styles.userName} data-cy="UserName">
-                {userInfo?.first_name}
-              </span>
-              <DownOutlined />
-            </a>
-          </Dropdown>,
-          <Button
-            key="change-lang-button"
-            shape="circle"
-            className={styles.langButton}
-            onClick={handleChangeLang}
-            data-cy={`LangButton_${getTargetLang(lang).toUpperCase()}`}
-          >
-            {getTargetLang(lang).toUpperCase()}
-          </Button>,
-        ]}
+          </Space>
+        }
       />
     </>
   );

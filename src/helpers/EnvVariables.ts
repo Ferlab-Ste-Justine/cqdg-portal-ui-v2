@@ -34,6 +34,7 @@ export default class EnvironmentVariables {
       window._env_?.REACT_APP_REPORTS_API_URL || process.env.REACT_APP_REPORTS_API_URL,
     ES_MAX_ITEMS_QUERY:
       window._env_?.REACT_APP_ES_MAX_ITEMS_QUERY || process.env.REACT_APP_ES_MAX_ITEMS_QUERY,
+    SUPPORT_EMAIL: window._env_?.REACT_APP_SUPPORT_EMAIL || process.env.REACT_APP_SUPPORT_EMAIL,
   };
 
   static configFor(key: string): string {

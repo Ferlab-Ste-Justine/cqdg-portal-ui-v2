@@ -59,7 +59,8 @@
     fill: $gray-8;
   }
 
-  .userMenuTrigger {
+  .menuTrigger {
+    cursor: pointer;
     color: $gray-8;
     display: flex;
     align-items: center;
