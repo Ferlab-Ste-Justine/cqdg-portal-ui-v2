@@ -11,11 +11,9 @@ import EnvironmentVariables from 'helpers/EnvVariables';
 import { GraphqlProvider } from 'provider/types';
 
 export const ARRANGER_API = EnvironmentVariables.configFor('ARRANGER_API');
-const PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
-
-export const ARRANGER_API_DOWNLOAD_URL = `${ARRANGER_API}/${PROJECT_ID}/download`;
-export const ARRANGER_API_PROJECT_URL = `${ARRANGER_API}/${PROJECT_ID}/graphql`;
-export const ARRANGER_API_COLUMN_STATE_URL = `${ARRANGER_API}/${PROJECT_ID}/graphql/columnsStateQuery`;
+export const ARRANGER_API_DOWNLOAD_URL = `${ARRANGER_API}/download`;
+export const ARRANGER_API_PROJECT_URL = `${ARRANGER_API}/graphql`;
+export const ARRANGER_API_COLUMN_STATE_URL = `${ARRANGER_API}/graphql/columnsStateQuery`;
 
 const arrangerLink = createHttpLink({
   uri: ARRANGER_API_PROJECT_URL,
