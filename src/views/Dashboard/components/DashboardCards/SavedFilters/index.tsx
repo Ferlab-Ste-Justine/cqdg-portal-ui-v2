@@ -6,6 +6,7 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import GridCard from '@ferlab/ui/core/view/v2/GridCard';
 import { List, Tabs, Typography } from 'antd';
 import cx from 'classnames';
+import EnvVariables from 'helpers/EnvVariables';
 import CardErrorPlaceholder from 'views/Dashboard/components/CardErrorPlaceHolder';
 import CardHeader from 'views/Dashboard/components/CardHeader';
 import { DashboardCardProps } from 'views/Dashboard/components/DashboardCards';
@@ -21,6 +22,28 @@ import ListItem from './ListItem';
 import styles from './index.module.scss';
 
 const { Text } = Typography;
+
+const Content = () => (
+  <Text>
+    {intl.get('screen.dashboard.cards.savedFilters.noSaved')}
+    <br />
+    <br />
+    {intl.get('screen.dashboard.cards.savedFilters.noSaved2')}
+    <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>{intl.get('screen.dataExploration.title')}</Link>
+    {intl.get('screen.dashboard.cards.and')}
+    <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
+    {intl.get('screen.dashboard.cards.pages')}
+    <ExternalLink
+      className={styles.docExternalLink}
+      hasIcon
+      href={`${EnvVariables.configFor(
+        'CQDG_DOCUMENTATION',
+      )}/docs/fonctionnalités-générales-du-portail`}
+    >
+      {intl.get('layout.main.menu.documentation')}
+    </ExternalLink>
+  </Text>
+);
 
 const getItemList = (
   savedFilters: TUserSavedFilter[],
@@ -47,20 +70,9 @@ const getItemList = (
       ) : (
         <Empty
           imageType="grid"
+          size="mini"
           // @ts-ignore cuz the type description is a string
-          description={
-            <>
-              {intl.get('screen.dashboard.cards.savedFilters.noSaved')}
-              <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
-                {intl.get('screen.dataExploration.dataExploration')}
-              </Link>
-              {intl.get('screen.dashboard.cards.and')}
-              <Link to={`${STATIC_ROUTES.VARIANTS}`}>
-                {intl.get('screen.variants.variantsExploration')}
-              </Link>
-              {intl.get('screen.dashboard.cards.pages')}
-            </>
-          }
+          description={<Content />}
         />
       ),
     }}
@@ -85,7 +97,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
       label: (
         <div data-cy="Tab_DataExploration">
           <FileSearchOutlined />
-          {intl.get('screen.dataExploration.dataExploration')} ({dataExplorationFilters.length})
+          {intl.get('screen.dataExploration.title')} ({dataExplorationFilters.length})
         </div>
       ),
       key: SavedFilterTag.DataExplorationPage,
@@ -115,19 +127,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           withHandle
           infoPopover={{
             title: intl.get('screen.dashboard.cards.savedFilters.popoverTitle'),
-            content: (
-              <Text>
-                {intl.get('screen.dashboard.cards.savedFilters.popoverContent')}
-                <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>
-                  {intl.get('screen.dataExploration.dataExploration')}
-                </Link>
-                {intl.get('screen.dashboard.cards.and')}
-                <Link to={`${STATIC_ROUTES.VARIANTS}`}>
-                  {intl.get('screen.variants.variantsExploration')}
-                </Link>
-                {intl.get('screen.dashboard.cards.pages')}
-              </Text>
-            ),
+            content: <Content />,
           }}
         />
       }

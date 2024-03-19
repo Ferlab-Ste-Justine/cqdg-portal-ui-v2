@@ -63,7 +63,7 @@ import styles from './index.module.scss';
 const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'participant_id',
-    title: intl.get('screen.dataExploration.tabs.participants.participant'),
+    title: intl.get('entities.participant.participant_id'),
     dataIndex: 'participant_id',
     render: (participant_id: string) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant_id}`}>{participant_id}</Link>
@@ -71,7 +71,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'study_code',
-    title: intl.get('screen.dataExploration.tabs.participants.study_code'),
+    title: intl.get('entities.study.study'),
     dataIndex: 'study_code',
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
@@ -88,7 +88,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'mondo_tagged.name',
-    title: intl.get('screen.dataExploration.tabs.participants.diagnosis'),
+    title: intl.get('entities.participant.diagnosis_mondo'),
     dataIndex: 'mondo_tagged',
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
@@ -120,7 +120,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'observed_phenotype_tagged.name',
-    title: intl.get('screen.dataExploration.tabs.participants.phenotype'),
+    title: intl.get('entities.participant.phenotype_hpo'),
     dataIndex: 'observed_phenotype_tagged',
     className: styles.phenotypeCell,
     render: (observed_phenotype_tagged: ArrangerResultsTree<IPhenotype>) => {
@@ -195,7 +195,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'nb_files',
-    title: intl.get('screen.dataExploration.tabs.participants.files'),
+    title: intl.get('entities.file.files'),
     render: (participant: ITableParticipantEntity) => {
       const fileCount = participant?.files?.hits.total || 0;
       return fileCount ? (
@@ -226,7 +226,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'nb_biospecimen',
-    title: intl.get('screen.dataExploration.tabs.participants.biospecimen'),
+    title: intl.get('entities.biospecimen.biospecimens'),
     render: (participant: ITableParticipantEntity) => {
       const nb_biospecimens = participant?.biospecimens?.hits.total || 0;
       return nb_biospecimens ? (
@@ -257,7 +257,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'ethnicity',
-    title: intl.get('screen.dataExploration.tabs.participants.ethnicity'),
+    title: intl.get('entities.participant.ethnicity'),
     dataIndex: 'ethnicity',
     defaultHidden: true,
     sorter: { multiple: 1 },
@@ -265,7 +265,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'icd_tagged.name',
-    title: intl.get('screen.dataExploration.tabs.participants.icdTagged'),
+    title: intl.get('entities.participant.diagnosis_icd'),
     dataIndex: 'icd_tagged',
     defaultHidden: true,
     className: styles.diagnosisCell,
@@ -298,7 +298,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'mondo_tagged.source_text',
-    title: intl.get('screen.dataExploration.tabs.participants.diagnosisSourceText'),
+    title: intl.get('entities.participant.diagnosis_source_text'),
     dataIndex: 'mondo_tagged',
     defaultHidden: true,
     className: styles.diagnosisCell,
@@ -320,14 +320,14 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'submitter_participant_id',
-    title: intl.get('screen.dataExploration.tabs.participants.submitterParticipantId'),
+    title: intl.get('entities.participant.submitter_participant_id'),
     dataIndex: 'submitter_participant_id',
     defaultHidden: true,
     render: (submitter_participant_id) => submitter_participant_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'vital_status',
-    title: intl.get('screen.dataExploration.tabs.participants.vitalStatus'),
+    title: intl.get('entities.participant.vital_status'),
     dataIndex: 'vital_status',
     defaultHidden: true,
     sorter: { multiple: 1 },

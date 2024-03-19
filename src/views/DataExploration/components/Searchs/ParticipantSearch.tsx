@@ -21,7 +21,7 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       index={INDEXES.PARTICIPANT}
       placeholder={intl.get('components.search.participantPlaceholder')}
       emptyDescription={intl.get('components.search.noParticipantFound')}
-      title={intl.get('components.search.searchByParticipantId')}
+      title={intl.get('components.search.searchByIds')}
       tooltipText={intl.get('components.search.searchByParticipantIdTooltip')}
       query={GET_PARTICIPANT_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}

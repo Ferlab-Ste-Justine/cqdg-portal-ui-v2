@@ -51,13 +51,13 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'sample_id',
     dataIndex: 'sample_id',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.sample_id'),
+    title: intl.get('entities.biospecimen.sample_id'),
     render: (sample_id: string) => sample_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'biospecimen_id',
     dataIndex: 'biospecimen_id',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_id'),
+    title: intl.get('entities.biospecimen.biospecimen_id'),
     render: (biospecimen_id: string) =>
       biospecimen_id ? (
         <Typography.Link
@@ -79,7 +79,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'participant.participant_id',
     dataIndex: 'participant',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.participant_id'),
+    title: intl.get('entities.participant.participant_id'),
     render: (participant: IParticipantEntity) => (
       <Link to={`${STATIC_ROUTES.PARTICIPANTS}/${participant.participant_id}`}>
         {participant.participant_id}
@@ -88,7 +88,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'study_code',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.study_code'),
+    title: intl.get('entities.study.study'),
     dataIndex: 'study_code',
     sorter: { multiple: 1 },
     render: (study_code: string) => (
@@ -98,7 +98,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'sample_type',
     dataIndex: 'sample_type',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.sample_type'),
+    title: intl.get('entities.biospecimen.sample_type'),
     sorter: { multiple: 1 },
     render: (sample_type: string) => {
       if (!sample_type) return TABLE_EMPTY_PLACE_HOLDER;
@@ -114,7 +114,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'biospecimen_tissue_source',
     dataIndex: 'biospecimen_tissue_source',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
+    title: intl.get('entities.biospecimen.biospecimen_tissue_source'),
     sorter: { multiple: 1 },
     render: (biospecimen_tissue_source: string) => {
       if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
@@ -157,7 +157,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'files',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.files'),
+    title: intl.get('entities.file.files'),
     render: (biospecimen: IBiospecimenEntity) => {
       const fileCount = biospecimen?.files?.hits?.total || 0;
       return fileCount ? (

@@ -21,7 +21,7 @@ const SampleSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       field="sample_id"
       searchFields={['sample_id', 'submitter_sample_id']}
       index={INDEXES.BIOSPECIMEN}
-      title={intl.get('components.search.searchBySampleId')}
+      title={intl.get('components.search.searchByIds')}
       tooltipText={intl.get('components.search.searchBySampleIdTooltip')}
       placeholder={intl.get('components.search.samplePlaceholder')}
       emptyDescription={intl.get('components.search.noSampleFound')}

@@ -35,6 +35,7 @@ import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
+import ExternalDataTypeLink from 'components/utils/ExternalDataTypeLink';
 import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
@@ -51,18 +52,18 @@ import styles from './index.module.scss';
 const getDefaultColumns = (): ProColumnType[] => [
   {
     key: 'lock',
-    title: intl.get('screen.dataExploration.tabs.datafiles.fileAuthorization'),
+    title: intl.get('entities.file.file_authorization'),
+    tooltip: intl.get('entities.file.file_authorization'),
     iconTitle: <LockOutlined />,
-    tooltip: intl.get('screen.dataExploration.tabs.datafiles.fileAuthorization'),
     align: 'center',
     render: (file: IFileEntity) => {
       const hasAccess = userHasAccessToFile(file);
       return hasAccess ? (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.authorized')}>
+        <Tooltip title={intl.get('entities.file.authorized')}>
           <UnlockFilled className={styles.authorizedLock} />
         </Tooltip>
       ) : (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.controlled')}>
+        <Tooltip title={intl.get('entities.file.controlled')}>
           <LockOutlined className={styles.unauthorizedLock} />
         </Tooltip>
       );
@@ -70,32 +71,32 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'data_access',
-    title: intl.get('screen.dataExploration.tabs.datafiles.dataAccess'),
+    title: intl.get('entities.file.data_access'),
+    tooltip: intl.get('entities.file.data_access'),
     iconTitle: <SafetyOutlined />,
-    tooltip: intl.get('screen.dataExploration.tabs.datafiles.dataAccess'),
     dataIndex: 'data_access',
     sorter: { multiple: 1 },
     align: 'center',
     render: (data_access: string) =>
       data_access === FileAccessType.REGISTERED ? (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.registered')}>
+        <Tooltip title={intl.get('entities.file.registered')}>
           <Tag color="green">R</Tag>
         </Tooltip>
       ) : (
-        <Tooltip title={intl.get('screen.dataExploration.tabs.datafiles.controlled')}>
+        <Tooltip title={intl.get('entities.file.controlled')}>
           <Tag color="geekblue">C</Tag>
         </Tooltip>
       ),
   },
   {
     key: 'file_id',
-    title: intl.get('screen.dataExploration.tabs.datafiles.file'),
+    title: intl.get('entities.file.file_id'),
     dataIndex: 'file_id',
     render: (file_id: string) => <Link to={`${STATIC_ROUTES.FILES}/${file_id}`}>{file_id}</Link>,
   },
   {
     key: 'study_code',
-    title: intl.get('screen.dataExploration.tabs.datafiles.study_code'),
+    title: intl.get('entities.study.study'),
     dataIndex: 'study_code',
     sorter: { multiple: 1 },
     className: styles.studyIdCell,
@@ -113,13 +114,14 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'data_category',
-    title: intl.get('screen.dataExploration.tabs.datafiles.dataCategory'),
+    title: intl.get('entities.file.data_category'),
     dataIndex: 'data_category',
     sorter: { multiple: 1 },
   },
   {
     key: 'data_type',
-    title: intl.get('screen.dataExploration.tabs.datafiles.dataType'),
+    title: intl.get('entities.file.data_type'),
+    tooltip: <ExternalDataTypeLink />,
     dataIndex: 'data_type',
     sorter: { multiple: 1 },
     render: (data_type) => data_type || TABLE_EMPTY_PLACE_HOLDER,
@@ -134,20 +136,20 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'file_format',
-    title: intl.get('screen.dataExploration.tabs.datafiles.format'),
+    title: intl.get('entities.file.file_format'),
     dataIndex: 'file_format',
     sorter: { multiple: 1 },
   },
   {
     key: 'file_size',
-    title: intl.get('screen.dataExploration.tabs.datafiles.size'),
+    title: intl.get('entities.file.file_size'),
     dataIndex: 'file_size',
     sorter: { multiple: 1 },
     render: (file_size) => formatFileSize(file_size, { output: 'string', round: 1 }),
   },
   {
     key: 'nb_participants',
-    title: intl.get('screen.dataExploration.tabs.datafiles.participants'),
+    title: intl.get('entities.participant.participants'),
     render: (file: IFileEntity) => {
       const participantIds = file?.participants?.hits.edges.map((p) => p.node.participant_id) || [];
       return participantIds?.length ? (
@@ -178,7 +180,7 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'nb_biospecimens',
-    title: intl.get('screen.dataExploration.tabs.datafiles.biospecimens'),
+    title: intl.get('entities.biospecimen.biospecimens'),
     render: (file: IFileEntity) => {
       const nb_biospecimens = file?.biospecimens?.hits.total || 0;
       return nb_biospecimens ? (
@@ -209,14 +211,14 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'file_name',
-    title: intl.get('screen.dataExploration.tabs.datafiles.name'),
+    title: intl.get('entities.file.file_name'),
     dataIndex: 'file_name',
     defaultHidden: true,
     render: (file_name) => file_name || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'sequencing_experiment.platform',
-    title: intl.get('screen.dataExploration.tabs.datafiles.platform'),
+    title: intl.get('entities.file.sequencing_experiment.platform'),
     dataIndex: 'sequencing_experiment',
     sorter: { multiple: 1 },
     defaultHidden: true,

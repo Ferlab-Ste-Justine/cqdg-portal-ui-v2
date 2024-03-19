@@ -9,6 +9,7 @@ import { INDEXES } from 'graphql/constants';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import ExternalDataTypeLink from 'components/utils/ExternalDataTypeLink';
 import { STATIC_ROUTES } from 'utils/routes';
 
 interface IFileInfoByType {
@@ -76,6 +77,7 @@ export const getDataTypeColumns = (files_nb: number, study_code: string): ProCol
     key: 'value',
     dataIndex: 'value',
     title: intl.get('entities.file.data_type'),
+    tooltip: <ExternalDataTypeLink />,
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

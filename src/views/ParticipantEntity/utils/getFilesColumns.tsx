@@ -10,6 +10,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import ExternalDataTypeLink from 'components/utils/ExternalDataTypeLink';
 import { STATIC_ROUTES } from 'utils/routes';
 
 interface IFileInfoByType {
@@ -115,6 +116,7 @@ export const getDataTypeColumns = (files_nb: number): ProColumnType<any>[] => [
   {
     key: 'value',
     dataIndex: 'value',
+    tooltip: <ExternalDataTypeLink />,
     title: intl.get('entities.file.data_type'),
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
