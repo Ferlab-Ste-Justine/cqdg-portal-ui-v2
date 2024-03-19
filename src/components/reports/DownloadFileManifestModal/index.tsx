@@ -2,8 +2,10 @@ import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
+import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
@@ -48,11 +50,26 @@ const DownloadFileManifestModal = ({
     </Text>
   );
 
+  const getTooltipTitle = () =>
+    isDisabled ? (
+      intl.get('screen.dataExploration.youMustSelect')
+    ) : (
+      <>
+        {intl.get('api.report.fileManifest.tooltip')}
+        <ExternalLink
+          className={styles.externalLinkFerload}
+          hasIcon
+          href={`${EnvVariables.configFor(
+            'CQDG_DOCUMENTATION',
+          )}/docs/comment-utiliser-le-client-ferload`}
+        >
+          Ferload
+        </ExternalLink>
+      </>
+    );
+
   return (
-    <Tooltip
-      title={intl.get('screen.dataExploration.youMustSelect')}
-      trigger={isDisabled ? 'hover' : 'none'}
-    >
+    <Tooltip title={getTooltipTitle()} visible={isModalVisible ? false : undefined}>
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}

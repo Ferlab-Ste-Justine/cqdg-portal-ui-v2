@@ -3,10 +3,14 @@
 .container {
   max-width: 1600px;
   margin-bottom: 40px;
+}
 
-  .title {
-    margin-bottom: 16px;
-  }
+.title {
+  margin-bottom: 16px;
+}
+
+.titlePopover {
+  max-width: 500px;
 }
 
 .tooltipIcon {

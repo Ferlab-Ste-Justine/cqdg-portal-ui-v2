@@ -349,7 +349,7 @@ const en = {
     delete: 'Delete',
     unknown: 'Unknown',
     summary: 'Summary',
-    viewInDataExploration: 'View in Data Exploration',
+    viewInDataExploration: 'View in Data Explorer',
     search: {
       genes: {
         emptyText: 'No gene found',
@@ -500,6 +500,7 @@ const en = {
         textStudy: `Download a manifest of this study’s files which can be used with CQDG's bulk download tool*. This manifest also includes additional information, including the participants and samples associated with these files.`,
         subText: '*In development and will be available soon.',
         textCheckbox: `Include data files of the same type for the participants' related family members for this selection.`,
+        tooltip: 'File manifest for the tool ',
       },
       requestAccess: {
         button: 'Request access',
@@ -728,7 +729,7 @@ const en = {
       menu: {
         dashboard: 'Dashboard',
         studies: 'Studies',
-        explore: 'Data Exploration',
+        explore: 'Data Explorer',
         variants: 'Variants',
         website: 'Website',
         documentation: 'Documentation',

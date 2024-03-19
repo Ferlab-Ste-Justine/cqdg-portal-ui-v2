@@ -5,7 +5,7 @@ import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQuery
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage';
 import EntityDataset from '@ferlab/ui/core/pages/EntityPage/EntityDataset';
-import { Tooltip, Typography } from 'antd';
+import { Popover, Typography } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { IDataSet } from 'graphql/studies/models';
@@ -27,9 +27,12 @@ const Datasets = ({ id, loading, title, datasets }: IDatasetsProps) => (
   <div className={styles.container} id={id}>
     <Typography.Title className={styles.title} level={4}>
       {title}
-      <Tooltip arrowPointAtCenter placement="topLeft" title={intl.get('entities.file.datasetInfo')}>
+      <Popover
+        overlayClassName={styles.titlePopover}
+        content={intl.get('entities.file.datasetInfo')}
+      >
         <InfoCircleOutlined className={styles.tooltipIcon} />
-      </Tooltip>
+      </Popover>
     </Typography.Title>
     {datasets?.hits?.edges?.map(({ node: dataset }) => (
       <EntityDataset

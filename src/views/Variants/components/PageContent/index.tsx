@@ -141,21 +141,23 @@ const PageContent = ({ variantMapping }: IPageContentProps) => {
 
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
-      <Title className={styles.title} level={4} data-cy="Title_Variants">
-        {intl.get('screen.variants.title')}
-      </Title>
-      <Text className={styles.title}>
-        {intl.get('screen.variants.subTitle')}
-        <ExternalLink
-          className={styles.docExternalLink}
-          hasIcon
-          href={`${EnvVariables.configFor(
-            'CQDG_DOCUMENTATION',
-          )}/docs/fonctionnalités-générales-du-portail`}
-        >
-          {intl.get('layout.main.menu.documentation')}
-        </ExternalLink>
-      </Text>
+      <div>
+        <Title className={styles.title} level={4} data-cy="Title_Variants">
+          {intl.get('screen.variants.title')}
+        </Title>
+        <Text className={styles.subTitle}>
+          {intl.get('screen.variants.subTitle')}
+          <ExternalLink
+            className={styles.docExternalLink}
+            hasIcon
+            href={`${EnvVariables.configFor(
+              'CQDG_DOCUMENTATION',
+            )}/docs/fonctionnalités-générales-du-portail`}
+          >
+            {intl.get('layout.main.menu.documentation')}
+          </ExternalLink>
+        </Text>
+      </div>
       <QueryBuilder
         id={VARIANT_REPO_QB_ID}
         className="variants-repo__query-builder"

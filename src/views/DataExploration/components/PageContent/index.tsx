@@ -220,21 +220,23 @@ const PageContent = ({
 
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
-      <Title className={styles.title} level={4} data-cy="Title_DataExploration">
-        {intl.get('screen.dataExploration.title')}
-      </Title>
-      <Text className={styles.title}>
-        {intl.get('screen.dataExploration.subTitle')}
-        <ExternalLink
-          className={styles.docExternalLink}
-          hasIcon
-          href={`${EnvVariables.configFor(
-            'CQDG_DOCUMENTATION',
-          )}/docs/fonctionnalités-générales-du-portail`}
-        >
-          {intl.get('layout.main.menu.documentation')}
-        </ExternalLink>
-      </Text>
+      <div>
+        <Title className={styles.title} level={4} data-cy="Title_DataExploration">
+          {intl.get('screen.dataExploration.title')}
+        </Title>
+        <Text className={styles.subTitle}>
+          {intl.get('screen.dataExploration.subTitle')}
+          <ExternalLink
+            className={styles.docExternalLink}
+            hasIcon
+            href={`${EnvVariables.configFor(
+              'CQDG_DOCUMENTATION',
+            )}/docs/fonctionnalités-générales-du-portail`}
+          >
+            {intl.get('layout.main.menu.documentation')}
+          </ExternalLink>
+        </Text>
+      </div>
       <QueryBuilder
         id={DATA_EXPLORATION_QB_ID}
         className="data-exploration-repo__query-builder"

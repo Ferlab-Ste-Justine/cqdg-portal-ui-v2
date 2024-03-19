@@ -107,7 +107,7 @@ const fr = {
     file: {
       file: 'Fichier',
       files: 'Fichiers',
-      datafile: 'Fichier',
+      datafile: 'Fichier de données',
       datafiles: 'Fichiers',
       filesAuto: '{count, plural, =0 {Fichier} =1 {Fichier} other {Fichiers}}',
       identifiant: 'Identifiant',
@@ -350,7 +350,7 @@ const fr = {
     delete: 'Supprimer',
     unknown: 'Inconnu',
     summary: 'Résumé',
-    viewInDataExploration: 'Voir sur la page Exploration',
+    viewInDataExploration: 'Voir sur la page Explorateur',
     search: {
       genes: {
         emptyText: 'Aucun gène trouvé',
@@ -502,6 +502,7 @@ const fr = {
         textStudy: `Téléchargez un manifeste des fichiers de cette étude. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG*. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         subText: '*En développement et bientôt disponible.',
         textCheckbox: `Inclure les fichiers de données de même type des membres de la famille des participants représentés dans les fichiers sélectionnés.`,
+        tooltip: 'Manifeste de fichiers pour l’outil ',
       },
       requestAccess: {
         button: 'Demande d’accès',
@@ -739,7 +740,7 @@ const fr = {
       menu: {
         dashboard: 'Tableau de bord',
         studies: 'Études',
-        explore: 'Exploration',
+        explore: 'Explorateur',
         variants: 'Variants',
         website: 'Site web',
         documentation: 'Documentation',
