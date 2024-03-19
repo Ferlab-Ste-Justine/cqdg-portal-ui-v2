@@ -64,7 +64,7 @@ const fr = {
       diagnosis: 'Diagnostic',
       diagnoses: 'Diagnostics',
       diagnosis_mondo: 'Diagnostic (MONDO)',
-      diagnosis_icd10: 'Diagnosis (ICD-10)',
+      diagnosis_icd10: 'Diagnostic (ICD-10)',
       diagnosis_icd: 'Diagnostic (ICD)',
       diagnosis_source_text: 'Diagnostic (texte source)',
       age_at_diagnosis: 'Âge au diagnostic',
@@ -440,6 +440,7 @@ const fr = {
     },
     seeLess: 'Voir moins',
     seeMore: 'Voir plus',
+    ferload: 'Ferload',
   },
   api: {
     savedFilter: {
@@ -623,7 +624,7 @@ const fr = {
           },
           saveThisFilter: 'Sauvegarder ce filtre',
           confirmUnsaved: {
-            title: 'Modifications non Sauvegardées',
+            title: 'Modifications non sauvegardées',
             openSavedFilter: {
               okText: 'Continuer',
               cancelText: 'Annuler',

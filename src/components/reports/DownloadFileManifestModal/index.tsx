@@ -63,7 +63,7 @@ const DownloadFileManifestModal = ({
             'CQDG_DOCUMENTATION',
           )}/docs/comment-utiliser-le-client-ferload`}
         >
-          Ferload
+          {intl.get('global.ferload')}
         </ExternalLink>
       </>
     );

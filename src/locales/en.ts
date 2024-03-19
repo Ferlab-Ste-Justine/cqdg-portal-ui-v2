@@ -439,6 +439,7 @@ const en = {
     },
     seeLess: 'See less',
     seeMore: 'See more',
+    ferload: 'Ferload',
   },
   api: {
     savedFilter: {
