@@ -1,10 +1,11 @@
 import intl from 'react-intl-universal';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import ExternalLinkIcon from '@ferlab/ui/core/components/ExternalLink/ExternalLinkIcon';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { EntityTableRedirectLink } from '@ferlab/ui/core/pages/EntityPage';
 import EntityDataset from '@ferlab/ui/core/pages/EntityPage/EntityDataset';
-import { Typography } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { ArrangerResultsTree } from 'graphql/models';
 import { IDataSet } from 'graphql/studies/models';
@@ -26,6 +27,9 @@ const Datasets = ({ id, loading, title, datasets }: IDatasetsProps) => (
   <div className={styles.container} id={id}>
     <Typography.Title className={styles.title} level={4}>
       {title}
+      <Tooltip arrowPointAtCenter placement="topLeft" title={intl.get('entities.file.datasetInfo')}>
+        <InfoCircleOutlined className={styles.tooltipIcon} />
+      </Tooltip>
     </Typography.Title>
     {datasets?.hits?.edges?.map(({ node: dataset }) => (
       <EntityDataset

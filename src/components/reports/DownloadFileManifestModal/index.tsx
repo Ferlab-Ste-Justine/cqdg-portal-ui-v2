@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal, Tooltip } from 'antd';
+import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
@@ -13,12 +13,15 @@ import FilesTable from './FilesTable';
 
 import styles from './index.module.scss';
 
+const { Text } = Typography;
+
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   type?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
   hasFamily?: boolean;
+  isStudy?: boolean;
 }
 
 const DownloadFileManifestModal = ({
@@ -27,11 +30,23 @@ const DownloadFileManifestModal = ({
   isDisabled,
   hasTooManyFiles,
   hasFamily = true,
+  isStudy = false,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
+
+  const Content = () => (
+    <Text>
+      <p>
+        {isStudy
+          ? intl.get('api.report.fileManifest.textStudy')
+          : intl.get('api.report.fileManifest.text')}
+      </p>
+      <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
+    </Text>
+  );
 
   return (
     <Tooltip
@@ -69,8 +84,7 @@ const DownloadFileManifestModal = ({
         className={styles.modal}
         data-cy="FileManifest_Modal"
       >
-        <p>{intl.get('api.report.fileManifest.text')}</p>
-        <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
+        <Content />
         {hasFamily && (
           <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
             {intl.get('api.report.fileManifest.textCheckbox')}

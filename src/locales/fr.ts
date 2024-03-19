@@ -132,7 +132,9 @@ const fr = {
       category: 'Catégorie',
       data_category: 'Catégorie de données',
       data_access: 'Accès aux données',
-      available_datasets: 'Jeux de données',
+      specialized_datasets: 'Jeux de données spécialisés',
+      datasetInfo:
+        'Les jeux de données spécialisés suivants sont offerts par l’étude aux chercheurs qui en font la demande. Un jeu de données spécialisé est un sous-ensemble des données de l’étude qui fait référence à une publication, un résultat d’une analyse, un événement de collecte ou à tout autre particularité que l’étude veut mettre en évidence.',
       dataset: 'Jeux de données',
       experimentalProcedure: 'Procédure expérimentale',
       analysisProperties: 'Propriétés de l’analyse',
@@ -455,7 +457,7 @@ const fr = {
         messageCreate: "Impossible de créer l'ensemble",
       },
       success: {
-        titleCreate: 'Votre ensemble a été enregistré.',
+        titleCreate: 'Votre ensemble a été sauvegardé.',
         messageCreate: 'Vous pouvez ajouter vos ensembles a une requête ou au tableau de bord.',
         titleUpdate: 'Succès',
         messageUpdate: 'Votre ensemble a été modifié.',
@@ -497,6 +499,7 @@ const fr = {
         okText: 'Télécharger',
         cancel: 'Annuler',
         text: `Télécharger un manifeste des fichiers sélectionnés. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG*. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
+        textStudy: `Téléchargez un manifeste des fichiers de cette étude. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG*. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         subText: '*En développement et bientôt disponible.',
         textCheckbox: `Inclure les fichiers de données de même type des membres de la famille des participants représentés dans les fichiers sélectionnés.`,
       },
@@ -505,7 +508,13 @@ const fr = {
         title: 'Demande d’accès',
         okText: 'Télécharger',
         cancel: 'Annuler',
-        text: `Télécharger les documents requis par les études pour votre demande d'accès aux données. Ces documents fournissent des informations sur les conditions d'utilisation des données autorisées ainsi qu'une liste complète par étude des fichiers sélectionnés. Pour en savoir davantage, consulter la page `,
+        text: 'Pour obtenir l’accès aux données de cette étude, veuillez formuler votre demande auprès de l’autorité d’accès ci-dessous :',
+        text2:
+          'Avant de formuler votre demande, assurez-vous d’être en mesure de répondre aux exigences et aux restrictions d’accès décrites dans la section « Accès aux données ».',
+        text3: 'Pour en savoir davantage, veuillez consulter la page ',
+        content:
+          'Téléchargez une archive contenant des documents pour vous guider dans vos demandes d’accès. Vous y trouverez les conditions d’utilisation et les coordonnées de l’autorité d’accès pour chaque étude, ainsi que la liste des fichiers par étude qui font l’objet de la demande d’accès.',
+        content2: 'Pour plus de détails, consultez le fichier README_FR dans l’archive ou la page ',
         textLink: `Demande d'accès aux données`,
         textCheckbox: `Inclure tous les fichiers de même type sur les membres des familles représentées dans cette sélection.`,
       },
@@ -602,8 +611,8 @@ const fr = {
       header: {
         modal: {
           edit: {
-            title: 'Enregistrer ce filtre',
-            okText: 'Enregistrer',
+            title: 'Sauvegarder ce filtre',
+            okText: 'Sauvegarder',
             cancelText: 'Annuler',
             input: {
               label: 'Nom du filtre',
@@ -611,14 +620,14 @@ const fr = {
               maximumLength: 'caractères maximum',
             },
           },
-          saveThisFilter: 'Enregistrer ce filtre',
+          saveThisFilter: 'Sauvegarder ce filtre',
           confirmUnsaved: {
-            title: 'Modifications non enregistrées',
+            title: 'Modifications non Sauvegardées',
             openSavedFilter: {
               okText: 'Continuer',
               cancelText: 'Annuler',
               content:
-                "Vous êtes sur le point d'ouvrir un filtre enregistré; toutes les modifications seront perdues.",
+                "Vous êtes sur le point d'ouvrir un filtre sauvegardé; toutes les modifications seront perdues.",
             },
             createNewFilter: {
               okText: 'Créer',
@@ -639,15 +648,15 @@ const fr = {
         },
         tooltips: {
           newQueryBuilder: 'Nouveau filtre',
-          save: 'Enregistrer le filtre',
-          saveChanges: 'Enregistrer les changements',
+          save: 'Sauvegarder le filtre',
+          saveChanges: 'Sauvegarder les changements',
           delete: 'Supprimer',
           duplicateQueryBuilder: 'Dupliquer le filtre',
           share: "Partager (Copier l'URL)",
           setAsDefaultFilter: 'Définir comme filtre par défaut',
           unsetDefaultFilter: 'Filtre par défaut non défini',
           undoChanges: 'Filtre par défaut non défini',
-          noSavedFilters: "Vous n'avez aucun filtre enregistré",
+          noSavedFilters: "Vous n'avez aucun filtre sauvegardé",
         },
         myFiltersDropdown: {
           title: 'Mes filtres',
@@ -689,7 +698,7 @@ const fr = {
       modal: {
         edit: {
           title: "Modifier l'ensemble",
-          okText: 'Enregistrer',
+          okText: 'Sauvegarder',
           cancelText: 'Annuler',
           input: {
             label: "Nom de l'ensemble",
@@ -796,7 +805,7 @@ const fr = {
           title: 'Supprimer le compte',
           button: 'Supprimer mon compte',
           notice:
-            'Vous ne pourrez plus vous connecter au portail de données CQDG. Tous vos ensembles et requêtes enregistrés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
+            'Vous ne pourrez plus vous connecter au portail de données CQDG. Tous vos ensembles et requêtes sauvegardés seront perdus. Vous pouvez créer un nouveau compte à tout moment.',
           confirm: {
             content: 'Êtes-vous sûr(e) de vouloir supprimer définitivement ce compte ?',
           },
@@ -838,7 +847,7 @@ const fr = {
           label: 'Domaine(s) de recherche ou domaine(s) d’intérêt',
           checkAll: 'Cochez tout ce qui s’applique',
         },
-        saveChanges: 'Enregistrer les modifications',
+        saveChanges: 'Sauvegarder les modifications',
         discardChanges: 'Annuler les modifications',
       },
       roleOptions: {
@@ -878,7 +887,7 @@ const fr = {
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
           contactSupport: 'contactez le support',
           pleaseRefresh: 'Veuillez actualiser et réessayer ou ',
-          failedFetch: 'Échec de la récupération des filtres enregistrés',
+          failedFetch: 'Échec de la récupération des filtres sauvegardés',
         },
         savedFilters: {
           title: 'Mes filtres',
@@ -1068,26 +1077,27 @@ const fr = {
           title: 'Fichiers de données ({count})',
         },
       },
+      saveSelection: 'Sauvegarder la sélection',
       participantsSelected: 'participants séléctionnés',
       participantSelected: 'participant séléctionné',
-      saveParticipantsSet: "Enregistrer l'ensemble de participants",
+      saveParticipantsSet: "Sauvegarder l'ensemble de participants",
       maxLimit: 'Max. {limit} éléments à la fois. Les {limit} premiers seront traités.',
       filesSelected: 'fichiers séléctionnés',
       fileSelected: 'fichier séléctionné',
-      saveFilesSet: "Enregistrer l'ensemble de fichiers",
+      saveFilesSet: "Sauvegarder l'ensemble de fichiers",
       biospecimensSelected: 'biospécimens séléctionnés',
       biospecimenSelected: 'biospécimen séléctionné',
-      saveBiospecimensSet: "Enregistrer l'ensemble de biospécimens",
+      saveBiospecimensSet: "Sauvegarder l'ensemble de biospécimens",
       variantsSelected: 'variants séléctionnés',
       variantSelected: 'variant séléctionné',
-      saveVariantsSet: "Enregistrer l'ensemble de variants",
+      saveVariantsSet: "Sauvegarder l'ensemble de variants",
       searchByBiospecimenId: 'Recherche par ID biospécimen',
       searchByBiospecimenSampleId: 'Recherche par ID d’échantillon',
       noBiospecimenFound: 'Aucun biospécimen trouvé',
       noBiospecimenSetsFound: 'Aucun ensemble de biospécimen trouvé',
       noBiospecimenCollectionFound: 'Aucune ID collection trouvé',
       savedBiospecimenSets: 'Ensemble d’échantillons',
-      saveAsNewSet: 'Enregistrer un nouvel ensemble',
+      saveAsNewSet: 'Créer un nouvel ensemble',
       addToExistingSet: 'Ajouter à un ensemble existant',
       removeFromExistingSet: "Supprimer d'un ensemble existant",
       addToSet: "Ajouter à l'ensemble",
