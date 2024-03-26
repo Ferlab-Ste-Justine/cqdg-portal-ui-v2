@@ -1,5 +1,3 @@
-// Footer.js
-
 import React from 'react';
 
 import ChuSjLogo from 'components/assets/logos-chusj-color.svg';

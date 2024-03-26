@@ -10,7 +10,7 @@ import TextIcon from '../../TextIcon';
 
 import styles from './index.module.scss';
 
-// TODO: add redirect and plug real data
+// TODO: plug real data
 const Variants = () => {
   const { keycloak } = useKeycloak();
   const handleSignin = async () => {

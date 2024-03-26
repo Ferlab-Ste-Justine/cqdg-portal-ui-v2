@@ -7,7 +7,6 @@ import sd4hLogo from '../../../../components/assets/sd4h.png';
 
 import styles from './index.module.scss';
 
-// TODO: add mailto
 const SecureData = () => (
   <div className={styles.container}>
     <img src={sd4hLogo} className={styles.logo} />

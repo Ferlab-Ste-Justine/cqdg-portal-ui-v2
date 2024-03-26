@@ -6,30 +6,35 @@ import CartageneLogo from 'components/assets/cartagene.png';
 
 import styles from './index.module.scss';
 
-const studies = ['cartagene', 'dee', 'bacq', 'pragmatiq', 'neurodev'];
+const studies = [
+  { name: 'cartagene', logo: CartageneLogo },
+  { name: 'dee' },
+  { name: 'bacq' },
+  { name: 'pragmatiq' },
+  { name: 'neurodev' },
+];
 
-// TODO: Check for text overflow
 const Carousel = () => (
   <AntCarousel
     className={styles.carousel}
-    // autoplay
-    // autoplaySpeed={5000}
+    autoplay
+    autoplaySpeed={5000}
     dots={{ className: styles.dots }}
   >
     {studies.map((study) => (
-      <div className={styles.contentStyle} key={study}>
+      <div className={styles.contentStyle} key={study.name}>
         <div className={styles.title}>
-          {intl.get(`screen.loginPage.studies.${study}.title`) !== '' ? (
-            intl.get(`screen.loginPage.studies.${study}.title`)
+          {study.logo ? (
+            <img src={study.logo} alt="Study Logo" className={styles.logo} />
           ) : (
-            <img src={CartageneLogo} alt="Cartagene Logo" className={styles.cartageneLogo} />
+            intl.get(`screen.loginPage.studies.${study.name}.title`)
           )}
         </div>
         <div className={styles.subTitle}>
-          {intl.get(`screen.loginPage.studies.${study}.subtitle`)}
+          {intl.get(`screen.loginPage.studies.${study.name}.subtitle`)}
         </div>
         <div className={styles.description}>
-          {intl.getHTML(`screen.loginPage.studies.${study}.description`)}
+          {intl.getHTML(`screen.loginPage.studies.${study.name}.description`)}
         </div>
       </div>
     ))}
