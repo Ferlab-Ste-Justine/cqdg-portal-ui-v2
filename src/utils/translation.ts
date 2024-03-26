@@ -40,8 +40,10 @@ export const getEntityConsequenceDictionary = () => ({
     dann: intl.get('entities.variant.consequences.predictions.dann'),
     lrt: intl.get('entities.variant.consequences.predictions.lrt'),
     revel: intl.get('entities.variant.consequences.predictions.revel'),
+    caddRaw: intl.get('entities.variant.consequences.predictions.caddRaw'),
+    caddPhred: intl.get('entities.variant.consequences.predictions.caddPhred'),
   },
-  conservationColumn: intl.get('entities.variant.consequences.conservationColumn'),
+  conservationColumn: intl.get('entities.variant.consequences.conservation'),
   transcript: intl.get('entities.variant.consequences.transcript'),
   canonical: intl.get('entities.variant.consequences.canonical'),
   refSeq: intl.get('entities.variant.consequences.refSeq'),
@@ -349,7 +351,7 @@ export const getFacetsDictionary = () => ({
   consequences: {
     consequence: intl.get('entities.variant.consequences.consequence'),
     consequences: intl.get('entities.variant.consequences.consequences'),
-    biotype: intl.get('entities.variant.biotype'),
+    biotype: intl.get('entities.variant.geneType'),
     vep_impact: 'VEP',
     predictions: {
       sift_pred: 'SIFT',
@@ -366,7 +368,7 @@ export const getFacetsDictionary = () => ({
     consequences: {
       consequence: intl.get('entities.variant.consequences.consequence'),
       consequences: intl.get('entities.variant.consequences.consequences'),
-      biotype: intl.get('entities.variant.biotype'),
+      biotype: intl.get('entities.variant.geneType'),
       vep_impact: 'VEP',
       predictions: {
         cadd_score: 'CADD (Raw)',
@@ -379,7 +381,7 @@ export const getFacetsDictionary = () => ({
         sift_pred: 'SIFT',
       },
     },
-    biotype: intl.get('entities.variant.biotype'),
+    biotype: intl.get('entities.variant.geneType'),
     gnomad: {
       pli: 'gnomAD pLI',
       loeuf: 'gnomAD LOEUF',

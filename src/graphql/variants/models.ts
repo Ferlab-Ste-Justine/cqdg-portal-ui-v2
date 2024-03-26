@@ -101,6 +101,7 @@ export interface IConsequenceEntity {
     total: number;
   };
   predictions: IPredictionEntity;
+  coding_dna_change: string;
 }
 
 export interface IClinVar {
@@ -206,10 +207,12 @@ export interface IVariantEntity {
 export interface IVariantStudyEntity {
   id: string;
   score: number | null;
+  participant_ids: string[];
   study_code: string;
   study_id: string;
+  transmissions: string[];
   zygosity: string[];
-  domain: string;
+  total: IBoundType;
 }
 
 export interface IVariantStudyFrequencies extends IVariantStudyEntity {

@@ -1,18 +1,18 @@
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { ProColumnType, TProTableSummary } from '@ferlab/ui/core/components/ProTable/types';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import {
   formatQuotientOrElse,
   formatQuotientToExponentialOrElse,
-  numberFormat,
+  numberWithCommas,
   toExponentialNotation,
 } from '@ferlab/ui/core/utils/numberUtils';
-import { Space, Tooltip } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { useStudy } from 'graphql/studies/actions';
-import { IVariantEntity, IVariantStudyFrequencies } from 'graphql/variants/models';
+import { IVariantEntity, IVariantStudyEntity } from 'graphql/variants/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
@@ -20,15 +20,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
 
-const StudyDomain = ({ study_code }: { study_code: string }) => {
-  const { data: study } = useStudy({
-    field: 'study_code',
-    value: study_code,
-  });
-  return <>{study?.domain || TABLE_EMPTY_PLACE_HOLDER}</>;
-};
-
-export const getFrequenciesItems = (): ProColumnType[] => [
+export const getFrequencyItems = (): ProColumnType[] => [
   {
     dataIndex: 'study_code',
     key: 'study_code',
@@ -57,34 +49,59 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     ),
   },
   {
-    title: intl.get('entities.study.domain'),
-    key: 'domain',
-    width: '14%',
-    render: (study: IVariantStudyFrequencies) =>
-      study && <StudyDomain study_code={study.study_code} />,
-  },
-  {
     title: intl.get('entities.variant.frequencies.participants'),
     iconTitle: (
       <Space>
         <Tooltip
-          className={styles.dotted}
+          className={styles.tooltip}
+          overlayStyle={{ whiteSpace: 'pre-line' }}
           title={intl.get('entities.variant.frequencies.participantsTooltip')}
         >
           {intl.get('entities.variant.frequencies.participants')}
         </Tooltip>
+        <Tooltip title={intl.get('entities.variant.frequencies.participantsInfoIconTooltip')}>
+          <InfoCircleOutlined />
+        </Tooltip>
       </Space>
     ),
     key: 'participants',
-    render: (row: IVariantStudyFrequencies) =>
-      formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER),
+    render: (row: IVariantStudyEntity) =>
+      row?.participant_ids?.length ? (
+        <>
+          <Button
+            type="link"
+            href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            onClick={() =>
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'participant_id',
+                      index: INDEXES.PARTICIPANT,
+                      value: row.participant_ids || [],
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              })
+            }
+            className={styles.frequencyParticipantLink}
+          >
+            {numberWithCommas(row.total?.pc || 0)}
+          </Button>
+          {row.total?.pc && row.total?.pn ? ` / ${numberWithCommas(row.total?.pn)}` : ''}
+        </>
+      ) : (
+        formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER)
+      ),
   },
   {
     title: intl.get('entities.variant.frequencies.frequency'),
     tooltip: intl.get('entities.variant.frequencies.frequencyTooltip'),
     key: 'frequency',
-    render: (row: IVariantStudyFrequencies) => {
-      if (!row.total.af) return TABLE_EMPTY_PLACE_HOLDER;
+    render: (row: IVariantStudyEntity) => {
+      if (!row?.total?.af) return TABLE_EMPTY_PLACE_HOLDER;
       return toExponentialNotation(row.total.af);
     },
   },
@@ -92,20 +109,24 @@ export const getFrequenciesItems = (): ProColumnType[] => [
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
     key: 'alt',
-    render: (row: IVariantStudyFrequencies) => (row.total?.ac ? numberFormat(row.total.ac) : 0),
+    render: (row: IVariantStudyEntity) => (row.total?.ac ? numberWithCommas(row.total.ac) : 0),
     width: '14%',
   },
   {
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),
     key: 'hom',
-    render: (row: IVariantStudyFrequencies) => (row.total?.hom ? numberFormat(row.total?.hom) : 0),
+    render: (row: IVariantStudyEntity) => (row.total?.hom ? numberWithCommas(row.total?.hom) : 0),
     width: '14%',
   },
 ];
 
-export const getFrequenciesTableSummaryColumns = (v?: IVariantEntity): TProTableSummary[] => {
+export const getFrequencyTableSummaryColumns = (
+  v?: IVariantEntity,
+  studies?: IVariantStudyEntity[],
+): TProTableSummary[] => {
   const totalNbOfParticipants = v?.internal_frequencies_wgs?.total?.pc || 0;
+  const participantIds = studies?.map((study) => study.participant_ids || [])?.flat() || [];
   return [
     {
       index: 0,
@@ -113,18 +134,44 @@ export const getFrequenciesTableSummaryColumns = (v?: IVariantEntity): TProTable
     },
     {
       index: 1,
-      value: '',
-    },
-    {
-      index: 2,
-      value: formatQuotientOrElse(
-        totalNbOfParticipants,
-        v?.internal_frequencies_wgs?.total?.pn || NaN,
-        TABLE_EMPTY_PLACE_HOLDER,
+      value: participantIds.length ? (
+        <>
+          <Button
+            type="link"
+            href={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            onClick={() =>
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'participant_id',
+                      index: INDEXES.PARTICIPANT,
+                      value: participantIds || [],
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              })
+            }
+            className={styles.frequencyParticipantLink}
+          >
+            {numberWithCommas(totalNbOfParticipants)}
+          </Button>
+          {v?.internal_frequencies_wgs?.total?.pn
+            ? ` / ${numberWithCommas(v.internal_frequencies_wgs?.total?.pn)}`
+            : ''}
+        </>
+      ) : (
+        formatQuotientOrElse(
+          totalNbOfParticipants,
+          v?.internal_frequencies_wgs?.total?.pn || NaN,
+          TABLE_EMPTY_PLACE_HOLDER,
+        )
       ),
     },
     {
-      index: 3,
+      index: 2,
       value: formatQuotientToExponentialOrElse(
         totalNbOfParticipants,
         v?.internal_frequencies_wgs?.total?.pn || NaN,
@@ -132,15 +179,15 @@ export const getFrequenciesTableSummaryColumns = (v?: IVariantEntity): TProTable
       ),
     },
     {
-      index: 4,
+      index: 3,
       value: v?.internal_frequencies_wgs?.total?.ac
-        ? numberFormat(v.internal_frequencies_wgs.total.ac)
+        ? numberWithCommas(v.internal_frequencies_wgs.total.ac)
         : 0,
     },
     {
-      index: 5,
+      index: 4,
       value: v?.internal_frequencies_wgs?.total?.hom
-        ? numberFormat(v.internal_frequencies_wgs.total.hom)
+        ? numberWithCommas(v.internal_frequencies_wgs.total.hom)
         : 0,
     },
   ];
@@ -164,8 +211,10 @@ export const getPublicCohorts = (): ProColumnType[] => [
     dataIndex: 'alt',
     key: 'alt',
     render: (alt: string | number | null) => {
-      if (!alt) return TABLE_EMPTY_PLACE_HOLDER;
-      return typeof alt === 'number' ? numberFormat(alt) : alt;
+      if (!alt) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return typeof alt === 'number' ? numberWithCommas(alt) : alt;
     },
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
@@ -174,8 +223,10 @@ export const getPublicCohorts = (): ProColumnType[] => [
     dataIndex: 'altRef',
     key: 'altRef',
     render: (altRef: string | number | null) => {
-      if (!altRef) return TABLE_EMPTY_PLACE_HOLDER;
-      return typeof altRef === 'number' ? numberFormat(altRef) : altRef;
+      if (!altRef) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return typeof altRef === 'number' ? numberWithCommas(altRef) : altRef;
     },
     title: intl.get('entities.variant.frequencies.altRef'),
     tooltip: intl.get('entities.variant.frequencies.altRefTooltip'),
@@ -184,8 +235,10 @@ export const getPublicCohorts = (): ProColumnType[] => [
     dataIndex: 'homozygotes',
     key: 'homozygotes',
     render: (homozygotes: string | number | null) => {
-      if (!homozygotes) return TABLE_EMPTY_PLACE_HOLDER;
-      return typeof homozygotes === 'number' ? numberFormat(homozygotes) : homozygotes;
+      if (!homozygotes) {
+        return TABLE_EMPTY_PLACE_HOLDER;
+      }
+      return typeof homozygotes === 'number' ? numberWithCommas(homozygotes) : homozygotes;
     },
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),
