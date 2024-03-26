@@ -33,6 +33,8 @@ export interface IStatistics {
   samples: number;
   studies: number;
   variants: number;
+  exomes: number;
+  genomes: number;
 }
 
 export interface ArrangerSingleColumnState {

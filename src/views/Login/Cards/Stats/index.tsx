@@ -7,6 +7,7 @@ import FileIcon from '@ferlab/ui/core/components/Icons/Futuro/FileIcon';
 import GeneIcon from '@ferlab/ui/core/components/Icons/Futuro/GeneIcon';
 import ParticipantIcon from '@ferlab/ui/core/components/Icons/Futuro/ParticipantIcon';
 import StudyIcon from '@ferlab/ui/core/components/Icons/Futuro/StudyIcon';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Card } from 'antd';
 
 import { useGlobals } from 'store/global';
@@ -15,10 +16,17 @@ import TextIcon from '../../TextIcon';
 
 import styles from './index.module.scss';
 
-// TODO: Changelog data, exomes, genomes
+// TODO: Changelog data
 const Stats = () => {
   const { stats } = useGlobals();
-  const { studies = 0, participants = 0, samples = 0, fileSize = '', variants = 0 } = stats || {};
+  const {
+    studies = 0,
+    participants = 0,
+    samples = 0,
+    fileSize = '',
+    exomes = 0,
+    genomes = 0,
+  } = stats || {};
 
   return (
     <div className={styles.cardContainer}>
@@ -39,19 +47,19 @@ const Stats = () => {
           <TextIcon
             color="dark"
             IconComponent={StudyIcon}
-            title={studies}
+            title={numberFormat(studies)}
             subTitle={intl.get('screen.loginPage.cards.stats.studies')}
           />
           <TextIcon
             color="dark"
             IconComponent={ParticipantIcon}
-            title={participants}
+            title={numberFormat(participants)}
             subTitle={intl.get('screen.loginPage.cards.stats.participants')}
           />
           <TextIcon
             color="dark"
             IconComponent={BiospecimenIcon}
-            title={samples}
+            title={numberFormat(samples)}
             subTitle={intl.get('screen.loginPage.cards.stats.biospecimens')}
           />
           <TextIcon
@@ -63,13 +71,13 @@ const Stats = () => {
           <TextIcon
             color="dark"
             IconComponent={GeneIcon}
-            title={variants}
+            title={numberFormat(genomes)}
             subTitle={intl.get('screen.loginPage.cards.stats.genomes')}
           />
           <TextIcon
             color="dark"
             IconComponent={ExomesIcon}
-            title={variants}
+            title={numberFormat(exomes)}
             subTitle={intl.get('screen.loginPage.cards.stats.exomes')}
           />
         </div>
