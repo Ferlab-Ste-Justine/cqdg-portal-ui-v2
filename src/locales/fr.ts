@@ -766,6 +766,80 @@ const fr = {
         "Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
       login: 'Connexion',
       signup: 'Créer un compte',
+      studies: {
+        title: 'Études',
+        summary:
+          'Explorez les données harmonisées d’études dans les populations pédiatriques et adultes.',
+        cartagene: {
+          subtitle: 'CARTaGENE',
+          description:
+            "<p>CARTaGENE est une plateforme publique de recherche du CHU Sainte-Justine créée pour accélérer la recherche en santé. CARTaGENE est constitué à la fois d'échantillons biologiques et de données de santé provenant de 43 000 résidents du Québec âgés de 40 à 69 ans.</p><p>Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier (WGS) de 2 179 individus.</p>",
+        },
+        dee: {
+          title: 'DEE',
+          subtitle: 'Investigation des causes génétiques des encéphalopathies épileptogènes',
+          description:
+            "<p>Étude de séquençage du génome entier (WGS) chez des enfants atteints d'encéphalopathies épileptogènes.</p><p>Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier de 588 individus appartenant à 196 familles.</p>",
+        },
+        bacq: {
+          title: 'BACQ',
+          subtitle: 'Biobanque des anomalies congénitales au Québec',
+          description:
+            '<p>Biobanque de cas affectés bien caractérisés ainsi que de leurs parents permettant de mener des études de génétique moléculaire pour identifier les gènes associés à ces malformations.</p><p>Le jeu de données présentement hébergé au CQDG comprend les données de séquençage de l’exome entier (WXS) de 386 individus appartenant à 124 familles.</p>',
+        },
+        pragmatiq: {
+          title: 'PRAGMatIQ',
+          subtitle: 'Pratique rapide de la génomique pédiatrique au Québec',
+          description:
+            "<p>L'objectif du projet est d'offrir un séquençage clinique rapide du génome entier (GWS) à tous les nouveau-nés et nourrissons gravement malades qui pourraient bénéficier de ce test au Québec.</p><p>Les données de 257 individus ont été soumises au CQDG. Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier de 110 individus appartenant à 38 familles.</p>",
+        },
+        neurodev: {
+          title: 'NeuroDev',
+          subtitle: 'Troubles du neuro-développement',
+          description:
+            "<p>L'objectif principal de ce projet est de constituer une banque d'échantillons et de données provenant d'enfants et d'adultes atteints d'un retard global de développement, d'épilepsie et/ou de malformations et de membres de leur famille pour alimenter divers projets de recherche qui visent à identifier les gènes impliqués dans ces pathologies.</p><p>Les données de 382 individus ont été soumises au CQDG. Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier de 67 individus appartenant à 22 familles.</p>",
+        },
+      },
+      cards: {
+        stats: {
+          release: 'Édition V1',
+          studies: 'Études',
+          participants: 'Participants',
+          biospecimens: 'Biospécimens',
+          files: 'Fichiers',
+          genomes: 'Génomes',
+          exomes: 'Exomes',
+        },
+        rare: {
+          title: 'Réseau pour Avancer la REcherche sur les maladies rares au Québec',
+          description:
+            'Le CQDG est un fier partenaire du nouveau Réseau pour Avancer la REcherche sur les maladies rares au Québec (RARE.Qc) financé par le FRQS. RARE.Qc est un regroupement de plus 100 chercheurs et patients partenaires à travers le Québec, qui vise à transformer la recherche sur les maladies rares.',
+        },
+        secureData: {
+          title: 'CQDG dans l’infonuage',
+          description:
+            'Analysez les données du CQDG avec vos propres logiciels sur l’infrastructure infonuagique Secure Data for Health (SD4H). D’autres infonuages seront également intégrés au CQDG dans un avenir rapproché. Contactez-nous pour en savoir plus.',
+          contact: 'Contactez-nous',
+        },
+        variants: {
+          title: 'Variants germinaux',
+          description:
+            'Notre explorateur de variants offre des fonctions de recherche avancées. En quelques clics, vous pouvez explorer des millions de variants germinaux annotés issus des génomes et exomes des participants du CQDG.',
+          explore: 'Explorer les données de variants',
+        },
+      },
+      documentation: {
+        title: 'Centre de documentation',
+        description:
+          'Pour savoir comment soumettre vos données, faire une demande d’accès ou pour consulter des guides d’utilisation du portail, visitez le centre de documentation.',
+        button: 'Centre de documentation',
+      },
+      hosting: {
+        title: 'Données à héberger?',
+        description:
+          'Le CQDG offre aux chercheurs une plateforme idéale pour entreposer et diffuser les données génomiques générées par les études cliniques et de recherche.',
+        button: 'Soumettre vos données',
+      },
     },
     memberProfile: {
       notFound: 'Membre non trouvé',

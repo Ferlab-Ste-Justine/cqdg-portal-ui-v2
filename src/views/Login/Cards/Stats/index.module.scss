@@ -1,0 +1,30 @@
+@import '../../../../style/themes/cqdg/colors';
+
+.cardContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 100%;
+  border-radius: 2px;
+  background-color: $gray-2 !important;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: $gray-9 !important;
+}
+
+.cardContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 32px;
+}
+

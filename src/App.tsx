@@ -21,10 +21,8 @@ import ErrorPage from 'views/Error';
 import Login from 'views/Login';
 
 import { LANG } from 'common/constants';
-import MainSideImage from 'components/assets/side-img-svg.svg';
 import ErrorBoundary from 'components/ErrorBoundary';
 import PageLayout from 'components/Layout';
-import SideImageLayout from 'components/Layout/SideImage';
 import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
 import { useLang } from 'store/global';
@@ -62,9 +60,7 @@ const App = () => {
               <Router>
                 <Switch>
                   <Route exact path={STATIC_ROUTES.LOGIN}>
-                    <SideImageLayout sideImgSrc={MainSideImage} theme="light">
-                      <Login />
-                    </SideImageLayout>
+                    <Login />
                   </Route>
                   <Route
                     path={DYNAMIC_ROUTES.ERROR}

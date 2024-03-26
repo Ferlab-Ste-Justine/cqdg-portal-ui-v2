@@ -1,0 +1,78 @@
+@import 'src/style/themes/cqdg/colors';
+
+.topBannerBg {
+  background: linear-gradient(266deg, #28AAE2 0.82%, #006095 98.04%)
+}
+
+.topBanner {
+  background-image: url("../../../components/assets/background.svg");
+  background-position: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 24px;
+}
+
+.languageButton {
+  position: absolute !important;
+  top: 40px;
+  right: 40px;
+}
+
+.content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.logo {
+  height: 104px;
+  width: 300px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: normal;
+  color: $gray-1;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: $gray-1;
+}
+
+.loginButton {
+  background-color: $gold-4 !important;
+  color: $gray-8 !important;
+}
+
+.signupButton {
+  color: $gray-1 !important;
+}
+
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .topBanner {
+    padding: 40px 40px;
+
+  }
+  .content {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 800px) {
+  .topBanner {
+    padding: 40px 40px;
+
+  }
+  .content {
+    max-width: 520px;
+  }
+}

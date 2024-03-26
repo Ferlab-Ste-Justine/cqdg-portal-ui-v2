@@ -1,0 +1,30 @@
+@import 'src/style/themes/cqdg/colors';
+
+.container {
+  background: linear-gradient(343deg, #008FC7 23.91%, #016195 102.01%);
+  width: 100%;
+  height: fit-content;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  color: $gray-1;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.exploreButton {
+  background-color: $gold-4 !important;
+  color: $gray-8 !important;
+}
+
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 40px;
+  }
+}
