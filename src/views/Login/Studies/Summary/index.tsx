@@ -2,7 +2,8 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import StudyIcon from '@ferlab/ui/core/components/Icons/FuturoSpot/StudySpotIcon';
 
-import { useGlobals } from '../../../../store/global';
+import { useGlobals } from 'store/global';
+
 import TextIcon from '../../TextIcon';
 
 import styles from './index.module.scss';

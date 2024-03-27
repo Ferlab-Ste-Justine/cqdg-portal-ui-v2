@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { fetchStats } from '../../store/global/thunks';
+import { fetchStats } from 'store/global/thunks';
 
 import BottomBanner from './BottomBanner';
 import Cards from './Cards';

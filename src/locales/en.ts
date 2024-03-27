@@ -791,10 +791,6 @@ const en = {
       cards: {
         stats: {
           release: 'Release V1',
-          studies: 'Studies',
-          participants: 'Participants',
-          biospecimens: 'Biospecimens',
-          files: 'Files',
           genomes: 'Genomes',
           exomes: 'Exomes',
         },

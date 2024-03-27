@@ -6,8 +6,9 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 
-import { useGlobals } from '../../../../store/global';
-import { STATIC_ROUTES } from '../../../../utils/routes';
+import { useGlobals } from 'store/global';
+import { STATIC_ROUTES } from 'utils/routes';
+
 import TextIcon from '../../TextIcon';
 
 import styles from './index.module.scss';

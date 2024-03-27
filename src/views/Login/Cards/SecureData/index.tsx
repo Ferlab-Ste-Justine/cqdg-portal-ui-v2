@@ -3,9 +3,8 @@ import intl from 'react-intl-universal';
 import { MailOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
+import sd4hLogo from 'components/assets/sd4h.png';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
-
-import sd4hLogo from '../../../../components/assets/sd4h.png';
 
 import styles from './index.module.scss';
 

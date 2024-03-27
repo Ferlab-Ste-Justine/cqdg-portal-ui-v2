@@ -48,25 +48,25 @@ const Stats = () => {
             color="dark"
             IconComponent={StudyIcon}
             title={numberFormat(studies)}
-            subTitle={intl.get('screen.loginPage.cards.stats.studies')}
+            subTitle={intl.get('entities.study.studies')}
           />
           <TextIcon
             color="dark"
             IconComponent={ParticipantIcon}
             title={numberFormat(participants)}
-            subTitle={intl.get('screen.loginPage.cards.stats.participants')}
+            subTitle={intl.get('entities.participant.participants')}
           />
           <TextIcon
             color="dark"
             IconComponent={BiospecimenIcon}
             title={numberFormat(samples)}
-            subTitle={intl.get('screen.loginPage.cards.stats.biospecimens')}
+            subTitle={intl.get('entities.biospecimen.biospecimens')}
           />
           <TextIcon
             color="dark"
             IconComponent={FileIcon}
             title={fileSize}
-            subTitle={intl.get('screen.loginPage.cards.stats.files')}
+            subTitle={intl.get('entities.file.files')}
           />
           <TextIcon
             color="dark"

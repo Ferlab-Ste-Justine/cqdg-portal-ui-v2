@@ -803,10 +803,6 @@ const fr = {
       cards: {
         stats: {
           release: 'Édition V1',
-          studies: 'Études',
-          participants: 'Participants',
-          biospecimens: 'Biospécimens',
-          files: 'Fichiers',
           genomes: 'Génomes',
           exomes: 'Exomes',
         },

@@ -3,14 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button, Space } from 'antd';
 
+import { REDIRECT_URI_KEY } from 'common/constants';
 import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
 import { getTargetLang } from 'components/Layout/Header';
+import useQueryParams from 'hooks/useQueryParams';
 import { globalActions, useLang } from 'store/global';
 import { updateUser } from 'store/user/thunks';
-
-import { REDIRECT_URI_KEY } from '../../../common/constants';
-import useQueryParams from '../../../hooks/useQueryParams';
-import { STATIC_ROUTES } from '../../../utils/routes';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
 
