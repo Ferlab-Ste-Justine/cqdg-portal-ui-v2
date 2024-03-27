@@ -1,6 +1,5 @@
 import React from 'react';
 import intl from 'react-intl-universal';
-import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import BiospecimenIcon from '@ferlab/ui/core/components/Icons/Futuro/BiospecimenIcon';
 import ExomesIcon from '@ferlab/ui/core/components/Icons/Futuro/ExomesIcon';
 import FileIcon from '@ferlab/ui/core/components/Icons/Futuro/FileIcon';
@@ -37,11 +36,6 @@ const Stats = () => {
           </span>
         }
         className={styles.card}
-        extra={
-          <ExternalLink href="https://docs.cqdg.ca/changelog" hasIcon>
-            14 mars 2024
-          </ExternalLink>
-        }
       >
         <div className={styles.cardContent}>
           <TextIcon
