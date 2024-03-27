@@ -57,7 +57,6 @@ export interface IStudyEntity {
   experimental_strategies: ArrangerResultsTree<IExperimentalStrategy>;
   family_count: number;
   family_data: boolean;
-  release_id: string;
   status: string;
   study_version: string;
   contact: { type: string; value: string };

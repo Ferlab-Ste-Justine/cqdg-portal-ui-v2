@@ -12,7 +12,6 @@ export const GET_BIOSPECIMENS = gql`
             biospecimen_id
             age_biospecimen_collection
             biospecimen_tissue_source
-            release_id
             study_id
             study_code
             participant {

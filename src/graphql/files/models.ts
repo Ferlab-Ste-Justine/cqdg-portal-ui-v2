@@ -50,7 +50,6 @@ export interface IFileEntity {
   ferload_url: string;
   file_hash: string;
   file_name: string;
-  release_id: string;
   sequencing_experiment: IFileSequencingExperiment;
   biospecimens: ArrangerResultsTree<IBiospecimenEntity>;
 }
