@@ -3,6 +3,8 @@ import intl from 'react-intl-universal';
 import { MailOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
+import { SUPPORT_EMAIL } from 'store/report/thunks';
+
 import sd4hLogo from '../../../../components/assets/sd4h.png';
 
 import styles from './index.module.scss';
@@ -16,7 +18,7 @@ const SecureData = () => (
       <Button
         type="ghost"
         size="large"
-        href="mailto:support@cqdg.ca"
+        href={`mailto:${SUPPORT_EMAIL}`}
         className={styles.contactButton}
       >
         {intl.get('screen.loginPage.cards.secureData.contact')}
