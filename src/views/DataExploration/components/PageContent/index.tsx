@@ -8,6 +8,7 @@ import {
   PieChartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { ISavedFilter } from '@ferlab/ui/core/components/QueryBuilder/types';
@@ -24,6 +25,7 @@ import { useTotalDataFiles } from 'graphql/files/actions';
 import { useTotalParticipants } from 'graphql/participants/actions';
 import { IParticipantResultTree } from 'graphql/participants/models';
 import { GET_PARTICIPANTS_COUNT } from 'graphql/participants/queries';
+import EnvVariables from 'helpers/EnvVariables';
 import get from 'lodash/get';
 import DataFilesTabs from 'views/DataExploration/components/PageContent/tabs/DataFiles';
 import ParticipantsTab from 'views/DataExploration/components/PageContent/tabs/Participants';
@@ -63,7 +65,7 @@ import BiospecimensTab from './tabs/Biospecimens';
 
 import styles from './index.module.scss';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
@@ -218,9 +220,23 @@ const PageContent = ({
 
   return (
     <Space direction="vertical" size={24} className={styles.dataExplorePageContent}>
-      <Title className={styles.title} level={4} data-cy="Title_DataExploration">
-        {intl.get('screen.dataExploration.title')}
-      </Title>
+      <div>
+        <Title className={styles.title} level={4} data-cy="Title_DataExploration">
+          {intl.get('screen.dataExploration.title')}
+        </Title>
+        <Text className={styles.subTitle}>
+          {intl.get('screen.dataExploration.subTitle')}
+          <ExternalLink
+            className={styles.docExternalLink}
+            hasIcon
+            href={`${EnvVariables.configFor(
+              'CQDG_DOCUMENTATION',
+            )}/docs/fonctionnalités-générales-du-portail`}
+          >
+            {intl.get('layout.main.menu.documentation')}
+          </ExternalLink>
+        </Text>
+      </div>
       <QueryBuilder
         id={DATA_EXPLORATION_QB_ID}
         className="data-exploration-repo__query-builder"

@@ -317,7 +317,7 @@ export const getFacetsDictionary = () => ({
     source_text: intl.get('entities.participant.phenotype_source_text'),
   },
   icd_tagged: {
-    name: intl.get('entities.participant.diagnosis_icd'),
+    name: intl.get('entities.participant.diagnosis_icd10'),
   },
   sex: intl.get('entities.participant.sex'),
   age_at_recruitment: intl.get('entities.participant.age_at_recruitment'),

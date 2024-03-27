@@ -4,17 +4,21 @@ import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal, Tooltip } from 'antd';
+import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
+import { IStudyEntity } from 'graphql/studies/models';
 import EnvVariables from 'helpers/EnvVariables';
 
 import RestrictedStudyAlert from 'components/reports/RestrictedStudyAlert';
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
+import ExternalMailToLink from 'components/utils/ExternalMailToLink';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
 
 import FilesTable from './FilesTable';
 
 import styles from './index.module.scss';
+
+const { Text } = Typography;
 
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
@@ -23,6 +27,7 @@ interface IDownloadFileManifestProps {
   hasTooManyFiles?: boolean;
   withoutFiles?: boolean;
   isRestricted?: boolean;
+  study?: IStudyEntity;
 }
 
 const DownloadRequestAccessModal = ({
@@ -32,6 +37,7 @@ const DownloadRequestAccessModal = ({
   hasTooManyFiles = false,
   withoutFiles = false,
   isRestricted = false,
+  study,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
@@ -41,6 +47,31 @@ const DownloadRequestAccessModal = ({
   const docHref = `${EnvVariables.configFor(
     'CQDG_DOCUMENTATION',
   )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
+
+  const Content = () =>
+    study ? (
+      <Text>
+        {intl.get('api.report.requestAccess.text')}
+        <br />
+        <br />
+        <ExternalMailToLink email={study.contact?.value} />
+        <br />
+        <br />
+        {intl.get('api.report.requestAccess.text2')}
+        <br />
+        <br />
+        {intl.get('api.report.requestAccess.text3')}
+        <ExternalLink href={docHref}>{intl.get('api.report.requestAccess.textLink')}</ExternalLink>.
+      </Text>
+    ) : (
+      <Text>
+        {intl.get('api.report.requestAccess.content')}
+        <br />
+        <br />
+        {intl.get('api.report.requestAccess.content2')}
+        <ExternalLink href={docHref}>{intl.get('api.report.requestAccess.textLink')}</ExternalLink>.
+      </Text>
+    );
 
   return (
     <Tooltip
@@ -79,15 +110,10 @@ const DownloadRequestAccessModal = ({
         className={styles.modal}
         data-cy="RequestAccess_Modal"
       >
-        <div>
-          {intl.get('api.report.requestAccess.text')}
-          <ExternalLink href={docHref}>
-            {intl.get('api.report.requestAccess.textLink')}
-          </ExternalLink>
-          .
-        </div>
+        <Content />
         {!withoutFiles && (
           <>
+            <br />
             <br />
             <Checkbox
               checked={isFamilyChecked}

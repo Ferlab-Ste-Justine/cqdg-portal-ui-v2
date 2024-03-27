@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { TExtendedMapping } from '@ferlab/ui/core/components/filters/types';
 import { resetSearchAfterQueryConfig, tieBreaker } from '@ferlab/ui/core/components/ProTable/utils';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
@@ -14,6 +15,7 @@ import copy from 'copy-to-clipboard';
 import { useVariant } from 'graphql/variants/actions';
 import { IVariantResultTree } from 'graphql/variants/models';
 import { GET_VARIANT_COUNT } from 'graphql/variants/queries';
+import EnvVariables from 'helpers/EnvVariables';
 import get from 'lodash/get';
 import {
   DEFAULT_OFFSET,
@@ -46,6 +48,8 @@ import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translatio
 import VariantsTable from './VariantsTable';
 
 import styles from './index.module.scss';
+
+const { Text, Title } = Typography;
 
 const addTagToFilter = (filter: ISavedFilter) => ({
   ...filter,
@@ -137,12 +141,23 @@ const PageContent = ({ variantMapping }: IPageContentProps) => {
 
   return (
     <Space direction="vertical" size={24} className={styles.variantsPageContent}>
-      <div className={styles.pageHeader}>
-        <Typography.Title className={styles.pageHeaderTitle} level={1} data-cy="Title_Variants">
-          {intl.get('screen.variants.variantsExploration')}
-        </Typography.Title>
+      <div>
+        <Title className={styles.title} level={4} data-cy="Title_Variants">
+          {intl.get('screen.variants.title')}
+        </Title>
+        <Text className={styles.subTitle}>
+          {intl.get('screen.variants.subTitle')}
+          <ExternalLink
+            className={styles.docExternalLink}
+            hasIcon
+            href={`${EnvVariables.configFor(
+              'CQDG_DOCUMENTATION',
+            )}/docs/fonctionnalités-générales-du-portail`}
+          >
+            {intl.get('layout.main.menu.documentation')}
+          </ExternalLink>
+        </Text>
       </div>
-
       <QueryBuilder
         id={VARIANT_REPO_QB_ID}
         className="variants-repo__query-builder"

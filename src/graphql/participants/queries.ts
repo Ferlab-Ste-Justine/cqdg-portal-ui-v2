@@ -205,6 +205,7 @@ export const MATCH_PARTICIPANTS = gql`
           node {
             id
             participant_id
+            submitter_participant_id
             study_code
           }
         }

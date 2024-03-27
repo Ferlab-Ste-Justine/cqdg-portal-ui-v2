@@ -20,10 +20,11 @@ interface OwnProps {
 const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
   <EntityUploadIds
     entityId="biospecimen"
-    entityIdTrans={intl.get('components.uploadIds.sample')}
-    entityIdentifiers={intl.get('components.uploadIds.sampleID')}
+    entityIdTrans={intl.get('entities.biospecimen.sample')}
+    entityIdentifiers={`${intl.get('entities.biospecimen.sample_id')}, ${intl.get(
+      'entities.biospecimen.submitter_sample_id',
+    )}`}
     placeHolder={intl.get('components.uploadIds.samplePlaceholder')}
-    title={intl.get('components.uploadIds.sampleTitle')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
         query: MATCH_BIOSPECIMENS.loc?.source.body,
@@ -32,7 +33,7 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
           offset: 0,
           sqon: generateQuery({
             operator: BooleanOperators.or,
-            newFilters: ['sample_id'].map((field) =>
+            newFilters: ['sample_id', 'submitter_sample_id'].map((field) =>
               generateValueFilter({
                 field,
                 value: ids,
@@ -49,7 +50,9 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
 
       return biospecimens?.flatMap((biospecimen) => {
         const matchedIds: string[] = ids.filter(
-          (id: string) => biospecimen.sample_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
+          (id: string) =>
+            biospecimen.sample_id.toLocaleLowerCase() === id.toLocaleLowerCase() ||
+            biospecimen.submitter_sample_id.toLocaleLowerCase() === id.toLocaleLowerCase(),
         );
 
         return matchedIds.map((id, index) => ({

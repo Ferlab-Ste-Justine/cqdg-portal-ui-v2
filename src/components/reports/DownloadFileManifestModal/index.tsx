@@ -2,8 +2,10 @@ import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { DownloadOutlined } from '@ant-design/icons';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Button, Checkbox, Modal, Tooltip } from 'antd';
+import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
+import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
@@ -13,12 +15,15 @@ import FilesTable from './FilesTable';
 
 import styles from './index.module.scss';
 
+const { Text } = Typography;
+
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   type?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
   hasFamily?: boolean;
+  isStudy?: boolean;
 }
 
 const DownloadFileManifestModal = ({
@@ -27,17 +32,44 @@ const DownloadFileManifestModal = ({
   isDisabled,
   hasTooManyFiles,
   hasFamily = true,
+  isStudy = false,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
 
+  const Content = () => (
+    <Text>
+      <p>
+        {isStudy
+          ? intl.get('api.report.fileManifest.textStudy')
+          : intl.get('api.report.fileManifest.text')}
+      </p>
+      <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
+    </Text>
+  );
+
+  const getTooltipTitle = () =>
+    isDisabled ? (
+      intl.get('screen.dataExploration.youMustSelect')
+    ) : (
+      <>
+        {intl.get('api.report.fileManifest.tooltip')}
+        <ExternalLink
+          className={styles.externalLinkFerload}
+          hasIcon
+          href={`${EnvVariables.configFor(
+            'CQDG_DOCUMENTATION',
+          )}/docs/comment-utiliser-le-client-ferload`}
+        >
+          {intl.get('global.ferload')}
+        </ExternalLink>
+      </>
+    );
+
   return (
-    <Tooltip
-      title={intl.get('screen.dataExploration.youMustSelect')}
-      trigger={isDisabled ? 'hover' : 'none'}
-    >
+    <Tooltip title={getTooltipTitle()} visible={isModalVisible ? false : undefined}>
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
@@ -69,8 +101,7 @@ const DownloadFileManifestModal = ({
         className={styles.modal}
         data-cy="FileManifest_Modal"
       >
-        <p>{intl.get('api.report.fileManifest.text')}</p>
-        <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
+        <Content />
         {hasFamily && (
           <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
             {intl.get('api.report.fileManifest.textCheckbox')}

@@ -17,9 +17,12 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
     <GlobalSearch<IParticipantEntity>
       queryBuilderId={queryBuilderId}
       field="participant_id"
+      searchFields={['participant_id', 'submitter_participant_id']}
       index={INDEXES.PARTICIPANT}
       placeholder={intl.get('components.search.participantPlaceholder')}
       emptyDescription={intl.get('components.search.noParticipantFound')}
+      title={intl.get('components.search.searchByIds')}
+      tooltipText={intl.get('components.search.searchByParticipantIdTooltip')}
       query={GET_PARTICIPANT_BY_ID}
       sqon={activeQuery as ISqonGroupFilter}
       optionsFormatter={(options, matchRegex, search) =>
@@ -33,7 +36,6 @@ const ParticipantSearch = ({ queryBuilderId }: ICustomSearchProps) => {
           value: option.participant_id,
         }))
       }
-      title={intl.get('components.search.searchByParticipantId')}
     />
   );
 };

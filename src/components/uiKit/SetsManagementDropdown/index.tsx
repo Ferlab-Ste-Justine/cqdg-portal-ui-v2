@@ -273,7 +273,7 @@ const SetsManagementDropdown = ({
           }
         >
           <Button className={'save-set-btn'} onClick={(e) => e.preventDefault()}>
-            {getTitle(type)}
+            {intl.get('screen.dataExploration.saveSelection')}
             <DownOutlined />
           </Button>
         </Dropdown>

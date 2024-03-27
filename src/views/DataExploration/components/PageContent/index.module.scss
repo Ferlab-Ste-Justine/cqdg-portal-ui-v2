@@ -1,9 +1,17 @@
+@import "src/style/themes/cqdg/colors";
+
 .dataExplorePageContent {
     width: 100%;
-    display: flex;
-    position: relative;
+}
 
-    .title {
-        margin: 0;
-    }
+.title {
+    margin: 0 !important;
+}
+
+.subTitle {
+    color: $gray-7;
+}
+
+.docExternalLink {
+    margin-left: 4px;
 }

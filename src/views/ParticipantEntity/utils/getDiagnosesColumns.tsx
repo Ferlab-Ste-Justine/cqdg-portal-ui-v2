@@ -75,7 +75,7 @@ const getDiagnosesColumns = (): IProColumnExport[] => [
   {
     key: 'diagnosis_icd_display',
     dataIndex: 'diagnosis_icd_display',
-    title: intl.get('entities.participant.diagnosis_icd'),
+    title: intl.get('entities.participant.diagnosis_icd10'),
     render: (diagnosis_ICD_code: string) => {
       if (!diagnosis_ICD_code) return TABLE_EMPTY_PLACE_HOLDER;
       const { code, title } = extractIcdTitleAndCode(diagnosis_ICD_code);

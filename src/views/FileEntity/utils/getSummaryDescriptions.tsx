@@ -14,7 +14,7 @@ const getSummaryDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] =
     value: file?.file_id || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
-    label: intl.get('entities.file.file_name'),
+    label: intl.get('entities.file.name'),
     value: file?.file_name || TABLE_EMPTY_PLACE_HOLDER,
   },
   {

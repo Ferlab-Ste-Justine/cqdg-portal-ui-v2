@@ -18,7 +18,8 @@ const FileSearch = ({ queryBuilderId }: ICustomSearchProps) => {
       queryBuilderId={queryBuilderId}
       field="file_id"
       index={INDEXES.FILE}
-      title={intl.get('components.search.searchByFileId')}
+      title={intl.get('components.search.searchByIds')}
+      tooltipText={intl.get('components.search.searchByFileIdTooltip')}
       placeholder={intl.get('components.search.filePlaceholder')}
       emptyDescription={intl.get('components.search.noFileFound')}
       query={GET_FILE_BY_ID}

@@ -32,3 +32,10 @@
   margin-top: 30px;
   color: $red-8;
 }
+
+.externalLinkFerload {
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+}

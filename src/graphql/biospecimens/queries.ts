@@ -12,7 +12,6 @@ export const GET_BIOSPECIMENS = gql`
             biospecimen_id
             age_biospecimen_collection
             biospecimen_tissue_source
-            release_id
             study_id
             study_code
             participant {
@@ -52,6 +51,7 @@ export const MATCH_BIOSPECIMENS = gql`
           node {
             sample_id
             study_code
+            submitter_sample_id
           }
         }
       }

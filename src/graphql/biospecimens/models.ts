@@ -16,7 +16,6 @@ export interface IBiospecimenEntity {
   age_biospecimen_collection: string;
   biospecimen_id: string;
   biospecimen_tissue_source: string;
-  release_id: string;
   sample_id: string;
   sample_type: string;
   submitter_biospecimen_id: string;
