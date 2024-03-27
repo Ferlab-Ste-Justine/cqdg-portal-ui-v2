@@ -7,7 +7,7 @@ import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/ut
 import {
   formatQuotientOrElse,
   formatQuotientToExponentialOrElse,
-  numberWithCommas,
+  numberFormat,
   toExponentialNotation,
 } from '@ferlab/ui/core/utils/numberUtils';
 import { Button, Space, Tooltip } from 'antd';
@@ -88,9 +88,9 @@ export const getFrequencyItems = (): ProColumnType[] => [
             }
             className={styles.frequencyParticipantLink}
           >
-            {numberWithCommas(row.total?.pc || 0)}
+            {numberFormat(row.total?.pc || 0)}
           </Button>
-          {row.total?.pc && row.total?.pn ? ` / ${numberWithCommas(row.total?.pn)}` : ''}
+          {row.total?.pc && row.total?.pn ? ` / ${numberFormat(row.total?.pn)}` : ''}
         </>
       ) : (
         formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER)
@@ -109,14 +109,14 @@ export const getFrequencyItems = (): ProColumnType[] => [
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
     key: 'alt',
-    render: (row: IVariantStudyEntity) => (row.total?.ac ? numberWithCommas(row.total.ac) : 0),
+    render: (row: IVariantStudyEntity) => (row.total?.ac ? numberFormat(row.total.ac) : 0),
     width: '14%',
   },
   {
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),
     key: 'hom',
-    render: (row: IVariantStudyEntity) => (row.total?.hom ? numberWithCommas(row.total?.hom) : 0),
+    render: (row: IVariantStudyEntity) => (row.total?.hom ? numberFormat(row.total?.hom) : 0),
     width: '14%',
   },
 ];
@@ -156,10 +156,10 @@ export const getFrequencyTableSummaryColumns = (
             }
             className={styles.frequencyParticipantLink}
           >
-            {numberWithCommas(totalNbOfParticipants)}
+            {numberFormat(totalNbOfParticipants)}
           </Button>
           {v?.internal_frequencies_wgs?.total?.pn
-            ? ` / ${numberWithCommas(v.internal_frequencies_wgs?.total?.pn)}`
+            ? ` / ${numberFormat(v.internal_frequencies_wgs?.total?.pn)}`
             : ''}
         </>
       ) : (
@@ -181,13 +181,13 @@ export const getFrequencyTableSummaryColumns = (
     {
       index: 3,
       value: v?.internal_frequencies_wgs?.total?.ac
-        ? numberWithCommas(v.internal_frequencies_wgs.total.ac)
+        ? numberFormat(v.internal_frequencies_wgs.total.ac)
         : 0,
     },
     {
       index: 4,
       value: v?.internal_frequencies_wgs?.total?.hom
-        ? numberWithCommas(v.internal_frequencies_wgs.total.hom)
+        ? numberFormat(v.internal_frequencies_wgs.total.hom)
         : 0,
     },
   ];
@@ -214,7 +214,7 @@ export const getPublicCohorts = (): ProColumnType[] => [
       if (!alt) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      return typeof alt === 'number' ? numberWithCommas(alt) : alt;
+      return typeof alt === 'number' ? numberFormat(alt) : alt;
     },
     title: intl.get('entities.variant.frequencies.altAlleles'),
     tooltip: intl.get('entities.variant.frequencies.altAllelesTooltip'),
@@ -226,7 +226,7 @@ export const getPublicCohorts = (): ProColumnType[] => [
       if (!altRef) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      return typeof altRef === 'number' ? numberWithCommas(altRef) : altRef;
+      return typeof altRef === 'number' ? numberFormat(altRef) : altRef;
     },
     title: intl.get('entities.variant.frequencies.altRef'),
     tooltip: intl.get('entities.variant.frequencies.altRefTooltip'),
@@ -238,7 +238,7 @@ export const getPublicCohorts = (): ProColumnType[] => [
       if (!homozygotes) {
         return TABLE_EMPTY_PLACE_HOLDER;
       }
-      return typeof homozygotes === 'number' ? numberWithCommas(homozygotes) : homozygotes;
+      return typeof homozygotes === 'number' ? numberFormat(homozygotes) : homozygotes;
     },
     title: intl.get('entities.variant.frequencies.homozygotes'),
     tooltip: intl.get('entities.variant.frequencies.homozygotesTooltip'),

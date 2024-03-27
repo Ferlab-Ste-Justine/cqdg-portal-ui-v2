@@ -158,7 +158,7 @@ export const getExpandedColumns = (): ColumnType<any>[] => [
   {
     key: 'predictions',
     dataIndex: 'predictions',
-    title: intl.get('entities.variant.consequences.predictions.prediction'),
+    title: intl.get('entities.variant.consequences.predictions.predictions'),
     render: (predictions: IPredictionEntity) => {
       const impact = getPredictionScore(predictions, getEntityConsequenceDictionary().predictions);
       if (!impact?.length) return TABLE_EMPTY_PLACE_HOLDER;
@@ -185,7 +185,7 @@ export const getExpandedColumns = (): ColumnType<any>[] => [
               <StackLayout horizontal key={id}>
                 <Text className={style.predictionLabel}>
                   {intl.get(
-                    `entities.variant.summary.details.${
+                    `entities.variant.details.${
                       predictionField[0].toLowerCase() + predictionField.slice(1)
                     }`,
                   )}
@@ -207,7 +207,7 @@ export const getExpandedColumns = (): ColumnType<any>[] => [
       conservations?.phyloP17way_primate ? (
         <StackLayout horizontal>
           <Text className={style.conservationLabel}>
-            {intl.get('entities.variant.consequences.phyloP17Way')}:
+            {intl.get('entities.variant.details.phyloP17Way')}:
           </Text>
           <Text>{conservations.phyloP17way_primate}</Text>
         </StackLayout>
@@ -242,7 +242,6 @@ export const getExpandedColumns = (): ColumnType<any>[] => [
     key: 'consequences',
     render: (refseq_mrna_id: string[]) => {
       if (!refseq_mrna_id?.length) return TABLE_EMPTY_PLACE_HOLDER;
-
       return (
         <ExpandableCell
           dataSource={refseq_mrna_id}
