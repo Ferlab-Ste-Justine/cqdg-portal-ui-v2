@@ -125,7 +125,7 @@ export default function VariantEntity() {
           title={intl.get('entities.variant.frequencies.frequency')}
           header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
-          summaryColumns={getFrequencyTableSummaryColumns(data, variantStudies)}
+          summaryColumns={getFrequencyTableSummaryColumns(data)}
         />
 
         <EntityPublicCohortTable
