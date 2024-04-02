@@ -3,7 +3,7 @@
 .cardsContainer {
   display: flex;
   justify-content: center;
-  padding: 80px 24px;
+  padding: 48px 24px;
   width: 100%;
   height: fit-content;
   background-color: $gray-1;
@@ -15,7 +15,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 40px;
-  grid-row-gap: 80px;
+  grid-row-gap: 48px;
 }
 
 

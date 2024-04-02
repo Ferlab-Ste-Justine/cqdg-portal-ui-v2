@@ -15,7 +15,7 @@ const BottomBanner = () => (
         title={intl.get('screen.loginPage.documentation.title')}
         description={intl.get('screen.loginPage.documentation.description')}
         buttonText={intl.get('screen.loginPage.documentation.button')}
-        buttonUrl={intl.get('https://docs.cqdg.ca/')}
+        buttonUrl="https://docs.cqdg.ca/"
       />
       <BannerItem
         IconComponent={CloudDatabaseIcon}
