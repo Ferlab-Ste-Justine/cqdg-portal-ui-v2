@@ -1,17 +1,17 @@
 @import 'style/themes/cqdg/colors';
 
-.topBannerBg {
-  background: linear-gradient(266deg, #28AAE2 0.82%, #006095 98.04%)
-}
-
 .topBanner {
-  background-image: url("../../../components/assets/background.svg");
+  background-image: url("../../../components/assets/background.svg"), linear-gradient(266deg, #28AAE2 0.82%, #006095 98.04%);
   background-position: center;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 100px 24px;
+}
+
+.contentContainer {
+  max-width: 1200px;
+  width: 100%;
 }
 
 .languageButton {

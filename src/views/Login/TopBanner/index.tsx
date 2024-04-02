@@ -28,6 +28,7 @@ const TopBanner = () => {
     });
     window.location.assign(url);
   };
+
   const handleChangeLang = () => {
     const targetLang = getTargetLang(lang);
 
@@ -40,9 +41,10 @@ const TopBanner = () => {
     );
     dispatch(globalActions.changeLang(targetLang));
   };
+
   return (
-    <div className={styles.topBannerBg}>
-      <div className={styles.topBanner}>
+    <div className={styles.topBanner}>
+      <div className={styles.contentContainer}>
         <Button type="primary" className={styles.languageButton} onClick={handleChangeLang}>
           {getTargetLang(lang).toUpperCase()}
         </Button>
@@ -75,4 +77,5 @@ const TopBanner = () => {
     </div>
   );
 };
+
 export default TopBanner;
