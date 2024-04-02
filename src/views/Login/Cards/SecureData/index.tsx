@@ -15,7 +15,7 @@ const SecureData = () => (
     <div className={styles.text}>{intl.get('screen.loginPage.cards.secureData.description')}</div>
     <div>
       <Button
-        type="ghost"
+        type="default"
         size="large"
         href={`mailto:${SUPPORT_EMAIL}`}
         className={styles.contactButton}

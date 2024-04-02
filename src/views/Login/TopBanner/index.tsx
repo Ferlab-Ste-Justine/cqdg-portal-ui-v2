@@ -45,7 +45,7 @@ const TopBanner = () => {
   return (
     <div className={styles.topBanner}>
       <div className={styles.contentContainer}>
-        <Button type="primary" className={styles.languageButton} onClick={handleChangeLang}>
+        <Button ghost type="default" className={styles.languageButton} onClick={handleChangeLang}>
           {getTargetLang(lang).toUpperCase()}
         </Button>
         <div className={styles.content}>
@@ -54,6 +54,7 @@ const TopBanner = () => {
           <div className={styles.description}>{intl.get('screen.loginPage.resume')}</div>
           <Space size={8}>
             <Button
+              ghost
               type="primary"
               size="large"
               data-cy="Login"
@@ -63,7 +64,8 @@ const TopBanner = () => {
               {intl.get('screen.loginPage.login')}
             </Button>
             <Button
-              type="ghost"
+              ghost
+              type="default"
               size="large"
               data-cy="Signup"
               onClick={handleSignin}

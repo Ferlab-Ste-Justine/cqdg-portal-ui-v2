@@ -7,7 +7,8 @@ import GeneIcon from '@ferlab/ui/core/components/Icons/Futuro/GeneIcon';
 import ParticipantIcon from '@ferlab/ui/core/components/Icons/Futuro/ParticipantIcon';
 import StudyIcon from '@ferlab/ui/core/components/Icons/Futuro/StudyIcon';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
-import { Card } from 'antd';
+import GridCard from '@ferlab/ui/core/view/v2/GridCard/index';
+import { Typography } from 'antd';
 
 import { useGlobals } from 'store/global';
 
@@ -15,7 +16,8 @@ import TextIcon from '../../TextIcon';
 
 import styles from './index.module.scss';
 
-// TODO: Changelog data
+const { Title } = Typography;
+
 const Stats = () => {
   const { stats } = useGlobals();
   const {
@@ -28,15 +30,11 @@ const Stats = () => {
   } = stats || {};
 
   return (
-    <div className={styles.cardContainer}>
-      <Card
-        title={
-          <span className={styles.cardTitle}>
-            {intl.get('screen.loginPage.cards.stats.release')}
-          </span>
-        }
-        className={styles.card}
-      >
+    <GridCard
+      wrapperClassName={styles.wrapper}
+      theme="shade"
+      title={<Title level={4}>{intl.get('screen.loginPage.cards.stats.release')}</Title>}
+      content={
         <div className={styles.cardContent}>
           <TextIcon
             color="dark"
@@ -75,8 +73,8 @@ const Stats = () => {
             subTitle={intl.get('screen.loginPage.cards.stats.exomes')}
           />
         </div>
-      </Card>
-    </div>
+      }
+    />
   );
 };
 

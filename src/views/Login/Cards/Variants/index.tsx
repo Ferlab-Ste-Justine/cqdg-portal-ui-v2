@@ -37,7 +37,13 @@ const Variants = () => {
         {intl.get('screen.loginPage.cards.variants.description')}
       </div>
       <div>
-        <Button type="primary" size="large" className={styles.exploreButton} onClick={handleSignin}>
+        <Button
+          ghost
+          type="primary"
+          size="large"
+          className={styles.exploreButton}
+          onClick={handleSignin}
+        >
           {intl.get('screen.loginPage.cards.variants.explore')}
           <ArrowRightOutlined />
         </Button>
