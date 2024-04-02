@@ -287,6 +287,7 @@ const fr = {
         dann: 'DANN',
         lrt: 'LRT',
         revel: 'REVEL',
+        rEVEL: 'REVEL',
         polyphen2: 'PolyPhen-2 HVAR',
         polyphen2hvar: 'PolyPhen-2 HVAR',
         phyloP17Way: 'PhyloP17Way',
@@ -372,6 +373,9 @@ const fr = {
         inheritance: 'Héritage',
         source: 'Source',
         interpretation: 'Interprétation',
+        germlineAbvr: 'GER',
+        somaticAbvr: 'SOM',
+        somatic: 'Somatic',
       },
       conditions: {
         title: 'Condition',
