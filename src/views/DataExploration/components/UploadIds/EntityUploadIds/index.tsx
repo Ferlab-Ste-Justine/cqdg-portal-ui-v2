@@ -27,14 +27,16 @@ const EntityUploadIds = ({
 }: IEntityUploadIdsProps) => (
   <UploadIds
     dictionary={{
-      modalTitle: title || intl.get('components.uploadIds.title', { entity: entityIdTrans }),
+      modalTitle:
+        title ||
+        intl.get('components.uploadIds.title', { entity: entityIdTrans?.toLowerCase() || '' }),
       submittedColTitle: intl.get('components.uploadIds.submittedColTitle', {
         entity: entityIdTrans,
       }),
       uploadBtnText:
         title ||
         intl.get('components.uploadIds.uploadBtnText', {
-          entity: entityIdTrans,
+          entity: entityIdTrans?.toLowerCase() || '',
         }),
       modalUploadBtnText: intl.get('components.uploadIds.upload.fileBtn'),
       mappedTo: intl.get('components.uploadIds.mappedTo'),
