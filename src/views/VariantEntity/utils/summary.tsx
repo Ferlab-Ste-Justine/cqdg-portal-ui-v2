@@ -299,7 +299,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
               <>
                 <Text className={style.predictionLabel}>
                   {intl.get(
-                    `filters.options.consequences.predictions.sift_pred.${pickedCons.node.predictions.sift_pred}`,
+                    `facets.options.genes__consequences__predictions__sift_pred.${pickedCons.node.predictions.sift_pred}`,
                   )}
                 </Text>
                 ({pickedCons.node.predictions.sift_score})
