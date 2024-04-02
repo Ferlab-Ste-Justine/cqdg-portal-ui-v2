@@ -75,9 +75,10 @@ export const getClinvarColumns = (): ProColumnType[] => [
         ),
       };
 
+      const textCapitalized = text?.[0] ? text[0].toUpperCase() + text.slice(1) : '';
       return (
         <Space direction="horizontal">
-          <Typography.Text>{text}</Typography.Text>
+          <Typography.Text>{textCapitalized}</Typography.Text>
           {tagMap[record.inheritance] || null}
         </Space>
       );
