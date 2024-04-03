@@ -803,7 +803,7 @@ const en = {
           title: 'CQDG in the Cloud',
           description:
             'Analyse CQDG datasets with your own software using the Secure Data for Health (SD4H) cloud-based infrastructure. Other cloud providers will be integrated with CQDG in a near future. Contact us to learn more.',
-          contact: 'Contact Us',
+          contact: 'Contact us',
         },
         variants: {
           title: 'Germline Variants',

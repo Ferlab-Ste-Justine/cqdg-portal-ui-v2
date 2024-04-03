@@ -763,9 +763,9 @@ const fr = {
     loginPage: {
       title: 'Portail de données',
       resume:
-        "Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
+        "Le Centre Québécois de Données Génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.",
       login: 'Connexion',
-      signup: 'Créer un compte',
+      signup: 'Créer compte',
       studies: {
         title: 'Études',
         summary:
@@ -831,7 +831,7 @@ const fr = {
         button: 'Centre de documentation',
       },
       hosting: {
-        title: 'Données à héberger?',
+        title: 'Données à héberger ?',
         description:
           'Le CQDG offre aux chercheurs une plateforme idéale pour entreposer et diffuser les données génomiques générées par les études cliniques et de recherche.',
         button: 'Soumettre vos données',
