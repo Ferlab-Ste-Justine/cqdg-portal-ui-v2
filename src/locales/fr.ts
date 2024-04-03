@@ -424,6 +424,7 @@ const fr = {
     },
     proTable: {
       results: 'Résultats',
+      result: 'Résultat',
       noResults: 'Aucun résultat',
       of: 'de',
       selected: 'élément sélectionné',
