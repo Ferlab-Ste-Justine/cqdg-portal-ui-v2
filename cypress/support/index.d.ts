@@ -12,7 +12,7 @@ declare namespace Cypress {
     resetColumns(table_id?: string): cy & CyEventEmitter;
     showColumn(column: string|RegExp): cy & CyEventEmitter;
     sortTableAndIntercept(column: string|RegExp, nbCalls: number): cy & CyEventEmitter;
-    sortTableAndWait(column: string): cy & CyEventEmitter;
+    sortTableAndWait(column: string|RegExp): cy & CyEventEmitter;
     typeAndIntercept(selector: string, text: string, methodHTTP: string, routeMatcher: string, nbCalls: number): cy & CyEventEmitter;
     validateClearAllButton(shouldExist: boolean): cy & CyEventEmitter;
     validateFacetFilter(facetTitle: string, valueFront: string, valueBack: string, expectedCount: string|RegExp, applyButton: boolean = false): cy & CyEventEmitter;

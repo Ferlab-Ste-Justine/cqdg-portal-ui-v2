@@ -91,9 +91,9 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
 
   it('Panneau data1', () => {
     cy.visitStudyEntity('STUDY1', 1);
-    cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Available Datasets').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[class*="Datasets_title"]').contains('Specialized Datasets').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-collapse-header"]').contains('data1').should('exist');
-    cy.get('[id="dataset"]').eq(0).find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
+    cy.get('[id="dataset"]').eq(0).find('[class="ant-collapse-header"]').contains('View in Data Explorer').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-label"]').eq(0).contains('Description').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-content"]').eq(0).contains('Congenital malformations description').should('exist');
     cy.get('[id="dataset"]').eq(0).find('[id="dataset"]').eq(0).find('[class="ant-descriptions-item-label"]').eq(1).contains('Data Type').should('exist');

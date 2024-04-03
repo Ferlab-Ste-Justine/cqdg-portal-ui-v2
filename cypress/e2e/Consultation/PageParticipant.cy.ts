@@ -34,7 +34,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[class*="EntityTitle"]').contains('PT0000010');
   });
 
-  it('Panneau Summary', () => {
+  it('Panneau Summary [CQDG-672]', () => {
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains(/^1$/);
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
     cy.get('[data-cy="SummaryHeader_Biospecimens_Button"]').contains(/^1$/);
@@ -84,7 +84,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.resetColumns('family');
     cy.get('[id="family"]').find('[class*="EntityTable_title"]').contains('Family').should('exist');
     cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('Family ( ').should('exist');
-    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('FM0000307').should('exist');
+    cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains('FM0000487').should('exist');
     cy.get('[id="family"]').find('[class="ant-collapse-header"]').contains(' )').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Participant').should('exist');
     cy.get('[id="family"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Family Position').should('exist');
@@ -157,12 +157,12 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(4).contains('202').should('exist');
   });
   
-  it('Panneau Biospecimens', () => {
+  it('Panneau Biospecimens [CQDG-672]', () => {
     cy.resetColumns('biospecimen');
     cy.get('[id="biospecimen"]').find('[class*="EntityTable_title"]').contains('Biospecimen').should('exist');
     cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').contains('Biospecimens').should('exist');
     cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').contains('(1)').should('exist');
-    cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
+    cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').contains('View in Data Explorer').should('exist');
     cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').find('svg[class="anticon"]').should('exist');
     cy.get('[id="biospecimen"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Sample').should('exist');
     cy.get('[id="biospecimen"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Sample Type').should('exist');
@@ -184,7 +184,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="data_file"]').find('[class*="EntityTable_title"]').contains('Data File').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Data Files').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(5)').should('exist');
-    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('View in Data Exploration').should('exist');
+    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('View in Data Explorer').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').find('svg[class="anticon"]').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_subTitle"]').eq(0).contains('File counts by Data Type').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(0).find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Data Type').should('exist');
@@ -221,7 +221,7 @@ describe('Page d\'un participant - Valider les liens disponibles', () => {
     cy.get('[data-cy="FamilyLink"]').click({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Family ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FM0000307').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FM0000487').should('exist');
   });
 
   it('Lien Mother du panneau Family', () => {

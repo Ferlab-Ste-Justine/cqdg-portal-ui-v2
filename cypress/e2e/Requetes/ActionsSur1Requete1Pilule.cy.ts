@@ -10,7 +10,7 @@ describe('Page Data Exploration - Requêtes', () => {
   beforeEach(() => {
     cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
 
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -19,8 +19,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.checkValueFacetAndApply('Variant Type', 'deletion');
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
-    cy.validateTotalSelectedQuery('16K');
-    cy.validateTableResultsCount('16K');
+    cy.validateTotalSelectedQuery('488K');
+    cy.validateTableResultsCount('488K');
     cy.validateClearAllButton(false);
   });
 
@@ -30,8 +30,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.clickAndIntercept('[class*="filtersDropdown"] [data-cy="Apply_Variant Type"]', 'POST', '**/graphql', 1);
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV','Deletion']);
-    cy.validateTotalSelectedQuery('16K');
-    cy.validateTableResultsCount('16K');
+    cy.validateTotalSelectedQuery('488K');
+    cy.validateTableResultsCount('488K');
     cy.validateClearAllButton(false);
   });
 
@@ -41,8 +41,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
     cy.validatePillSelectedQuery('Consequence', ['Intron'], 1);
     cy.validateOperatorSelectedQuery('and');
-    cy.validateTotalSelectedQuery('12K');
-    cy.validateTableResultsCount('12K');
+    cy.validateTotalSelectedQuery('249K');
+    cy.validateTableResultsCount('249K');
     cy.validateClearAllButton(false);
   });
 
@@ -54,15 +54,15 @@ describe('Page Data Exploration - Requêtes', () => {
     };
 
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
-    cy.validateTotalSelectedQuery('19.5K');
-    cy.validateTableResultsCount('19.5K');
+    cy.validateTotalSelectedQuery('554K');
+    cy.validateTableResultsCount('554K');
     cy.validateClearAllButton(false);
 
     cy.checkValueFacetAndApply('Consequence', 'intron');
 
     cy.validatePillSelectedQuery('Consequence', ['Intron']);
-    cy.validateTotalSelectedQuery('14K');
-    cy.validateTableResultsCount('14K');
+    cy.validateTotalSelectedQuery('325K');
+    cy.validateTableResultsCount('325K');
     cy.validateClearAllButton(true);
   });
 
@@ -72,8 +72,8 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
-    cy.validateTotalSelectedQuery('15.2K');
-    cy.validateTableResultsCount('15.2K');
+    cy.validateTotalSelectedQuery('425K');
+    cy.validateTableResultsCount('425K');
     cy.validateClearAllButton(true);
   });
 });

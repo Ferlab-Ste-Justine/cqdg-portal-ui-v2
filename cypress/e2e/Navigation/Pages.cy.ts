@@ -14,7 +14,7 @@ describe('Navigation', () => {
     cy.get('[data-cy="HeaderLink_Studies"]').click();
     cy.get('[data-cy="Title_Studies"]').should('exist');
 
-    cy.get('[data-cy="HeaderLink_Data Exploration"]').click();
+    cy.get('[data-cy="HeaderLink_Data Explorer"]').click();
     cy.get('[data-cy="Title_DataExploration"]').should('exist');
 
     cy.get('[data-cy="HeaderLink_Variants"]').click();
@@ -169,11 +169,11 @@ describe('Navigation', () => {
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
   });
 
-  it('Modals de la page Data Exploration', () => {
+  it('Modals de la page Data Exploration [CQDG-672]', () => {
     cy.visitDataExploration();
 
     // Facettes
-    cy.get('[data-cy="SidebarMenuItem_Participant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').click({force: true});
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('participant').should('exist');
@@ -187,13 +187,13 @@ describe('Navigation', () => {
     cy.get('[data-cy="TreeFacet_Modal_mondoTree"]').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('[data-cy="SidebarMenuItem_Biospecimen"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Biospecimen"]').click({force: true});
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('sample').should('exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
-    cy.get('[data-cy="SidebarMenuItem_Data File"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Data File"]').click({force: true});
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('file').should('exist');
@@ -219,7 +219,7 @@ describe('Navigation', () => {
  
   it('Modals de la page des variants', () => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Gene"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Gene"]').click({force: true});
 
     cy.get('button[class*="UploadIdsButton"]').click({force: true});
     cy.get('[class="ant-modal-header"]').contains('gene').should('exist');

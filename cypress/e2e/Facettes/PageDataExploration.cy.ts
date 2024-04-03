@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitDataExploration('participants');
-    cy.get('[data-cy="SidebarMenuItem_Participant"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -24,7 +24,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Search by participant ID - PT0000010', () => {
-    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by participant ID').should('exist');
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'PT0000010', 'POST', '*/grapgql', 1);
     cy.wait(1000);
@@ -107,7 +107,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
 describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitDataExploration('biospecimens');
-    cy.get('[data-cy="SidebarMenuItem_Biospecimen"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Biospecimen"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -123,7 +123,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
   });
 
   it('Search by sample ID - SR0000214', () => {
-    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by sample ID').should('exist');
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'SR0000214', 'POST', '*/grapgql', 1);
     cy.wait(1000);
@@ -158,7 +158,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
 describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitDataExploration('datafiles');
-    cy.get('[data-cy="SidebarMenuItem_Data File"]').click();
+    cy.get('[data-cy="SidebarMenuItem_Data File"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').click({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
@@ -174,7 +174,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   });
 
   it('Search by file ID - FI0000572', () => {
-    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by file ID').should('exist');
+    cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FI0000572', 'POST', '*/grapgql', 1);
     cy.wait(1000);
@@ -211,7 +211,7 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   });
 
   it('Format - gVCF', () => {
-    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^588$/);
+    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^594$/);
     cy.validateFacetRank(4, 'Format');
   });
 });
