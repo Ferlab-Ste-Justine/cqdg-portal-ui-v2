@@ -12,7 +12,7 @@ beforeEach(() => {
 
 describe('Page des études - Vérifier les informations affichées', () => {
   it('Titre', () => {
-    cy.get('[data-cy="Title_Studies"]').contains('Studies');
+    cy.get('[data-cy="Title_Studies"]').contains('Study Directory');
   });
 
   it('Tableau', () => {

@@ -20,7 +20,7 @@ describe('Page d\'un fichier - Exporter le tableau Participants-Samples en TSV',
     cy.validateFileName('cqdg-participants-table-'+`${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`+'.tsv');
   });
 
-  it('Valider les en-têtes du fichier', () => {
+  it('Valider les en-têtes du fichier [CQDG-672]', () => {
     cy.validateFileHeaders('ExportTableauParticipantsPageFile.json');
   });
 

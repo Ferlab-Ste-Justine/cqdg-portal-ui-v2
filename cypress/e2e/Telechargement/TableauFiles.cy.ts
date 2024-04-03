@@ -14,6 +14,7 @@ beforeEach(() => {
   cy.wait(1000);
 
   cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 2);
+  cy.wait(10 * 1000);
 });
 
 describe('Page Data Exploration (Data Files) - Exporter les fichiers en TSV', () => {

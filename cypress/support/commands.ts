@@ -40,6 +40,8 @@ Cypress.Commands.add('checkValueFacet', (facetTitle: string, value: string) => {
   for (let i = 0; i < 8; i++) {
     cy.wait('@getPOSTgraphql', {timeout: 20*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number) => {
@@ -54,6 +56,8 @@ Cypress.Commands.add('clickAndIntercept', (selector: string, methodHTTP: string,
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('closePopup', () => {
@@ -108,9 +112,7 @@ Cypress.Commands.add('login', () => {
 
  cy.get('[data-cy*="LangButton"]').invoke('text').then((invokeText) => {
    if (invokeText.includes("EN")) {
-//     cy.intercept('PUT', '**/user').as('getPOSTuser');
      cy.get('[data-cy*="LangButton"]').click();
-//     cy.wait('@getPOSTuser', {timeout: 20*1000});
    };
  });
 });
@@ -159,6 +161,7 @@ Cypress.Commands.add('showColumn', (column: string|RegExp) => {
     .find('[type="checkbox"]').check({force: true});
   cy.wait('@getPOSTuser', {timeout: 20*1000});
   cy.get('[class*="Header_logo"]').click({force: true});
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: number) => {
@@ -170,10 +173,11 @@ Cypress.Commands.add('sortTableAndIntercept', (column: string|RegExp, nbCalls: n
     cy.wait('@getPOSTgraphql', {timeout: 60*1000});
   };
 
-  cy.waitWhileSpin(1000);
+  cy.waitWhileSpin(5000);
+  cy.wait(1000);
 });
 
-Cypress.Commands.add('sortTableAndWait', (column: string) => {
+Cypress.Commands.add('sortTableAndWait', (column: string|RegExp) => {
   cy.get('thead[class="ant-table-thead"]').contains(column).click({force: true});
   cy.wait(1000);
 });
@@ -186,6 +190,8 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 60*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
@@ -302,6 +308,8 @@ Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, rout
   for (let i = 0; i < nbCalls; i++) {
     cy.wait('@getRouteMatcher', {timeout: 20*1000});
   };
+
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('visitCommunityPage', () => {

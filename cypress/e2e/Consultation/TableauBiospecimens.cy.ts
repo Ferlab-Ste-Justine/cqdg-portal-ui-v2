@@ -11,7 +11,7 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
   });
 
   it('Titre', () => {
-    cy.get('[data-cy="Title_DataExploration"]').contains('Data Exploration');
+    cy.get('[data-cy="Title_DataExploration"]').contains('Data Explorer');
   });
 
   it('Tableau', () => {

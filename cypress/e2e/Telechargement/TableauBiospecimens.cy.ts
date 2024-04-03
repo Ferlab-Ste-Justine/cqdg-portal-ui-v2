@@ -10,6 +10,7 @@ beforeEach(() => {
   cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
 
   cy.clickAndIntercept('div[id="content"] svg[data-icon="download"]', 'POST', '**/download', 1, 1);
+  cy.wait(10 * 1000);
 });
 
 describe('Page Data Exploration (Biospecimens) - Exporter les biospecimens en TSV', () => {

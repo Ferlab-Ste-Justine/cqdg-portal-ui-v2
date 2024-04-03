@@ -188,7 +188,7 @@ describe('Page d\'un participant - Colonnes du tableau Biospecimens', () => {
     cy.resetColumns('biospecimen');
   });
 
-  it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {
+  it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes [CQDG-672]', () => {
     cy.get('[id="biospecimen"]')
       .find('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(0)
