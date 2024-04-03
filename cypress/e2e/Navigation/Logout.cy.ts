@@ -11,23 +11,30 @@ describe('Page Logout', () => {
   it('Vérifier les informations affichées', () => {
     cy.logout();
 
-    cy.contains('Available Data').should('exist');
-    cy.get('[data-cy="DataRelease_Study"]').contains(/\d{1}/).should('exist');
-    cy.get('[data-cy="DataRelease_Study"]').contains('Stud').should('exist');
-    cy.get('[data-cy="DataRelease_Participant"]').contains(/\d{1}/).should('exist');
-    cy.get('[data-cy="DataRelease_Participant"]').contains('Participants').should('exist');
-    cy.get('[data-cy="DataRelease_Biospecimen"]').contains(/\d{1}/).should('exist');
-    cy.get('[data-cy="DataRelease_Biospecimen"]').contains('Biospecimens').should('exist');
-    cy.get('[data-cy="DataRelease_File"]').contains(/\.\d{1,2}(T|G)B/).should('exist');
-    cy.get('[data-cy="DataRelease_File"]').contains('Data Files').should('exist');
-
-    cy.contains('Data Portal').should('exist');
-    cy.contains('The Quebec Genomic Data Center is a data harmonization and sharing platform for genomic datasets produced by Quebec\'s clinical and research studies.').should('exist');
-    cy.get('[data-cy="Login"]').contains('Login').should('exist');
-    cy.get('[data-cy="Signup"]').contains('Sign up').should('exist');
-
-    cy.get('img[src*="/static/media/genome_qc."]').should('exist');
-    cy.get('img[src*="/static/media/FRQS."]').should('exist');
-    cy.get('img[src*="/static/media/FCI."]').should('exist');
+    cy.get('[class*="TopBanner_title"]').contains(/(Portail de données|Data Portal)/).should('exist');
+    cy.get('[class*="Studies_container"] [class*="Summary"] [id="study"]').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_dots"]').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"] [src*="/static/media/cartagene."]').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('DEE').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('BACQ').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('PRAGMatIQ').should('exist');
+    cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('NeuroDev').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Édition|Release)/).should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).find('[id="study"]').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).find('[id="participant"]').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).find('[id="biospecimen"]').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(3).find('[id="file"]').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(4).find('[id="gene"]').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(5).find('[id="exomes"]').should('exist');
+    cy.get('[class*="Rare_container"] [src*="/static/media/RARE."]').should('exist');
+    cy.get('[class*="SecureData_container"] [src*="data:image/png"]').should('exist');
+    cy.get('[class*="Variants_container"] [id="gene"]').should('exist');
+    cy.get('[class*="BannerItem_container"]').eq(0).find('[id="information"]').should('exist');
+    cy.get('[class*="BannerItem_container"]').eq(1).find('[id="cloud-database"]').should('exist');
+    cy.get('[src*="/static/media/logos-genome_qc."]').should('exist');
+    cy.get('[src*="/static/media/logos-chusj-color."]').should('exist');
+    cy.get('[src*="/static/media/logos-FRQS-color."]').should('exist');
+    cy.get('[src*="/static/media/logos-FCI-color."]').should('exist');
+    cy.get('[src*="/static/media/logos-ferlab-color."]').should('exist');
   });
 });
