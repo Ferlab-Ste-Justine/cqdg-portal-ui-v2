@@ -38,7 +38,7 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
-    cy.validateTableResultsCount(/^1 Results$/);
+    cy.validateTableResultsCount(/^1 Result$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
@@ -51,14 +51,14 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_T-DEE"]').should('exist');
-    cy.validateTableResultsCount(/^1 Results$/);
+    cy.validateTableResultsCount(/^1 Result$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
     cy.get('[data-cy="Tag_T-DEE"]').should('not.exist');
   });
 
   it('Domain - Rare Diseases', () => {
-    cy.validateFacetFilter('Domain', 'Rare diseases', 'rare diseases', /^1 Results$/, false);
+    cy.validateFacetFilter('Domain', 'Rare diseases', 'rare diseases', /^1 Result$/, false);
     cy.validateFacetRank(0, 'Domain');
   });
 

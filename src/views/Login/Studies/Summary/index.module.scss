@@ -1,0 +1,25 @@
+@import 'style/themes/cqdg/colors';
+
+.container {
+  max-width: 360px;
+  width: 100%;
+  background: linear-gradient(343deg, #008FC7 23.91%, #016195 102.01%);
+  padding: 48px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 24px;
+  color: $gray-1;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 40px;
+  }
+}

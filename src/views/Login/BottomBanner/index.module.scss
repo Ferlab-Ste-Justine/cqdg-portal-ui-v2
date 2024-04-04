@@ -1,0 +1,37 @@
+@import 'style/themes/cqdg/colors';
+
+.bottomBanner {
+  background: linear-gradient(266deg, #28AAE2 0.82%, #006095 98.04%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.content {
+  max-width: 1200px;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .bottomBanner {
+    padding: 40px 24px;
+
+  }
+  .content {
+    gap: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .bottomBanner {
+    padding: 40px 24px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 0;
+  }
+}
