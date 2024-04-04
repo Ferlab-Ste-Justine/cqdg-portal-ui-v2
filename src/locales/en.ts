@@ -780,7 +780,7 @@ const en = {
           title: 'PRAGMatIQ',
           subtitle: 'Applying rapid pediatric genomics in Quebec',
           description:
-            '<p>The objective of the project is to offer rapid clinical Whole Genome Sequencing (GWS) to all critically ill newborns and infants who could benefit from this test in Quebec.</p><p>Data for 257 individuals has been submitted to the CQDG. The dataset currently available in the CQDG contains whole genome sequencing data for 110 individuals belonging to 38 families.</p>',
+            '<p>The objective of the project is to offer rapid clinical Whole Genome Sequencing (WGS) to all critically ill newborns and infants who could benefit from this test in Quebec.</p><p>Data for 257 individuals has been submitted to the CQDG. The dataset currently available in the CQDG contains whole genome sequencing data for 110 individuals belonging to 38 families.</p>',
         },
         neurodev: {
           title: 'NeuroDev',

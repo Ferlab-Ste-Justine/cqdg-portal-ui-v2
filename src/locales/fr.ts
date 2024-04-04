@@ -792,7 +792,7 @@ const fr = {
           title: 'PRAGMatIQ',
           subtitle: 'Pratique rapide de la génomique pédiatrique au Québec',
           description:
-            "<p>L'objectif du projet est d'offrir un séquençage clinique rapide du génome entier (GWS) à tous les nouveau-nés et nourrissons gravement malades qui pourraient bénéficier de ce test au Québec.</p><p>Les données de 257 individus ont été soumises au CQDG. Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier de 110 individus appartenant à 38 familles.</p>",
+            "<p>L'objectif du projet est d'offrir un séquençage clinique rapide du génome entier (WGS) à tous les nouveau-nés et nourrissons gravement malades qui pourraient bénéficier de ce test au Québec.</p><p>Les données de 257 individus ont été soumises au CQDG. Le jeu de données présentement hébergé au CQDG comprend les données de séquençage du génome entier de 110 individus appartenant à 38 familles.</p>",
         },
         neurodev: {
           title: 'NeuroDev',
