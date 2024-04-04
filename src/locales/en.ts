@@ -422,6 +422,7 @@ const en = {
       genericError: 'An error occured',
     },
     proTable: {
+      result: 'Result',
       results: 'Results',
       result: 'Result',
       noResults: 'No Result',
@@ -430,6 +431,7 @@ const en = {
       selectedPlural: 'items selected',
       selectAllResults: 'Select all results',
       clear: 'Clear',
+      clearFilters: 'Clear filters',
       tableExport: 'Export as TSV',
       reset: 'Reset',
       columns: 'Columns',

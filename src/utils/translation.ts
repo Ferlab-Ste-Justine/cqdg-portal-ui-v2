@@ -56,6 +56,7 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     emptyText: intl.get('global.proTable.noResults'),
   },
   itemCount: {
+    result: intl.get('global.proTable.result'),
     results: intl.get('global.proTable.results'),
     result: intl.get('global.proTable.result'),
     noResults: intl.get('global.proTable.noResults'),
@@ -64,6 +65,7 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     selectedPlural: intl.get('global.proTable.selectedPlural'),
     selectAllResults: intl.get('global.proTable.selectAllResults'),
     clear: intl.get('global.proTable.clear'),
+    clearFilters: intl.get('global.proTable.clear'),
   },
   tooltips: {
     tableExport: intl.get('global.proTable.tableExport'),

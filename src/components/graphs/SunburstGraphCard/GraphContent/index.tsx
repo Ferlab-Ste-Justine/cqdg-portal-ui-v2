@@ -108,7 +108,7 @@ const SunburstGraph = ({
     setTreeData(generateNavTreeFormKey(phenoReversed));
   };
 
-  if (!treeData?.length) {
+  if (!isLoading && !treeData?.length) {
     return (
       <Empty
         imageType="grid"

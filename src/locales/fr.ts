@@ -423,6 +423,7 @@ const fr = {
       genericError: 'Une erreur est apparue',
     },
     proTable: {
+      result: 'Résultat',
       results: 'Résultats',
       result: 'Résultat',
       noResults: 'Aucun résultat',
@@ -431,6 +432,7 @@ const fr = {
       selectedPlural: 'éléments sélectionnés',
       selectAllResults: 'Sélectionner tous les résultats',
       clear: 'Effacer',
+      clearFilters: 'Effacer les filtres',
       tableExport: 'Exporter en TSV',
       reset: 'Réinitialiser',
       columns: 'Colonnes',
