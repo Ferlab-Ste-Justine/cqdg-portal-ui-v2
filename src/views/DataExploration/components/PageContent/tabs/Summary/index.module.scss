@@ -2,3 +2,14 @@
   width: 100%;
 }
 
+.summaryGrapCard {
+  height: 100%;
+
+  div[class$='-body'] {
+    overflow: unset !important;
+  }
+}
+
+.summaryGraphCardCol {
+  width: 100%;
+}

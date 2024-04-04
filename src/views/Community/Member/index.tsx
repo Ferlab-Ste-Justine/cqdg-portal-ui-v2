@@ -17,7 +17,7 @@ import Banner from './components/Banner';
 import styles from './index.module.scss';
 
 const CommunityMember = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id = '' } = useParams<{ id: string }>();
   const { userInfo } = useUser();
 
   const { loading, result } = useApi<TUser>({

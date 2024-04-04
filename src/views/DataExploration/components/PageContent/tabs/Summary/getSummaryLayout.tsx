@@ -1,5 +1,14 @@
 import intl from 'react-intl-universal';
 import { IResizableGridLayoutConfig } from '@ferlab/ui/core/layout/ResizableGridLayout';
+import {
+  // ageAtDiagnosisDefaultGridConfig,
+  // dataCategoryDefaultGridConfig,
+  // dataTypeDefaultGridConfig,
+  // demographicsDefaultGridConfig,
+  mondoDefaultGridConfig,
+  observedPhenotypeDefaultGridConfig,
+  // studiesDefaultGridConfig,
+} from '@ferlab/ui/core/layout/ResizableGridLayout/utils';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import DataTypeGraphCard from 'components/graphs/DataTypeGraphCard';
@@ -34,6 +43,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
+    ...observedPhenotypeDefaultGridConfig,
     base: { h: 4, w: 6, x: 0, y: 0, minH: 4, minW: 5, isResizable: true },
     md: { h: 4, w: 6, x: 0, y: 0 },
     sm: { h: 4, w: 6, x: 0, y: 0 },
@@ -50,6 +60,7 @@ const getSummaryLayout = (): IResizableGridLayoutConfig[] => [
         queryId={DATA_EXPLORATION_QB_ID}
       />
     ),
+    ...mondoDefaultGridConfig,
     base: { h: 4, w: 6, x: 6, y: 0, minH: 4, minW: 5, isResizable: true },
     md: { h: 4, w: 6, x: 6, y: 0 },
     sm: { h: 4, w: 6, x: 0, y: 4 },

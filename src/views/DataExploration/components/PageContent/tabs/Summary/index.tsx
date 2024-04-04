@@ -15,12 +15,13 @@ import styles from './index.module.scss';
 const SummaryTab = () => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
+  const defaultLayouts = getSummaryLayout();
 
   return (
     <Space className={styles.wrapper} direction="vertical">
       <ResizableGridLayout
         uid={UID}
-        defaultLayouts={getSummaryLayout()}
+        defaultLayouts={defaultLayouts}
         dictionary={getResizableGridDictionary()}
         layouts={userInfo?.config.data_exploration?.summary?.layouts}
         onReset={(layouts: TSerializedResizableGridLayoutConfig[]) => {

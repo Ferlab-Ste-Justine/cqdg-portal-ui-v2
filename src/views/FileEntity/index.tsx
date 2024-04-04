@@ -40,7 +40,7 @@ export const pageId = 'file-entity-page';
 const FileEntity = () => {
   const dispatch = useDispatch();
   const { userInfo } = useUser();
-  const { file_id } = useParams<{ file_id: string }>();
+  const { file_id = '' } = useParams<{ file_id: string }>();
 
   const { data, loading } = useFile({
     field: 'file_id',

@@ -139,7 +139,7 @@ const filtersContainer = (
 };
 
 const DataExploration = () => {
-  const { tab } = useParams<{ tab: string }>();
+  const { tab = '' } = useParams<{ tab: string }>();
   const participantMappingResults = useGetExtendedMappings(INDEXES.PARTICIPANT);
   const fileMappingResults = useGetExtendedMappings(INDEXES.FILE);
   const biospecimenMappingResults = useGetExtendedMappings(INDEXES.BIOSPECIMEN);
