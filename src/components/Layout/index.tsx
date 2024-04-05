@@ -8,11 +8,11 @@ import Header from 'components/Layout/Header';
 
 import styles from './index.module.scss';
 
-interface OwnProps {
-  children: React.ReactElement;
+interface ILayoutProps {
+  children: React.ReactNode;
 }
 
-const Layout = ({ children }: OwnProps) => (
+const Layout = ({ children }: ILayoutProps) => (
   <AntLayout className={styles.mainLayout}>
     <Header />
     <ScrollContent id={MAIN_SCROLL_WRAPPER_ID} className={styles.mainContent}>

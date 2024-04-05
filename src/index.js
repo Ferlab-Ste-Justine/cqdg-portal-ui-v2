@@ -1,6 +1,5 @@
-// Import css before everything to make sure it is applied correctly
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import { initUserSnap } from 'services/initUsersnap';
 
@@ -13,14 +12,13 @@ import './index.css';
 
 initUserSnap();
 
-//On Summary tab ResizableGridLayout fails with new createRoot(container) from React 18
-//so we need to keep ReactDOM.render for now until we solve this issue
-//eslint-disable-next-line react/no-deprecated
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function

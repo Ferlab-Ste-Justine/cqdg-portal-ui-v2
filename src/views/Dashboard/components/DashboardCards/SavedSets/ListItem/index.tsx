@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ListItemWithActions from '@ferlab/ui/core/components/List/ListItemWithActions';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
@@ -51,7 +51,7 @@ interface IListItemProps {
 const ListItem = ({ data, icon }: IListItemProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -98,7 +98,7 @@ const ListItem = ({ data, icon }: IListItemProps) => {
             setAsActive: true,
           });
 
-          history.push(redirectToPage(data.setType));
+          navigate(redirectToPage(data.setType));
         }}
         title={data.tag}
         description={intl.get('screen.dashboard.cards.lastSaved', {

@@ -1,51 +1,36 @@
-import React from 'react';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 
 import { REDIRECT_URI_KEY } from 'common/constants';
-import ConditionalWrapper from 'components/utils/ConditionalWrapper';
 import { useUser } from 'store/user';
 import { STATIC_ROUTES } from 'utils/routes';
 
-type OwnProps = Omit<RouteProps, 'component' | 'render' | 'children'> & {
-  layout?: (children: any) => React.ReactElement;
+type TProtectedRoute = {
   children: React.ReactNode;
 };
 
-const ProtectedRoute = ({ children, layout, ...routeProps }: OwnProps) => {
+const ProtectedRoute = ({ children }: TProtectedRoute) => {
   const { error } = useUser();
+  const location = useLocation();
   const { keycloak } = useKeycloak();
-  const RouteLayout = layout!;
-  const userNeedsToLogin = !keycloak.authenticated;
-  const currentPath = routeProps.path;
 
   if (error) {
-    return <Redirect to={STATIC_ROUTES.ERROR} />;
+    return <Navigate to={STATIC_ROUTES.ERROR} />;
   }
 
-  if (userNeedsToLogin) {
+  if (!keycloak.authenticated) {
     return (
-      <Redirect
-        to={{
-          pathname: STATIC_ROUTES.LOGIN,
-          search: `${REDIRECT_URI_KEY}=${routeProps.location?.pathname}${routeProps.location?.search}`,
-        }}
+      <Navigate
+        to={`${STATIC_ROUTES.LOGIN}?${REDIRECT_URI_KEY}=${location.pathname}${location.search}`}
       />
     );
   }
 
-  if (currentPath === STATIC_ROUTES.LOGIN) {
-    return <Redirect to={STATIC_ROUTES.STUDIES} />;
+  if (location.pathname === STATIC_ROUTES.LOGIN) {
+    return <Navigate to={STATIC_ROUTES.STUDIES} />;
   }
 
-  return (
-    <ConditionalWrapper
-      condition={RouteLayout !== undefined}
-      wrapper={(children) => <RouteLayout>{children}</RouteLayout>}
-    >
-      <Route {...routeProps}>{children}</Route>
-    </ConditionalWrapper>
-  );
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

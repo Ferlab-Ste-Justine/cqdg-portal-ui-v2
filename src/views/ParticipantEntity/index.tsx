@@ -22,7 +22,7 @@ import styles from './index.module.scss';
 export const pageId = 'participant-entity-page';
 
 const ParticipantEntity = () => {
-  const { participant_id } = useParams<{ participant_id: string }>();
+  const { participant_id = '' } = useParams<{ participant_id: string }>();
 
   const { data, loading } = useParticipant({
     field: 'participant_id',

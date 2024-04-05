@@ -108,17 +108,7 @@ const SunburstGraph = ({
     setTreeData(generateNavTreeFormKey(phenoReversed));
   };
 
-  if (isLoading) {
-    return (
-      <div className={styles.spinnerWrapper}>
-        <div className={styles.spinner}>
-          <Spin />
-        </div>
-      </div>
-    );
-  }
-
-  if (!treeData?.length) {
+  if (!isLoading && !treeData?.length) {
     return (
       <Empty
         imageType="grid"
@@ -138,6 +128,13 @@ const SunburstGraph = ({
 
   return (
     <Row gutter={[24, 24]} id={`tooltip-wrapper-${field}`} className={styles.sunburstRowWrapper}>
+      {isLoading && (
+        <div className={styles.spinnerWrapper}>
+          <div className={styles.spinner}>
+            <Spin />
+          </div>
+        </div>
+      )}
       <Col lg={12} xl={10}>
         <svg
           className={styles.sunburstChart}
@@ -147,7 +144,7 @@ const SunburstGraph = ({
           ref={sunburstRef}
         />
       </Col>
-      <Col lg={12} xl={14}>
+      <Col className={isLoading ? styles.hidden : ''} lg={12} xl={14}>
         <TreePanel
           currentNode={currentNode!}
           treeData={treeData!}

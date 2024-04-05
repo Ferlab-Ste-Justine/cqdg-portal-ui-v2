@@ -40,7 +40,7 @@ enum SectionId {
 }
 
 export default function VariantEntity() {
-  const { locus } = useParams<{ locus: string }>();
+  const { locus = '' } = useParams<{ locus: string }>();
 
   const links: IAnchorLink[] = [
     { href: `#${SectionId.SUMMARY}`, title: intl.get('global.summary') },
