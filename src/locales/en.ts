@@ -442,6 +442,7 @@ const en = {
         all: 'All',
         none: 'None',
         clear: 'Clear',
+        clearFilters: 'Clear Filters',
         less: 'Less',
         more: 'More',
         apply: 'Apply',
