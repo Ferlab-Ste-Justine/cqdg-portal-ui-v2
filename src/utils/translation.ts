@@ -58,7 +58,6 @@ export const getProTableDictionary = (): IProTableDictionary => ({
   itemCount: {
     result: intl.get('global.proTable.result'),
     results: intl.get('global.proTable.results'),
-    result: intl.get('global.proTable.result'),
     noResults: intl.get('global.proTable.noResults'),
     of: intl.get('global.proTable.of'),
     selected: intl.get('global.proTable.selected'),
