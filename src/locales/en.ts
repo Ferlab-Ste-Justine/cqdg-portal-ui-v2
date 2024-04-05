@@ -485,6 +485,7 @@ const en = {
     },
     proTable: {
       results: 'Results',
+      result: 'Result',
       noResults: 'No Result',
       of: 'of',
       selected: 'item selected',
@@ -817,6 +818,75 @@ const en = {
         "The Quebec Genomic Data Center is a data harmonization and sharing platform for genomic datasets produced by Quebec's clinical and research studies.",
       login: 'Login',
       signup: 'Sign up',
+      studies: {
+        title: 'Studies',
+        summary: 'Explore harmonized data from studies in both pediatric and adult populations.',
+        cartagene: {
+          subtitle: 'CARTaGENE',
+          description:
+            '<p>CARTaGENE is a public research platform of the CHU Sainte-Justine created to accelerate health research. CARTaGENE consists of both biological samples and health data from 43,000 Quebec residents aged between 40 to 69 years.</p><p>The dataset currently available in the CQDG contains whole genome sequencing (WGS) data for 2,179 individuals.</p>',
+        },
+        dee: {
+          title: 'DEE',
+          subtitle: 'Investigating the genetic causes of epileptogenic encephalopathies',
+          description:
+            '<p>Whole Genome Sequencing (WGS) study in children with epileptogenic encephalopathies.</p><p>The dataset currently available in the CQDG contains whole genome sequencing data for 588 individuals belonging to 196 families.</p>',
+        },
+        bacq: {
+          title: 'BACQ',
+          subtitle: 'Quebec congenital malformation biobank',
+          description:
+            '<p>Biobank of well-characterized affected cases as well as their parents allowing molecular genetic studies to be carried out to identify the genes associated with these malformations.</p><p>The dataset currently available in the CQDG contains whole exome sequencing (WXS) data for 386 individuals belonging to 124 families.</p>',
+        },
+        pragmatiq: {
+          title: 'PRAGMatIQ',
+          subtitle: 'Applying rapid pediatric genomics in Quebec',
+          description:
+            '<p>The objective of the project is to offer rapid clinical Whole Genome Sequencing (WGS) to all critically ill newborns and infants who could benefit from this test in Quebec.</p><p>Data for 257 individuals has been submitted to the CQDG. The dataset currently available in the CQDG contains whole genome sequencing data for 110 individuals belonging to 38 families.</p>',
+        },
+        neurodev: {
+          title: 'NeuroDev',
+          subtitle: 'Neurodevelopmental disorders',
+          description:
+            '<p>The main objective of this project is to constitute a bank of samples and data from children and adults with global developmental delay, epilepsy and/or malformations and members of their family to supply various research projects which aim to identify the genes involved in these conditions.</p><p>Data for 382 individuals has been submitted to the CQDG. The dataset currently available in the CQDG contains whole genome sequencing data for 67 individuals belonging to 22 families.</p>',
+        },
+      },
+      cards: {
+        stats: {
+          release: 'Release V1',
+          genomes: 'Genomes',
+          exomes: 'Exomes',
+        },
+        rare: {
+          title: 'Network to advance research on rare diseases in Quebec',
+          description:
+            'The CQDG is a proud partner of the new Réseau pour Avancer la REcherche sur les maladies rares au Québec (Network to advance research on rare diseases in Quebec or RARE.Qc) financed by the FRQS. RARE.Qc is a coalition of over 100 researchers and patient partners across Quebec, aiming to transform research on rare diseases, particularly by promoting collaboration and data sharing using the CQDG infrastructure.',
+        },
+        secureData: {
+          title: 'CQDG in the Cloud',
+          description:
+            'Analyse CQDG datasets with your own software using the Secure Data for Health (SD4H) cloud-based infrastructure. Other cloud providers will be integrated with CQDG in a near future. Contact us to learn more.',
+          contact: 'Contact us',
+        },
+        variants: {
+          title: 'Germline Variants',
+          description:
+            'Our variant explorer offers advanced searching capabilities. With just a few clicks, you can explore millions of annotated germline variants from genomes and exomes of the CQDG participants.',
+          explore: 'Explore variant data',
+        },
+      },
+      documentation: {
+        title: 'Documentation Center',
+        description:
+          'To learn how to submit your data, request access to data, or to read user guides for the portal, visit the Documentation Center.',
+        button: 'Documentation Center',
+      },
+      hosting: {
+        title: 'Need to Host Your Data?',
+        description:
+          'The CQDG offers an ideal platform for researchers to store and share genomic data produced by clinical and research studies.',
+        button: 'Submit your data',
+      },
     },
     memberProfile: {
       notFound: 'User not found',

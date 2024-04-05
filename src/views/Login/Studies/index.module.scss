@@ -1,0 +1,34 @@
+@import 'style/themes/cqdg/colors';
+
+
+.container {
+  padding: 48px 24px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  // This is a known bug with Slick (what is used under the hood by Carousel
+  // Fix: https://github.com/kenwheeler/slick/issues/982#issuecomment-73517458
+  * {
+    min-height: 0;
+    min-width: 0;
+  }
+
+}
+
+.layout {
+  display: flex;
+}
+
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 40px 24px;
+  }
+
+  .layout {
+    flex-direction: column-reverse;
+  }
+}
+
+
