@@ -18,7 +18,7 @@
   font-size: 20px;
   line-height: 28px;
   padding-right: 8px;
-  color: $gray-8;
+  color: $gray-8 !important;
 }
 
 .ensemblLink {
@@ -121,4 +121,8 @@
       background-color: $gray-1;
     }
   }
+}
+
+.externalLinkInTag {
+  color: inherit !important;
 }

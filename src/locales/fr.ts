@@ -276,10 +276,10 @@ const fr = {
         canonical: 'Transcrit canonique',
       },
       details: {
-        functionalScores: 'Functional Scores',
-        geneConstraints: 'Gene Constraints',
-        spliceAltering: 'Splice Altering',
-        associatedConditions: 'Associated Conditions (OMIM)',
+        functionalScores: 'Scores de prédictions',
+        geneConstraints: 'Contraintes géniques',
+        spliceAltering: "Altération de l'épissage",
+        associatedConditions: 'Conditions associées (OMIM)',
         sift: 'SIFT',
         fathmm: 'FATHMM',
         caddPhred: 'CADD (Phred)',
@@ -309,7 +309,7 @@ const fr = {
         studies: 'Études',
         domain: 'Domaine',
         participants: 'Participants',
-        participantsTooltip: '# de participants atteints dans les études du CQDG',
+        participantsTooltip: '# de participants affectés dans les études du CQDG',
         participantsInfoIconTooltip:
           'En raison de la confidentialité des participants, les liens peuvent renvoyer un nombre inférieur à celui affiché',
         altAlleles: '# Allèles ALT',

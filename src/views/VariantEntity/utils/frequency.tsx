@@ -9,7 +9,6 @@ import {
   numberFormat,
   toExponentialNotation,
 } from '@ferlab/ui/core/utils/numberUtils';
-import { Space, Tooltip } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { useStudy } from 'graphql/studies/actions';
 import { IVariantEntity, IVariantStudyFrequencies } from 'graphql/variants/models';
@@ -17,8 +16,6 @@ import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
-
-import styles from '../index.module.scss';
 
 const StudyDomain = ({ study_code }: { study_code: string }) => {
   const { data: study } = useStudy({
@@ -65,16 +62,7 @@ export const getFrequencyItems = (): ProColumnType[] => [
   },
   {
     title: intl.get('entities.variant.frequencies.participants'),
-    iconTitle: (
-      <Space>
-        <Tooltip
-          className={styles.dotted}
-          title={intl.get('entities.variant.frequencies.participantsTooltip')}
-        >
-          {intl.get('entities.variant.frequencies.participants')}
-        </Tooltip>
-      </Space>
-    ),
+    tooltip: intl.get('entities.variant.frequencies.participantsTooltip'),
     key: 'participants',
     render: (row: IVariantStudyFrequencies) =>
       formatQuotientOrElse(row.total?.pc || NaN, row.total?.pn || NaN, TABLE_EMPTY_PLACE_HOLDER),

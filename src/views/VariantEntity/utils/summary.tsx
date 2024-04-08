@@ -19,7 +19,7 @@ import { ClinvarColorMap } from 'views/Variants/components/PageContent/VariantsT
 
 import { STATIC_ROUTES } from 'utils/routes';
 
-import style from '../index.module.scss';
+import styles from '../index.module.scss';
 
 const { Text } = Typography;
 
@@ -35,9 +35,10 @@ const renderClinvar = (clinVar: IClinVar) => {
     ? clinVarSigKey.map((clinvarKey, index) => (
         <Tag color={ClinvarColorMap[clinvarKey]} key={index}>
           <ExternalLink
+            className={styles.externalLinkInTag}
             href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinVar.clinvar_id}`}
           >
-            <Text className={style.clinVar}>
+            <Text className={styles.clinVar}>
               {intl.get(`entities.variant.pathogenicity.clinVarLabel.${clinvarKey}`)}
             </Text>
           </ExternalLink>
@@ -48,7 +49,7 @@ const renderClinvar = (clinVar: IClinVar) => {
 
 const renderParticipantsFrequency = (variant: IVariantEntity) =>
   variant.internal_frequencies_wgs?.total?.pf && (
-    <Text className={style.frequency}>
+    <Text className={styles.frequency}>
       ({toExponentialNotation(variant.internal_frequencies_wgs.total.pf)})
     </Text>
   );
@@ -62,14 +63,14 @@ const renderParticipants = (variant: IVariantEntity) => {
 
   if (!participantIds.length) {
     return (
-      <div className={style.participants}>
+      <div className={styles.participants}>
         {totalNbOfParticipants} / {numberFormat(totalParticipants)}
         {renderParticipantsFrequency(variant)}
       </div>
     );
   }
   return (
-    <div className={style.participants}>
+    <div className={styles.participants}>
       {participantIds.length > 10 ? (
         <>
           <Link
@@ -117,7 +118,7 @@ const renderOmim = (pickedOmim: IArrangerEdge<IGeneOmim>[]) => {
         {omim.node.inheritance_code?.length > 0 &&
           omim.node.inheritance_code.map((code) => (
             <Tooltip key={code} title={intl.get(`entities.variant.table.inheritant.code.${code}`)}>
-              <Tag color="blue">{code}</Tag>
+              <Tag>{code}</Tag>
             </Tooltip>
           ))}
       </Space>
@@ -143,7 +144,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
         label: (
           <>
             <ExternalLink
-              className={style.symbolLink}
+              className={styles.symbolLink}
               href={
                 geneWithPickedConsequence.omim_gene_id
                   ? `https://omim.org/entry/${geneWithPickedConsequence.omim_gene_id}`
@@ -155,7 +156,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             </ExternalLink>
             (
             <ExternalLink
-              className={style.ensemblLink}
+              className={styles.ensemblLink}
               href={`https://www.ensembl.org/id/${pickedCons.node.ensembl_transcript_id}`}
             >
               {intl.get('entities.variant.ensembl')}
@@ -170,7 +171,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
         value: (
           <>
             {pickImpactBadge(pickedCons.node.vep_impact, 14, 14)}
-            <Text className={style.summaryConsequence}>
+            <Text className={styles.summaryConsequence}>
               {removeUnderscoreAndCapitalize(pickedCons.node.consequence[0])}
             </Text>
           </>
@@ -189,7 +190,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
               placement="topLeft"
               title={intl.get('entities.variant.participant.tooltip')}
             >
-              <InfoCircleOutlined className={style.tooltipIcon} />
+              <InfoCircleOutlined className={styles.tooltipIcon} />
             </Tooltip>
           </>
         ),
@@ -204,13 +205,13 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
               placement="topLeft"
               title={intl.get('entities.variant.gnomADTooltip')}
             >
-              <InfoCircleOutlined className={style.tooltipIcon} />
+              <InfoCircleOutlined className={styles.tooltipIcon} />
             </Tooltip>
           </>
         ),
         value: variant.external_frequencies?.gnomad_genomes_3?.af ? (
           <ExternalLink
-            className={style.gnomad}
+            className={styles.gnomad}
             href={`https://gnomad.broadinstitute.org/variant/${variant.locus}?dataset=gnomad_r3`}
           >
             {toExponentialNotation(variant.external_frequencies.gnomad_genomes_3.af)}
@@ -228,7 +229,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
         {pickedCons.node.canonical && (
           <Tooltip title={intl.get('entities.variant.consequences.canonical')}>
             <div>
-              <CanonicalIcon className={style.canonicalIcon} height={16} width={16} />
+              <CanonicalIcon className={styles.canonicalIcon} height={16} width={16} />
             </div>
           </Tooltip>
         )}
@@ -244,7 +245,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
           </ExternalLink>
           {pickedCons.node.refseq_mrna_id.length > 1 && (
             <Popover
-              overlayClassName={style.popOverContent}
+              overlayClassName={styles.popOverContent}
               placement="bottom"
               title={intl.get('entities.variant.consequences.seeMoreRefSeq', {
                 ensemblTranscriptId: pickedCons.node.ensembl_transcript_id,
@@ -265,7 +266,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
                 </Space>
               }
             >
-              <Button className={style.seeMore} type="link">
+              <Button className={styles.seeMore} type="link">
                 {intl.get('global.seeMore')}
               </Button>
             </Popover>
@@ -288,7 +289,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
     details: {
       leftSection: {
         title: (
-          <Text className={style.functionalScores}>
+          <Text className={styles.functionalScores}>
             {intl.get('entities.variant.details.functionalScores')}
           </Text>
         ),
@@ -297,7 +298,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             label: intl.get('entities.variant.details.sift'),
             value: pickedCons.node.predictions?.sift_pred ? (
               <>
-                <Text className={style.predictionLabel}>
+                <Text className={styles.predictionLabel}>
                   {intl.get(
                     `facets.options.genes__consequences__predictions__sift_pred.${pickedCons.node.predictions.sift_pred}`,
                   )}
@@ -312,7 +313,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             label: intl.get('entities.variant.details.fathmm'),
             value: pickedCons.node.predictions?.fathmm_pred ? (
               <>
-                <Text className={style.predictionLabel}>
+                <Text className={styles.predictionLabel}>
                   {' '}
                   {intl.get(
                     `facets.options.genes__consequences__predictions__fathmm_pred.${pickedCons.node.predictions.fathmm_pred}`,
@@ -340,7 +341,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             label: intl.get('entities.variant.details.lrt'),
             value: pickedCons.node.predictions?.lrt_pred ? (
               <>
-                <Text className={style.predictionLabel}>
+                <Text className={styles.predictionLabel}>
                   {intl.get(
                     `facets.options.genes__consequences__predictions__lrt_pred.${pickedCons.node.predictions.lrt_pred}`,
                   )}
@@ -359,7 +360,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             label: intl.get('entities.variant.details.polyphen2hvar'),
             value: pickedCons.node.predictions?.polyphen2_hvar_pred ? (
               <>
-                <Text className={style.predictionLabel}>
+                <Text className={styles.predictionLabel}>
                   {intl.get(
                     // eslint-disable-next-line max-len
                     `facets.options.genes__consequences__predictions__polyphen2_hvar_pred.${pickedCons.node.predictions.polyphen2_hvar_pred}`,
@@ -398,7 +399,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
               label: intl.get('entities.variant.details.spliceAi'),
               value: geneWithPickedConsequence.spliceai?.ds ? (
                 <>
-                  <Text className={style.spliceAi}>{geneWithPickedConsequence.spliceai.ds}</Text>
+                  <Text className={styles.spliceAi}>{geneWithPickedConsequence.spliceai.ds}</Text>
                   {geneWithPickedConsequence.spliceai.type.map((t: string, index: number) => (
                     <Tooltip
                       key={index}
