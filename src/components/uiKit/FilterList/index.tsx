@@ -90,7 +90,7 @@ const FilterList = ({
                   defaultOpen={filterInfo.defaultOpenFacets?.includes(facet) ? true : undefined}
                   filterMapper={filterMapper}
                   headerTooltip={group.tooltips?.includes(facet)}
-                  noDataInputOption={!group.noDataOption?.includes(facet)}
+                  noDataInputOption={group.noDataOption?.includes(facet)}
                   intervalDecimal={
                     group.intervalDecimal?.[facet] || group.intervalDecimal?.[facet] === 0
                       ? group.intervalDecimal[facet]

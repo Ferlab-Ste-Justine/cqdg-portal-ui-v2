@@ -266,6 +266,7 @@ const PageContent = ({
             const index = filter.content.index!;
             const field = filter.content.field;
             const { sqon, mapping } = getSqonAndMappingByIndex(index as INDEXES);
+            // const noDataInputOption = getNoDataOptionValue(field.replaceAll('.', '__'));
             setSelectedFilterContent(
               <GenericFilters
                 queryBuilderId={DATA_EXPLORATION_QB_ID}
@@ -273,6 +274,7 @@ const PageContent = ({
                 field={dotToUnderscore(field)}
                 sqon={sqon}
                 extendedMappingResults={mapping}
+                // noDataInputOption={true}
               />,
             );
           },

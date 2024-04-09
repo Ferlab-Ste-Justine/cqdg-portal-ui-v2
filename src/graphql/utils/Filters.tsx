@@ -101,6 +101,7 @@ export const generateFilters = ({
           }}
           searchInputVisible={searchInputVisible}
           selectedFilters={selectedFilters}
+          noDataInputOption={filterGroup?.config?.noDataInputOption}
         />
       </div>
     );
