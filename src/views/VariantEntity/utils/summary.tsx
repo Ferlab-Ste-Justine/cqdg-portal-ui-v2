@@ -188,7 +188,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
             <Tooltip
               arrowPointAtCenter
               placement="topLeft"
-              title={intl.get('entities.variant.participant.tooltip')}
+              title={intl.get('entities.variant.frequencies.participantsTooltip')}
             >
               <InfoCircleOutlined className={styles.tooltipIcon} />
             </Tooltip>
