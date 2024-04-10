@@ -34,7 +34,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[class*="EntityTitle"]').contains('PT0000010');
   });
 
-  it('Panneau Summary [CQDG-672]', () => {
+  it('Panneau Summary', () => {
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains(/^1$/);
     cy.get('[data-cy="SummaryHeader_Studies_Button"]').contains('Study');
     cy.get('[data-cy="SummaryHeader_Biospecimens_Button"]').contains(/^1$/);
@@ -44,7 +44,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[id="summary"]').find('[class="ant-collapse-header"]').contains('Summary').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('ID').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(0).contains('PT0000010').should('exist');
-    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('Ext. Participant ID').should('exist');
+    cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(1).contains('External Participant ID').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('HSJ-1005-389').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-label"]').eq(2).contains('Study').should('exist');
     cy.get('[id="summary"]').find('[class="ant-descriptions-item-content"]').eq(2).contains('Developmental and epileptic encephalopathies (T-DEE)').should('exist');
@@ -157,7 +157,7 @@ describe('Page d\'un participant - Vérifier les informations affichées', () =>
     cy.get('[data-row-key="PH0000196"]').find('td[class="ant-table-cell"]').eq(4).contains('202').should('exist');
   });
   
-  it('Panneau Biospecimens [CQDG-672]', () => {
+  it('Panneau Biospecimens', () => {
     cy.resetColumns('biospecimen');
     cy.get('[id="biospecimen"]').find('[class*="EntityTable_title"]').contains('Biospecimen').should('exist');
     cy.get('[id="biospecimen"]').find('[class="ant-collapse-header"]').contains('Biospecimens').should('exist');
