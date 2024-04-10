@@ -19,7 +19,7 @@ describe('Page Logout', () => {
     cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('BACQ').should('exist');
     cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('PRAGMatIQ').should('exist');
     cy.get('[class*="Studies_container"] [class*="ant-carousel"] [class*="Carousel_title"]').contains('NeuroDev').should('exist');
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Édition|Release)/).should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Données CQDG|Release)/).should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).find('[id="study"]').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).find('[id="participant"]').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).find('[id="biospecimen"]').should('exist');

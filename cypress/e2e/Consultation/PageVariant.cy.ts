@@ -7,9 +7,9 @@ beforeEach(() => {
 });
 
 describe('Page d\'un variant - Vérifier les informations affichées', () => {
-  it('Titre [CQDG-677]', () => {
+  it('Titre', () => {
     cy.get('[class*="EntityTitle"]').contains('chr1:g.156176849G>A');
-    cy.get('[class*="EntityTitle"]').contains('GrCh38');
+    cy.get('[class*="EntityTitle"]').contains('GRCh38');
     cy.get('[class*="EntityTitle"]').find('[class="ant-tag"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('Germline');
     cy.get('[class*="EntityTitle"]').find('[class*="variantTag"]').should('exist');
@@ -121,7 +121,7 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
   });
 
   it('Panneau CQDG Studies', () => {
-    cy.get('[id="frequency"]').find('h4[class*="EntityTable_title"]').eq(0).contains('Frequency').should('exist');
+    cy.get('[id="frequency"]').find('h4[class*="EntityTable_title"]').eq(0).contains('Frequency (only WGS)').should('exist');
     cy.get('[id="frequency"]').find('[class*="ant-collapse-header-text"]').find('div[class*="ant-space-item"]').eq(0).contains('CQDG Studies').should('exist');
     cy.get('[id="frequency"]').find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Studies').should('exist');
     cy.get('[id="frequency"]').find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Domain').should('exist');

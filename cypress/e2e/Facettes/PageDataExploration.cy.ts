@@ -41,7 +41,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Study Code - STUDY1', () => {
-    cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^6$/);
+    cy.validateFacetFilter('Study Code', 'STUDY1', 'STUDY1', /^9$/);
     cy.validateFacetRank(0, 'Study Code');
   });
 
@@ -61,17 +61,17 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Family Position - Proband', () => {
-    cy.validateFacetFilter('Family Position', 'Proband', 'Proband', /^200$/);
+    cy.validateFacetFilter('Family Position', 'Proband', 'Proband', /^201$/);
     cy.validateFacetRank(2, 'Family Position');
   });
 
   it('Family Type - Case-parent trio', () => {
-    cy.validateFacetFilter('Family Type', 'Case-parent trio', 'Case-parent trio', /^591$/);
+    cy.validateFacetFilter('Family Type', 'Case-parent trio', 'Case-parent trio', /^594$/);
     cy.validateFacetRank(3, 'Family Type');
   });
 
   it('Sex - Female', () => {
-    cy.validateFacetFilter('Sex', 'Female', 'female', /^284$/);
+    cy.validateFacetFilter('Sex', 'Female', 'female', /^287$/);
     cy.validateFacetRank(4, 'Sex');
   });
 
@@ -140,7 +140,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
   });
 
   it('Sample Type - DNA (NCIT:C449)', () => {
-    cy.validateFacetFilter('Sample Type', 'DNA (NCIT:C449)', 'DNA (NCIT:C449)', /^599$/);
+    cy.validateFacetFilter('Sample Type', 'DNA (NCIT:C449)', 'DNA (NCIT:C449)', /^602$/);
     cy.validateFacetRank(0, 'Sample Type');
   });
 
@@ -191,27 +191,27 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   });
 
   it('Dataset - Data1', () => {
-    cy.validateFacetFilter('Dataset', 'Data1', 'data1', /^12$/);
+    cy.validateFacetFilter('Dataset', 'Data1', 'data1', /^24$/);
     cy.validateFacetRank(0, 'Dataset');
   });
 
   it('Data Category - Genomics', () => {
-    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^2,989$/);
+    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /^3,001$/);
     cy.validateFacetRank(1, 'Data Category');
   });
 
   it('Data Type - Aligned Reads', () => {
-    cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^599$/);
+    cy.validateFacetFilter('Data Type', 'Aligned Reads', 'Aligned Reads', /^602$/);
     cy.validateFacetRank(2, 'Data Type');
   });
 
   it('Strategy - WGS', () => {
-    cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^2,989$/);
+    cy.validateFacetFilter('Strategy', 'WGS', 'WGS', /^3,001$/);
     cy.validateFacetRank(3, 'Strategy');
   });
 
   it('Format - gVCF', () => {
-    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^594$/);
+    cy.validateFacetFilter('Format', 'GVCF', 'gVCF', /^597$/);
     cy.validateFacetRank(4, 'Format');
   });
 });

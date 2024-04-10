@@ -294,9 +294,9 @@ describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
-  it('CQDG Allele Frequency', () => {
-    cy.validateFacetNumFilter('CQDG Allele Frequency', '0.5', /^366K$/);
-    cy.validateFacetRank(0, 'CQDG Allele Frequency');
+  it('CQDG Allele Frequency (WGS)', () => {
+    cy.validateFacetNumFilter('CQDG Allele Frequency (WGS)', '0.5', /^366K$/);
+    cy.validateFacetRank(0, 'CQDG Allele Frequency (WGS)');
   });
 
   it('gnomAD Genome 2.1', () => {

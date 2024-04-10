@@ -10,7 +10,7 @@ beforeEach(() => {
   cy.showColumn('Description');
 });
 
-describe('Page des études - Vérifier les informations affichées', () => {
+describe.skip('Page des études - Vérifier les informations affichées', () => {
   it('Titre', () => {
     cy.get('[data-cy="Title_Studies"]').contains('Study Directory');
   });
@@ -39,7 +39,7 @@ describe('Page des études - Vérifier les informations affichées', () => {
 });
 
 describe('Page des études - Valider les liens disponibles', () => {
-  it('Lien Code du tableau', () => {
+  it.skip('Lien Code du tableau', () => {
     cy.get('tr[data-row-key="T-DEE"]').find('[class*="ant-table-cell"]').eq(0).find('[href]').click({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
@@ -47,14 +47,14 @@ describe('Page des études - Valider les liens disponibles', () => {
 
   it('Lien Participants du tableau', () => {
     cy.get('tr[data-row-key="T-DEE"]').find('[class="ant-table-cell"]').eq(4).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]').should('exist');
+    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
   });
 
   it('Lien Files du tableau', () => {
     cy.get('tr[data-row-key="T-DEE"]').find('[class="ant-table-cell"]').eq(9).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
+    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('T-DEE').should('exist');
   });

@@ -82,7 +82,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
 
   it('Lien Files du tableau', () => {
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
+    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
     cy.validateTableResultsCount(/^5$/);
@@ -90,7 +90,7 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
 
   it('Lien Biospecimens du tableau', () => {
     cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
+    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
     cy.validateTableResultsCount(/^1$/);
