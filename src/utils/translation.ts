@@ -57,6 +57,7 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     selectedPlural: intl.get('global.proTable.selectedPlural'),
     selectAllResults: intl.get('global.proTable.selectAllResults'),
     clear: intl.get('global.proTable.clear'),
+    clearFilters: intl.get('global.proTable.clearFilters'),
   },
   tooltips: {
     tableExport: intl.get('global.proTable.tableExport'),

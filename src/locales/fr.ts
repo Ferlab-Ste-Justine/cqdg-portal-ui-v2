@@ -497,6 +497,7 @@ const fr = {
       selectedPlural: 'éléments sélectionnés',
       selectAllResults: 'Sélectionner tous les résultats',
       clear: 'Effacer',
+      clearFilters: 'Effacer les filtres',
       tableExport: 'Exporter en TSV',
       reset: 'Réinitialiser',
       columns: 'Colonnes',

@@ -496,6 +496,7 @@ const en = {
       selectedPlural: 'items selected',
       selectAllResults: 'Select all results',
       clear: 'Clear',
+      clearFilters: 'Clear Filters',
       tableExport: 'Export as TSV',
       reset: 'Reset',
       columns: 'Columns',
