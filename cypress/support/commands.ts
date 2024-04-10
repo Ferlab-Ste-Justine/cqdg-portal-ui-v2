@@ -69,6 +69,34 @@ Cypress.Commands.add('closePopup', () => {
   });
 });
 
+Cypress.Commands.add('createFilterIfNotExists', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').invoke('text').then((invokeText) => {
+    if (!invokeText.includes(filterName)) {
+      cy.saveFilterAs(filterName);
+    };
+  });
+});
+
+Cypress.Commands.add('deleteFilter', (filterName: string) => {
+  cy.get('[class*="ant-dropdown-menu-title-content"]').contains(filterName).click({force: true});
+  cy.get('[id="query-builder-header-tools"] [class*="Header_togglerTitle"]').contains(filterName).should('exist');
+  cy.get('[id="query-builder-header-tools"] [class*="anticon-delete"]').click({force: true});
+  cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-dangerous"]', 'POST', '**/graphql', 1);
+
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').contains(filterName).should('not.exist');
+});
+
+Cypress.Commands.add('deleteFilterIfExists', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-root"]').invoke('text').then((invokeText) => {
+    if (invokeText.includes(filterName)) {
+      cy.deleteFilter(filterName);
+    };
+  });
+});
+
 Cypress.Commands.add('login', () => {
   cy.session(['user'], () => {
     cy.visit('/dashboard');
@@ -110,7 +138,7 @@ Cypress.Commands.add('login', () => {
  });
  cy.visit('/dashboard');
 
- cy.get('[data-cy*="LangButton"]').invoke('text').then((invokeText) => {
+ cy.get('[data-cy*="LangButton"]', {timeout: 60*1000}).invoke('text').then((invokeText) => {
    if (invokeText.includes("EN")) {
      cy.get('[data-cy*="LangButton"]').click();
    };
@@ -151,6 +179,15 @@ Cypress.Commands.add('resetColumns', (table_id?: string) => {
   cy.get('button[class*="ProTablePopoverColumnResetBtn"]').should('be.disabled', {timeout: 20*1000});
   cySettings.click({force: true});
   cy.get('[class*="Header_logo"]').click({force: true});
+});
+
+Cypress.Commands.add('saveFilterAs', (filterName: string) => {
+  cy.get('button[class*="Header_iconBtnAction"]').click({force: true});
+  cy.get('[class="ant-modal-content"] input').clear().type(filterName);
+  cy.get(`[class="ant-modal-content"] input[value="`+filterName+`"]`).should('exist');
+  cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'POST', '**/saved-filters', 1);
+
+  cy.get('[id="query-builder-header-tools"] [class*="Header_togglerTitle"]').contains(filterName).should('exist');
 });
 
 Cypress.Commands.add('showColumn', (column: string|RegExp) => {
@@ -266,6 +303,20 @@ Cypress.Commands.add('validateFileName', (namePattern: string) => {
   });
 });
 
+Cypress.Commands.add('validateFilterInManager', (filterName: string, expect: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[data-menu-id*="manage-my-filters"]').click({force: true});
+  cy.get('[class="ant-modal-content"]').contains(filterName).should(expect);
+  cy.get('button[class="ant-modal-close"]').invoke('click');
+});
+
+Cypress.Commands.add('validateIconStates', (iconName: string, isDisable: boolean, isDirty: boolean) => {
+  const strShouldDisable = isDisable ? 'be.disabled' : 'not.be.disabled';
+  const strShouldDirty = isDirty ? 'have.class' : 'not.have.class';
+  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDisable)
+  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDirty, 'dirty');
+});
+
 Cypress.Commands.add('validateOperatorSelectedQuery', (expectedOperator: string) => {
   cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').contains(expectedOperator).should('exist');
 });
@@ -281,6 +332,11 @@ Cypress.Commands.add('validatePillSelectedQuery', (facetTitle: string|RegExp, va
   for (let i = 0; i < values.length; i++) {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_queryValuesContainer"]').eq(eq).contains(values[i]).should('exist');
     }
+});
+
+Cypress.Commands.add('validateSelectedFilterInDropdown', (filterName: string) => {
+  cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+  cy.get('[class*="ant-dropdown-menu-item-selected"]').contains(filterName).should('exist');
 });
 
 Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number) => {

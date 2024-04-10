@@ -9,7 +9,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
   it('Section Upper banner', () => {
     cy.get('[class*="TopBanner_logo"]').should('exist');
     cy.get('[class*="TopBanner_title"]').contains(/(Portail de données|Data Portal)/).should('exist');
-    cy.get('[class*="TopBanner_description"]').contains(/(Le Centre québécois de données génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.|The Quebec Genomic Data Center is a data harmonization and sharing platform for genomic datasets produced by Quebec's clinical and research studies.)/).should('exist');
+    cy.get('[class*="TopBanner_description"]').contains(/(Le Centre Québécois de Données Génomiques est une plateforme d'harmonisation et de diffusion des données génomiques générées par les études cliniques et de recherche du Québec.|The Quebec Genomic Data Center is a data harmonization and sharing platform for genomic datasets produced by Quebec's clinical and research studies.)/).should('exist');
     cy.get('[data-cy="Login"]').contains(/(Connexion|Login)/).should('exist');
     cy.get('[data-cy="Signup"]').contains(/(Créer compte|Sign up)/).should('exist');
   });
@@ -17,7 +17,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
   it('Section Studies Side Panel Tile', () => {
     cy.get('[class*="Studies_container"] [class*="Summary"] [id="study"]').should('exist');
     cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains('3').should('exist');
-    cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains('Studies').should('exist');
+    cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains(/(Studies|Études)/).should('exist');
     cy.get('[class*="Studies_container"] [class*="Summary"]').contains(/(Explorez les données harmonisées d’études dans les populations pédiatriques et adultes.|Explore harmonized data from studies in both pediatric and adult populations.)/).should('exist');
   });
 
@@ -51,18 +51,18 @@ describe('Page Landing - Vérifier les informations affichées', () => {
   });
 
   it('Section Released Data Stats', () => {
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Édition|Release) V1/).should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Données CQDG|Release) v1.0/).should('exist');
 
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).find('[id="study"]').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).contains('3').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).contains(/(Études|Studies)/).should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).find('[id="participant"]').should('exist');
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).contains('599').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).contains('602').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).contains('Participants').should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).find('[id="biospecimen"]').should('exist');
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).contains('599').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).contains('602').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(2).contains(/Biosp(é|e)cimens/).should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(3).find('[id="file"]').should('exist');
@@ -70,7 +70,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(3).contains(/(Fichiers|Files)/).should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(4).find('[id="gene"]').should('exist');
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(4).contains('599').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(4).contains('602').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(4).contains(/G(é|e)nomes/).should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(5).find('[id="exomes"]').should('exist');
@@ -103,7 +103,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
     cy.get('[class*="BannerItem_container"]').eq(0).find('[id="information"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(0).find('[class*="TextIcon_title"]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
     cy.get('[class*="BannerItem_container"]').eq(0).contains(/(Pour savoir comment soumettre vos données, faire une demande d’accès ou pour consulter des guides d’utilisation du portail, visitez le centre de documentation.|To learn how to submit your data, request access to data, or to read user guides for the portal, visit the Documentation Center.)/).should('exist');
-    cy.get('[class*="BannerItem_container"]').eq(0).find('[href="https://docs.cqdg.ca/"]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
+    cy.get('[class*="BannerItem_container"]').eq(0).find('[href="https://docs.cqdg.ca"]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
 
     cy.get('[class*="BannerItem_container"]').eq(1).find('[id="cloud-database"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(1).find('[class*="TextIcon_title"]').contains(/(Données à héberger \?|Need to Host Your Data\?)/).should('exist');

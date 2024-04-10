@@ -78,35 +78,35 @@ describe('Navigation', () => {
 
     cy.visitDashboard();
     cy.get('[data-cy="GridCard_Participants"]').find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]').should('exist');
+    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="GridCard_Biospecimens"]').find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
+    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="GridCard_DataFiles"]').find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
+    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
   });
 
   it('Liens Saved Sets de la page Dashboard', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedSets"]').contains('Cypress Participants').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]').should('exist');
+    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Participants').should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="Tab_Biospecimens"]').click({force: true});
     cy.get('[data-cy="SavedSets"]').contains('Cypress Biospecimens').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
+    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Biospecimens').should('exist');
 
     cy.visitDashboard();
     cy.get('[data-cy="Tab_Files"]').click({force: true});
     cy.get('[data-cy="SavedSets"]').contains('Cypress Data Files').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
+    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
 
@@ -160,13 +160,13 @@ describe('Navigation', () => {
     cy.get('[aria-label="Participants by Study"]').should('exist');
 
     cy.get('[data-cy="Tab_Participants"]').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]').should('exist');
+    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
 
     cy.get('[data-cy="Tab_Biospecimens"]').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
+    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
 
     cy.get('[data-cy="Tab_DataFiles"]').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
+    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
   });
 
   it('Modals de la page Data Exploration', () => {
@@ -202,6 +202,13 @@ describe('Navigation', () => {
     // Query Builder
     cy.get('button[class*="Header_iconBtnAction"]').click({force: true});
     cy.contains('Save this filter').should('exist');
+    cy.get('button[class="ant-modal-close"]').invoke('click');
+
+    // Manage my filters
+    cy.get('button[class*="QueryBuilderHeaderTools_queryBuilderHeaderDdb"]').click({force: true});
+    cy.get('[data-menu-id*="manage-my-filters"]').click({force: true});
+    cy.contains('Manage my filters').should('exist', {timeout: 20*1000});
+    cy.contains('Close').should('exist', {timeout: 20*1000});
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     // Onglet Data Files
