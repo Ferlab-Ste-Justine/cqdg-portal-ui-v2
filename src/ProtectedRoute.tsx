@@ -2,6 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 
 import { REDIRECT_URI_KEY } from 'common/constants';
+import PageLayout from 'components/Layout';
 import { useUser } from 'store/user';
 import { STATIC_ROUTES } from 'utils/routes';
 
@@ -30,7 +31,7 @@ const ProtectedRoute = ({ children }: TProtectedRoute) => {
     return <Navigate to={STATIC_ROUTES.STUDIES} />;
   }
 
-  return <>{children}</>;
+  return <PageLayout>{children}</PageLayout>;
 };
 
 export default ProtectedRoute;

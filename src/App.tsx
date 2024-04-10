@@ -16,7 +16,6 @@ import Login from 'views/Login';
 
 import { LANG } from 'common/constants';
 import ErrorBoundary from 'components/ErrorBoundary';
-import PageLayout from 'components/Layout';
 import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
 import { useLang } from 'store/global';
@@ -51,7 +50,7 @@ const App = () => {
         <div className="appContainer">
           {keycloakIsReady ? (
             <AuthMiddleware>
-              <PageLayout>
+              <>
                 <Routes>
                   <Route path={STATIC_ROUTES.LOGIN} element={<Login />} />
                   <Route path={DYNAMIC_ROUTES.ERROR} element={<ErrorPage />} />
@@ -154,7 +153,7 @@ const App = () => {
                   <Route path="*" element={<Navigate to={STATIC_ROUTES.STUDIES} />} />
                 </Routes>
                 <NotificationContextHolder />
-              </PageLayout>
+              </>
             </AuthMiddleware>
           ) : (
             <Spinner size={'large'} />
