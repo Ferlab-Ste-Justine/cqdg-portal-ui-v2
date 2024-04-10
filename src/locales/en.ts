@@ -547,6 +547,7 @@ const en = {
       participantPlaceholder: 'e.g. PT0483333',
       samplePlaceholder: 'e.g. SR0230956',
       filePlaceholder: 'e.g. FI0080837',
+      sampleTitle: 'Upload a sample list',
       gene: 'gene',
       geneID: 'Gene Symbol, Gene Alias, Ensembl ID',
       genePlaceholder: 'e.g. ENSG00000157764, TP53',
