@@ -198,7 +198,6 @@ const fr = {
       manePlus: 'MANE Plus',
       maneSelect: 'MANE Select',
       canonical: 'Ensembl Canonical',
-      germline: 'Germline',
       ensembl: 'Ensembl',
       typeAbrv: {
         insertion: 'Ins',
@@ -376,6 +375,7 @@ const fr = {
         inheritance: 'Héritage',
         source: 'Source',
         interpretation: 'Interprétation',
+        germline: 'Germline',
         germlineAbvr: 'GER',
         somaticAbvr: 'SOM',
         somatic: 'Somatic',

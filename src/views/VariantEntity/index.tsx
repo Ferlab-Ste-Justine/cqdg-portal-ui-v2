@@ -92,7 +92,9 @@ export default function VariantEntity() {
           tag={
             <>
               <Tag>{data?.assembly_version}</Tag>
-              <Tag className={styles.variantTag}>{intl.get('entities.variant.germline')}</Tag>
+              <Tag className={styles.variantTag}>
+                {intl.get('entities.variant.pathogenicity.germline')}
+              </Tag>
             </>
           }
         />
