@@ -227,10 +227,6 @@ const fr = {
         title: 'ALT',
         tooltip: '# d’allèles alternatifs',
       },
-      frequence: {
-        title: 'Fréq.',
-        tooltip: 'Fréquence du variant à travers les cohortes CQDG',
-      },
       participant: {
         title: 'Part.',
         tooltip: '# de participants affectés et fréquence à travers les cohortes CQDG',
@@ -244,6 +240,12 @@ const fr = {
           low: 'BAS',
           moderate: 'MODÉRÉ',
           high: 'HAUT',
+        },
+        impactTooltip: {
+          HIGH: 'Haut',
+          LOW: 'Bas',
+          MODERATE: 'Modéré',
+          MODIFIER: 'Modifier',
         },
         predictions: {
           predictions: 'Prédictions',
@@ -291,6 +293,7 @@ const fr = {
         polyphen2: 'PolyPhen-2 HVAR',
         polyphen2hvar: 'PolyPhen-2 HVAR',
         phyloP17Way: 'PhyloP17Way',
+        pickedTooltip: 'Gène avec la conséquence la plus délétère',
         spliceAi: 'SpliceAI',
         pli: 'pLI',
         loeuf: 'LOEUF',
@@ -304,7 +307,7 @@ const fr = {
       frequencies: {
         frequency: 'Fréquence',
         frequencies: 'Fréquences',
-        frequencyTooltip: 'Fréquence du variant à travers les études du CQDG',
+        frequencyTooltip: 'Fréquence du variant dans les études du CQDG',
         publicCohorts: 'Cohortes publiques',
         studies: 'Études',
         domain: 'Domaine',
@@ -379,7 +382,7 @@ const fr = {
       },
       conditions: {
         title: 'Condition',
-        tableTitle: 'Gene - Phenotype Association',
+        tableTitle: 'Association gène - phénotype',
       },
       mostDeleteriousConsequence: {
         title: 'Conséquence la plus délétère',
@@ -393,6 +396,7 @@ const fr = {
           DR: 'Digenic Recessive',
           IC: 'Isolated Cases',
           Mi: 'Mitochondrial',
+          MI: 'Mitochondrial Inheritance',
           Mu: 'Multifactorial',
           NRT: 'No Reported Transmission',
           SMo: 'Somatic Mosaicism',

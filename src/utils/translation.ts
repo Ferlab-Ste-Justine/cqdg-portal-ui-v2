@@ -9,15 +9,6 @@ import { ageCategoriesKeyLabel } from 'graphql/participants/models';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
-export const getEntityExpandableTableMultiple = () => ({
-  hideTranscript: intl.get('entities.variant.consequences.hideTranscript'),
-  showTranscript: (count: number) =>
-    intl.get('entities.variant.consequences.showTranscript', { count }),
-  seeLess: intl.get('see.less'),
-  seeMore: intl.get('see.more'),
-  noDataAvailable: intl.get('api.noData'),
-});
-
 export const getEntityConsequenceDictionary = () => ({
   consequence: intl.get('entities.variant.consequences.consequence'),
   impactTag: {

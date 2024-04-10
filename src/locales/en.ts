@@ -226,10 +226,6 @@ const en = {
         title: 'ALT',
         tooltip: '# of alternative alleles',
       },
-      frequence: {
-        title: 'Freq.',
-        tooltip: 'Frequency of the variant across CQDG cohorts',
-      },
       participant: {
         title: 'Part.',
         tooltip: '# of affected participants and frequency across CQDG cohorts',
@@ -243,6 +239,12 @@ const en = {
           low: 'LOW',
           moderate: 'MODERATE',
           high: 'HIGH',
+        },
+        impactTooltip: {
+          HIGH: 'High',
+          LOW: 'Low',
+          MODERATE: 'Moderate',
+          MODIFIER: 'Modifier',
         },
         predictions: {
           predictions: 'Predictions',
@@ -290,6 +292,7 @@ const en = {
         polyphen2: 'PolyPhen-2 HVAR',
         polyphen2hvar: 'PolyPhen-2 HVAR',
         phyloP17Way: 'PhyloP17Way',
+        pickedTooltip: 'Gene with most deleterious consequence',
         spliceAi: 'SpliceAI',
         pli: 'pLI',
         loeuf: 'LOEUF',
@@ -392,6 +395,7 @@ const en = {
           DR: 'Digenic Recessive',
           IC: 'Isolated Cases',
           Mi: 'Mitochondrial',
+          MI: 'Mitochondrial Inheritance',
           Mu: 'Multifactorial',
           NRT: 'No Reported Transmission',
           SMo: 'Somatic Mosaicism',

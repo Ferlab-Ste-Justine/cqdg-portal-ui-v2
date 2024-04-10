@@ -137,6 +137,10 @@ export const getGenePhenotypeColumns = (): ProColumnType[] => [
               conditions={record.conditions as HpoConditions}
               withInheritanceTags
               inheritances={record.inheritance as SingleValuedInheritance}
+              dictionary={{
+                'see.less': intl.get('global.seeLess'),
+                'see.more': intl.get('global.seeMore'),
+              }}
             />
           );
         case ClinicalGenesTableSource.ddd:

@@ -44,7 +44,7 @@ export const getColumn = (geneSymbolOfPicked?: string): ProColumnType[] => [
             {gene.symbol}
           </ExternalLink>
           {gene.symbol === geneSymbolOfPicked && (
-            <Tooltip title={intl.get('entities.variant.consequences.pickedTooltip')}>
+            <Tooltip title={intl.get('entities.variant.details.pickedTooltip')}>
               <CheckCircleFilled className={style.pickedIcon} />
             </Tooltip>
           )}

@@ -16,9 +16,7 @@ import {
   makeGenesOrderedRow,
 } from '@ferlab/ui/core/pages/EntityPage/utils/pathogenicity';
 import { Space, Tag } from 'antd';
-import { ArrangerEdge } from 'graphql/models';
 import { useVariantEntity } from 'graphql/variants/actions';
-import { IVariantStudyEntity } from 'graphql/variants/models';
 
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 
@@ -69,13 +67,14 @@ export default function VariantEntity() {
     values: locus ? [locus] : [],
   });
 
-  const variantStudies = (data?.studies.hits.edges || []).map(
-    (e: ArrangerEdge<IVariantStudyEntity>) => e.node,
-  );
-
   const geneSymbolOfPicked = data?.genes?.hits?.edges?.find((e) =>
     (e.node.consequences || [])?.hits?.edges?.some((e) => e.node?.picked),
   )?.node?.symbol;
+
+  const studyFrequencies = (data?.study_frequencies_wgs?.hits?.edges || []).map((edge) => ({
+    key: edge.node.study_code,
+    ...edge.node,
+  }));
 
   return (
     <EntityPageWrapper
@@ -121,7 +120,7 @@ export default function VariantEntity() {
         <EntityTable
           id={SectionId.FREQUENCY}
           columns={getFrequencyItems()}
-          data={variantStudies}
+          data={studyFrequencies}
           title={intl.get('entities.variant.frequencies.frequency')}
           header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
