@@ -66,7 +66,7 @@ export const renderOmim = (
       <Space size={4} className={styles.variantSnvOmimCellItem}>
         {inheritance.map((code) => (
           <Tooltip key={code} title={intl.get(`entities.variant.inheritant.code.${code}`)}>
-            <Tag>
+            <Tag color="blue">
               <ExternalLink className={styles.externalLinkInTag} href={omimLink}>
                 {code}
               </ExternalLink>

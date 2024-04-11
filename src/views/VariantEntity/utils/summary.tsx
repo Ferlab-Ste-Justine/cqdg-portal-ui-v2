@@ -118,7 +118,7 @@ const renderOmim = (pickedOmim: IArrangerEdge<IGeneOmim>[]) => {
         {omim.node.inheritance_code?.length > 0 &&
           omim.node.inheritance_code.map((code) => (
             <Tooltip key={code} title={intl.get(`entities.variant.table.inheritant.code.${code}`)}>
-              <Tag>{code}</Tag>
+              <Tag color="blue">{code}</Tag>
             </Tooltip>
           ))}
       </Space>
