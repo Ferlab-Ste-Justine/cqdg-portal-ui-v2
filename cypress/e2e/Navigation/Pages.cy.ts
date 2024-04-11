@@ -169,7 +169,7 @@ describe('Navigation', () => {
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
   });
 
-  it('Modals de la page Data Exploration [CQDG-672]', () => {
+  it('Modals de la page Data Exploration', () => {
     cy.visitDataExploration();
 
     // Facettes

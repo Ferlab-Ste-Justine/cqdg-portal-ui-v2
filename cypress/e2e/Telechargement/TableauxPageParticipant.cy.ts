@@ -83,7 +83,7 @@ describe('Page d\'un participant - Exporter le tableau Biospecimens en TSV', () 
     cy.validateFileName('cqdg-biospecimens-table-'+`${strDate.slice(0, 4)}-${strDate.slice(4, 6)}-${strDate.slice(6, 8)}`+'.tsv');
   });
 
-  it('Valider les en-têtes du fichier [CQDG-672]', () => {
+  it('Valider les en-têtes du fichier', () => {
     cy.validateFileHeaders('ExportTableauBiospecimensPageParticipant.json');
   });
 

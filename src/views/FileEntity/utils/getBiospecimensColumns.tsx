@@ -63,7 +63,7 @@ const getBiospecimensColumns = (): IProColumnExport[] => [
   {
     key: 'biospecimen_tissue_source',
     dataIndex: 'biospecimen_tissue_source',
-    title: intl.get('screen.dataExploration.tabs.biospecimens.biospecimen_tissue_source'),
+    title: intl.get('entities.biospecimen.biospecimen_tissue_source'),
     render: (biospecimen_tissue_source: string) => {
       if (!biospecimen_tissue_source) return TABLE_EMPTY_PLACE_HOLDER;
       if (biospecimen_tissue_source === 'Unknown') return intl.get('global.unknown');

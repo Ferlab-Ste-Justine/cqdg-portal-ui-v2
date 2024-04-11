@@ -11,7 +11,7 @@ describe('Page d\'un fichier - Colonnes du tableau Participants-Samples', () => 
     cy.resetColumns('biospecimens');
   });
 
-  it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes [CQDG-672]', () => {
+  it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {
     cy.get('[id="biospecimens"]')
       .find('thead[class="ant-table-thead"]')
       .find('th[class*="ant-table-cell"]').eq(0)
