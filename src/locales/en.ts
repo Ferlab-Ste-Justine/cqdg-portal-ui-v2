@@ -514,7 +514,7 @@ const en = {
           'Before submitting your request, please ensure you are able to comply with the study’s Access Limitations and Access Requirements listed in the “Data Access” section.',
         text3: 'To find out more, please read the page ',
         content:
-          'Download an archive containing documents to guide you through your access requests. You will find terms of use and coordinates for the Access Authority for each study, as well as a list of files included in each study’s access request.',
+          "Download an archive containing documents to guide you through your access requests. You will find terms of use and the Access Authority contact information for each study, as well as a list of files included in each study's access request.",
         content2:
           'For more information, consult the README_EN file in the archive or this documentation page: ',
         textLink: 'Data Access Request',
