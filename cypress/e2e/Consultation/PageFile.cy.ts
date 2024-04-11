@@ -63,7 +63,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="data_type"]').find('[class="ant-descriptions-item-content"]').eq(1).contains('SNV').should('exist');
   });
 
-  it('Panneau Participants-Samples [CQDG-672]', () => {
+  it('Panneau Participants-Samples', () => {
     cy.resetColumns('biospecimens');
     cy.get('[id="biospecimens"]').find('[class="ant-collapse-header"]').contains('(1)').should('exist');
     cy.get('[id="biospecimens"]').find('[class="ant-collapse-header"]').contains('View in Data Explorer').should('exist');

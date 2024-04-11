@@ -24,6 +24,7 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
     entityIdentifiers={`${intl.get('entities.biospecimen.sample_id')}, ${intl.get(
       'entities.biospecimen.submitter_sample_id',
     )}`}
+    title={intl.get('components.uploadIds.sampleTitle')}
     placeHolder={intl.get('components.uploadIds.samplePlaceholder')}
     fetchMatch={async (ids) => {
       const response = await ArrangerApi.graphqlRequest({
