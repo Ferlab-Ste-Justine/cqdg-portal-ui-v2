@@ -69,7 +69,7 @@ const DownloadFileManifestModal = ({
     );
 
   return (
-    <Tooltip title={getTooltipTitle()} visible={isModalVisible ? false : undefined}>
+    <Tooltip title={getTooltipTitle()} open={isModalVisible ? false : undefined}>
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}

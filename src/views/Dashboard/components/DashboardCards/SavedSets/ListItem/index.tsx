@@ -11,16 +11,14 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
-import {
-  DATA_EXPLORATION_FILTER_TAG,
-  DATA_EXPLORATION_QB_ID,
-} from 'views/DataExploration/utils/constant';
-import { VARIANT_FILTER_TAG, VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
 import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { deleteSavedSet } from 'store/savedSet/thunks';
 import { getIdFieldByType } from 'utils/fieldMapper';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import CreateEditModal from '../CreateEditModal';
 
@@ -31,15 +29,15 @@ const { Text } = Typography;
 const redirectToPage = (setType: string) => {
   switch (setType) {
     case INDEXES.FILE:
-      return `${DATA_EXPLORATION_FILTER_TAG}/datafiles`;
+      return STATIC_ROUTES.DATA_EXPLORATION_DATAFILES;
     case INDEXES.PARTICIPANT:
-      return `${DATA_EXPLORATION_FILTER_TAG}/participants`;
+      return STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS;
     case INDEXES.BIOSPECIMEN:
-      return `${DATA_EXPLORATION_FILTER_TAG}/biospecimens`;
+      return STATIC_ROUTES.DATA_EXPLORATION_BIOSPECIMENS;
     case INDEXES.VARIANT:
-      return `${VARIANT_FILTER_TAG}`;
+      return STATIC_ROUTES.VARIANTS;
     default:
-      return DATA_EXPLORATION_FILTER_TAG;
+      return STATIC_ROUTES.DATA_EXPLORATION;
   }
 };
 
@@ -97,7 +95,6 @@ const ListItem = ({ data, icon }: IListItemProps) => {
             }),
             setAsActive: true,
           });
-
           navigate(redirectToPage(data.setType));
         }}
         title={data.tag}
