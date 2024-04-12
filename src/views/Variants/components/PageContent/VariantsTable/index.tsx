@@ -229,8 +229,8 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'external_frequencies.gnomad_genomes_3.af',
-    title: intl.get('entities.variant.gnomAd'),
-    tooltip: intl.get('entities.variant.gnomAdTooltip'),
+    title: intl.get('entities.variant.gnomAD'),
+    tooltip: intl.get('entities.variant.gnomADTooltip'),
     dataIndex: 'external_frequencies',
     sorter: { multiple: 1 },
     width: 90,

@@ -1,6 +1,110 @@
 @import 'src/style/themes/cqdg/theme.template';
 
-.predictionLabel {
+.variantTag {
+  color: $variant-tag-color;
+  background-color: $variant-tag-bg-color;
+}
+
+.frequencyParticipantLink {
+  padding: 0;
+}
+
+.titleIcon {
+  font-size: 24px;
+}
+
+.symbolLink {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  padding-right: 8px;
+  color: $gray-8 !important;
+}
+
+.ensemblLink {
+  padding: 0 2px;
+}
+
+.tooltipIcon {
+  padding-left: 4px;
+}
+
+.tooltip {
+  border-bottom: 1px dotted;
+}
+
+.summaryConsequence {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: capitalize;
+}
+
+.consequence {
+  text-transform: capitalize;
+}
+
+.clinVar {
+  white-space: wrap;
+  text-decoration: underline;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.interpretation {
+  white-space: wrap;
+  color: inherit;
+}
+
+.participants {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+
+  > a {
+    text-decoration: underline;
+    color: $gray-8;
+  }
+
+  .frequency {
+    padding-left: 4px;
+  }
+}
+
+.gnomad {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: $gray-8;
+}
+
+.popOverContent {
+  max-width: 420px;
+}
+
+.seeMore {
+  padding: 0 0 0 12px;
+  height: auto;
+  font-size: 12px;
+}
+
+.spliceAi {
+  padding-right: 8px;
+}
+
+.pickedIcon {
+  padding-left: 8px;
+  color: $blue-8;
+}
+
+.functionalScores {
+  color: $gray-9;
+}
+
+.predictionLabel,
+.conservationLabel {
   margin-right: 4px;
 }
 
@@ -8,34 +112,18 @@
   color: $canonical-icon-color;
 }
 
-.dotted {
-  border-bottom: 1px dotted;
-}
-
-.variantTag {
-  color: $variant-tag-color;
-  background-color: $variant-tag-bg-color;
-}
-
-.infoIcon {
-  color: $gray-7;
-  font-size: 12px;
-}
-
-.titleIcon {
-  font-size: 24px;
-}
-
-.geneExternalLink {
-  &:not(&:first-child) {
-    &::before {
-      content: ',';
-      margin-right: 4px;
-      color: $body-1;
+.expandedTable {
+  :global(.ant-spin-nested-loading
+      .ant-spin-container
+      .ant-table
+      .ant-table-container
+      .ant-table-content) {
+    table > tbody > tr > td {
+      background-color: $gray-1;
     }
   }
 }
 
-.frequencyParticipantLink {
-  padding: 0;
+.externalLinkInTag {
+  color: inherit !important;
 }

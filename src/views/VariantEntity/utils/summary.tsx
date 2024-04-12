@@ -1,188 +1,425 @@
 import intl from 'react-intl-universal';
+import { Link } from 'react-router-dom';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { TABLE_EMPTY_PLACE_HOLDER } from '@ferlab/ui/core/common/constants';
+import { pickImpactBadge } from '@ferlab/ui/core/components/Consequences/Cell';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { IEntitySummaryColumns } from '@ferlab/ui/core/pages/EntityPage/EntitySummary';
+import CanonicalIcon from '@ferlab/ui/core/components/Icons/CanonicalIcon';
+import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
+import { generateQuery, generateValueFilter } from '@ferlab/ui/core/data/sqon/utils';
+import { IArrangerEdge } from '@ferlab/ui/core/graphql/types';
 import { toExponentialNotation } from '@ferlab/ui/core/utils/numberUtils';
+import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { removeUnderscoreAndCapitalize } from '@ferlab/ui/core/utils/stringUtils';
-import { Tag, Tooltip } from 'antd';
-import { IVariantEntity } from 'graphql/variants/models';
-import { getSourceTagColor } from 'views/Variants/components/PageContent/VariantsTable';
+import { Button, Popover, Space, Tag, Tooltip, Typography } from 'antd';
+import { INDEXES } from 'graphql/constants';
+import { IClinVar, IGeneOmim, IVariantEntity } from 'graphql/variants/models';
+import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import { ClinvarColorMap } from 'views/Variants/components/PageContent/VariantsTable/utils';
 
-import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from '../index.module.scss';
 
-const handleOmimValues = (variant?: IVariantEntity) => {
-  const genes = variant?.genes?.hits?.edges || [];
-  const genesOmimFiltered = genes.filter((gene) => gene?.node?.omim_gene_id);
-  return genesOmimFiltered.length
-    ? genesOmimFiltered.map((gene) => (
-        <ExternalLink
-          key={gene.node.omim_gene_id}
-          className={styles.geneExternalLink}
-          href={`https://omim.org/entry/${genesOmimFiltered[0].node.omim_gene_id}`}
-          data-cy="Summary_OMIM_ExternalLink"
-        >
-          {gene.node.omim_gene_id}
-        </ExternalLink>
+const { Text } = Typography;
+
+const renderClinvar = (clinVar: IClinVar) => {
+  const clinVarSigKey: string[] = [];
+
+  clinVar?.clin_sig &&
+    clinVar.clin_sig.map((c) => {
+      clinVarSigKey.push(c.toLowerCase());
+    });
+
+  return clinVar?.clin_sig && clinVar.clinvar_id
+    ? clinVarSigKey.map((clinvarKey, index) => (
+        <Tag color={ClinvarColorMap[clinvarKey]} key={index}>
+          <ExternalLink
+            className={styles.externalLinkInTag}
+            href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${clinVar.clinvar_id}`}
+          >
+            <Text className={styles.clinVar}>
+              {intl.get(`entities.variant.pathogenicity.clinVarLabel.${clinvarKey}`)}
+            </Text>
+          </ExternalLink>
+        </Tag>
       ))
     : TABLE_EMPTY_PLACE_HOLDER;
 };
 
-export const getSummaryItems = (variant?: IVariantEntity): IEntitySummaryColumns[] => [
-  {
-    column: {
-      lg: 12,
-      md: 24,
-      xs: 24,
-    },
-    rows: [
+const renderParticipantsFrequency = (variant: IVariantEntity) =>
+  variant.internal_frequencies_wgs?.total?.pf && (
+    <Text className={styles.frequency}>
+      ({toExponentialNotation(variant.internal_frequencies_wgs.total.pf)})
+    </Text>
+  );
+
+const renderParticipants = (variant: IVariantEntity) => {
+  const totalNbOfParticipants = variant.internal_frequencies_wgs?.total?.pc || 0;
+  const totalParticipants = variant.internal_frequencies_wgs?.total?.pn || 0;
+  const studies = variant.studies;
+  const participantIds =
+    studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
+
+  if (!participantIds.length) {
+    return (
+      <div className={styles.participants}>
+        {totalNbOfParticipants} / {numberFormat(totalParticipants)}
+        {renderParticipantsFrequency(variant)}
+      </div>
+    );
+  }
+  return (
+    <div className={styles.participants}>
+      {participantIds.length > 10 ? (
+        <>
+          <Link
+            to={STATIC_ROUTES.DATA_EXPLORATION_PARTICIPANTS}
+            onClick={() => {
+              addQuery({
+                queryBuilderId: DATA_EXPLORATION_QB_ID,
+                query: generateQuery({
+                  newFilters: [
+                    generateValueFilter({
+                      field: 'participant_id',
+                      value: participantIds,
+                      index: INDEXES.PARTICIPANT,
+                    }),
+                  ],
+                }),
+                setAsActive: true,
+              });
+            }}
+          >
+            {numberFormat(totalNbOfParticipants)}
+          </Link>
+          <Text> / {numberFormat(totalParticipants)}</Text>
+        </>
+      ) : (
+        <Text>
+          {numberFormat(totalNbOfParticipants)} / {numberFormat(totalParticipants)}
+        </Text>
+      )}
+      {renderParticipantsFrequency(variant)}
+    </div>
+  );
+};
+
+const renderOmim = (pickedOmim: IArrangerEdge<IGeneOmim>[]) => {
+  if (!pickedOmim.length) return [{ label: undefined, value: <>{TABLE_EMPTY_PLACE_HOLDER}</> }];
+
+  return pickedOmim.map((omim) => ({
+    label: undefined,
+    value: (
+      <Space size={4}>
+        <ExternalLink href={`https://www.omim.org/entry/${omim.node.omim_id}`}>
+          {omim.node.name}
+        </ExternalLink>
+        {omim.node.inheritance_code?.length > 0 &&
+          omim.node.inheritance_code.map((code) => (
+            <Tooltip key={code} title={intl.get(`entities.variant.table.inheritant.code.${code}`)}>
+              <Tag color={code === 'Not Applicable' ? '' : 'blue'}>{code}</Tag>
+            </Tooltip>
+          ))}
+      </Space>
+    ),
+  }));
+};
+
+export const getSummaryItems = (variant?: IVariantEntity) => {
+  const geneWithPickedConsequence = variant?.genes?.hits?.edges?.find((e) =>
+    (e.node.consequences || [])?.hits?.edges?.some((e) => e.node?.picked),
+  )?.node;
+
+  const consequences = geneWithPickedConsequence?.consequences?.hits?.edges;
+  const pickedCons = consequences?.find((c) => c.node.picked);
+
+  if (!geneWithPickedConsequence || !consequences || !pickedCons) return undefined;
+
+  const pickedOmim = geneWithPickedConsequence.omim?.hits?.edges || [];
+
+  return {
+    banner: [
       {
-        title: '',
-        data: [
-          {
-            label: intl.get('entities.variant.variant'),
-            value: variant?.hgvsg || TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.type'),
-            value: variant?.variant_class
-              ? removeUnderscoreAndCapitalize(variant.variant_class)
-              : TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.cytoband'),
-            value: variant?.genes?.hits?.edges[0]
-              ? variant.genes.hits.edges[0].node.location
-              : TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.referenceGenome'),
-            value: variant?.assembly_version || TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.sources'),
-            value: variant?.sources?.length
-              ? variant?.sources?.map((value) => (
-                  <Tag color={getSourceTagColor(value)} key={value}>
-                    {value || TABLE_EMPTY_PLACE_HOLDER}
-                  </Tag>
-                ))
-              : TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.genes'),
-            value: variant?.genes?.hits?.edges?.length
-              ? variant.genes.hits.edges.map((gene) => {
-                  if (!gene?.node?.symbol) return;
-                  return (
-                    <ExternalLink
-                      key={gene.node.symbol}
-                      className={styles.geneExternalLink}
-                      href={`https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${gene.node.symbol}`}
-                      data-cy="Summary_Gene_ExternalLink"
-                    >
-                      {gene.node.symbol}
-                    </ExternalLink>
-                  );
-                })
-              : TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: intl.get('entities.variant.consequences.omim'),
-            value: handleOmimValues(variant),
-          },
-          {
-            label: intl.get('entities.variant.pathogenicity.pathoClinvar'),
-            value: variant?.clinvar?.clin_sig?.length
-              ? variant.clinvar.clin_sig.map((c, index) => {
-                  const value = removeUnderscoreAndCapitalize(c);
-                  const getTagColor = (clinvar: string) => {
-                    switch (clinvar) {
-                      case 'Pathogenic':
-                      case 'Likely Pathogenic':
-                        return 'red';
-                      case 'Benign':
-                      case 'Likely Benign':
-                        return 'green';
-                      default:
-                        return '';
-                    }
-                  };
-                  return (
-                    <Tag color={getTagColor(value)} key={c + index}>
-                      {value || TABLE_EMPTY_PLACE_HOLDER}
-                    </Tag>
-                  );
-                })
-              : TABLE_EMPTY_PLACE_HOLDER,
-          },
-        ],
+        label: (
+          <>
+            <ExternalLink
+              className={styles.symbolLink}
+              href={
+                geneWithPickedConsequence.omim_gene_id
+                  ? `https://omim.org/entry/${geneWithPickedConsequence.omim_gene_id}`
+                  : // eslint-disable-next-line max-len
+                    `https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=${geneWithPickedConsequence.symbol}`
+              }
+            >
+              <Text>{geneWithPickedConsequence.symbol}</Text>
+            </ExternalLink>
+            (
+            <ExternalLink
+              className={styles.ensemblLink}
+              href={`https://www.ensembl.org/id/${pickedCons.node.ensembl_transcript_id}`}
+            >
+              {intl.get('entities.variant.ensembl')}
+            </ExternalLink>
+            )
+          </>
+        ),
+        value: pickedCons.node.aa_change || TABLE_EMPTY_PLACE_HOLDER,
+      },
+      {
+        label: intl.get('entities.variant.consequences.consequence'),
+        value: (
+          <>
+            {pickImpactBadge(pickedCons.node.vep_impact, 14, 14)}
+            <Text className={styles.summaryConsequence}>
+              {removeUnderscoreAndCapitalize(pickedCons.node.consequence[0])}
+            </Text>
+          </>
+        ),
+      },
+      {
+        label: intl.get('entities.variant.pathogenicity.clinVar'),
+        value: renderClinvar(variant.clinvar),
+      },
+      {
+        label: (
+          <>
+            {intl.get('entities.participant.participants')}
+            <Tooltip
+              arrowPointAtCenter
+              placement="topLeft"
+              title={intl.get('entities.variant.frequencies.participantsTooltip')}
+            >
+              <InfoCircleOutlined className={styles.tooltipIcon} />
+            </Tooltip>
+          </>
+        ),
+        value: renderParticipants(variant),
+      },
+      {
+        label: (
+          <>
+            {intl.get('entities.variant.gnomAD')}
+            <Tooltip
+              arrowPointAtCenter
+              placement="topLeft"
+              title={intl.get('entities.variant.gnomADTooltip')}
+            >
+              <InfoCircleOutlined className={styles.tooltipIcon} />
+            </Tooltip>
+          </>
+        ),
+        value: variant.external_frequencies?.gnomad_genomes_3?.af ? (
+          <ExternalLink
+            className={styles.gnomad}
+            href={`https://gnomad.broadinstitute.org/variant/${variant.locus}?dataset=gnomad_r3`}
+          >
+            {toExponentialNotation(variant.external_frequencies.gnomad_genomes_3.af)}
+          </ExternalLink>
+        ) : (
+          TABLE_EMPTY_PLACE_HOLDER
+        ),
       },
     ],
-  },
-  {
-    column: {
-      lg: 12,
-      md: 24,
-      xs: 24,
-    },
-    rows: [
-      {
-        title: intl.get('entities.variant.frequencies.frequencies'),
-        data: [
+    info: [
+      <Space key="0" direction="horizontal">
+        <ExternalLink href={`https://www.ensembl.org/id/${pickedCons.node.ensembl_transcript_id}`}>
+          {pickedCons.node.ensembl_transcript_id}
+        </ExternalLink>
+        {pickedCons.node.canonical && (
+          <Tooltip title={intl.get('entities.variant.consequences.canonical')}>
+            <div>
+              <CanonicalIcon className={styles.canonicalIcon} height={16} width={16} />
+            </div>
+          </Tooltip>
+        )}
+      </Space>,
+      pickedCons.node.refseq_mrna_id?.length > 0 &&
+      //need to check first value not null because we have this type of data [null]
+      pickedCons.node.refseq_mrna_id[0] ? (
+        <div key="1">
+          <ExternalLink
+            href={`https://www.ncbi.nlm.nih.gov/nuccore/${pickedCons.node.refseq_mrna_id[0]}?report=graph`}
+          >
+            {pickedCons.node.refseq_mrna_id[0]}
+          </ExternalLink>
+          {pickedCons.node.refseq_mrna_id.length > 1 && (
+            <Popover
+              overlayClassName={styles.popOverContent}
+              placement="bottom"
+              title={intl.get('entities.variant.consequences.seeMoreRefSeq', {
+                ensemblTranscriptId: pickedCons.node.ensembl_transcript_id,
+              })}
+              content={
+                <Space direction="vertical">
+                  {pickedCons.node.refseq_mrna_id.map((id: string, index: number) => {
+                    if (index === 0) return;
+                    return (
+                      <ExternalLink
+                        href={`https://www.ncbi.nlm.nih.gov/nuccore/${id}?report=graph`}
+                        key={index}
+                      >
+                        {id}
+                      </ExternalLink>
+                    );
+                  })}
+                </Space>
+              }
+            >
+              <Button className={styles.seeMore} type="link">
+                {intl.get('global.seeMore')}
+              </Button>
+            </Popover>
+          )}
+        </div>
+      ) : (
+        TABLE_EMPTY_PLACE_HOLDER
+      ),
+      <Text key="3">{pickedCons?.node?.coding_dna_change || TABLE_EMPTY_PLACE_HOLDER}</Text>,
+      <div key="4">
+        {variant.rsnumber ? (
+          <ExternalLink href={`https://www.ncbi.nlm.nih.gov/snp/${variant.rsnumber}`}>
+            {variant.rsnumber}
+          </ExternalLink>
+        ) : (
+          TABLE_EMPTY_PLACE_HOLDER
+        )}
+      </div>,
+    ],
+    details: {
+      leftSection: {
+        title: (
+          <Text className={styles.functionalScores}>
+            {intl.get('entities.variant.details.functionalScores')}
+          </Text>
+        ),
+        items: [
           {
-            label: intl.get('entities.variant.gnomadGenome3'),
-            value:
-              toExponentialNotation(variant?.external_frequencies?.gnomad_genomes_3?.af) ||
-              TABLE_EMPTY_PLACE_HOLDER,
-          },
-          {
-            label: (
+            label: intl.get('entities.variant.details.sift'),
+            value: pickedCons.node.predictions?.sift_pred ? (
               <>
-                {intl.get('entities.study.CQDGStudies')}{' '}
-                <Tooltip title={intl.get('entities.variant.frequencies.frequencyTooltip')}>
-                  <InfoCircleOutlined className={styles.infoIcon} />
-                </Tooltip>
+                <Text className={styles.predictionLabel}>
+                  {intl.get(
+                    `facets.options.genes__consequences__predictions__sift_pred.${pickedCons.node.predictions.sift_pred}`,
+                  )}
+                </Text>
+                ({pickedCons.node.predictions.sift_score})
               </>
-            ),
-            value:
-              toExponentialNotation(variant?.internal_frequencies_wgs?.total?.af) ||
-              TABLE_EMPTY_PLACE_HOLDER,
-          },
-        ],
-      },
-      {
-        title: intl.get('entities.variant.variant_external_references'),
-        data: [
-          {
-            label: intl.get('entities.variant.pathogenicity.clinVar'),
-            value: variant?.clinvar?.clinvar_id ? (
-              <ExternalLink
-                href={`https://www.ncbi.nlm.nih.gov/clinvar/variation/${variant.clinvar.clinvar_id}`}
-                data-cy="Summary_ClinVar_ExternalLink"
-              >
-                {variant?.clinvar?.clinvar_id}
-              </ExternalLink>
             ) : (
               TABLE_EMPTY_PLACE_HOLDER
             ),
           },
           {
-            label: intl.get('entities.variant.dbsnp'),
-            value: variant?.rsnumber ? (
-              <ExternalLink
-                href={`https://www.ncbi.nlm.nih.gov/snp/${variant?.rsnumber}`}
-                data-cy="Summary_dbSNP_ExternalLink"
-              >
-                {variant?.rsnumber}
-              </ExternalLink>
+            label: intl.get('entities.variant.details.fathmm'),
+            value: pickedCons.node.predictions?.fathmm_pred ? (
+              <>
+                <Text className={styles.predictionLabel}>
+                  {' '}
+                  {intl.get(
+                    `facets.options.genes__consequences__predictions__fathmm_pred.${pickedCons.node.predictions.fathmm_pred}`,
+                  )}
+                </Text>
+                ({pickedCons.node.predictions.fathmm_score})
+              </>
             ) : (
               TABLE_EMPTY_PLACE_HOLDER
             ),
           },
+          {
+            label: intl.get('entities.variant.details.caddRaw'),
+            value: pickedCons.node.predictions?.cadd_score || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
+            label: intl.get('entities.variant.details.caddPhred'),
+            value: pickedCons.node.predictions?.cadd_phred || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
+            label: intl.get('entities.variant.details.dann'),
+            value: pickedCons.node.predictions?.dann_score || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
+            label: intl.get('entities.variant.details.lrt'),
+            value: pickedCons.node.predictions?.lrt_pred ? (
+              <>
+                <Text className={styles.predictionLabel}>
+                  {intl.get(
+                    `facets.options.genes__consequences__predictions__lrt_pred.${pickedCons.node.predictions.lrt_pred}`,
+                  )}
+                </Text>
+                ({pickedCons.node.predictions.lrt_score})
+              </>
+            ) : (
+              TABLE_EMPTY_PLACE_HOLDER
+            ),
+          },
+          {
+            label: intl.get('entities.variant.details.revel'),
+            value: pickedCons.node.predictions?.revel_score || TABLE_EMPTY_PLACE_HOLDER,
+          },
+          {
+            label: intl.get('entities.variant.details.polyphen2hvar'),
+            value: pickedCons.node.predictions?.polyphen2_hvar_pred ? (
+              <>
+                <Text className={styles.predictionLabel}>
+                  {intl.get(
+                    // eslint-disable-next-line max-len
+                    `facets.options.genes__consequences__predictions__polyphen2_hvar_pred.${pickedCons.node.predictions.polyphen2_hvar_pred}`,
+                  )}{' '}
+                </Text>
+                ({pickedCons.node.predictions.polyphen2_hvar_score})
+              </>
+            ) : (
+              TABLE_EMPTY_PLACE_HOLDER
+            ),
+          },
+          {
+            label: intl.get('entities.variant.details.phyloP17Way'),
+            value: pickedCons.node.conservations?.phyloP17way_primate || TABLE_EMPTY_PLACE_HOLDER,
+          },
         ],
       },
-    ],
-  },
-];
+      middleSection: [
+        {
+          title: intl.get('entities.variant.details.geneConstraints'),
+          items: [
+            {
+              label: intl.get('entities.variant.details.pli'),
+              value: geneWithPickedConsequence.gnomad?.pli || TABLE_EMPTY_PLACE_HOLDER,
+            },
+            {
+              label: intl.get('entities.variant.details.loeuf'),
+              value: geneWithPickedConsequence.gnomad?.loeuf || TABLE_EMPTY_PLACE_HOLDER,
+            },
+          ],
+        },
+        {
+          title: intl.get('entities.variant.details.spliceAltering'),
+          items: [
+            {
+              label: intl.get('entities.variant.details.spliceAi'),
+              value: geneWithPickedConsequence.spliceai?.ds ? (
+                <>
+                  <Text className={styles.spliceAi}>{geneWithPickedConsequence.spliceai.ds}</Text>
+                  {geneWithPickedConsequence.spliceai.type.map((t: string, index: number) => (
+                    <Tooltip
+                      key={index}
+                      title={intl.get(`entities.variant.details.spliceAiType.${t}`)}
+                    >
+                      <Tag>{t}</Tag>
+                    </Tooltip>
+                  ))}
+                </>
+              ) : (
+                TABLE_EMPTY_PLACE_HOLDER
+              ),
+            },
+          ],
+        },
+      ],
+      rightSection: {
+        title: intl.get('entities.variant.details.associatedConditions'),
+        items: renderOmim(pickedOmim),
+      },
+    },
+  };
+};

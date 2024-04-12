@@ -9,15 +9,6 @@ import { ageCategoriesKeyLabel } from 'graphql/participants/models';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
-export const getEntityExpandableTableMultiple = () => ({
-  hideTranscript: intl.get('entities.variant.consequences.hideTranscript'),
-  showTranscript: (count: number) =>
-    intl.get('entities.variant.consequences.showTranscript', { count }),
-  seeLess: intl.get('see.less'),
-  seeMore: intl.get('see.more'),
-  noDataAvailable: intl.get('api.noData'),
-});
-
 export const getEntityConsequenceDictionary = () => ({
   consequence: intl.get('entities.variant.consequences.consequence'),
   impactTag: {
@@ -40,8 +31,10 @@ export const getEntityConsequenceDictionary = () => ({
     dann: intl.get('entities.variant.consequences.predictions.dann'),
     lrt: intl.get('entities.variant.consequences.predictions.lrt'),
     revel: intl.get('entities.variant.consequences.predictions.revel'),
+    caddRaw: intl.get('entities.variant.consequences.predictions.caddRaw'),
+    caddPhred: intl.get('entities.variant.consequences.predictions.caddPhred'),
   },
-  conservationColumn: intl.get('entities.variant.consequences.conservationColumn'),
+  conservationColumn: intl.get('entities.variant.consequences.conservation'),
   transcript: intl.get('entities.variant.consequences.transcript'),
   canonical: intl.get('entities.variant.consequences.canonical'),
   refSeq: intl.get('entities.variant.consequences.refSeq'),
@@ -64,6 +57,7 @@ export const getProTableDictionary = (): IProTableDictionary => ({
     selectedPlural: intl.get('global.proTable.selectedPlural'),
     selectAllResults: intl.get('global.proTable.selectAllResults'),
     clear: intl.get('global.proTable.clear'),
+    clearFilters: intl.get('global.proTable.clearFilters'),
   },
   tooltips: {
     tableExport: intl.get('global.proTable.tableExport'),
@@ -350,7 +344,7 @@ export const getFacetsDictionary = () => ({
   consequences: {
     consequence: intl.get('entities.variant.consequences.consequence'),
     consequences: intl.get('entities.variant.consequences.consequences'),
-    biotype: intl.get('entities.variant.biotype'),
+    biotype: intl.get('entities.variant.geneType'),
     vep_impact: 'VEP',
     predictions: {
       sift_pred: 'SIFT',
@@ -367,7 +361,7 @@ export const getFacetsDictionary = () => ({
     consequences: {
       consequence: intl.get('entities.variant.consequences.consequence'),
       consequences: intl.get('entities.variant.consequences.consequences'),
-      biotype: intl.get('entities.variant.biotype'),
+      biotype: intl.get('entities.variant.geneType'),
       vep_impact: 'VEP',
       predictions: {
         cadd_score: 'CADD (Raw)',
@@ -380,7 +374,7 @@ export const getFacetsDictionary = () => ({
         sift_pred: 'SIFT',
       },
     },
-    biotype: intl.get('entities.variant.biotype'),
+    biotype: intl.get('entities.variant.geneType'),
     gnomad: {
       pli: 'gnomAD pLI',
       loeuf: 'gnomAD LOEUF',
