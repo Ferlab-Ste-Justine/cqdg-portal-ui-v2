@@ -27,7 +27,7 @@ import SummaryHeader from './SummaryHeader';
 import styles from './index.module.scss';
 
 const StudyEntity = () => {
-  const { study_code } = useParams<{ study_code: string }>();
+  const { study_code = '' } = useParams<{ study_code: string }>();
   const participantSqon = useParticipantResolvedSqon(queryId);
   const fileSqon = useFileResolvedSqon(queryId);
 

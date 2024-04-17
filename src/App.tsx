@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-} from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Empty from '@ferlab/ui/core/components/Empty';
 import loadable from '@loadable/component';
 import { useKeycloak } from '@react-keycloak/web';
@@ -22,7 +16,6 @@ import Login from 'views/Login';
 
 import { LANG } from 'common/constants';
 import ErrorBoundary from 'components/ErrorBoundary';
-import PageLayout from 'components/Layout';
 import Spinner from 'components/uiKit/Spinner';
 import NotificationContextHolder from 'components/utils/NotificationContextHolder';
 import { useLang } from 'store/global';
@@ -57,61 +50,110 @@ const App = () => {
         <div className="appContainer">
           {keycloakIsReady ? (
             <AuthMiddleware>
-              <Router>
-                <Switch>
-                  <Route exact path={STATIC_ROUTES.LOGIN}>
-                    <Login />
-                  </Route>
+              <>
+                <Routes>
+                  <Route path={STATIC_ROUTES.LOGIN} element={<Login />} />
+                  <Route path={DYNAMIC_ROUTES.ERROR} element={<ErrorPage />} />
                   <Route
-                    path={DYNAMIC_ROUTES.ERROR}
-                    render={(props: RouteComponentProps<{ status?: any }>) => (
-                      <ErrorPage status={props.match.params.status} />
-                    )}
+                    path={STATIC_ROUTES.DASHBOARD}
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
                   />
-                  <ProtectedRoute exact path={STATIC_ROUTES.DASHBOARD} layout={PageLayout}>
-                    <Dashboard />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.STUDIES} layout={PageLayout}>
-                    <Studies />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={DYNAMIC_ROUTES.DATA_EXPLORATION} layout={PageLayout}>
-                    <DataExploration />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.VARIANTS} layout={PageLayout}>
-                    <Variants />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={DYNAMIC_ROUTES.VARIANT_ENTITY} layout={PageLayout}>
-                    <VariantEntity />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={DYNAMIC_ROUTES.FILE_ENTITY} layout={PageLayout}>
-                    <FileEntity />
-                  </ProtectedRoute>
-                  <ProtectedRoute
-                    exact
+                  <Route
+                    path={STATIC_ROUTES.COMMUNITY}
+                    element={
+                      <ProtectedRoute>
+                        <Community />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={DYNAMIC_ROUTES.COMMUNITY_MEMBER}
+                    element={
+                      <ProtectedRoute>
+                        <CommunityMember />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={STATIC_ROUTES.PROFILE_SETTINGS}
+                    element={
+                      <ProtectedRoute>
+                        <ProfileSettings />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={STATIC_ROUTES.SETTINGS}
+                    element={
+                      <ProtectedRoute>
+                        <Settings />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={STATIC_ROUTES.STUDIES}
+                    element={
+                      <ProtectedRoute>
+                        <Studies />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={DYNAMIC_ROUTES.DATA_EXPLORATION}
+                    element={
+                      <ProtectedRoute>
+                        <DataExploration />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
                     path={DYNAMIC_ROUTES.PARTICIPANT_ENTITY}
-                    layout={PageLayout}
-                  >
-                    <ParticipantEntity />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={DYNAMIC_ROUTES.STUDY_ENTITY} layout={PageLayout}>
-                    <StudyEntity />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.COMMUNITY} layout={PageLayout}>
-                    <Community />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={DYNAMIC_ROUTES.COMMUNITY_MEMBER} layout={PageLayout}>
-                    <CommunityMember />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.PROFILE_SETTINGS} layout={PageLayout}>
-                    <ProfileSettings />
-                  </ProtectedRoute>
-                  <ProtectedRoute exact path={STATIC_ROUTES.SETTINGS} layout={PageLayout}>
-                    <Settings />
-                  </ProtectedRoute>
-                  <Redirect from="*" to={STATIC_ROUTES.STUDIES} />
-                </Switch>
+                    element={
+                      <ProtectedRoute>
+                        <ParticipantEntity />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={STATIC_ROUTES.VARIANTS}
+                    element={
+                      <ProtectedRoute>
+                        <Variants />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={DYNAMIC_ROUTES.VARIANT_ENTITY}
+                    element={
+                      <ProtectedRoute>
+                        <VariantEntity />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={DYNAMIC_ROUTES.FILE_ENTITY}
+                    element={
+                      <ProtectedRoute>
+                        <FileEntity />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path={DYNAMIC_ROUTES.STUDY_ENTITY}
+                    element={
+                      <ProtectedRoute>
+                        <StudyEntity />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="*" element={<Navigate to={STATIC_ROUTES.STUDIES} />} />
+                </Routes>
                 <NotificationContextHolder />
-              </Router>
+              </>
             </AuthMiddleware>
           ) : (
             <Spinner size={'large'} />

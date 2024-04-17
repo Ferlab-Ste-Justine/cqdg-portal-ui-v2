@@ -1,14 +1,11 @@
 import intl from 'react-intl-universal';
+import { useParams } from 'react-router';
 import { Button, Result } from 'antd';
 import { ExceptionStatusType } from 'antd/lib/result';
 
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';
-
-interface OwnProps {
-  status?: ExceptionStatusType;
-}
 
 const getResultProps = (
   status: ExceptionStatusType,
@@ -39,16 +36,20 @@ const getResultProps = (
   }
 };
 
-const ErrorPage = ({ status }: OwnProps) => (
-  <Result
-    className={styles.errorPage}
-    {...getResultProps(status || '500')}
-    extra={
-      <Button type="primary" onClick={() => (window.location.href = STATIC_ROUTES.HOME)}>
-        {intl.get('global.errors.backHome')}
-      </Button>
-    }
-  />
-);
+const ErrorPage = () => {
+  const { status } = useParams();
+
+  return (
+    <Result
+      className={styles.errorPage}
+      {...getResultProps((status as ExceptionStatusType) || '500')}
+      extra={
+        <Button type="primary" onClick={() => (window.location.href = STATIC_ROUTES.HOME)}>
+          {intl.get('global.errors.backHome')}
+        </Button>
+      }
+    />
+  );
+};
 
 export default ErrorPage;

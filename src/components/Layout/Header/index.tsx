@@ -1,6 +1,6 @@
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   DownOutlined,
   FileSearchOutlined,
@@ -46,8 +46,8 @@ const Header = () => {
   const { userInfo } = useUser();
   const dispatch = useDispatch();
   const { keycloak } = useKeycloak();
-  const history = useHistory();
-  const currentPathName = history.location.pathname;
+  const location = useLocation();
+  const currentPathName = location.pathname;
   const tokenParsed = keycloak.tokenParsed as IncludeKeycloakTokenParsed;
   const DATA_EXPLORATION_ROUTES = [
     STATIC_ROUTES.DATA_EXPLORATION,
