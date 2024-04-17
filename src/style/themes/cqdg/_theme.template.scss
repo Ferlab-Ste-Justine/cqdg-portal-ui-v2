@@ -63,7 +63,7 @@ $sidebar-menu-item-border-focus-color: $gray-1;
 
 $sidebar-quick-filter-input-box-shadow-hover: 0 0 0 2px $blue-8;
 $sidebar-quick-filter-input-box-shadow-focus: 0 0 0 2px $gray-8,
-  0 0 0 3px $gray-1;
+0 0 0 3px $gray-1;
 $sidebar-quick-filter-input-placeholder-color: $gray-6;
 $sidebar-quick-filter-input-text-color: $gray-8;
 
@@ -93,3 +93,11 @@ $prolabel-required-mark-color: $red-8;
 
 // UploadIds
 $file-upload-item-color: $blue-8;
+
+// LandingPage
+$landing-card-gradient: linear-gradient(343deg, #008FC7 23.91%, #016195 102.01%);
+$landing-text-color: $gray-1;
+$landing-text-icon-color-light: $gray-1;
+$landing-text-icon-color-dark: $gray-8;
+$landing-spot-icon-color-light: $blue-7;
+$landing-spot-icon-color-dark: $blue-3;
