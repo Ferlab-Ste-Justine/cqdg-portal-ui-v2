@@ -2,8 +2,8 @@ import React from 'react';
 import intl from 'react-intl-universal';
 import Studies from '@ferlab/ui/core/pages/LandingPage/Studies';
 
-import CartageneLogo from '../../../components/assets/cartagene.png';
-import { useGlobals } from '../../../store/global';
+import CartageneLogo from 'components/assets/cartagene.png';
+import { useGlobals } from 'store/global';
 
 import styles from './index.module.scss';
 

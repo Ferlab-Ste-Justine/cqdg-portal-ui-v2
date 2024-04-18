@@ -3,6 +3,7 @@ import intl from 'react-intl-universal';
 import CloudDatabaseIcon from '@ferlab/ui/core/components/Icons/FuturoSpot/CloudDatabaseSpotIcon';
 import InformationIcon from '@ferlab/ui/core/components/Icons/FuturoSpot/InformationSpotIcon';
 import BannerItem from '@ferlab/ui/core/pages/LandingPage/BannerItem';
+import EnvVariables from 'helpers/EnvVariables';
 
 import styles from './index.module.scss';
 
@@ -19,7 +20,7 @@ const BottomBanner = () => (
         buttonProps={{
           ghost: true,
           target: '_blank',
-          href: 'https://docs.cqdg.ca/',
+          href: EnvVariables.configFor('CQDG_DOCUMENTATION'),
         }}
       />
       <BannerItem
@@ -32,7 +33,9 @@ const BottomBanner = () => (
         buttonProps={{
           ghost: true,
           target: '_blank',
-          href: 'https://docs.cqdg.ca/docs/comment-soumettre-vos-donn%C3%A9es',
+          href: `${EnvVariables.configFor(
+            'CQDG_DOCUMENTATION',
+          )}/docs/comment-soumettre-vos-donn%C3%A9es`,
         }}
       />
     </div>

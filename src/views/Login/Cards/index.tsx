@@ -2,8 +2,8 @@ import intl from 'react-intl-universal';
 import VariantCard from '@ferlab/ui/core/pages/LandingPage/VariantCard';
 import { useKeycloak } from '@react-keycloak/web';
 
-import { useGlobals } from '../../../store/global';
-import { STATIC_ROUTES } from '../../../utils/routes';
+import { useGlobals } from 'store/global';
+import { STATIC_ROUTES } from 'utils/routes';
 
 import Rare from './Rare';
 import SecureData from './SecureData';
