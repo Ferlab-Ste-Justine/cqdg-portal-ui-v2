@@ -28,7 +28,7 @@ describe('Page Logout', () => {
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(5).find('[id="exomes"]').should('exist');
     cy.get('[class*="Rare_container"] [src*="/static/media/RARE."]').should('exist');
     cy.get('[class*="SecureData_container"] [src*="data:image/png"]').should('exist');
-    cy.get('[class*="Variants_container"] [id="gene"]').should('exist');
+    cy.get('[class*="VariantCard_container"] [id="gene"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(0).find('[id="information"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(1).find('[id="cloud-database"]').should('exist');
     cy.get('[src*="/static/media/logos-genome_qc."]').should('exist');
