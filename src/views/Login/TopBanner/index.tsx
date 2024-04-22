@@ -53,24 +53,10 @@ const TopBanner = () => {
           <div className={styles.title}>{intl.get('screen.loginPage.title')}</div>
           <div className={styles.description}>{intl.get('screen.loginPage.resume')}</div>
           <Space size={8}>
-            <Button
-              ghost
-              type="primary"
-              size="large"
-              data-cy="Login"
-              onClick={handleSignin}
-              className={styles.loginButton}
-            >
+            <Button ghost type="primary" size="large" data-cy="Login" onClick={handleSignin}>
               {intl.get('screen.loginPage.login')}
             </Button>
-            <Button
-              ghost
-              type="default"
-              size="large"
-              data-cy="Signup"
-              onClick={handleSignin}
-              className={styles.signupButton}
-            >
+            <Button ghost type="default" size="large" data-cy="Signup" onClick={handleSignin}>
               {intl.get('screen.loginPage.signup')}
             </Button>
           </Space>
