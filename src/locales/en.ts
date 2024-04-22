@@ -198,6 +198,7 @@ const en = {
       maneSelect: 'MANE Select',
       canonical: 'Ensembl Canonical',
       ensembl: 'Ensembl',
+      noGene: 'No gene',
       typeAbrv: {
         insertion: 'Ins',
         deletion: 'Del',
