@@ -165,7 +165,7 @@ export const getSummaryItems = (variant?: IVariantEntity) => {
                   className={styles.ensemblLink}
                   href={`https://www.ensembl.org/id/${pickedCons.node.ensembl_transcript_id}`}
                 >
-                  {intl.get('screen.variants.summary.ensembl')}
+                  {intl.get('entities.variant.ensembl')}
                 </ExternalLink>
                 )
               </Text>
