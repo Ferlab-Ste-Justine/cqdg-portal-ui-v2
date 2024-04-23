@@ -178,7 +178,7 @@ const getDefaultColumns = (): ProColumnType[] => [
       return (
         <ConsequencesCell
           consequences={consequences}
-          emptyText={intl.get('no.data.available')}
+          emptyText={intl.get('api.noDataAvailable')}
           layoutClassName={styles.csqCellLayout}
           symbol={geneWithPickedConsequence.symbol}
           withoutSymbol

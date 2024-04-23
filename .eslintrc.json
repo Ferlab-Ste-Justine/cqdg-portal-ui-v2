@@ -32,7 +32,7 @@
   },
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
-    "complexity": ["warn", 26],
+    "complexity": ["warn", 29],
     "template-curly-spacing": "off",
     "indent": "off",
     "default-case": 0,

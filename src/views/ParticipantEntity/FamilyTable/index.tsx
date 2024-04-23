@@ -84,7 +84,7 @@ const FamilyTable = ({ participant, loading, id }: IFamilyTableProps) => {
       header={participant?.family_id ? <FamilyLink /> : intl.get('entities.participant.family')}
       columns={getFamilyColumns(participant?.participant_id)}
       data={familySorted}
-      emptyMessage={intl.get('api.noData')}
+      emptyMessage={intl.get('api.noDataAvailable')}
       initialColumnState={userColumns}
       dictionary={getProTableDictionary()}
       headerConfig={{
