@@ -40,6 +40,7 @@ const DiagnosesTable = ({ participant, id, loading }: IDiagnosesTableProps) => {
       total={diagnosesData.length}
       initialColumnState={userColumns}
       dictionary={getProTableDictionary()}
+      emptyMessage={intl.get('api.noDataAvailable')}
       headerConfig={{
         enableTableExport: true,
         onTableExportClick: () =>
