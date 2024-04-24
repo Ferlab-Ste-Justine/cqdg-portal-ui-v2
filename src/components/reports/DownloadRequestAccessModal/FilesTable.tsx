@@ -27,6 +27,12 @@ export const getColumns = (): ProColumnType<any>[] => [
     render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
   },
   {
+    key: 'study_code',
+    dataIndex: 'key',
+    title: intl.get('entities.study.study_code'),
+    render: (label: string) => label || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
     key: 'nb_files',
     dataIndex: 'nb_files',
     title: intl.get('entities.file.files'),
@@ -36,7 +42,6 @@ export const getColumns = (): ProColumnType<any>[] => [
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
   const config: AxiosRequestConfig = {
-    // @ts-ignore
     url: REPORTS_ROUTES[ReportType.FILE_REQUEST_ACCESS_STATS],
     method: 'POST',
     responseType: 'json',
