@@ -1024,20 +1024,17 @@ const en = {
           popoverTitle: 'Managing Saved Filters',
           noSaved:
             'A filter is a collection of queries applied to all harmonized CQDG data. The results of a filter may change over time as CQDG data is updated.',
-          noSaved2:
-            'Save and modify your filters using the buttons displayed above the query section at the top of the ',
+          howToCreate: 'How to create a filter',
         },
         savedSets: {
           title: 'My Sets',
           popoverTitle: 'Managing Saved Sets',
           noSaved:
-            'A set is a collection of entity IDs (participants, biospecimens, files or variants). Saved sets do not change over time, unlike the results of filters which may change as data is updated in the CQDG.',
-          noSaved2:
-            'Save and modify your filters using the buttons displayed above the query section at the top of the ',
+            'A set is a fixed collection of entities (participants, biospecimens, files, or variants) which does not change even if CQDG data is updated.',
+          howToCreate: 'How to create a set',
         },
         lastSaved: 'Last saved: {date} ago',
-        and: ' and ',
-        pages: ' pages. ',
+        learnMore: 'Learn more',
       },
     },
     variants: {

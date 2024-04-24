@@ -1028,21 +1028,18 @@ const fr = {
           title: 'Mes filtres',
           popoverTitle: 'Gestions des filtres sauvegardés',
           noSaved:
-            'Un filtre est un ensemble de requêtes appliquées sur toutes les données harmonisées du CQDG. Les résultats d’un filtre peuvent changer après une mise à jour des données du CQDG.',
-          noSaved2:
-            'Sauvegardez et modifiez vos filtres à l’aide des boutons affichés au-dessus de la section des requêtes en haut des pages ',
+            "Un filtre est un ensemble de requêtes appliquées sur les données harmonisées du CQDG. Les résultats d'un filtre peuvent changer lors d'une mise à jour des données.",
+          howToCreate: 'Comment créer un filtre',
         },
         savedSets: {
           title: 'Mes ensembles',
           popoverTitle: 'Gestion des ensembles sauvegardés',
           noSaved:
-            'Un ensemble est une collection d’identifiants d’entités (participants, biospécimens, fichiers ou variants). Les ensembles sauvegardés ne changent pas avec le temps, contrairement aux résultats des filtres qui peuvent changer avec les mises à jour des données du CQDG.',
-          noSaved2:
-            'Sauvegardez et modifiez vos ensembles à l’aide du bouton « Sauvegarder la sélection » situé au-dessus des tableaux des résultats dans les pages ',
+            "Un ensemble est une collection fixe d'entités (participants, biospécimens, fichiers ou variants) qui demeure inchangé malgré la mise à jour des données.",
+          howToCreate: 'Comment créer un ensemble',
         },
         lastSaved: 'Dernier enregistrement : il y a {date}',
-        and: ' et ',
-        pages: '. ',
+        learnMore: 'En savoir plus',
       },
     },
     variants: {
