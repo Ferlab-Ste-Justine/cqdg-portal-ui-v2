@@ -45,6 +45,7 @@ const PhenotypesTable = ({ participant, id, loading }: IPhenotypesTableProps) =>
       total={phenotypesData.length}
       initialColumnState={userColumns}
       dictionary={getProTableDictionary()}
+      emptyMessage={intl.get('api.noDataAvailable')}
       headerConfig={{
         enableTableExport: true,
         onTableExportClick: () =>

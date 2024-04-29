@@ -76,13 +76,17 @@ export default function VariantEntity() {
     ...edge.node,
   }));
 
+  const consequencesData = hydrateResults(data?.genes?.hits?.edges || []).filter(
+    (gene) => gene.symbol !== NO_GENE,
+  );
+
   return (
     <EntityPageWrapper
       pageId="variant-entity-page"
       links={links}
       data={data}
       loading={loading}
-      emptyText={intl.get('api.noData')}
+      emptyText={intl.get('api.noDataAvailable')}
     >
       <>
         <EntityTitle
@@ -102,21 +106,19 @@ export default function VariantEntity() {
         <EntityVariantSummary
           id={SectionId.SUMMARY}
           loading={loading}
-          data={getSummaryItems(data)}
-          noDataLabel={intl.get('entities.variant.noDataVariant')}
+          data={data ? getSummaryItems(data) : undefined}
+          noDataLabel={intl.get('api.noDataAvailable')}
         />
 
         <EntityNestedTable
           columns={getColumn(geneSymbolOfPicked)}
-          data={hydrateResults(data?.genes?.hits?.edges || []).filter(
-            (gene) => gene.symbol !== NO_GENE,
-          )}
+          data={consequencesData.length ? consequencesData : undefined}
           expandedRowRender={expandedRowRender}
           id={SectionId.CONSEQUENCE}
           loading={loading}
           title={intl.get('entities.variant.consequences.consequence')}
           header={intl.get('entities.variant.consequences.transcripts')}
-          noDataLabel={intl.get('entities.variant.noDataVariant')}
+          noDataLabel={intl.get('api.noDataAvailable')}
         />
 
         <EntityTable
@@ -127,6 +129,7 @@ export default function VariantEntity() {
           header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
           summaryColumns={getFrequencyTableSummaryColumns(data)}
+          emptyMessage={intl.get('api.noDataAvailable')}
         />
 
         <EntityPublicCohortTable
@@ -136,7 +139,7 @@ export default function VariantEntity() {
           locus={data?.locus}
           header={intl.get('entities.variant.frequencies.publicCohorts')}
           loading={loading}
-          emptyMessage={intl.get('api.noData')}
+          emptyMessage={intl.get('api.noDataAvailable')}
         />
 
         <EntityTable
@@ -159,7 +162,7 @@ export default function VariantEntity() {
           }
           data={makeClinvarRows(data?.clinvar)}
           columns={getClinvarColumns()}
-          emptyMessage={intl.get('api.noData')}
+          emptyMessage={intl.get('api.noDataAvailable')}
         />
 
         <EntityTable
@@ -169,7 +172,7 @@ export default function VariantEntity() {
           header={intl.get('entities.variant.conditions.tableTitle')}
           data={makeGenesOrderedRow(data?.genes)}
           columns={getGenePhenotypeColumns()}
-          emptyMessage={intl.get('api.noData')}
+          emptyMessage={intl.get('api.noDataAvailable')}
         />
       </>
     </EntityPageWrapper>

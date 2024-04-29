@@ -39,6 +39,7 @@ const AnalysisFilesTable = ({ file, id }: { file: IFileEntity; id: string }) => 
       total={files.length}
       initialColumnState={userInfo?.config.files?.tables?.files?.columns}
       dictionary={getProTableDictionary()}
+      emptyMessage={intl.get('api.noDataAvailable')}
       titleExtra={[
         <EntityTableRedirectLink
           key="1"

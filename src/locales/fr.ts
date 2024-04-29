@@ -591,6 +591,7 @@ const fr = {
       },
     },
     noData: 'Aucune donnée',
+    noDataAvailable: 'Aucune donnée',
   },
   components: {
     search: {
@@ -1046,7 +1047,6 @@ const fr = {
       title: 'Banque des variants germinaux',
       subTitle: 'Explorez l’ensemble des variants germinaux soumis par les études du CQDG.',
       variantsExploration: 'Exploration des variants',
-      noDataVariant: 'Aucune donnée disponible pour ce variant',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',

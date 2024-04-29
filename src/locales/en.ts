@@ -165,7 +165,6 @@ const en = {
       variant: 'Variant',
       variants: 'Variants',
       variantAuto: '{count, plural, =0 {Variant} =1 {Variant} other {Variants}}',
-      noDataVariant: 'No data available for this variant',
       type: 'Type',
       variant_class: 'Variant Type',
       variant_external_reference: 'External Reference',
@@ -591,6 +590,7 @@ const en = {
       },
     },
     noData: 'No data',
+    noDataAvailable: 'No data available',
   },
   components: {
     search: {
@@ -1041,7 +1041,6 @@ const en = {
       title: 'Germline Variant Database',
       subTitle: 'Explore all the germline variants submitted by the CQDG studies.',
       variantsExploration: 'Variants Exploration',
-      noDataVariant: 'No data available for this variant',
       sidemenu: {
         participant: 'Participant',
         variant: 'Variant',

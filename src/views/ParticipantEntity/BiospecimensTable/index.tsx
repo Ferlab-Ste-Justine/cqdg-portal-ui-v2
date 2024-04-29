@@ -75,6 +75,7 @@ const BiospecimensTable = ({ participant, id, loading }: IBiospecimensTableProps
       total={biospecimensData.length}
       initialColumnState={userInfo?.config.participants?.tables?.biospecimens?.columns}
       dictionary={getProTableDictionary()}
+      emptyMessage={intl.get('api.noDataAvailable')}
       headerConfig={{
         enableTableExport: true,
         onTableExportClick: () =>
