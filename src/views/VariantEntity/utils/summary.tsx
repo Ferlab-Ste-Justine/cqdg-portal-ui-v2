@@ -61,6 +61,10 @@ const renderParticipants = (variant: IVariantEntity) => {
   const participantIds =
     studies?.hits?.edges?.map((study) => study.node.participant_ids || [])?.flat() || [];
 
+  if (!totalNbOfParticipants || !totalParticipants) {
+    return TABLE_EMPTY_PLACE_HOLDER;
+  }
+
   if (!participantIds.length) {
     return (
       <div className={styles.participants}>
@@ -69,6 +73,7 @@ const renderParticipants = (variant: IVariantEntity) => {
       </div>
     );
   }
+
   return (
     <div className={styles.participants}>
       {participantIds.length > 10 ? (
