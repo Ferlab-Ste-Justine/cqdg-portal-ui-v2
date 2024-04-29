@@ -56,6 +56,7 @@ const SexGraphCard = ({
       loadingType="spinner"
       headerTitle={intl.get('entities.participant.participantsBySex')}
       tsvSettings={{ data: [data] }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <PieChart
           data={data}
