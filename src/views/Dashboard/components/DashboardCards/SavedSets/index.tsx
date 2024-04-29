@@ -63,7 +63,8 @@ const getItemList = (
         />
       ) : (
         <Empty
-          showImage={false}
+          imageType="grid"
+          size="mini"
           // @ts-ignore cuz the type description is a string
           description={
             <Content linkText={intl.get('screen.dashboard.cards.savedSets.howToCreate')} />
