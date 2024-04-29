@@ -1,5 +1,4 @@
 import intl from 'react-intl-universal';
-import { Link } from 'react-router-dom';
 import { FileSearchOutlined } from '@ant-design/icons';
 import Empty from '@ferlab/ui/core/components/Empty';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
@@ -15,7 +14,6 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { SavedFilterTag, TUserSavedFilter } from 'services/api/savedFilter/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedFilter } from 'store/savedFilter';
-import { STATIC_ROUTES } from 'utils/routes';
 
 import ListItem from './ListItem';
 
@@ -23,24 +21,17 @@ import styles from './index.module.scss';
 
 const { Text } = Typography;
 
-const Content = () => (
+const Content = ({ linkText = '' }) => (
   <Text>
     {intl.get('screen.dashboard.cards.savedFilters.noSaved')}
     <br />
     <br />
-    {intl.get('screen.dashboard.cards.savedFilters.noSaved2')}
-    <Link to={`${STATIC_ROUTES.DATA_EXPLORATION}`}>{intl.get('screen.dataExploration.title')}</Link>
-    {intl.get('screen.dashboard.cards.and')}
-    <Link to={`${STATIC_ROUTES.VARIANTS}`}>{intl.get('screen.variants.title')}</Link>
-    {intl.get('screen.dashboard.cards.pages')}
     <ExternalLink
       className={styles.docExternalLink}
       hasIcon
-      href={`${EnvVariables.configFor(
-        'CQDG_DOCUMENTATION',
-      )}/docs/fonctionnalités-générales-du-portail`}
+      href={`${EnvVariables.configFor('CQDG_DOCUMENTATION')}/docs/filtres`}
     >
-      {intl.get('layout.main.menu.documentation')}
+      {linkText}
     </ExternalLink>
   </Text>
 );
@@ -69,10 +60,11 @@ const getItemList = (
         />
       ) : (
         <Empty
-          imageType="grid"
-          size="mini"
+          showImage={false}
           // @ts-ignore cuz the type description is a string
-          description={<Content />}
+          description={
+            <Content linkText={intl.get('screen.dashboard.cards.savedFilters.howToCreate')} />
+          }
         />
       ),
     }}
@@ -127,7 +119,7 @@ const SavedFilters = ({ id, key, className = '' }: DashboardCardProps) => {
           withHandle
           infoPopover={{
             title: intl.get('screen.dashboard.cards.savedFilters.popoverTitle'),
-            content: <Content />,
+            content: <Content linkText={intl.get('screen.dashboard.cards.learnMore')} />,
           }}
         />
       }
