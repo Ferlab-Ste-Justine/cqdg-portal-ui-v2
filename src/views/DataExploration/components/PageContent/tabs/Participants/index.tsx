@@ -92,7 +92,7 @@ const getDefaultColumns = (): ProColumnType[] => [
     dataIndex: 'mondo_tagged',
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
-      const mondoNames = mondo_tagged?.hits?.edges.map((m) => m.node.name);
+      const mondoNames = mondo_tagged?.hits?.edges.map((m) => m.node.name)?.filter((e) => e);
       if (!mondoNames?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
@@ -303,7 +303,9 @@ const getDefaultColumns = (): ProColumnType[] => [
     defaultHidden: true,
     className: styles.diagnosisCell,
     render: (mondo_tagged: ArrangerResultsTree<IMondoTagged>) => {
-      const sourceTexts = mondo_tagged?.hits?.edges.map((m) => m.node.source_text);
+      const sourceTexts = mondo_tagged?.hits?.edges
+        .map((m) => m.node.source_text)
+        ?.filter((e) => e);
       if (!sourceTexts?.length) return TABLE_EMPTY_PLACE_HOLDER;
       return (
         <ExpandableCell
