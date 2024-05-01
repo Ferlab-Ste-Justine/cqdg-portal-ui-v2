@@ -54,6 +54,7 @@ const StudyDomainGraphCard = ({
       loadingType="spinner"
       headerTitle={intl.get('entities.participant.participantsByDomain')}
       tsvSettings={{ data: [data] }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <PieChart
           onClick={(datum) => addToQuery('domain', datum.id as string, INDEXES.STUDY, queryId)}

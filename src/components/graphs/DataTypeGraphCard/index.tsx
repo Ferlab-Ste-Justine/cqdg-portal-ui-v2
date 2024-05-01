@@ -53,6 +53,7 @@ const DataTypeGraphCard = ({
       tsvSettings={{
         data: [data],
       }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <BarChart
           data={data}

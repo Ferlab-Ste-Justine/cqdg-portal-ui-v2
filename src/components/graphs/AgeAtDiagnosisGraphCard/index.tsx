@@ -117,6 +117,7 @@ const AgeAtDiagnosisGraphCard = ({
       tsvSettings={{
         data: [ageAtDiagnosisresults],
       }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <BarChart
           data={ageAtDiagnosisresults}

@@ -170,7 +170,7 @@ const DataExploration = () => {
     },
     {
       key: TAB_IDS.DATA_FILES,
-      title: intl.get('entities.file.datafile'),
+      title: intl.get('screen.dataExploration.tabs.datafiles.facet'),
       icon: <FileSearchOutlined className={styles.sideMenuIcon} />,
       panelContent: filtersContainer(
         fileMappingResults,

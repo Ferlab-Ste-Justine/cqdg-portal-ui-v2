@@ -1194,6 +1194,7 @@ const en = {
         },
         datafiles: {
           title: 'Data Files ({count})',
+          facet: 'Data File',
         },
       },
       saveSelection: 'Save current selection',

@@ -1206,7 +1206,8 @@ const fr = {
           title: 'Biospécimens ({count})',
         },
         datafiles: {
-          title: 'Fichiers de données ({count})',
+          title: 'Fichiers ({count})',
+          facet: 'Fichier',
         },
       },
       saveSelection: 'Sauvegarder la sélection',

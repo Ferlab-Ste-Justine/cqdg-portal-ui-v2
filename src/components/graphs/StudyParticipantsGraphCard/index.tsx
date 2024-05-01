@@ -54,6 +54,7 @@ const StudyParticipantsGraphCard = ({
       loadingType="spinner"
       headerTitle={intl.get('entities.participant.participantsByStudy')}
       tsvSettings={{ data: [data] }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <PieChart
           data={data}

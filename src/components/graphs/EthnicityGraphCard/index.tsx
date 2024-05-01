@@ -56,6 +56,7 @@ const EthnicityGraphCard = ({
       loadingType="spinner"
       headerTitle={intl.get('entities.participant.participantsByEthnicity')}
       tsvSettings={{ data: [data] }}
+      titleTruncateThresholdWidth={70}
       modalContent={
         <PieChart
           data={data}
