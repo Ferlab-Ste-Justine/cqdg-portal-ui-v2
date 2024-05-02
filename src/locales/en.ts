@@ -300,6 +300,7 @@ const en = {
       },
       frequencies: {
         frequency: 'Frequency',
+        frequencyOnlyWGS: 'Frequency (only WGS)',
         frequencies: 'Frequencies',
         frequencyTooltip: 'Frequency of the variant across CQDG studies',
         publicCohorts: 'Public Cohorts',
@@ -319,7 +320,7 @@ const en = {
         homozygotesTooltip: 'Number of homozygote variants',
         total: 'Total',
         cohort: 'Cohort',
-        internal_frequencies_wgs_af: 'Frequency (only WGS)',
+        internal_frequencies_wgs_af: 'CQDG Allele Frequency (WGS)',
       },
       pathogenicity: {
         pathogenicity: 'Pathogenicity',

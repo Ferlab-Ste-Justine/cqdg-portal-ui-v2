@@ -125,7 +125,7 @@ export default function VariantEntity() {
           id={SectionId.FREQUENCY}
           columns={getFrequencyItems()}
           data={studyFrequencies}
-          title={intl.get('entities.variant.frequencies.frequency')}
+          title={intl.get('entities.variant.frequencies.frequencyOnlyWGS')}
           header={intl.get('entities.study.CQDGStudies')}
           loading={loading}
           summaryColumns={getFrequencyTableSummaryColumns(data)}
