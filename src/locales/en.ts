@@ -225,10 +225,6 @@ const en = {
         title: 'ALT',
         tooltip: '# of alternative alleles',
       },
-      participant: {
-        title: 'Part.',
-        tooltip: '# of affected participants and frequency across CQDG cohorts',
-      },
       consequences: {
         consequence: 'Consequence',
         consequences: 'Consequences',
@@ -304,13 +300,16 @@ const en = {
       },
       frequencies: {
         frequency: 'Frequency',
+        frequencyOnlyWGS: 'Frequency (only WGS)',
         frequencies: 'Frequencies',
         frequencyTooltip: 'Frequency of the variant across CQDG studies',
         publicCohorts: 'Public Cohorts',
         studies: 'Studies',
         domain: 'Domain',
+        part: 'Part.',
         participants: 'Participants',
-        participantsTooltip: '# of affected participants across CQDG studies',
+        participantsTooltip:
+          'Number and frequency of participant carriers in the CQDG cohorts (whole genomes only)',
         participantsInfoIconTooltip:
           'Due to participant confidentiality, links may return a smaller number than displayed',
         altAlleles: '# ALT Alleles',
@@ -321,7 +320,7 @@ const en = {
         homozygotesTooltip: 'Number of homozygote variants',
         total: 'Total',
         cohort: 'Cohort',
-        internal_frequencies_wgs_af: 'CQDG Allele Frequency',
+        internal_frequencies_wgs_af: 'CQDG Allele Frequency (WGS)',
       },
       pathogenicity: {
         pathogenicity: 'Pathogenicity',
@@ -861,7 +860,7 @@ const en = {
       },
       cards: {
         stats: {
-          release: 'Release V1',
+          release: 'Release v1.0',
           genomes: 'Genomes',
           exomes: 'Exomes',
         },

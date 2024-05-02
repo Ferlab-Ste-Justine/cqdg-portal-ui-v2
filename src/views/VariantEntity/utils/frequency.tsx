@@ -61,7 +61,7 @@ export const getFrequencyItems = (): ProColumnType[] => [
       study && <StudyDomain study_code={study.study_code} />,
   },
   {
-    title: intl.get('entities.variant.frequencies.participants'),
+    title: intl.get('entities.participant.participants'),
     tooltip: intl.get('entities.variant.frequencies.participantsTooltip'),
     key: 'participants',
     render: (row: IVariantStudyFrequencies) =>
