@@ -866,7 +866,7 @@ const fr = {
       },
       cards: {
         stats: {
-          release: 'Édition V1',
+          release: 'Données CQDG v1.0',
           genomes: 'Génomes',
           exomes: 'Exomes',
         },

@@ -861,7 +861,7 @@ const en = {
       },
       cards: {
         stats: {
-          release: 'Release V1',
+          release: 'Release v1.0',
           genomes: 'Genomes',
           exomes: 'Exomes',
         },
