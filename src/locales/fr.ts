@@ -227,10 +227,6 @@ const fr = {
         title: 'ALT',
         tooltip: '# d’allèles alternatifs',
       },
-      participant: {
-        title: 'Part.',
-        tooltip: '# de participants affectés et fréquence à travers les cohortes CQDG',
-      },
       consequences: {
         consequence: 'Conséquence',
         consequences: 'Conséquences',
@@ -311,8 +307,10 @@ const fr = {
         publicCohorts: 'Cohortes publiques',
         studies: 'Études',
         domain: 'Domaine',
+        part: 'Part.',
         participants: 'Participants',
-        participantsTooltip: '# de participants affectés dans les études du CQDG',
+        participantsTooltip:
+          'Nombre et fréquence de participants porteurs dans les cohortes du CQDG (génomes entiers seulement)',
         participantsInfoIconTooltip:
           'En raison de la confidentialité des participants, les liens peuvent renvoyer un nombre inférieur à celui affiché',
         altAlleles: '# Allèles ALT',
@@ -323,7 +321,7 @@ const fr = {
         homozygotesTooltip: 'Nombre de variants homozygotes',
         total: 'Total',
         cohort: 'Cohorte',
-        internal_frequencies_wgs_af: 'Fréq. allélique CQDG',
+        internal_frequencies_wgs_af: 'Fréquence (WGS seulement)',
       },
       pathogenicity: {
         pathogenicity: 'Pathogénicité',

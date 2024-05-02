@@ -259,8 +259,8 @@ const getDefaultColumns = (): ProColumnType[] => [
   },
   {
     key: 'internal_frequencies_wgs.total.pc',
-    title: intl.get('entities.variant.participant.title'),
-    tooltip: intl.get('entities.variant.participant.tooltip'),
+    title: intl.get('entities.variant.frequencies.part'),
+    tooltip: intl.get('entities.variant.frequencies.participantsTooltip'),
     dataIndex: 'internal_frequencies_wgs',
     sorter: { multiple: 1 },
     width: 60,
