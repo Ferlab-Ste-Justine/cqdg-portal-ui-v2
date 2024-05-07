@@ -1,19 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import Footer from '@ferlab/ui/core/pages/LandingPage/Footer';
 
-import ChuSjLogo from 'components/assets/logos-chusj-color.svg';
-import FciLogo from 'components/assets/logos-FCI-color.svg';
-import FerlabLogo from 'components/assets/logos-ferlab-color.svg';
-import FrqsLogo from 'components/assets/logos-FRQS-color.png';
-import GenomeQcLogo from 'components/assets/logos-genome_qc.svg';
+import kid from 'components/assets/kid.jpg';
 import { fetchStats } from 'store/global/thunks';
 
 import TopBanner from './TopBanner';
 
 import styles from './index.module.scss';
-
-const footerLogos = [GenomeQcLogo, ChuSjLogo, FrqsLogo, FciLogo, FerlabLogo];
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,9 +17,12 @@ const Login = () => {
 
   return (
     <div className={styles.mainLayout}>
+      <div className={styles.kidImgContainer}>
+        <img src={kid} className={styles.kidImg} />
+      </div>
       <TopBanner />
-      <Footer logos={footerLogos} />
     </div>
   );
 };
+
 export default Login;

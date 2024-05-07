@@ -26,7 +26,6 @@ const Dashboard = loadable(() => import('views/Dashboard'), loadableProps);
 const Studies = loadable(() => import('views/Studies'), loadableProps);
 const Settings = loadable(() => import('views/Settings'), loadableProps);
 const DataExploration = loadable(() => import('views/DataExploration'), loadableProps);
-const Variants = loadable(() => import('views/Variants'), loadableProps);
 const VariantEntity = loadable(() => import('views/VariantEntity'), loadableProps);
 const FileEntity = loadable(() => import('views/FileEntity'), loadableProps);
 const ParticipantEntity = loadable(() => import('views/ParticipantEntity'), loadableProps);
@@ -115,14 +114,6 @@ const App = () => {
                     element={
                       <ProtectedRoute>
                         <ParticipantEntity />
-                      </ProtectedRoute>
-                    }
-                  />
-                  <Route
-                    path={STATIC_ROUTES.VARIANTS}
-                    element={
-                      <ProtectedRoute>
-                        <Variants />
                       </ProtectedRoute>
                     }
                   />

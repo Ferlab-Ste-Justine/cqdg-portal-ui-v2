@@ -1,12 +1,12 @@
 @import 'style/themes/cqdg/colors';
 
 .topBanner {
-  background-image: url("../../../components/assets/background.svg"), linear-gradient(266deg, #28AAE2 0.82%, #006095 98.04%);
-  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 24px;
+  padding: 0 82px;
+  justify-content: center;
+  width: 60%;
 }
 
 .contentContainer {
@@ -31,22 +31,18 @@
 .logo {
   height: 104px;
   width: 300px;
-  background: white;
-  padding: 20px;
 }
 
 .title {
   font-size: 24px;
   font-weight: 800;
   line-height: normal;
-  color: $gray-1;
 }
 
 .description {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  color: $gray-1;
 }
 
 @media (min-width: 800px) and (max-width: 1024px) {
