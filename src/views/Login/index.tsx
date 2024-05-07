@@ -9,9 +9,6 @@ import FrqsLogo from 'components/assets/logos-FRQS-color.png';
 import GenomeQcLogo from 'components/assets/logos-genome_qc.svg';
 import { fetchStats } from 'store/global/thunks';
 
-import BottomBanner from './BottomBanner';
-import Cards from './Cards';
-import Studies from './Studies';
 import TopBanner from './TopBanner';
 
 import styles from './index.module.scss';
@@ -28,9 +25,6 @@ const Login = () => {
   return (
     <div className={styles.mainLayout}>
       <TopBanner />
-      <Studies />
-      <Cards />
-      <BottomBanner />
       <Footer logos={footerLogos} />
     </div>
   );

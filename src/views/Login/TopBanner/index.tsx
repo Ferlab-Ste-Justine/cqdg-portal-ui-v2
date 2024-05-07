@@ -4,7 +4,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Button, Space } from 'antd';
 
 import { REDIRECT_URI_KEY } from 'common/constants';
-import CQDGLogoFull from 'components/Icons/CQDGLogoFull';
+import SKIDSLogo from 'components/assets/skids-chusj-logo.svg';
 import { getTargetLang } from 'components/Layout/Header';
 import useQueryParams from 'hooks/useQueryParams';
 import { globalActions, useLang } from 'store/global';
@@ -49,7 +49,7 @@ const TopBanner = () => {
           {getTargetLang(lang).toUpperCase()}
         </Button>
         <div className={styles.content}>
-          <CQDGLogoFull className={styles.logo} />
+          <img src={SKIDSLogo} className={styles.logo} />
           <div className={styles.title}>{intl.get('screen.loginPage.title')}</div>
           <div className={styles.description}>{intl.get('screen.loginPage.resume')}</div>
           <Space size={8}>
