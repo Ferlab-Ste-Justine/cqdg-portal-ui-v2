@@ -9,6 +9,7 @@ import { ExtendedMappingResults } from 'graphql/models';
 import PageContent from 'views/DataExploration/components/PageContent';
 import FileSearch from 'views/DataExploration/components/Searchs/FileSearch';
 import FileSetSearch from 'views/DataExploration/components/Searchs/FileSetSearch';
+import ParticipantFacetsSearch from 'views/DataExploration/components/Searchs/ParticipantFacetsSearch';
 import ParticipantSearch from 'views/DataExploration/components/Searchs/ParticipantSearch';
 import ParticipantSetSearch from 'views/DataExploration/components/Searchs/ParticipantSetSearch';
 import SampleSearch from 'views/DataExploration/components/Searchs/SampleSearch';
@@ -43,43 +44,67 @@ enum FilterTypes {
   Datafiles,
 }
 
+const participantFacets = [
+  'study__study_code',
+  <TreeFacet
+    key="observed_phenotypes"
+    field="observed_phenotypes"
+    type={RemoteComponentList.HPOTree}
+    title={intl.get('entities.participant.phenotype_hpo')}
+  />,
+  <TreeFacet
+    key="mondo"
+    field="mondo"
+    type={RemoteComponentList.MondoTree}
+    title={intl.get('entities.participant.diagnosis_mondo')}
+  />,
+  'icd_tagged__name',
+  'relationship_to_proband',
+  'family_type',
+  'sex',
+  'age_at_recruitment',
+  'mondo_tagged__age_at_event',
+  'ethnicity',
+  'observed_phenotype_tagged__source_text',
+  'mondo_tagged__source_text',
+];
+
+const biospecimenFacets = [
+  'sample_type',
+  'biospecimen_tissue_source',
+  'age_biospecimen_collection',
+];
+
+const fileFacets = [
+  'dataset',
+  'data_category',
+  'data_type',
+  'sequencing_experiment__experimental_strategy',
+  'file_format',
+];
+
+const mixedFacets: string[] = [
+  ...((participantFacets?.filter((f) => typeof f === 'string') as string[]) || []),
+  ...(biospecimenFacets?.filter((f) => typeof f === 'string')?.map((f) => `biospecimens__${f}`) ||
+    []),
+  ...(fileFacets?.filter((f) => typeof f === 'string')?.map((f) => `files__${f}`) || []),
+];
+
 const getFilterGroups = (type: FilterTypes) => {
   switch (type) {
     case FilterTypes.Participant:
       return {
         customSearches: [
+          <ParticipantFacetsSearch
+            key={3}
+            queryBuilderId={DATA_EXPLORATION_QB_ID}
+            facets={mixedFacets}
+          />,
           <ParticipantSearch key={0} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
           <ParticipantSetSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
           <ParticipantUploadIds key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
         ],
-        groups: [
-          {
-            facets: [
-              'study__study_code',
-              <TreeFacet
-                key="observed_phenotypes"
-                field="observed_phenotypes"
-                type={RemoteComponentList.HPOTree}
-                title={intl.get('entities.participant.phenotype_hpo')}
-              />,
-              <TreeFacet
-                key="mondo"
-                field="mondo"
-                type={RemoteComponentList.MondoTree}
-                title={intl.get('entities.participant.diagnosis_mondo')}
-              />,
-              'icd_tagged__name',
-              'relationship_to_proband',
-              'family_type',
-              'sex',
-              'age_at_recruitment',
-              'mondo_tagged__age_at_event',
-              'ethnicity',
-              'observed_phenotype_tagged__source_text',
-              'mondo_tagged__source_text',
-            ],
-          },
-        ],
+        groups: [{ facets: participantFacets }],
       };
     case FilterTypes.Biospecimen:
       return {
@@ -88,11 +113,7 @@ const getFilterGroups = (type: FilterTypes) => {
           <SampleSetSearch key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
           <SampleUploadIds key={3} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
         ],
-        groups: [
-          {
-            facets: ['sample_type', 'biospecimen_tissue_source', 'age_biospecimen_collection'],
-          },
-        ],
+        groups: [{ facets: biospecimenFacets }],
       };
     case FilterTypes.Datafiles:
       return {
@@ -101,17 +122,7 @@ const getFilterGroups = (type: FilterTypes) => {
           <FileSetSearch key={1} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
           <FileUploadIds key={2} queryBuilderId={DATA_EXPLORATION_QB_ID} />,
         ],
-        groups: [
-          {
-            facets: [
-              'dataset',
-              'data_category',
-              'data_type',
-              'sequencing_experiment__experimental_strategy',
-              'file_format',
-            ],
-          },
-        ],
+        groups: [{ facets: fileFacets }],
       };
   }
 };

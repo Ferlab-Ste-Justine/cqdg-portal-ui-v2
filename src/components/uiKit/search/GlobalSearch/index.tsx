@@ -25,6 +25,8 @@ interface OwnProps<T> {
   limit?: number;
   handleSearch?: TCustomHandleSearch<T>;
   optionsFormatter: (options: T[], matchRegex: RegExp, search: string) => OptionsType[];
+  isAggregation?: boolean;
+  disableOnSelect?: boolean;
 }
 
 const GlobalSearch = <T,>({
@@ -41,9 +43,12 @@ const GlobalSearch = <T,>({
   tooltipText,
   limit,
   handleSearch,
+  isAggregation = false,
+  disableOnSelect = false,
 }: OwnProps<T>) => (
   <Search<T>
     onSelect={(values) =>
+      !disableOnSelect &&
       updateActiveQueryField({
         queryBuilderId,
         field,
@@ -69,6 +74,7 @@ const GlobalSearch = <T,>({
     }
     title={title}
     limit={limit}
+    isAggregation={isAggregation}
   />
 );
 

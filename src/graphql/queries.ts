@@ -41,9 +41,10 @@ export const AGGREGATION_QUERY = (
   index: string,
   aggList: string[],
   mappingResults: ExtendedMappingResults,
+  queryName?: string,
 ) => {
   if (!mappingResults || mappingResults.loading) {
-    console.error('[AGGREGATION_QUERY] mappingResults missing');
+    console.error(`[${queryName || 'AGGREGATION_QUERY'}] mappingResults missing`);
     return DEFAULT_QUERY(index);
   }
 
@@ -54,14 +55,14 @@ export const AGGREGATION_QUERY = (
   const aggregations = generateAggregations(extendedMappingsFields);
 
   if (!aggregations) {
-    console.error('[AGGREGATION_QUERY] impossible to generate aggregations');
+    console.error(`[${queryName || 'AGGREGATION_QUERY'}] impossible to generate aggregations`);
     return DEFAULT_QUERY(index);
   }
 
   return gql`
-    query AggregationInformation($sqon: JSON) {
+    query ${queryName || 'AggregationInformation'}($sqon: JSON) {
       ${index} {
-        aggregations (filters: $sqon, include_missing: false) {
+        aggregations (filters: $sqon, include_missing: true) {
           ${aggregations}
         }
       }

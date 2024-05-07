@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { ArrangerValues } from '@ferlab/ui/core/data/arranger/formatting';
 import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { generateQuery, generateWildCardValueFilter } from '@ferlab/ui/core/data/sqon/utils';
 import { DocumentNode } from 'graphql';
 import { INDEXES } from 'graphql/constants';
-import get from 'lodash/get';
 
 import SearchAutocomplete, {
   ISearchAutocomplete,
@@ -11,6 +11,16 @@ import SearchAutocomplete, {
 } from 'components/uiKit/search/GlobalSearch/Search/SearchAutocomplete';
 import { ArrangerApi } from 'services/api/arranger';
 import { ISuggestionPayload } from 'services/api/arranger/models';
+
+const aggregationToData = (buckets: any[] = [], field: string): any[] =>
+  buckets.map(({ doc_count, key }) => {
+    const dataKey = key === ArrangerValues.missing ? 'No Data' : key;
+    return {
+      field,
+      value: dataKey,
+      count: doc_count,
+    };
+  });
 
 interface IGlobalSearch<T> {
   query: DocumentNode;
@@ -20,6 +30,7 @@ interface IGlobalSearch<T> {
   searchValueTransformer?: (search: string) => string;
   onSelect: (values: string[]) => void;
   customHandleSearch?: TCustomHandleSearch<T>;
+  isAggregation?: boolean;
 }
 
 export type TCustomHandleSearch<T> = (searchText: string) => Promise<ISuggestionPayload<T>>;
@@ -36,6 +47,7 @@ const Search = <T,>({
   setCurrentOptions,
   searchValueTransformer,
   customHandleSearch,
+  isAggregation = false,
   ...props
 }: TGlobalSearch<T>) => {
   const [options, setOptions] = useState<OptionsType[]>([]);
@@ -69,14 +81,17 @@ const Search = <T,>({
         },
       });
 
-      setOptions(
-        setCurrentOptions(
-          get(data.data, `${index}.hits.edges`, []).map(({ node }: any) => ({
-            ...node,
-          })),
-          search,
-        ),
-      );
+      let _options = (data?.data?.[index]?.hits?.edges || []).map((edges: any) => ({
+        ...edges?.node,
+      }));
+      if (isAggregation) {
+        const bucketsValues = Object.entries(data?.data?.[index]?.aggregations)?.map((value: any) =>
+          aggregationToData(value[1]?.buckets || [], value[0]),
+        );
+        _options = bucketsValues?.flat() || [];
+      }
+
+      setOptions(setCurrentOptions(_options, search));
     }
   };
 
