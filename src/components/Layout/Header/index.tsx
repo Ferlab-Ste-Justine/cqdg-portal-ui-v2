@@ -23,6 +23,7 @@ import { AlterTypes } from 'common/types';
 import SKIDSLogo from 'components/assets/skids-chusj-logo.svg';
 import NotificationBanner from 'components/featureToggle/NotificationBanner';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
+import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import HeaderLink from 'components/Layout/Header/HeaderLink';
 import { globalActions, useLang } from 'store/global';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
@@ -193,6 +194,12 @@ const Header = () => {
                 to={DATA_EXPLORATION_ROUTES}
                 icon={<FileSearchOutlined />}
                 title={intl.get('layout.main.menu.explore')}
+                currentPathName={currentPathName}
+              />
+              <HeaderLink
+                to={[STATIC_ROUTES.VARIANTS]}
+                icon={<LineStyleIcon height={16} width={16} className={styles.iconSvg} />}
+                title={intl.get('layout.main.menu.variants')}
                 currentPathName={currentPathName}
               />
               <HeaderLink

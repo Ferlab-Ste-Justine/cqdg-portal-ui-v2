@@ -17,9 +17,7 @@ const Login = () => {
 
   return (
     <div className={styles.mainLayout}>
-      <div className={styles.kidImgContainer}>
-        <img src={kid} className={styles.kidImg} />
-      </div>
+      <img src={kid} />
       <TopBanner />
     </div>
   );

@@ -44,23 +44,21 @@ const TopBanner = () => {
 
   return (
     <div className={styles.topBanner}>
-      <div className={styles.contentContainer}>
-        <Button type="default" className={styles.languageButton} onClick={handleChangeLang}>
-          {getTargetLang(lang).toUpperCase()}
-        </Button>
-        <div className={styles.content}>
-          <img src={SKIDSLogo} className={styles.logo} />
-          <div className={styles.title}>{intl.get('screen.loginPage.title')}</div>
-          <div className={styles.description}>{intl.get('screen.loginPage.resume')}</div>
-          <Space size={8}>
-            <Button type="primary" size="large" data-cy="Login" onClick={handleSignin}>
-              {intl.get('screen.loginPage.login')}
-            </Button>
-            <Button type="default" size="large" data-cy="Signup" onClick={handleSignin}>
-              {intl.get('screen.loginPage.signup')}
-            </Button>
-          </Space>
-        </div>
+      <Button type="default" className={styles.languageButton} onClick={handleChangeLang}>
+        {getTargetLang(lang).toUpperCase()}
+      </Button>
+      <div className={styles.content}>
+        <img src={SKIDSLogo} className={styles.logo} />
+        <div className={styles.title}>{intl.get('screen.loginPage.title')}</div>
+        <div className={styles.description}>{intl.get('screen.loginPage.resume')}</div>
+        <Space size={8}>
+          <Button type="primary" size="large" data-cy="Login" onClick={handleSignin}>
+            {intl.get('screen.loginPage.login')}
+          </Button>
+          <Button type="default" size="large" data-cy="Signup" onClick={handleSignin}>
+            {intl.get('screen.loginPage.signup')}
+          </Button>
+        </Space>
       </div>
     </div>
   );
