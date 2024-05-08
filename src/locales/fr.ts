@@ -825,8 +825,7 @@ const fr = {
   screen: {
     loginPage: {
       title: 'The CHU Sainte-Justine and SickKids Data Sharing Platform',
-      resume:
-        "Le portail SickKids est une plateforme d'harmonisation et de diffusion des données génomiques.",
+      resume: '',
       login: 'Connexion',
       signup: 'Créer compte',
       studies: {

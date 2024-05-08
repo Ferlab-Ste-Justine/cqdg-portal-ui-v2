@@ -821,8 +821,7 @@ const en = {
   screen: {
     loginPage: {
       title: 'The CHU Sainte-Justine and SickKids Data Sharing Platform',
-      resume:
-        'The SickKids Portal is a data harmonization and sharing platform for genomic datasets.',
+      resume: '',
       login: 'Login',
       signup: 'Sign up',
       studies: {
