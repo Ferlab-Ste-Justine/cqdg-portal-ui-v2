@@ -111,58 +111,58 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
 
   it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndIntercept('Study', 1);
-    cy.validateTableFirstRow('STUDY1', 2);
+    cy.validateTableFirstRow('STUDY1', 2, true);
     cy.sortTableAndIntercept('Study', 1);
-    cy.validateTableFirstRow('T-DEE', 2);
+    cy.validateTableFirstRow('T-DEE', 2, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Sex', () => {
     cy.sortTableAndIntercept('Sex', 1);
-    cy.validateTableFirstRow('Female', 3);
+    cy.validateTableFirstRow('Female', 3, true);
     cy.sortTableAndIntercept('Sex', 1);
-    cy.validateTableFirstRow('Male', 3);
+    cy.validateTableFirstRow('Male', 3, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Family Position', () => {
     cy.sortTableAndIntercept('Family Position', 1);
-    cy.validateTableFirstRow('-', 6);
+    cy.validateTableFirstRow('-', 6, true);
     cy.sortTableAndIntercept('Family Position', 1);
-    cy.validateTableFirstRow('Proband', 6);
+    cy.validateTableFirstRow('Proband', 6, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Family Type', () => {
     cy.sortTableAndIntercept('Family Type', 1);
-    cy.validateTableFirstRow('-', 7);
+    cy.validateTableFirstRow('-', 7, true);
     cy.sortTableAndIntercept('Family Type', 1);
-    cy.validateTableFirstRow('Other', 7);
+    cy.validateTableFirstRow('Other', 7, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Age', () => {
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('-', 8);
+    cy.validateTableFirstRow('-', 8, true);
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('Senior', 8);
+    cy.validateTableFirstRow('Senior', 8, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Ethnicity', () => {
     cy.sortTableAndIntercept('Ethnicity', 1);
-    cy.validateTableFirstRow('-', 11);
+    cy.validateTableFirstRow('-', 11, true);
     cy.sortTableAndIntercept('Ethnicity', 1);
-    cy.validateTableFirstRow('-', 11);
+    cy.validateTableFirstRow('-', 11, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Vital Status', () => {
     cy.sortTableAndIntercept('Vital Status', 1);
-    cy.validateTableFirstRow('Alive', 12);
+    cy.validateTableFirstRow('Alive', 12, true);
     cy.sortTableAndIntercept('Vital Status', 1);
-    cy.validateTableFirstRow('Unknown', 12);
+    cy.validateTableFirstRow('Unknown', 12, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Vital Status', 1);
     cy.sortTableAndIntercept('Vital Status', 1);
     cy.sortTableAndIntercept('Study', 1);
-    cy.validateTableFirstRow('STUDY1', 2);
+    cy.validateTableFirstRow('STUDY1', 2, true);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {

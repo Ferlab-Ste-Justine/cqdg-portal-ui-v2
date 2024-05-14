@@ -73,37 +73,37 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
 
   it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('STUDY1', 4);
+    cy.validateTableFirstRow('STUDY1', 4, true);
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('T-DEE', 4);
+    cy.validateTableFirstRow('T-DEE', 4, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Sample Type', () => {
     cy.sortTableAndWait('Sample Type');
-    cy.validateTableFirstRow('C449', 5);
+    cy.validateTableFirstRow('C449', 5, true);
     cy.sortTableAndWait('Sample Type');
-    cy.validateTableFirstRow('C449', 5);
+    cy.validateTableFirstRow('C449', 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Tissue', () => {
     cy.sortTableAndWait('Tissue');
-    cy.validateTableFirstRow('C12434', 6);
+    cy.validateTableFirstRow('C12434', 6, true);
     cy.sortTableAndWait('Tissue');
-    cy.validateTableFirstRow('Unknown', 6);
+    cy.validateTableFirstRow('Unknown', 6, true);
     cy.sortTableAndWait('Tissue');
   });
 
   it('Valider les fonctionnalités du tableau - Tri Age', () => {
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('-', 7);
+    cy.validateTableFirstRow('-', 7, true);
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('Young Adult', 7);
+    cy.validateTableFirstRow('Young Adult', 7, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndIntercept('Sample Type', 1);
     cy.sortTableAndIntercept('Study', 1);
-    cy.validateTableFirstRow('STUDY1', 4);
+    cy.validateTableFirstRow('STUDY1', 4, true);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
