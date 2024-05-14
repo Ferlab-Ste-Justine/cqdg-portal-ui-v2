@@ -80,65 +80,65 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
 
   it('Valider les fonctionnalités du tableau - Tri Study', () => {
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('STUDY1', 4);
+    cy.validateTableFirstRow('STUDY1', 4, true);
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('T-DEE', 4);
+    cy.validateTableFirstRow('T-DEE', 4, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Dataset', () => {
     cy.sortTableAndWait('Dataset');
-    cy.validateTableFirstRow('-', 5);
+    cy.validateTableFirstRow('-', 5, true);
     cy.sortTableAndWait('Dataset');
-    cy.validateTableFirstRow('Data2', 5);
+    cy.validateTableFirstRow('Data2', 5, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Data Category', () => {
     cy.sortTableAndWait('Data Category');
-    cy.validateTableFirstRow('Genomics', 6);
+    cy.validateTableFirstRow('Genomics', 6, true);
     cy.sortTableAndWait('Data Category');
-    cy.validateTableFirstRow('Genomics', 6);
+    cy.validateTableFirstRow('Genomics', 6, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Data Type', () => {
     cy.sortTableAndWait('Data Type');
-    cy.validateTableFirstRow('Aligned Reads', 7);
+    cy.validateTableFirstRow('Aligned Reads', 7, true);
     cy.sortTableAndWait('Data Type');
-    cy.validateTableFirstRow('Supplement', 7);
+    cy.validateTableFirstRow('Supplement', 7, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Strategy', () => {
     cy.sortTableAndWait('Strategy');
-    cy.validateTableFirstRow('WGS', 8);
+    cy.validateTableFirstRow('WGS', 8, true);
     cy.sortTableAndWait('Strategy');
-    cy.validateTableFirstRow('WGS', 8);
+    cy.validateTableFirstRow('WGS', 8, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Format', () => {
     cy.sortTableAndWait('Format');
-    cy.validateTableFirstRow('CRAM', 9);
+    cy.validateTableFirstRow('CRAM', 9, true);
     cy.sortTableAndWait('Format');
-    cy.validateTableFirstRow('gVCF', 9);
+    cy.validateTableFirstRow('gVCF', 9, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Size', () => {
     cy.sortTableAndWait('Size');
-    cy.validateTableFirstRow('0 B', 10);
+    cy.validateTableFirstRow('0 B', 10, true);
     cy.sortTableAndWait('Size');
-    cy.validateTableFirstRow('10.7 GB', 10);
+    cy.validateTableFirstRow('10.7 GB', 10, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri Platform', () => {
     cy.sortTableAndWait('Platform');
-    cy.validateTableFirstRow('Illumina HiSeq 2000 PE100', 14);
+    cy.validateTableFirstRow('Illumina HiSeq 2000 PE100', 14, true);
     cy.sortTableAndWait('Platform');
-    cy.validateTableFirstRow('NovaSeq S4 PE150', 14);
+    cy.validateTableFirstRow('NovaSeq S4 PE150', 14, true);
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
     cy.sortTableAndWait('Format');
     cy.sortTableAndWait('Study');
     cy.sortTableAndWait('Study');
-    cy.validateTableFirstRow('T-DEE', 4);
+    cy.validateTableFirstRow('T-DEE', 4, true);
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
