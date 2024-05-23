@@ -47,16 +47,15 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
-  it('Search by variant - 1-11846011-A-G', () => {
+  it('Search by variant locus - 1-11846011-A-G', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by variant').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
     cy.get('div[class="ant-tooltip-inner"]').contains('Enter Variant Locus, Gene Symbol, Gene Alias, Gene AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', '1-11846011-A-G', 'POST', '*/grapgql', 3);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('1-11846011-A-G').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', '1-11846011-a-g', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-11846011-A-G').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
@@ -65,6 +64,96 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
 
     cy.get('[data-icon="close-circle"]').click({force: true});
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
+  });
+
+  it('Search by gene symbol - PRDX1', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'prdx1', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy*="Tag_"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy*="Tag_"]').should('not.exist');
+  });
+
+  it('Search by gene alias - NKEFA [CQDG-750]', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'nkefa', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy*="Tag_"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy*="Tag_"]').should('not.exist');
+  });
+
+  it('Search by gene AA change - p.Ter152Arg', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'p.ter152arg', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-11846011-A-G').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
+  });
+
+  it('Search by dbSNP ID - rs5065', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'RS5065', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-11846011-A-G').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
+  });
+
+  it('Search by ClinVar ID - 226855', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', '226855', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-11846011-A-G').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
+  });
+
+  it('Search by Ensembl ID - ENST00000376480', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'enst00000376480', 'POST', '* /grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy*="Tag_"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy*="Tag_"]').should('not.exist');
+  });
+
+  it('Search by refseq ID - NM_006172.4', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'nm_006172.4', 'POST', '* /grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy*="Tag_"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
   it('Variant Type - SNV', () => {
@@ -125,24 +214,51 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
   });
 
-  it('Search by gene - FCGR3B', () => {
+  it('Search by gene symbol - PRDX1', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by gene').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
     cy.get('div[class="ant-tooltip-inner"]').contains('Enter Gene Symbol, Gene Alias or Ensembl ID').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FCGR3B', 'POST', '*/grapgql', 3);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('FCGR3B').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'prdx1', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
-    cy.get('[data-cy="Tag_FCGR3B"]').should('exist');
+    cy.get('[data-cy="Tag_PRDX1"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('FCGR3B').should('exist');
-    cy.validateTableResultsCount(/^63$/);
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
+    cy.validateTableResultsCount(/^133$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
-    cy.get('[data-cy="Tag_FCGR3B"]').should('not.exist');
+    cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
+  });
+
+  it('Search by gene alias - NKEFA', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'nkefa', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_PRDX1"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
+    cy.validateTableResultsCount(/^133$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
+  });
+
+  it('Search by Ensembl ID - ENSG00000117450', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'ensg00000117450', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PRDX1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_PRDX1"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Gene').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
+    cy.validateTableResultsCount(/^133$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
   });
 
   it('Gene Type - Protein Coding', () => {
