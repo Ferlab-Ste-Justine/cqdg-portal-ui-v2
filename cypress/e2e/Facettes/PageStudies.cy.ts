@@ -26,16 +26,15 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
   });
 
-  it('Search study - STUDY1', () => {
+  it('Search by study code - STUDY1', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search study').should('exist');
 
     cy.get('[data-cy="SearchLabel_InfoCircleOutlined"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
     cy.get('div[class="ant-tooltip-inner"]').contains('Search by study code, name, domain or keyword').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'STUDY1', 'POST', '*/grapgql', 3);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('STUDY1').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'study1', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
@@ -44,17 +43,40 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
   });
 
-  it('Search study - T-DEE', () => {
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'T-DEE', 'POST', '*/grapgql', 5);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('T-DEE').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+  it('Search by study name - Congenital', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'congenital', 'POST', '*/grapgql', 5);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
-    cy.get('[data-cy="Tag_T-DEE"]').should('exist');
+    cy.get('[data-cy="Tag_STUDY1"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
     cy.get('[data-icon="close-circle"]').click({force: true});
-    cy.get('[data-cy="Tag_T-DEE"]').should('not.exist');
+    cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
+  });
+
+  it('Search by study domain - Diseases', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'diseases', 'POST', '*/grapgql', 5);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_STUDY1"]').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
+  });
+
+  it('Search by study keyword - family', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FAMILY', 'POST', '*/grapgql', 5);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY2').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy*="Tag_"]').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
   it('Domain - Rare Diseases', () => {

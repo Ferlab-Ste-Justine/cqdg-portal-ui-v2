@@ -26,10 +26,26 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   it('Search by participant ID - PT0000010', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'PT0000010', 'POST', '*/grapgql', 1);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('PT0000010').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[class*="SearchLabel_tooltipIcon"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true}); //data-cy="SearchLabel_InfoCircleOutlined"
+    cy.get('div[class="ant-tooltip-inner"]').contains('Search by participant ID or external participant ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'pt0000010', 'POST', '*/grapgql', 1);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PT0000010').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_PT0000010"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_PT0000010"]').should('not.exist');
+  });
+
+  it('Search by external participant ID - HSJ-1005-389 [CQDG-754]', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'hsj-1005-389', 'POST', '*/grapgql', 1);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PT0000010').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_PT0000010"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
@@ -125,10 +141,26 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
   it('Search by sample ID - SR0000214', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'SR0000214', 'POST', '*/grapgql', 1);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('SR0000214').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[class*="SearchLabel_tooltipIcon"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true}); //data-cy="SearchLabel_InfoCircleOutlined"
+    cy.get('div[class="ant-tooltip-inner"]').contains('Search by sample ID or external sample ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'sr0000214', 'POST', '*/grapgql', 1);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('SR0000214').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+
+    cy.get('[data-cy="Tag_SR0000214"]').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
+    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SR0000214').should('exist');
+    cy.validateTableResultsCount(/^1 Result$/);
+
+    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-cy="Tag_SR0000214"]').should('not.exist');
+  });
+
+  it('Search by external sample ID - S03510 [CQDG-754]', () => {
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 's03510', 'POST', '*/grapgql', 1);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('SR0000214').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_SR0000214"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
@@ -176,10 +208,12 @@ describe('Page Data Exploration (Data Files) - Filtrer avec les facettes', () =>
   it('Search by file ID - FI0000572', () => {
     cy.get('[data-cy="SearchLabel_Title"]').contains('Search by IDs').should('exist');
 
-    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FI0000572', 'POST', '*/grapgql', 1);
-    cy.wait(1000);
-    cy.get('[data-cy="Search_Dropdown"]').contains('FI0000572').should('exist');
-    cy.get('[data-cy="Search_Dropdown"]').find('div[class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[class*="SearchLabel_tooltipIcon"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true}); //data-cy="SearchLabel_InfoCircleOutlined"
+    cy.get('div[class="ant-tooltip-inner"]').contains('Search by file ID').should('exist');
+
+    cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'fi0000572', 'POST', '*/grapgql', 1);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('FI0000572').should('exist');
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy="Tag_FI0000572"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
