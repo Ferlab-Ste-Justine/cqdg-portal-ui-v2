@@ -2,7 +2,7 @@ import { BooleanOperators } from '@ferlab/ui/core/data/sqon/operators';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { IPhenotypeSource } from 'graphql/summary/models';
 
-import { ArrangerApi } from 'services/api/arranger';
+import { WrapperApi } from 'services/api/wrapper';
 
 import OntologyTree, { lightTreeNodeConstructor, TreeNode, TTitleFormatter } from './OntologyTree';
 
@@ -68,7 +68,7 @@ export class PhenotypeStore {
       aggregations_filter_themselves: filterThemselves,
     };
 
-    const { data, error } = await ArrangerApi.fetchPhenotypes<any>(body);
+    const { data, error } = await WrapperApi.fetchPhenotypes<any>(body);
 
     if (error || data?.data.errors) {
       return [];

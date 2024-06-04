@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ArrangerApi } from 'services/api/arranger';
-import { IStatistics } from 'services/api/arranger/models';
+import { WrapperApi } from 'services/api/wrapper';
+import { IStatistics } from 'services/api/wrapper/models';
 import { RootState } from 'store/types';
 
 const fetchStats = createAsyncThunk<IStatistics, void, { rejectValue: string; state: RootState }>(
-  'arranger/fetch/stats',
+  'wrapper/fetch/stats',
   async () => {
-    const { data } = await ArrangerApi.fetchStatistics();
+    const { data } = await WrapperApi.fetchStatistics();
 
     return data!;
   },

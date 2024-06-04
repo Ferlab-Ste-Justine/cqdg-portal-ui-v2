@@ -11,10 +11,10 @@ import startCase from 'lodash/startCase';
 import { v4 } from 'uuid';
 
 import { getDefaultContentType } from 'common/downloader';
-import { ArrangerApi } from 'services/api/arranger';
-import { ArrangerColumnStateResults } from 'services/api/arranger/models';
 import { ReportApi } from 'services/api/reports';
 import { ReportConfig } from 'services/api/reports/models';
+import { WrapperApi } from 'services/api/wrapper';
+import { ArrangerColumnStateResults } from 'services/api/wrapper/models';
 import { globalActions } from 'store/global';
 
 import { TFetchTSVArgs } from './types';
@@ -96,7 +96,7 @@ const fetchTsvReport = createAsyncThunk<void, TFetchTSVArgs, { rejectValue: stri
         args.fileName ?? args.index.toLowerCase()
       }-table-${formattedDate}.tsv`;
 
-      const { data, error } = await ArrangerApi.columnStates({
+      const { data, error } = await WrapperApi.columnStates({
         query: getColumnStateQuery(args.index),
         variables: {},
       });
@@ -246,7 +246,7 @@ const fetchTsxReport = async (
     downloadKey: v4(),
   });
 
-  const { data: downloadData, error: downloadError } = await ArrangerApi.download(params);
+  const { data: downloadData, error: downloadError } = await WrapperApi.download(params);
 
   return {
     downloadData,

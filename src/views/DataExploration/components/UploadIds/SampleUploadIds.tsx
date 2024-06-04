@@ -9,7 +9,7 @@ import { INDEXES } from 'graphql/constants';
 import { hydrateResults } from 'graphql/models';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import { ArrangerApi } from 'services/api/arranger';
+import { WrapperApi } from 'services/api/wrapper';
 
 import EntityUploadIds from './EntityUploadIds';
 
@@ -27,7 +27,7 @@ const SampleUploadIds = ({ queryBuilderId }: OwnProps) => (
     title={intl.get('components.uploadIds.sampleTitle')}
     placeHolder={intl.get('components.uploadIds.samplePlaceholder')}
     fetchMatch={async (ids) => {
-      const response = await ArrangerApi.graphqlRequest({
+      const response = await WrapperApi.graphqlRequest({
         query: MATCH_BIOSPECIMENS.loc?.source.body,
         variables: {
           first: MAX_ITEMS_QUERY,

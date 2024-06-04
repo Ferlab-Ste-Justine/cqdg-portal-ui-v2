@@ -10,14 +10,13 @@ import keycloak from 'auth/keycloak-api/keycloak';
 import EnvironmentVariables from 'helpers/EnvVariables';
 import { GraphqlProvider } from 'provider/types';
 
-export const ARRANGER_API = EnvironmentVariables.configFor('ARRANGER_API');
-const PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
-export const ARRANGER_API_DOWNLOAD_URL = `${ARRANGER_API}/${PROJECT_ID}/download`;
-export const ARRANGER_API_PROJECT_URL = `${ARRANGER_API}/${PROJECT_ID}/graphql`;
-export const ARRANGER_API_COLUMN_STATE_URL = `${ARRANGER_API}/${PROJECT_ID}/graphql/columnsStateQuery`;
+export const WRAPPER_API = EnvironmentVariables.configFor('WRAPPER_API');
+export const API_DOWNLOAD_URL = `${WRAPPER_API}/download`;
+export const API_PROJECT_URL = `${WRAPPER_API}/graphql`;
+export const API_COLUMN_STATE_URL = `${WRAPPER_API}/graphql/columnsStateQuery`;
 
-const arrangerLink = createHttpLink({
-  uri: ARRANGER_API_PROJECT_URL,
+const wrapperLink = createHttpLink({
+  uri: API_PROJECT_URL,
 });
 
 const getAuthLink = () =>
@@ -41,7 +40,7 @@ const Provider = ({ children }: GraphqlProvider) => {
         Variant: { merge: true },
       },
     }),
-    link: header.concat(arrangerLink),
+    link: header.concat(wrapperLink),
   });
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };

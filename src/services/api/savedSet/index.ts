@@ -4,7 +4,7 @@ import { sendRequest } from 'services/api';
 
 import { IUserSetOutput, TUserSavedSet, TUserSavedSetInsert, TUserSavedSetUpdate } from './models';
 
-const SETS_API_URL = `${EnvironmentVariables.configFor('ARRANGER_API')}/sets`;
+const SETS_API_URL = `${EnvironmentVariables.configFor('WRAPPER_API')}/sets`;
 
 const headers = () => ({
   'Content-Type': 'application/json',

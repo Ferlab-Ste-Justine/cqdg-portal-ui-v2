@@ -30,8 +30,8 @@ import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import useQBStateWithSavedFilters from 'hooks/useQBStateWithSavedFilters';
-import { ArrangerApi } from 'services/api/arranger';
 import { SavedFilterTag } from 'services/api/savedFilter/models';
+import { WrapperApi } from 'services/api/wrapper';
 import { globalActions } from 'store/global';
 import {
   createSavedFilter,
@@ -212,7 +212,7 @@ const PageContent = ({ variantMapping }: IPageContentProps) => {
         dictionary={getQueryBuilderDictionary(facetTransResolver, savedSets)}
         getResolvedQueryForCount={(sqon) => resolveSyntheticSqon(queryList, sqon)}
         fetchQueryCount={async (sqon) => {
-          const { data } = await ArrangerApi.graphqlRequest<{ data: IVariantResultTree }>({
+          const { data } = await WrapperApi.graphqlRequest<{ data: IVariantResultTree }>({
             query: GET_VARIANT_COUNT.loc?.source.body,
             variables: { sqon: resolveSyntheticSqon(queryList, sqon) },
           });
