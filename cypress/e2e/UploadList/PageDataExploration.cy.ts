@@ -133,7 +133,7 @@ describe('Page Data Exploration (Biospecimens) - Téléverser une liste d\'ident
     cy.get('body').contains('Use the search tools & facets on the left to build a query').should('exist');
   });
 
-  it('Valider les fonctionnalités de la modal - Section Résumé masquable [CQDG-754]', () => {
+  it('Valider les fonctionnalités de la modal - Section Résumé masquable', () => {
     cy.get('[class*="UploadModal"] [class="ant-collapse-header-text"]').contains('Summary Table (2 matched, 1 unmatched)').should('exist');
 
     cy.get('[class*="UploadModal"] span[class*="ant-collapse-arrow"]').click({force: true});
