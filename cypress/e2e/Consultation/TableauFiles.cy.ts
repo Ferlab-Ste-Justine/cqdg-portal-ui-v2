@@ -87,7 +87,7 @@ describe('Page Data Exploration (Data Files) - Valider les fonctionnalités du t
 
   it('Valider les fonctionnalités du tableau - Tri Dataset', () => {
     cy.sortTableAndWait('Dataset');
-    cy.validateTableFirstRow('-', 5, true);
+    cy.validateTableFirstRow('Data1', 5, true);
     cy.sortTableAndWait('Dataset');
     cy.validateTableFirstRow('Data2', 5, true);
   });
