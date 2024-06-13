@@ -95,7 +95,7 @@ describe('Page Data Exploration (Biospecimens) - Valider les fonctionnalités du
 
   it('Valider les fonctionnalités du tableau - Tri Age', () => {
     cy.sortTableAndIntercept('Age', 1);
-    cy.validateTableFirstRow('-', 7, true);
+    cy.validateTableFirstRow('Congenital', 7, true);
     cy.sortTableAndIntercept('Age', 1);
     cy.validateTableFirstRow('Young Adult', 7, true);
   });
