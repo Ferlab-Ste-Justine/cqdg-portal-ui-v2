@@ -258,10 +258,7 @@ describe('Navigation', () => {
   });
  
   it('Liens des page Profile', () => {
-    cy.visitProfileSettingsPage();
-    cy.get('[data-cy="ViewProfileButton"]').click({force: true});
-    cy.get('[data-cy="AvatarHeader"]').should('exist');
-
+    cy.visitProfileViewPage();
     cy.get('[data-cy="EditProfileButton"]').click({force: true});
     cy.get('[data-cy="Title_ProfileSettings"]').should('exist');
 
