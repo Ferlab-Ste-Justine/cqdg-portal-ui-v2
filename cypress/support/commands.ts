@@ -450,8 +450,16 @@ Cypress.Commands.add('visitParticipantEntity', (participantId: string) => {
 });
 
 Cypress.Commands.add('visitProfileSettingsPage', () => {
-  cy.visit('/profile/settings');
-  cy.get('[data-cy="Title_ProfileSettings"]', {timeout: 60 * 1000})
+  cy.visitAndIntercept('/profile/settings',
+    'GET',
+    '**.cqdg.ferlab.bio',
+    1);
+});
+
+Cypress.Commands.add('visitProfileViewPage', () => {
+  cy.visit('/member/be8bfaec-f565-4899-9c7c-641ffdf20027');
+  cy.get('[data-cy="AvatarHeader"]').should('exist');
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('visitStudyEntity', (studyId: string, nbCalls: number) => {
