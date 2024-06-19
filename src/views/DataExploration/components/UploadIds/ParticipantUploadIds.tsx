@@ -9,7 +9,7 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { MATCH_PARTICIPANTS } from 'graphql/participants/queries';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import { ArrangerApi } from 'services/api/arranger';
+import { WrapperApi } from 'services/api/wrapper';
 
 import EntityUploadIds from './EntityUploadIds';
 
@@ -26,7 +26,7 @@ const ParticipantUploadIds = ({ queryBuilderId }: OwnProps) => (
     )}`}
     placeHolder={intl.get('components.uploadIds.participantPlaceholder')}
     fetchMatch={async (ids) => {
-      const response = await ArrangerApi.graphqlRequest({
+      const response = await WrapperApi.graphqlRequest({
         query: MATCH_PARTICIPANTS.loc?.source.body,
         variables: {
           first: MAX_ITEMS_QUERY,

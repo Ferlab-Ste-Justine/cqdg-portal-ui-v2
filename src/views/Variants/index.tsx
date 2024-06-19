@@ -13,7 +13,7 @@ import GeneIcon from 'components/Icons/GeneIcon';
 import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import FilterList from 'components/uiKit/FilterList';
 import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
-import { SuggestionType } from 'services/api/arranger/models';
+import { SuggestionType } from 'services/api/wrapper/models';
 
 import PageContent from './components/PageContent';
 import { SCROLL_WRAPPER_ID } from './utils/constants';

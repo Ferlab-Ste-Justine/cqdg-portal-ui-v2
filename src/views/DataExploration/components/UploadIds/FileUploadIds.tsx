@@ -9,7 +9,7 @@ import { MATCH_FILES } from 'graphql/files/queries';
 import { hydrateResults } from 'graphql/models';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import { ArrangerApi } from 'services/api/arranger';
+import { WrapperApi } from 'services/api/wrapper';
 
 import EntityUploadIds from './EntityUploadIds';
 
@@ -24,7 +24,7 @@ const FileUploadIds = ({ queryBuilderId }: OwnProps) => (
     entityIdentifiers={intl.get('entities.file.file_id')}
     placeHolder={intl.get('components.uploadIds.filePlaceholder')}
     fetchMatch={async (ids) => {
-      const response = await ArrangerApi.graphqlRequest({
+      const response = await WrapperApi.graphqlRequest({
         query: MATCH_FILES.loc?.source.body,
         variables: {
           first: MAX_ITEMS_QUERY,

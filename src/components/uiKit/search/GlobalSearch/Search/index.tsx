@@ -9,8 +9,8 @@ import SearchAutocomplete, {
   ISearchAutocomplete,
   OptionsType,
 } from 'components/uiKit/search/GlobalSearch/Search/SearchAutocomplete';
-import { ArrangerApi } from 'services/api/arranger';
-import { ISuggestionPayload } from 'services/api/arranger/models';
+import { WrapperApi } from 'services/api/wrapper';
+import { ISuggestionPayload } from 'services/api/wrapper/models';
 
 interface IGlobalSearch<T> {
   query: DocumentNode;
@@ -59,7 +59,7 @@ const Search = <T,>({
       };
       const searchFilter = generateQuery(payload);
 
-      const { data } = await ArrangerApi.graphqlRequest<any>({
+      const { data } = await WrapperApi.graphqlRequest<any>({
         query: query.loc?.source.body,
         variables: {
           sqon: {
