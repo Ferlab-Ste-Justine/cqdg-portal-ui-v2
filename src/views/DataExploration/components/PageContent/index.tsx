@@ -39,8 +39,8 @@ import {
 import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import useQBStateWithSavedFilters from 'hooks/useQBStateWithSavedFilters';
-import { ArrangerApi } from 'services/api/arranger';
 import { SavedFilterTag } from 'services/api/savedFilter/models';
+import { WrapperApi } from 'services/api/wrapper';
 import { globalActions } from 'store/global';
 import { remoteSliceActions } from 'store/remote/slice';
 import {
@@ -293,7 +293,7 @@ const PageContent = ({
         dictionary={getQueryBuilderDictionary(facetTransResolver, savedSets)}
         getResolvedQueryForCount={(sqon) => resolveSqonForParticipants(queryList, sqon)}
         fetchQueryCount={async (sqon) => {
-          const { data } = await ArrangerApi.graphqlRequest<{ data: IParticipantResultTree }>({
+          const { data } = await WrapperApi.graphqlRequest<{ data: IParticipantResultTree }>({
             query: GET_PARTICIPANTS_COUNT.loc?.source.body,
             variables: {
               sqon: resolveSqonForParticipants(queryList, sqon),

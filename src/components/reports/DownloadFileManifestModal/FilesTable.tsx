@@ -12,7 +12,7 @@ import useApi from 'hooks/useApi';
 import { headers, REPORTS_ROUTES } from 'services/api/reports';
 import { ReportType } from 'services/api/reports/models';
 import { formatFileSize } from 'utils/formatFileSize';
-const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
+const PROJECT_ID = EnvironmentVariables.configFor('PROJECT_ID');
 
 interface IFileByDataType {
   key: string;
@@ -59,7 +59,7 @@ const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
     responseType: 'json',
     data: {
       sqon,
-      projectId: ARRANGER_PROJECT_ID,
+      projectId: PROJECT_ID,
     },
     headers: headers(),
   };

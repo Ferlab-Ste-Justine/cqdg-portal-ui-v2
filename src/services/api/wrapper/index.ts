@@ -3,10 +3,10 @@ import { IParticipantResultTree } from 'graphql/participants/models';
 import { MATCH_PARTICIPANTS } from 'graphql/participants/queries';
 import EnvironmentVariables from 'helpers/EnvVariables';
 import {
-  ARRANGER_API,
-  ARRANGER_API_COLUMN_STATE_URL,
-  ARRANGER_API_DOWNLOAD_URL,
-  ARRANGER_API_PROJECT_URL,
+  API_COLUMN_STATE_URL,
+  API_DOWNLOAD_URL,
+  API_PROJECT_URL,
+  WRAPPER_API,
 } from 'provider/ApolloProvider';
 
 import { sendRequest } from 'services/api';
@@ -20,8 +20,8 @@ import {
   SuggestionType,
 } from './models';
 
-const ARRANGER_API_URL = EnvironmentVariables.configFor('ARRANGER_API');
-const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
+const WRAPPER_API_URL = EnvironmentVariables.configFor('WRAPPER_API');
+const PROJECT_ID = EnvironmentVariables.configFor('PROJECT_ID');
 
 const headers = () => ({
   'Content-Type': 'application/json',
@@ -30,42 +30,42 @@ const headers = () => ({
 const fetchStatistics = () =>
   sendRequest<IStatistics>({
     method: 'GET',
-    url: `${ARRANGER_API_URL}/statistics`,
+    url: `${WRAPPER_API_URL}/statistics`,
     headers: headers(),
   });
 
 const fetchPhenotypes = <T = any>(data: ArrangerPhenotypes) =>
   sendRequest<T>({
     method: 'POST',
-    url: `${ARRANGER_API_URL}/phenotypes`,
-    data: { ...data, project: ARRANGER_PROJECT_ID },
+    url: `${WRAPPER_API_URL}/phenotypes`,
+    data: { ...data, project: PROJECT_ID },
   });
 
 const graphqlRequest = <T = any>(data: { query: any; variables: any }) =>
   sendRequest<T>({
     method: 'POST',
-    url: ARRANGER_API_PROJECT_URL,
+    url: API_PROJECT_URL,
     data,
   });
 
 const download = <T = any>(data: URLSearchParams) =>
   sendRequest<T>({
     method: 'POST',
-    url: ARRANGER_API_DOWNLOAD_URL,
+    url: API_DOWNLOAD_URL,
     data,
   });
 
 const columnStates = (data: { query: any; variables: any }) =>
   sendRequest<ArrangerColumnStateResults>({
     method: 'POST',
-    url: ARRANGER_API_COLUMN_STATE_URL,
+    url: API_COLUMN_STATE_URL,
     data,
   });
 
 const fetchMatchParticipant = (ids: string[]) =>
   sendRequest<{ data: IParticipantResultTree }>({
     method: 'POST',
-    url: ARRANGER_API_PROJECT_URL,
+    url: API_PROJECT_URL,
     data: {
       query: MATCH_PARTICIPANTS.loc?.source.body,
       variables: {
@@ -84,10 +84,10 @@ const fetchMatchParticipant = (ids: string[]) =>
 const searchSuggestions = (type: SuggestionType, value: string) =>
   sendRequest<ISuggestionPayload<Suggestion>>({
     method: 'GET',
-    url: `${ARRANGER_API}/${type}Feature/suggestions/${value}`,
+    url: `${WRAPPER_API}/${type}Feature/suggestions/${value}`,
   });
 
-export const ArrangerApi = {
+export const WrapperApi = {
   fetchStatistics,
   graphqlRequest,
   download,

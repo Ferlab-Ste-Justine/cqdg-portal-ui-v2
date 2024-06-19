@@ -40,7 +40,6 @@ import { SetType } from 'services/api/savedSet/models';
 import { fetchTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
-import { userHasAccessToFile } from 'utils/dataFiles';
 import formatFileSize from 'utils/formatFileSize';
 import { formatQuerySortList, scrollToTop } from 'utils/helper';
 import { STATIC_ROUTES } from 'utils/routes';
@@ -55,10 +54,10 @@ const getDefaultColumns = (): ProColumnType[] => [
     title: intl.get('entities.file.file_authorization'),
     tooltip: intl.get('entities.file.file_authorization'),
     iconTitle: <LockOutlined />,
+    dataIndex: 'user_authorized',
     align: 'center',
-    render: (file: IFileEntity) => {
-      const hasAccess = userHasAccessToFile(file);
-      return hasAccess ? (
+    render: (user_authorized: boolean) =>
+      user_authorized ? (
         <Tooltip title={intl.get('entities.file.authorized')}>
           <UnlockFilled className={styles.authorizedLock} />
         </Tooltip>
@@ -66,8 +65,7 @@ const getDefaultColumns = (): ProColumnType[] => [
         <Tooltip title={intl.get('entities.file.controlled')}>
           <LockOutlined className={styles.unauthorizedLock} />
         </Tooltip>
-      );
-    },
+      ),
   },
   {
     key: 'data_access',

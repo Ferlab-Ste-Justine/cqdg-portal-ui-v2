@@ -11,7 +11,7 @@ import { ReportConfig, ReportType } from './models';
 
 const REPORT_API_URL = EnvironmentVariables.configFor('REPORTS_API_URL');
 
-const ARRANGER_PROJECT_ID = EnvironmentVariables.configFor('ARRANGER_PROJECT_ID');
+const PROJECT_ID = EnvironmentVariables.configFor('PROJECT_ID');
 
 export const REPORTS_ROUTES = {
   [ReportType.CLINICAL_DATA]: `${REPORT_API_URL}/reports/clinical-data`,
@@ -54,7 +54,7 @@ const generateReport = (config: ReportConfig) => {
     responseType: 'blob',
     data: {
       sqon: reportSqon,
-      projectId: ARRANGER_PROJECT_ID,
+      projectId: PROJECT_ID,
       filename: fileNameFormatted,
       withFamily: config.withFamily,
       withoutFiles: config.withoutFiles,

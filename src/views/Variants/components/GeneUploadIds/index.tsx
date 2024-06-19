@@ -11,7 +11,7 @@ import { IGeneEntity } from 'graphql/variants/models';
 import EntityUploadIds from 'views/DataExploration/components/UploadIds/EntityUploadIds';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import { ArrangerApi } from 'services/api/arranger';
+import { WrapperApi } from 'services/api/wrapper';
 
 interface IGenesUploadIdsProps {
   queryBuilderId: string;
@@ -24,7 +24,7 @@ const GenesUploadIds = ({ queryBuilderId }: IGenesUploadIdsProps) => (
     entityIdentifiers={intl.get('components.uploadIds.geneID')}
     placeHolder={intl.get('components.uploadIds.genePlaceholder')}
     fetchMatch={async (ids: string[]) => {
-      const response = await ArrangerApi.graphqlRequest({
+      const response = await WrapperApi.graphqlRequest({
         query: CHECK_GENE_MATCH_QUERY.loc?.source.body,
         variables: {
           first: MAX_ITEMS_QUERY,

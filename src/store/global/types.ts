@@ -1,7 +1,7 @@
 import { ArgsProps as MessageArgsProps, NoticeType } from 'antd/lib/message';
 import { ArgsProps as NotificationArgsProps } from 'antd/lib/notification';
 
-import { IStatistics } from 'services/api/arranger/models';
+import { IStatistics } from 'services/api/wrapper/models';
 
 export type MessageArgsPropsCustom = MessageArgsProps & { type: NoticeType };
 

@@ -12,8 +12,8 @@ import { ICustomSearchProps } from 'components/uiKit/search/GlobalSearch';
 import SearchAutocomplete, {
   OptionsType,
 } from 'components/uiKit/search/GlobalSearch/Search/SearchAutocomplete';
-import { ArrangerApi } from 'services/api/arranger';
-import { Suggestion, SuggestionType } from 'services/api/arranger/models';
+import { WrapperApi } from 'services/api/wrapper';
+import { Suggestion, SuggestionType } from 'services/api/wrapper/models';
 
 import OptionItem from './OptionItem';
 
@@ -30,7 +30,7 @@ const VariantGeneSearch = ({ queryBuilderId, type }: OwnProps) => {
   const field = type === SuggestionType.VARIANTS ? 'locus' : 'genes.symbol';
 
   const handleSearch = async (searchText: string) => {
-    const { data } = await ArrangerApi.searchSuggestions(type, searchText);
+    const { data } = await WrapperApi.searchSuggestions(type, searchText);
     setOptions(
       data?.suggestions?.map((s) => ({
         label: <OptionItem type={type} suggestion={s} value={getValue(type, s)} />,
