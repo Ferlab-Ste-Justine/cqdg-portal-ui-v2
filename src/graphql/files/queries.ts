@@ -15,6 +15,8 @@ export const GET_FILES = gql`
             file_name
             file_hash
             ferload_url
+            user_authorized
+            data_access
             participants {
               hits {
                 total
