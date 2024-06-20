@@ -42,7 +42,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
     cy.get('[data-cy="Tag_PT0000010"]').should('not.exist');
   });
 
-  it('Search by external participant ID - HSJ-1005-389 [CQDG-754]', () => {
+  it('Search by external participant ID - HSJ-1005-389', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'hsj-1005-389', 'POST', '*/grapgql', 1);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('PT0000010').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
@@ -157,7 +157,7 @@ describe('Page Data Exploration (Biospecimens) - Filtrer avec les facettes', () 
     cy.get('[data-cy="Tag_SR0000214"]').should('not.exist');
   });
 
-  it('Search by external sample ID - S03510 [CQDG-754]', () => {
+  it('Search by external sample ID - S03510', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 's03510', 'POST', '*/grapgql', 1);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('SR0000214').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
