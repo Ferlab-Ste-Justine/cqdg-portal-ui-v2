@@ -23,3 +23,13 @@
 .forceLinkUnderline:hover {
   text-decoration: none !important;
 }
+
+.unauthorizedLock {
+  margin-left: 8px;
+  color: $gray-6
+}
+
+.authorizedLock {
+  margin-left: 8px;
+  color: $green-7
+}

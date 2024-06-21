@@ -1,7 +1,7 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { FileTextOutlined } from '@ant-design/icons';
 import { IAnchorLink } from '@ferlab/ui/core/components/AnchorMenu';
 import ExternalLinkIcon from '@ferlab/ui/core/components/ExternalLink/ExternalLinkIcon';
 import { addQuery } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
@@ -10,13 +10,11 @@ import EntityPage, {
   EntityDescriptions,
   EntityTable,
   EntityTableRedirectLink,
-  EntityTitle,
 } from '@ferlab/ui/core/pages/EntityPage';
 import { IBiospecimenEntity } from 'graphql/biospecimens/models';
 import { INDEXES } from 'graphql/constants';
 import { useFile } from 'graphql/files/actions';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
-import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 import AnalysisFilesTable from 'views/FileEntity/AnalysisFilesTable/AnalysisFilesTable';
 import SummaryHeader from 'views/FileEntity/SummaryHeader';
 import getAnalysisDescriptions from 'views/FileEntity/utils/getAnalysisDescriptions';
@@ -25,7 +23,6 @@ import getDataTypeDescriptions from 'views/FileEntity/utils/getDataTypeDescripti
 import getExperimentalProcedureDescriptions from 'views/FileEntity/utils/getExperimentalProcedureDescriptions';
 import getSummaryDescriptions from 'views/FileEntity/utils/getSummaryDescriptions';
 
-import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import { generateLocalTsvReport } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { updateUserConfig } from 'store/user/thunks';
@@ -33,7 +30,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from 'views/ParticipantEntity/index.module.scss';
+import Title from './Title';
 
 export const pageId = 'file-entity-page';
 
@@ -73,29 +70,13 @@ const FileEntity = () => {
   const dataBiospecimensTable: IBiospecimenEntity[] =
     data?.biospecimens?.hits?.edges?.map((e) => ({ key: e.node.sample_id, ...e.node })) || [];
 
-  const getCurrentSqon = (): any => generateSelectionSqon(INDEXES.FILE, [file_id]);
-
   const defaultCols = getBiospecimensColumns();
   const userCols = userInfo?.config.files?.tables?.biospecimens?.columns || [];
   const userColumns = userColumnPreferencesOrDefault(userCols, defaultCols);
-  const hasFamily = data?.participants?.hits?.edges?.some((e) => e.node.family_id);
 
   return (
     <EntityPage loading={loading} data={data} links={links} pageId={pageId}>
-      <EntityTitle
-        text={data?.file_id}
-        icon={<FileTextOutlined className={styles.titleIcon} />}
-        loading={loading}
-        extra={
-          data && (
-            <DownloadFileManifestModal
-              sqon={getCurrentSqon()}
-              type="primary"
-              hasFamily={hasFamily}
-            />
-          )
-        }
-      />
+      <Title file={data} loading={loading} />
       <EntityDescriptions
         id={SectionId.SUMMARY}
         loading={loading}
