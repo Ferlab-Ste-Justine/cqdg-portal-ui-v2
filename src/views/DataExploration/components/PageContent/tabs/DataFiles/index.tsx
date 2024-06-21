@@ -62,7 +62,7 @@ const getDefaultColumns = (): ProColumnType[] => [
           <UnlockFilled className={styles.authorizedLock} />
         </Tooltip>
       ) : (
-        <Tooltip title={intl.get('entities.file.controlled')}>
+        <Tooltip title={intl.get('entities.file.unauthorized')}>
           <LockOutlined className={styles.unauthorizedLock} />
         </Tooltip>
       ),
