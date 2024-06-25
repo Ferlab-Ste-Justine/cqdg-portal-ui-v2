@@ -963,6 +963,7 @@ const en = {
             'Are you sure you want to remove your photo? We will replace it with a default avatar.',
           uploadPhotoButton: 'Upload photo',
           removePhotoButton: 'Remove photo',
+          linkedinUrl: 'Please enter a valid LinkedIn URL',
         },
         roleAffiliation: {
           title: 'Role & Affiliation',

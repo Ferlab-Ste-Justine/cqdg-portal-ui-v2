@@ -18,6 +18,9 @@ import ProfileImageUpload from './ProfileImageUpload';
 
 import styles from './index.module.scss';
 
+export const LINKEDIN_REGEX =
+  /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/iu;
+
 enum FORM_FIELDS {
   FIRST_NAME = 'first_name',
   LAST_NAME = 'last_name',
@@ -146,7 +149,13 @@ const IdentificationCard = () => {
                 className="noMargin"
                 name={FORM_FIELDS.LINKEDIN}
                 label={<ProLabel title="LinkedIn" />}
-                rules={[{ type: 'url', validateTrigger: 'onSubmit' }]}
+                rules={[
+                  {
+                    validateTrigger: 'onSubmit',
+                    pattern: LINKEDIN_REGEX,
+                    message: intl.get('screen.profileSettings.cards.identification.linkedinUrl'),
+                  },
+                ]}
                 required={false}
                 requiredMark="optional"
               >
