@@ -969,6 +969,7 @@ const fr = {
             'Voulez-vous vraiment supprimer votre photo ? Nous le remplacerons par un avatar par défaut.',
           uploadPhotoButton: 'Envoyer la photo',
           removePhotoButton: 'Supprimer la photo',
+          linkedinUrl: 'Veuillez entrer une URL LinkedIn valide',
         },
         roleAffiliation: {
           title: 'Rôle et affiliation',

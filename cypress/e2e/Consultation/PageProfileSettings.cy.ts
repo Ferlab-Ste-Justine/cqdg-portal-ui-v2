@@ -15,7 +15,7 @@ describe('Page Profile Settings - Vérifier les informations affichées', () => 
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('[class*="ant-alert-info"]').contains('You are authenticated with using . This email is never shown to the public and cannot be changed.').should('exist');
   });
 
-  it('Section Identification - Champs [CQDG-712]', () => {
+  it('Section Identification - Champs', () => {
     cy.get('input[id="first_name"]').clear({force: true}).type('Cypress', {force: true});
     cy.get('input[id="last_name"]').clear({force: true}).type('Test', {force: true});
     cy.get('input[id="public_email"]').clear({force: true});
