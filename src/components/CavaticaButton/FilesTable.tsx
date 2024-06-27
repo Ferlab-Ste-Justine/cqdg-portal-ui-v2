@@ -42,7 +42,7 @@ interface IFilesTableProps {
 const FilesTable = ({ filesAuthorized }: IFilesTableProps) => {
   const filesAuthorizedByStudies: IFileByStudy[] = [];
   filesAuthorized.forEach((file) => {
-    const study = filesAuthorized.find((e) => e.study_code === file.study.study_code);
+    const study = filesAuthorizedByStudies.find((e) => e.study_code === file.study.study_code);
     if (!study) {
       const filesByStudy = filesAuthorized.filter(
         (f) => f.study.study_code === file.study.study_code,
@@ -51,7 +51,7 @@ const FilesTable = ({ filesAuthorized }: IFilesTableProps) => {
         key: file.study_code,
         study_name: file.study.name,
         study_code: file.study.study_code,
-        nb_files: filesByStudy.length || 0,
+        nb_files: filesByStudy.length,
       });
     }
   });
