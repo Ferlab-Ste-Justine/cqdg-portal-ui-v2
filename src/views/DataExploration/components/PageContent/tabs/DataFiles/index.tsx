@@ -32,6 +32,7 @@ import {
 } from 'views/DataExploration/utils/constant';
 
 import { MAX_ITEMS_QUERY, TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
+import CavaticaButton from 'components/CavaticaButton';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import DownloadRequestAccessModal from 'components/reports/DownloadRequestAccessModal';
 import SetsManagementDropdown from 'components/uiKit/SetsManagementDropdown';
@@ -374,6 +375,12 @@ const DataFilesTab = ({ sqon }: IDataFilesTabProps) => {
             />,
             <DownloadRequestAccessModal
               key={3}
+              sqon={getCurrentSqon()}
+              isDisabled={!selectedKeys.length && !selectedAllResults}
+              hasTooManyFiles={hasTooManyFiles}
+            />,
+            <CavaticaButton
+              key={4}
               sqon={getCurrentSqon()}
               isDisabled={!selectedKeys.length && !selectedAllResults}
               hasTooManyFiles={hasTooManyFiles}

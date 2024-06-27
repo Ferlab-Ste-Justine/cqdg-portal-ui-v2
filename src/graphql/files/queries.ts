@@ -118,7 +118,7 @@ export const GET_FILES_COUNT = gql`
   }
 `;
 
-export const GET_FILES_TABLE = gql`
+export const GET_FILES_CAVATICA = gql`
   query getFiles($sqon: JSON, $first: Int, $offset: Int, $sort: [Sort], $searchAfter: JSON) {
     File {
       hits(filters: $sqon, first: $first, offset: $offset, sort: $sort, searchAfter: $searchAfter) {
@@ -126,9 +126,10 @@ export const GET_FILES_TABLE = gql`
         edges {
           node {
             file_id
-            data_type
-            sequencing_experiment {
-              experimental_strategy
+            user_authorized
+            study {
+              study_code
+              name
             }
           }
         }

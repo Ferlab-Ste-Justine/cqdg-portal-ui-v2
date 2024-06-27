@@ -14,6 +14,8 @@ export default class EnvironmentVariables {
     WRAPPER_API: window._env_?.REACT_APP_WRAPPER_API_URL || process.env.REACT_APP_WRAPPER_API_URL,
     PROJECT_ID: window._env_?.REACT_APP_PROJECT_ID || process.env.REACT_APP_PROJECT_ID,
     USERS_API: window._env_?.REACT_APP_USERS_API_URL || process.env.REACT_APP_USERS_API_URL,
+    MANIFEST_API:
+      window._env_?.REACT_APP_MANIFEST_API_URL || process.env.REACT_APP_MANIFEST_API_URL,
     // FENCES
     KEY_MANAGER_API_URL:
       window._env_?.REACT_APP_KEY_MANAGER_API_URL || process.env.REACT_APP_KEY_MANAGER_API_URL,

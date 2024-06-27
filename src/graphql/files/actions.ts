@@ -9,8 +9,12 @@ import useLazyResultQuery from 'hooks/graphql/useLazyResultQuery';
 import { IFileResultTree } from './models';
 import { GET_FILES, GET_FILES_COUNT } from './queries';
 
-export const useDataFiles = (variables?: IQueryVariable, operations?: IQueryOperationsConfig) => {
-  const { loading, result } = useLazyResultQuery<IFileResultTree>(GET_FILES, {
+export const useDataFiles = (
+  variables?: IQueryVariable,
+  operations?: IQueryOperationsConfig,
+  query?: DocumentNode,
+) => {
+  const { loading, result } = useLazyResultQuery<IFileResultTree>(query || GET_FILES, {
     variables,
     fetchPolicy: 'network-only',
   });

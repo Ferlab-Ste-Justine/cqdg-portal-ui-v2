@@ -17,6 +17,9 @@ import { WrapperApi } from 'services/api/wrapper';
 import { ArrangerColumnStateResults } from 'services/api/wrapper/models';
 import { globalActions } from 'store/global';
 
+import { ManifestApi } from '../../services/api/manifest';
+import { ManifestConfig } from '../../services/api/manifest/models';
+
 import { TFetchTSVArgs } from './types';
 
 export const SUPPORT_EMAIL = EnvironmentVariables.configFor('SUPPORT_EMAIL') || 'support@cqdg.ca';
@@ -264,4 +267,39 @@ const getTitleFromColumns = (columns: ProColumnType[], field: string) => {
   return column.title;
 };
 
-export { fetchReport, fetchTsvReport, generateLocalTsvReport };
+const fetchCavaticaManifest = createAsyncThunk<
+  void,
+  {
+    data: ManifestConfig;
+    callback?: () => void;
+  },
+  { rejectValue: string }
+>('report/generateReport', async (args, thunkAPI) => {
+  const messageKey = 'report_pending';
+
+  try {
+    thunkAPI.dispatch(
+      globalActions.displayMessage({
+        type: 'loading',
+        key: messageKey,
+        content: intl.get('api.report.inProgress.fetchReport'),
+        duration: 0,
+      }),
+    );
+    await ManifestApi.generateManifest(args.data);
+    thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
+    thunkAPI.dispatch(
+      globalActions.displayNotification({
+        type: 'success',
+        message: intl.get('api.report.onSuccess.title'),
+        description: intl.get('api.report.onSuccess.fetchReport'),
+      }),
+    );
+    if (args.callback) args.callback();
+  } catch (e) {
+    thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
+    showErrorReportNotif(thunkAPI);
+  }
+});
+
+export { fetchReport, fetchTsvReport, generateLocalTsvReport, fetchCavaticaManifest };
