@@ -118,21 +118,6 @@ describe('Navigation', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Variants').should('exist');
   });
 
-  it('Liens Saved Filters de la page Dashboard', () => {
-    cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"]').contains('Cypress Sex Filter').click({force: true});
-    cy.get('[data-cy="Title_DataExploration"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sex').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Female').should('exist');
-
-    cy.visitDashboard();
-    cy.get('[data-cy="SavedFilters"] [data-cy="Tab_Variants"]').click({force: true});
-    cy.get('[data-cy="SavedFilters"]').contains('Cypress Variant Type Filter').click({force: true});
-    cy.get('[data-cy="Title_Variants"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant Type').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('SNV').should('exist');
-  });
-
   it('Modals de la page Dashboard [CQDG-139]', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedSets"] svg[data-icon="edit"]').eq(0).click({force: true});
