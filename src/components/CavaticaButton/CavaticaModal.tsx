@@ -7,7 +7,6 @@ import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Modal, Tag, Typography } from 'antd';
 import { IStudyEntity } from 'graphql/studies/models';
 
-import RestrictedStudyAlert from 'components/reports/RestrictedStudyAlert';
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 
 import { MAX_ITEMS_QUERY } from '../../common/constants';
@@ -31,7 +30,6 @@ interface ICavaticaModalProps {
   buttonType?: 'default' | 'primary';
   hasTooManyFiles?: boolean;
   withoutFiles?: boolean;
-  isRestricted?: boolean;
   study?: IStudyEntity;
   isOpen?: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -40,7 +38,6 @@ interface ICavaticaModalProps {
 const CavaticaModal = ({
   sqon,
   hasTooManyFiles = false,
-  isRestricted = false,
   isOpen = false,
   setIsOpen,
 }: ICavaticaModalProps) => {
@@ -89,7 +86,6 @@ const CavaticaModal = ({
           })}
         </Text>
         {!hasTooManyFiles && <FilesTable filesAuthorized={filesAuthorized} />}
-        {isRestricted && <RestrictedStudyAlert />}
       </>
     ) : (
       <ContentUnauthorized />
@@ -100,7 +96,7 @@ const CavaticaModal = ({
       open={isOpen}
       title={intl.get('screen.cavatica.analyseModal.title')}
       okText={intl.get('screen.cavatica.analyseModal.copyFiles')}
-      okButtonProps={{ disabled: hasTooManyFiles || isRestricted || !filesAuthorizedCount }}
+      okButtonProps={{ disabled: hasTooManyFiles || !filesAuthorizedCount }}
       cancelText={intl.get('screen.cavatica.analyseModal.cancel')}
       onCancel={() => setIsOpen(false)}
       onOk={() => {
