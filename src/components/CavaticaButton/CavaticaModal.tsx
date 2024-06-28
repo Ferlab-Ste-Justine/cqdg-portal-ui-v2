@@ -4,7 +4,7 @@ import { FileTextOutlined } from '@ant-design/icons';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
-import { Modal, Spin, Tag, Typography } from 'antd';
+import { Modal, Tag, Typography } from 'antd';
 import { IStudyEntity } from 'graphql/studies/models';
 
 import RestrictedStudyAlert from 'components/reports/RestrictedStudyAlert';
@@ -26,21 +26,7 @@ const docHref = `${EnvVariables.configFor(
   'CQDG_DOCUMENTATION',
 )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
 
-const ContentUnauthorized = () => (
-  <Text>
-    <h5>
-      <CloseCircleOutlined className={styles.unauthorizedIcon} />{' '}
-      {intl.get('screen.cavatica.analyseModal.unauthorizedFiles')}
-    </h5>
-    {intl.get('screen.cavatica.analyseModal.unauthorizedFilesDescription')}
-    <ExternalLink href={docHref}>
-      {intl.get('screen.cavatica.analyseModal.dataAccess')}
-    </ExternalLink>
-    .
-  </Text>
-);
-
-interface IDownloadFileManifestProps {
+interface ICavaticaModalProps {
   sqon: ISyntheticSqon;
   buttonType?: 'default' | 'primary';
   hasTooManyFiles?: boolean;
@@ -54,16 +40,15 @@ interface IDownloadFileManifestProps {
 const CavaticaModal = ({
   sqon,
   hasTooManyFiles = false,
-  withoutFiles = false,
   isRestricted = false,
   isOpen = false,
   setIsOpen,
-}: IDownloadFileManifestProps) => {
+}: ICavaticaModalProps) => {
   const dispatch = useDispatch();
 
-  const { loading, data: files = [] } = useDataFiles(
+  const { data: files = [] } = useDataFiles(
     {
-      first: MAX_ITEMS_QUERY,
+      first: hasTooManyFiles ? 0 : MAX_ITEMS_QUERY,
       sqon,
     },
     undefined,
@@ -75,7 +60,40 @@ const CavaticaModal = ({
   const filesTotalCount: number = files?.length || 0;
   const file_ids = files.map((file) => file.file_id);
 
-  if (loading) return <Spin />;
+  const ContentUnauthorized = () => (
+    <Text>
+      <h5>
+        <CloseCircleOutlined className={styles.unauthorizedIcon} />{' '}
+        {intl.get('screen.cavatica.analyseModal.unauthorizedFiles')}
+      </h5>
+      {intl.get('screen.cavatica.analyseModal.unauthorizedFilesDescription')}
+      <ExternalLink href={docHref}>
+        {intl.get('screen.cavatica.analyseModal.dataAccess')}
+      </ExternalLink>
+      .
+    </Text>
+  );
+
+  const Content = () =>
+    filesAuthorizedCount ? (
+      <>
+        <Text>
+          {intl.get('screen.cavatica.analyseModal.youAreAuthorizedToCopy')}
+          <Tag className={styles.authorizedFilesTag} icon={<FileTextOutlined />}>
+            {intl.get('screen.cavatica.analyseModal.countFiles', {
+              filesAuthorizedCount,
+            })}
+          </Tag>
+          {intl.get('screen.cavatica.analyseModal.ofFiles', {
+            filesTotalCount,
+          })}
+        </Text>
+        {!hasTooManyFiles && <FilesTable filesAuthorized={filesAuthorized} />}
+        {isRestricted && <RestrictedStudyAlert />}
+      </>
+    ) : (
+      <ContentUnauthorized />
+    );
 
   return (
     <Modal
@@ -100,26 +118,8 @@ const CavaticaModal = ({
       className={styles.modal}
       data-cy="Cavatica_Modal"
     >
-      {filesAuthorizedCount ? (
-        <>
-          <Text>
-            {intl.get('screen.cavatica.analyseModal.youAreAuthorizedToCopy')}
-            <Tag className={styles.authorizedFilesTag} icon={<FileTextOutlined />}>
-              {intl.get('screen.cavatica.analyseModal.countFiles', {
-                filesAuthorizedCount,
-              })}
-            </Tag>
-            {intl.get('screen.cavatica.analyseModal.ofFiles', {
-              filesTotalCount,
-            })}
-          </Text>
-          {!hasTooManyFiles && <FilesTable filesAuthorized={filesAuthorized} />}
-          {!withoutFiles && hasTooManyFiles && <TooMuchFilesAlert />}
-          {isRestricted && <RestrictedStudyAlert />}
-        </>
-      ) : (
-        <ContentUnauthorized />
-      )}
+      {hasTooManyFiles && <TooMuchFilesAlert marginTop={0} />}
+      {!hasTooManyFiles && <Content />}
     </Modal>
   );
 };

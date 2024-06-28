@@ -11,7 +11,6 @@ interface IDownloadFileManifestProps {
   buttonType?: 'default' | 'primary';
   isDisabled?: boolean;
   hasTooManyFiles?: boolean;
-  withoutFiles?: boolean;
   isRestricted?: boolean;
 }
 
@@ -20,7 +19,6 @@ const CavaticaButton = ({
   buttonType = 'primary',
   isDisabled = false,
   hasTooManyFiles = false,
-  withoutFiles = false,
   isRestricted = false,
 }: IDownloadFileManifestProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +41,6 @@ const CavaticaButton = ({
         <CavaticaModal
           hasTooManyFiles={hasTooManyFiles}
           isRestricted={isRestricted}
-          withoutFiles={withoutFiles}
           sqon={sqon}
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}

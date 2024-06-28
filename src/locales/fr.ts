@@ -1254,11 +1254,11 @@ const fr = {
     cavatica: {
       title: 'Connecter à Cavatica',
       analyseModal: {
-        title: 'Analyze in Cavatica',
-        copyFiles: 'Copy files',
-        youAreAuthorizedToCopy: 'You are authorized to copy',
-        countFiles: '{filesAuthorizedCount} files',
-        ofFiles: ' (out of {filesTotalCount} selected) to your Cavatica workspace.',
+        title: 'Analyse dans Cavatica',
+        copyFiles: 'Copier fichiers',
+        youAreAuthorizedToCopy: 'Vous êtes autorisé à copier',
+        countFiles: '{filesAuthorizedCount} fichiers',
+        ofFiles: ' (sur {filesTotalCount} sélectionnés) vers votre espace de travail Cavatica.',
         unauthorizedFiles: 'Fichiers non autorisés',
         unauthorizedFilesDescription:
           "Vous n'êtes pas autorisé à analyser les fichiers sélectionnés. Pour plus de détails, consultez la page ",

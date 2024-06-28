@@ -6,12 +6,13 @@ import { Alert } from 'antd';
 import { MAX_ITEMS_QUERY } from 'common/constants';
 import styles from 'components/reports/DownloadRequestAccessModal/index.module.scss';
 
-const TooMuchFilesAlert = () => (
+const TooMuchFilesAlert = ({ marginTop = 30 }) => (
   <Alert
     type="error"
     showIcon
     icon={<CloseCircleOutlined className={styles.customAlertIcon} />}
     className={styles.customAlert}
+    style={{ marginTop }}
     message={intl.get('api.report.error.tooMuchFilesTitle')}
     description={intl.get('api.report.error.tooMuchFiles', {
       limit: numberFormat(MAX_ITEMS_QUERY),
