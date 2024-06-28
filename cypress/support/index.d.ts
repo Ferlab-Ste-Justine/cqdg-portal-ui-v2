@@ -7,7 +7,7 @@ declare namespace Cypress {
     clickAndIntercept(selector: string, methodHTTP: string, routeMatcher: string, nbCalls: number, eq?: number): cy & CyEventEmitter;
     closePopup(): cy & CyEventEmitter;
     createFilterIfNotExists(filterName: string): cy & CyEventEmitter;
-    createSetIfNotExists(etName: string, itemPosition: number): cy & CyEventEmitter;
+    createSetIfNotExists(setName: string, itemPosition: number): cy & CyEventEmitter;
     deleteFilter(filterName: string): cy & CyEventEmitter;
     deleteFilterIfExists(filterName: string): cy & CyEventEmitter;
     deleteSet(dataNodeKey: string, setName: string): cy & CyEventEmitter;

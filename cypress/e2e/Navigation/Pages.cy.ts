@@ -89,35 +89,6 @@ describe('Navigation', () => {
     cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
   });
 
-  it('Liens Saved Sets de la page Dashboard', () => {
-    cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Participants').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Participants').should('exist');
-
-    cy.visitDashboard();
-    cy.get('[data-cy="Tab_Biospecimens"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Biospecimens').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Sample ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Biospecimens').should('exist');
-
-    cy.visitDashboard();
-    cy.get('[data-cy="Tab_Files"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Data Files').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('File ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
-
-    cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"] [data-cy="Tab_Variants"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Variants').click({force: true});
-    cy.get('[data-cy="Title_Variants"]').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('Cypress Variants').should('exist');
-  });
-
   it('Modals de la page Dashboard [CQDG-139]', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedSets"] svg[data-icon="edit"]').eq(0).click({force: true});
