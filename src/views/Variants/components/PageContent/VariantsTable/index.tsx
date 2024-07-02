@@ -314,6 +314,24 @@ const getDefaultColumns = (): ProColumnType[] => [
     },
   },
   {
+    key: 'internal_frequencies_wgs.total.af',
+    title: intl.get('entities.variant.frequencies.freq'),
+    tooltip: intl.get('entities.variant.frequencies.freqTooltip'),
+    dataIndex: 'internal_frequencies_wgs',
+    sorter: { multiple: 1 },
+    width: 60,
+    render: (internalFrequencies: IVariantInternalFrequencies) => (
+      <>
+        {internalFrequencies?.total?.pc || 0}
+        {internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af) && (
+          <span className={styles.partCell}>
+            ({toExponentialNotation(internalFrequencies.total.af)})
+          </span>
+        )}
+      </>
+    ),
+  },
+  {
     key: 'CADD',
     title: intl.get('entities.variant.consequences.predictions.cadd'),
     tooltip: intl.get('entities.variant.consequences.predictions.caddTooltip'),

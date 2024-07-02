@@ -406,7 +406,10 @@ export const getFacetsDictionary = () => ({
     thousand_genomes: { af: '1000 Genomes' },
   },
   internal_frequencies_wgs: {
-    total: { af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af') },
+    total: {
+      af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af'),
+      pf: intl.get('entities.variant.frequencies.internal_frequencies_pf'),
+    },
   },
   frequencies: {
     internal: {
