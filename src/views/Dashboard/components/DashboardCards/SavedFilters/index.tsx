@@ -14,6 +14,7 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { SavedFilterTag, TUserSavedFilter } from 'services/api/savedFilter/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedFilter } from 'store/savedFilter';
+import { getDocLang } from 'utils';
 
 import ListItem from './ListItem';
 
@@ -29,7 +30,7 @@ const Content = ({ linkText = '' }) => (
     <ExternalLink
       className={styles.docExternalLink}
       hasIcon
-      href={`${EnvVariables.configFor('CQDG_DOCUMENTATION')}/docs/filtres`}
+      href={`${EnvVariables.configFor('CQDG_DOCUMENTATION')}/docs/filtres${getDocLang()}`}
     >
       {linkText}
     </ExternalLink>

@@ -5,6 +5,8 @@ import InformationIcon from '@ferlab/ui/core/components/Icons/FuturoSpot/Informa
 import BannerItem from '@ferlab/ui/core/pages/LandingPage/BannerItem';
 import EnvVariables from 'helpers/EnvVariables';
 
+import { getDocLang } from 'utils';
+
 import styles from './index.module.scss';
 
 const BottomBanner = () => (
@@ -20,7 +22,7 @@ const BottomBanner = () => (
         buttonProps={{
           ghost: true,
           target: '_blank',
-          href: EnvVariables.configFor('CQDG_DOCUMENTATION'),
+          href: EnvVariables.configFor('CQDG_DOCUMENTATION') + getDocLang(),
         }}
       />
       <BannerItem
