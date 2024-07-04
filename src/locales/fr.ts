@@ -315,7 +315,8 @@ const fr = {
         domain: 'Domaine',
         part: 'Part.',
         freq: 'Fréq.',
-        freqTooltip: 'Fréquence allélique du variant à travers les cohortes CQDG',
+        freqTooltip:
+          'Fréquence allélique du variant dans les cohortes CQDG (génomes entiers seulement)',
         participants: 'Participants',
         participantsTooltip:
           'Nombre et fréquence de participants porteurs dans les cohortes du CQDG (génomes entiers seulement)',
@@ -330,7 +331,7 @@ const fr = {
         total: 'Total',
         cohort: 'Cohorte',
         internal_frequencies_wgs_af: 'Fréq. allélique CQDG (WGS)',
-        internal_frequencies_pf: 'Fréq. participant CQDG',
+        internal_frequencies_wgs_pf: 'Fréq. participant CQDG (WGS)',
       },
       pathogenicity: {
         pathogenicity: 'Pathogénicité',

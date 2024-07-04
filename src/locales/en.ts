@@ -312,7 +312,7 @@ const en = {
         domain: 'Domain',
         part: 'Part.',
         freq: 'Freq.',
-        freqTooltip: 'Allelic frequency of the variant across CQDG cohorts',
+        freqTooltip: 'Allelic frequency of the variant across CQDG cohorts (whole genomes only)',
         participants: 'Participants',
         participantsTooltip:
           'Number and frequency of participant carriers in the CQDG cohorts (whole genomes only)',
@@ -327,7 +327,7 @@ const en = {
         total: 'Total',
         cohort: 'Cohort',
         internal_frequencies_wgs_af: 'CQDG Allele Frequency (WGS)',
-        internal_frequencies_pf: 'CQDG Participant Frequency',
+        internal_frequencies_wgs_pf: 'CQDG Participant Frequency (WGS)',
       },
       pathogenicity: {
         pathogenicity: 'Pathogenicity',

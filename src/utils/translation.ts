@@ -408,7 +408,7 @@ export const getFacetsDictionary = () => ({
   internal_frequencies_wgs: {
     total: {
       af: intl.get('entities.variant.frequencies.internal_frequencies_wgs_af'),
-      pf: intl.get('entities.variant.frequencies.internal_frequencies_pf'),
+      pf: intl.get('entities.variant.frequencies.internal_frequencies_wgs_pf'),
     },
   },
   frequencies: {

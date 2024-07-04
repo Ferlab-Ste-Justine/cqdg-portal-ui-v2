@@ -319,17 +319,14 @@ const getDefaultColumns = (): ProColumnType[] => [
     tooltip: intl.get('entities.variant.frequencies.freqTooltip'),
     dataIndex: 'internal_frequencies_wgs',
     sorter: { multiple: 1 },
+    defaultHidden: true,
     width: 60,
-    render: (internalFrequencies: IVariantInternalFrequencies) => (
-      <>
-        {internalFrequencies?.total?.pc || 0}
-        {internalFrequencies?.total?.af && isNumber(internalFrequencies.total.af) && (
-          <span className={styles.partCell}>
-            ({toExponentialNotation(internalFrequencies.total.af)})
-          </span>
-        )}
-      </>
-    ),
+    render: (internalFrequencies: IVariantInternalFrequencies) =>
+      internalFrequencies?.total?.af
+        ? toExponentialNotation(internalFrequencies.total.af)
+        : internalFrequencies?.total?.af === 0
+        ? 0
+        : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     key: 'CADD',
