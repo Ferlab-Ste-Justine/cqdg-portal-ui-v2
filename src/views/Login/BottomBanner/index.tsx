@@ -37,7 +37,7 @@ const BottomBanner = () => (
           target: '_blank',
           href: `${EnvVariables.configFor(
             'CQDG_DOCUMENTATION',
-          )}/docs/comment-soumettre-vos-donn%C3%A9es`,
+          )}/docs/comment-soumettre-vos-donn%C3%A9es${getDocLang()}`,
         }}
       />
     </div>

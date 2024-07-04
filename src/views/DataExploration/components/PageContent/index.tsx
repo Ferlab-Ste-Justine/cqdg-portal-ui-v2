@@ -50,6 +50,7 @@ import {
   updateSavedFilter,
 } from 'store/savedFilter/thunks';
 import { useSavedSet } from 'store/savedSet';
+import { getDocLang } from 'utils';
 import {
   combineExtendedMappings,
   mapFilterForBiospecimen,
@@ -232,7 +233,7 @@ const PageContent = ({
             hasIcon
             href={`${EnvVariables.configFor(
               'CQDG_DOCUMENTATION',
-            )}/docs/fonctionnalités-générales-du-portail`}
+            )}/docs/fonctionnalités-générales-du-portail${getDocLang()}`}
           >
             {intl.get('layout.main.menu.documentation')}
           </ExternalLink>

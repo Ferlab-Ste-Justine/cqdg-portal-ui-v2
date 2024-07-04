@@ -13,6 +13,7 @@ import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import ExternalMailToLink from 'components/utils/ExternalMailToLink';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
+import { getDocLang } from 'utils';
 
 import FilesTable from './FilesTable';
 
@@ -46,7 +47,7 @@ const DownloadRequestAccessModal = ({
 
   const docHref = `${EnvVariables.configFor(
     'CQDG_DOCUMENTATION',
-  )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
+  )}/docs/faire-une-demande-daccès-aux-données-du-cqdg${getDocLang()}`;
 
   const Content = () =>
     study ? (

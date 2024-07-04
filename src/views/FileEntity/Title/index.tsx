@@ -9,6 +9,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
+import { getDocLang } from 'utils';
 
 import EnvVariables from '../../../helpers/EnvVariables';
 
@@ -25,7 +26,7 @@ const FileEntityTitle = ({ file, loading }: IFileEntityTitleProps) => {
   const getCurrentSqon = (): any => generateSelectionSqon(INDEXES.FILE, [file?.file_id || '']);
   const docHref = `${EnvVariables.configFor(
     'CQDG_DOCUMENTATION',
-  )}/docs/faire-une-demande-daccès-aux-données-du-cqdg`;
+  )}/docs/faire-une-demande-daccès-aux-données-du-cqdg${getDocLang()}`;
 
   const title = {
     text: file?.file_id,
