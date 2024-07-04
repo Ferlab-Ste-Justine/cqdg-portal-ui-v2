@@ -53,7 +53,7 @@ import { GnomadCircle, renderClinvar, renderOmim } from './utils';
 
 import styles from './index.module.scss';
 
-const isNumber = (n: number) => n && !Number.isNaN(n);
+const isNumber = (n?: number) => n && !Number.isNaN(n);
 
 export const getSourceTagColor = (value: string) => {
   switch (value) {
@@ -255,8 +255,6 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (externalFrequencies: IExternalFrequenciesEntity) =>
       externalFrequencies?.gnomad_genomes_3?.ac
         ? numberFormat(externalFrequencies?.gnomad_genomes_3?.ac)
-        : externalFrequencies?.gnomad_genomes_3?.ac === 0
-        ? 0
         : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
@@ -268,8 +266,8 @@ const getDefaultColumns = (): ProColumnType[] => [
     width: 60,
     render: (internalFrequencies: IVariantInternalFrequencies) => (
       <>
-        {internalFrequencies?.total?.pc || 0}
-        {internalFrequencies?.total?.pf && isNumber(internalFrequencies.total.pf) && (
+        {internalFrequencies?.total?.pc || TABLE_EMPTY_PLACE_HOLDER}
+        {isNumber(internalFrequencies.total.pf) && (
           <span className={styles.partCell}>
             ({toExponentialNotation(internalFrequencies.total.pf)})
           </span>
@@ -322,10 +320,8 @@ const getDefaultColumns = (): ProColumnType[] => [
     defaultHidden: true,
     width: 60,
     render: (internalFrequencies: IVariantInternalFrequencies) =>
-      internalFrequencies?.total?.af
-        ? toExponentialNotation(internalFrequencies.total.af)
-        : internalFrequencies?.total?.af === 0
-        ? 0
+      isNumber(internalFrequencies?.total?.af)
+        ? toExponentialNotation(internalFrequencies.total.af) || 0
         : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
