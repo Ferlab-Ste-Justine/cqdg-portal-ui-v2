@@ -5,7 +5,7 @@ import InformationIcon from '@ferlab/ui/core/components/Icons/FuturoSpot/Informa
 import BannerItem from '@ferlab/ui/core/pages/LandingPage/BannerItem';
 import EnvVariables from 'helpers/EnvVariables';
 
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import styles from './index.module.scss';
 

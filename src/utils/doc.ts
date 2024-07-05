@@ -1,5 +1,5 @@
-import { LANG } from '../common/constants';
-import getStoreConfig from '../store';
+import { LANG } from 'common/constants';
+import getStoreConfig from 'store';
 
 export const getDocLang = () => {
   const { store } = getStoreConfig();

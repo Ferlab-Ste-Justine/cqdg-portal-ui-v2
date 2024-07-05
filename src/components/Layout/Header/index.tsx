@@ -30,7 +30,7 @@ import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useUser } from 'store/user';
 import { userActions } from 'store/user/slice';
 import { updateUser } from 'store/user/thunks';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import styles from './index.module.scss';

@@ -50,7 +50,7 @@ import {
   updateSavedFilter,
 } from 'store/savedFilter/thunks';
 import { useSavedSet } from 'store/savedSet';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 import {
   combineExtendedMappings,
   mapFilterForBiospecimen,

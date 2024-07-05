@@ -14,7 +14,7 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { SavedFilterTag, TUserSavedFilter } from 'services/api/savedFilter/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedFilter } from 'store/savedFilter';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import ListItem from './ListItem';
 

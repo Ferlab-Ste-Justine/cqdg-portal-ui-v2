@@ -9,7 +9,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import EnvVariables from '../../../helpers/EnvVariables';
 

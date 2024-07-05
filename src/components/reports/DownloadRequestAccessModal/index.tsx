@@ -13,7 +13,7 @@ import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import ExternalMailToLink from 'components/utils/ExternalMailToLink';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import FilesTable from './FilesTable';
 

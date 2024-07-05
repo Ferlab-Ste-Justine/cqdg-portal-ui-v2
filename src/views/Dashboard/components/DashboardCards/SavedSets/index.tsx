@@ -15,7 +15,7 @@ import LineStyleIcon from 'components/Icons/LineStyleIcon';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 import { useSavedSet } from 'store/savedSet';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import ListItem from './ListItem';
 

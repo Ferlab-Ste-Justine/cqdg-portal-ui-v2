@@ -41,7 +41,7 @@ import {
 } from 'store/savedFilter/thunks';
 import { useSavedSet } from 'store/savedSet';
 import { useUser } from 'store/user';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 import { combineExtendedMappings } from 'utils/fieldMapper';
 import { getCurrentUrl } from 'utils/helper';
 import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translation';

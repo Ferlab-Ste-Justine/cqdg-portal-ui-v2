@@ -17,7 +17,7 @@ import CardHeader from 'views/Dashboard/components/CardHeader';
 import ExternalLinkIcon from 'components/Icons/ExternalLinkIcon';
 import { useGlobals } from 'store/global';
 import { fetchStats } from 'store/global/thunks';
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 import { STATIC_ROUTES } from 'utils/routes';
 
 import LinkBox from './LinkBox';

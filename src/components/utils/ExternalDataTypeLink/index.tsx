@@ -3,7 +3,7 @@ import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import ExternalLinkIcon from '@ferlab/ui/core/components/ExternalLink/ExternalLinkIcon';
 import EnvVariables from 'helpers/EnvVariables';
 
-import { getDocLang } from 'utils';
+import { getDocLang } from 'utils/doc';
 
 import styles from './index.module.scss';
 
