@@ -255,6 +255,8 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (externalFrequencies: IExternalFrequenciesEntity) =>
       externalFrequencies?.gnomad_genomes_3?.ac
         ? numberFormat(externalFrequencies?.gnomad_genomes_3?.ac)
+        : externalFrequencies?.gnomad_genomes_3?.ac === 0
+        ? 0
         : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
