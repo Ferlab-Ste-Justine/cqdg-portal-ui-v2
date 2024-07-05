@@ -16,3 +16,4 @@ REACT_APP_ES_MAX_ITEMS_QUERY=2000
 REACT_APP_SUPPORT_EMAIL=support@cqdg.ca
 REACT_APP_FERLOAD_GITHUB_URL=https://github.com/Ferlab-Ste-Justine/ferload-client-cli
 REACT_APP_MANIFEST_API_URL=https://cavatica-manifest-api.qa.juno.cqdg.ferlab.bio
+REACT_APP_CAVATICA_ENABLED=false

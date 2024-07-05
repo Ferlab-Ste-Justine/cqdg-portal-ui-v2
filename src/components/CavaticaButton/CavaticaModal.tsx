@@ -105,8 +105,8 @@ const CavaticaModal = ({
             data: {
               file_ids,
             },
-            callback: () => {
-              window.open('https://cavatica.org/', '_blank');
+            callback: (url) => {
+              window.open(url, '_blank');
             },
           }),
         );

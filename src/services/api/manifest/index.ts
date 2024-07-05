@@ -15,7 +15,7 @@ export const headers = (): AxiosRequestHeaders => ({
 });
 
 const generateManifest = async (data: ManifestConfig) =>
-  sendRequest({
+  sendRequest<{ importUrl: string }>({
     method: 'POST',
     headers: headers(),
     data: JSON.stringify(data),

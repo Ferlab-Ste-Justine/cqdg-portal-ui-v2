@@ -11,14 +11,13 @@ import startCase from 'lodash/startCase';
 import { v4 } from 'uuid';
 
 import { getDefaultContentType } from 'common/downloader';
+import { ManifestApi } from 'services/api/manifest';
+import { ManifestConfig } from 'services/api/manifest/models';
 import { ReportApi } from 'services/api/reports';
 import { ReportConfig } from 'services/api/reports/models';
 import { WrapperApi } from 'services/api/wrapper';
 import { ArrangerColumnStateResults } from 'services/api/wrapper/models';
 import { globalActions } from 'store/global';
-
-import { ManifestApi } from '../../services/api/manifest';
-import { ManifestConfig } from '../../services/api/manifest/models';
 
 import { TFetchTSVArgs } from './types';
 
@@ -271,7 +270,7 @@ const fetchCavaticaManifest = createAsyncThunk<
   void,
   {
     data: ManifestConfig;
-    callback?: () => void;
+    callback?: (url: string) => void;
   },
   { rejectValue: string }
 >('report/generateReport', async (args, thunkAPI) => {
@@ -286,7 +285,8 @@ const fetchCavaticaManifest = createAsyncThunk<
         duration: 0,
       }),
     );
-    await ManifestApi.generateManifest(args.data);
+    const response = await ManifestApi.generateManifest(args.data);
+    const url = response?.data?.importUrl || '';
     thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
     thunkAPI.dispatch(
       globalActions.displayNotification({
@@ -295,7 +295,7 @@ const fetchCavaticaManifest = createAsyncThunk<
         description: intl.get('api.report.onSuccess.fetchReport'),
       }),
     );
-    if (args.callback) args.callback();
+    if (args.callback) args.callback(url);
   } catch (e) {
     thunkAPI.dispatch(globalActions.destroyMessages([messageKey]));
     showErrorReportNotif(thunkAPI);
