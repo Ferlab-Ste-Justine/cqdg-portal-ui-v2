@@ -269,7 +269,7 @@ const getDefaultColumns = (): ProColumnType[] => [
     render: (internalFrequencies: IVariantInternalFrequencies) => (
       <>
         {internalFrequencies?.total?.pc || TABLE_EMPTY_PLACE_HOLDER}
-        {isNumber(internalFrequencies.total.pf) && (
+        {isNumber(internalFrequencies?.total?.pf) && (
           <span className={styles.partCell}>
             ({toExponentialNotation(internalFrequencies.total.pf)})
           </span>
