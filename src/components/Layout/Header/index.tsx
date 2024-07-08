@@ -102,6 +102,20 @@ const Header = () => {
         ),
       },
       {
+        key: 'downloadTool',
+        label: (
+          <ExternalLink
+            href={EnvVariables.configFor('FERLOAD_GITHUB_URL')}
+            data-cy="HeaderLink_DownloadTool"
+          >
+            <Space>
+              <ExternalLinkIcon {...iconSize} />
+              {intl.get('layout.main.menu.downloadTool')}
+            </Space>
+          </ExternalLink>
+        ),
+      },
+      {
         key: 'cqdg-website',
         label: (
           <ExternalLink href={EnvVariables.configFor('CQDG_WEB_SITE')} data-cy="HeaderLink_Website">

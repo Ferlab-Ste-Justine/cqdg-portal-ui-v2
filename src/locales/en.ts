@@ -815,6 +815,7 @@ const en = {
         community: 'Community',
         resources: 'Resources',
         contact: 'Contact',
+        downloadTool: 'Download Tool',
       },
     },
     user: {
