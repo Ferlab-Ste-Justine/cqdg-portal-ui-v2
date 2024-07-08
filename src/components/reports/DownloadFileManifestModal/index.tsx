@@ -10,6 +10,7 @@ import EnvVariables from 'helpers/EnvVariables';
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
+import { getDocLang } from 'utils/doc';
 
 import FilesTable from './FilesTable';
 
@@ -61,7 +62,7 @@ const DownloadFileManifestModal = ({
           hasIcon
           href={`${EnvVariables.configFor(
             'CQDG_DOCUMENTATION',
-          )}/docs/comment-utiliser-le-client-ferload`}
+          )}/docs/comment-utiliser-le-client-ferload${getDocLang()}`}
         >
           {intl.get('global.ferload')}
         </ExternalLink>
