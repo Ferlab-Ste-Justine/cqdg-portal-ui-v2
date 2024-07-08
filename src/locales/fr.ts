@@ -821,6 +821,7 @@ const fr = {
         community: 'Communauté',
         resources: 'Ressources',
         contact: 'Contact',
+        downloadTool: 'Outil de téléchargement',
       },
     },
     user: {

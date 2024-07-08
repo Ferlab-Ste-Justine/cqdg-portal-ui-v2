@@ -32,6 +32,8 @@ export default class EnvironmentVariables {
     ES_MAX_ITEMS_QUERY:
       window._env_?.REACT_APP_ES_MAX_ITEMS_QUERY || process.env.REACT_APP_ES_MAX_ITEMS_QUERY,
     SUPPORT_EMAIL: window._env_?.REACT_APP_SUPPORT_EMAIL || process.env.REACT_APP_SUPPORT_EMAIL,
+    FERLOAD_GITHUB_URL:
+      window._env_?.REACT_APP_FERLOAD_GITHUB_URL || process.env.REACT_APP_FERLOAD_GITHUB_URL,
   };
 
   static configFor(key: string): string {
