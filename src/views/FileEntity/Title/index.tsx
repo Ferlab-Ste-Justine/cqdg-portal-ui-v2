@@ -6,13 +6,12 @@ import { EntityTitle } from '@ferlab/ui/core/pages/EntityPage';
 import { Popover, Space } from 'antd';
 import { INDEXES } from 'graphql/constants';
 import { IFileEntity } from 'graphql/files/models';
+import EnvVariables from 'helpers/EnvVariables';
 import { generateSelectionSqon } from 'views/DataExploration/utils/selectionSqon';
 
+import CavaticaButton from 'components/CavaticaButton';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import { getDocLang } from 'utils/doc';
-
-import CavaticaButton from '../../../components/CavaticaButton';
-import EnvVariables from '../../../helpers/EnvVariables';
 
 import styles from './index.module.scss';
 

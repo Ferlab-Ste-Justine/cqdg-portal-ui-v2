@@ -1,11 +1,10 @@
 import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { Table } from 'antd';
+import { IFileEntity } from 'graphql/files/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import styles from 'components/reports/DownloadRequestAccessModal/index.module.scss';
-
-import { IFileEntity } from '../../graphql/files/models';
 
 interface IFileByStudy {
   key: string;

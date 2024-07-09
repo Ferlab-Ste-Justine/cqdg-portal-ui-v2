@@ -6,6 +6,7 @@ import { Button, Tooltip } from 'antd';
 import EnvVariables from 'helpers/EnvVariables';
 
 import CavaticaModal from './CavaticaModal';
+
 interface IDownloadFileManifestProps {
   sqon: ISyntheticSqon;
   buttonType?: 'default' | 'primary';

@@ -5,15 +5,14 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Modal, Tag, Typography } from 'antd';
+import { useDataFiles } from 'graphql/files/actions';
+import { GET_FILES_CAVATICA } from 'graphql/files/queries';
 import { IStudyEntity } from 'graphql/studies/models';
+import EnvVariables from 'helpers/EnvVariables';
 
+import { MAX_ITEMS_QUERY } from 'common/constants';
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
-
-import { MAX_ITEMS_QUERY } from '../../common/constants';
-import { useDataFiles } from '../../graphql/files/actions';
-import { GET_FILES_CAVATICA } from '../../graphql/files/queries';
-import EnvVariables from '../../helpers/EnvVariables';
-import { fetchCavaticaManifest } from '../../store/report/thunks';
+import { fetchCavaticaManifest } from 'store/report/thunks';
 
 import FilesTable from './FilesTable';
 
