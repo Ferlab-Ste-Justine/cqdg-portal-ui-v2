@@ -34,13 +34,10 @@ export default class EnvironmentVariables {
     ES_MAX_ITEMS_QUERY:
       window._env_?.REACT_APP_ES_MAX_ITEMS_QUERY || process.env.REACT_APP_ES_MAX_ITEMS_QUERY,
     SUPPORT_EMAIL: window._env_?.REACT_APP_SUPPORT_EMAIL || process.env.REACT_APP_SUPPORT_EMAIL,
-<<<<<<< HEAD
     FERLOAD_GITHUB_URL:
       window._env_?.REACT_APP_FERLOAD_GITHUB_URL || process.env.REACT_APP_FERLOAD_GITHUB_URL,
-=======
     CAVATICA_ENABLED:
       window._env_?.REACT_APP_CAVATICA_ENABLED || process.env.REACT_APP_CAVATICA_ENABLED || 'false',
->>>>>>> 2976c9f (feat: CQDG-788 create CAVATICA_ENABLED env var)
   };
 
   static configFor(key: string): string {
