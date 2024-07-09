@@ -13,14 +13,10 @@
   margin-top: 30px;
 }
 
-.customAlertIcon {
-  font-size: 21px !important;
-  margin-top: 2px;
+.authorizedFilesTag {
+  margin: 0 4px;
 }
 
-.customAlert {
-  *[class$="-alert-message"] {
-    font-weight: 600;
-  }
+.unauthorizedIcon {
   color: $red-8;
 }

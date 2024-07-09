@@ -1250,6 +1250,21 @@ const fr = {
       set: 'Ensemble',
       chooseSet: 'Choisissez un ensemble',
       youMustSelect: 'Sélectionnez au moins un élément',
+      comingSoon: 'Bientôt disponible !',
+    },
+    cavatica: {
+      title: 'Connecter à Cavatica',
+      analyseModal: {
+        title: 'Analyse dans Cavatica',
+        copyFiles: 'Copier fichiers',
+        youAreAuthorizedToCopy: 'Vous êtes autorisé à copier',
+        countFiles: '{filesAuthorizedCount} fichiers',
+        ofFiles: ' (sur {filesTotalCount} sélectionnés) vers votre espace de travail Cavatica.',
+        unauthorizedFiles: 'Fichiers non autorisés',
+        unauthorizedFilesDescription:
+          "Vous n'êtes pas autorisé à analyser les fichiers sélectionnés. Pour plus de détails, consultez la page ",
+        dataAccess: "Demande d'accès aux données",
+      },
     },
   },
   // this facets object is also used by Ferlab-ui to override the values in the facets
