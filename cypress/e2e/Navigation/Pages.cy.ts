@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress"/>
 import '../../support/commands';
 
 describe('Navigation', () => {
@@ -45,7 +45,7 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="Resources"]').click({force: true});
     cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.cqdg.ca');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-ca');
   });
 
   it('Lien externe de la header - Website', () => {
@@ -68,7 +68,7 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="Resources"]').click({force: true});
     cy.get('[data-cy="ExternalLink_DataRelease"]')
-      .should('have.attr', 'href', 'https://docs.cqdg.ca');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-ca');
   });
 
   it('Redirections de la page Dashboard', () => {
