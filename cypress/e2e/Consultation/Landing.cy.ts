@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress"/>
 import '../../support/commands';
 
 beforeEach(() => {
@@ -103,12 +103,12 @@ describe('Page Landing - Vérifier les informations affichées', () => {
     cy.get('[class*="BannerItem_container"]').eq(0).find('[id="information"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(0).find('[class*="TextIcon_title"]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
     cy.get('[class*="BannerItem_container"]').eq(0).contains(/(Pour savoir comment soumettre vos données, faire une demande d’accès ou pour consulter des guides d’utilisation du portail, visitez le centre de documentation.|To learn how to submit your data, request access to data, or to read user guides for the portal, visit the Documentation Center.)/).should('exist');
-    cy.get('[class*="BannerItem_container"]').eq(0).find('[href="https://docs.cqdg.ca"]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
+    cy.get('[class*="BannerItem_container"]').eq(0).find('[href*="https://docs.cqdg.ca?ljs="]').contains(/(Centre de documentation|Documentation Center)/).should('exist');
 
     cy.get('[class*="BannerItem_container"]').eq(1).find('[id="cloud-database"]').should('exist');
     cy.get('[class*="BannerItem_container"]').eq(1).find('[class*="TextIcon_title"]').contains(/(Données à héberger \?|Need to Host Your Data\?)/).should('exist');
     cy.get('[class*="BannerItem_container"]').eq(1).contains(/(Le CQDG offre aux chercheurs une plateforme idéale pour entreposer et diffuser les données génomiques générées par les études cliniques et de recherche.|The CQDG offers an ideal platform for researchers to store and share genomic data produced by clinical and research studies.)/).should('exist');
-    cy.get('[class*="BannerItem_container"]').eq(1).find('[href="https://docs.cqdg.ca/docs/comment-soumettre-vos-donn%C3%A9es"]').contains(/(Soumettre vos données|Submit your data)/).should('exist');
+    cy.get('[class*="BannerItem_container"]').eq(1).find('[href*="https://docs.cqdg.ca/docs/comment-soumettre-vos-donn%C3%A9es?ljs="]').contains(/(Soumettre vos données|Submit your data)/).should('exist');
   });
 
   it('Section Lower banner', () => {

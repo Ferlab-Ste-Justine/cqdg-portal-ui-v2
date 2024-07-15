@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress"/>
 import '../../support/commands';
 
 beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Page Dashboard - Widget Saved Sets', () => {
         cy.wrap($el).find('[class*="CardHeader_infoIcon"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
       }
     });
-    cy.get('[href="https://docs.cqdg.ca/docs/filtres"]').should('exist');
+    cy.get('[href*="https://docs.cqdg.ca/docs/filtres?ljs="]').should('exist');
   });
 });
 
