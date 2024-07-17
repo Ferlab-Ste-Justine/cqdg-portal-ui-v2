@@ -23,7 +23,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.ts')(on, config);
     },
-    baseUrl: 'http://portal-ui:3000/',
+    baseUrl: 'https://portail.qa.juno.cqdg.ferlab.bio/',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     slowTestThreshold: 60000,
     experimentalSessionAndOrigin: true,
