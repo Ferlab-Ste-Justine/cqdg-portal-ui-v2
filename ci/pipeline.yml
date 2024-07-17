@@ -51,7 +51,7 @@ resources:
   webhook_token: ((slack.webhook-url))
   source:
     uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
-    branch: main
+    branch: fix/cypress
     private_key: ((git.ssh-key))
     # ignore_paths: [ci/]
 
