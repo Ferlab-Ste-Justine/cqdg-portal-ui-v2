@@ -48,6 +48,13 @@ describe('Navigation', () => {
       .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-ca');
   });
 
+  it('Lien externe de la header - Download tool', () => {
+    cy.visitDashboard();
+    cy.get('[data-cy="Resources"]').click({force: true});
+    cy.get('[data-cy="HeaderLink_DownloadTool"]')
+      .should('have.attr', 'href', 'https://github.com/Ferlab-Ste-Justine/ferload-client-cli');
+  });
+
   it('Lien externe de la header - Website', () => {
     cy.visitDashboard();
     cy.get('[data-cy="Resources"]').click({force: true});
