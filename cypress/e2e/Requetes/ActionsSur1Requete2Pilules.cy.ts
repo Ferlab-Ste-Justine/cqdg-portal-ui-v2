@@ -10,16 +10,16 @@ describe('Page Data Exploration - Requêtes', () => {
   beforeEach(() => {
     cy.visitVariantsPage('?sharedFilterId=51590cb8-6c31-471c-bb34-129dcb018adc');
 
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
   it('Modifier l\'opérateur d\'une requête', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql1');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').click({force: true});
+    cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').clickAndWait({force: true});
     for (let i = 0; i < 7; i++) {
-      cy.wait('@getPOSTgraphql1', {timeout: 20*1000});
+      cy.wait('@getPOSTgraphql1');
     };
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
@@ -30,9 +30,9 @@ describe('Page Data Exploration - Requêtes', () => {
     cy.validateClearAllButton(false);
 
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql2');
-    cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').click({force: true});
+    cy.get('[class*="QueryBar_selected"]').find('[class*="Combiner_operator"]').clickAndWait({force: true});
     for (let i = 0; i < 7; i++) {
-      cy.wait('@getPOSTgraphql2', {timeout: 20*1000});
+      cy.wait('@getPOSTgraphql2');
     };
 
     cy.validatePillSelectedQuery('Variant Type', ['SNV']);
@@ -46,9 +46,9 @@ describe('Page Data Exploration - Requêtes', () => {
   it('Supprimer une des pilules d\'une requête avec le X', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql');
     cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');
-    cy.get('[class*="QueryBar_selected"]').find('button[class*="QueryPill_close"]').eq(0).click();
+    cy.get('[class*="QueryBar_selected"]').find('button[class*="QueryPill_close"]').eq(0).clickAndWait();
     for (let i = 0; i < 7; i++) {
-      cy.wait('@getPOSTgraphql', {timeout: 20*1000});
+      cy.wait('@getPOSTgraphql');
     };
 
     cy.validatePillSelectedQuery('Position', ['10000000']);

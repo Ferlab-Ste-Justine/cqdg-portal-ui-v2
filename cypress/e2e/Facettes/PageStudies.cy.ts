@@ -15,12 +15,12 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
@@ -34,48 +34,48 @@ describe('Page des études - Filtrer avec les facettes', () => {
 
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'study1', 'POST', '*/grapgql', 3);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
-    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).clickAndWait({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
   });
 
   it('Search by study name - Congenital', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'congenital', 'POST', '*/grapgql', 5);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
-    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).clickAndWait({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
   });
 
   it('Search by study domain - Diseases', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'diseases', 'POST', '*/grapgql', 5);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY1').should('exist');
-    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).clickAndWait({force: true});
 
     cy.get('[data-cy="Tag_STUDY1"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_STUDY1"]').should('not.exist');
   });
 
   it('Search by study keyword - family', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'FAMILY', 'POST', '*/grapgql', 5);
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('STUDY2').should('exist');
-    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).clickAndWait({force: true});
 
     cy.get('[data-cy*="Tag_"]').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 

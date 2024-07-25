@@ -1,5 +1,6 @@
 /// <reference types="cypress"/>
 import '../../support/commands';
+import { oneMinute } from '../../support/utils';
 
 beforeEach(() => {
   cy.login();
@@ -55,13 +56,13 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
   });
 
   it('Lien Participant du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(1).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(1).find('[href]').clickAndWait({force: true});
     cy.get('[id="participant-entity-page"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('PT0000010');
   });
 
   it('Lien Study du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(2).find('[href]').click({force: true});
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(2).find('[href]').clickAndWait({force: true});
     cy.get('[id="study-entity-page"]').should('exist');
     cy.get('[class*="EntityTitle"]').contains('Developmental and epileptic encephalopathies');
   });
@@ -81,16 +82,16 @@ describe('Page Data Exploration (Participants) - Valider les liens disponibles',
   });
 
   it('Lien Files du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(9).find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
     cy.validateTableResultsCount(/^5$/);
   });
 
   it('Lien Biospecimens du tableau', () => {
-    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
+    cy.get('tr[data-row-key="PT0000010"]').find('[class*="ant-table-cell"]').eq(10).find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT0000010').should('exist');
     cy.validateTableResultsCount(/^1$/);
@@ -166,32 +167,32 @@ describe('Page Data Exploration (Participants) - Valider les fonctionnalités du
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.get('body').find('span[class*="ant-select-selection-item"]').click({force: true});
-    cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
+    cy.get('body').find('span[class*="ant-select-selection-item"]').clickAndWait({force: true});
+    cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^1$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^20$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Next').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Next').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^21$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^40$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Next').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Next').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^41$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^60$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Previous').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Previous').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^21$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^40$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('First').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('First').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^1$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^20$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('be.disabled');
