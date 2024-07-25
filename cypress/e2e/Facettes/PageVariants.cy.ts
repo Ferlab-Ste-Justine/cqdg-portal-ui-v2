@@ -8,8 +8,8 @@ beforeEach(() => {
 describe('Page des variants (Participant) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Participant"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
@@ -17,7 +17,7 @@ describe('Page des variants (Participant) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
@@ -32,8 +32,8 @@ describe('Page des variants (Participant) - Filtrer avec les facettes', () => {
 describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
@@ -41,7 +41,7 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
@@ -62,31 +62,33 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
   });
 
   it('Search by gene symbol - PRDX1', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'prdx1', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy*="Tag_"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
   it('Search by gene alias - NKEFA [CQDG-750]', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'nkefa', 'POST', '*/grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy*="Tag_"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
@@ -100,7 +102,7 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
   });
 
@@ -114,7 +116,7 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
   });
 
@@ -128,31 +130,33 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('1-11846011-A-G').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_1-11846011-A-G"]').should('not.exist');
   });
 
   it('Search by Ensembl ID - ENST00000376480', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'enst00000376480', 'POST', '* /grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy*="Tag_"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
   it('Search by refseq ID - NM_006172.4', () => {
     cy.typeAndIntercept('[data-cy="SearchAutocomplete_Select"]', 'nm_006172.4', 'POST', '* /grapgql', 3);
+    cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').contains('1-').should('exist');
     cy.get('[data-cy="Search_Dropdown"] [class*="ant-select-item"]').eq(0).click({force: true});
 
     cy.get('[data-cy*="Tag_"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Variant ID').should('exist');
     cy.validateTableResultsCount(/^1 Result$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy*="Tag_"]').should('not.exist');
   });
 
@@ -199,8 +203,8 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
 describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Gene"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Gene"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
@@ -208,7 +212,7 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
@@ -229,7 +233,7 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
     cy.validateTableResultsCount(/^133$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
   });
 
@@ -243,7 +247,7 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
     cy.validateTableResultsCount(/^133$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
   });
 
@@ -257,7 +261,7 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PRDX1').should('exist');
     cy.validateTableResultsCount(/^133$/);
 
-    cy.get('[data-icon="close-circle"]').click({force: true});
+    cy.get('[data-icon="close-circle"]').clickAndWait({force: true});
     cy.get('[data-cy="Tag_PRDX1"]').should('not.exist');
   });
 
@@ -321,8 +325,8 @@ describe('Page des variants (Gene) - Filtrer avec les facettes', () => {
 describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Pathogenicity"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Pathogenicity"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
@@ -330,7 +334,7 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');
@@ -395,8 +399,8 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
 describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
   beforeEach(() => {
     cy.visitVariantsPage();
-    cy.get('[data-cy="SidebarMenuItem_Frequency"]').click({force: true});
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Frequency"]').clickAndWait({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
   });
 
@@ -404,7 +408,7 @@ describe('Page des variants (Frequency) - Filtrer avec les facettes', () => {
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('not.exist');
 
-    cy.get('[data-cy="ExpandAll"]').click({force: true});
+    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').contains('Expand all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="false"]').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('not.exist');

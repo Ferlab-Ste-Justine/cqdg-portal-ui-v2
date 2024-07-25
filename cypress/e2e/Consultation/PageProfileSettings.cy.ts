@@ -20,7 +20,7 @@ describe('Page Profile Settings - Vérifier les informations affichées', () => 
     cy.get('input[id="last_name"]').clear({force: true}).type('Test', {force: true});
     cy.get('input[id="public_email"]').clear({force: true});
     cy.get('input[id="linkedin"]').clear({force: true});
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
 
     cy.get('label[for="first_name"]').contains('First Name').should('exist');
     cy.get('input[id="first_name"]').should('have.attr', 'value', 'Cypress').should('have.attr', 'placeholder', 'Your First Name');
@@ -46,7 +46,7 @@ describe('Page Profile Settings - Vérifier les informations affichées', () => 
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('input[value="bioinformatician_software_developer"]').check({force: true});
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('input[value="other"]').uncheck({force: true});
     cy.get('input[id="no_affiliation"]').check({force: true});
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
 
     cy.get('label[for="roles"]').contains('I am a').should('exist');
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('[class*="ant-checkbox-group"]').contains('Check all that apply').should('exist');
@@ -73,7 +73,7 @@ describe('Page Profile Settings - Vérifier les informations affichées', () => 
   it('Section Research Domain - Champs', () => {
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="aging"]').check({force: true}).should('be.checked');
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="other"]').uncheck({force: true}).should('not.be.checked');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
 
     cy.get('label[for="research_domain"]').contains('Research domains or domains of interest').should('exist');
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('[class*="ant-checkbox-group"]').contains('Check all that apply').should('exist');
@@ -117,7 +117,7 @@ describe('Page Profile Settings - Vérifier les informations affichées', () => 
 
 describe('Page Profile Settings - Valider les liens disponibles', () => {
   it('Lien du bouton View profile', () => {
-    cy.get('[class*="ProfileSettings_profileSettingsHeader"] button').click({force: true}); // data-cy="ViewProfileButton"
+    cy.get('[class*="ProfileSettings_profileSettingsHeader"] button').clickAndWait({force: true}); // data-cy="ViewProfileButton"
     cy.get('[data-cy="AvatarHeader"]').should('exist');
   });
 
@@ -126,7 +126,7 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
     cy.get('input[id="last_name"]').clear({force: true}).type('Discard', {force: true}).should('have.attr', 'value', 'Discard');
     cy.get('input[id="public_email"]').clear({force: true}).type('Discard', {force: true}).should('have.attr', 'value', 'Discard');
     cy.get('input[id="linkedin"]').clear({force: true}).type('Discard', {force: true}).should('have.attr', 'value', 'Discard');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-text"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-text"]').clickAndWait({force: true});
     
     cy.get('input[id="first_name"]').should('not.have.attr', 'value', 'Discard');
     cy.get('input[id="last_name"]').should('not.have.attr', 'value', 'Discard');
@@ -144,7 +144,7 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
   it('Bouton Discard changes de la section Role & Affiliation', () => {
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('input[value="bioinformatician_software_developer"]').uncheck({force: true}).should('not.be.checked');
     cy.get('input[id="no_affiliation"]').uncheck({force: true}).should('not.be.checked');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-text"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-text"]').clickAndWait({force: true});
     
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('input[value="bioinformatician_software_developer"]').should('be.checked');
     cy.get('input[id="no_affiliation"]').should('be.checked');
@@ -152,20 +152,20 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
 
   it('Bouton Discard changes de la section Research Domain', () => {
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="other"]').check({force: true}).should('be.checked');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-text"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-text"]').clickAndWait({force: true});
 
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="other"]').should('not.be.checked');
   });
 
   it('Bouton Delete my account de la section Delete Account', () => {
-    cy.get('button[class*="ant-btn-dangerous"]').click({force: true});
+    cy.get('button[class*="ant-btn-dangerous"]').clickAndWait({force: true});
     
     cy.get('[class="ant-modal-content"]').contains('Delete Account').should('exist');
     cy.get('[class="ant-modal-content"]').contains('Are you sure you want to permanently delete this account?').should('exist');
     cy.get('[class="ant-modal-content"] button[class*="ant-btn-default"]').contains('Cancel').should('exist');
     cy.get('[class="ant-modal-content"] button[class*="ant-btn-primary ant-btn-dangerous"]').contains('Delete').should('exist');
 
-    cy.get('[class="ant-modal-content"] button[class*="ant-btn-default"]').click({force: true});
+    cy.get('[class="ant-modal-content"] button[class*="ant-btn-default"]').clickAndWait({force: true});
     cy.get('[class="ant-modal-content"]').should('not.exist');
   });
 
@@ -174,7 +174,7 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
     cy.get('input[id="last_name"]').clear({force: true}).type('LastNameEdit', {force: true}).should('have.attr', 'value', 'LastNameEdit');
     cy.get('input[id="public_email"]').clear({force: true}).type('email@edit.com', {force: true}).should('have.attr', 'value', 'email@edit.com');
     cy.get('input[id="linkedin"]').clear({force: true}).type('https://www.linkedin.com/in/edit/', {force: true}).should('have.attr', 'value', 'https://www.linkedin.com/in/edit/');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(0).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
     cy.visitProfileViewPage();
     
     cy.get('body').contains('FirstNameEdit').should('exist');
@@ -187,7 +187,7 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('input[value="other"]').check({force: true}).should('be.checked');
     cy.get('input[id="no_affiliation"]').uncheck({force: true}).should('not.be.checked');
     cy.get('input[id="affiliation"]').clear({force: true}).type('AffiliationEdit', {force: true}).should('have.attr', 'value', 'AffiliationEdit');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(1).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
     cy.visitProfileViewPage();
     
     cy.get('body').contains('AffiliationEdit').should('exist');
@@ -196,7 +196,7 @@ describe('Page Profile Settings - Valider les liens disponibles', () => {
   it('Bouton Save changes de la section Research Domain', () => {
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="aging"]').uncheck({force: true}).should('not.be.checked');
     cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('input[value="other"]').check({force: true}).should('be.checked');
-    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-primary"]').click({force: true});
+    cy.get('[class*="Gridcard_fuiCardWrapper"]').eq(2).find('button[class*="ant-btn-primary"]').clickAndWait({force: true});
     cy.visitProfileViewPage();
 
     cy.get('body').contains('Aging').should('not.exist');

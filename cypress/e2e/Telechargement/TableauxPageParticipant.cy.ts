@@ -1,5 +1,5 @@
 /// <reference types="cypress"/>
-import { getDateTime } from '../../support/utils';
+import { getDateTime, oneMinute } from '../../support/utils';
 
 const { strDate } = getDateTime();
 
@@ -12,8 +12,8 @@ describe('Page d\'un participant - Exporter le tableau Family en TSV', () => {
   beforeEach(() => {
     cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('family');
-    cy.get('div[id="content"] svg[data-icon="download"]').eq(1).click({force: true});
-    cy.wait(2000);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(1).clickAndWait({force: true});
+    cy.waitUntilFile(oneMinute);
   });
   
   it('Valider le nom du fichier', () => {
@@ -33,8 +33,8 @@ describe('Page d\'un participant - Exporter le tableau Diagnoses en TSV', () => 
   beforeEach(() => {
     cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('diagnosis');
-    cy.get('div[id="content"] svg[data-icon="download"]').eq(2).click({force: true});
-    cy.wait(2000);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(2).clickAndWait({force: true});
+    cy.waitUntilFile(oneMinute);
   });
   
   it('Valider le nom du fichier', () => {
@@ -54,8 +54,8 @@ describe('Page d\'un participant - Exporter le tableau Phenotypes en TSV', () =>
   beforeEach(() => {
     cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('phenotype');
-    cy.get('div[id="content"] svg[data-icon="download"]').eq(3).click({force: true});
-    cy.wait(2000);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(3).clickAndWait({force: true});
+    cy.waitUntilFile(oneMinute);
   });
   
   it('Valider le nom du fichier', () => {
@@ -75,8 +75,8 @@ describe('Page d\'un participant - Exporter le tableau Biospecimens en TSV', () 
   beforeEach(() => {
     cy.visitParticipantEntity('PT0000010');
     cy.resetColumns('biospecimen');
-    cy.get('div[id="content"] svg[data-icon="download"]').eq(5).click({force: true});
-    cy.wait(2000);
+    cy.get('div[id="content"] svg[data-icon="download"]').eq(5).clickAndWait({force: true});
+    cy.waitUntilFile(oneMinute);
   });
   
   it('Valider le nom du fichier', () => {

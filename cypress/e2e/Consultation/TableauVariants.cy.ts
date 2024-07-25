@@ -1,5 +1,6 @@
 /// <reference types="cypress"/>
 import '../../support/commands';
+import { oneMinute } from '../../support/utils';
 
 beforeEach(() => {
   cy.login();
@@ -52,7 +53,7 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien Variant', () => {
-    cy.get('tr[data-row-key]').eq(9).contains('chr1:g.11846011A>G').click({force: true});
+    cy.get('tr[data-row-key]').eq(9).contains('chr1:g.11846011A>G').clickAndWait({force: true});
     cy.get('[class*="EntityTitle"]').contains('chr1:g.11846011A>G');
   });
  
@@ -67,7 +68,7 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider les liens disponibles Lien Gene Plus', () => {
-    cy.get('tr[data-row-key]').eq(9).find('td').eq(5).find('[data-icon="plus"]').click({force: true});
+    cy.get('tr[data-row-key]').eq(9).find('td').eq(5).find('[data-icon="plus"]').clickAndWait({force: true});
     cy.validatePillSelectedQuery('Gene', ['NPPA']);
   });
  
@@ -83,15 +84,15 @@ describe('Page des variants - Consultation du tableau', () => {
  
   // Pas de donnée
     it.skip('Valider les liens disponibles Lien Part.', () => {
-      cy.get('tr[data-row-key]').eq(9).find('td').eq(12).find('a[href]').click({force: true});
-      cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
+      cy.get('tr[data-row-key]').eq(9).find('td').eq(12).find('a[href]').clickAndWait({force: true});
+      cy.get('[data-cy="ProTable_Participants"]').should('exist');
       cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Participant ID').should('exist');
       cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('PT').should('exist');
     });
  
   it('Valider les liens disponibles Lien Studies', () => {
-    cy.get('tr[data-row-key]').eq(9).find('td').eq(13).find('a[href]').click({force: true});
-    cy.get('[data-cy="ProTable_Participants"]', {timeout: 60*1000}).should('exist');
+    cy.get('tr[data-row-key]').eq(9).find('td').eq(13).find('a[href]').clickAndWait({force: true});
+    cy.get('[data-cy="ProTable_Participants"]').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryPill_field"]').contains('Study Code').should('exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="QueryValues_value"]').contains('STUDY1').should('exist');
   });
@@ -103,8 +104,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Variant', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndWait('Variant');
     cy.validateTableFirstRow('chr1:g.100000723G>A', 1, true);
     cy.sortTableAndWait('Variant');
@@ -112,8 +111,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Type', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndWait('Type');
     cy.validateTableFirstRow('SNV', 2, true);
     cy.sortTableAndWait('Type');
@@ -121,8 +118,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndIntercept(/^gnomAD$/, 1);
     cy.validateTableFirstRow('-', 10, true);
     cy.sortTableAndIntercept(/^gnomAD$/, 1);
@@ -130,8 +125,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri gnomAD ALT', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndIntercept('gnomAD ALT', 1);
     cy.validateTableFirstRow(/^0$/, 11, true);
     cy.sortTableAndIntercept('gnomAD ALT', 1);
@@ -139,8 +132,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri Part.', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndIntercept('Part.', 1);
     cy.validateTableFirstRow(/^1/, 12, true);
     cy.sortTableAndIntercept('Part.', 1);
@@ -149,7 +140,6 @@ describe('Page des variants - Consultation du tableau', () => {
 
   it('Valider les fonctionnalités du tableau - Tri Freq.', () => {
     cy.showColumn('Freq.');
-    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Freq.', 1);
     cy.validateTableFirstRow('8.33e-2', 14, true);
@@ -159,7 +149,6 @@ describe('Page des variants - Consultation du tableau', () => {
 
   it('Valider les fonctionnalités du tableau - Tri ALT', () => {
     cy.showColumn(/^ALT$/);
-    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept(/^ALT$/, 1);
     cy.validateTableFirstRow(/^1$/, 14, true);
@@ -169,7 +158,6 @@ describe('Page des variants - Consultation du tableau', () => {
 
   it('Valider les fonctionnalités du tableau - Tri Homo.', () => {
     cy.showColumn('Homo.');
-    cy.waitWhileSpin(2000);
 
     cy.sortTableAndIntercept('Homo.', 1);
     cy.validateTableFirstRow(/^0$/, 14, true);
@@ -178,8 +166,6 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Tri multiple', () => {
-    cy.waitWhileSpin(2000);
-
     cy.sortTableAndWait('Type');
     cy.sortTableAndWait('Type');
     cy.sortTableAndWait('Variant');
@@ -187,32 +173,32 @@ describe('Page des variants - Consultation du tableau', () => {
   });
 
   it('Valider les fonctionnalités du tableau - Pagination', () => {
-    cy.get('body').find('span[class*="ant-select-selection-item"]').click({force: true});
-    cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').click({force: true});
+    cy.get('body').find('span[class*="ant-select-selection-item"]').clickAndWait({force: true});
+    cy.get('body').find('div[class*="ant-select-item-option-content"]').contains('20').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^1$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^20$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Next').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Next').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^21$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^40$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Next').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Next').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^41$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^60$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('Previous').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('Previous').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^21$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^40$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('not.be.disabled');
     cy.get('body').find('button[type="button"]').contains('First').parent('button').should('not.be.disabled');
 
-    cy.get('body').find('button[type="button"]').contains('First').click({force: true});
+    cy.get('body').find('button[type="button"]').contains('First').clickAndWait({force: true});
     cy.get('div[class*="ProTableHeader"]').contains(/^1$/).should('exist');
     cy.get('div[class*="ProTableHeader"]').contains(/^20$/).should('exist');
     cy.get('body').find('button[type="button"]').contains('Previous').parent('button').should('be.disabled');

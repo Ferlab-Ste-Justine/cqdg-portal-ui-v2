@@ -1,5 +1,6 @@
 /// <reference types="cypress"/>
 import '../../support/commands';
+import { oneMinute } from '../../support/utils';
 
 beforeEach(() => {
   cy.login();
@@ -33,7 +34,7 @@ describe('Page Dashboard - Widget Saved Sets', () => {
 describe('Page Dashboard - Widget Saved Sets', () => {
   beforeEach(() => {
     cy.visitDataExploration('participants');
-    cy.get('[data-cy="SidebarMenuItem_Participant"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').clickAndWait({force: true});
     cy.createSetIfNotExists('Cypress_SB', 0);
     cy.visitDashboard();
   });
@@ -48,22 +49,22 @@ describe('Page Dashboard - Widget Saved Sets', () => {
   });
 
   it('Valider les liens disponibles - Nom', () => {
-    cy.get('[data-cy="Tab_Biospecimens"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Biospecimens').click({force: true});
-    cy.get('[data-cy="ProTable_Biospecimens"]', {timeout: 60*1000}).should('exist');
+    cy.get('[data-cy="Tab_Biospecimens"]').clickAndWait({force: true});
+    cy.get('[data-cy="SavedSets"]').contains('Cypress Biospecimens').clickAndWait({force: true});
+    cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').contains('Sample ID').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryValues_value"]').contains('Cypress Biospecimens').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="Tab_Files"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Data Files').click({force: true});
-    cy.get('[data-cy="ProTable_DataFiles"]', {timeout: 60*1000}).should('exist');
+    cy.get('[data-cy="Tab_Files"]').clickAndWait({force: true});
+    cy.get('[data-cy="SavedSets"]').contains('Cypress Data Files').clickAndWait({force: true});
+    cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').contains('File ID').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryValues_value"]').contains('Cypress Data Files').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="SavedSets"] [data-cy="Tab_Variants"]').click({force: true});
-    cy.get('[data-cy="SavedSets"]').contains('Cypress Variants').click({force: true});
+    cy.get('[data-cy="SavedSets"] [data-cy="Tab_Variants"]').clickAndWait({force: true});
+    cy.get('[data-cy="SavedSets"]').contains('Cypress Variants').clickAndWait({force: true});
     cy.get('[data-cy="Title_Variants"]').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryPill_field"]').contains('Variant ID').should('exist');
     cy.get('[class*="QueryBar_selected"] [class*="QueryValues_value"]').contains('Cypress Variants').should('exist');
@@ -72,7 +73,7 @@ describe('Page Dashboard - Widget Saved Sets', () => {
   it('Valider les liens disponibles - Bouton Delete', () => {
     cy.get('[class*="ListItemWithActions_fuiListItemWithActions"]').each(($el: JQuery<HTMLElement>) => {
       if ($el.text().includes('Cypress_SB')) {
-        cy.wrap($el).find('svg[data-icon="delete"]').click({force:true});
+        cy.wrap($el).find('svg[data-icon="delete"]').clickAndWait({force:true});
       }
     });
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-dangerous"]', 'DELETE', '**/sets/**', 1);
@@ -83,7 +84,7 @@ describe('Page Dashboard - Widget Saved Sets', () => {
 describe('Page Dashboard - Widget Saved Sets', () => {
   beforeEach(() => {
     cy.visitDataExploration('participants');
-    cy.get('[data-cy="SidebarMenuItem_Participant"]').click({force: true});
+    cy.get('[data-cy="SidebarMenuItem_Participant"]').clickAndWait({force: true});
     cy.createSetIfNotExists('Cypress_SA', 0);
     cy.deleteSetIfExists('participants', 'Cypress_SB');
     cy.visitDashboard();
@@ -92,7 +93,7 @@ describe('Page Dashboard - Widget Saved Sets', () => {
   it('Valider les liens disponibles - Bouton Edit', () => {
     cy.get('[class*="ListItemWithActions_fuiListItemWithActions"]').each(($el: JQuery<HTMLElement>) => {
       if ($el.text().includes('Cypress_SA')) {
-        cy.wrap($el).find('svg[data-icon="edit"]').click({force:true});
+        cy.wrap($el).find('svg[data-icon="edit"]').clickAndWait({force:true});
       }
     });
     cy.get('[class="ant-modal-content"] input').clear().type('Cypress_SB');
