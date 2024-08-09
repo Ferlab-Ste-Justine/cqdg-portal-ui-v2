@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 
 import rareLogo from 'components/assets/RARE.png';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const Rare = () => (
   <div className={styles.container}>

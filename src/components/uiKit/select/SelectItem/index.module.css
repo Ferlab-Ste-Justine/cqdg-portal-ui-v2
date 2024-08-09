@@ -1,0 +1,7 @@
+.iconWrapper * {
+  color: var(--gray-7);
+}
+
+.textEllipsis {
+  width: 240px;
+}

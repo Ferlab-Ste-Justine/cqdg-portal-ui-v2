@@ -5,7 +5,7 @@ import { TUser } from 'services/api/user/models';
 
 import { formatName } from '../../utils';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 interface OwnProps {
   user?: TUser;

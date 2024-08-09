@@ -19,7 +19,7 @@ import { ClinvarColorMap } from 'views/Variants/components/PageContent/VariantsT
 
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const { Text } = Typography;
 

@@ -29,7 +29,7 @@ import capitalize from 'lodash/capitalize';
 
 import { getEntityConsequenceDictionary } from 'utils/translation';
 
-import style from '../index.module.scss';
+import style from '../index.module.css';
 
 const { Text } = Typography;
 

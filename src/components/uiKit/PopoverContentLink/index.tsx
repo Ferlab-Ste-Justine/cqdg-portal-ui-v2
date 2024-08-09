@@ -2,7 +2,7 @@ import { Link, LinkProps } from 'react-router-dom';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { Button, ButtonProps } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type OwnProps = Omit<LinkProps, 'to'> & {
   title: string;

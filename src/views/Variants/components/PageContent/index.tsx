@@ -48,7 +48,7 @@ import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translatio
 
 import VariantsTable from './VariantsTable';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text, Title } = Typography;
 

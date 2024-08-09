@@ -33,7 +33,7 @@ import { updateUser } from 'store/user/thunks';
 import { getDocLang } from 'utils/doc';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const iconSize = { width: 14, height: 14 };
 const FT_FLAG_KEY = 'SITE_WIDE_BANNER';

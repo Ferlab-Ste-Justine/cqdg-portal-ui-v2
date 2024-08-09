@@ -16,7 +16,7 @@ import BaseForm from '../BaseForm';
 
 import ProfileImageUpload from './ProfileImageUpload';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export const LINKEDIN_REGEX =
   /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/iu;

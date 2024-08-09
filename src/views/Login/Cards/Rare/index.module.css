@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+  width: 100%;
+  height: fit-content;
+}
+
+.logo {
+  width: 143px;
+  height: 54px;
+  object-position: -4px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 32px;
+  color: var(--gray-9);
+}
+
+.text {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-8);
+}

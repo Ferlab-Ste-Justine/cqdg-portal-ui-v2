@@ -1,0 +1,15 @@
+.dataExplorePageContent {
+  width: 100%;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.subTitle {
+  color: var(--gray-7);
+}
+
+.docExternalLink {
+  margin-left: 4px;
+}

@@ -50,7 +50,7 @@ const ExperimentalStrategyGraphCard = ({
     <ResizableGridCard
       gridUID={gridUID}
       id={id}
-      dictionary={getResizableGridDictionary()}
+      dictionary={getResizableGridDictionary().download}
       theme="shade"
       loading={loading}
       loadingType="spinner"

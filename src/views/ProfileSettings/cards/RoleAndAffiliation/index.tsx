@@ -13,7 +13,7 @@ import BaseCard from '../BaseCard';
 import BaseForm from '../BaseForm';
 import { sortOptionsLabelsByName } from '../utils';
 
-import formStyles from '../form.module.scss';
+import formStyles from '../form.module.css';
 
 enum FORM_FIELDS {
   ROLES = 'roles',

@@ -13,6 +13,6 @@ body {
   height: 100vh;
 }
 
-[ant-click-animating-without-extra-node='true']::after{
-  display:none;
+[ant-click-animating-without-extra-node='true']::after {
+  display: none;
 }

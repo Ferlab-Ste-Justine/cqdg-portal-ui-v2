@@ -12,7 +12,7 @@ import {
   STUDIES_EXPLORATION_QB_ID,
 } from 'views/Studies/utils/constant';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title } = Typography;
 

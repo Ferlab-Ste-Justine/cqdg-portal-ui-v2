@@ -14,7 +14,7 @@ import Cards from './Cards';
 import Studies from './Studies';
 import TopBanner from './TopBanner';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const footerLogos = [GenomeQcLogo, ChuSjLogo, FrqsLogo, FciLogo, FerlabLogo];
 

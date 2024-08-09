@@ -1,0 +1,17 @@
+.collapseLikeFacet .collapse,
+.collapseLikeFacet .collapse :global(.ant-collapse-item) {
+  border: none;
+}
+
+.collapseLikeFacet .collapse div[class$='-header'] {
+  font-size: 14px !important;
+  color: unset !important;
+  padding-top: 5.5px;
+  padding-bottom: 5.5px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.collapseLikeFacet .collapse div[class$='-header']:hover {
+  cursor: pointer;
+}

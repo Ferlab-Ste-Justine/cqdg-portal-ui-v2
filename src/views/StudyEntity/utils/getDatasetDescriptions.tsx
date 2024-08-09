@@ -5,7 +5,7 @@ import { IDataSet } from 'graphql/studies/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getDatasetDescriptions = (dataset?: IDataSet): IEntityDescriptionsItem[] => [
   {

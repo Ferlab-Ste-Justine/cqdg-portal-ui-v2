@@ -22,7 +22,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 
 import CreateEditModal from '../CreateEditModal';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text } = Typography;
 

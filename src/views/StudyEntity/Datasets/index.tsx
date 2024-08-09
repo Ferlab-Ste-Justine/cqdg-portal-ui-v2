@@ -14,7 +14,7 @@ import getDatasetDescriptions from 'views/StudyEntity/utils/getDatasetDescriptio
 
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface IDatasetsProps {
   id: string;

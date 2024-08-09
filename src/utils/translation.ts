@@ -180,6 +180,8 @@ export const getQueryBuilderDictionary = (
         'components.querybuilder.header.tooltips.duplicateQueryBuilder',
       ),
       share: intl.get('components.querybuilder.header.tooltips.share'),
+      shareDisabled: intl.get('components.querybuilder.header.tooltips.shareDisabled'),
+      saveDisabled: intl.get('components.querybuilder.header.tooltips.saveDisabled'),
       setAsDefaultFilter: intl.get('components.querybuilder.header.tooltips.setAsDefaultFilter'),
       unsetDefaultFilter: intl.get('components.querybuilder.header.tooltips.unsetDefaultFilter'),
       undoChanges: intl.get('components.querybuilder.header.tooltips.undoChanges'),

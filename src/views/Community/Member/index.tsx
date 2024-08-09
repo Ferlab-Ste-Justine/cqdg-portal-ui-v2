@@ -14,7 +14,7 @@ import { useUser } from 'store/user';
 import AvatarHeader from './components/AvatarHeader';
 import Banner from './components/Banner';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const CommunityMember = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,0 +1,46 @@
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+  width: 100%;
+  height: fit-content;
+  background-color: var(--gray-1);
+}
+.cardsGrid {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 48px;
+}
+@media (min-width: 800px) and (max-width: 1024px) {
+  .cardsContainer {
+    padding: 40px 24px;
+  }
+  .cardsGrid {
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+  }
+}
+@media (max-width: 800px) {
+  .cardsContainer {
+    padding: 40px 24px;
+  }
+  .cardsGrid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+  }
+  .cardsGrid div:nth-child(1) {
+    order: 1;
+  }
+  .cardsGrid div:nth-child(2) {
+    order: 2;
+  }
+  .cardsGrid div:nth-child(3) {
+    order: 4;
+  }
+  .cardsGrid div:nth-child(4) {
+    order: 3;
+  }
+}

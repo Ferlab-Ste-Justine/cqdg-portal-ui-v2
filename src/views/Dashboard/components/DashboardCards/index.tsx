@@ -4,7 +4,7 @@ import cx from 'classnames';
 import SavedFilters from './SavedFilters';
 import SavedSets from './SavedSets';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export interface DashboardCardProps {
   id: string;

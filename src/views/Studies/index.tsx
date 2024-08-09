@@ -9,7 +9,7 @@ import useGetExtendedMappings from 'hooks/graphql/useGetExtendedMappings';
 import PageContent from './components/PageContent';
 import { SCROLL_WRAPPER_ID, STUDIES_EXPLORATION_QB_ID } from './utils/constant';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const Studies = () => {
   const studyMappingResults = useGetExtendedMappings(INDEXES.STUDY);

@@ -45,7 +45,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const getDefaultColumns = (): ProColumnType[] => [
   {

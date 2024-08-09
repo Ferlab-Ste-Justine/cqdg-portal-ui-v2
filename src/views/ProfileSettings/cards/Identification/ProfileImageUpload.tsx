@@ -11,7 +11,7 @@ import { useAppDispatch } from 'store';
 import { useUser } from 'store/user';
 import { updateUser } from 'store/user/thunks';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const ProfileImageUpload = () => {
   const { userInfo } = useUser();

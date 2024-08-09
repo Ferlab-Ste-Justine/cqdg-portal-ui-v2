@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Space, Tooltip, Typography } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text } = Typography;
 

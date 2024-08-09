@@ -64,7 +64,7 @@ import { getFacetsDictionary, getQueryBuilderDictionary } from 'utils/translatio
 
 import BiospecimensTab from './tabs/Biospecimens';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title, Text } = Typography;
 

@@ -13,7 +13,7 @@ import CavaticaButton from 'components/CavaticaButton';
 import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import { getDocLang } from 'utils/doc';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface IFileEntityTitleProps {
   file?: IFileEntity;

@@ -5,7 +5,7 @@ import Studies from '@ferlab/ui/core/pages/LandingPage/Studies';
 import CartageneLogo from 'components/assets/cartagene.png';
 import { useGlobals } from 'store/global';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const studies = [
   { code: 'cartagene', logo: CartageneLogo },

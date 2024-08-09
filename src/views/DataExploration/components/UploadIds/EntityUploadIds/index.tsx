@@ -4,7 +4,7 @@ import { TFetchMatchFunc, TOnUpload } from '@ferlab/ui/core/components/UploadIds
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Descriptions } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface IEntityUploadIdsProps {
   entityId: string;

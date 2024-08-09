@@ -14,7 +14,7 @@ import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSet, updateSavedSet } from 'store/savedSet/thunks';
 import { getIdFieldByType } from 'utils/fieldMapper';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const FORM_NAME = 'save-set';
 const SET_NAME_KEY = 'nameSet';
