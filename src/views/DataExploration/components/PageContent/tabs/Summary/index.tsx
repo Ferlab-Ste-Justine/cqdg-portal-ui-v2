@@ -10,7 +10,7 @@ import { getResizableGridDictionary } from 'utils/translation';
 
 import getSummaryLayout, { UID } from './getSummaryLayout';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const SummaryTab = () => {
   const dispatch = useDispatch();

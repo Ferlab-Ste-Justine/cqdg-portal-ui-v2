@@ -9,7 +9,7 @@ import Rare from './Rare';
 import SecureData from './SecureData';
 import Stats from './Stats';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const Cards = () => {
   const { keycloak } = useKeycloak();

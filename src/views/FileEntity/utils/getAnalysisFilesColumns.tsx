@@ -10,7 +10,7 @@ import { pageId } from 'views/FileEntity/index';
 import { formatFileSize } from 'utils/formatFileSize';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from 'views/FileEntity/index.module.scss';
+import styles from 'views/FileEntity/index.module.css';
 
 const getAnalysisFilesColumns = (): ProColumnType<any>[] => [
   {

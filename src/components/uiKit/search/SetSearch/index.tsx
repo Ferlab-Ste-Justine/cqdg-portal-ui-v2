@@ -17,7 +17,7 @@ import { getIdFieldByType } from 'utils/fieldMapper';
 
 import SearchLabel from '../SearchLabel';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OptionsType {
   value: string;

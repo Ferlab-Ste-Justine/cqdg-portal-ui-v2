@@ -1,0 +1,13 @@
+.barChartWrapper {
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.barChartWrapper *[class$='-typography'] {
+  margin: 0;
+}
+.barChartWrapper .chartWrapper {
+  width: 100%;
+}

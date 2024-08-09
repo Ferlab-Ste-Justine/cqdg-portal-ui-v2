@@ -17,7 +17,7 @@ import DownloadClinicalDataDropdown from 'components/reports/DownloadClinicalDat
 import getSummaryDescriptions from './utils/getSummaryDescriptions';
 import SummaryHeader from './SummaryHeader';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export const pageId = 'participant-entity-page';
 

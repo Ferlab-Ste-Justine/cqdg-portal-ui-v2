@@ -6,7 +6,7 @@ import { IFileEntity } from 'graphql/files/models';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import ExternalDataTypeLink from 'components/utils/ExternalDataTypeLink';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getDataTypeDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {

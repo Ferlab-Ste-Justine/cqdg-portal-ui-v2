@@ -6,8 +6,9 @@ import { initUserSnap } from 'services/initUsersnap';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import '@ferlab/ui/themes/default/theme.template.css';
 import 'style/themes/cqdg/dist/antd.css';
-import 'style/themes/cqdg/main.scss';
+import 'style/themes/cqdg/main.css';
 import './index.css';
 
 initUserSnap();

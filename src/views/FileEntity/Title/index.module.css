@@ -1,0 +1,15 @@
+.popOverContent {
+  max-width: 450px;
+}
+
+.contentLink {
+  display: inline;
+}
+
+.locked {
+  color: var(--gray-6);
+}
+
+.unlocked {
+  color: var(--green-7);
+}

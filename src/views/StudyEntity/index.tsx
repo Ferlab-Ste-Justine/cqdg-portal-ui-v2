@@ -24,7 +24,7 @@ import Datasets from './Datasets';
 import FilesTable from './FilesTable';
 import SummaryHeader from './SummaryHeader';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const StudyEntity = () => {
   const { study_code = '' } = useParams<{ study_code: string }>();

@@ -7,7 +7,7 @@ import { AxiosRequestConfig } from 'axios';
 import EnvironmentVariables from 'helpers/EnvVariables';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
-import styles from 'components/reports/DownloadFileManifestModal/index.module.scss';
+import styles from 'components/reports/DownloadFileManifestModal/index.module.css';
 import useApi from 'hooks/useApi';
 import { headers, REPORTS_ROUTES } from 'services/api/reports';
 import { ReportType } from 'services/api/reports/models';

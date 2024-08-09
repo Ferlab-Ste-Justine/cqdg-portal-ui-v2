@@ -13,7 +13,7 @@ import { Typography } from 'antd';
 
 import { useGlobals } from 'store/global';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title } = Typography;
 

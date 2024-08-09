@@ -9,7 +9,7 @@ import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { EMAIL_REGEX } from 'utils/helper';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[] => [
   {

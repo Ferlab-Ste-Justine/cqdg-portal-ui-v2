@@ -28,7 +28,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { truncateString } from 'utils/string';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface OwnProps {
   results: IQueryResults<IStudyEntity[]>;

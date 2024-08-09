@@ -14,7 +14,7 @@ import FiltersBox from './components/Filters/Box';
 import { getSortItems } from './components/Filters/Sorter';
 import MemberCard from './components/MemberCard';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title } = Typography;
 const DEFAULT_PAGE_SIZE = 25;

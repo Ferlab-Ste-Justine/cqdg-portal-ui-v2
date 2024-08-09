@@ -4,7 +4,7 @@ import DragHandle from '@ferlab/ui/core/layout/SortableGrid/DragHandle';
 import { Popover, PopoverProps, Space, Typography } from 'antd';
 import cx from 'classnames';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 // TODO: Move this comoponent in ferlab with GridCard V2
 

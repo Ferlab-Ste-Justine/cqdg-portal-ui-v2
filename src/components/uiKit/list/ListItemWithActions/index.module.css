@@ -1,0 +1,25 @@
+.listItemWithActions {
+  align-items: baseline;
+}
+.listItemWithActions .filterLink {
+  padding: 0;
+  height: unset;
+  color: var(--gray-8);
+}
+.listItemWithActions:hover .setLink {
+  text-decoration: underline;
+}
+.listItemWithActions:hover .setLink:hover {
+  color: var(--gray-8);
+  text-decoration: none;
+}
+.listItemWithActions:hover .extra {
+  display: none;
+}
+.listItemWithActions .itemMeta {
+  margin-bottom: 0px;
+}
+.listItemWithActions .actionBtn:hover,
+.listItemWithActions .actionBtn:focus {
+  background-color: transparent;
+}

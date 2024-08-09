@@ -6,7 +6,7 @@ import { IFileEntity } from 'graphql/files/models';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
-import styles from 'views/FileEntity/index.module.scss';
+import styles from 'views/FileEntity/index.module.css';
 
 const getExperimentalProcedureDescriptions = (file?: IFileEntity): IEntityDescriptionsItem[] => [
   {

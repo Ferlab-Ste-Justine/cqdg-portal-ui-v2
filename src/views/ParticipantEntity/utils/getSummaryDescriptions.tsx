@@ -7,7 +7,7 @@ import { IParticipantEntity } from 'graphql/participants/models';
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getSummaryDescriptions = (participant?: IParticipantEntity): IEntityDescriptionsItem[] => [
   {

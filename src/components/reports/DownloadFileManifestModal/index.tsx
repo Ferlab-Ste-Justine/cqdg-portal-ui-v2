@@ -14,7 +14,7 @@ import { getDocLang } from 'utils/doc';
 
 import FilesTable from './FilesTable';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text } = Typography;
 

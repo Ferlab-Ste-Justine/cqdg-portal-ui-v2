@@ -51,7 +51,7 @@ import { getProTableDictionary } from 'utils/translation';
 
 import { GnomadCircle, renderClinvar, renderOmim } from './utils';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const isNumber = (n?: number) => n && !Number.isNaN(n);
 
