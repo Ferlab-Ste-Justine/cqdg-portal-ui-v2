@@ -9,6 +9,8 @@ import { ageCategoriesKeyLabel } from 'graphql/participants/models';
 
 import { IUserSetOutput } from 'services/api/savedSet/models';
 
+import { SET_FILTER_NAME_REGEX } from '../common/constants';
+
 export const getEntityConsequenceDictionary = () => ({
   consequence: intl.get('entities.variant.consequences.consequence'),
   impactTag: {
@@ -161,6 +163,10 @@ export const getQueryBuilderDictionary = (
     form: {
       error: {
         fieldRequired: intl.get('global.forms.errors.requiredField'),
+      },
+      pattern: {
+        message: intl.get('components.querybuilder.pattern'),
+        regex: SET_FILTER_NAME_REGEX,
       },
     },
     popupConfirm: {

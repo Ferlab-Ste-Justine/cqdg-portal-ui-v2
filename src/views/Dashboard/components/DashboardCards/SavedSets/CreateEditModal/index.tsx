@@ -6,7 +6,7 @@ import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Form, Input, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 
-import { MAX_TITLE_LENGTH } from 'common/constants';
+import { MAX_TITLE_LENGTH, SET_FILTER_NAME_REGEX } from 'common/constants';
 import filtersToName from 'common/sqonToName';
 import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
@@ -179,6 +179,16 @@ const CreateEditModal = ({
               type: 'string',
               required: true,
               message: intl.get('global.forms.errors.requiredField'),
+              validateTrigger: 'onSubmit',
+            },
+            {
+              type: 'string',
+              message: (
+                <span>
+                  <WarningFilled /> {intl.get('components.querybuilder.pattern')}
+                </span>
+              ),
+              pattern: SET_FILTER_NAME_REGEX,
               validateTrigger: 'onSubmit',
             },
           ]}

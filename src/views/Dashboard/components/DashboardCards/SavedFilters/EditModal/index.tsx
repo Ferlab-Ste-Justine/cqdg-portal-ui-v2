@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { WarningFilled } from '@ant-design/icons';
 import { Form, Input, Modal } from 'antd';
 
-import { MAX_TITLE_LENGTH } from 'common/constants';
+import { MAX_TITLE_LENGTH, SET_FILTER_NAME_REGEX } from 'common/constants';
 import { TUserSavedFilter } from 'services/api/savedFilter/models';
 import { updateSavedFilter } from 'store/savedFilter/thunks';
 
@@ -71,6 +71,16 @@ const EditModal = ({ visible = false, onCancel, filter }: OwnProps) => {
                   type: 'string',
                   required: true,
                   message: intl.get('global.forms.errors.requiredField'),
+                  validateTrigger: 'onSubmit',
+                },
+                {
+                  type: 'string',
+                  message: (
+                    <span>
+                      <WarningFilled /> {intl.get('components.querybuilder.pattern')}
+                    </span>
+                  ),
+                  pattern: SET_FILTER_NAME_REGEX,
                   validateTrigger: 'onSubmit',
                 },
               ]}

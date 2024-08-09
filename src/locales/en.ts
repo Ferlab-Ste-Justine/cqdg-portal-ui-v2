@@ -762,6 +762,7 @@ const en = {
           description: 'You are about to delete all your queries. They will be lost forever.',
         },
       },
+      pattern: 'Permitted characters: ((A-Z, a-z, 0-9) ()[]-_:|.,)',
     },
     savedSets: {
       modal: {
