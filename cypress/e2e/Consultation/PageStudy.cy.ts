@@ -117,7 +117,7 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
   it('Panneau Files', () => {
     cy.get('[id="data_file"]').find('[class*="EntityTable_title"]').contains('Data File').should('exist');
     cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('Data Files').should('exist');
-    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(2940)').should('exist');
+    cy.get('[id="data_file"]').find('[class="ant-collapse-header"]').contains('(2,940)').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_subTitle"]').eq(0).contains('File counts by Data Type').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(0).find('thead').find('th[class="ant-table-cell"]').eq(0).contains('Data Type').should('exist');
     cy.get('[id="data_file"]').find('[class*="EntityTable_contentTable"]').eq(0).find('thead').find('th[class="ant-table-cell"]').eq(1).contains('Files').should('exist');
