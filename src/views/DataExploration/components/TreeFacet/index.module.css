@@ -1,64 +1,72 @@
-.hpoTransfer div[class$='transfer-list'] {
+.transfer div[class$='transfer-list'] {
   flex: 1 1 50%;
   width: auto;
   height: auto;
   min-height: 600px;
 }
-.hpoTransfer div[class$='transfer-list'] .highlight {
+
+.transfer div[class$='transfer-list'] .highlight {
   background-color: yellow;
   display: inherit;
 }
-.hpoTransfer div[class$='transfer-list'] div[class$='-list-body-customize-wrapper'] {
+
+.transfer div[class$='transfer-list'] div[class$='-list-body-customize-wrapper'] {
   height: 100%;
 }
-.hpoTransfer
+
+.transfer
   div[class$='transfer-list']
   div[class$='-list-body-customize-wrapper']
   div[class^='ant-spin-'] {
   height: 100%;
 }
-.hpoTransfer div[class$='transfer-list']:last-child div[class$='-list-body-search-wrapper'] {
+
+.transfer div[class$='transfer-list']:last-child div[class$='-list-body-search-wrapper'] {
   display: none;
 }
 
-.hpoTransfer li[class$='-list-content-item'] span[class$='-list-content-item-text'] {
+.transfer li[class$='-list-content-item'] span[class$='-list-content-item-text'] {
   flex: unset;
 }
 
-.hpoTransfer li[class$='-list-content-item'] div[class$='-list-content-item-remove'] {
+.transfer li[class$='-list-content-item'] div[class$='-list-content-item-remove'] {
   color: var(--gray-8);
 }
 
-.hpoTransfer :global(.ant-tree-list-holder-inner) {
+.transfer :global(.ant-tree-list-holder-inner) {
   display: block !important;
 }
 
-.hpoTransfer :global(.ant-tree-treenode) {
+.transfer :global(.ant-tree-treenode) {
   width: 100%;
 }
 
-.hpoTransfer :global(.ant-tree-node-content-wrapper) {
+.transfer :global(.ant-tree-node-content-wrapper) {
   width: 100%;
   display: block;
 }
 
-.hpoTransfer :global(.ant-tree-title) {
+.transfer :global(.ant-tree-title) {
   display: block;
   width: 100%;
 }
 
-.hpoTransfer .phenotypeTreeCountTag {
+.transfer .phenotypeTreeCountTag {
   display: flex;
   justify-content: center;
 }
 
-.hpoTransfer .phenotypeTreeHeader {
+.transfer .phenotypeTreeHeader {
   padding-right: 4px;
   margin-bottom: 12px;
 }
 
-.hpoTreeModalWrapper .hpoTreeModal {
+.treeModalWrapper .treeModal {
   width: 90% !important;
+}
+
+.treeModalFooter {
+  display: inline-flex;
 }
 
 .treeNodeTitle {

@@ -203,46 +203,48 @@ const TreeFacetModal = ({ type, modalField, queryBuilderField, titleFormatter }:
   return (
     <Modal
       open={visible}
-      wrapClassName={styles.hpoTreeModalWrapper}
-      className={styles.hpoTreeModal}
+      wrapClassName={styles.treeModalWrapper}
+      className={styles.treeModal}
       title={intl.get(`screen.dataExploration.${type}.modal.title`)}
-      footer={[
-        <Button key="back" onClick={handleCancel}>
-          {intl.get(`screen.dataExploration.${type}.modal.cancelText`)}
-        </Button>,
-        <Dropdown.Button
-          key="treeFacet-footer-dropdown-button"
-          type="primary"
-          menu={{
-            onClick: (e) => handleOnApply(e.key as TermOperators),
-            items: [
-              {
-                key: TermOperators.in,
-                label: intl.get('global.filters.operators.anyOf'),
-              },
-              {
-                key: TermOperators.all,
-                label: intl.get('global.filters.operators.allOf'),
-              },
-              {
-                key: TermOperators['some-not-in'],
-                label: intl.get('global.filters.operators.noneOf'),
-              },
-            ],
-          }}
-          style={{ marginLeft: '8px' }}
-          onClick={() => handleOnApply(TermOperators.in)}
-        >
-          {intl.get(`screen.dataExploration.${type}.modal.okText`)}
-        </Dropdown.Button>,
-      ]}
+      footer={
+        <div className={styles.treeModalFooter}>
+          <Button key="back" onClick={handleCancel}>
+            {intl.get(`screen.dataExploration.${type}.modal.cancelText`)}
+          </Button>
+          <Dropdown.Button
+            key="treeFacet-footer-dropdown-button"
+            type="primary"
+            menu={{
+              onClick: (e) => handleOnApply(e.key as TermOperators),
+              items: [
+                {
+                  key: TermOperators.in,
+                  label: intl.get('global.filters.operators.anyOf'),
+                },
+                {
+                  key: TermOperators.all,
+                  label: intl.get('global.filters.operators.allOf'),
+                },
+                {
+                  key: TermOperators['some-not-in'],
+                  label: intl.get('global.filters.operators.noneOf'),
+                },
+              ],
+            }}
+            style={{ marginLeft: '8px' }}
+            onClick={() => handleOnApply(TermOperators.in)}
+          >
+            {intl.get(`screen.dataExploration.${type}.modal.okText`)}
+          </Dropdown.Button>
+        </div>
+      }
       okButtonProps={{ disabled: isEmpty(targetKeys) && isEmpty(treeData) }}
       onOk={() => handleOnApply()}
       onCancel={handleCancel}
       data-cy={`TreeFacet_Modal_${type}`}
     >
       <Transfer<TreeNode>
-        className={styles.hpoTransfer}
+        className={styles.transfer}
         showSearch={!isEmpty(treeData)}
         targetKeys={targetKeys}
         selectedKeys={[]}
