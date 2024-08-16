@@ -16,7 +16,7 @@ import { STATIC_ROUTES } from 'utils/routes';
 import { userColumnPreferencesOrDefault } from 'utils/tables';
 import { getProTableDictionary } from 'utils/translation';
 
-import styles from 'views/FileEntity/index.module.scss';
+import styles from 'views/FileEntity/index.module.css';
 
 interface IFamilyTableProps {
   participant?: IParticipantEntity;

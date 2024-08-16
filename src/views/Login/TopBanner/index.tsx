@@ -11,7 +11,7 @@ import { globalActions, useLang } from 'store/global';
 import { updateUser } from 'store/user/thunks';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const TopBanner = () => {
   const { keycloak } = useKeycloak();

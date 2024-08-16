@@ -1,0 +1,9 @@
+.dataTypeLink {
+  color: inherit;
+}
+.dataTypeLink:hover {
+  color: inherit;
+}
+.dataTypeLink svg {
+  margin-left: 4px;
+}

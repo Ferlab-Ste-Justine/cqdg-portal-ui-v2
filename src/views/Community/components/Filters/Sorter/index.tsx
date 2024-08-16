@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export const getSortItems = () => [
   {

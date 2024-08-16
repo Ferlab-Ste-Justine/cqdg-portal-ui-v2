@@ -6,7 +6,7 @@ import capitalize from 'lodash/capitalize';
 
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[] => [
   {

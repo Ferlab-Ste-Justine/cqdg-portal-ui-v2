@@ -1,0 +1,71 @@
+.mainHeader {
+  height: var(--main-header-height);
+  background-color: var(--gray-1) !important;
+  box-shadow: 0 0 8px 0 rgba(38, 67, 111, 0.25);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.mainHeader .logo {
+  margin-right: 10px;
+}
+.mainHeader .tagBeta {
+  padding: 1px 8px 1px 8px;
+}
+.mainHeader .headerNavList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.mainHeader .langButton {
+  border: none;
+  margin-left: 8px;
+}
+.mainHeader div[class$='-header-heading'] {
+  width: 100%;
+}
+.mainHeader span[class$='-header-heading-extra'] {
+  display: flex;
+  align-items: center;
+}
+.mainHeader .headerBtn {
+  border: none;
+  padding: 4px 8px;
+  margin: 2px 5px;
+}
+.mainHeader .headerBtn:hover,
+.mainHeader .headerBtn:focus {
+  background-color: var(--gray-3);
+}
+.mainHeader .headerBtnActive {
+  background-color: var(--gray-4) !important;
+}
+.mainHeader .icon path {
+  fill: var(--gray-8);
+}
+.mainHeader .menuTrigger {
+  cursor: pointer;
+  color: var(--gray-8);
+  display: flex;
+  align-items: center;
+}
+.mainHeader .menuTrigger .userAvatar {
+  margin: 5px 8px;
+}
+.mainHeader .menuTrigger .userName {
+  margin-right: 5px;
+}
+.mainHeader .iconSvg {
+  vertical-align: sub;
+}
+
+.siteWideBanner {
+  z-index: 1001;
+}
+
+.titleUserDropdown {
+  font-size: 12px;
+  color: var(--gray-8);
+}

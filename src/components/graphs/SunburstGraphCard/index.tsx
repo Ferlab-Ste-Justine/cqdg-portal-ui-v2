@@ -55,7 +55,7 @@ const SunburstGraphCard = ({
     <ResizableGridCard
       gridUID={gridUID}
       id={id}
-      dictionary={getResizableGridDictionary()}
+      dictionary={getResizableGridDictionary().download}
       theme="shade"
       loading={false}
       headerTitle={intl.get(`screen.dataExploration.tabs.summary.${field}.cardTitle`)}

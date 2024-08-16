@@ -11,14 +11,14 @@ export interface Replacement {
 Cypress.Commands.add('checkValueFacetAndApply', (facetTitle: string, value: string) => {
   cy.get(`[aria-expanded="true"] [data-cy="FilterContainer_${facetTitle}"]`).should('exist');
   cy.waitWhileSpin(oneMinute);
-  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__8Dsbs')
     .find('button').then(($button) => {
     if ($button.hasClass('ant-btn-link')) {
-      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
+      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__8Dsbs')
         .find('button[class*="CheckboxFilter_filtersTypesFooter"]').clickAndWait({force: true});
     };
   });
- 
+
   cy.get(`[data-cy="Checkbox_${facetTitle}_${value}"]`).check({force: true});
   cy.clickAndIntercept(`[data-cy="Apply_${facetTitle}"]`, 'POST', '**/graphql', 3);
 });
@@ -26,10 +26,10 @@ Cypress.Commands.add('checkValueFacetAndApply', (facetTitle: string, value: stri
 Cypress.Commands.add('checkValueFacet', (facetTitle: string, value: string) => {
   cy.get(`[aria-expanded="true"] [data-cy="FilterContainer_${facetTitle}"]`).should('exist');
   cy.waitWhileSpin(1000);
-  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
+  cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__8Dsbs')
     .find('button').then(($button) => {
     if ($button.hasClass('ant-btn-link')) {
-      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__O6v-O')
+      cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__8Dsbs')
         .find('button[class*="CheckboxFilter_filtersTypesFooter"]').clickAndWait({force: true});
       };
   });
@@ -423,7 +423,7 @@ Cypress.Commands.add('visitDashboard', () => {
 Cypress.Commands.add('visitDataExploration', (tab?: string, sharedFilterOption?: string) => {
   const strTab = tab !== undefined ? tab : '';
   const strSharedFilterOption = sharedFilterOption !== undefined ? sharedFilterOption : '';
-  
+
   cy.visitAndIntercept(`/data-exploration/${strTab}${strSharedFilterOption}`,
                        'POST',
                        '**/graphql',

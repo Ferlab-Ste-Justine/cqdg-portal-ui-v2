@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import sd4hLogo from 'components/assets/sd4h.png';
 import { SUPPORT_EMAIL } from 'store/report/thunks';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const SecureData = () => (
   <div className={styles.container}>

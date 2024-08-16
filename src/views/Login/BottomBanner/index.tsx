@@ -7,7 +7,7 @@ import EnvVariables from 'helpers/EnvVariables';
 
 import { getDocLang } from 'utils/doc';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const BottomBanner = () => (
   <div className={styles.bottomBanner}>

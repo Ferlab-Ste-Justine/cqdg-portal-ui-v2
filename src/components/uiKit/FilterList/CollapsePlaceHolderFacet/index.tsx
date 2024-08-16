@@ -1,7 +1,7 @@
 import Collapse, { CollapsePanel } from '@ferlab/ui/core/components/Collapse';
 import cx from 'classnames';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface ICollapsePlaceHolderFacetProps {
   className?: string;

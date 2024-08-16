@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import cx from 'classnames';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 interface IHeaderLinkProps {
   className?: string;

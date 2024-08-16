@@ -12,7 +12,7 @@ import { IUserOptions } from 'services/api/user/models';
 
 import Sorter from '../Sorter';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface IFiltersBoxProps {
   onMatchFilterChange: (value: string) => void;

@@ -4,7 +4,7 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Alert } from 'antd';
 
 import { MAX_ITEMS_QUERY } from 'common/constants';
-import styles from 'components/reports/DownloadRequestAccessModal/index.module.scss';
+import styles from 'components/reports/DownloadRequestAccessModal/index.module.css';
 
 const TooMuchFilesAlert = ({ marginTop = 30 }) => (
   <Alert

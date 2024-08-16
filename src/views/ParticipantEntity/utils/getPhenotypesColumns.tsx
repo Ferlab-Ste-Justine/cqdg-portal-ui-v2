@@ -15,7 +15,7 @@ import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IProColumnExport } from 'common/types';
 import { STATIC_ROUTES } from 'utils/routes';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const ParticipantsPhenotypesCount = ({ phenotypeName }: { phenotypeName: string }) => {
   const { loading, total } = useParticipantsFromField({

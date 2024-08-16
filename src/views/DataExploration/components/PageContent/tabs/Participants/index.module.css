@@ -1,0 +1,17 @@
+.participantTabWrapper {
+  display: flex;
+}
+.participantTabWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+.participantTabWrapper .diagnosisCell,
+.participantTabWrapper .phenotypeCell {
+  min-width: 180px;
+}
+.participantTabWrapper .studyIdCell {
+  min-width: 85px;
+}
+
+.tooltip {
+  border-bottom: 1px dotted;
+}

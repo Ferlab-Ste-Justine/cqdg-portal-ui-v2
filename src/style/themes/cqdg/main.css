@@ -1,0 +1,108 @@
+:root {
+  --font-weight-semibold: 500;
+  --font-weight-bold: 600;
+
+  /*Query Builder*/
+  --query-default-action-default-color: var(--gray-8);
+  --query-default-action-hover-color: var(--gray-8);
+  --query-default-action-focus-color: var(--gray-8);
+
+  --query-builder-header-tools-icon-color: var(--gray-8);
+  --query-builder-header-tools-icon-hover: var(--gray-8);
+  --query-builder-header-tools-icon-focus: var(--gray-8);
+  --query-builder-header-tools-icon-color-dirty: var(--orange-7);
+
+  --query-builder-bg: var(--gray-1);
+  --query-builder-border-color: var(--gray-4);
+  --query-builder-header-border-divider-color: var(--gray-4);
+
+  --query-bar-bg: var(--gray-2);
+  --query-bar-bg-active: var(--blue-2);
+  --query-bar-border-color: var(--gray-4);
+  --query-bar-border-color-active: var(--blue-4);
+
+  --query-bar-identifier: var(--gray-6);
+  --query-bar-identifier-active: var(--blue-6);
+
+  --query-pill-bg: var(--gray-4);
+  --query-pill-bg-active: var(--blue-3);
+  --query-pill-button-default-color: var(--gray-8);
+  --query-pill-button-hover-color: var(--gray-8);
+  --query-pill-button-focus-color: var(--gray-8);
+
+  --query-icon-operator-color: var(--gray-8);
+  --query-text-operator-color-hover: var(--gray-8);
+  --query-icon-operator-color-hover: var(--gray-8);
+  --query-icon-label-operator-color: var(--gray-8);
+
+  --query-combiner-button-default-color: var(--gray-8);
+  --query-combiner-button-hover-color: var(--gray-8);
+  --query-combiner-button-focus-color: var(--gray-8);
+
+  /*Filters*/
+  --checkbox-filter-actions-separator-links: var(--blue-8);
+  --filter-actions-border-color: var(--gray-4);
+
+  /*SidebarMenu*/
+  --sidebar-login-width: 573px;
+  --sidebar-menu-width: 180px;
+  --sidebar-menu-collapsed-width: 50px;
+  --sidebar-menu-background-color: var(--blue-8);
+  --sidebar-menu-toggle-icon-size: 21px;
+
+  --sidebar-menu-item-icon-size: 22px;
+  --sidebar-menu-item-height: 50px;
+  --sidebar-menu-item-text-color: var(--gray-1);
+  --sidebar-menu-item-active-background-color: var(--blue-9);
+  --sidebar-menu-item-active-color: var(--gray-1);
+  --sidebar-menu-item-hover-color: var(--gray-1);
+  --sidebar-menu-item-hover-opacity: 0.8;
+  --sidebar-menu-item-border-focus: none;
+  --sidebar-menu-item-border-focus-color: var(--gray-1);
+
+  --sidebar-quick-filter-input-box-shadow-hover: 0 0 0 2px var(--blue-8);
+  --sidebar-quick-filter-input-box-shadow-focus: 0 0 0 2px var(--gray-8), 0 0 0 3px var(--gray-1);
+  --sidebar-quick-filter-input-placeholder-color: var(--gray-6);
+  --sidebar-quick-filter-input-text-color: var(--gray-8);
+
+  --sidebar-content-panel-padding: 16px;
+  --sidebar-content-panel-width: 320px;
+  --sidebar-content-panel-close-icon-color: var(--gray-8);
+  --sidebar-content-panel-right-border: 1px solid var(--gray-5);
+  --sidebar-content-panel-background-color: transparent;
+  --sidebar-content-panel-close-icon-width: 16px;
+
+  --grid-card-light-background-color: white;
+  --grid-card-shade-background-color: var(--gray-2);
+
+  /*EMPTY*/
+  --empty-image-color: var(--gray-5);
+  --empty-content-color: var(--gray-7);
+
+  /*Collapse*/
+  --collapse-light-background-color: white;
+  --collapse-shade-background-color: var(--gray-3);
+  --collapse-header-border-color: var(--gray-4);
+
+  /*ProLabel*/
+  --prolabel-required-mark-color: var(--red-8);
+
+  /*UploadIds*/
+  --file-upload-item-color: var(--blue-8);
+
+  /*LandingPage*/
+  --landing-card-gradient: linear-gradient(343deg, #008fc7 23.91%, #016195 102.01%);
+  --landing-text-color: var(--gray-1);
+  --landing-text-icon-color-light: var(--gray-1);
+  --landing-text-icon-color-dark: var(--gray-8);
+  --landing-spot-icon-color-light: var(--blue-7);
+  --landing-spot-icon-color-dark: var(--blue-3);
+
+  --default-padding: 24px;
+  --default-page-content-padding: 16px 24px;
+  --main-header-height: 64px;
+}
+
+html {
+  font-size: 12px;
+}

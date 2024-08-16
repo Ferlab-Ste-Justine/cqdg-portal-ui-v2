@@ -8,7 +8,7 @@ import { extractNcitTissueTitleAndCode } from 'views/DataExploration/utils/helpe
 import { TABLE_EMPTY_PLACE_HOLDER } from 'common/constants';
 import { IProColumnExport } from 'common/types';
 
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const getDiagnosesColumns = (): IProColumnExport[] => [
   {

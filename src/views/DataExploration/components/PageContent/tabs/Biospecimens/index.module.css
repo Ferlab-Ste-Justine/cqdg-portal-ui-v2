@@ -1,0 +1,13 @@
+.biospecimenTabWrapper {
+  display: flex;
+}
+.biospecimenTabWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}
+.biospecimenTabWrapper .ncitTissueCell {
+  min-width: 300px;
+}
+
+.tooltip {
+  border-bottom: 1px dotted;
+}

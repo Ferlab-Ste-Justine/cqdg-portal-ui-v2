@@ -13,7 +13,7 @@ import { FilterInfo } from 'components/uiKit/FilterList/types';
 
 import { STUDIES_EXPLORATION_QB_ID } from '../../utils/constant';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 interface ISideBarFacetProps {
   className?: string;

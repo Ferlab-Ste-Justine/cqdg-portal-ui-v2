@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+}
+
+.logo {
+  width: 130px;
+  height: 54px;
+  object-position: -16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 32px;
+  color: var(--gray-9);
+}
+
+.text {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-8);
+}
+
+@media (min-width: 800px) and (max-width: 1024px) {
+  .container {
+    padding: 40px 40px 0;
+  }
+}

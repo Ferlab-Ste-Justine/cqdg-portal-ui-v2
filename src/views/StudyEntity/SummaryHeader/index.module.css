@@ -1,0 +1,50 @@
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 8px 0 16px 0;
+}
+.buttonGroup .button {
+  display: flex;
+  padding: 8px 16px;
+  height: 48px;
+}
+.buttonGroup .button .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+.buttonGroup .button .link .alignBaseline {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.buttonGroup .button .link .icon {
+  font-size: 21px;
+  color: var(--gray-9);
+}
+.buttonGroup .button .link .count {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--gray-9);
+  padding-left: 4px;
+}
+.buttonGroup .button .link .name {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--gray-7);
+}
+.buttonGroup .buttonDisabled {
+  background-color: var(--gray-3);
+  color: var(--gray-7);
+}
+.buttonGroup .disableHover {
+  cursor: inherit;
+}
+.buttonGroup .disableHover:hover {
+  background-color: inherit;
+}

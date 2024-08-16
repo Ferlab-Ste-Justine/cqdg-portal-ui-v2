@@ -18,7 +18,7 @@ import { getDocLang } from 'utils/doc';
 
 import ListItem from './ListItem';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text } = Typography;
 

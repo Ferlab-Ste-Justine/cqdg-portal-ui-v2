@@ -5,7 +5,7 @@ import { Typography } from 'antd';
 
 import { getCommonColors } from 'common/charts';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 type OwnProps = Omit<BarSvgProps<BarDatum>, 'width' | 'height'> & {
   title?: string;

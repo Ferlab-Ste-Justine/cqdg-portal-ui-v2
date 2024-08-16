@@ -1,0 +1,8 @@
+.studyTabWrapper {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+}
+.studyTabWrapper :global(.ant-pagination) {
+  margin-bottom: 0;
+}

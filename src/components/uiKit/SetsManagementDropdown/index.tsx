@@ -28,7 +28,7 @@ import AddRemoveSaveSetModal from 'components/uiKit/SetsManagementDropdown/AddRe
 import { SetType } from 'services/api/savedSet/models';
 import { useSavedSet } from 'store/savedSet';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export enum SetActionType {
   RENAME_TAG = 'RENAME_TAG',

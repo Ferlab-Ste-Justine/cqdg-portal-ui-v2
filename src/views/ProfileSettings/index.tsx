@@ -13,7 +13,7 @@ import IdentificationCard from './cards/Identification';
 import ResearchDomainCard from './cards/ResearchDomain';
 import RoleAndAffiliationCard from './cards/RoleAndAffiliation';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Title } = Typography;
 

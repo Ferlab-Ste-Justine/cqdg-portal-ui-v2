@@ -1,0 +1,7 @@
+.popoverContentLink {
+  padding: 0;
+}
+.popoverContentLink,
+.popoverContentLink:hover {
+  color: var(--gray-8);
+}

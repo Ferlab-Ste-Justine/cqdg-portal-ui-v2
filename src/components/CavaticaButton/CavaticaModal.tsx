@@ -16,7 +16,7 @@ import { fetchCavaticaManifest } from 'store/report/thunks';
 
 import FilesTable from './FilesTable';
 
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 const { Text } = Typography;
 
