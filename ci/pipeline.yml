@@ -1,14 +1,23 @@
 groups:
   - name: portal-ui-cypress
     jobs:
-      - run-cypress-tests-parallel  
-
+      - run-cypress-tests  
+  - name: update-pipeline
+    jobs:
+      - update-pipeline
 resource_types:
 - name: time
   type: registry-image
   source:
     repository: concourse/time-resource
-    
+
+- name: git
+  type: registry-image
+  source:
+    repository: concourse/git-resource
+    username: ((docker.username))
+    password: ((docker.password))
+
 - name: slack-notification
   type: docker-image
   source:
@@ -24,7 +33,7 @@ resources:
   check_every: 30s
   source:
     interval: 24h
-    start: "09:00 AM"
+    start: "02:00 AM"
     stop: "04:30 AM"
     location: "America/Toronto"
     days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
@@ -51,13 +60,21 @@ resources:
   webhook_token: ((slack.webhook-url))
   source:
     uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
-    branch: fix/cypress
+    branch: main
     private_key: ((git.ssh-key))
     # ignore_paths: [ci/]
 
+- name: ci-folder
+  type: git
+  check_every: 30s
+  source:
+    uri: git@github.com:Ferlab-Ste-Justine/cqdg-portal-ui.git
+    branch: main
+    paths: [ci]
+    private_key: ((git.ssh-key))
+
 jobs:
-# Cypress
-- name: run-cypress-tests-parallel
+- name: run-cypress-tests
   plan:
   - get: daily-schedule
     trigger: true
@@ -65,12 +82,11 @@ jobs:
     trigger: false
     params:
       submodule_recursive: true
-
   - in_parallel:
       fail_fast: false
       steps:
-
       - task: cypress-parallel-1
+        attempts: 6
         config:
           platform: linux
           image_resource:
@@ -81,7 +97,8 @@ jobs:
           inputs:
             - name: git-portal-ui
           outputs:
-            - name: test-results-1
+            - name: test-results
+            - name: timestamp
           params:
             CYPRESS_PASSWORD: ((cypress.password))
           run:
@@ -90,146 +107,44 @@ jobs:
               - -c
               - |
                 set +e 
+                # Navigate to the project directory
                 pushd git-portal-ui
+
+                # Install dependencies
                 npm install
+
+                # Copy env-qa to .env
                 cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-1/results-[hash].xml" --spec "cypress/e2e/Colonnes/*,cypress/e2e/Consultation/L*,cypress/e2e/Requetes/*,cypress/e2e/UploadList/*"
+                
+                # Ensure a newline before appending the variables
+                echo "" >> .env
+                echo 'CYPRESS_USER_PASSWORD="'$CYPRESS_PASSWORD'"' >> .env
+                echo 'CYPRESS_USER_USERNAME="cypress"' >> .env
+
+                # Run Cypress tests
+                npx cypress run --config-file cypress.config.ts --config retries=5 --browser chrome --reporter junit --reporter-options "mochaFile=test-results/results-[hash].xml" --spec "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}"
                 
                 # Run only the first Cypress test
                 # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-1/results-[hash].xml" --spec "$FIRST_TEST"
+                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=test-results/results-[hash].xml" --spec "$FIRST_TEST"
              
-                popd
-                exit 0
+                # Generate a timestamp
+                TIMESTAMP=$(date +%Y%m%d%H%M%S)
+                echo $TIMESTAMP > ../timestamp/timestamp.txt
 
-      - task: cypress-parallel-2
-        config:
-          platform: linux
-          image_resource:
-            type: registry-image
-            source:
-              repository: ferlabcrsj/cypress-included-custom
-              tag: latest
-          inputs:
-            - name: git-portal-ui
-          outputs:
-            - name: test-results-2
-          params:
-            CYPRESS_PASSWORD: ((cypress.password))
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set +e 
-                pushd git-portal-ui
-                npm install
-                cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-2/results-[hash].xml" --spec "cypress/e2e/Navigation/*,cypress/e2e/Consultation/P*"
+                # Merge the XML files using junit-merge if results exist
+                if compgen -G "test-results/results-*.xml" > /dev/null; then
+                  npx junit-merge test-results/results-*.xml -o ../test-results/merged-results-${TIMESTAMP}.xml
+                else
+                  echo "No results to merge." > ../test-results/merged-results-${TIMESTAMP}.xml
+                fi
                 
-                # Run only the first Cypress test
-                # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-2/results-[hash].xml" --spec "$FIRST_TEST"
-             
                 popd
                 exit 0
-      - task: cypress-parallel-3
-        config:
-          platform: linux
-          image_resource:
-            type: registry-image
-            source:
-              repository: ferlabcrsj/cypress-included-custom
-              tag: latest
-          inputs:
-            - name: git-portal-ui
-          outputs:
-            - name: test-results-3
-          params:
-            CYPRESS_PASSWORD: ((cypress.password))
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set +e 
-                pushd git-portal-ui
-                npm install
-                cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "cypress/e2e/Facettes/*"
-
-                # Run only the first Cypress test
-                # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-3/results-[hash].xml" --spec "$FIRST_TEST"
-             
-                popd
-                exit 0
-      - task: cypress-parallel-4
-        config:
-          platform: linux
-          image_resource:
-            type: registry-image
-            source:
-              repository: ferlabcrsj/cypress-included-custom
-              tag: latest
-          inputs:
-            - name: git-portal-ui
-          outputs:
-            - name: test-results-4
-          params:
-            CYPRESS_PASSWORD: ((cypress.password))
-          run:
-            path: bash
-            args:
-              - -c
-              - |
-                set +e
-                pushd git-portal-ui
-                npm install
-                cp env-qa .env
-                sed -i 's/CYPRESS_PASSWORD=""/CYPRESS_PASSWORD="'$CYPRESS_PASSWORD'"/' .env
-                npx cypress run --config-file cypress.config.ts --config retries=9 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-4/results-[hash].xml" --spec "cypress/e2e/Telechargement/*,cypress/e2e/Consultation/T*"
-
-                # Run only the first Cypress test
-                # FIRST_TEST=$(ls cypress/e2e/**/*.cy.{js,jsx,ts,tsx} | head -n 1)
-                # npx cypress run --config-file cypress.config.ts --config retries=2 --browser chrome --reporter junit --reporter-options "mochaFile=../test-results-4/results-[hash].xml" --spec "$FIRST_TEST"
-             
-                popd
-                exit 0
-                
-  - task: merge-results
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source:
-          repository: ferlabcrsj/cypress-included-custom
-          tag: latest
-      inputs:
-        - name: test-results-1
-        - name: test-results-2
-        - name: test-results-3
-        - name: test-results-4
-      outputs:
-        - name: merged-results
-        - name: timestamp
-      run:
-        path: bash
-        args:
-          - -c
-          - |
-            set -e # Exit on error
-            mkdir -p merged-results
-            TIMESTAMP=$(date +%Y%m%d%H%M%S)
-            echo $TIMESTAMP > timestamp/timestamp.txt
-            npx junit-merge test-results-1/*.xml test-results-2/*.xml test-results-3/*.xml test-results-4/*.xml -o merged-results/merged-results-${TIMESTAMP}.xml
 
   - put: ceph-storage
     params:
-      file: merged-results/merged-results-*.xml
+      file: test-results/merged-results-*.xml
     no_get: true
 
   - task: generate-presigned-url
@@ -244,7 +159,7 @@ jobs:
           repository: ferlabcrsj/cypress-included-custom
           tag: latest
       inputs:
-        - name: merged-results
+        - name: test-results
         - name: timestamp
       outputs:
         - name: slack-data
@@ -259,10 +174,13 @@ jobs:
             TIMESTAMP=$(cat timestamp/timestamp.txt)
 
             # Check if the merged results file is not empty
-            if [ -s merged-results/merged-results-${TIMESTAMP}.xml ]; then
+            if [ -s test-results/merged-results-${TIMESTAMP}.xml ]; then
+              # Set AWS environment variables for credentials
+              export AWS_ACCESS_KEY_ID=$CEPH_ACCESS_KEY
+              export AWS_SECRET_ACCESS_KEY=$CEPH_SECRET_KEY
+
               # Generate a pre-signed URL
-              mc alias set myceph https://objets.juno.calculquebec.ca $ceph_ACCESS_KEY $MINIO_SECRET_KEY
-              PRESIGNED_URL=$(mc share download myminio/cqgc-qa-cypress-tests/test-results/merged-results-${TIMESTAMP}.xml --expire=48h | grep -oP '(?<=Share: ).*')
+              PRESIGNED_URL=$(aws --endpoint-url https://objets.juno.calculquebec.ca s3 presign s3://cqdg-qa-cypress-tests/test-results/merged-results-${TIMESTAMP}.xml --expires-in 172800)
 
               # Prepare Slack message for success
               echo '[
@@ -287,6 +205,9 @@ jobs:
     params:
       attachments_file: slack-data/attachments.json
 
-
-
-
+- name: update-pipeline
+  plan:
+    - get: ci-folder
+      trigger: true
+    - set_pipeline: self
+      file: ci-folder/ci/pipeline.yml
