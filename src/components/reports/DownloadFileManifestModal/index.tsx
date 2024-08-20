@@ -25,6 +25,8 @@ interface IDownloadFileManifestProps {
   hasTooManyFiles?: boolean;
   hasFamily?: boolean;
   isStudy?: boolean;
+  isDataset?: boolean;
+  fileName?: string;
 }
 
 const DownloadFileManifestModal = ({
@@ -34,20 +36,26 @@ const DownloadFileManifestModal = ({
   hasTooManyFiles,
   hasFamily = true,
   isStudy = false,
+  isDataset = false,
+  fileName = '',
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
 
+  const _fileName =
+    fileName || (isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST);
+
   const Content = () => (
     <Text>
       <p>
         {isStudy
           ? intl.get('api.report.fileManifest.textStudy')
+          : isDataset
+          ? intl.get('api.report.fileManifest.textDataset')
           : intl.get('api.report.fileManifest.text')}
       </p>
-      <p className={styles.subText}>{intl.get('api.report.fileManifest.subText')}</p>
     </Text>
   );
 
@@ -91,7 +99,7 @@ const DownloadFileManifestModal = ({
           dispatch(
             fetchReport({
               data: {
-                name: isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST,
+                name: _fileName,
                 sqon,
                 withFamily: isFamilyChecked,
               },

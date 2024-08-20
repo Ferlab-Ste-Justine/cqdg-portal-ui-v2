@@ -78,8 +78,10 @@ const Datasets = ({ id, loading, title, datasets, study_code = '' }: IDatasetsPr
             <div key="0" onClick={(e) => e.stopPropagation()} className={styles.titleExtra}>
               <DownloadFileManifestModal
                 sqon={getSqon(dataset.name)}
-                hasTooManyFiles={dataset?.file_count > MAX_ITEMS_QUERY}
+                hasTooManyFiles={dataset.file_count > MAX_ITEMS_QUERY}
                 isStudy
+                isDataset
+                fileName={`${dataset.name}_manifest`}
               />
               <EntityTableRedirectLink
                 key="1"

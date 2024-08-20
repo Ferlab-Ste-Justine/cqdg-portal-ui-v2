@@ -46,10 +46,10 @@ const generateReport = (config: ReportConfig) => {
   /** the quotes in string are required by format function, else it throws an error */
   const fileName = `'cqdg_${name}'_yyyyMMdd`;
   const fileNameFormatted = format(new Date(), fileName);
+  const route = config.withFamily ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST;
 
   return downloader({
-    // @ts-ignore
-    url: REPORTS_ROUTES[name],
+    url: REPORTS_ROUTES[route],
     method: 'POST',
     responseType: 'blob',
     data: {
