@@ -84,7 +84,6 @@ const Datasets = ({ id, loading, title, datasets, study_code = '' }: IDatasetsPr
                 fileName={`${dataset.name}_manifest`}
               />
               <EntityTableRedirectLink
-                key="1"
                 to={STATIC_ROUTES.DATA_EXPLORATION_DATAFILES}
                 icon={<ExternalLinkIcon width="14" />}
                 data-cy="Dataset_RedirectLink"
