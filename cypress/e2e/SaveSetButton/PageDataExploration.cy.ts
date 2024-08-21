@@ -25,6 +25,7 @@ describe('Page Data Exploration (Participants) - Bouton Save set', () => {
     cy.get('div[role="tabpanel"] [class*="ant-table-row"]').eq(0).find('[type="checkbox"]').check({force: true});
     cy.get('[id="Participant-set-dropdown-container"] button').clickAndWait({force: true});
     cy.get('[class="ant-dropdown-menu-title-content"] [data-icon="info-circle"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
+    cy.wait(1000);
 
     cy.get('[class="ant-tooltip-inner"]').should('not.have.class', 'ant-tooltip-hidden');
     cy.get('[class="ant-tooltip-inner"]').contains('Max. 2,000 items at a time. The first 2,000 will be processed.').should('exist');
@@ -107,6 +108,7 @@ describe('Page Data Exploration (Biospecimens) - Bouton Save set', () => {
     cy.get('div[role="tabpanel"] [class*="ant-table-row"]').eq(0).find('[type="checkbox"]').check({force: true});
     cy.get('[id="Biospecimen-set-dropdown-container"] button').clickAndWait({force: true});
     cy.get('[class="ant-dropdown-menu-title-content"] [data-icon="info-circle"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
+    cy.wait(1000);
 
     cy.get('[class="ant-tooltip-inner"]').should('not.have.class', 'ant-tooltip-hidden');
     cy.get('[class="ant-tooltip-inner"]').contains('Max. 2,000 items at a time. The first 2,000 will be processed.').should('exist');
@@ -189,6 +191,7 @@ describe('Page Data Exploration (Data Files) - Bouton Save set', () => {
     cy.get('div[role="tabpanel"] [class*="ant-table-row"]').eq(0).find('[type="checkbox"]').check({force: true});
     cy.get('[id="File-set-dropdown-container"] button').clickAndWait({force: true});
     cy.get('[class="ant-dropdown-menu-title-content"] [data-icon="info-circle"]').trigger('mouseover', {eventConstructor: 'MouseEvent', force: true});
+    cy.wait(1000);
 
     cy.get('[class="ant-tooltip-inner"]').should('not.have.class', 'ant-tooltip-hidden');
     cy.get('[class="ant-tooltip-inner"]').contains('Max. 2,000 items at a time. The first 2,000 will be processed.').should('exist');

@@ -264,6 +264,7 @@ Cypress.Commands.add('typeAndIntercept', (selector: string, text: string, method
   };
 
   cy.waitWhileSpin(oneMinute);
+  cy.wait(1000);
 });
 
 Cypress.Commands.add('validateClearAllButton', (shouldExist: boolean) => {
@@ -376,6 +377,7 @@ Cypress.Commands.add('validateSelectedFilterInDropdown', (filterName: string) =>
 
 Cypress.Commands.add('validateTableFirstRow', (expectedValue: string|RegExp, eq: number, hasCheckbox: boolean = false) => {
   cy.get('.ant-spin-container').should('not.have.class', 'ant-spin-blur', {timeout: 5*1000});
+  cy.wait(1000);
   cy.get('tr[class*="ant-table-row"]').eq(0)
   .then(($firstRow) => {
     cy.wrap($firstRow).find('td').eq(eq).contains(expectedValue).should('exist');
@@ -437,7 +439,7 @@ Cypress.Commands.add('visitFileEntity', (fileId: string) => {
   cy.visitAndIntercept(`/files/${fileId}`,
                        'POST',
                        '**/graphql',
-                       2);
+                       3);
 });
 
 Cypress.Commands.add('visitParticipantEntity', (participantId: string) => {
