@@ -108,6 +108,7 @@ export default function VariantEntity() {
           loading={loading}
           data={data ? getSummaryItems(data) : undefined}
           noDataLabel={intl.get('api.noDataAvailable')}
+          theme="basic-bordered"
         />
 
         <EntityNestedTable
