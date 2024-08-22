@@ -46,7 +46,7 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="Resources"]').clickAndWait({force: true});
     cy.get('[data-cy="HeaderLink_Documentation"]')
-      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-ca');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-CA');
   });
 
   it('Lien externe de la header - Download tool', () => {
@@ -76,7 +76,7 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="Resources"]').clickAndWait({force: true});
     cy.get('[data-cy="ExternalLink_DataRelease"]')
-      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-ca');
+      .should('have.attr', 'href', 'https://docs.cqdg.ca?ljs=en-CA');
   });
 
   it('Redirections de la page Dashboard', () => {
