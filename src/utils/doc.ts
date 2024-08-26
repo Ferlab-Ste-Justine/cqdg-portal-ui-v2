@@ -9,7 +9,7 @@ export const getDocLang = () => {
     case LANG.FR:
       return '?ljs=fr';
     case LANG.EN:
-      return '?ljs=en-ca';
+      return '?ljs=en-CA';
     default:
       return '';
   }

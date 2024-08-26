@@ -43,7 +43,9 @@ const DataExplorationLinks = () => {
           title={intl.get('components.dataRelease.dataExploration')}
           extra={[
             <ExternalLink
-              href={EnvVariables.configFor('CQDG_DOCUMENTATION') + getDocLang()}
+              href={`${EnvVariables.configFor(
+                'CQDG_DOCUMENTATION',
+              )}/changelog/data-release-1${getDocLang()}`}
               key="data-release"
               data-cy="ExternalLink_DataRelease"
             >
