@@ -31,3 +31,8 @@ jobs:
 
       - name: Validate Pipeline
         run: ./fly vp -c ci/pipeline.yml --enable-across-step
+      - name: Configure Fly CLI
+        run: |
+          ./fly -t main login -c  https://build.qa.juno.cqdg.ferlab.bio --username ${{ secrets.CQDG_QA_CONCOURSE_USERNAME }} --password ${{ secrets.CQDG_QA_CONCOURSE_PASSWORD }}
+      - name: Set Pipeline
+        run: ./fly sp -t main -p cqdg-portal-ui -c ci/pipeline.yml
