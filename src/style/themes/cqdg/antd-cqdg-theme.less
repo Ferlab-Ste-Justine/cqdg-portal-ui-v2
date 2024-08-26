@@ -74,18 +74,23 @@
 // a (antd force text-decoration: none)
 .ant-typography a, .ant-descriptions a {
   text-decoration: underline;
+  color: @blue-8 !important;
 }
 
 .ant-typography a:hover, .ant-descriptions a:hover {
   text-decoration: none;
 }
 
+.ant-typography a:active, .ant-descriptions a:active {
+  color: @blue-10 !important;
+}
+
 a:hover {
-  color: @blue-8;
+  color: @blue-8 !important;
 }
 
 a:active {
-  color: @blue-10;
+  color: @blue-10 !important;
 }
 
 // TABLE
