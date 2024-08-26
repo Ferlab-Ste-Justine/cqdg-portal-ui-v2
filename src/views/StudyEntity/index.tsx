@@ -134,6 +134,7 @@ const StudyEntity = () => {
           loading={loading}
           title={intl.get('entities.file.specialized_datasets')}
           datasets={study?.datasets}
+          study_code={study_code}
         />
       )}
       <FilesTable id={SectionId.DATA_FILE} study={study} loading={loading} />
