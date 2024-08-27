@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe('Page des variants - Consultation du tableau', () => {
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
+    cy.visitVariantsPage('?sharedFilterId=782f8a5e-f7b7-42e7-9061-49411ead5f79');
     cy.showColumn('Freq.');
     cy.showColumn('CADD');
     cy.showColumn('REVEL');
@@ -47,7 +47,7 @@ describe('Page des variants - Consultation du tableau', () => {
   });
  
   it('Valider l\'icône de sauvegarde des requêtes personnalisées', () => {
-    cy.visitVariantsPage('?sharedFilterId=ef7ef916-6ab4-469e-a42c-52669e583d34');
+    cy.visitVariantsPage('?sharedFilterId=782f8a5e-f7b7-42e7-9061-49411ead5f79');
     cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-save"]').should('not.exist');
     cy.get('[class*="QueryBar_selected"]').find('[class*="anticon-copy"]').should('exist');
   });

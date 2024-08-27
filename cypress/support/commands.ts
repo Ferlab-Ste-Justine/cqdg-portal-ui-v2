@@ -457,7 +457,7 @@ Cypress.Commands.add('visitProfileSettingsPage', () => {
 });
 
 Cypress.Commands.add('visitProfileViewPage', () => {
-  cy.visit('/member/be8bfaec-f565-4899-9c7c-641ffdf20027');
+  cy.visit('/member/6a396218-869f-4f51-aaa8-c06c1a409065');
   cy.get('[data-cy="AvatarHeader"]').should('exist');
   cy.waitWhileSpin(oneMinute);
 });

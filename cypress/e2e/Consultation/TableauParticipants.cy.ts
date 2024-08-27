@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Participants) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('participants', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
     cy.showColumn('Ethnicity');
     cy.showColumn('Diagnosis (ICD)');
     cy.showColumn('Diagnosis (Source Text)');
@@ -46,7 +46,7 @@ describe('Page Data Exploration (Participants) - Vérifier les informations affi
 
 describe('Page Data Exploration (Participants) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitDataExploration('participants', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('participants', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
     cy.showColumn('Diagnosis (ICD)');
   });
  

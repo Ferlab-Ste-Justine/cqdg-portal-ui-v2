@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=a4cb8de6-d56d-4b37-9877-c89c004709ac');
+    cy.visitVariantsPage('?sharedFilterId=f61a3a36-d3de-4ac5-852b-fab8f79c1834');
 
     cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
     cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});

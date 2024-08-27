@@ -8,7 +8,7 @@ beforeEach(() => {
 describe('Page Data Exploration - Requêtes', () => {
 
   beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=fbfdb5e3-231b-47f1-9021-1b3af84425ff');
+    cy.visitVariantsPage('?sharedFilterId=d85b8a94-ac84-4112-8dd1-a2adf312fc69');
   });
 
   it('Validation Facette numérique ou No Data', () => {
