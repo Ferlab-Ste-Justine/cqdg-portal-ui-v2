@@ -1075,6 +1075,10 @@ const en = {
       accessRequirement: 'Access Requirement',
       sampleAvailability: 'Sample Availability',
       description: 'Description',
+      searchLabel: {
+        title: 'Search by study code, name, domain, or keyword',
+        placeholder: 'e.g. CAG, CARTaGENE, Rare Diseases, Epilepsy',
+      },
     },
     dataExploration: {
       title: 'Data Explorer',

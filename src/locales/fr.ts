@@ -1083,6 +1083,10 @@ const fr = {
       accessRequirement: 'Exigence d’accès',
       sampleAvailability: 'Disponibilité des échantillons',
       description: 'Description',
+      searchLabel: {
+        title: 'Recherche par code, nom, domaine de l’étude ou mot-clé',
+        placeholder: 'ex. CAG, CARTaGENE, Rare Diseases, Epilepsy',
+      },
     },
     dataExploration: {
       title: 'Explorateur de données',
