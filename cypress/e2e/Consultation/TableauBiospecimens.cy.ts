@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Biospecimens) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('biospecimens', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
   });
 
   it('Titre', () => {
@@ -33,7 +33,7 @@ describe('Page Data Exploration (Biospecimens) - Vérifier les informations affi
 
 describe('Page Data Exploration (Biospecimens) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitDataExploration('biospecimens', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('biospecimens', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
   });
 
   it('Lien Participant du tableau', () => {

@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe('Page Data Exploration (Data Files) - Vérifier les informations affichées', () => {
   beforeEach(() => {
-    cy.visitDataExploration('datafiles', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
     cy.showColumn('Dataset');
     cy.showColumn('File Name');
     cy.showColumn('Platform');
@@ -39,7 +39,7 @@ describe('Page Data Exploration (Data Files) - Vérifier les informations affich
 
 describe('Page Data Exploration (Data Files) - Valider les liens disponibles', () => {
   beforeEach(() => {
-    cy.visitDataExploration('datafiles', '?sharedFilterId=a80b4939-38c4-415e-9189-27f79ab37cb5');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
   });
 
   it('Lien File du tableau', () => {
