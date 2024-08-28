@@ -7,11 +7,10 @@ import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button } from 'antd';
 import cx from 'classnames';
 import { INDEXES } from 'graphql/constants';
+import { STUDIES_REPO_QB_ID } from 'views/Studies/utils/constant';
 
 import FilterList from 'components/uiKit/FilterList';
 import { FilterInfo } from 'components/uiKit/FilterList/types';
-
-import { STUDIES_EXPLORATION_QB_ID } from '../../utils/constant';
 
 import styles from './index.module.css';
 
@@ -47,7 +46,7 @@ const SideBarFacet = ({ className, extendedMappingResults, filterInfo }: ISideBa
             <FilterList
               key={INDEXES.STUDY}
               index={INDEXES.STUDY}
-              queryBuilderId={STUDIES_EXPLORATION_QB_ID}
+              queryBuilderId={STUDIES_REPO_QB_ID}
               extendedMappingResults={extendedMappingResults}
               filterInfo={filterInfo}
               filterGroupConfig={filterGroupConfig}

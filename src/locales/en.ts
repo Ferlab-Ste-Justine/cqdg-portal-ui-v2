@@ -448,7 +448,7 @@ const en = {
         all: 'All',
         none: 'None',
         clear: 'Clear',
-        clearFilters: 'Clear Filters',
+        clearFilters: 'Clear filters',
         less: 'Less',
         more: 'More',
         apply: 'Apply',
@@ -503,7 +503,7 @@ const en = {
       selectedPlural: 'items selected',
       selectAllResults: 'Select all results',
       clear: 'Clear',
-      clearFilters: 'Clear Filters',
+      clearFilters: 'Clear filters',
       tableExport: 'Export as TSV',
       reset: 'Reset',
       columns: 'Columns',
@@ -1075,6 +1075,10 @@ const en = {
       accessRequirement: 'Access Requirement',
       sampleAvailability: 'Sample Availability',
       description: 'Description',
+      searchLabel: {
+        title: 'Search by study code, name, domain, or keyword',
+        placeholder: 'e.g. CAG, CARTaGENE, Rare Diseases, Epilepsy',
+      },
     },
     dataExploration: {
       title: 'Data Explorer',

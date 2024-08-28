@@ -1,8 +1,8 @@
-.studiesExplorationLayout {
+.studiesPage {
   display: flex;
-  height: calc(100vh - var(--main-header-height));
 }
-.studiesExplorationLayout .scrollContent {
+
+.scrollContent {
   width: 100%;
   padding: var(--default-page-content-padding);
 }
