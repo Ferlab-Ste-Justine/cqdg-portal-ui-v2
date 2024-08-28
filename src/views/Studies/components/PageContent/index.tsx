@@ -117,7 +117,7 @@ const PageContent = ({ defaultColumns = [] }: OwnProps) => {
 
   return (
     <Space direction="vertical" size={16} className={styles.pageContent}>
-      <Title className={styles.title} level={4}>
+      <Title className={styles.title} level={4} data-cy="Title_Studies">
         {intl.get('screen.studies.title')}
       </Title>
       <div>
@@ -175,7 +175,7 @@ const PageContent = ({ defaultColumns = [] }: OwnProps) => {
               clearFilter,
             }}
             size="small"
-            dataSource={data.map((i) => ({ ...i, key: i.id }))}
+            dataSource={data.map((i) => ({ ...i, key: i.study_code }))}
             dictionary={getProTableDictionary()}
           />
         }
