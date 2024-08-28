@@ -171,7 +171,7 @@ describe('Page des variants (Variant) - Filtrer avec les facettes', () => {
   });
 
   it('Consequence - Missense', () => {
-    cy.validateFacetFilter('Consequence', 'Missense', 'missense', /^1,949$/);
+    cy.validateFacetFilter('Consequence', 'Missense', 'missense', /^1,918$/);
   });
 
   it('External Reference - DbSNP', () => {
@@ -351,7 +351,7 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
   });
 
   it('CADD (Raw)', () => {
-    cy.validateFacetNumFilter('CADD (Raw)', '0.01', /^376$/);
+    cy.validateFacetNumFilter('CADD (Raw)', '0.01', /^377$/);
     cy.validateFacetRank(2, 'CADD (Raw)');
   });
 
@@ -366,12 +366,12 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
   });
 
   it('FATHMM - Tolerated', () => {
-    cy.validateFacetFilter('FATHMM', 'Tolerated', 'T', /^1,424$/);
+    cy.validateFacetFilter('FATHMM', 'Tolerated', 'T', /^1,427$/);
     cy.validateFacetRank(5, 'FATHMM');
   });
 
   it('LRT - Neutral', () => {
-    cy.validateFacetFilter('LRT', 'Neutral', 'N', /^1,081$/);
+    cy.validateFacetFilter('LRT', 'Neutral', 'N', /^1,083$/);
     cy.validateFacetRank(6, 'LRT');
   });
 
@@ -391,7 +391,7 @@ describe('Page des variants (Pathogenicity) - Filtrer avec les facettes', () => 
   });
 
   it('SIFT - Tolerated', () => {
-    cy.validateFacetFilter('SIFT', 'Tolerated', 'T', /^1,255$/);
+    cy.validateFacetFilter('SIFT', 'Tolerated', 'T', /^1,257$/);
     cy.validateFacetRank(10, 'SIFT');
   });
 });
