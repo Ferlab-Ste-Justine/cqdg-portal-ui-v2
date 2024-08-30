@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { DownloadOutlined } from '@ant-design/icons';
+import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
 import { fetchReport } from 'store/report/thunks';
+import { PROJECT_ID, useSavedSet } from 'store/savedSet';
+import { createSavedSet } from 'store/savedSet/thunks';
 import { getDocLang } from 'utils/doc';
+import { getIdFieldByType } from 'utils/fieldMapper';
+
+import { globalActions } from '../../../store/global';
 
 import FilesTable from './FilesTable';
 
@@ -43,6 +49,9 @@ const DownloadFileManifestModal = ({
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
+  const [isManifestIdTriggered, setIsManifestIdTriggered] = useState(false);
+  const { isLoading, savedSets } = useSavedSet();
+  const lastSetId: string = savedSets?.find((s) => s.tag === 'manifestIdSet')?.id || '';
 
   const _fileName =
     fileName || (isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST);
@@ -77,6 +86,55 @@ const DownloadFileManifestModal = ({
       </>
     );
 
+  const handleDownload = () =>
+    dispatch(
+      fetchReport({
+        data: {
+          name: _fileName,
+          sqon,
+          withFamily: isFamilyChecked,
+        },
+        callback: () => setIsModalVisible(false),
+      }),
+    );
+
+  const handleManifestIdCallback = () => {
+    setIsManifestIdTriggered(true);
+  };
+
+  const handleManifestIdCopy = () => {
+    if (lastSetId) {
+      navigator.clipboard.writeText(lastSetId);
+      dispatch(
+        globalActions.displayMessage({
+          content: 'Copied Manifest ID',
+          type: 'success',
+        }),
+      );
+    }
+  };
+
+  const handleManifestId = async () => {
+    if (isManifestIdTriggered) {
+      handleManifestIdCopy();
+    } else {
+      setIsManifestIdTriggered(true);
+      dispatch(
+        createSavedSet({
+          idField: getIdFieldByType(INDEXES.FILE),
+          projectId: PROJECT_ID,
+          sort: [],
+          sqon: sqon as ISqonGroupFilter,
+          type: INDEXES.FILE,
+          onCompleteCb: handleManifestIdCallback,
+          tag: 'manifestIdSet',
+          isPhantomManifest: true,
+          sharedpublicly: true,
+        }),
+      );
+    }
+  };
+
   return (
     <Tooltip title={getTooltipTitle()} open={isModalVisible ? false : undefined}>
       <Button
@@ -91,22 +149,25 @@ const DownloadFileManifestModal = ({
       <Modal
         open={isModalVisible}
         title={intl.get('api.report.fileManifest.title')}
-        okText={intl.get('api.report.fileManifest.okText')}
-        okButtonProps={{ disabled: hasTooManyFiles }}
-        cancelText={intl.get('api.report.fileManifest.cancel')}
-        onCancel={() => setIsModalVisible(false)}
-        onOk={() => {
-          dispatch(
-            fetchReport({
-              data: {
-                name: _fileName,
-                sqon,
-                withFamily: isFamilyChecked,
-              },
-              callback: () => setIsModalVisible(false),
-            }),
-          );
-        }}
+        footer={[
+          <Button key="1" onClick={() => setIsModalVisible(false)}>
+            {intl.get('api.report.fileManifest.cancel')}
+          </Button>,
+          <Button
+            key="2"
+            type={isManifestIdTriggered ? 'default' : 'primary'}
+            onClick={handleManifestId}
+            loading={isLoading}
+            icon={isManifestIdTriggered && <CopyOutlined />}
+          >
+            {isManifestIdTriggered
+              ? lastSetId
+              : intl.get('api.report.fileManifest.manifestIdButton')}
+          </Button>,
+          <Button key="3" type="primary" disabled={hasTooManyFiles} onClick={handleDownload}>
+            {intl.get('api.report.fileManifest.okText')}
+          </Button>,
+        ]}
         className={styles.modal}
         data-cy="FileManifest_Modal"
       >

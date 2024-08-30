@@ -9,6 +9,8 @@ export interface ISavedSet {
   tag: string;
   type: string;
   sort: Sort[];
+  isPhantomManifest?: boolean;
+  sharedpublicly?: boolean;
 }
 
 export type Sort = {

@@ -5,7 +5,7 @@ import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
 import { Form, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 
-import { SetActionType } from 'components/uiKit/SetsManagementDropdown/index';
+import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import UserSetsForm from 'components/uiKit/SetsManagementDropdown/UserSetForm';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
