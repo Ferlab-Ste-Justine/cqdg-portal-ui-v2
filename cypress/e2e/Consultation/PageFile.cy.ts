@@ -100,7 +100,9 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Capture Kit').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('-').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Date (yyyy-mm-dd)').should('exist');
-    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('2004-05-14').should('exist');
+    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(5).invoke('text').then((strDate) => {
+      assert.equal('2004-05-14', strDate); // Pour debug, car plante souvent via Concourse
+    });
   });
 
   it('Panneau Analysis Properties', () => {
