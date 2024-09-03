@@ -43,7 +43,7 @@ const store: any = configureStore({
     const defaultMid = getDefaultMiddleware({
       serializableCheck: false,
     });
-    return isDevMode && isReduxLog ? defaultMid.concat(logger) : defaultMid;
+    return isDevMode && isReduxLog ? defaultMid.concat(logger as any) : defaultMid;
   },
 });
 
