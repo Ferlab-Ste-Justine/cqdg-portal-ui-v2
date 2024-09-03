@@ -87,7 +87,7 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="biospecimens"]').find('td[class="ant-table-cell"]').eq(5).contains('C12434').should('exist');
   });
 
-  it('Panneau Experimental Procedure', () => {
+  it('Panneau Experimental Procedure [CQDG-852]', () => {
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(0).contains('Strategy').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(0).contains('WGS').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(0).find('[class*="FileEntity_tag"]').should('exist');
@@ -100,9 +100,8 @@ describe('Page d\'un fichier - Vérifier les informations affichées', () => {
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(4).contains('Capture Kit').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(4).contains('-').should('exist');
     cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-label"]').eq(5).contains('Date (yyyy-mm-dd)').should('exist');
-    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(5).invoke('text').then((strDate) => {
-      assert.equal('2004-05-14', strDate); // Pour debug, car plante souvent via Concourse
-    });
+    cy.wait(2000);
+    cy.get('[id="experimental_procedure"]').find('[class="ant-descriptions-item-content"]').eq(5).contains('2004-05-15').should('exist');
   });
 
   it('Panneau Analysis Properties', () => {
