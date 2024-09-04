@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import EnvVariables from 'helpers/EnvVariables';
-import { combineReducers } from 'redux';
+import { combineReducers, Middleware } from 'redux';
 import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -36,14 +36,14 @@ const rootReducer = combineReducers<RootState>({
   remote: RemoteReducer,
 });
 
-const store: any = configureStore({
+const store = configureStore({
   reducer: persistReducer(persistConfig, rootReducer),
   devTools: isDevMode,
   middleware: (getDefaultMiddleware) => {
     const defaultMid = getDefaultMiddleware({
       serializableCheck: false,
     });
-    return isDevMode && isReduxLog ? defaultMid.concat(logger) : defaultMid;
+    return isDevMode && isReduxLog ? defaultMid.concat(logger as Middleware) : defaultMid;
   },
 });
 
