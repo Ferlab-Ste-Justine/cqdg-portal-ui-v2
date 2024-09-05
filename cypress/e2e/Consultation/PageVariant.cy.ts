@@ -38,42 +38,42 @@ describe('Page d\'un variant - Vérifier les informations affichées', () => {
     cy.get('div[class*="EntityVariantSummary_infoWrapper"]').find('[class*="ant-typography"]').eq(0).contains('c.2138G>A').should('exist');
     cy.get('div[class*="EntityVariantSummary_infoWrapper"]').find('div[class*="ant-space-horizontal"]').eq(3).contains('rs41265017').should('exist');
     // Details
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="VariantEntity_functionalScores"]').eq(0).contains('Functional Scores').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(0).contains('SIFT').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(0).contains('Tolerated').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(0).contains('0.298').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(1).contains('FATHMM').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(1).contains('Tolerated').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(1).contains('-1.41').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(2).contains('CADD (Raw)').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(2).contains('2.591949').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(3).contains('CADD (Phred)').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(3).contains('22.6').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(4).contains('DANN').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(4).contains('0.9805721474226299').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(5).contains('LRT').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(5).contains('Neutral').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(5).contains('0.52363').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(6).contains('REVEL').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(6).contains('0.238').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(7).contains('PolyPhen-2 HVAR').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(7).contains('Benign').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(7).contains('0.024').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-label"]').eq(8).contains('PhyloP17Way').should('exist');
-    cy.get('div[class*="EntityVariantSummary_score"]').find('[class*="ant-descriptions-item-content"]').eq(8).contains('0.616').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="EntityVariantSummary_detailsTitle"]').eq(0).contains('Gene Constraints').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-label"]').eq(0).contains('pLI').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-content"]').eq(0).contains('0.000018394').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-label"]').eq(1).contains('LOEUF').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-content"]').eq(1).contains('0.641').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="EntityVariantSummary_detailsTitle"]').eq(1).contains('Splice Altering').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-label"]').eq(2).contains('SpliceAI').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-content"]').eq(2).contains('0.02').should('exist');
-    cy.get('div[class*="EntityVariantSummary_geneSplice"]').find('[class*="ant-descriptions-item-content"]').eq(2).find('[class="ant-tag"]').contains('AL').should('exist');
-    cy.get('div[class*="EntityVariantSummary_omim"]').find('[class*="EntityVariantSummary_detailsTitle"]').eq(0).contains('Associated Conditions (OMIM)').should('exist');
-    cy.get('div[class*="EntityVariantSummary_omim"]').find('[class*="ant-descriptions-item-content"]').eq(0).contains('Retinitis pigmentosa 35').should('exist');
-    cy.get('div[class*="EntityVariantSummary_omim"]').find('[class*="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').contains('AD').should('exist');
-    cy.get('div[class*="EntityVariantSummary_omim"]').find('[class*="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').contains('AR').should('exist');
+    cy.get('[class*="VariantEntity_functionalScores"]').contains('Functional Scores').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(0).contains('SIFT').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(0).contains('Tolerated').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(0).contains('0.298').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(1).contains('FATHMM').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(1).contains('Tolerated').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(1).contains('-1.41').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(2).contains('CADD (Raw)').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(2).contains('2.591949').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(3).contains('CADD (Phred)').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(3).contains('22.6').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(4).contains('DANN').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(4).contains('0.9805721474226299').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(5).contains('LRT').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(5).contains('Neutral').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(5).contains('0.52363').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(6).contains('REVEL').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(6).contains('0.238').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(7).contains('PolyPhen-2 HVAR').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(7).contains('Benign').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(7).contains('0.024').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-label"]').eq(8).contains('PhyloP17Way').should('exist');
+    cy.get('[class*="EntityVariantSummary_score"] [class="ant-descriptions-item-content"]').eq(8).contains('0.616').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class*="EntityVariantSummary_detailsTitle"]').eq(0).contains('Gene Constraints').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-label"]').eq(0).contains('pLI').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-content"]').eq(0).contains('0.000018394').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-label"]').eq(1).contains('LOEUF').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-content"]').eq(1).contains('0.641').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class*="EntityVariantSummary_detailsTitle"]').eq(1).contains('Splice Altering').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-label"]').eq(2).contains('SpliceAI').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-content"]').eq(2).contains('0.02').should('exist');
+    cy.get('div[class*="EntityVariantSummary_geneSplice"] [class="ant-descriptions-item-content"]').eq(2).find('[class="ant-tag"]').contains('AL').should('exist');
+    cy.get('div[class*="EntityVariantSummary_omim"] [class*="EntityVariantSummary_detailsTitle"]').eq(0).contains('Associated Conditions (OMIM)').should('exist');
+    cy.get('div[class*="EntityVariantSummary_omim"] [class="ant-descriptions-item-label"]').eq(0).contains('Retinitis pigmentosa 35').should('exist');
+    cy.get('div[class*="EntityVariantSummary_omim"] [class="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').contains('AD').should('exist');
+    cy.get('div[class*="EntityVariantSummary_omim"] [class="ant-descriptions-item-content"]').eq(0).find('[class*="ant-tag-blue"]').contains('AR').should('exist');
   });
 
   it('Panneau Transcripts', () => {
@@ -252,7 +252,7 @@ describe('Page d\'un variant - Valider les liens disponibles', () => {
   });
 
   it('Lien OMIM du panneau Summary', () => {
-    cy.get('div[class*="EntityVariantSummary_omim"]').find('[class*="ant-descriptions-item-content"]').eq(0).find('a') // data-cy="Summary_Omim_ExternalLink"
+    cy.get('div[class*="EntityVariantSummary_omim"] [class="ant-descriptions-item-label"] a') // data-cy="Summary_Omim_ExternalLink"
     .should('have.attr', 'href', 'https://www.omim.org/entry/610282');
   });
 
