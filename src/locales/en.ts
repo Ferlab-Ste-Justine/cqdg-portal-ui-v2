@@ -421,6 +421,7 @@ const en = {
     delete: 'Delete',
     unknown: 'Unknown',
     summary: 'Summary',
+    copyToClipboard: 'Copy to clipboard',
     viewInDataExploration: 'View in Data Explorer',
     search: {
       genes: {
@@ -577,6 +578,9 @@ const en = {
         textDataset: `Download a manifest of this dataset’s files which can be used with CQDG's bulk download tool. This manifest also includes additional information, including the participants and samples associated with these files.`,
         textCheckbox: `Include data files of the same type for the participants' related family members for this selection.`,
         tooltip: 'File manifest for the tool ',
+        manifestIdButton: 'Manifest ID',
+        manifestIdButtonTooltip: 'Generate an ID to use in Ferload',
+        copyToClipboardToFerload: 'Copy to clipboard to use in Ferload',
       },
       requestAccess: {
         button: 'Request access',

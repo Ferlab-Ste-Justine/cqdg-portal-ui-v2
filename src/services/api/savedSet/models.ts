@@ -17,6 +17,8 @@ export type IUserSetOutput = {
   tag: string;
   size: number;
   setType: SetType;
+  ids: string[];
+  is_phantom_manifest?: boolean;
 };
 
 export type TUserSavedSetInsert = Omit<

@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,9 +11,13 @@ import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Col, Modal, Row, Typography } from 'antd';
 import { formatDistance } from 'date-fns';
 import { INDEXES } from 'graphql/constants';
-import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
+import {
+  DATA_EXPLORATION_QB_ID,
+  DATA_FILES_SAVED_SETS_FIELD,
+} from 'views/DataExploration/utils/constant';
 import { VARIANT_REPO_QB_ID } from 'views/Variants/utils/constants';
 
+import DownloadFileManifestModal from 'components/reports/DownloadFileManifestModal';
 import { SetActionType } from 'components/uiKit/SetsManagementDropdown';
 import { IUserSetOutput, SetType } from 'services/api/savedSet/models';
 import { deleteSavedSet } from 'store/savedSet/thunks';
@@ -51,6 +55,16 @@ const ListItem = ({ data, icon }: IListItemProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const sqon = generateQuery({
+    newFilters: [
+      generateValueFilter({
+        field: DATA_FILES_SAVED_SETS_FIELD,
+        index: INDEXES.FILE,
+        value: data?.ids,
+      }),
+    ],
+  });
+
   return (
     <>
       <ListItemWithActions
@@ -68,6 +82,16 @@ const ListItem = ({ data, icon }: IListItemProps) => {
             onOk: () => dispatch(deleteSavedSet(data.id)),
           })
         }
+        extraActions={[
+          data.setType === SetType.FILE && (
+            <DownloadFileManifestModal
+              key="fileManifest"
+              sqon={sqon}
+              isIconButton
+              setId={data.id}
+            />
+          ),
+        ]}
         extra={
           <Row gutter={8} className={styles.countDisplay}>
             <Col>
