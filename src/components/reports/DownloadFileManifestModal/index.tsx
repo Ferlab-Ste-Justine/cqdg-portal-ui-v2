@@ -124,7 +124,7 @@ const DownloadFileManifestModal = ({
   };
 
   const handleManifestId = async () => {
-    if (isManifestIdTriggered || lastSetId) {
+    if ((isManifestIdTriggered && lastSetId) || setId) {
       handleManifestIdCopy();
     } else {
       setIsManifestIdTriggered(true);
@@ -175,7 +175,7 @@ const DownloadFileManifestModal = ({
             <Button
               onClick={handleManifestId}
               loading={isLoading}
-              icon={isManifestIdTriggered ? <CopyOutlined /> : <FileTextOutlined />}
+              icon={isManifestIdTriggered || setId ? <CopyOutlined /> : <FileTextOutlined />}
             >
               {(!isLoading && isManifestIdTriggered) || setId
                 ? truncateString(lastSetId, 20)
