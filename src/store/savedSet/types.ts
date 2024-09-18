@@ -11,6 +11,7 @@ export interface ISavedSet {
   sort: Sort[];
   is_phantom_manifest?: boolean;
   sharedpublicly?: boolean;
+  withFamily?: boolean;
 }
 
 export type Sort = {

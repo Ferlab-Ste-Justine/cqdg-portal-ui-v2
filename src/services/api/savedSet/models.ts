@@ -19,6 +19,7 @@ export type IUserSetOutput = {
   setType: SetType;
   ids: string[];
   is_phantom_manifest?: boolean;
+  withFamily?: boolean;
 };
 
 export type TUserSavedSetInsert = Omit<

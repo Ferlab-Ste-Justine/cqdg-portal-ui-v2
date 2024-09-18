@@ -23,6 +23,28 @@ const fetchSavedSet = createAsyncThunk<IUserSetOutput[], void | string, { reject
   },
 );
 
+const createSavedSetPhantomManifest = createAsyncThunk<
+  IUserSetOutput,
+  TUserSavedSetInsert & { onCompleteCb: (phantom_set_id?: string) => void },
+  { rejectValue: string }
+>('savedsets/create', async (set, thunkAPI) => {
+  const { data, error } = await SavedSetApi.create({ ...set, is_phantom_manifest: true });
+
+  return handleThunkApiReponse({
+    error,
+    data: data!,
+    reject: thunkAPI.rejectWithValue,
+    onSuccess: () => set.onCompleteCb(data?.id),
+    onError: () =>
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          content: intl.get('api.report.fileManifest.manifestIdCopyError'),
+          type: 'error',
+        }),
+      ),
+  });
+});
+
 const createSavedSet = createAsyncThunk<
   IUserSetOutput,
   TUserSavedSetInsert & { onCompleteCb: () => void },
@@ -117,4 +139,10 @@ const deleteSavedSet = createAsyncThunk<string, string, { rejectValue: string }>
   },
 );
 
-export { fetchSavedSet, createSavedSet, updateSavedSet, deleteSavedSet };
+export {
+  fetchSavedSet,
+  createSavedSet,
+  updateSavedSet,
+  deleteSavedSet,
+  createSavedSetPhantomManifest,
+};

@@ -581,9 +581,10 @@ const fr = {
         textDataset: `Téléchargez un manifeste des fichiers de ce jeu de données. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         textCheckbox: `Inclure les fichiers de données de même type des membres de la famille des participants représentés dans les fichiers sélectionnés.`,
         tooltip: 'Manifeste de fichiers pour l’outil ',
-        manifestIdButton: 'ID de manifeste',
-        manifestIdButtonTooltip: 'Générer un ID pour utiliser dans Ferload',
-        copyToClipboardToFerload: 'Copier dans le presse-papier pour utiliser dans Ferload',
+        manifestIdButton: 'Copier l’identifiant',
+        manifestIdButtonTooltip: "Copiez l'identifiant du manifeste à utiliser avec ",
+        manifestIdCopySuccess: 'Identifiant copié dans le presse-papiers',
+        manifestIdCopyError: 'Erreur de copie de l’identifiant dans le presse-papiers',
       },
       requestAccess: {
         button: 'Demande d’accès',

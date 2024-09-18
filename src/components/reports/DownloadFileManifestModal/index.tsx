@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { CopyOutlined, DownloadOutlined, FileTextOutlined } from '@ant-design/icons';
+import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
 import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
@@ -13,10 +13,9 @@ import { ReportType } from 'services/api/reports/models';
 import { globalActions } from 'store/global';
 import { fetchReport } from 'store/report/thunks';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
-import { createSavedSet } from 'store/savedSet/thunks';
+import { createSavedSetPhantomManifest } from 'store/savedSet/thunks';
 import { getDocLang } from 'utils/doc';
 import { getIdFieldByType } from 'utils/fieldMapper';
-import { truncateString } from 'utils/string';
 
 import FilesTable from './FilesTable';
 
@@ -47,18 +46,15 @@ const DownloadFileManifestModal = ({
   isDataset = false,
   fileName = '',
   isIconButton = false,
-  setId = '',
+  setId = '', // setId exists when the user has selected a set from the dashboard since CQDG-835
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
-  const [isManifestIdTriggered, setIsManifestIdTriggered] = useState(false);
-  const { isLoading, savedSets } = useSavedSet();
-  const lastSetId: string = savedSets?.find((s) => s.is_phantom_manifest)?.id || '';
+  const { isLoading } = useSavedSet();
 
   const handleClose = () => {
-    setIsManifestIdTriggered(false);
     setIsModalVisible(false);
   };
 
@@ -107,41 +103,32 @@ const DownloadFileManifestModal = ({
       }),
     );
 
-  const handleManifestIdCallback = () => {
-    setIsManifestIdTriggered(true);
-  };
-
-  const handleManifestIdCopy = () => {
-    if (lastSetId) {
-      navigator.clipboard.writeText(lastSetId);
+  const handleManifestIdCopy = (phantom_set_id?: string) => {
+    const idToCopy = setId || phantom_set_id;
+    if (idToCopy) {
+      navigator.clipboard.writeText(idToCopy);
       dispatch(
         globalActions.displayMessage({
-          content: 'Copied Manifest ID',
-          type: 'success',
+          content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
+          type: 'info',
         }),
       );
     }
   };
 
   const handleManifestId = async () => {
-    if ((isManifestIdTriggered && lastSetId) || setId) {
-      handleManifestIdCopy();
-    } else {
-      setIsManifestIdTriggered(true);
-      dispatch(
-        createSavedSet({
-          idField: getIdFieldByType(INDEXES.FILE),
-          projectId: PROJECT_ID,
-          sort: [],
-          sqon: sqon as ISqonGroupFilter,
-          type: INDEXES.FILE,
-          onCompleteCb: handleManifestIdCallback,
-          tag: 'manifestIdSet',
-          is_phantom_manifest: true,
-          sharedpublicly: true,
-        }),
-      );
-    }
+    dispatch(
+      createSavedSetPhantomManifest({
+        idField: getIdFieldByType(INDEXES.FILE),
+        projectId: PROJECT_ID,
+        sort: [],
+        sqon: sqon as ISqonGroupFilter,
+        type: INDEXES.FILE,
+        onCompleteCb: handleManifestIdCopy,
+        tag: 'manifest_phantom_set',
+        withFamily: isFamilyChecked,
+      }),
+    );
   };
 
   return (
@@ -167,19 +154,27 @@ const DownloadFileManifestModal = ({
           <Tooltip
             key="2"
             title={
-              isManifestIdTriggered || setId
-                ? intl.get('api.report.fileManifest.copyToClipboardToFerload')
-                : intl.get('api.report.fileManifest.manifestIdButtonTooltip')
+              <>
+                {intl.get('api.report.fileManifest.manifestIdButtonTooltip')}
+                <ExternalLink
+                  className={styles.externalLinkFerload}
+                  hasIcon
+                  href={`${EnvVariables.configFor(
+                    'CQDG_DOCUMENTATION',
+                  )}/docs/comment-utiliser-le-client-ferload${getDocLang()}`}
+                >
+                  {intl.get('global.ferload')}
+                </ExternalLink>
+              </>
             }
           >
             <Button
+              type="primary"
               onClick={handleManifestId}
               loading={isLoading}
-              icon={isManifestIdTriggered || setId ? <CopyOutlined /> : <FileTextOutlined />}
+              icon={<CopyOutlined />}
             >
-              {(!isLoading && isManifestIdTriggered) || setId
-                ? truncateString(lastSetId, 20)
-                : intl.get('api.report.fileManifest.manifestIdButton')}
+              {intl.get('api.report.fileManifest.manifestIdButton')}
             </Button>
           </Tooltip>,
           <Button
@@ -196,11 +191,17 @@ const DownloadFileManifestModal = ({
         data-cy="FileManifest_Modal"
       >
         <Content />
-        {hasFamily && (
-          <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
-            {intl.get('api.report.fileManifest.textCheckbox')}
-          </Checkbox>
-        )}
+        {
+          /** from dashboard or study page, the user cant add family's files */
+          hasFamily && !setId && !isStudy && (
+            <Checkbox
+              checked={isFamilyChecked}
+              onChange={() => setIsFamilyChecked(!isFamilyChecked)}
+            >
+              {intl.get('api.report.fileManifest.textCheckbox')}
+            </Checkbox>
+          )
+        }
         {hasTooManyFiles && <TooMuchFilesAlert />}
         {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
