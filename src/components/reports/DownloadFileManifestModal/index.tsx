@@ -198,7 +198,9 @@ const DownloadFileManifestModal = ({
               checked={isFamilyChecked}
               onChange={() => setIsFamilyChecked(!isFamilyChecked)}
             >
-              {intl.get('api.report.fileManifest.textCheckbox')}
+              {setId
+                ? intl.get('api.report.fileManifest.textCheckboxSet')
+                : intl.get('api.report.fileManifest.textCheckbox')}
             </Checkbox>
           )
         }

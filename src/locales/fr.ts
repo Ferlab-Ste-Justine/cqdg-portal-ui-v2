@@ -580,6 +580,8 @@ const fr = {
         textStudy: `Téléchargez un manifeste des fichiers de cette étude. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         textDataset: `Téléchargez un manifeste des fichiers de ce jeu de données. Celui-ci pourra être utilisé par l'outil de téléchargement rapide des données du CQDG. Ce manifeste comprend également des informations supplémentaires, notamment sur les participants et les échantillons associés à ces fichiers.`,
         textCheckbox: `Inclure les fichiers de données de même type des membres de la famille des participants représentés dans les fichiers sélectionnés.`,
+        textCheckboxSet:
+          'Inclure tous les fichiers de même type sur les membres des familles représentées dans cet ensemble.',
         tooltip: 'Manifeste de fichiers pour l’outil ',
         manifestIdButton: 'Copier l’identifiant',
         manifestIdButtonTooltip: "Copiez l'identifiant du manifeste à utiliser avec ",

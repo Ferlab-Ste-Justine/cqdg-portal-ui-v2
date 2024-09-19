@@ -577,6 +577,8 @@ const en = {
         textStudy: `Download a manifest of this study’s files which can be used with CQDG's bulk download tool. This manifest also includes additional information, including the participants and samples associated with these files.`,
         textDataset: `Download a manifest of this dataset’s files which can be used with CQDG's bulk download tool. This manifest also includes additional information, including the participants and samples associated with these files.`,
         textCheckbox: `Include data files of the same type for the participants' related family members for this selection.`,
+        textCheckboxSet:
+          'Include the files of the same type for related family members in this set.',
         tooltip: 'File manifest for the tool ',
         manifestIdButton: 'Copy manifest ID',
         manifestIdButtonTooltip: 'Copy the manifest ID for use in ',
