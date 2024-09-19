@@ -769,7 +769,7 @@ const fr = {
             'Vous êtes sur le point de supprimer toutes vos requêtes. Ils seront perdus à jamais.',
         },
       },
-      pattern: 'Caractères permis: ((A-Z, a-z, 0-9) () [] - _ : | . ,)',
+      pattern: 'Caractères permis : A-Z a-z 0-9 ()[]-_:|,.',
     },
     savedSets: {
       modal: {
