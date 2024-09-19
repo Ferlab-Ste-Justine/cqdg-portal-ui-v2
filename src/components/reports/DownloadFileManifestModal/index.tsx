@@ -39,14 +39,14 @@ interface IDownloadFileManifestProps {
 const DownloadFileManifestModal = ({
   sqon,
   type = 'default',
-  isDisabled,
-  hasTooManyFiles,
+  isDisabled = false,
+  hasTooManyFiles = false,
   hasFamily = true,
   isStudy = false,
   isDataset = false,
   fileName = '',
   isIconButton = false,
-  setId = '', // setId exists when the user has selected a set from the dashboard since CQDG-835
+  setId = '' /** setId exists when the user has selected a set from the dashboard since CQDG-835 */,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
