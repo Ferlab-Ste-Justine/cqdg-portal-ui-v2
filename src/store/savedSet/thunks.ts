@@ -34,7 +34,15 @@ const createSavedSetPhantomManifest = createAsyncThunk<
     error,
     data: data!,
     reject: thunkAPI.rejectWithValue,
-    onSuccess: () => set.onCompleteCb(data?.id),
+    onSuccess: () => {
+      thunkAPI.dispatch(
+        globalActions.displayMessage({
+          content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
+          type: 'info',
+        }),
+      );
+      set.onCompleteCb(data?.id);
+    },
     onError: () =>
       thunkAPI.dispatch(
         globalActions.displayMessage({

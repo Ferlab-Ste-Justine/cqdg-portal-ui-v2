@@ -10,7 +10,6 @@ import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
-import { globalActions } from 'store/global';
 import { fetchReport } from 'store/report/thunks';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSetPhantomManifest } from 'store/savedSet/thunks';
@@ -103,24 +102,18 @@ const DownloadFileManifestModal = ({
       }),
     );
 
-  const handleManifestIdCopy = async (phantom_set_id?: string) => {
-    const idToCopy = setId || phantom_set_id;
-    if (idToCopy) {
-      await navigator.clipboard.writeText(idToCopy);
-      dispatch(
-        globalActions.displayMessage({
-          content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
-          type: 'info',
-        }),
-      );
-    }
+  const handleManifestIdCopy = (setId: string = '') => {
+    /** Safari issue: copy to clipboard needs to be on a setTimeout */
+    setTimeout(() => {
+      navigator.clipboard.writeText(setId);
+    }, 0);
   };
 
   const handleManifestId = async () => {
     if (setId) {
-      return handleManifestIdCopy();
+      return handleManifestIdCopy(setId);
     }
-    return dispatch(
+    dispatch(
       createSavedSetPhantomManifest({
         idField: getIdFieldByType(INDEXES.FILE),
         projectId: PROJECT_ID,
