@@ -10,6 +10,7 @@ import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
+import { globalActions } from 'store/global';
 import { fetchReport } from 'store/report/thunks';
 import { PROJECT_ID, useSavedSet } from 'store/savedSet';
 import { createSavedSetPhantomManifest } from 'store/savedSet/thunks';
@@ -102,11 +103,17 @@ const DownloadFileManifestModal = ({
       }),
     );
 
-  const handleManifestIdCopy = (setId: string = '') => {
+  const handleManifestIdCopy = (idToCopy: string = '') => {
     /** Safari issue: copy to clipboard needs to be on a setTimeout */
     setTimeout(() => {
-      navigator.clipboard.writeText(setId);
+      navigator.clipboard.writeText(idToCopy);
     }, 0);
+    dispatch(
+      globalActions.displayMessage({
+        content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
+        type: 'info',
+      }),
+    );
   };
 
   const handleManifestId = async () => {
