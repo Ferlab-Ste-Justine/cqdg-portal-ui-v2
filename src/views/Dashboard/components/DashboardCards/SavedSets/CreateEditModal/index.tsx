@@ -195,13 +195,13 @@ const CreateEditModal = ({
             placeholder={intl.get('components.savedSets.modal.edit.input.placeholder')}
           />
         </Form.Item>
-        {saveSetActionType === SetActionType.CREATE_SET && (
+        {saveSetActionType === SetActionType.CREATE_SET && setType === SetType.FILE && (
           <Form.Item
             name={FAMILY_CHECKBOX}
             valuePropName="checked"
             className={styles.FamilyFormItem}
           >
-            <Checkbox>{intl.get('api.report.fileManifest.textCheckbox')}</Checkbox>
+            <Checkbox>{intl.get('api.report.fileManifest.textCheckboxSet')}</Checkbox>
           </Form.Item>
         )}
       </Form>

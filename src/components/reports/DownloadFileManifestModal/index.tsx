@@ -103,10 +103,10 @@ const DownloadFileManifestModal = ({
       }),
     );
 
-  const handleManifestIdCopy = (phantom_set_id?: string) => {
+  const handleManifestIdCopy = async (phantom_set_id?: string) => {
     const idToCopy = setId || phantom_set_id;
     if (idToCopy) {
-      navigator.clipboard.writeText(idToCopy);
+      await navigator.clipboard.writeText(idToCopy);
       dispatch(
         globalActions.displayMessage({
           content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
@@ -117,7 +117,10 @@ const DownloadFileManifestModal = ({
   };
 
   const handleManifestId = async () => {
-    dispatch(
+    if (setId) {
+      return handleManifestIdCopy();
+    }
+    return dispatch(
       createSavedSetPhantomManifest({
         idField: getIdFieldByType(INDEXES.FILE),
         projectId: PROJECT_ID,

@@ -49,6 +49,7 @@ const AddRemoveSaveSetModal = ({ hideModalCb, userSets, setActionType, sqon, typ
   const [hasSetSelection, setHasSetSelection] = useState(false);
   const { isUpdating } = useSavedSet();
   const dispatch = useDispatch();
+  const savedSetsWithoutPhantomManifest = userSets.filter((s) => !s.is_phantom_manifest);
 
   const onSuccessCreateCb = () => {
     setIsVisible(false);
@@ -96,7 +97,7 @@ const AddRemoveSaveSetModal = ({ hideModalCb, userSets, setActionType, sqon, typ
       okButtonProps={{ disabled: !hasSetSelection, loading: isUpdating }}
     >
       <UserSetsForm
-        userSets={userSets.filter((s) => s.setType === type)}
+        userSets={savedSetsWithoutPhantomManifest.filter((s) => s.setType === type)}
         form={form}
         formName={FORM_NAME}
         onFinish={onFinish}
