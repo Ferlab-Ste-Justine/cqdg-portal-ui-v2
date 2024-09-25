@@ -517,8 +517,8 @@ const fr = {
     },
     quickFilter: {
       emptyMessage: 'Min. 3 caractères',
-      menuTitle: 'Quick filter',
-      placeholder: 'Chercher...',
+      menuTitle: 'Rechercher',
+      placeholder: 'Rechercher...',
       results: 'Résultats',
     },
     seeLess: 'Voir moins',
