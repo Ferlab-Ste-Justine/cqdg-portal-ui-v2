@@ -101,6 +101,7 @@ describe('Navigation', () => {
     cy.visitDashboard();
     cy.get('[data-cy="SavedSets"] svg[data-icon="edit"]').eq(0).clickAndWait({force: true});
     cy.contains('Edit set').should('exist');
+    cy.get('form[id="save-set"] input[id="save-set_familyCheckbox"]').should('not.exist');
     cy.get('button[class="ant-modal-close"]').invoke('click');
 
     cy.visitDashboard();

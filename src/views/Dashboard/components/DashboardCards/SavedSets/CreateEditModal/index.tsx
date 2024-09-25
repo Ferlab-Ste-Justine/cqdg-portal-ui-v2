@@ -3,7 +3,7 @@ import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
 import { WarningFilled } from '@ant-design/icons';
 import { ISqonGroupFilter } from '@ferlab/ui/core/data/sqon/types';
-import { Form, Input, Modal } from 'antd';
+import { Checkbox, Form, Input, Modal } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 
 import { MAX_TITLE_LENGTH, SET_FILTER_NAME_REGEX } from 'common/constants';
@@ -18,6 +18,7 @@ import styles from './index.module.css';
 
 const FORM_NAME = 'save-set';
 const SET_NAME_KEY = 'nameSet';
+const FAMILY_CHECKBOX = 'familyCheckbox';
 
 interface ICreateEditModal {
   title: string;
@@ -64,7 +65,7 @@ const CreateEditModal = ({
   };
 
   const onFinish = async (value: Store) => {
-    const { nameSet } = value;
+    const { nameSet, familyCheckbox } = value;
 
     if (isSetNameExists(nameSet)) {
       form.setFields([
@@ -93,6 +94,7 @@ const CreateEditModal = ({
             tag: nameSet,
             type: setType,
             onCompleteCb: onSuccessCreateCb,
+            withFamily: familyCheckbox,
           }),
         );
       }
@@ -154,6 +156,10 @@ const CreateEditModal = ({
             name: [SET_NAME_KEY],
             value: getSetDefaultName(form.getFieldValue(SET_NAME_KEY)),
           },
+          {
+            name: [FAMILY_CHECKBOX],
+            value: form.getFieldValue(FAMILY_CHECKBOX),
+          },
         ]}
         validateMessages={{
           required: intl.get('global.forms.errors.requiredField'),
@@ -199,6 +205,15 @@ const CreateEditModal = ({
             placeholder={intl.get('components.savedSets.modal.edit.input.placeholder')}
           />
         </Form.Item>
+        {saveSetActionType === SetActionType.CREATE_SET && setType === SetType.FILE && (
+          <Form.Item
+            name={FAMILY_CHECKBOX}
+            valuePropName="checked"
+            className={styles.FamilyFormItem}
+          >
+            <Checkbox>{intl.get('api.report.fileManifest.textCheckboxSet')}</Checkbox>
+          </Form.Item>
+        )}
       </Form>
     </Modal>
   );

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import intl from 'react-intl-universal';
 import { ProColumnType } from '@ferlab/ui/core/components/ProTable/types';
 import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
@@ -63,9 +64,9 @@ const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
     },
     headers: headers(),
   };
-
-  const { loading, result } = useApi({ config });
-  const files = (result as IFileByDataType[]) || [];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cachedConfig = useMemo(() => config, []);
+  const { loading, result: files = [] } = useApi<IFileByDataType[]>({ config: cachedConfig });
 
   return (
     <Table

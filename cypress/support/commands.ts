@@ -217,15 +217,18 @@ Cypress.Commands.add('saveFilterAs', (filterName: string) => {
   cy.get('[id="query-builder-header-tools"] [class*="Header_togglerTitle"]').contains(filterName).should('exist');
 });
 
-Cypress.Commands.add('saveSetAs', (setName: string, itemPosition: number) => {
+Cypress.Commands.add('saveSetAs', (setName: string, itemPosition: number, familyCheckbox: boolean = false) => {
   cy.get('div[role="tabpanel"] [class*="ant-table-row"], [class="ant-table-body"] [class*="ant-table-row"]').eq(itemPosition).find('[type="checkbox"]').check({force: true});
   cy.get('[id*="-set-dropdown-container"] button').clickAndWait({force: true});
   cy.get('[data-menu-id*="-create"]').clickAndWait({force: true});
-  cy.get('form[id="save-set"] input').clear();
-  cy.get('form[id="save-set"] input').type(setName);
+  cy.get('form[id="save-set"] input[id="save-set_nameSet"]').clear();
+  cy.get('form[id="save-set"] input[id="save-set_nameSet"]').type(setName);
+  if (familyCheckbox) {
+    cy.get('form[id="save-set"] input[id="save-set_familyCheckbox"]').check({force: true});
+  }
   cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'POST', '**/sets', 1);
 
-  cy.get('form[id="save-set"]').should('not.exist');
+  cy.get('form[id="save-set_nameSet"]').should('not.exist');
 });
 
 Cypress.Commands.add('showColumn', (column: string|RegExp) => {

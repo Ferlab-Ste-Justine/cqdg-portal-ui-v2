@@ -75,11 +75,12 @@ const getItemList = (
     }}
     dataSource={fetchingError ? [] : savedSets.filter((s) => s.setType === type)}
     loading={isLoading}
-    renderItem={(item) => <ListItem data={item} icon={icon} />}
+    renderItem={(item) => !item.is_phantom_manifest && <ListItem data={item} icon={icon} />}
   />
 );
 const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
   const { savedSets, isLoading, fetchingError } = useSavedSet();
+  const savedSetsWithoutPhantomManifest = savedSets.filter((s) => !s.is_phantom_manifest);
 
   const items = [
     {
@@ -87,13 +88,13 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         <div data-cy="Tab_Participants">
           <UserOutlined />
           {intl.get('entities.participant.participants')} (
-          {savedSets.filter((s) => s.setType === SetType.PARTICIPANT).length})
+          {savedSetsWithoutPhantomManifest.filter((s) => s.setType === SetType.PARTICIPANT).length})
         </div>
       ),
       key: 'participants',
       children: getItemList(
         SetType.PARTICIPANT,
-        savedSets,
+        savedSetsWithoutPhantomManifest,
         fetchingError,
         isLoading,
         <UserOutlined />,
@@ -104,13 +105,13 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         <div data-cy="Tab_Biospecimens">
           <ExperimentOutlined />
           {intl.get('entities.biospecimen.biospecimens')} (
-          {savedSets.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
+          {savedSetsWithoutPhantomManifest.filter((s) => s.setType === SetType.BIOSPECIMEN).length})
         </div>
       ),
       key: 'biospecimens',
       children: getItemList(
         SetType.BIOSPECIMEN,
-        savedSets,
+        savedSetsWithoutPhantomManifest,
         fetchingError,
         isLoading,
         <ExperimentOutlined />,
@@ -121,13 +122,13 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         <div data-cy="Tab_Files">
           <FileTextOutlined />
           {intl.get('entities.file.files')} (
-          {savedSets.filter((s) => s.setType === SetType.FILE).length})
+          {savedSetsWithoutPhantomManifest.filter((s) => s.setType === SetType.FILE).length})
         </div>
       ),
       key: 'files',
       children: getItemList(
         SetType.FILE,
-        savedSets,
+        savedSetsWithoutPhantomManifest,
         fetchingError,
         isLoading,
         <FileTextOutlined />,
@@ -138,13 +139,13 @@ const SavedSets = ({ id, key, className = '' }: DashboardCardProps) => {
         <div data-cy="Tab_Variants">
           <LineStyleIcon height={16} width={16} className={styles.iconSvg} />
           {intl.get('entities.variant.variants')} (
-          {savedSets.filter((s) => s.setType === SetType.VARIANT).length})
+          {savedSetsWithoutPhantomManifest.filter((s) => s.setType === SetType.VARIANT).length})
         </div>
       ),
       key: 'variants',
       children: getItemList(
         SetType.VARIANT,
-        savedSets,
+        savedSetsWithoutPhantomManifest,
         fetchingError,
         isLoading,
         <LineStyleIcon height={16} width={16} className={styles.iconSvg} />,

@@ -18,7 +18,7 @@ declare namespace Cypress {
     removeFilesFromFolder(folder: string): cy & CyEventEmitter;
     resetColumns(table_id?: string): cy & CyEventEmitter;
     saveFilterAs(filterName: string): cy & CyEventEmitter;
-    saveSetAs(setName: string, itemPosition: number): cy & CyEventEmitter;
+    saveSetAs(setName: string, itemPosition: number, familyCheckbox: boolean = false): cy & CyEventEmitter;
     showColumn(column: string|RegExp): cy & CyEventEmitter;
     sortTableAndIntercept(column: string|RegExp, nbCalls: number): cy & CyEventEmitter;
     sortTableAndWait(column: string|RegExp): cy & CyEventEmitter;

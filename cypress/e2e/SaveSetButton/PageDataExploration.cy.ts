@@ -53,6 +53,7 @@ describe('Page Data Exploration (Participants) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_P').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_P').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 
@@ -72,6 +73,7 @@ describe('Page Data Exploration (Participants) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_P').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_P').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 
@@ -136,6 +138,7 @@ describe('Page Data Exploration (Biospecimens) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_B').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_B').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 
@@ -155,6 +158,7 @@ describe('Page Data Exploration (Biospecimens) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_B').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_B').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 
@@ -173,10 +177,10 @@ describe('Page Data Exploration (Data Files) - Bouton Save set', () => {
     cy.login();
     cy.deleteSetIfExists('files', 'Cypress_New_F');
     cy.deleteSetIfExists('files', 'Cypress_F');
-    cy.visitDataExploration('datafiles');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
     cy.get('[data-cy="SidebarMenuItem_Data File"]').clickAndWait({force: true});
     cy.createSetIfNotExists('Cypress_F', 0);
-    cy.visitDataExploration('datafiles');
+    cy.visitDataExploration('datafiles', '?sharedFilterId=f586eafb-ed2d-4cde-8ac0-c0c44fa2a504');
     cy.get('[data-cy="SidebarMenuItem_Data File"]').clickAndWait({force: true});
   });
 
@@ -210,6 +214,20 @@ describe('Page Data Exploration (Data Files) - Bouton Save set', () => {
     cy.get('[class*="SavedSets_setTabs"] [data-node-key="files"]').clickAndWait({force: true});
     cy.get('[class*="SavedSets_setTabs"] [class*="ant-tabs-tabpane-active"]').contains('Cypress_New_F').parentsUntil('[class*="ListItem_savedSetListItem"]').parent().find('[class*="ListItem_count"]').contains(/^1$/).clickAndWait({force: true});
   });
+  
+  it('Valider les fonctionnalités du bouton - Save as new set (checkbox)', () => {
+    cy.saveSetAs('Cypress_New_F', 0, true/*familyCheckbox*/);
+
+    cy.get('[class*="ant-notification"]').contains('Your set has been saved.').should('exist');
+    cy.get('[class*="ant-notification"]').contains('You can add your sets to a query from the sidebar or the dashboard.').should('exist');
+    
+    cy.get('[class*="SetSearch_search"] input').type('Cypress_New_F', {force: true});
+    cy.get('[class*="SetSearch_search"] [class*="ant-select-dropdown"]').contains('Cypress_New_F').should('exist');
+
+    cy.visitDashboard();
+    cy.get('[class*="SavedSets_setTabs"] [data-node-key="files"]').clickAndWait({force: true});
+    cy.get('[class*="SavedSets_setTabs"] [class*="ant-tabs-tabpane-active"]').contains('Cypress_New_F').parentsUntil('[class*="ListItem_savedSetListItem"]').parent().find('[class*="ListItem_count"]').contains(/^3$/).clickAndWait({force: true});
+  });
 
   it('Valider les fonctionnalités du bouton - Add to existing set', () => {
     cy.get('div[role="tabpanel"] [class*="ant-table-row"]').eq(1).find('[type="checkbox"]').check({force: true});
@@ -219,6 +237,7 @@ describe('Page Data Exploration (Data Files) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_F').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_F').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 
@@ -238,6 +257,7 @@ describe('Page Data Exploration (Data Files) - Bouton Save set', () => {
     cy.get('[class*="ant-select-in-form-item"] input').focus().type('{enter}', {force: true});
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_F').parentsUntil('[class="ant-select-item-option-content"]').contains(/^1$/).should('exist');
     cy.get('[class*="ant-select-dropdown"]').contains('Cypress_F').clickAndWait({force: true});
+    cy.get('form[id="add-remove-set"] input[type="checkbox"]').should('not.exist');
     cy.clickAndIntercept('[class="ant-modal-content"] button[class*="ant-btn-primary"]', 'PUT', '**/sets/**', 1);
     cy.get('form[id="add-remove-set"]').should('not.exist');
 

@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import intl from 'react-intl-universal';
 import { useDispatch } from 'react-redux';
-import { DownloadOutlined } from '@ant-design/icons';
+import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
 import ExternalLink from '@ferlab/ui/core/components/ExternalLink';
-import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 import { Button, Checkbox, Modal, Tooltip, Typography } from 'antd';
+import { INDEXES } from 'graphql/constants';
 import EnvVariables from 'helpers/EnvVariables';
 
 import TooMuchFilesAlert from 'components/reports/TooMuchFilesAlert';
 import { ReportType } from 'services/api/reports/models';
+import { globalActions } from 'store/global';
 import { fetchReport } from 'store/report/thunks';
+import { PROJECT_ID, useSavedSet } from 'store/savedSet';
+import { createSavedSetPhantomManifest } from 'store/savedSet/thunks';
 import { getDocLang } from 'utils/doc';
+import { getIdFieldByType } from 'utils/fieldMapper';
 
 import FilesTable from './FilesTable';
 
@@ -27,22 +32,31 @@ interface IDownloadFileManifestProps {
   isStudy?: boolean;
   isDataset?: boolean;
   fileName?: string;
+  isIconButton?: boolean;
+  setId?: string;
 }
 
 const DownloadFileManifestModal = ({
   sqon,
   type = 'default',
-  isDisabled,
-  hasTooManyFiles,
+  isDisabled = false,
+  hasTooManyFiles = false,
   hasFamily = true,
   isStudy = false,
   isDataset = false,
   fileName = '',
+  isIconButton = false,
+  setId = '' /** setId exists when the user has selected a set from the dashboard since CQDG-835 */,
 }: IDownloadFileManifestProps) => {
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFamilyChecked, setIsFamilyChecked] = useState(false);
+  const { isLoading } = useSavedSet();
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+  };
 
   const _fileName =
     fileName || (isFamilyChecked ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST);
@@ -77,45 +91,122 @@ const DownloadFileManifestModal = ({
       </>
     );
 
+  const handleDownload = () =>
+    dispatch(
+      fetchReport({
+        data: {
+          name: _fileName,
+          sqon,
+          withFamily: isFamilyChecked,
+        },
+        callback: () => setIsModalVisible(false),
+      }),
+    );
+
+  const handleManifestIdCopy = (idToCopy: string = '') => {
+    /** Safari issue: copy to clipboard needs to be on a setTimeout */
+    setTimeout(() => {
+      navigator.clipboard.writeText(idToCopy);
+    }, 0);
+    dispatch(
+      globalActions.displayMessage({
+        content: intl.get('api.report.fileManifest.manifestIdCopySuccess'),
+        type: 'info',
+      }),
+    );
+  };
+
+  const handleManifestId = async () => {
+    if (setId) {
+      return handleManifestIdCopy(setId);
+    }
+    dispatch(
+      createSavedSetPhantomManifest({
+        idField: getIdFieldByType(INDEXES.FILE),
+        projectId: PROJECT_ID,
+        sort: [],
+        sqon: sqon as ISqonGroupFilter,
+        type: INDEXES.FILE,
+        onCompleteCb: handleManifestIdCopy,
+        tag: 'manifest_phantom_set',
+        withFamily: isFamilyChecked,
+      }),
+    );
+  };
+
   return (
     <Tooltip title={getTooltipTitle()} open={isModalVisible ? false : undefined}>
       <Button
         icon={<DownloadOutlined />}
         onClick={() => setIsModalVisible(true)}
-        type={type}
+        type={isIconButton ? 'text' : type}
+        size={isIconButton ? 'small' : undefined}
         disabled={isDisabled}
         data-cy="FileManifest_Button"
       >
-        {intl.get('api.report.fileManifest.button')}
+        {!isIconButton && intl.get('api.report.fileManifest.button')}
       </Button>
       <Modal
         open={isModalVisible}
         title={intl.get('api.report.fileManifest.title')}
-        okText={intl.get('api.report.fileManifest.okText')}
-        okButtonProps={{ disabled: hasTooManyFiles }}
-        cancelText={intl.get('api.report.fileManifest.cancel')}
-        onCancel={() => setIsModalVisible(false)}
-        onOk={() => {
-          dispatch(
-            fetchReport({
-              data: {
-                name: _fileName,
-                sqon,
-                withFamily: isFamilyChecked,
-              },
-              callback: () => setIsModalVisible(false),
-            }),
-          );
-        }}
+        onCancel={handleClose}
+        footer={[
+          <Button key="1" onClick={handleClose}>
+            {intl.get('api.report.fileManifest.cancel')}
+          </Button>,
+          <Tooltip
+            key="2"
+            title={
+              <>
+                {intl.get('api.report.fileManifest.manifestIdButtonTooltip')}
+                <ExternalLink
+                  className={styles.externalLinkFerload}
+                  hasIcon
+                  href={`${EnvVariables.configFor(
+                    'CQDG_DOCUMENTATION',
+                  )}/docs/comment-utiliser-le-client-ferload${getDocLang()}`}
+                >
+                  {intl.get('global.ferload')}
+                </ExternalLink>
+              </>
+            }
+          >
+            <Button
+              type="primary"
+              onClick={handleManifestId}
+              loading={isLoading}
+              icon={<CopyOutlined />}
+            >
+              {intl.get('api.report.fileManifest.manifestIdButton')}
+            </Button>
+          </Tooltip>,
+          <Button
+            key="3"
+            type="primary"
+            disabled={hasTooManyFiles}
+            onClick={handleDownload}
+            icon={<DownloadOutlined />}
+          >
+            {intl.get('api.report.fileManifest.okText')}
+          </Button>,
+        ]}
         className={styles.modal}
         data-cy="FileManifest_Modal"
       >
         <Content />
-        {hasFamily && (
-          <Checkbox checked={isFamilyChecked} onChange={() => setIsFamilyChecked(!isFamilyChecked)}>
-            {intl.get('api.report.fileManifest.textCheckbox')}
-          </Checkbox>
-        )}
+        {
+          /** from dashboard or study page, the user cant add family's files */
+          hasFamily && !setId && !isStudy && (
+            <Checkbox
+              checked={isFamilyChecked}
+              onChange={() => setIsFamilyChecked(!isFamilyChecked)}
+            >
+              {setId
+                ? intl.get('api.report.fileManifest.textCheckboxSet')
+                : intl.get('api.report.fileManifest.textCheckbox')}
+            </Checkbox>
+          )
+        }
         {hasTooManyFiles && <TooMuchFilesAlert />}
         {!hasTooManyFiles && isModalVisible && <FilesTable sqon={sqon} />}
       </Modal>
