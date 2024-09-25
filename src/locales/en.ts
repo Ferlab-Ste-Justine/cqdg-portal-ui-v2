@@ -513,6 +513,12 @@ const en = {
       next: 'Next',
       view: '{value} / view',
     },
+    quickFilter: {
+      emptyMessage: 'Min. 3 characters',
+      menuTitle: 'Quick filter',
+      placeholder: 'Search...',
+      results: 'Results',
+    },
     seeLess: 'See less',
     seeMore: 'See more',
     ferload: 'Ferload',

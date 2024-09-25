@@ -515,6 +515,12 @@ const fr = {
       next: 'Suivant',
       view: '{value} / écran',
     },
+    quickFilter: {
+      emptyMessage: 'Min. 3 caractères',
+      menuTitle: 'Quick filter',
+      placeholder: 'Chercher...',
+      results: 'Résultats',
+    },
     seeLess: 'Voir moins',
     seeMore: 'Voir plus',
     ferload: 'Ferload',
