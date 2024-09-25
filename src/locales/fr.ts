@@ -478,7 +478,7 @@ const fr = {
         empty: 'Aucune valeur trouvée',
       },
       checkbox: {
-        placeholder: 'Chercher...',
+        placeholder: 'Rechercher...',
       },
     },
     forms: {
