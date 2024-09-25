@@ -36,7 +36,7 @@ import {
   TAB_IDS,
 } from 'views/DataExploration/utils/constant';
 
-import { SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
+import { MAX_TITLE_LENGTH, SHARED_FILTER_ID_QUERY_PARAM_KEY } from 'common/constants';
 import GenericFilters from 'components/uiKit/FilterList/GenericFilters';
 import useQBStateWithSavedFilters from 'hooks/useQBStateWithSavedFilters';
 import { SavedFilterTag } from 'services/api/savedFilter/models';
@@ -260,6 +260,7 @@ const PageContent = ({
           onSaveFilter: handleOnSaveFilter,
           onDeleteFilter: handleOnDeleteFilter,
           onSetAsFavorite: handleOnSaveAsFavorite,
+          maxNameCapSavedQuery: MAX_TITLE_LENGTH,
         }}
         facetFilterConfig={{
           enable: true,
