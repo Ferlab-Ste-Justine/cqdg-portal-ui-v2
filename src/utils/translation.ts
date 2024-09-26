@@ -227,6 +227,7 @@ export const getQueryBuilderDictionary = (
       age_at_recruitment: ageCategoriesKeyLabel,
       'mondo_tagged.age_at_event': ageCategoriesKeyLabel,
       age_biospecimen_collection: ageCategoriesKeyLabel,
+      'biospecimens.age_biospecimen_collection': ageCategoriesKeyLabel,
       variant_external_reference: {
         DBSNP: intl.get('facets.options.variant_external_reference.DBSNP'),
         Clinvar: intl.get('facets.options.variant_external_reference.Clinvar'),
@@ -342,6 +343,19 @@ export const getFacetsDictionary = () => ({
   sample_type: intl.get('entities.biospecimen.sample_type'),
   biospecimen_tissue_source: intl.get('entities.biospecimen.biospecimen_tissue_source'),
   age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection'),
+  biospecimens: {
+    biospecimen_tissue_source: intl.get('entities.biospecimen.biospecimen_tissue_source'),
+    age_biospecimen_collection: intl.get('entities.biospecimen.age_biospecimen_collection'),
+  },
+  files: {
+    dataset: intl.get('entities.file.dataset'),
+    data_category: intl.get('entities.file.data_category'),
+    data_type: intl.get('entities.file.data_type'),
+    file_format: intl.get('entities.file.file_format'),
+    sequencing_experiment: {
+      experimental_strategy: intl.get('entities.file.strategy'),
+    },
+  },
   clinvar: {
     clin_sig: 'ClinVar',
   },

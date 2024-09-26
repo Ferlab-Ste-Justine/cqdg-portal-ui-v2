@@ -350,12 +350,12 @@ const DataExploration = () => {
     const getAgg = () => {
       switch (option.index) {
         case INDEXES.BIOSPECIMEN:
-          return data?.data.biospecimen.aggregations[getFieldWithoutPrefix(option.key)];
+          return data?.data.Biospecimen.aggregations[getFieldWithoutPrefix(option.key)];
         case INDEXES.FILE:
-          return data?.data.file.aggregations[getFieldWithoutPrefix(option.key)];
+          return data?.data.File.aggregations[getFieldWithoutPrefix(option.key)];
         case INDEXES.PARTICIPANT:
         default:
-          return data?.data.participant.aggregations[getFieldWithoutPrefix(option.key)];
+          return data?.data.Participant.aggregations[getFieldWithoutPrefix(option.key)];
       }
     };
 
