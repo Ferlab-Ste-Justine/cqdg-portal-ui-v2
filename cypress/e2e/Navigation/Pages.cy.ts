@@ -28,7 +28,7 @@ describe('Navigation', () => {
     cy.get('[data-cy="Title_Community"]').should('exist');
 
     cy.get('[data-cy="UserName"]').clickAndWait({force: true});
-    cy.get('[data-menu-id*="profile_settings"]').find('[href]').clickAndWait({force: true});
+    cy.get('[data-menu-id*="profile_settings"] [href]').clickAndWait({force: true});
     cy.get('[data-cy="Title_ProfileSettings"]').should('exist');
 
     cy.get('[data-cy="LangButton_FR"]').clickAndWait();
@@ -81,19 +81,19 @@ describe('Navigation', () => {
 
   it('Redirections de la page Dashboard', () => {
     cy.visitDashboard();
-    cy.get('[data-cy="GridCard_Studies"]').find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="GridCard_Studies"] [href]').clickAndWait({force: true});
     cy.get('[data-cy="Title_Studies"]').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="GridCard_Participants"]').find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="GridCard_Participants"] [href]').clickAndWait({force: true});
     cy.get('[data-cy="ProTable_Participants"]').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="GridCard_Biospecimens"]').find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="GridCard_Biospecimens"] [href]').clickAndWait({force: true});
     cy.get('[data-cy="ProTable_Biospecimens"]').should('exist');
 
     cy.visitDashboard();
-    cy.get('[data-cy="GridCard_DataFiles"]').find('[href]').clickAndWait({force: true});
+    cy.get('[data-cy="GridCard_DataFiles"] [href]').clickAndWait({force: true});
     cy.get('[data-cy="ProTable_DataFiles"]').should('exist');
   });
 
