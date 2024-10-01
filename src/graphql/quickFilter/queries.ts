@@ -34,6 +34,12 @@ export const GET_QUICK_FILTER_EXPLO = gql`
             doc_count
           }
         }
+        family_type {
+          buckets {
+            key
+            doc_count
+          }
+        }
         sex {
           buckets {
             key

@@ -515,7 +515,7 @@ const en = {
     },
     quickFilter: {
       emptyMessage: 'Min. 3 characters',
-      menuTitle: 'Quick filter',
+      menuTitle: 'Quick Filter',
       placeholder: 'Search...',
       results: 'Results',
     },
@@ -1303,6 +1303,7 @@ const en = {
       age_at_recruitment: ageCategoriesKeyLabelTooltip,
       mondo_tagged__age_at_event: ageCategoriesKeyLabelTooltip,
       age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
+      biospecimens__age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
     },
   },
 };

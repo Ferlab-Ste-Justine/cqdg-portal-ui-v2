@@ -199,7 +199,7 @@ const DataExploration = () => {
   const [forceClose, setForceClose] = useState<boolean>(false);
 
   const quickfilterOpenRemote = (field: string): boolean => {
-    if (field === 'observed_phenotype__name') {
+    if (field === 'observed_phenotypes__name') {
       dispatch(
         remoteSliceActions.openRemoteComponent({
           id: RemoteComponentList.HPOTree,
@@ -222,7 +222,6 @@ const DataExploration = () => {
 
       return true;
     }
-
     return false;
   };
 

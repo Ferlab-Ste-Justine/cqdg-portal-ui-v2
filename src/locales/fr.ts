@@ -1322,6 +1322,7 @@ const fr = {
       age_at_recruitment: ageCategoriesKeyLabelTooltip,
       mondo_tagged__age_at_event: ageCategoriesKeyLabelTooltip,
       age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
+      biospecimens__age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
     },
   },
 };
