@@ -31,7 +31,8 @@ export const headers = (): AxiosRequestHeaders => ({
 });
 
 const generateReport = (config: ReportConfig) => {
-  const name = config.name;
+  const name = config.name as ReportType;
+  const url = REPORTS_ROUTES[name];
 
   let reportSqon;
   if (!config.sqon || isEmpty(config.sqon)) {
@@ -43,13 +44,14 @@ const generateReport = (config: ReportConfig) => {
     reportSqon = config.sqon;
   }
 
+  const fileNameToUse = config.fileName || name;
+
   /** the quotes in string are required by format function, else it throws an error */
-  const fileName = `'cqdg_${name}'_yyyyMMdd`;
+  const fileName = `'cqdg_${fileNameToUse}'_yyyyMMdd`;
   const fileNameFormatted = format(new Date(), fileName);
-  const route = config.withFamily ? ReportType.FILE_MANIFEST_FAMILY : ReportType.FILE_MANIFEST;
 
   return downloader({
-    url: REPORTS_ROUTES[route],
+    url,
     method: 'POST',
     responseType: 'blob',
     data: {
