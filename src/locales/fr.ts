@@ -515,6 +515,12 @@ const fr = {
       next: 'Suivant',
       view: '{value} / écran',
     },
+    quickFilter: {
+      emptyMessage: 'Min. 3 caractères',
+      menuTitle: 'Rechercher',
+      placeholder: 'Rechercher...',
+      results: 'Résultats',
+    },
     seeLess: 'Voir moins',
     seeMore: 'Voir plus',
     ferload: 'Ferload',
@@ -1316,6 +1322,7 @@ const fr = {
       age_at_recruitment: ageCategoriesKeyLabelTooltip,
       mondo_tagged__age_at_event: ageCategoriesKeyLabelTooltip,
       age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
+      biospecimens__age_biospecimen_collection: ageCategoriesKeyLabelTooltip,
     },
   },
 };
