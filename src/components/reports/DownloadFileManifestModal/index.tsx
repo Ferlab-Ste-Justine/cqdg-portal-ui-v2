@@ -147,6 +147,7 @@ const DownloadFileManifestModal = ({
         {!isIconButton && intl.get('api.report.fileManifest.button')}
       </Button>
       <Modal
+        destroyOnClose
         open={isModalVisible}
         title={intl.get('api.report.fileManifest.title')}
         onCancel={handleClose}

@@ -54,7 +54,6 @@ export const getDataTypeColumns = (): ProColumnType<any>[] => [
 
 const FilesTable = ({ sqon }: { sqon: ISyntheticSqon }) => {
   const config: AxiosRequestConfig = {
-    // @ts-ignore
     url: REPORTS_ROUTES[ReportType.FILE_MANIFEST_STATS],
     method: 'POST',
     responseType: 'json',

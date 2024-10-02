@@ -54,7 +54,7 @@ describe('Page Data Exploration (Data Files) - Bouton Manifest', () => {
 
   it('Valider les fonctionnalités - Bouton Cancel', () => {
     cy.get('[class="ant-modal-footer"] button[class*="ant-btn-default"]').click({force: true});
-    cy.get('[class*="DownloadFileManifestModal_modal"]').should('have.css', 'display', 'none');
+    cy.get('[class*="DownloadFileManifestModal_modal"]').should('not.exist');
     cy.task('fileExists', `${Cypress.config('downloadsFolder')}`).then((exists) => {
       assert.isTrue(!exists);
     });
@@ -80,7 +80,7 @@ describe('Page Data Exploration (Data Files) - Bouton Manifest', () => {
 
   it('Valider les fonctionnalités - Bouton Download', () => {
     cy.clickAndIntercept('[class="ant-modal-footer"] button[class*="ant-btn-primary"]', 'POST', '**/file-manifest', 1, 1);
-    cy.get('[class*="DownloadFileManifestModal_modal"]').should('have.css', 'display', 'none');
+    cy.get('[class*="DownloadFileManifestModal_modal"]').should('not.exist');
     cy.waitUntilFile(oneMinute);
     cy.validateFileName('*.tsv');
   });
