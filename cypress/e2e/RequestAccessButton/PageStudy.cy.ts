@@ -52,29 +52,21 @@ describe('Page d\'une étude - Bouton Request Access', () => {
   });
 
   it('Valider les fonctionnalités - Bouton Download', () => {
-    cy.clickAndIntercept('[class="ant-modal-footer"] button[class*="ant-btn-primary"]', 'POST', '**/file-manifest', 1);
+    cy.clickAndIntercept('[class="ant-modal-footer"] button[class*="ant-btn-primary"]', 'POST', '**/file-request-access', 1);
     cy.get('[class*="DownloadRequestAccessModal_modal"]').should('have.css', 'display', 'none');
     cy.waitUntilFile(oneMinute);
-    cy.validateFileName('*.tsv');
+    cy.validateFileName('*.gz');
   });
 });
 
 describe('Page d\'une étude - Télécharger le Request Access', () => {
   beforeEach(() => {
     cy.get('[class*="EntityTitle"] [data-cy="RequestAccess_Button"]').click({force: true});
-    cy.clickAndIntercept('[class="ant-modal-footer"] button[class*="ant-btn-primary"]', 'POST', '**/file-manifest', 1);
+    cy.clickAndIntercept('[class="ant-modal-footer"] button[class*="ant-btn-primary"]', 'POST', '**/file-request-access', 1);
     cy.waitUntilFile(oneMinute);
   });
 
   it('Valider le nom du fichier', () => {
-    cy.validateFileName('cqdg_fileRequestAccess_'+`${strDate.slice(0, 4)}${strDate.slice(4, 6)}${strDate.slice(6, 8)}`+'.tsv');
-  });
-
-  it('Valider les en-têtes du fichier', () => {
-    cy.validateFileHeaders('DownloadRequestAccessFamily.json');
-  });
-
-  it('Valider le contenu du fichier', () => {
-    cy.validateFileContent('DownloadRequestAccessFamily.json');
+    cy.validateFileName('CQDG-access-request.tar.gz');
   });
 });

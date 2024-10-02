@@ -14,11 +14,11 @@ beforeEach(() => {
 });
 
 describe('Page d\'un participant - Télécharger le sample data', () => {
-  it('Valider le nom du fichier [CQDG-861]', () => {
-    cy.validateFileName(`cqdg_biospecimenData_${strDate.slice(0, 4)}${strDate.slice(4, 6)}${strDate.slice(6, 8)}T*.xlsx`);
+  it('Valider le nom du fichier', () => {
+    cy.validateFileName(`cqdg_biospecimenData_${strDate.slice(0, 4)}${strDate.slice(4, 6)}${strDate.slice(6, 8)}.xlsx`);
   });
 
-  it('Valider le contenu du fichier [CQDG-861]', () => {
-    cy.validateXlsxFileContent('DownloadbiospecimenData.json');
+  it('Valider le contenu du fichier [CQDG-889]', () => {
+    cy.validateXlsxFileContent('DownloadBiospecimenData.json');
   });
 });

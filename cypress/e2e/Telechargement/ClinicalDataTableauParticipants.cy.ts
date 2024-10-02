@@ -19,11 +19,11 @@ describe('Page Data Exploration (Participants) - Télécharger le clinical data'
     cy.waitUntilFile(oneMinute);
   });
 
-  it('Valider le nom du fichier [CQDG-861]', () => {
+  it('Valider le nom du fichier', () => {
     cy.validateFileName(`cqdg_clinicalData_${strDate.slice(0, 4)}${strDate.slice(4, 6)}${strDate.slice(6, 8)}.xlsx`);
   });
 
-  it('Valider le contenu du fichier [CQDG-861]', () => {
+  it('Valider le contenu du fichier [CQDG-889]', () => {
     cy.validateXlsxFileContent('DownloadClinicalData.json');
   });
 });
@@ -34,11 +34,11 @@ describe('Page Data Exploration (Participants) - Télécharger le clinical data 
     cy.waitUntilFile(oneMinute);
   });
 
-  it('Valider le nom du fichier [CQDG-861]', () => {
+  it('Valider le nom du fichier', () => {
     cy.validateFileName(`cqdg_familyClinicalData_${strDate.slice(0, 4)}${strDate.slice(4, 6)}${strDate.slice(6, 8)}.xlsx`);
   });
 
-  it('Valider le contenu du fichier [CQDG-861]', () => {
+  it('Valider le contenu du fichier [CQDG-889]', () => {
     cy.validateXlsxFileContent('DownloadClinicalDataFamily.json');
   });
 });
