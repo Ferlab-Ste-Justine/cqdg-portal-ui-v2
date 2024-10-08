@@ -235,6 +235,7 @@ const DataExploration = () => {
       },
     });
     if (data) setQuickFilterData(data?.data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(activeQuery)]);
 
   useEffect(() => {

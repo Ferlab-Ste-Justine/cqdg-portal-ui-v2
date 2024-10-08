@@ -44,9 +44,8 @@ const savedFilterSlice = createSlice({
       savedFilters: sortByUpdateDate(action.payload),
       isLoading: false,
     }));
-    builder.addCase(fetchSavedFilters.rejected, (state, action) => ({
+    builder.addCase(fetchSavedFilters.rejected, (state) => ({
       ...state,
-      fetchingError: action.payload,
       isLoading: false,
     }));
     // Fetch Shared

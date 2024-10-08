@@ -51,12 +51,12 @@ const getItemList = (
     locale={{
       emptyText: fetchingError ? (
         <CardErrorPlaceholder
-          title={intl.get('screen.dashboard.cards.error.failedFetch')}
+          title={intl.get('screen.dashboard.cards.error.failedFetchSets')}
           subTitle={
             <Text>
-              {intl.get('screen.dashboard.cards.pleaseRefresh')}
+              {intl.get('screen.dashboard.cards.error.pleaseRefresh')}
               <ExternalLink href={`mailto:${SUPPORT_EMAIL}`}>
-                <Text>{intl.get('screen.dashboard.cards.contact')}</Text>
+                <Text>{intl.get('screen.dashboard.cards.error.contactSupport')}</Text>
               </ExternalLink>
               .
             </Text>

@@ -493,6 +493,13 @@ const fr = {
       404: "Désolé, cette page n'existe pas.",
       500: 'Désolé, quelque chose en va pas.',
       backHome: 'Retour accueil',
+      query: {
+        notFound: {
+          title: 'Requête introuvable',
+          content: `Nous n'avons pas pu charger votre requête. Veuillez réessayer ou <a href="{href}" style="text-decoration: underline;" target="_blank">contacter le support</a>.`,
+          okText: 'Fermer',
+        },
+      },
     },
     notification: {
       genericError: 'Une erreur est apparue',
@@ -1046,9 +1053,10 @@ const fr = {
           title: 'Erreur de connexion',
           subtitle:
             'Nous ne sommes actuellement pas en mesure de nous connecter à ce service. Veuillez actualiser la page et réessayer. Si le problème persiste, veuillez',
-          contactSupport: 'contactez le support',
           pleaseRefresh: 'Veuillez actualiser et réessayer ou ',
-          failedFetch: 'Échec de la récupération des filtres sauvegardés',
+          failedFetchFilters: 'Échec de la récupération des filtres sauvegardés',
+          failedFetchSets: 'Échec de la récupération des ensembles sauvegardés',
+          contactSupport: 'contactez le support',
         },
         savedFilters: {
           title: 'Mes filtres',

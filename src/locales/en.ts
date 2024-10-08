@@ -491,6 +491,14 @@ const en = {
       404: 'Sorry, the page you visited does not exist.',
       500: 'Sorry, something went wrong.',
       backHome: 'Back home',
+      query: {
+        notFound: {
+          title: 'Query not found',
+          content:
+            'We were unable to load your query. Please try again or <a href="{href}" style="text-decoration: underline;" target="_blank">contact support</a>.',
+          okText: 'Close',
+        },
+      },
     },
     notification: {
       genericError: 'An error occured',
@@ -1039,9 +1047,10 @@ const en = {
           title: 'Connection error',
           subtitle:
             'We are currently unable to connect to this service. Please refresh the page and try again. If the problem persists, please',
-          contactSupport: 'contact support',
           pleaseRefresh: 'Please refresh and try again or ',
-          failedFetch: 'Failed to fetch filters saved',
+          failedFetchFilters: 'Failed to fetch Saved Filters',
+          failedFetchSets: 'Failed to fetch Saved Sets',
+          contactSupport: 'contact our support',
         },
         savedFilters: {
           title: 'My Filters',
