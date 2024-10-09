@@ -1,6 +1,7 @@
 import intl from 'react-intl-universal';
 import { setQueryBuilderState } from '@ferlab/ui/core/components/QueryBuilder/utils/useQueryBuilderState';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Modal } from 'antd';
 import isEmpty from 'lodash/isEmpty';
 import { v4 } from 'uuid';
 
@@ -13,6 +14,8 @@ import {
 } from 'services/api/savedFilter/models';
 import { globalActions } from 'store/global';
 import { handleThunkApiReponse } from 'store/utils';
+
+import { SUPPORT_EMAIL } from '../report/thunks';
 
 const fetchSavedFilters = createAsyncThunk<
   TUserSavedFilter[],
@@ -44,6 +47,14 @@ const fetchSharedSavedFilter = createAsyncThunk<
 
   return handleThunkApiReponse({
     error,
+    onError: () =>
+      Modal.error({
+        content: intl.getHTML('global.errors.query.notFound.content', {
+          href: `mailto:${SUPPORT_EMAIL}`,
+        }),
+        okText: intl.get('global.errors.query.notFound.okText'),
+        title: intl.get('global.errors.query.notFound.title'),
+      }),
     data: data,
     reject: thunkAPI.rejectWithValue,
   });
