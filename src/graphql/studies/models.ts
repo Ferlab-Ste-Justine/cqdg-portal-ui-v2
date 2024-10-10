@@ -62,4 +62,8 @@ export interface IStudyEntity {
   contact: { type: string; value: string };
   datasets: ArrangerResultsTree<IDataSet>;
   security?: Security;
+  principal_investigators: string[];
+  data_sources: string[];
+  selection_criterias: string[];
+  publication: string;
 }
