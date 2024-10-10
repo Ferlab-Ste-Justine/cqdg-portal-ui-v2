@@ -55,6 +55,18 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
         </div>
       )) || TABLE_EMPTY_PLACE_HOLDER,
   },
+  {
+    label: intl.get('entities.study.data_sources'),
+    value: study?.data_sources || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    label: intl.get('entities.study.selection_criterias'),
+    value: study?.selection_criterias || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    label: intl.get('entities.study.publication'),
+    value: study?.publication || TABLE_EMPTY_PLACE_HOLDER,
+  },
 ];
 
 export default getSummaryDescriptions;

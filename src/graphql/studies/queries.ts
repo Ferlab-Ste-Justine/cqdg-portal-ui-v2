@@ -76,6 +76,10 @@ export const GET_STUDIES = gql`
                 }
               }
             }
+            principal_investigators
+            data_sources
+            selection_criterias
+            publication
           }
         }
       }
