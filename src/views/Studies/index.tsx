@@ -237,6 +237,28 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       </Popover>
     ),
   },
+  {
+    dataIndex: 'data_collection_method',
+    key: 'data_collection_method',
+    title: intl.get('entities.study.data_collection_method'),
+    sorter: { multiple: 1 },
+    render: (data_collection_method: string[]) =>
+      data_collection_method || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    dataIndex: 'design',
+    key: 'design',
+    title: intl.get('entities.study.design'),
+    sorter: { multiple: 1 },
+    render: (design: string[]) => design || TABLE_EMPTY_PLACE_HOLDER,
+  },
+  {
+    dataIndex: 'data_categories',
+    key: 'data_categories',
+    title: intl.get('entities.study.data_categories'),
+    sorter: { multiple: 1 },
+    render: (data_categories: string[]) => data_categories || TABLE_EMPTY_PLACE_HOLDER,
+  },
 ];
 
 const Studies = () => {
@@ -247,6 +269,9 @@ const Studies = () => {
       'population',
       'data_access_codes__access_limitations',
       'data_access_codes__access_requirements',
+      'data_collection_method',
+      'design',
+      'data_categories',
     ],
     groups: [
       {
@@ -255,6 +280,9 @@ const Studies = () => {
           'population',
           'data_access_codes__access_limitations',
           'data_access_codes__access_requirements',
+          'data_collection_method',
+          'design',
+          'data_categories',
         ],
       },
     ],

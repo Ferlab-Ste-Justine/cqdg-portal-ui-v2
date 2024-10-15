@@ -76,10 +76,23 @@ export const GET_STUDIES = gql`
                 }
               }
             }
+            restricted
+            design
+            data_collection_method
+            expected_number_participants
+            expected_number_biospecimens
+            expected_number_files
+            restricted_number_participants
+            restricted_number_biospecimens
+            restricted_number_files
             principal_investigators
-            data_sources
-            selection_criterias
-            publication
+            contact_name
+            contact_institution
+            contact_email
+            website
+            funding_source
+            citation_statement
+            selection_criteria
           }
         }
       }
