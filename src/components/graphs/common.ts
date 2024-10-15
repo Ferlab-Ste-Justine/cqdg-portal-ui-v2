@@ -3,7 +3,7 @@ import { LegendProps } from '@nivo/legends';
 export const legends: LegendProps[] = [
   {
     anchor: 'bottom',
-    translateX: 0,
+    translateX: -320,
     translateY: 100,
     direction: 'column',
     itemWidth: 100,
