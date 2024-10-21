@@ -77,8 +77,8 @@ export const GET_STUDIES = gql`
               }
             }
             restricted
-            design
-            data_collection_method
+            study_designs
+            data_collection_methods
             expected_number_participants
             expected_number_biospecimens
             expected_number_files
@@ -86,13 +86,16 @@ export const GET_STUDIES = gql`
             restricted_number_biospecimens
             restricted_number_files
             principal_investigators
-            contact_name
-            contact_institution
-            contact_email
-            website
-            funding_source
+            contact_names
+            contact_extensions
+            contact_institutions
+            contact_emails
+            telecom
+            websites
+            funding_sources
             citation_statement
             selection_criteria
+            expected_items
           }
         }
       }

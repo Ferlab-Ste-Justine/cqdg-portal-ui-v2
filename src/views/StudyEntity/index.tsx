@@ -117,8 +117,7 @@ const StudyEntity = () => {
       <EntityDescriptions
         id={SectionId.SUMMARY}
         loading={loading}
-        // descriptions={getSummaryDescriptions(study).filter((e) => e.value)}
-        descriptions={getSummaryDescriptions(study)}
+        descriptions={getSummaryDescriptions(study).filter((e) => e.value)}
         header={intl.get('global.summary')}
         subheader={<SummaryHeader study={study} isRestricted={isRestricted} />}
       />

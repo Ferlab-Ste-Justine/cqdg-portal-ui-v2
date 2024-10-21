@@ -1,3 +1,4 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { CheckOutlined } from '@ant-design/icons';
@@ -11,7 +12,13 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
+import { ArrangerResultsTree } from 'graphql/models';
+import {
+  IDataCategory,
+  IStudyDataAccessCodes,
+  IStudyEntity,
+  ITableStudyEntity,
+} from 'graphql/studies/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import SideBarFacet from 'views/Studies/components/SideBarFacet';
@@ -238,26 +245,55 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     ),
   },
   {
-    dataIndex: 'data_collection_method',
-    key: 'data_collection_method',
-    title: intl.get('entities.study.data_collection_method'),
+    dataIndex: 'data_collection_methods',
+    key: 'data_collection_methods',
+    title: intl.get('entities.study.data_collection_methods'),
     sorter: { multiple: 1 },
-    render: (data_collection_method: string[]) =>
-      data_collection_method || TABLE_EMPTY_PLACE_HOLDER,
+    render: (data_collection_methods: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_collection_methods || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
   },
   {
-    dataIndex: 'design',
-    key: 'design',
+    dataIndex: 'study_designs',
+    key: 'study_designs',
     title: intl.get('entities.study.design'),
     sorter: { multiple: 1 },
-    render: (design: string[]) => design || TABLE_EMPTY_PLACE_HOLDER,
+    render: (study_designs: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={study_designs || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
   },
   {
     dataIndex: 'data_categories',
-    key: 'data_categories',
+    key: 'data_categories.data_category',
     title: intl.get('entities.study.data_categories'),
     sorter: { multiple: 1 },
-    render: (data_categories: string[]) => data_categories || TABLE_EMPTY_PLACE_HOLDER,
+    render: (data_categories: ArrangerResultsTree<IDataCategory>) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_categories?.hits?.edges?.map((e) => e?.node?.data_category) || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
   },
 ];
 
@@ -269,9 +305,9 @@ const Studies = () => {
       'population',
       'data_access_codes__access_limitations',
       'data_access_codes__access_requirements',
-      'data_collection_method',
-      'design',
-      'data_categories',
+      'data_collection_methods',
+      'study_designs',
+      'data_categories__data_category',
     ],
     groups: [
       {
@@ -280,9 +316,9 @@ const Studies = () => {
           'population',
           'data_access_codes__access_limitations',
           'data_access_codes__access_requirements',
-          'data_collection_method',
-          'design',
-          'data_categories',
+          'data_collection_methods',
+          'study_designs',
+          'data_categories__data_category',
         ],
       },
     ],

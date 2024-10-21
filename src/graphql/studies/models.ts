@@ -19,7 +19,7 @@ interface IDataType {
   participant_count: number;
 }
 
-interface IDataCategory {
+export interface IDataCategory {
   id: string;
   data_category: string;
   participant_count: number;
@@ -69,8 +69,8 @@ export interface IStudyEntity {
   datasets: ArrangerResultsTree<IDataSet>;
   security?: Security;
   restricted: boolean;
-  design: string[];
-  data_collection_method: string[];
+  study_designs: string[];
+  data_collection_methods: string[];
   expected_number_participants: number;
   expected_number_biospecimens: number;
   expected_number_files: number;
@@ -78,11 +78,11 @@ export interface IStudyEntity {
   restricted_number_biospecimens: number;
   restricted_number_files: number;
   principal_investigators: string[];
-  contact_name: string;
-  contact_institution: string;
-  contact_email: string;
-  website: string;
-  funding_source: string;
+  contact_names: string[];
+  contact_institutions: string[];
+  contact_emails: string[];
+  websites: string[];
+  funding_sources: string[];
   citation_statement: string;
   selection_criteria: string;
 }

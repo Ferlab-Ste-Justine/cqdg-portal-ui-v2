@@ -1,4 +1,5 @@
 import intl from 'react-intl-universal';
+import ExternalLink from '@ferlab/ui/core/components/ExternalLink/index';
 import { IEntityDescriptionsItem } from '@ferlab/ui/core/pages/EntityPage';
 import { Tag } from 'antd';
 import { IStudyEntity } from 'graphql/studies/models';
@@ -27,7 +28,7 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.design'),
-    value: study?.design,
+    value: study?.study_designs?.toString()?.replaceAll(',', ', '),
   },
   {
     label: intl.get('entities.study.population'),
@@ -54,31 +55,40 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.data_categories'),
-    value: study?.data_categories?.hits?.edges?.map(({ node }) => node.data_category),
+    value: study?.data_categories?.hits?.edges
+      ?.map(({ node }) => node.data_category)
+      ?.toString()
+      ?.replaceAll(',', ', '),
   },
   {
-    label: intl.get('entities.study.data_collection_method'),
-    value: study?.data_collection_method,
+    label: intl.get('entities.study.data_collection_methods'),
+    value: study?.data_collection_methods?.toString()?.replaceAll(',', ', '),
   },
   {
     label: intl.get('entities.study.principal_investigators'),
-    value: study?.principal_investigators,
+    value: study?.principal_investigators?.toString()?.replaceAll(',', ', '),
   },
   {
-    label: intl.get('entities.study.contact_name'),
-    value: study?.contact_name,
+    label: intl.get('entities.study.contact_names'),
+    value: study?.contact_names?.toString()?.replaceAll(',', ', '),
   },
   {
-    label: intl.get('entities.study.contact_institution'),
-    value: study?.contact_institution,
+    label: intl.get('entities.study.contact_institutions'),
+    value: study?.contact_institutions?.toString()?.replaceAll(',', ', '),
   },
   {
     label: intl.get('entities.study.website'),
-    value: study?.website,
+    value:
+      study?.websites?.length &&
+      study.websites.map((website, i) => (
+        <ExternalLink key={i} href={website}>
+          {website}
+        </ExternalLink>
+      )),
   },
   {
-    label: intl.get('entities.study.funding_source'),
-    value: study?.funding_source,
+    label: intl.get('entities.study.funding_sources'),
+    value: study?.funding_sources?.toString()?.replaceAll(',', ', '),
   },
   {
     label: intl.get('entities.study.citation_statement'),
