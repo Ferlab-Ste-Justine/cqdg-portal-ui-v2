@@ -55,7 +55,7 @@ const DownloadRequestAccessModal = ({
         {intl.get('api.report.requestAccess.text')}
         <br />
         <br />
-        <ExternalMailToLink email={study.contact?.value} />
+        <ExternalMailToLink email={study.access_authority?.value} />
         <br />
         <br />
         {intl.get('api.report.requestAccess.text2')}

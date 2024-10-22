@@ -80,7 +80,7 @@ export const GET_PARTICIPANTS = gql`
                 access_limitations
                 access_requirements
               }
-              contact {
+              access_authority {
                 type
                 value
               }
