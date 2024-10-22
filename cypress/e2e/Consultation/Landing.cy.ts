@@ -16,7 +16,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
 
   it('Section Studies Side Panel Tile', () => {
     cy.get('[class*="Studies_container"] [class*="Summary"] [id="study"]').should('exist');
-    cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains('3').should('exist');
+    cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains('4').should('exist');
     cy.get('[class*="Studies_container"] [class*="Summary"] [class*="TextIcon_layout"]').contains(/(Studies|Études)/).should('exist');
     cy.get('[class*="Studies_container"] [class*="Summary"]').contains(/(Explorez les données harmonisées d’études dans les populations pédiatriques et adultes.|Explore harmonized data from studies in both pediatric and adult populations.)/).should('exist');
   });
@@ -54,7 +54,7 @@ describe('Page Landing - Vérifier les informations affichées', () => {
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-head"]').contains(/(Données CQDG|Release) v1.0/).should('exist');
 
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).find('[id="study"]').should('exist');
-    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).contains('3').should('exist');
+    cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).contains('4').should('exist');
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(0).contains(/(Études|Studies)/).should('exist');
     
     cy.get('[class*="Stats_wrapper"] [class*="ant-card-body"] [class*="TextIcon_layout"]').eq(1).find('[id="participant"]').should('exist');

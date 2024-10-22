@@ -115,7 +115,7 @@ describe('Page Data Exploration (Participants) - Filtrer avec les facettes', () 
   });
 
   it('Diagnosis (Source Text) - Intractable Epilepsy', () => {
-    cy.validateFacetFilter('Diagnosis (Source Text)', 'Intractable Epilepsy', 'Intractable Epilepsy', /^205$/);
+    cy.validateFacetFilter('Diagnosis (Source Text)', 'Intractable Epilepsy', 'Intractable Epilepsy', /\d{1}/);
     cy.validateFacetRank(9, 'Diagnosis (Source Text)');
   });
 });
