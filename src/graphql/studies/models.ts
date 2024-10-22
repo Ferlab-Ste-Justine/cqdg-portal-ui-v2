@@ -59,7 +59,7 @@ export interface IStudyEntity {
   family_data: boolean;
   status: string;
   study_version: string;
-  contact: { type: string; value: string };
+  access_authority: { type: string; value: string };
   datasets: ArrangerResultsTree<IDataSet>;
   security?: Security;
 }

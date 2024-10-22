@@ -80,16 +80,16 @@ const getDataAccessDescriptions = (study?: IStudyEntity): IEntityDescriptionsIte
   },
   {
     label: intl.get('entities.study.access_authority'),
-    value: study?.contact?.value ? (
+    value: study?.access_authority?.value ? (
       <ExternalLink
         href={
-          EMAIL_REGEX.test(study.contact.value)
-            ? `mailto:${study.contact.value}`
-            : study.contact.value
+          EMAIL_REGEX.test(study.access_authority.value)
+            ? `mailto:${study.access_authority.value}`
+            : study.access_authority.value
         }
         className={styles.link}
       >
-        {study.contact.value}
+        {study.access_authority.value}
       </ExternalLink>
     ) : (
       TABLE_EMPTY_PLACE_HOLDER

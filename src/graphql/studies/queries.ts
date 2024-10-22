@@ -20,7 +20,7 @@ export const GET_STUDIES = gql`
             file_count
             family_count
             security
-            contact {
+            access_authority {
               value
               type
             }
