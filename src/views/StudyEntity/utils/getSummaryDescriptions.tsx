@@ -28,7 +28,11 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.design'),
-    value: study?.study_designs?.toString()?.replaceAll(',', ', '),
+    value: study?.study_designs?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.population'),
@@ -55,26 +59,45 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.data_categories'),
-    value: study?.data_categories?.hits?.edges
-      ?.map(({ node }) => node.data_category)
-      ?.toString()
-      ?.replaceAll(',', ', '),
+    value:
+      study?.data_categories?.hits?.edges?.length &&
+      study.data_categories.hits.edges.map(({ node }) => (
+        <Tag key={node.data_category} className={styles.tag}>
+          {node.data_category}
+        </Tag>
+      )),
   },
   {
     label: intl.get('entities.study.data_collection_methods'),
-    value: study?.data_collection_methods?.toString()?.replaceAll(',', ', '),
+    value: study?.data_collection_methods?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.principal_investigators'),
-    value: study?.principal_investigators?.toString()?.replaceAll(',', ', '),
+    value: study?.principal_investigators?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.contact_names'),
-    value: study?.contact_names?.toString()?.replaceAll(',', ', '),
+    value: study?.contact_names?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.contact_institutions'),
-    value: study?.contact_institutions?.toString()?.replaceAll(',', ', '),
+    value: study?.contact_institutions?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.website'),
@@ -88,7 +111,11 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.funding_sources'),
-    value: study?.funding_sources?.toString()?.replaceAll(',', ', '),
+    value: study?.funding_sources?.map((e) => (
+      <Tag key={e} className={styles.tag}>
+        {e}
+      </Tag>
+    )),
   },
   {
     label: intl.get('entities.study.citation_statement'),
