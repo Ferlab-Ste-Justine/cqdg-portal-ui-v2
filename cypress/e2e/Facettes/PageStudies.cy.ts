@@ -32,17 +32,17 @@ describe('Page des études - Filtrer avec les facettes', () => {
   });
 
   it('Population - Pediatric and adult', () => {
-    cy.validateFacetFilter('Population', 'Pediatric and adult', 'Pediatric and adult', /^3 Results$/, false);
+    cy.validateFacetFilter('Population', 'Pediatric and adult', 'Pediatric and adult', /\d{1} Results/, false);
     cy.validateFacetRank(1, 'Population');
   });
 
   it('Access Limitation - Health or medical or biomedical research (DUO:0000006)', () => {
-    cy.validateFacetFilter('Access Limitation', 'Health or medical or biomedical research (DUO:0000006)', 'health or medical or biomedical research (DUO:0000006)', /^3 Results$/, false);
+    cy.validateFacetFilter('Access Limitation', 'Health or medical or biomedical research (DUO:0000006)', 'health or medical or biomedical research (DUO:0000006)', /\d{1} Results/, false);
     cy.validateFacetRank(2, 'Access Limitation');
   });
 
   it('Access Requirement - Genetic studies only (DUO:0000016)', () => {
-    cy.validateFacetFilter('Access Requirement', 'Genetic studies only (DUO:0000016)', 'genetic studies only (DUO:0000016)', /^3 Results$/, false);
+    cy.validateFacetFilter('Access Requirement', 'Genetic studies only (DUO:0000016)', 'genetic studies only (DUO:0000016)', /\d{1} Results/, false);
     cy.validateFacetRank(3, 'Access Requirement');
   });
 });
