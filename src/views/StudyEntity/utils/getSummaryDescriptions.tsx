@@ -104,7 +104,7 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
     value:
       study?.websites?.length &&
       study.websites.map((website, i) => (
-        <ExternalLink key={i} href={website}>
+        <ExternalLink key={i} href={website} className={styles.marginRight}>
           {website}
         </ExternalLink>
       )),
