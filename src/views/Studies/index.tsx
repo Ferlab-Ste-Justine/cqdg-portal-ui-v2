@@ -12,13 +12,7 @@ import ScrollContent from '@ferlab/ui/core/layout/ScrollContent';
 import { numberFormat } from '@ferlab/ui/core/utils/numberUtils';
 import { Popover } from 'antd';
 import { INDEXES } from 'graphql/constants';
-import { ArrangerResultsTree } from 'graphql/models';
-import {
-  IDataCategory,
-  IStudyDataAccessCodes,
-  IStudyEntity,
-  ITableStudyEntity,
-} from 'graphql/studies/models';
+import { IStudyDataAccessCodes, IStudyEntity, ITableStudyEntity } from 'graphql/studies/models';
 import { DATA_EXPLORATION_QB_ID } from 'views/DataExploration/utils/constant';
 import { extractDuoTitleAndCode } from 'views/DataExploration/utils/helper';
 import SideBarFacet from 'views/Studies/components/SideBarFacet';
@@ -245,27 +239,10 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     ),
   },
   {
-    dataIndex: 'data_collection_methods',
-    key: 'data_collection_methods',
-    title: intl.get('entities.study.data_collection_methods'),
-    sorter: { multiple: 1 },
-    render: (data_collection_methods: string[]) => (
-      <ExpandableCell
-        nOfElementsWhenCollapsed={1}
-        dataSource={data_collection_methods || []}
-        renderItem={(item, index) => <div key={index}>{item}</div>}
-        dictionnary={{
-          'see.less': intl.get('global.seeLess'),
-          'see.more': intl.get('global.seeMore'),
-        }}
-      />
-    ),
-  },
-  {
     dataIndex: 'study_designs',
     key: 'study_designs',
     title: intl.get('entities.study.design'),
-    sorter: { multiple: 1 },
+    defaultHidden: true,
     render: (study_designs: string[]) => (
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
@@ -279,14 +256,82 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
     ),
   },
   {
-    dataIndex: 'data_categories',
-    key: 'data_categories.data_category',
-    title: intl.get('entities.study.data_categories'),
-    sorter: { multiple: 1 },
-    render: (data_categories: ArrangerResultsTree<IDataCategory>) => (
+    dataIndex: 'data_collection_methods',
+    key: 'data_collection_methods',
+    title: intl.get('entities.study.data_collection_methods'),
+    defaultHidden: true,
+    render: (data_collection_methods: string[]) => (
       <ExpandableCell
         nOfElementsWhenCollapsed={1}
-        dataSource={data_categories?.hits?.edges?.map((e) => e?.node?.data_category) || []}
+        dataSource={data_collection_methods || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'principal_investigators',
+    key: 'principal_investigators',
+    title: intl.get('entities.study.principal_investigators'),
+    defaultHidden: true,
+    render: (principal_investigators: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={principal_investigators || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'contact_names',
+    key: 'contact_names',
+    title: intl.get('entities.study.contact_names'),
+    defaultHidden: true,
+    render: (contact_names: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={contact_names || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'contact_institutions',
+    key: 'contact_institutions',
+    title: intl.get('entities.study.contact_institutions'),
+    defaultHidden: true,
+    render: (contact_institutions: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={contact_institutions || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'selection_criteria',
+    key: 'selection_criteria',
+    title: intl.get('entities.study.selection_criteria'),
+    defaultHidden: true,
+    render: (selection_criteria: string) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={Array.isArray(selection_criteria) ? selection_criteria : [selection_criteria]}
         renderItem={(item, index) => <div key={index}>{item}</div>}
         dictionnary={{
           'see.less': intl.get('global.seeLess'),

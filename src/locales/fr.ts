@@ -34,7 +34,7 @@ const fr = {
       CQDGStudies: 'Études du CQDG',
       restricted: 'Restricte',
       design: 'Conception générale',
-      data_collection_methods: 'Méthodes de collecte de données',
+      data_collection_methods: 'Méthode de collecte de données',
       expected_number_participants: 'Expected Number Participants',
       expected_number_biospecimens: 'Expected Number Biospecimens',
       expected_number_files: 'Expected Number Files',
