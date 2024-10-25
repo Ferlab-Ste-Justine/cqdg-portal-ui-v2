@@ -34,6 +34,15 @@ describe('Page des études - Rechercher des études', () => {
     cy.validateTableResultsCount(/\d{1} Results/);
   });
 
+  it('Par chercheur principal', () => {
+    cy.typeAndIntercept('[class*="PageContent_search"]', 'batman', 'POST', '**/graphql', 6);
+    cy.validateTableResultsCount(/1 Result/);
+    cy.validateTableFirstRow('STUDY1', 0);
+
+    cy.get('button[class*="Header_clearFilterLink"]').should('contain', 'Clear filters').clickAndWait({force: true});
+    cy.validateTableResultsCount(/\d{1} Results/);
+  });
+
   it('Par mot-clé', () => {
     cy.typeAndIntercept('[class*="PageContent_search"]', 'FAMILY', 'POST', '**/graphql', 6);
     cy.validateTableResultsCount(/\d{1} Results/);

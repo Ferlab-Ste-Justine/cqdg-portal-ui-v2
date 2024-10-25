@@ -173,6 +173,11 @@ describe('Page d\'une étude - Vérifier les informations affichées', () => {
 });
 
 describe('Page d\'une étude - Valider les liens disponibles', () => {
+  it('Lien du Website du panneau Summary', () => {
+    cy.get('[id="summary"] [class="ant-descriptions-item-content"]').eq(13).find('[href]')
+      .should('have.attr', 'href', 'https://www.t_dee.com/');
+  });
+
   it('Lien Duo de l\'Access Limitations du panneau Data Access', () => {
     cy.get('[id="data_access"] [class="ant-descriptions-item-content"]').eq(0).find('[href]')
       .should('have.attr', 'href', 'http://purl.obolibrary.org/obo/DUO_0000006');

@@ -45,4 +45,19 @@ describe('Page des études - Filtrer avec les facettes', () => {
     cy.validateFacetFilter('Access Requirement', 'Genetic studies only (DUO:0000016)', 'genetic studies only (DUO:0000016)', /\d{1} Results/, false);
     cy.validateFacetRank(3, 'Access Requirement');
   });
+
+  it('Data Category - Genomics', () => {
+    cy.validateFacetFilter('Data Category', 'Genomics', 'Genomics', /\d{1} Results/, false);
+    cy.validateFacetRank(4, 'Data Category');
+  });
+
+  it('Overall Design - Case only', () => {
+    cy.validateFacetFilter('Overall Design', 'Case only', 'Case only', /\d{1} Results/, false);
+    cy.validateFacetRank(5, 'Overall Design');
+  });
+
+  it('Data Collection Method - Medical Records', () => {
+    cy.validateFacetFilter('Data Collection Method', 'Medical Records', 'Medical Records', /\d{1} Results/, false);
+    cy.validateFacetRank(6, 'Data Collection Method');
+  });
 });
