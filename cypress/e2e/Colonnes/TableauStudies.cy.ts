@@ -73,12 +73,48 @@ describe('Page des études - Colonnes du tableau', () => {
     cy.get('div[class="ant-popover-inner"]')
       .find('div[class="ant-space-item"]').eq(12)
       .contains('Access Requirement').should('exist');
-  
+
     cy.get('thead[class="ant-table-thead"]')
       .contains('Description').should('not.exist');
     cy.get('div[class="ant-popover-inner"]')
       .find('div[class="ant-space-item"]').eq(13)
       .contains('Description').should('exist');
+  
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Overall Design').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(14)
+      .contains('Overall Design').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Data Collection Method').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(15)
+      .contains('Data Collection Method').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Principal Investigators').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(16)
+      .contains('Principal Investigators').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Contact Persons').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(17)
+      .contains('Contact Persons').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Affiliated Institutions').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(18)
+      .contains('Affiliated Institutions').should('exist');
+
+    cy.get('thead[class="ant-table-thead"]')
+      .contains('Inclusion and Exclusion Criteria').should('not.exist');
+    cy.get('div[class="ant-popover-inner"]')
+      .find('div[class="ant-space-item"]').eq(19)
+      .contains('Inclusion and Exclusion Criteria').should('exist');
   });
 
   it('Masquer une colonne affichée', () => {

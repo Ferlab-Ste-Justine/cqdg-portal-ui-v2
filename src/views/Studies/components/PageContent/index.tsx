@@ -52,7 +52,7 @@ const generateSearchFilter = (search: string) => {
   return {
     ...query,
     content: {
-      fields: ['study_code', 'name', 'domain', 'description', 'keyword'],
+      fields: ['study_code', 'name', 'domain', 'description', 'keyword', 'principal_investigators'],
       value: `*${search}*`,
     },
   };

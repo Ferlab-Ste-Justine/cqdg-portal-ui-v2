@@ -296,6 +296,11 @@ export const getFacetsDictionary = () => ({
     access_limitations: intl.get('entities.study.data_access_codes.access_limitations'),
     access_requirements: intl.get('entities.study.data_access_codes.access_requirements'),
   },
+  study_designs: intl.get('entities.study.design'),
+  data_categories: {
+    data_category: intl.get('entities.study.data_category'),
+  },
+  data_collection_methods: intl.get('entities.study.data_collection_methods'),
   study: {
     study_code: intl.get('entities.study.study_code'),
     name: intl.get('entities.study.name'),
@@ -495,6 +500,8 @@ export const getFacetsDictionary = () => ({
         },
       },
     },
+    study_designs: intl.get('entities.study.design_tooltip'),
+    data_collection_methods: intl.get('entities.study.data_collection_methods_tooltip'),
   },
   chromosome: intl.get('entities.variant.chromosome'),
   zygosity: intl.get('entities.variant.zygosity'),

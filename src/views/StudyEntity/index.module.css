@@ -16,6 +16,10 @@
   text-decoration: underline;
 }
 
+.marginRight {
+  margin-right: 8px;
+}
+
 .titleIcon {
   font-size: 20px;
 }

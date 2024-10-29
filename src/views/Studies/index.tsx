@@ -1,3 +1,4 @@
+import React from 'react';
 import intl from 'react-intl-universal';
 import { Link } from 'react-router-dom';
 import { CheckOutlined } from '@ant-design/icons';
@@ -237,6 +238,108 @@ const getDefaultColumns = (): ProColumnType<ITableStudyEntity>[] => [
       </Popover>
     ),
   },
+  {
+    dataIndex: 'study_designs',
+    key: 'study_designs',
+    title: intl.get('entities.study.design'),
+    defaultHidden: true,
+    render: (study_designs: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={study_designs || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'data_collection_methods',
+    key: 'data_collection_methods',
+    title: intl.get('entities.study.data_collection_methods'),
+    defaultHidden: true,
+    render: (data_collection_methods: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={data_collection_methods || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'principal_investigators',
+    key: 'principal_investigators',
+    title: intl.get('entities.study.principal_investigators'),
+    defaultHidden: true,
+    render: (principal_investigators: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={principal_investigators || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'contact_names',
+    key: 'contact_names',
+    title: intl.get('entities.study.contact_names'),
+    defaultHidden: true,
+    render: (contact_names: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={contact_names || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'contact_institutions',
+    key: 'contact_institutions',
+    title: intl.get('entities.study.contact_institutions'),
+    defaultHidden: true,
+    render: (contact_institutions: string[]) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={contact_institutions || []}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
+  {
+    dataIndex: 'selection_criteria',
+    key: 'selection_criteria',
+    title: intl.get('entities.study.selection_criteria'),
+    defaultHidden: true,
+    render: (selection_criteria: string) => (
+      <ExpandableCell
+        nOfElementsWhenCollapsed={1}
+        dataSource={Array.isArray(selection_criteria) ? selection_criteria : [selection_criteria]}
+        renderItem={(item, index) => <div key={index}>{item}</div>}
+        dictionnary={{
+          'see.less': intl.get('global.seeLess'),
+          'see.more': intl.get('global.seeMore'),
+        }}
+      />
+    ),
+  },
 ];
 
 const Studies = () => {
@@ -247,6 +350,9 @@ const Studies = () => {
       'population',
       'data_access_codes__access_limitations',
       'data_access_codes__access_requirements',
+      'data_categories__data_category',
+      'study_designs',
+      'data_collection_methods',
     ],
     groups: [
       {
@@ -255,7 +361,11 @@ const Studies = () => {
           'population',
           'data_access_codes__access_limitations',
           'data_access_codes__access_requirements',
+          'data_categories__data_category',
+          'study_designs',
+          'data_collection_methods',
         ],
+        tooltips: ['study_designs', 'data_collection_methods'],
       },
     ],
   };

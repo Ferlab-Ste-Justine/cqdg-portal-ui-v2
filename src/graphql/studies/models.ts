@@ -19,6 +19,12 @@ interface IDataType {
   participant_count: number;
 }
 
+export interface IDataCategory {
+  id: string;
+  data_category: string;
+  participant_count: number;
+}
+
 export interface IDataSet {
   id: string;
   data_types: string[];
@@ -52,7 +58,7 @@ export interface IStudyEntity {
   sample_count: number;
   file_count: number;
   data_types: ArrangerResultsTree<IDataType>;
-  data_categories: ArrangerResultsTree<IDataType>;
+  data_categories: ArrangerResultsTree<IDataCategory>;
   data_access_codes: IStudyDataAccessCodes;
   experimental_strategies: ArrangerResultsTree<IExperimentalStrategy>;
   family_count: number;
@@ -62,4 +68,21 @@ export interface IStudyEntity {
   access_authority: { type: string; value: string };
   datasets: ArrangerResultsTree<IDataSet>;
   security?: Security;
+  restricted: boolean;
+  study_designs: string[];
+  data_collection_methods: string[];
+  expected_number_participants: number;
+  expected_number_biospecimens: number;
+  expected_number_files: number;
+  restricted_number_participants: number;
+  restricted_number_biospecimens: number;
+  restricted_number_files: number;
+  principal_investigators: string[];
+  contact_names: string[];
+  contact_institutions: string[];
+  contact_emails: string[];
+  websites: string[];
+  funding_sources: string[];
+  citation_statement: string;
+  selection_criteria: string;
 }
