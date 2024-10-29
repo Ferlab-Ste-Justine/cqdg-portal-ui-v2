@@ -20,23 +20,31 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.description'),
-    value: study?.description.split('|').map((desc, index) => (
-      <div key={index} className={styles.whiteSpace}>
-        {desc}
-      </div>
-    )),
+    value: study?.description?.length
+      ? study.description.split('|').map((desc, index) => (
+          <div key={index} className={styles.whiteSpace}>
+            {desc}
+          </div>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.design'),
-    value: study?.study_designs?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.study_designs?.length
+      ? study.study_designs.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.population'),
-    value: study?.population ? <Tag className={styles.tagCyan}>{study.population}</Tag> : null,
+    value: study?.population ? (
+      <Tag className={styles.tagCyan}>{study.population}</Tag>
+    ) : (
+      TABLE_EMPTY_PLACE_HOLDER
+    ),
   },
   {
     label: intl.get('entities.study.selection_criteria'),
@@ -44,78 +52,94 @@ const getSummaryDescriptions = (study?: IStudyEntity): IEntityDescriptionsItem[]
   },
   {
     label: intl.get('entities.study.domain'),
-    value: study?.domain ? <Tag className={styles.tagGold}>{study.domain}</Tag> : null,
+    value: study?.domain ? (
+      <Tag className={styles.tagGold}>{study.domain}</Tag>
+    ) : (
+      TABLE_EMPTY_PLACE_HOLDER
+    ),
   },
   {
     label: intl.get('entities.study.keywords'),
-    value: study?.keyword?.map((key) => (
-      <Tag key={key} className={styles.tag}>
-        {key
-          ?.split(' ')
-          .map((word) => capitalize(word))
-          .join(' ')}
-      </Tag>
-    )),
+    value: study?.keyword?.length
+      ? study?.keyword?.map((key) => (
+          <Tag key={key} className={styles.tag}>
+            {key
+              ?.split(' ')
+              .map((word) => capitalize(word))
+              .join(' ')}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.data_categories'),
-    value:
-      study?.data_categories?.hits?.edges?.length &&
-      study.data_categories.hits.edges.map(({ node }) => (
-        <Tag key={node.data_category} className={styles.tag}>
-          {node.data_category}
-        </Tag>
-      )),
+    value: study?.data_categories?.hits?.edges?.length
+      ? study.data_categories.hits.edges.map(({ node }) => (
+          <Tag key={node.data_category} className={styles.tag}>
+            {node.data_category}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.data_collection_methods'),
-    value: study?.data_collection_methods?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.data_collection_methods?.length
+      ? study.data_collection_methods.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.principal_investigators'),
-    value: study?.principal_investigators?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.principal_investigators?.length
+      ? study?.principal_investigators?.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.contact_names'),
-    value: study?.contact_names?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.contact_names?.length
+      ? study.contact_names.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.contact_institutions'),
-    value: study?.contact_institutions?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.contact_institutions?.length
+      ? study.contact_institutions.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.website'),
-    value:
-      study?.websites?.length &&
-      study.websites.map((website, i) => (
-        <ExternalLink key={i} href={website} className={styles.marginRight}>
-          {website}
-        </ExternalLink>
-      )),
+    value: study?.websites?.length
+      ? study.websites.map((website, i) => (
+          <ExternalLink key={i} href={website} className={styles.marginRight}>
+            {website}
+          </ExternalLink>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.funding_sources'),
-    value: study?.funding_sources?.map((e) => (
-      <Tag key={e} className={styles.tag}>
-        {e}
-      </Tag>
-    )),
+    value: study?.funding_sources?.length
+      ? study.funding_sources.map((e) => (
+          <Tag key={e} className={styles.tag}>
+            {e}
+          </Tag>
+        ))
+      : TABLE_EMPTY_PLACE_HOLDER,
   },
   {
     label: intl.get('entities.study.citation_statement'),
