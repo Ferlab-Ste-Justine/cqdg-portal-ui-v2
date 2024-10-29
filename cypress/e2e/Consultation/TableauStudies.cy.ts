@@ -8,12 +8,12 @@ beforeEach(() => {
   cy.showColumn('Population');
   cy.showColumn('Access Limitation');
   cy.showColumn('Access Requirement');
-  cy.showColumn('Overall design');
+  cy.showColumn('Overall Design');
   cy.showColumn('Data Collection Method');
-  cy.showColumn('Principal Investigator(s)');
-  cy.showColumn('Contact person(s)');
-  cy.showColumn('Affiliated institution(s)');
-  cy.showColumn('Inclusion and exclusion criteria');
+  cy.showColumn('Principal Investigators');
+  cy.showColumn('Contact Persons');
+  cy.showColumn('Affiliated Institutions');
+  cy.showColumn('Inclusion and Exclusion Criteria');
   cy.showColumn('Description');
 });
 
