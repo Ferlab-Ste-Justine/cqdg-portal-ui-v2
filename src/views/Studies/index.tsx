@@ -350,9 +350,9 @@ const Studies = () => {
       'population',
       'data_access_codes__access_limitations',
       'data_access_codes__access_requirements',
-      'data_collection_methods',
-      'study_designs',
       'data_categories__data_category',
+      'study_designs',
+      'data_collection_methods',
     ],
     groups: [
       {
@@ -361,10 +361,11 @@ const Studies = () => {
           'population',
           'data_access_codes__access_limitations',
           'data_access_codes__access_requirements',
-          'data_collection_methods',
-          'study_designs',
           'data_categories__data_category',
+          'study_designs',
+          'data_collection_methods',
         ],
+        tooltips: ['study_designs', 'data_collection_methods'],
       },
     ],
   };

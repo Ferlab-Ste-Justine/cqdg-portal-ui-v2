@@ -34,7 +34,10 @@ const fr = {
       CQDGStudies: 'Études du CQDG',
       restricted: 'Restricte',
       design: 'Conception générale',
+      design_tooltip:
+        "Conception générale de l'étude, y compris si elle est longitudinale et si des membres de la famille ou autres contrôles non apparentés sont également inscrits",
       data_collection_methods: 'Méthode de collecte de données',
+      data_collection_methods_tooltip: "Décrit les méthodes de collecte de données de l'étude",
       expected_number_participants: 'Expected Number Participants',
       expected_number_biospecimens: 'Expected Number Biospecimens',
       expected_number_files: 'Expected Number Files',
@@ -42,14 +45,15 @@ const fr = {
       restricted_number_biospecimens: 'Restricted Number Biospecimens',
       restricted_number_files: 'Restricted Number Files',
       principal_investigators: 'Chercheurs principaux',
-      contact_names: 'Personne(s) contact',
-      contact_institutions: 'Institution(s) affiliée(s)',
+      contact_names: 'Personnes contact',
+      contact_institutions: 'Institutions affiliées',
       contact_emails: 'Contact Email',
       website: 'Site web',
-      funding_sources: 'Source(s) de financement',
+      funding_sources: 'Sources de financement',
       citation_statement: 'Déclaration de citation',
       selection_criteria: "Critères d'inclusion et d'exclusion",
       data_categories: 'Catégories de données',
+      data_category: 'Catégorie de données',
     },
     biospecimen: {
       sample_id: `ID échantillon`,
@@ -457,12 +461,6 @@ const fr = {
         title: 'Recherche par variant',
         tooltip:
           'Entrer un Locus de Variant, Symbole de gène, Alias de gène, Gène AA Change, dbSNP ID, ClinVar ID, Ensembl ID, refseq ID',
-      },
-      study: {
-        emptyText: 'Aucune étude trouvée',
-        placeholder: 'ex : DEE, Developmental and Epileptic Encephalopathies',
-        title: 'Rechercher une étude',
-        tooltip: 'Recherche par code, nom, domaine de l’étude ou mot-clé',
       },
     },
     filters: {
@@ -1123,7 +1121,7 @@ const fr = {
       sampleAvailability: 'Disponibilité des échantillons',
       description: 'Description',
       searchLabel: {
-        title: 'Recherche par code, nom, domaine de l’étude ou mot-clé',
+        title: 'Recherche par code, nom, domaine, chercheur principal de l’étude ou mot-clé',
         placeholder: 'ex. CAG, CARTaGENE, Rare Diseases, Epilepsy',
       },
     },
