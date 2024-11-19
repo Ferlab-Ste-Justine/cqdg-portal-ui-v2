@@ -38,6 +38,8 @@ export default class EnvironmentVariables {
       window._env_?.REACT_APP_FERLOAD_GITHUB_URL || process.env.REACT_APP_FERLOAD_GITHUB_URL,
     CAVATICA_ENABLED:
       window._env_?.REACT_APP_CAVATICA_ENABLED || process.env.REACT_APP_CAVATICA_ENABLED || 'false',
+    // Sentry
+    SENTRY_API: process.env.REACT_APP_SENTRY_API,
   };
 
   static configFor(key: string): string {
