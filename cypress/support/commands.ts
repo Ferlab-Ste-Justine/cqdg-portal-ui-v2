@@ -350,7 +350,7 @@ Cypress.Commands.add('validateFilterInManager', (filterName: string, expect: str
 Cypress.Commands.add('validateIconStates', (iconName: string, isDisable: boolean, isDirty: boolean) => {
   const strShouldDisable = isDisable ? 'be.disabled' : 'not.be.disabled';
   const strShouldDirty = isDirty ? 'have.class' : 'not.have.class';
-  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDisable)
+  cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDisable);
   cy.get(`[id="query-builder-header-tools"] [data-icon="`+iconName+`"]`).parentsUntil('button').parent().should(strShouldDirty, 'dirty');
 });
 
@@ -436,13 +436,14 @@ Cypress.Commands.add('visitAndIntercept', (url: string, methodHTTP: string, rout
 Cypress.Commands.add('visitCommunityPage', () => {
   cy.visit('/community');
   cy.waitWhileSpin(oneMinute);
-  cy.get('[data-cy="Title_Community"]')
+  cy.get('[data-cy="Title_Community"]');
 });
 
 Cypress.Commands.add('visitDashboard', () => {
   cy.visit('/dashboard');
   cy.waitWhileSpin(oneMinute);
-  cy.get('[data-cy="Title_Dashboard"]')
+  cy.get('[data-cy="Title_Dashboard"]');
+  cy.wait(2000);
 });
 
 Cypress.Commands.add('visitDataExploration', (tab?: string, sharedFilterOption?: string) => {
