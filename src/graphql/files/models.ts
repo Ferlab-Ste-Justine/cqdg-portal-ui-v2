@@ -46,7 +46,6 @@ export interface IFileEntity {
   study_id: string;
   study_code: string;
   study: IStudyEntity;
-  biospecimen_reference: string;
   ferload_url: string;
   file_hash: string;
   file_name: string;
