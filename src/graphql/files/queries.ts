@@ -54,7 +54,6 @@ export const GET_FILES = gql`
             data_category
             data_type
             dataset
-            biospecimen_reference
             sequencing_experiment {
               experimental_strategy
               type_of_sequencing
