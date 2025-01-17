@@ -211,4 +211,3 @@ jobs:
       trigger: true
     - set_pipeline: self
       file: ci-folder/ci/pipeline.yml
-      
