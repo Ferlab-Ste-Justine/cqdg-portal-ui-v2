@@ -3,13 +3,10 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitStudiesPage();
 });
 
 describe('Page des études - Filtrer avec les facettes', () => {
-  beforeEach(() => {
-    cy.visitStudiesPage();
-  });
-
   it('Expand all/Collapse all', () => {
     cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
     cy.get('section[class*="Filters"] [aria-expanded="true"]').should('exist');

@@ -3,14 +3,10 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitVariantsPage('?sharedFilterId=d85b8a94-ac84-4112-8dd1-a2adf312fc69');
 });
 
 describe('Page Data Exploration - Requêtes', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=d85b8a94-ac84-4112-8dd1-a2adf312fc69');
-  });
-
   it('Validation Facette numérique ou No Data', () => {
     cy.validateTotalSelectedQuery('173K');
     cy.validateTableResultsCount('173K');

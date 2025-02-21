@@ -3,18 +3,14 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitVariantsPage('?sharedFilterId=f61a3a36-d3de-4ac5-852b-fab8f79c1834');
+
+  cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
 });
 
 describe('Page Data Exploration - Requêtes', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=f61a3a36-d3de-4ac5-852b-fab8f79c1834');
-
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-  });
-
   it('Supprimer une requête utilisée dans une combinaison', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql1');
     cy.get('.simplebar-wrapper').invoke('css', 'overflow', 'visible');

@@ -3,18 +3,14 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitVariantsPage('?sharedFilterId=5b4acf3a-54b3-4997-807e-d864e96f0aad');
+
+  cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
 });
 
 describe('Page Data Exploration - Requêtes', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=5b4acf3a-54b3-4997-807e-d864e96f0aad');
-
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-  });
-
   it('Modifier l\'opérateur d\'une requête', () => {
     cy.intercept('POST', '**/graphql').as('getPOSTgraphql1');
     cy.get('[class*="QueryBar_selected"] [class*="Combiner_operator"]').clickAndWait({force: true});
