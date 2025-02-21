@@ -3,18 +3,14 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitVariantsPage('?sharedFilterId=d8c31b37-17e5-4c32-9e33-b6effecda04f');
+
+  cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
 });
 
 describe('Page Data Exploration - Requêtes', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=d8c31b37-17e5-4c32-9e33-b6effecda04f');
-
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-  });
-
   it('Sélectionner une requête', () => {
     cy.validateTableResultsCount('425K');
 

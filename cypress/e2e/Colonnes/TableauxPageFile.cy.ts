@@ -3,14 +3,11 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitFileEntity('FI0000981');
+  cy.resetColumns('biospecimens');
 });
 
 describe('Page d\'un fichier - Colonnes du tableau Participants-Samples', () => {
-  beforeEach(() => {
-    cy.visitFileEntity('FI0000981');
-    cy.resetColumns('biospecimens');
-  });
-
   it('Valider l\'affichage (par défaut/optionnel) et l\'ordre des colonnes', () => {
     cy.get('[id="biospecimens"]')
       .find('thead[class="ant-table-thead"]')

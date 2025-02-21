@@ -3,18 +3,14 @@ import '../../support/commands';
 
 beforeEach(() => {
   cy.login();
+  cy.visitVariantsPage('?sharedFilterId=782f8a5e-f7b7-42e7-9061-49411ead5f79');
+
+  cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
+  cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
 });
 
 describe('Page Data Exploration - Requêtes', () => {
-
-  beforeEach(() => {
-    cy.visitVariantsPage('?sharedFilterId=782f8a5e-f7b7-42e7-9061-49411ead5f79');
-
-    cy.get('[data-cy="SidebarMenuItem_Variant"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').clickAndWait({force: true});
-    cy.get('[data-cy="ExpandAll"]').contains('Collapse all').should('exist');
-  });
-
   it('Éditer une pilule via la facette', () => {
     cy.checkValueFacetAndApply('Variant Type', 'deletion');
 
