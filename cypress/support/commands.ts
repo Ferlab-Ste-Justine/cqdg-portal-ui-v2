@@ -24,7 +24,7 @@ Cypress.Commands.add('checkValueFacetAndApply', (facetTitle: string, value: stri
 
 Cypress.Commands.add('checkValueFacet', (facetTitle: string, value: string) => {
   cy.get(`[aria-expanded="true"] [data-cy="FilterContainer_${facetTitle}"]`).should('exist');
-  cy.waitWhileSpin(1000);
+  cy.waitWhileSpin(oneMinute);
   cy.get(`[data-cy="FilterContainer_${facetTitle}"]`).parentsUntil('.FilterContainer_filterContainer__8Dsbs')
     .find('button').then(($button) => {
     if ($button.hasClass('ant-btn-link')) {
@@ -549,7 +549,7 @@ Cypress.Commands.add('waitWhileSpin', (ms: number) => {
 
     return cy.get('body').then(($body) => {
       if ($body.find('.ant-spin-blur').length > 0) {
-        return cy.wait(500).then(checkForSpinners);
+        return cy.wait(1000).then(checkForSpinners);
       };
     });
   };
