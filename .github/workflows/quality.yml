@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '18.20.4'
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: '18.20.4'
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
@@ -51,7 +51,7 @@ jobs:
         with:
           node-version: '18.20.4'
       - name: use cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
